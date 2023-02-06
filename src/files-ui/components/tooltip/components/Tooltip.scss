@@ -1,0 +1,60 @@
+////////////////@at-root
+.files-ui-tooltip {
+  cursor: default;
+  position: relative;
+  //display: inline-block;
+  // border-bottom: 1px dotted black;
+  &:hover {
+    z-index: 2;
+    .files-ui-tooltiptext {
+      visibility: visible;
+      opacity: 1;
+      z-index: 2;
+    }
+  }
+  .files-ui-tooltiptext {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+
+    font-size: 0.8rem;
+    font-weight: 400;
+    visibility: hidden;
+    width: 132px;
+    // background-color: green;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 2px 2px;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+
+    // Fade in tooltip - takes 1 second to go from 0% to 100% opac:
+    opacity: 0;
+    transition: opacity 1s;
+
+    &.not-valid-error {
+      background: linear-gradient(to top, #c62828, #d32f2f);
+      &::after {
+        border-color: transparent transparent #d32f2f transparent;
+      }
+    }
+    &.success {
+      //background-color: green;
+      background: linear-gradient(to top, #1b5e20, #2e7d32);
+      &::after {
+        border-color: transparent transparent #2e7d32 transparent;
+      }
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      //border-color: transparent transparent green transparent;
+    }
+  }
+}

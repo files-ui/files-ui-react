@@ -1,0 +1,12 @@
+.code-highlight {
+  color: #1a2027;
+  background-color: rgba(102, 178, 255, 0.15);
+  border-radius: 5px;
+  font-size: 0.9125rem;
+  padding: 0px 5px;
+  line-height: 1.6;
+  &.dark-mode{
+    color: #fff;
+    background-color: rgba(102, 178, 255, 0.15);
+  }
+}

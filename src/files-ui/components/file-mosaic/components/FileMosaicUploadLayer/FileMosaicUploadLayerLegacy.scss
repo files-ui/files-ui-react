@@ -1,0 +1,83 @@
+.files-ui-file-mosaic-upload-layer {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 1em;
+    position: relative;
+    overflow: hidden;
+  
+    .elevation-list {
+      transition: all 2s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .elevation-item {
+        width: 100%;
+        height: 132px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 10px;
+        box-sizing: border-box;
+  
+        text {
+          text-align: center;
+          word-break: break-all;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2; /* number of lines to show */
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+      }
+    }
+  
+    .elevation-layer-container {
+      width: 100%;
+      height: 100%;
+      //display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      .elevate-layer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        //transform: translateY(0px);
+        //transition: all 0.3s ease-in-out;
+      }
+      .appear-layer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        //transform: translateY(132px);
+        //transition: all 0.3s ease-in-out;
+      }
+      &.elevate {
+        .elevate-layer {
+          transform: translateY(-132px);
+          transition: all 2s ease-in-out;
+        }
+        .appear-layer {
+          transform: translateY(-132px);
+          transition: all 2s ease-in-out;
+        }
+      }
+    }
+  }
+  

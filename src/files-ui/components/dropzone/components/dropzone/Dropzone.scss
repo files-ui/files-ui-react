@@ -1,0 +1,106 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
+
+.fui-dropzone-root {
+  min-height: 180px;
+  width: 100%;
+  min-width: 150px;
+
+  position: relative;
+
+  // DISPLAY
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 23px 0px;
+
+  /// label
+  color: #646c7f;
+  text-rendering: optimizeLegibility;
+  font-size: 1.5em;
+  font-family: inherit;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.02857em;
+  box-sizing: border-box;
+
+  @media (max-width: 600px) {
+    font-size: 1.3em;
+  }
+  word-break: normal;
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  //BORDER
+  /*  &.fui-dropzone-border {
+    box-sizing: border-box;
+
+    border: 1px dashed #0c2358;
+    border-radius: 10px;
+    &.fui-hide-border {
+      border: none;
+    }
+  } */
+}
+
+.files-ui-header {
+  height: 22px;
+  position: absolute;
+  cursor: text;
+  top: 0;
+  display: flex;
+  //width: calc(100% - 10px);
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  //font-family: "Poppins", sans-serif;
+  font-family: inherit;
+  padding-right: 10px;
+  font-size: 1rem;
+  @media (max-width: 960px) {
+    width: calc(100% - 1px);
+    padding-right: 1px;
+    font-size: 0.8rem;
+  }
+}
+
+.files-ui-footer {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-sizing: border-box;
+  height: 23px;
+  position: absolute;
+  cursor: text;
+  bottom: 0;
+  left: 0;
+  // width: calc(100% - 10px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-top: 1px dotted grey;
+  background-color: #80808021;
+  font-family: "Poppins", sans-serif;
+  font-family: inherit;
+  padding-left: 10px;
+  font-size: 1rem;
+  ////3 dots break in 1 lines
+  //overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+
+  @media (max-width: 960px) {
+    width: calc(100% - 1px);
+    padding-left: 1px;
+    font-size: 0.8rem;
+  }
+}

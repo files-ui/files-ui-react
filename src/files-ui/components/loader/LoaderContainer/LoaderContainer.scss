@@ -1,0 +1,18 @@
+.files-ui-loader-container {
+  background-color: rgba(0, 0, 0, 0.41);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.61);
+  }
+
+}

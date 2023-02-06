@@ -1,0 +1,11 @@
+.right-menu-anchor-item {
+  box-sizing: border-box;
+  text-decoration: none;
+  padding-left: 5px;
+  width: 100%;
+  &.selected,
+  &:hover {
+    border-left: 2px #b2bac2 solid;
+    color: #6f7e8c;
+  }
+}

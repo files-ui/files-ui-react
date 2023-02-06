@@ -1,0 +1,40 @@
+.getting-started-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  p,
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+  h2{
+    margin-top: 10px;
+  }
+  .button-container {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 10px;
+    .code-button-flex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      width: 60%;
+      gap :10px
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .button-container {
+      flex-direction: column;
+      align-items: stretch;
+      .code-button-flex {
+        width: 100%;
+      }
+    }
+  }
+}

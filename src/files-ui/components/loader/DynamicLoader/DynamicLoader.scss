@@ -1,0 +1,26 @@
+.circle_loader {
+  fill: none;
+  stroke: #14ff00;
+  stroke-width: 8px;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  /*  width: 100px; */
+}
+
+.dui_svg_circle_loader {
+  /* border: 1px solid #14ff00; */
+  fill: rgba(0, 0, 0, 0.21);
+  border-radius: 50%;
+  &:hover {
+    fill: rgba(0, 0, 0, 0.61);
+  }
+}
+
+.dui-text-loader {
+  /* dominant-baseline: middle;
+     */
+  text-anchor: middle;
+  font-size: 1em;
+  //font-family: Arial;
+  //fill: aliceblue;
+}

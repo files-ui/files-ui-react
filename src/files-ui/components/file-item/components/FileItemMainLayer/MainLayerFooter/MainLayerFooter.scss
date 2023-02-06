@@ -1,0 +1,29 @@
+.dui-main-layer-footer-container {
+  min-height: 23px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //position: relative;
+  .dui-main-layer-footer-status {
+    //height: 0px;
+    //position: relative;
+    //bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .dui-main-layer-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    // min-height: 20px;
+  }
+
+  //width: inherit;
+}

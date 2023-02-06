@@ -1,0 +1,102 @@
+///// DUI SKELETON based on MUI SKELETON
+.fui-mui-skeleton {
+  background-color: rgba(0, 0, 0, 0.11);
+  border-radius: 6px;
+  &.circular {
+    border-radius: 50%;
+  }
+  &.wave {
+    display: block;
+    height: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    transform-origin: 0px 55% 0px;
+    position: relative;
+    overflow: hidden;
+    mask-image: -webkit-radial-gradient(white, black);
+    &::before {
+      content: " ";
+    }
+    &::after {
+      animation: 1.6s linear 0.5s infinite normal none running
+        fui-skeleton-wave-animation;
+      background: rgba(0, 0, 0, 0)
+        linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent)
+        repeat scroll 0% 0%;
+      content: "";
+      position: absolute;
+      transform: translateX(-100%);
+      inset: 0px;
+    }
+    @-webkit-keyframes fui-skeleton-wave-animation {
+      0% {
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        transform: translateX(-100%);
+      }
+      50% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+      100% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+    }
+    @keyframes fui-skeleton-wave-animation {
+      0% {
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        transform: translateX(-100%);
+      }
+      50% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+      100% {
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+    }
+  }
+  &.pulse {
+    &::before {
+      content: " ";
+    }
+    animation: 1.5s ease-in-out 0.5s infinite normal none running
+      fui-skeleton-pulse-animation;
+    @-webkit-keyframes fui-skeleton-pulse-animation {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.4;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fui-skeleton-pulse-animation {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.4;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+}

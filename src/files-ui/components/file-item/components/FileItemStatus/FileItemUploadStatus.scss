@@ -1,0 +1,17 @@
+.fui-file-item-upload-status-container {
+  text-align: center;
+  font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 4px;
+  padding: 0.5px;
+  font-weight: 400;
+  &.file-status-error-aborted {
+    color: #f44336;
+  }
+  &.file-status-success {
+    color: #5c7a1f;
+  }
+}

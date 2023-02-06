@@ -1,0 +1,104 @@
+.material-button-root {
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  outline: 0;
+  position: relative;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+  text-decoration: none;
+  text-transform: none;
+  color: white;
+}
+
+.material-button {
+  //padding: 15rem 5rem;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  overflow: hidden;
+  //transition: background 400ms;
+  min-width: 64px;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+}
+
+.material-button.uppercase {
+  text-transform: uppercase;
+}
+.material-button.lowercase {
+  text-transform: lowercase;
+}
+.material-button.capitalize {
+  text-transform: capitalize;
+}
+.material-button.contained {
+  padding: 6px 16px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+.material-button.outlined {
+  padding: 5px 15px;
+}
+.material-button.text {
+  padding: 5px 15px;
+}
+.material-button-root.contained:hover {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.material-button span.material-button-label {
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+}
+
+span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 500ms linear;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.material-button-root.disabled {
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+  padding: 6px 16px;
+}
+
+//mobile
+@media screen and (max-width: 600px) {
+  .material-button {
+    min-width: 30px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    letter-spacing: 0.025em;
+  }
+  .material-button.contained {
+    padding: 4px 13px;
+  }
+  .material-button.outlined {
+    padding: 4px 12px;
+  }
+}
