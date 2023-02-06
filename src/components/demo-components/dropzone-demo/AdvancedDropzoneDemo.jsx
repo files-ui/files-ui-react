@@ -33,7 +33,7 @@ export default function AdvancedDropzoneDemo() {
   async function checkFiles() {
     try {
       const res = await axios.get(
-        REMOTE +
+        LOCAL +
           "/file"
       );
       console.log("checkFiles", res);
@@ -55,7 +55,7 @@ export default function AdvancedDropzoneDemo() {
         uploadConfig={{
           /* autoUpload: true */
           method: "POST",
-          url: REMOTE + "/file/28048465460",
+          url: LOCAL + "/file/28048465460",
           //url: "http://localhost:2800/file/28048465460",
           cleanOnUpload: true,
         }}

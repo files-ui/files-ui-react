@@ -29,14 +29,14 @@ const FileMosaicImageLayer: React.FC<FileMosaicImageLayerProps> = (
   //console.log("FileMosaicImageLayer", props);
   const { imageSource, url, fileName, card, isBlur } = props;
 
-  const [localSource, setSource] = React.useState<string | undefined>(
+  const [localSource, setLocalSource] = React.useState<string | undefined>(
     undefined
   );
   const [error, setError] = React.useState<boolean>(false);
 
   //assign to localSource the imageSource or the url of the ile type
   React.useEffect(() => {
-    setSource(imageSource || url);
+    setLocalSource(imageSource || url);
   }, [imageSource, url]);
 
   /**
@@ -45,7 +45,8 @@ const FileMosaicImageLayer: React.FC<FileMosaicImageLayerProps> = (
    */
   const handleError = () => {
     setError(true);
-    setSource(url);
+    setLocalSource(url);
+    console.log("FileMosaicImageLayer error", url);
   };
 
   //If blur is true

@@ -117,13 +117,13 @@ const files: ExtFile[] = [
   },
   {
     id: 1,
-    name: "myself.jpg",
-    type: "image/jpeg",
+    name: "ironman.png",
+    type: "image/png",
     size: 282000,
     downloadUrl:
-      "https://files-ui-temp-storage.s3.amazonaws.com/2878b8d4278795cef1b66b86e687d984019742a05883f58809678df4e5a80c8f.jpg",
+      "https://i.pinimg.com/236x/3e/e9/46/3ee946b27fd1cc5eb0b485e4a0669534.jpg",
 
     imageUrl:
-      "https://files-ui-temp-storage.s3.amazonaws.com/2878b8d4278795cef1b66b86e687d984019742a05883f58809678df4e5a80c8f.jpg",
+      "https://i.pinimg.com/236x/3e/e9/46/3ee946b27fd1cc5eb0b485e4a0669534.jpg",
   },
 ];

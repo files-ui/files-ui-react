@@ -62,6 +62,10 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
   const finalHeight: string | number | undefined =
     height || (orientation === "portrait" ? "100%" : undefined);
     
+    const handleError=(evt: React.SyntheticEvent<HTMLImageElement, Event>)=>{
+      console.log("handleError", onError);
+      onError?.(evt);
+    }
   return (
     <React.Fragment>
       {src && source && (
@@ -75,7 +79,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
           src={source}
           alt={alt}
           className={className}
-          onError={onError}
+          onError={handleError}
         />
       )}
     </React.Fragment>
