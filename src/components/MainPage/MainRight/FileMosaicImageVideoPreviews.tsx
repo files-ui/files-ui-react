@@ -27,10 +27,10 @@ const FileMosaicImageVideoPreviews: React.FC<
   const handleWatch = (videoSource: File | string | undefined) => {
     console.log(
       "handleWatch videoSource",
-      "https://www.w3schools.com/tags/movie.mp4"
+      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4"
     );
     //setVideoSrc(videoSource);
-    setVideoSrc("https://www.w3schools.com/tags/movie.mp4");
+    setVideoSrc("https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4");
   };
 
   return (
@@ -101,8 +101,8 @@ const files: ExtFile[] = [
     name: "video-preview.mp4",
     type: "video/mp4",
     size: 282000,
-
-    downloadUrl: "https://www.w3schools.com/tags/movie.mp4",
+    downloadUrl:
+      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4",
   },
   {
     id: 3,
