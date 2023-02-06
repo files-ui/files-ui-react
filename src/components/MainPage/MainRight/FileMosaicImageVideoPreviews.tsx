@@ -117,13 +117,13 @@ const files: ExtFile[] = [
   },
   {
     id: 1,
-    name: "image-preview.png",
-    type: "image/png",
+    name: "myself.jpg",
+    type: "image/jpeg",
     size: 282000,
     downloadUrl:
-      "https://i.pinimg.com/236x/3e/e9/46/3ee946b27fd1cc5eb0b485e4a0669534.jpg",
+      "https://files-ui-temp-storage.s3.amazonaws.com/2878b8d4278795cef1b66b86e687d984019742a05883f58809678df4e5a80c8f.jpg",
 
     imageUrl:
-      "https://i.pinimg.com/236x/3e/e9/46/3ee946b27fd1cc5eb0b485e4a0669534.jpg",
+      "https://files-ui-temp-storage.s3.amazonaws.com/2878b8d4278795cef1b66b86e687d984019742a05883f58809678df4e5a80c8f.jpg",
   },
 ];
