@@ -8,6 +8,7 @@ import Collapse from "@mui/material/Collapse";
 
 import { MainMenuSideBarItems, MainMenuSideBarProps } from "./MenuSideBarProps";
 import { useNavigate } from "react-router";
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 
 export default function MainMenuSideBar(props: MainMenuSideBarProps) {
   const { /* items, */ selectedIndex, setSelectedIndex } = props;
@@ -43,7 +44,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
         {
           label: "FileCard",
           index: 5,
-          onClick: () => navigate("/components/file-card"),
+          onClick: () => navigate("/components/filecard"),
         },
       ],
     },
@@ -65,7 +66,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
         {
           label: "FileCard",
           index: 7,
-          onClick: () => navigate("/api/file-card"),
+          onClick: () => navigate("/api/filecard"),
         },
       ],
     },
@@ -123,7 +124,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
-            Quick Start
+           <ElectricBoltIcon/>  Quick Start
           </ListSubheader>
         }
       >

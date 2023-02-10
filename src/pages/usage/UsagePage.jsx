@@ -38,7 +38,7 @@ const UsagePage = (props) => {
           <SubTitle content="Quick start (Basic exaple)" />
           The following code snippet demonstrates a simple app that uses the
           Files UI <a href="/components/dropzone">Dropzone</a> and{" "}
-          <a href="/components/file-mosaic">FileMosaic</a> components:
+          <a href="/components/filemosaic">FileMosaic</a> components:
         </DescParagraph>
         <DescParagraph>
           In this demo we set dropzone with the minimun props that allows you to

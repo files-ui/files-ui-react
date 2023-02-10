@@ -50,7 +50,7 @@ const FileMosaicDemoPage = (props) => {
               demonstrated here is not shown in context.{" "}
             </Alert>
 
-            <section id="basic-file-mosaic">
+            <section id="basic-filemosaic">
               <SubTitle content="Basic FileMosaic" />
               <DescParagraph>
                 The <CodeHighlight>FileMosaic</CodeHighlight> supports
@@ -128,7 +128,7 @@ const rightMenuItems = [
   {
     id: 0,
     label: "Basic file mosaic",
-    referTo: "/components/file-mosaic/#basic-file-mosaic",
+    referTo: "/components/file-mosaic/#basic-filemosaic",
   },
   {
     id: 1,

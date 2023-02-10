@@ -6,6 +6,7 @@ import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import { FileMosaicAPIPropsRows } from "../../data/FileMosaicAPIPropsRows";
+import TableTemplate from "../../templates/TableTemplate";
 import PropsTableApi from "./PropsTableApi";
 
 const rightMenuItems = [
@@ -22,33 +23,36 @@ const rightMenuItems = [
 ];
 const FileMosaicApi = (props) => {
   return (
-    <MainLayoutPage
-      rightMenu={<RightMenu width="240px" items={rightMenuItems} />}
-    >
-      <MainTitle>FileMosaic API</MainTitle>
-      <DescParagraph>
-        API reference docs for the React Filemosaic component. Learn about the
-        props and other APIs of this exported module.
-      </DescParagraph>
-      <section id="filemosaic-demo">
-      <SubTitle content="Demo" />
-        <Alert severity="info">
-         {/*  <AlertTitle> Demo </AlertTitle> */}
-          For examples and details on the usage of this React component, visit
-          the component demo pages:
-          <ul>
-            <li>
-              <a href="/components/file-mosaic">FileMosaic. </a>
-            </li>
-          </ul>
-        </Alert>
-      </section>
-      <section id="filemosaic-props">
-        <SubTitle content="Props" />
+    <React.Fragment>
+      <MainLayoutPage
+        rightMenu={<RightMenu width="240px" items={rightMenuItems} />}
+      >
+        <MainTitle>FileMosaic API</MainTitle>
+        <DescParagraph>
+          API reference docs for the React Filemosaic component. Learn about the
+          props and other APIs of this exported module.
+        </DescParagraph>
+        <section id="filemosaic-demo">
+          <SubTitle content="Demo" />
+          <Alert severity="info">
+            
+            For examples and details on the usage of this React component, visit
+            the component demo pages:
+            <ul>
+              <li>
+                <a href="/components/filemosaic">FileMosaic. </a>
+              </li>
+            </ul>
+          </Alert>
+        </section>
+        <section id="filemosaic-props">
+          <SubTitle content="Props" />
 
-        <PropsTableApi rows={FileMosaicAPIPropsRows} />
-      </section>
-    </MainLayoutPage>
+          <PropsTableApi rows={FileMosaicAPIPropsRows} />
+        </section>
+      </MainLayoutPage>
+    
+    </React.Fragment>
   );
 };
 export default FileMosaicApi;

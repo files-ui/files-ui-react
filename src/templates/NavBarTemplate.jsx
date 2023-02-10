@@ -88,7 +88,7 @@ function NavBarTemplate(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", flexDirection: { xs: "column",sm:"row" } }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -186,7 +186,7 @@ function NavBarTemplate(props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: {xs:1,sm:3},
+          p: { xs: 1, sm: 3 },
           width: {
             sm: `calc(100% - ${drawerWidth}px)`,
             //md: `calc(100% - ${240}px)`,

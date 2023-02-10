@@ -212,7 +212,7 @@ const DropzoneDemoPage = (props) => {
             </li>
             <li>
               <CodeHighlight>
-                <a href="/api/file-mosaic">{"<FileMosaic />"}</a>
+                <a href="/api/filemosaic">{"<FileMosaic />"}</a>
               </CodeHighlight>
             </li>
           </ul>

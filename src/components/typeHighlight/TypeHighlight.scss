@@ -5,4 +5,7 @@
  // word-break: break-all;
   padding: 0px 5px;
   display: inline-block;
+  &.np{
+    padding: 0;
+  }
 }

@@ -31,13 +31,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function PropsTableApi({ rows = [] }) {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="customized table">
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell width={"30%"}>Name</StyledTableCell>
-            <StyledTableCell align="left" width={"30%"}>Type</StyledTableCell>
+            <StyledTableCell /* width={"30%"} */>Name</StyledTableCell>
+            <StyledTableCell align="left" /* width={"30%"} */>
+              Type
+            </StyledTableCell>
             <StyledTableCell align="left">Default</StyledTableCell>
-            <StyledTableCell align="left" width={"30%"}>
+            <StyledTableCell align="left" /*  width={"30%"} */>
               Description
             </StyledTableCell>
           </TableRow>
@@ -48,11 +50,13 @@ export default function PropsTableApi({ rows = [] }) {
               <StyledTableCell
                 component="th"
                 scope="row"
-                style={{ wordBreak: "break-all" }}
+                style={{
+                  wordBreak: row.name.length > 12 ? "break-word" : "normal",
+                }}
               >
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="left" style={{ wordBreak: "break-all" }}>
+              <StyledTableCell align="left" style={{ wordBreak: "break-word" }}>
                 {row.type}
               </StyledTableCell>
               <StyledTableCell align="left">{row.default}</StyledTableCell>

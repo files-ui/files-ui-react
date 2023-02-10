@@ -42,7 +42,7 @@ const DropzoneMainPage = ({ darkMode = false }) => {
         onChange={updateFiles}
         value={files}
         maxFileSize={28*1024}
-        maxFiles={4}
+        maxFiles={5}
         accept=".jpg, .png, application/json, video/*"
         fakeUpload
         behaviour="add"
@@ -60,6 +60,7 @@ const DropzoneMainPage = ({ darkMode = false }) => {
               alwaysActive
               hd
               onSee={handleSee}
+              resultOnTooltip
             />
           ))}
       </Dropzone>

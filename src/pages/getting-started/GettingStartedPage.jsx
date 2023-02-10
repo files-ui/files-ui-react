@@ -74,7 +74,7 @@ const GettingStartedPage = ({ darkModeOn }) => {
                 The following code snippet demonstrates a simple app that uses
                 the Files UI <a href="/components/dropzone">
                   Dropzone
-                </a> and <a href="/components/file-mosaic">FileMosaic</a>{" "}
+                </a> and <a href="/components/filemosaic">FileMosaic</a>{" "}
                 components:
                 <BasicDropzoneCodeJS />
               </DescParagraph>

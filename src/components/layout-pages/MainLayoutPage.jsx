@@ -8,11 +8,13 @@ const MainLayoutPage = ({ mainContent, rightMenu, children }) => {
       <Stack direction={"row"} sx={{ position: "relative" }}>
         <Box
           sx={{
+            overflow:"hidden",
             boxSizing: "border-box",
             marginLeft: { xl: "240px", lg: "0px" },
             marginRight: { lg: "240px" },
             width: {
               lg: `min(1000px, calc(100% - ${240}px))`,
+             
             },
           }}
         >

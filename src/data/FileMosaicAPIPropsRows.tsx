@@ -4,12 +4,12 @@ export const FileMosaicAPIPropsRows = [
   {
     id: 0,
     name: "alwaysActive",
-    type: <TypeHighlight>boolean</TypeHighlight>,
-    default: <TypeHighlight>false</TypeHighlight>,
+    type: <TypeHighlight np>boolean</TypeHighlight>,
+    default: <TypeHighlight np>false</TypeHighlight>,
     description: (
       <>
         Flag that makes all buttons visible. If{" "}
-        <TypeHighlight>false</TypeHighlight>, the buttons and info will be
+        <TypeHighlight np>false</TypeHighlight>, the buttons and info will be
         visible only when user triggers the hover event.
       </>
     ),
@@ -18,18 +18,18 @@ export const FileMosaicAPIPropsRows = [
     id: 1,
     name: "elevation",
     type: (
-      <TypeHighlight>
+      <TypeHighlight np>
         <span>"1" | "2" | "3" | "4" | 1 | 2 | 3 | 4 | false</span>
       </TypeHighlight>
     ),
-    default: <TypeHighlight>undefined</TypeHighlight>,
+    default: <TypeHighlight np>undefined</TypeHighlight>,
     description: <>Shadow depth for the FileItem container.</>,
   }, */
   {
     id: 2,
     name: "errors",
-    type: <TypeHighlight>{"string[]"}</TypeHighlight>,
-    default: <TypeHighlight>undefined</TypeHighlight>,
+    type: <TypeHighlight np>{"string[]"}</TypeHighlight>,
+    default: <TypeHighlight np>undefined</TypeHighlight>,
     description: (
       <>
         The list of errors according to the validation criteria or the result of
@@ -40,32 +40,32 @@ export const FileMosaicAPIPropsRows = [
   {
     id: 3,
     name: "file",
-    type: <TypeHighlight>{"File"}</TypeHighlight>,
-    default: <TypeHighlight>undefined</TypeHighlight>,
+    type: <TypeHighlight np>{"File"}</TypeHighlight>,
+    default: <TypeHighlight np>undefined</TypeHighlight>,
     description: <>The file object obtained from client drop or selection</>,
   },
   {
     name: "name",
-    type: <TypeHighlight>{"string"}</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>{"string"}</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The name of the file</>,
   },
   {
     name: "type",
-    type: <TypeHighlight>{"string"}</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>{"string"}</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The file mime type.</>,
   },
   {
     name: "size",
-    type: <TypeHighlight>{"number"}</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>{"number"}</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The size of the file in bytes.</>,
   },
   {
     name: "valid",
-    type: <TypeHighlight>{"boolean"}</TypeHighlight>,
-    default: <TypeHighlight>undefined</TypeHighlight>,
+    type: <TypeHighlight np>{"boolean"}</TypeHighlight>,
+    default: <TypeHighlight np>undefined</TypeHighlight>,
     description: (
       <>
         If present, it will show a valid or rejected message ("valid",
@@ -76,29 +76,35 @@ export const FileMosaicAPIPropsRows = [
   /*   {
     id: 4,
     name: "hd",
-    type: <TypeHighlight>{"boolean"}</TypeHighlight>,
-    default: <TypeHighlight>undefined</TypeHighlight>,
+    type: <TypeHighlight np>{"boolean"}</TypeHighlight>,
+    default: <TypeHighlight np>undefined</TypeHighlight>,
     description: <>The actual File object instance</>,
   }, */
   {
     id: 5,
     name: "id",
-    type: <TypeHighlight>{"string | number"}</TypeHighlight>,
-    default: <TypeHighlight>undefined</TypeHighlight>,
+    type: (
+      <>
+        {" "}
+        <TypeHighlight np>{"string"}</TypeHighlight> {" | "}
+        <TypeHighlight np>{"number"}</TypeHighlight>
+      </>
+    ),
+    default: <TypeHighlight np>undefined</TypeHighlight>,
     description: <>The identifier of the file</>,
   },
   {
     id: 6,
     name: "info",
-    type: <TypeHighlight>{"boolean"}</TypeHighlight>,
-    default: <TypeHighlight>false</TypeHighlight>,
+    type: <TypeHighlight np>{"boolean"}</TypeHighlight>,
+    default: <TypeHighlight np>false</TypeHighlight>,
     description: <>If true, the info button will be visible</>,
   },
   {
     id: 7,
     name: "imageUrl",
-    type: <TypeHighlight>{"string"}</TypeHighlight>,
-    default: <TypeHighlight>undefined</TypeHighlight>,
+    type: <TypeHighlight np>{"string"}</TypeHighlight>,
+    default: <TypeHighlight np>undefined</TypeHighlight>,
     description: (
       <>
         A string representation or web url of the image that will be set to the
@@ -111,33 +117,45 @@ export const FileMosaicAPIPropsRows = [
   {
     id: 7,
     name: "backgroundBlurImage",
-    type: <TypeHighlight>{"boolean"}</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>{"boolean"}</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>If true, a background blur image will be shown</>,
   },
   {
     id: 7,
     name: "darkMode",
-    type: <TypeHighlight>{"boolean"}</TypeHighlight>,
-    default: <TypeHighlight>false</TypeHighlight>,
+    type: <TypeHighlight np>{"boolean"}</TypeHighlight>,
+    default: <TypeHighlight np>false</TypeHighlight>,
     description: <>If true, dark mode colors are used in the component.</>,
   },
   {
     name: "localization",
     type: (
-      <TypeHighlight>
-        {
-          '"EN-en" | "ES-es" | "FR-fr" | "IT-it" | "PT-pt" | "RU-ru" | "ZH-cn" | "ZH-hk"'
-        }
-      </TypeHighlight>
+      <>
+        <TypeHighlight np>{'"EN-en"'}</TypeHighlight>
+        {" | "}
+        <TypeHighlight np>{'"ES-es"'}</TypeHighlight>
+        {" | "}
+        <TypeHighlight np>{'"FR-fr"'}</TypeHighlight>
+        {" | "}
+        <TypeHighlight np>{'"IT-it"'}</TypeHighlight>
+        {" | "}
+        <TypeHighlight np>{'"PT-pt"'}</TypeHighlight>
+        {" | "}
+        <TypeHighlight np>{'"RU-ru"'}</TypeHighlight>
+        {" | "}
+        <TypeHighlight np>{'"ZH-cn"'}</TypeHighlight>
+        {" | "}
+        <TypeHighlight np>{'"ZH-hk"'}</TypeHighlight>
+      </>
     ),
-    default: <TypeHighlight>{'"EN-en"'}</TypeHighlight>,
+    default: <TypeHighlight np>{'"EN-en"'}</TypeHighlight>,
     description: <>If true, dark mode colors are used in the component.</>,
   },
   {
     name: "progress",
-    type: <TypeHighlight>number</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>number</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         The current percentage of upload progress. This value will have a higher
@@ -147,8 +165,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "xhr",
-    type: <TypeHighlight>XMLHttpRequest</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>XMLHttpRequest</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         A reference to the XHR object that allows the upload, progress and abort
@@ -158,8 +176,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onSee",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         A function that return a file object when "see" button is pressed or
@@ -175,8 +193,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onWatch",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when `delete` button is clicked or pressed. If
@@ -192,8 +210,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onDelete",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when `delete` button is clicked or pressed. If
@@ -209,8 +227,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onAbort",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when `abort` button is clicked or pressed during
@@ -227,8 +245,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onCancel",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when `cancel` button is clicked or pressed
@@ -245,8 +263,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onDownload",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when `download` button is clicked or pressed. If
@@ -264,8 +282,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onClick",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when user clicks the component
@@ -278,8 +296,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onDoubleClick",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when user double clicks the component
@@ -292,8 +310,8 @@ export const FileMosaicAPIPropsRows = [
   },
   {
     name: "onRightClick",
-    type: <TypeHighlight>func</TypeHighlight>,
-    default: <TypeHighlight></TypeHighlight>,
+    type: <TypeHighlight np>func</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Event that is triggered when user right clicks the component

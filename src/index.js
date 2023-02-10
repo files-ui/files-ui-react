@@ -42,7 +42,7 @@ const router = createBrowserRouter([
     element: <FileMosaicDemoPage />,
   },
   {
-    path: "/components/file-card",
+    path: "/components/filecard",
     element: <FileCardDemoPage />,
   },
   {
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     element: <FileMosaicApi />,
   },
   {
-    path: "/api/file-card",
+    path: "/api/filecard",
     element: <FileCardApi />,
   },
   {
