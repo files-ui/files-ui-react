@@ -1,7 +1,6 @@
 import * as React from "react";
 import useMaterialButtonClassName from "./hooks/useMaterialButtonClassName";
 import { MaterialButtonProps } from "./MaterialButtonProps";
-import MaterialButtonStyleManager from "./utils/MaterialButtonStyleManager";
 import "./MaterialButton.scss";
 import { createRippleButton } from "../../core";
 

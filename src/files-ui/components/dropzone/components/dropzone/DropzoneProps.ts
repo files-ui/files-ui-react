@@ -75,6 +75,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * the user drops files or selects files
    */
   disableRipple?: boolean;
+
   ///////////////         VALIDATION STAGE        ///////////////
   /**
    * The max file size allowed in bytes
@@ -189,12 +190,12 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   onUploadFinish?: (responses: UploadResponse[]) => void;
 
 
- /**
-  * The configuration needed for uploading the files.
-  * When "uploadConfig" is not given or uploadConfig.url is undefined
-  * the upload button will not be visible
-  * and uploadOnDrop flag will not work
-  */
+  /**
+   * The configuration needed for uploading the files.
+   * When "uploadConfig" is not given or uploadConfig.url is undefined
+   * the upload button will not be visible
+   * and uploadOnDrop flag will not work
+   */
   actionButtons?: DropzoneActions;
 
   //advancedConfig?: DropzoneAdvancedConfig;
@@ -262,7 +263,7 @@ export type DropzoneActionButton = {
   style?: React.CSSProperties;
   className?: string;
   resetStyles: boolean;
-  onClick?:Function;
+  onClick?: Function;
 }
 
 export interface DropzoneActions {

@@ -43,7 +43,7 @@ const useMaterialButtonClassName = (
             disabled,
             color,
             textColor,
-            // textDecoration
+            textDecoration
         );
 
         let idStyle: string = "";

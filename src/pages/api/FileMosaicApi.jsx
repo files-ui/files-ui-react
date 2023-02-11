@@ -26,6 +26,7 @@ const FileMosaicApi = (props) => {
     <React.Fragment>
       <MainLayoutPage
         rightMenu={<RightMenu width="240px" items={rightMenuItems} />}
+        MainLayoutPage={7}
       >
         <MainTitle>FileMosaic API</MainTitle>
         <DescParagraph>

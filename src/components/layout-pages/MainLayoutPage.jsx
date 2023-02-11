@@ -2,9 +2,9 @@ import { Stack, Box } from "@mui/material";
 import * as React from "react";
 import NavBarTemplate from "../../templates/NavBarTemplate";
 
-const MainLayoutPage = ({ mainContent, rightMenu, children }) => {
+const MainLayoutPage = ({ mainContent, rightMenu, children, selectedIndex }) => {
   return (
-    <NavBarTemplate>
+    <NavBarTemplate selectedIndex={selectedIndex}>
       <Stack direction={"row"} sx={{ position: "relative" }}>
         <Box
           sx={{

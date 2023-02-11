@@ -8,12 +8,14 @@ import Collapse from "@mui/material/Collapse";
 
 import { MainMenuSideBarItems, MainMenuSideBarProps } from "./MenuSideBarProps";
 import { useNavigate } from "react-router";
-import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
+import { useNavigateToTop } from "../../hooks/useNavigateToTop";
 
 export default function MainMenuSideBar(props: MainMenuSideBarProps) {
   const { /* items, */ selectedIndex, setSelectedIndex } = props;
-  const navigate = useNavigate();
-  const quickStartItems: MainMenuSideBarItems[] = [
+  const navigate = useNavigateToTop();
+
+  const quickStartItemsIni: MainMenuSideBarItems[] = [
     {
       label: "Getting started",
       index: 0,
@@ -25,25 +27,32 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       onClick: () => navigate("/usage"),
     },
   ];
-  const Regularitems: MainMenuSideBarItems[] = [
+
+  const RegularItemsIni: MainMenuSideBarItems[] = [
     {
       //Icon: <FileOpenIcon />,
       label: "Components",
       index: 2,
+      isOpen:false,
       subMenu: [
         {
           label: "Dropzone",
-          index: 3,
+          index: 21,
           onClick: () => navigate("/components/dropzone"),
         },
         {
           label: "FileMosaic",
-          index: 4,
+          index: 22,
           onClick: () => navigate("/components/filemosaic"),
         },
         {
+          label: "FileInputButton",
+          index: 23,
+          onClick: () => navigate("/components/fileinputbutton"),
+        },
+        {
           label: "FileCard",
-          index: 5,
+          index: 24,
           onClick: () => navigate("/components/filecard"),
         },
       ],
@@ -51,48 +60,78 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     {
       // Icon: <DocumentScannerIcon />,
       label: "API documentation",
-      index: 6,
+      index: 3,
+      isOpen:false,
+
       subMenu: [
         {
           label: "Dropzone",
-          index: 5,
+          index: 31,
           onClick: () => navigate("/api/dropzone"),
         },
+
         {
           label: "FileMosaic",
-          index: 6,
+          index: 32,
           onClick: () => navigate("/api/filemosaic"),
         },
         {
+          label: "FileInputButton",
+          index: 33,
+          onClick: () => navigate("/api/fileinputbutton"),
+        },
+        {
           label: "FileCard",
-          index: 7,
+          index: 34,
           onClick: () => navigate("/api/filecard"),
+        },
+        {
+          label: "FullScreenPreview",
+          index: 34,
+          onClick: () => navigate("/api/fullscreenpreview"),
+        },
+        {
+          label: "ImagePreview",
+          index: 34,
+          onClick: () => navigate("/api/imagepreview"),
+        },
+        {
+          label: "VideoPreview",
+          index: 34,
+          onClick: () => navigate("/api/videopreview"),
         },
       ],
     },
     {
       label: "Server side",
-      index: 7,
+      index: 5,
       onClick: () => navigate("/server-side"),
     },
     {
       label: "Code Generator",
-      index: 8,
+      index: 6,
       onClick: () => navigate("/code-generator"),
     },
-    { label: "Types", index: 9, onClick: () => navigate("/types") },
+    {
+      label: "Types",
+      index: 7,
+      onClick: () => navigate("/types"),
+    },
 
     {
       label: "Utilities Methods",
-      index: 10,
+      index: 8,
       onClick: () => navigate("/utilities-methods"),
     },
   ];
 
-  const [open, setOpen] = React.useState(true);
+  const [quickStartItems, setQuickStartItems] =
+    React.useState(quickStartItemsIni);
+
+  const [regularItems, setRegularItemsIni] = React.useState(RegularItemsIni);
 
   const handleClick = () => {
-    setOpen(!open);
+    //setOpen(!open);
   };
 
   const handleCLickItem = (
@@ -110,9 +149,19 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     onClick: Function | undefined,
     withSubMenu?: boolean
   ) => {
-    setSelectedIndex(index);
+    //setSelectedIndex(index);
     if (!withSubMenu) {
       onClick?.();
+    } else {
+
+      setRegularItemsIni((arr) =>
+        arr.map((item) => {
+          if (item.index === index) {
+            return { ...item, isOpen: !item.isOpen };
+          }
+          return { ...item };
+        })
+      );
     }
   };
 
@@ -124,13 +173,13 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
-           <ElectricBoltIcon/>  Quick Start
+            <ElectricBoltIcon /> Quick Start
           </ListSubheader>
         }
       >
         {quickStartItems &&
           quickStartItems.map(
-            ({ Icon, label, onClick, index, subMenu }, indexBase) => (
+            ({ Icon, label, onClick, index, subMenu, isOpen }, indexBase) => (
               <React.Fragment key={indexBase}>
                 <ListItemButton
                   style={{ padding: "2px 20px" }}
@@ -160,7 +209,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
 
                 {subMenu && (
                   <Collapse
-                    in={open}
+                    in={isOpen}
                     timeout="auto"
                     unmountOnExit
                     key={"collapse-submenu" + indexBase}
@@ -198,9 +247,9 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           </ListSubheader>
         }
       >
-        {Regularitems &&
-          Regularitems.map(
-            ({ Icon, label, onClick, index, subMenu }, indexBase) => (
+        {regularItems &&
+          regularItems.map(
+            ({ Icon, label, onClick, index, subMenu, isOpen }, indexBase) => (
               <React.Fragment key={indexBase}>
                 <ListItemButton
                   style={{ padding: "2px 20px" }}
@@ -230,7 +279,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
 
                 {subMenu && (
                   <Collapse
-                    in={open}
+                    in={isOpen}
                     timeout="auto"
                     unmountOnExit
                     key={"collapse-submenu" + indexBase}
@@ -239,6 +288,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
                       {subMenu.map(
                         ({ Icon, label, onClick, index }, index2) => (
                           <ListItemButton
+                            style={{ paddingTop: 0 }}
                             sx={{ pl: 4 }}
                             selected={selectedIndex === index}
                             key={index2 + indexBase}

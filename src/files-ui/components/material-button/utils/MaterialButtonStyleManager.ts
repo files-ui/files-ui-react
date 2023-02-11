@@ -27,7 +27,7 @@ export default class MaterialButtonStyleManager {
         disabled?: boolean,
         color?: string,
         textColor?: string,
-        //textDecoration?: string
+        textDecoration?: "uppercase" | "capitalize" | "lowercase" | "none",
         //nextClassName?: number
     ): DynamicSheet => {
         //([{ variant, disabled, color, textColor, nextClassName }]);
@@ -59,7 +59,7 @@ export default class MaterialButtonStyleManager {
                             asureColor(colourNameToHex(color)),
                             1
                         ),
-                        //textDecoration: finalTextDecoration
+                        textDecoration: textDecoration
                     };
                     sheetRules[1].rules = {
                         ":hover": {
@@ -80,7 +80,7 @@ export default class MaterialButtonStyleManager {
                         )}`,
                         color: asureColor(colourNameToHex(color)),
                         backgroundColor: "transparent",
-                        //textDecoration: finalTextDecoration
+                        textDecoration: textDecoration
                     };
                     sheetRules[1].rules = {
                         ":hover": {
@@ -99,7 +99,7 @@ export default class MaterialButtonStyleManager {
                     sheetRules[0].rules = {
                         color: asureColor(colourNameToHex(color)),
                         backgroundColor: "transparent",
-                        //textDecoration: finalTextDecoration
+                        textDecoration: textDecoration
                     };
                     sheetRules[1].rules = {
                         ":hover": {

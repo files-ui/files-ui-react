@@ -10,7 +10,8 @@ export type MainMenuSideBarItems = {
     Icon?: any,
     onClick?: Function,
     index: number,
-    subMenu?: Array<MainMenuSideBarPropsIndividual>
+    subMenu?: Array<MainMenuSideBarPropsIndividual>,
+    isOpen?:boolean;
 }
 
 export type MainMenuSideBarProps = {

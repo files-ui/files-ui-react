@@ -25,6 +25,7 @@ import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import InputIcon from "@mui/icons-material/Input";
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import { useNavigate } from "react-router";
+import { useNavigateToTop } from "../hooks/useNavigateToTop";
 
 const drawerWidth = 280;
 const StyledImage = styled("img")(({ theme }) => ({
@@ -37,11 +38,11 @@ const StyledImage = styled("img")(({ theme }) => ({
   },
 }));
 function NavBarTemplate(props) {
-  const navigate = useNavigate();
-  const { window, children, darkModeOn, handleDarkMode } = props;
+  const navigate = useNavigateToTop();
+  const { window, children, darkModeOn, handleDarkMode, selectedIndex } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  //const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleGoGitRepo = () => {
     window.open("https://github.com/files-ui", "_blank");
@@ -77,7 +78,7 @@ function NavBarTemplate(props) {
       <Divider />
 
       <MainMenuSideBar
-        setSelectedIndex={setSelectedIndex}
+        //setSelectedIndex={setSelectedIndex}
         selectedIndex={selectedIndex}
         //items={}
       />
@@ -88,7 +89,7 @@ function NavBarTemplate(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: { xs: "column",sm:"row" } }}>
+    <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" } }}>
       <CssBaseline />
       <AppBar
         position="fixed"

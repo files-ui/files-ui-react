@@ -25,7 +25,8 @@ import {
 import useDropzoneFileListUpdater from "../../hooks/useDropzoneFileUpdater";
 import InputHidden from "../input-hidden/InputHidden";
 import { MaterialButton } from "../material-button";
-import { InputButtonProps } from "./InputButtonProps";
+import { mergeProps } from "../overridable";
+import { defaultInputButtonProps, InputButtonProps } from "./InputButtonProps";
 
 const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
   const {
@@ -41,7 +42,15 @@ const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
     disabled,
     onUploadFinish,
     fakeUpload,
-  } = props;
+    label,
+    children,
+    style,
+    className,
+    color,
+    variant,
+    textDecoration,
+    resetStyles,
+  } = mergeProps(props, defaultInputButtonProps);
   const {
     url,
     method,
@@ -109,7 +118,7 @@ const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
-    if(!url) return;
+    if (!url) return;
 
     setIsUploading(true);
     print_manager(localFiles, "start");
@@ -233,7 +242,7 @@ const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
     const finishUploadMessenger: FunctionLabel =
       DropzoneLocalizer.uploadFinished as FunctionLabel;
 
-   /*  setLocalMessage(
+    /*  setLocalMessage(
       finishUploadMessenger(missingUpload - totalRejected, totalRejected)
     ); */
     setIsUploading(false);
@@ -322,15 +331,27 @@ const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
 
     handleClickInput(inputRef.current);
   }
+
   return (
-    <MaterialButton onClick={handleClick}>
+    <>
+      <MaterialButton
+        className={className}
+        style={style}
+        color={color}
+        variant={variant}
+        textDecoration={textDecoration}
+        resetStyles={resetStyles}
+        onClick={handleClick}
+      >
+        {children || label}
+      </MaterialButton>
       <InputHidden
         multiple={maxFiles ? maxFiles > 1 : true}
         accept={accept || ""}
         inputRef={inputRef}
         onChange={handleChangeInput}
       />
-    </MaterialButton>
+    </>
   );
 };
 export default InputButton;

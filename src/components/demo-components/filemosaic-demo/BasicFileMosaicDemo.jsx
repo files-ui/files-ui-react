@@ -1,4 +1,5 @@
 import * as React from "react";
+import { InputButton } from "../../../files-ui";
 import { FileMosaic } from "../../../files-ui/components/file-mosaic";
 const sampleFile = {
   id: ":0:",
@@ -9,19 +10,17 @@ const sampleFile = {
 };
 const BasicFileMosaicDemo = (props) => {
   const [value, setValue] = React.useState([]);
+
+  const updateFiles = (incommingFiles) => {
+    console.log("incomming extFiles", incommingFiles);
+    setValue(incommingFiles);
+  };
   const removeFile = () => {
     setValue([]);
   };
   return (
     <>
-      <FileMosaic
-        key={sampleFile.id}
-        {...sampleFile}
-        onDelete={() => {}}
-        info
-        alwaysActive
-      />
-      {value.length>0 ? (
+      {value.length > 0 ? (
         <FileMosaic
           key={sampleFile.id + ":"}
           {...value[0]}
@@ -30,8 +29,21 @@ const BasicFileMosaicDemo = (props) => {
           alwaysActive
         />
       ) : (
-        <div onClick={() => setValue([sampleFile])}>InputFileButton</div>
+        <>
+          <InputButton
+            label="Browse Files..."
+            onChange={updateFiles}
+            textDecoration="uppercase"
+          />
+        </>
       )}
+      <FileMosaic
+        key={sampleFile.id}
+        {...sampleFile}
+        onDelete={() => {}}
+        info
+        alwaysActive
+      />
     </>
   );
 };

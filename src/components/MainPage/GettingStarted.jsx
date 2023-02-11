@@ -5,6 +5,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import "../../styles/GettingStarted.scss";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router";
+import { useNavigateToTop } from "../../hooks/useNavigateToTop";
 const CodeButton = styled(Button)({
   display: "flex",
   justifyContent: "space-between",
@@ -17,7 +18,7 @@ const CodeButton = styled(Button)({
 });
 
 const GettingStarted = ({ darkModeOn }) => {
-  const navigator = useNavigate();
+  const navigator = useNavigateToTop();
 
   const [copiedNpm, setCopiedNpm] = React.useState(false);
   const [copiedYarn, setCopiedYarn] = React.useState(false);
