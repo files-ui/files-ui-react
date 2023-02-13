@@ -2,6 +2,7 @@ import * as React from "react";
 import "../styles/MainPage.scss";
 import logoLight from "../static/files-ui-logo-blue-wbg.png";
 import logo_blue from "../static/files-ui-logo-blue.png";
+import logo_blue_dark from "../static/files-ui-logo-blue-dark.png";
 import DropzoneMainPage from "../components/DropzoneMainPage";
 
 import GettingStarted from "../components/MainPage/GettingStarted";
@@ -23,23 +24,17 @@ const MainPage = ({ darkMode }) => {
       <MainNavBar
         darkModeOn={darkModeOn}
         logo_blue={logo_blue}
-        logoLight={logoLight}
+        logo_blue_dark={logo_blue_dark}
         handleDarkMode={handleDarkMode}
       />
       <main className="filesui-main">
         <div className="fui-main-left">
-          <div
-            className={
-              darkModeOn
-                ? "filesui-main-logo-container darkmode"
-                : "filesui-main-logo-container"
-            }
-          >
-            <img
-              className="fui-logo-img"
-              // src={!darkModeOn ? logo_blue : logoLight}
-              src={logo_blue}
-            />
+          <div className={"filesui-main-logo-container"}>
+            {!darkMode ? (
+              <img className="fui-logo-img" src={logo_blue} />
+            ) : (
+              <img className="fui-logo-img" src={logo_blue_dark} />
+            )}
           </div>
 
           {/*  <Badges /> */}

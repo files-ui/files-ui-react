@@ -26,6 +26,8 @@ import InputIcon from "@mui/icons-material/Input";
 import FileOpenIcon from "@mui/icons-material/FileOpen";
 import { useNavigate } from "react-router";
 import { useNavigateToTop } from "../hooks/useNavigateToTop";
+import logo_text_blue from "../static/files-ui-logo-text-med.png";
+import logo_text_blue_dark from "../static/files-ui-logo-text-med-dark.png";
 
 const drawerWidth = 280;
 const StyledImage = styled("img")(({ theme }) => ({
@@ -54,25 +56,32 @@ function NavBarTemplate(props) {
   const drawer = (
     <div>
       <Toolbar>
-        <Stack
-          direction={"row"}
-          alignItems="center"
-          sx={{ "&:hover": { cursor: "pointer" } }}
-          onClick={() => navigate("/")}
-        >
-          <img
-            style={{
-              height: "40px",
-              marginRight: "10px",
-            }}
-            className="filesui-nav-logo"
-            src={!darkModeOn ? logo_blue : logoLight}
-            alt="files-ui-main-logo"
-          />
-          <Typography variant="h6" noWrap component="div" color="primary">
-            Files ui
-          </Typography>
-        </Stack>
+        <a href="/" style={{ textDecoration: "none" }}>
+          <Stack
+            direction={"row"}
+            alignItems="center"
+            sx={{ "&:hover": { cursor: "pointer" } }}
+            // onClick={() => navigate("/")}
+          >
+            <img
+              style={{
+                height: "40px",
+                marginRight: "5px",
+              }}
+              className="filesui-nav-logo"
+              src={!darkModeOn ? logo_blue : logoLight}
+              alt="files-ui-main-logo"
+            />
+            <img
+              src={darkModeOn ? logo_text_blue_dark : logo_text_blue}
+              alt="files-ui-main-logo-text"
+              height={20}
+            />
+          {/*   <Typography variant="h6" noWrap component="div" color="primary">
+              Files ui
+            </Typography> */}
+          </Stack>
+        </a>
       </Toolbar>
 
       <Divider />

@@ -1,6 +1,4 @@
 import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import * as React from "react";
@@ -8,119 +6,93 @@ import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import BasicFileMosaicDemo from "../../components/demo-components/filemosaic-demo/BasicFileMosaicDemo";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
+import MainContentContainer from "../../components/layout-pages/MainContentContainer";
+import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
+import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
-import NavBarTemplate from "../../templates/NavBarTemplate";
 
 const FileMosaicDemoPage = (props) => {
   return (
-    <NavBarTemplate>
-      <Stack direction={"row"} sx={{ position: "relative" }}>
-        <Box
-          sx={{
-            boxSizing: "border-box",
-            marginLeft: { xl: "240px", lg: "0px" },
-            marginRight: { lg: "240px" },
-            width: {
-              lg: `min(1000px, calc(100% - ${240}px))`,
-            },
-          }}
-        >
-          <Box
-            sx={{
-              boxSizing: "border-box",
-              width: "100%",
+    <React.Fragment>
+      <MainContentContainer>
+        <MainTitle>FileMosaic</MainTitle>
+        <MainParagraph>
+          File mosaics are compact elements that represent a file in the UI.
+          They can be used for just showing general info of the file, or either
+          allow the user to interact with them.
+        </MainParagraph>
+        <DescParagraph>
+          This widget allow users to see information of Files and / or trigger
+          actions.
+        </DescParagraph>
+        <Alert severity="info">
+          While included here as a standalone component, the most common use
+          will be as a result of the "onChange" event of {"<Dropzone/>"} or{" "}
+          {"<InputButton/>"} components, so some of the behavior demonstrated
+          here is not shown in context.{" "}
+        </Alert>
+        <section id="basic-filemosaic">
+          <SubTitle content="Basic FileMosaic" />
+          <DescParagraph>
+            The <CodeHighlight>FileMosaic</CodeHighlight> supports displaying
+            information from <TypeHighlight>File</TypeHighlight> object or
+            individual props.
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <h1 style={{ fontSize: "2.25rem" }}>FileMosaic</h1>
-            <MainParagraph>
-              File mosaics are compact elements that represent a file in the UI.
-              They can be used for just showing general info of the file, or
-              either allow the user to interact with them.
-            </MainParagraph>
-            <DescParagraph>
-              This widget allow users to see information of Files and / or
-              trigger actions.
-            </DescParagraph>
-            <Alert severity="info">
-              While included here as a standalone component, the most common use
-              will be as a result of the "onChange" event of {"<Dropzone/>"} or{" "}
-              {"<InputButton/>"} components, so some of the behavior
-              demonstrated here is not shown in context.{" "}
-            </Alert>
+            <Stack spacing={2} direction="row" alignItems={"center"}>
+              <BasicFileMosaicDemo />
+            </Stack>
+          </Paper>
+          <p></p>
+          {/* <BasicDropzoneCodeJS /> */}
+        </section>
+        <section id="image-preview">
+          <SubTitle content="Image preview" />
+          <DescParagraph>
+            By setting the <CodeHighlight>preview</CodeHighlight> prop to{" "}
+            <TypeHighlight>true</TypeHighlight> the component will show a image
+            preview using the <CodeHighlight>imageUrl</CodeHighlight>
+            prop or by reading the <TypeHighlight>File</TypeHighlight> object if
+            given (file prop).
+          </DescParagraph>
 
-            <section id="basic-filemosaic">
-              <SubTitle content="Basic FileMosaic" />
-              <DescParagraph>
-                The <CodeHighlight>FileMosaic</CodeHighlight> supports
-                displaying information from <TypeHighlight>File</TypeHighlight>{" "}
-                object or individual props.
-              </DescParagraph>
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            {/* <BasicDemoDropzone /> */}
+          </Paper>
+          <p></p>
+          {/* <BasicDropzoneCodeJS /> */}
+        </section>
+        <section id="validation">
+          <SubTitle content="Validation" />
+          <DescParagraph>
+            The <CodeHighlight>valid</CodeHighlight> prop can be set to{" "}
+            <TypeHighlight>true</TypeHighlight>,{" "}
+            <TypeHighlight>false</TypeHighlight> or{" "}
+            <TypeHighlight>undefined</TypeHighlight>
+          </DescParagraph>
 
-              <Paper
-                variant="outlined"
-                style={{
-                  padding: "25px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Stack spacing={2} direction="row" alignItems={"center"}>
-                  
-                <BasicFileMosaicDemo />
-                </Stack>
-              </Paper>
-              <p></p>
-              {/* <BasicDropzoneCodeJS /> */}
-            </section>
-            <section id="image-preview">
-              <SubTitle content="Image preview" />
-              <DescParagraph>
-                By setting the <CodeHighlight>preview</CodeHighlight> prop to{" "}
-                <TypeHighlight>true</TypeHighlight> the component will show a
-                image preview using the <CodeHighlight>imageUrl</CodeHighlight>
-                prop or by reading the <TypeHighlight>File</TypeHighlight>{" "}
-                object if given (file prop).
-              </DescParagraph>
-
-              <Paper variant="outlined" style={{ padding: "25px" }}>
-                {/* <BasicDemoDropzone /> */}
-              </Paper>
-              <p></p>
-              {/* <BasicDropzoneCodeJS /> */}
-            </section>
-            <section id="validation">
-              <SubTitle content="Validation" />
-              <DescParagraph>
-                The <CodeHighlight>valid</CodeHighlight> prop can be set to{" "}
-                <TypeHighlight>true</TypeHighlight>,{" "}
-                <TypeHighlight>false</TypeHighlight> or{" "}
-                <TypeHighlight>undefined</TypeHighlight>
-              </DescParagraph>
-
-              <Paper variant="outlined" style={{ padding: "25px" }}>
-                {/* <BasicDemoDropzone /> */}
-              </Paper>
-              <p></p>
-              {/* <BasicDropzoneCodeJS /> */}
-            </section>
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            position: "fixed",
-            top: 100,
-            right: 0,
-            width: "240px",
-            display: { lg: "flex", xs: "none" },
-          }}
-        >
-          <RightMenu width="240px" items={rightMenuItems} />
-        </Box>
-      </Stack>
-    </NavBarTemplate>
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            {/* <BasicDemoDropzone /> */}
+          </Paper>
+          <p></p>
+          {/* <BasicDropzoneCodeJS /> */}
+        </section>
+      </MainContentContainer>
+      <RightMenuContainer>
+        <RightMenu width="240px" items={rightMenuItems} />
+      </RightMenuContainer>
+    </React.Fragment>
   );
 };
 export default FileMosaicDemoPage;

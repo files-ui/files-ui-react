@@ -33,7 +33,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       //Icon: <FileOpenIcon />,
       label: "Components",
       index: 2,
-      isOpen:false,
+      isOpen: false,
       subMenu: [
         {
           label: "Dropzone",
@@ -61,7 +61,6 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       // Icon: <DocumentScannerIcon />,
       label: "API documentation",
       index: 3,
-      isOpen:false,
 
       subMenu: [
         {
@@ -104,31 +103,46 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     },
     {
       label: "Server side",
-      index: 5,
+      index: 4,
       onClick: () => navigate("/server-side"),
     },
     {
       label: "Code Generator",
-      index: 6,
+      index: 5,
       onClick: () => navigate("/code-generator"),
     },
     {
       label: "Types",
-      index: 7,
+      index: 6,
       onClick: () => navigate("/types"),
     },
-
     {
       label: "Utilities Methods",
-      index: 8,
-      onClick: () => navigate("/utilities-methods"),
+      index: 7,
+      subMenu: [
+        {
+          label: "File readers",
+          index: 71,
+          onClick: () => navigate("/utilities-methods/file-reader"),
+        },
+
+        {
+          label: "File uploader",
+          index: 72,
+          onClick: () => navigate("/utilities-methods/file-uploader"),
+        },
+      ],
     },
   ];
 
   const [quickStartItems, setQuickStartItems] =
     React.useState(quickStartItemsIni);
 
-  const [regularItems, setRegularItemsIni] = React.useState(RegularItemsIni);
+  const [regularItems, setRegularItemsIni] = React.useState(
+    RegularItemsIni.map((x) => {
+      return { ...x, isOpen: x.subMenu && x.index === selectedIndex };
+    })
+  );
 
   const handleClick = () => {
     //setOpen(!open);
@@ -153,7 +167,6 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     if (!withSubMenu) {
       onClick?.();
     } else {
-
       setRegularItemsIni((arr) =>
         arr.map((item) => {
           if (item.index === index) {
@@ -185,6 +198,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
                   style={{ padding: "2px 20px" }}
                   key={indexBase}
                   selected={subMenu === undefined && selectedIndex === index}
+                  //selected={selectedIndex === index}
                   onClick={(event) =>
                     handleListItemClick(
                       event,
@@ -209,7 +223,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
 
                 {subMenu && (
                   <Collapse
-                    in={isOpen}
+                    in={isOpen }
                     timeout="auto"
                     unmountOnExit
                     key={"collapse-submenu" + indexBase}
@@ -279,7 +293,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
 
                 {subMenu && (
                   <Collapse
-                    in={isOpen}
+                    in={isOpen }
                     timeout="auto"
                     unmountOnExit
                     key={"collapse-submenu" + indexBase}

@@ -9,5 +9,5 @@ export interface RightMenuItem {
 export interface RightMenuProps {
     items: RightMenuItem[];
     width: string;
-    baseUrl: string;
+    baseUrl?: string;
 }
