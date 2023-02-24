@@ -1,49 +1,35 @@
 import * as React from "react";
-import { InputButton } from "../../../files-ui";
-import { FileMosaic } from "../../../files-ui/components/file-mosaic";
-const sampleFile = {
+import { InputButton,FileMosaic } from "../../../files-ui";
+
+const sampleFileProps = {
   id: ":0:",
-  name: "",
   size: 28 * 1024 * 1024,
   type: "plain/javascript",
   name: "fileeeeee.jsx",
 };
 const BasicFileMosaicDemo = (props) => {
-  const [value, setValue] = React.useState([]);
+  const [value, setValue] = React.useState(undefined);
 
   const updateFiles = (incommingFiles) => {
     console.log("incomming extFiles", incommingFiles);
-    setValue(incommingFiles);
+
+    setValue(incommingFiles[0]);
   };
   const removeFile = () => {
-    setValue([]);
+    setValue(undefined);
   };
   return (
     <>
-      {value.length > 0 ? (
-        <FileMosaic
-          key={sampleFile.id + ":"}
-          {...value[0]}
-          onDelete={removeFile}
-          info
-          alwaysActive
-        />
+      {value ? (
+        <FileMosaic {...value} onDelete={removeFile} alwaysActive info />
       ) : (
-        <>
-          <InputButton
-            label="Browse Files..."
-            onChange={updateFiles}
-            textDecoration="uppercase"
-          />
-        </>
+        <InputButton
+          label="Browse File..."
+          onChange={updateFiles}
+          textDecoration="uppercase"
+        />
       )}
-      <FileMosaic
-        key={sampleFile.id}
-        {...sampleFile}
-        onDelete={() => {}}
-        info
-        alwaysActive
-      />
+      <FileMosaic {...sampleFileProps} onDelete={() => {}} alwaysActive info />
     </>
   );
 };

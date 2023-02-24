@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import * as React from "react";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
+import BasicFileMosaicCodeJS from "../../components/demo-components/filemosaic-demo/BasicFileMosaicCodeJS";
 import BasicFileMosaicDemo from "../../components/demo-components/filemosaic-demo/BasicFileMosaicDemo";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
@@ -37,7 +38,7 @@ const FileMosaicDemoPage = (props) => {
           <SubTitle content="Basic FileMosaic" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> supports displaying
-            information from <TypeHighlight>File</TypeHighlight> object or
+            information from a <TypeHighlight>File</TypeHighlight> object or from
             individual props.
           </DescParagraph>
 
@@ -50,12 +51,12 @@ const FileMosaicDemoPage = (props) => {
               justifyContent: "center",
             }}
           >
-            <Stack spacing={2} direction="row" alignItems={"center"}>
+            <Stack spacing={10} direction="row" alignItems={"center"}>
               <BasicFileMosaicDemo />
             </Stack>
           </Paper>
           <p></p>
-          {/* <BasicDropzoneCodeJS /> */}
+          <BasicFileMosaicCodeJS/>
         </section>
         <section id="image-preview">
           <SubTitle content="Image preview" />
