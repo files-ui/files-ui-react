@@ -19,6 +19,8 @@ export const parseSize = (sizeStr: IconProps["size"] | number): number => {
             return 25;
         case "large":
             return 28;
+        case "extra-large":
+            return 32;
         default:
             return 24;
     }

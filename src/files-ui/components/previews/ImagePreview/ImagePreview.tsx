@@ -11,10 +11,8 @@ import "./ImagePreview.scss";
 const ImagePreview: React.FC<ImagePreviewProps> = (
   props: ImagePreviewProps
 ) => {
-  const { src, alt, className, style, width, height, onError } = mergeProps(
-    props,
-    ImagePreviewDefaultProps
-  );
+  const { src, alt, className, style, width, height, onError, smart } =
+    mergeProps(props, ImagePreviewDefaultProps);
 
   //console.table({ src, alt, className, style, width, height });
   const [source, setSource] = React.useState<string | undefined>(undefined);
@@ -26,15 +24,22 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
     const newImageSrc: string | undefined = await readAsDataURL(src);
     handleSetStrSource(newImageSrc);
   };
+
   const handleSetStrSource = async (imageSource: string | undefined) => {
-    if (imageSource) {
-      const orientation: "landscape" | "portrait" = await getImageOrientation(
-        imageSource
-      );
-      setOrientation(orientation);
-    }
+    if (imageSource === "" || !imageSource) return;
+
+    setSource(imageSource);
+
+    if (!smart) return;
+
+    const orientation: "landscape" | "portrait" = await getImageOrientation(
+      imageSource
+    );
+    setOrientation(orientation);
+
     setSource(imageSource);
   };
+
   React.useEffect(() => {
     //if not undefined
     if (!src) {
@@ -58,14 +63,16 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
   //console.log("ImagePreview", src, source);
 
   const finalWidth: string | number | undefined =
-    width || (orientation === "landscape" ? "100%" : undefined);
+    width || (orientation === "landscape" && smart ? "100%" : undefined);
   const finalHeight: string | number | undefined =
-    height || (orientation === "portrait" ? "100%" : undefined);
-    
-    const handleError=(evt: React.SyntheticEvent<HTMLImageElement, Event>)=>{
-      console.log("handleError", onError);
-      onError?.(evt);
-    }
+    height || (orientation === "portrait" && smart ? "100%" : undefined);
+
+  console.log("Image result", finalHeight, finalWidth, orientation, smart);
+  const handleError = (evt: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    console.log("handleError", onError);
+    onError?.(evt);
+  };
+
   return (
     <React.Fragment>
       {src && source && (

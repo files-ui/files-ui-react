@@ -26,10 +26,23 @@ export const useAvatarStyle = (borderRadius: string | undefined): boolean => {
     }
 
     React.useEffect(() => {
-   /*      if (!borderRadius) {
-            DynamiCSS.removeStyleSheet(idAvatarStyles);
-            return;
-        } */
+        return () => {
+            console.log("avatar, deleting init", styleInjected, idAvatarStyles);
+            if (styleInjected) {
+                console.log("avatar, catch css delete");
+
+                DynamiCSS.removeStyleSheet(idAvatarStyles);
+            }
+            setIdAvatarStyles("");
+            setStyleInjected(false);
+        }
+    }, []);
+    
+    React.useEffect(() => {
+        /*      if (!borderRadius) {
+                 DynamiCSS.removeStyleSheet(idAvatarStyles);
+                 return;
+             } */
         let idStyle: string = "avatar-styles";
         const styleSheet: DynamicSheet = makeDynamicAvatarCSSRules(borderRadius);
         // check if classname was added
@@ -50,17 +63,9 @@ export const useAvatarStyle = (borderRadius: string | undefined): boolean => {
             DynamiCSS.editStyleSheet(idAvatarStyles, styleSheet.sheetRules || []);
         }
 
-        return () => {
-            console.log("avatar, deleting init", styleInjected, idAvatarStyles);
-            if (styleInjected) {
-                console.log("avatar, catch css delete");
 
-                DynamiCSS.removeStyleSheet(idAvatarStyles);
-            }
-            setIdAvatarStyles("");
-            setStyleInjected(false);
-        }
     }, [borderRadius]);
+
 
     /*  React.useEffect(() => {
  

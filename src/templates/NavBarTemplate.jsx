@@ -75,9 +75,9 @@ function NavBarTemplate(props) {
             <img
               src={darkModeOn ? logo_text_blue_dark : logo_text_blue}
               alt="files-ui-main-logo-text"
-              height={20}
+              height={16}
             />
-          {/*   <Typography variant="h6" noWrap component="div" color="primary">
+            {/*   <Typography variant="h6" noWrap component="div" color="primary">
               Files ui
             </Typography> */}
           </Stack>

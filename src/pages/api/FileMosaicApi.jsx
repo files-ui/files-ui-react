@@ -15,12 +15,12 @@ const rightMenuItems = [
   {
     id: 0,
     label: "Demos",
-    referTo: "/api/file-mosaic/#filemosaic-demo",
+    referTo: "/api/file-mosaic#filemosaic-demo",
   },
   {
     id: 1,
     label: "Props",
-    referTo: "/api/file-mosaic/#filemosaic-props",
+    referTo: "/api/file-mosaic#filemosaic-props",
   },
 ];
 const FileMosaicApi = (props) => {

@@ -19,7 +19,7 @@ import {
   UploadResponse,
   instantPreparingToUploadOne,
   fakeFuiUpload,
-  uploadOnePromiseXHR,
+  uploadExtFile,
   sleepTransition,
   toUploadableExtFileList,
   cleanInput,
@@ -272,24 +272,41 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
         //UPLOADING => UPLOAD()
         //upload one file and notify about change
-        const uploadResponse: UploadResponse = fakeUpload
-          ? await fakeFuiUpload(currentExtFileInstance, DropzoneLocalizer)
-          : await uploadOnePromiseXHR(
-              currentExtFileInstance,
-              url,
-              method,
-              headers,
-              uploadLabel
-            );
+        let uploadResponse: UploadResponse;
+        try {
+          uploadResponse = fakeUpload
+            ? await fakeFuiUpload(currentExtFileInstance, DropzoneLocalizer)
+            : await uploadExtFile(
+                currentExtFileInstance,
+                url,
+                method,
+                headers,
+                uploadLabel
+              );
+        } catch (error) {
+          uploadResponse = {
+            id: currentExtFileInstance.id,
+            serverResponse: {
+              success: false,
+              message: "Error on upload: unexpected error " + error,
+              payload: {},
+            },
+            uploadedFile: { ...currentExtFileInstance },
+          };
+        }
 
         const { uploadedFile } = uploadResponse;
         //update instances
         currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
         currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
-        
+
         //add fake progress only on fakeupload
         if (fakeUpload) {
-          console.log("Adding fake progress", fakeUpload, uploadedFile.progress);
+          console.log(
+            "Adding fake progress",
+            fakeUpload,
+            uploadedFile.progress
+          );
           currentExtFileInstance.progress = uploadedFile.progress;
         }
         //CHANGE
@@ -526,10 +543,10 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     console.log("validatedFuiFileList pre", fuiFileListToValidate);
 
     let finalNumberOfValids: number = numberOfValidFiles;
-     if (behaviour === "replace") {
+    if (behaviour === "replace") {
       //re-start number of valids
       finalNumberOfValids = 0;
-    } 
+    }
 
     const validatedFuiFileList: ExtFile[] = validateExtFileList(
       fuiFileListToValidate,

@@ -6,9 +6,12 @@ import { IconButton, Tooltip, Typography } from "@mui/material";
 import logo_text_blue from "../../static/files-ui-logo-text-med.png";
 import logo_text_blue_dark from "../../static/files-ui-logo-text-med-dark.png";
 
-
-
-const MainNavBar = ({ darkModeOn, logo_blue, logo_blue_dark, handleDarkMode }) => {
+const MainNavBar = ({
+  darkModeOn,
+  logo_blue,
+  logo_blue_dark,
+  handleDarkMode,
+}) => {
   const handleGoGitRepo = () => {
     window.open("https://github.com/files-ui", "_blank");
   };
@@ -17,27 +20,17 @@ const MainNavBar = ({ darkModeOn, logo_blue, logo_blue_dark, handleDarkMode }) =
     <nav className="filesui-nav">
       <div className="filesui-nav-container">
         <div className="left-part">
-          <div
-            className={
-             "filesui-nav-logo-container"
-            }
-          >
+          <div className={"filesui-nav-logo-container"}>
             <img
               className={"filesui-nav-logo"}
               // src={!darkModeOn ? logo_blue : logoLight}
-              src={darkModeOn?logo_blue_dark:logo_blue}
+              src={darkModeOn ? logo_blue_dark : logo_blue}
               alt="files-ui-main-logo"
             />
           </div>
 
-          {/*  <Typography variant="h5" noWrap component="div" color="primary">
-            Files ui
-          </Typography> */}
-          {/*  <p className="filesui-nav-text-logo">
-            <span className="gradient-span">Files UI</span>
-          </p> */}
           <img
-            height={"20px"}
+            height={"18px"}
             src={darkModeOn ? logo_text_blue_dark : logo_text_blue}
             alt="files-ui-main-logo-text"
           />

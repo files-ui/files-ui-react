@@ -96,7 +96,7 @@ export {
 } from "./types"
 
 export {
-    FilesUIUpload, uploadPromiseXHR,
+    uploadExtFile,
     FuiUpload,
     completeUploadResult,
     instantPreparingToUploadOne,
@@ -104,8 +104,20 @@ export {
     sleepTransition,
     toUploadableExtFileList,
     unableToUploadResult,
-    unexpectedErrorUploadResult,
     uploadOnePromiseXHR,
+    makeServerResponse,
+    uploadFile,
+    uploadFormData,
+    ABORTED_ERROR_RESPONSE,
+    JSON_PARSE_ERROR_RESPONSE,
+    JsonParseResponse,
+    NO_XHR_PROVIDED_ERROR,
+    TIMEOUT_ERROR_RESPONSE,
+    UNEXPECTED_ERROR_RESPONSE,
+    makeErrorUploadResponse,
+    makeSuccessUploadResponse,
+    addExtraData,
+    addHeaders
 } from "./upload";
 
 export {
@@ -139,7 +151,7 @@ export {
 } from "./validation";
 
 
-export { createFuiRippleFromDiv,createRippleButton } from "./ripple";
+export { createFuiRippleFromDiv, createRippleButton } from "./ripple";
 
 export {
     asureColor,

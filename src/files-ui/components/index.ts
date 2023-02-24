@@ -1,3 +1,6 @@
+export { Avatar } from "./avatar";
+export * from "./avatar";
+
 export { Dropzone } from "./dropzone";
 export * from "./dropzone";
 

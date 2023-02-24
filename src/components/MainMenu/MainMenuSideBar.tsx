@@ -46,14 +46,19 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           onClick: () => navigate("/components/filemosaic"),
         },
         {
-          label: "FileInputButton",
+          label: "InputButton",
           index: 23,
-          onClick: () => navigate("/components/fileinputbutton"),
+          onClick: () => navigate("/components/inputbutton"),
         },
         {
           label: "FileCard",
           index: 24,
           onClick: () => navigate("/components/filecard"),
+        },
+        {
+          label: "Avatar",
+          index: 25,
+          onClick: () => navigate("/components/avatar"),
         },
       ],
     },
@@ -75,9 +80,9 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           onClick: () => navigate("/api/filemosaic"),
         },
         {
-          label: "FileInputButton",
+          label: "InputButton",
           index: 33,
-          onClick: () => navigate("/api/fileinputbutton"),
+          onClick: () => navigate("/api/inputbutton"),
         },
         {
           label: "FileCard",
@@ -98,6 +103,11 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           label: "VideoPreview",
           index: 34,
           onClick: () => navigate("/api/videopreview"),
+        },
+        {
+          label: "Avatar",
+          index: 35,
+          onClick: () => navigate("/api/avatar"),
         },
       ],
     },
@@ -223,7 +233,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
 
                 {subMenu && (
                   <Collapse
-                    in={isOpen }
+                    in={isOpen}
                     timeout="auto"
                     unmountOnExit
                     key={"collapse-submenu" + indexBase}
@@ -268,7 +278,8 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
                 <ListItemButton
                   style={{ padding: "2px 20px" }}
                   key={indexBase}
-                  selected={subMenu === undefined && selectedIndex === index}
+                 // selected={subMenu === undefined && selectedIndex === index}
+                  selected={isOpen && selectedIndex === index}
                   onClick={(event) =>
                     handleListItemClick(
                       event,
@@ -293,7 +304,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
 
                 {subMenu && (
                   <Collapse
-                    in={isOpen }
+                    in={isOpen}
                     timeout="auto"
                     unmountOnExit
                     key={"collapse-submenu" + indexBase}

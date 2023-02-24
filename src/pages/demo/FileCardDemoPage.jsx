@@ -101,46 +101,46 @@ const rightMenuItems = [
   {
     id: 0,
     label: "Basic file mosaic",
-    referTo: "/components/file-mosaic/#basic-filemosaic",
+    referTo: "/components/file-mosaic#basic-filemosaic",
   },
   {
     id: 1,
     label: "Image Preview",
-    referTo: "/components/file-mosaic/#file-mosaic-image-preview",
+    referTo: "/components/file-mosaic#file-mosaic-image-preview",
   },
   {
     id: 2,
     label: "Validation",
-    referTo: "/components/file-mosaic/#file-mosaic-validation",
+    referTo: "/components/file-mosaic#file-mosaic-validation",
   },
   {
     id: 3,
     label: "Uploading",
-    referTo: "/components/file-mosaic/#file-mosaic-uploading",
+    referTo: "/components/file-mosaic#file-mosaic-uploading",
   },
   {
     id: 4,
     label: "Localization",
-    referTo: "/components/file-mosaic/#file-mosaic-localization",
+    referTo: "/components/file-mosaic#file-mosaic-localization",
   },
   {
     id: 5,
     label: "Previews",
-    referTo: "/components/file-mosaic/#file-mosaic-previews",
+    referTo: "/components/file-mosaic#file-mosaic-previews",
   },
   {
     id: 6,
     label: "Actions",
-    referTo: "/components/file-mosaic/#actions",
+    referTo: "/components/file-mosaic#actions",
   },
   {
     id: 7,
     label: "Default previews",
-    referTo: "/components/file-mosaic/#default-previews",
+    referTo: "/components/file-mosaic#default-previews",
   },
   {
     id: 8,
     label: "Dark mode",
-    referTo: "/components/file-mosaic/#dark-mode",
+    referTo: "/components/file-mosaic#dark-mode",
   },
 ];

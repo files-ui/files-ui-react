@@ -21,7 +21,7 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 const GettingStartedPage = ({ darkModeOn }) => {
   return (
     <MainLayoutPage selectedIndex={0}>
-      <MainContentContainer >
+      <MainContentContainer>
         <Stack sx={{ width: "100%", alignItems: "center" }}>
           <img
             className="fui-logo-img-getting-started"
@@ -75,18 +75,17 @@ const rightMenuItems = [
   {
     id: 0,
     label: "Overview",
-    referTo: "/getting-started/#overview",
+    referTo: "/getting-started#overview",
   },
   {
     id: 1,
     label: "Installation",
-    referTo: "/getting-started/#installation",
+    referTo: "/getting-started#installation",
   },
   {
     id: 2,
     label: "Peer dependency",
-    referTo: "/getting-started/#peer-dependency",
+    referTo: "/getting-started#peer-dependency",
   },
-  { id: 3, label: "Default font", referTo: "/getting-started/#default-font" },
-
+  { id: 3, label: "Default font", referTo: "/getting-started#default-font" },
 ];

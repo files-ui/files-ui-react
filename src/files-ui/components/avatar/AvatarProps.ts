@@ -11,15 +11,24 @@ export interface AvatarFullProps extends OverridableComponentProps {
     alt?: string,
 
     emptyLabel?: string;
+    uploadingLabel?: string;
     changeLabel?: string;
     /**
-     * if a src given, then avanatr will show the image
+     * if a src is given, then avatar will show the image
      * or a file error message and will not allow
      * the user to change the picture. Also, layer on hover will not be shown
      */
     readOnly?: boolean;
 
+    isUloading?: boolean;
+
     onError?: React.ReactEventHandler<HTMLImageElement>;
+    /**
+     * If true, images will be analized and showed according their orientation
+     * orientation can be landscape if height < width. 
+     * In that case height will be set to 100%. Otherwise width will be set to 100%
+     */
+    smart?: boolean;
 }
 
 export declare type AvatarProps = {
@@ -33,5 +42,7 @@ export const defaultAvatarProps: AvatarProps =
     alt: `avatar`,
     emptyLabel: "Agregar foto",
     changeLabel: "Cambiar foto",
-    readOnly: false
+    uploadingLabel: "Uploading...",
+    readOnly: false,
+    smart: false,
 }

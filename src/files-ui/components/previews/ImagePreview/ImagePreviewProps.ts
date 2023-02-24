@@ -25,6 +25,12 @@ export interface ImagePreviewProps extends OverridableComponentProps {
      * Fallback when the image is not loaded correctly
      */
     onError?: React.ReactEventHandler<HTMLImageElement> | undefined;
+    /**
+     * If true, images will be analized and showed according their orientation
+     * orientation can be landscape if height < width. 
+     * In that case height will be set to 100%. Otherwise width will be set to 100%
+     */
+    smart?: boolean;
 
 }
 export const ImagePreviewDefaultProps: ImagePreviewProps = {
@@ -32,4 +38,5 @@ export const ImagePreviewDefaultProps: ImagePreviewProps = {
     //height: "100%",
     alt: "image-preview",
     //className: "fui-image-preview"
+    smart:true
 }

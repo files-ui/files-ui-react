@@ -17,44 +17,43 @@ const rightMenuItems = [
   {
     id: 0,
     label: "Basic dropzone",
-    referTo: "/components/dropzone/#basic-dropzone",
+    referTo: "/components/dropzone#basic-dropzone",
   },
   {
     id: 1,
     label: "Validation",
-    referTo: "/components/dropzone/#validation",
+    referTo: "/components/dropzone#validation",
   },
   {
     id: 1,
     label: "Custom validation",
-    referTo: "/components/dropzone/#custom-validation",
+    referTo: "/components/dropzone#custom-validation",
   },
   {
     id: 2,
     label: "Dropzone events",
-    referTo: "/components/dropzone/#dropzone-events",
+    referTo: "/components/dropzone#dropzone-events",
   },
   {
     id: 3,
     label: "Uploading",
-    referTo: "/components/dropzone/#uploading",
+    referTo: "/components/dropzone#uploading",
   },
   {
     id: 4,
     label: "Styling",
-    referTo: "/components/dropzone/#styling",
+    referTo: "/components/dropzone#styling",
   },
   {
     id: 5,
     label: "Localization",
-    referTo: "/components/dropzone/#localization",
+    referTo: "/components/dropzone#localization",
   },
   {
     id: 6,
     label: "Dark mode",
-    referTo: "/components/dropzone/#dark-mode",
+    referTo: "/components/dropzone#dark-mode",
   },
-
 ];
 const DropzoneDemoPage = (props) => {
   return (
@@ -80,18 +79,15 @@ const DropzoneDemoPage = (props) => {
               and dropped into the widget
             </li>
             <li>
-              The file(s) must be validated or not taking into account a
-              predefined set of allowed{" "}
+              The file(s) must be validated or not. If validation is required,
+              it can be done by taking into account a predefined set of allowed{" "}
               <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">
                 Common MIME Types
               </a>
-              ; specifiying the max file size (in bytes) or max amout of files.
+              ; specifiying the max file size (in bytes) and/or the max amount
+              of files.
             </li>
             <li>The file(s) must be uploaded somewhere in the internet.</li>
-            <li>
-              The file(s) must be shown in the screen with a preview according
-              to the file type.
-            </li>
           </ol>
         </DescParagraph>
         <DescParagraph>
@@ -104,8 +100,8 @@ const DropzoneDemoPage = (props) => {
           <DescParagraph>
             In this demo we set dropzone with the minimun props that allows you
             to get done fast. These props are{" "}
-            <code className="code">onChange</code> and{" "}
-            <code className="code">value</code> props.
+            <CodeHighlight>onChange</CodeHighlight> and{" "}
+            <CodeHighlight>value</CodeHighlight>.
           </DescParagraph>
           <Paper variant="outlined" style={{ padding: "25px" }}>
             <BasicDemoDropzone />
@@ -114,7 +110,7 @@ const DropzoneDemoPage = (props) => {
           <Alert severity="info">
             <AlertTitle> FileMosaic </AlertTitle>
             For completeness, these examples include{" "}
-            <strong>{`<FileMosaic/>`} </strong>
+            <CodeHighlight>{`<FileMosaic/>`} </CodeHighlight>
             component for showing the files selected by the user with minimun
             props too. For further information of this component check out the{" "}
             <a href="/components/filemosaic">FileMosaic</a> page.
@@ -134,43 +130,52 @@ const DropzoneDemoPage = (props) => {
           </Alert>
         </section>
 
-        {/*    <section id="validation">
-        <SubTitle content="Validation" />
-        <DescParagraph>
-          You can either "tell" Dropzone component to validate user files by
-          providing one or more of these criteria:
-          <ol>
-            <li>Accept specific file types.</li>
-            <li>Accept an specific number of files.</li>
-            <li>Accept an specific size (in bytes) of files.</li>
-          </ol>
-        </DescParagraph>
+        <section id="validation">
+          <SubTitle content="Validation" />
+          <DescParagraph>
+            You can either "tell" Dropzone component to validate user files by
+            providing one or more of these criteria:
+            <ol>
+              <li>Accept specific file types.</li>
+              <li>Accept an specific number of files.</li>
+              <li>Accept an specific size (in bytes) of files.</li>
+            </ol>
+          </DescParagraph>
 
-        <Paper variant="outlined" style={{ padding: "25px" }}>
-          <BasicDemoDropzone />
-        </Paper>
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <BasicDemoDropzone />
+          </Paper>
 
-        <p></p>
-        <BasicDropzoneCodeJS />
-      </section>
+          <p></p>
+          <BasicDropzoneCodeJS />
+        </section>
 
-      <section id="custom-validation">
-        <SubTitle content="Custom validation" />
-        <DescParagraph>
-          You can also "override the Dropzone validation by performimg a custom
-          validation using a custom function that must fit the following
-          signature:
-          <div>... type</div>
-        </DescParagraph>
+        <section id="custom-validation">
+          <SubTitle content="Custom validation" />
+          <DescParagraph>
+            You can also "override the Dropzone validation by giving a custom
+            validation function that must fit the following signature:{" "}
+            <CodeHighlight>
+              {"validator?: (f: "}
+              <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">
+                File
+              </a>
+              {") => "}
+              <a href="/types#custom-validate-file-response">
+                CustomValidateFileResponse
+              </a>
+            </CodeHighlight>
+            .
+          </DescParagraph>
 
-        <Paper variant="outlined" style={{ padding: "25px" }}>
-          <BasicDemoDropzone />
-        </Paper>
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <BasicDemoDropzone />
+          </Paper>
 
-        <p></p>
-        <BasicDropzoneCodeJS />
-      </section>
-
+          <p></p>
+          <BasicDropzoneCodeJS />
+        </section>
+        {/* 
       <section id="dropzone-events">
         <SubTitle content="Dropzone events" />
         <DescParagraph>

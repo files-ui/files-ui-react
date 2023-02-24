@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 export interface IconProps {
-    size?: "micro" | "small" | "semi-medium" | "medium" | "large" | number;
+    size?: "micro" | "small" | "semi-medium" | "medium" | "large"| "extra-large" | number;
     /**
      * main color for icon
      */

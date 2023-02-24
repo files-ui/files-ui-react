@@ -9,6 +9,9 @@ import {
 import InputHidden from "../input-hidden/InputHidden";
 import { useAvatarStyle } from "./useAvatarStyle";
 import { DynamicSheet, DynamiCSS } from "@dynamicss/dynamicss";
+import { ImagePreview } from "../previews";
+import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
+import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const {
     style,
@@ -20,13 +23,18 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     readOnly,
     variant,
     borderRadius,
+    uploadingLabel,
+    isUloading,
     onError,
+    smart,
   } = mergeProps(props, defaultAvatarProps);
 
   const inputRef: React.RefObject<HTMLInputElement> =
     React.useRef<HTMLInputElement>(null);
 
   const isStyleInjected: boolean = useAvatarStyle(borderRadius);
+
+  //const [isUloading, setIsUploading] = React.useState<boolean>(false);
 
   const avatarClassNameContainer: string = setAvatarClassNameContainer(variant);
   const avatarClassNameLayerInfo: string = setAvatarClassNameLayerInfo(variant);
@@ -56,33 +64,50 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
 
   if (isStyleInjected) {
     return (
-      <div className="fui-avatar-main-container" style={style}>
-        {/**Layer 1 */}
-        {src ? (
-          <img
-            className="fui-avatar-image"
-            height={"100%"}
-            width={"100%"}
-            src={src}
-            alt={alt}
-            onError={handleError}
-          />
-        ) : (
-          <p className={"fui-avatar-label"}>{emptyLabel}</p>
-        )}
-        {/**Layer 2 */}
-        {!readOnly && (
-          <p className={"fui-avatar-label hide"} onClick={handleClick}>
-            {src ? changeLabel : emptyLabel}
-            <InputHidden
-              multiple={false}
-              accept={"image/*"}
-              onChange={handleChangeInput}
-              inputRef={inputRef}
-            />{" "}
-          </p>
-        )}
-      </div>
+      <React.Fragment>
+        <div
+          className={`fui-avatar-main-container${
+            variant === "circle" ? " circle" : ""
+          }`}
+          style={style}
+        >
+          {/**Layer 1 */}
+          {isUloading ? (
+            <Layer visible={isUloading}>
+              <div className={"fui-avatar-label"}>
+                <InfiniteLoader />
+                {uploadingLabel}
+              </div>
+            </Layer>
+          ) : src ? (
+            <>
+              <ImagePreview
+                className={`fui-avatar-image`}
+                src={src}
+                alt={alt}
+                onError={handleError}
+                smart={smart}
+              />
+            </>
+          ) : (
+            <div className={"fui-avatar-label"}>{emptyLabel}</div>
+          )}
+          {/**Layer 2 */}
+          {!readOnly && (
+            <>
+              <p className={"fui-avatar-label hide"} onClick={handleClick}>
+                {src ? changeLabel : emptyLabel}
+              </p>
+              <InputHidden
+                multiple={false}
+                accept={""}
+                onChange={handleChangeInput}
+                inputRef={inputRef}
+              />
+            </>
+          )}
+        </div>
+      </React.Fragment>
     );
   }
   return <React.Fragment></React.Fragment>;

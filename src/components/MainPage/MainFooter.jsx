@@ -9,7 +9,7 @@ const MainFooter = (props) => {
         style={{ display:"flex", flexDirection:"row", alignItems:"center" }}
       >
         <img className="fui-logo-img" src={logo_blue} width="38px" />
-        <img className="fui-logo-text-img" src={logo_white_ext} height="18px" />
+        <img className="fui-logo-text-img" src={logo_white_ext} height="14px" />
       </div>
       <p>{" | "}Copyright © 2023</p>
     </footer>

@@ -19,11 +19,11 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import MainTitle from "../../components/main-title/MainTitle";
 const rightMenuItems = [
-  { id: 0, label: "Quick start", referTo: "/usage/#quick-start" },
+  { id: 0, label: "Quick start", referTo: "/usage#quick-start" },
   {
     id: 1,
     label: "Advanced examples",
-    referTo: "/usage/#advanced-example",
+    referTo: "/usage#advanced-example",
   },
 ];
 const UsagePage = (props) => {
@@ -48,7 +48,7 @@ const UsagePage = (props) => {
             <CodeHighlight>onChange</CodeHighlight> and{" "}
             <CodeHighlight>value</CodeHighlight> props. This example is the same
             as the one you will find in the{" "}
-            <a href="/components/dropzone/#basic-dropzone">Basic dropzone</a>{" "}
+            <a href="/components/dropzone#basic-dropzone">Basic dropzone</a>{" "}
             section.
           </DescParagraph>{" "}
           <BasicDropzoneCodeJS splittedOnly />
@@ -57,7 +57,7 @@ const UsagePage = (props) => {
         </Paper>{" "} */}
           <DescParagraph>
             You can play around with this code in the interactive Code Sandbox
-            demo below. Try changing the <CodeHighlight>label</CodeHighlight> on
+            demo below. Try adding the <CodeHighlight>accept</CodeHighlight> prop to
             the Dropzone to see the changes:
           </DescParagraph>
           {/*   <iframe

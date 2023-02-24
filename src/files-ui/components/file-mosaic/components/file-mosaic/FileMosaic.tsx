@@ -9,7 +9,6 @@ import FileMosaicName from "../FileMosaicName/FileMosaicName";
 import FileMosaicUploadLayer from "../FileMosaicUploadLayer/FileMosaicUploadLayer";
 import useFileMosaicInitializer from "../../hooks/useFileMosaicInitializer";
 import FileMosaicImageLayer from "../FIleMosaicImageLayer/FileMosaicImageLayer";
-import getProgress from "../../hooks/getProgress";
 import { useIsUploading } from "../../hooks/useIsUploading";
 import { Tooltip } from "../../../tooltip";
 import FileMosaicMainLayer from "../FileMosaicMainLayer.tsx/FileMosaicMainLayer";
