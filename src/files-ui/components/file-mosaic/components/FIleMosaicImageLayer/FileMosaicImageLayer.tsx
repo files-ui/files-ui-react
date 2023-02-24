@@ -55,7 +55,11 @@ const FileMosaicImageLayer: React.FC<FileMosaicImageLayerProps> = (
       <React.Fragment>
         {/** If it is not card, there isn't an error  and there is an imageSource*/}
         {!card && !error && imageSource && (
-          <ImagePreview src={localSource} alt={`blur ${fileName}`} />
+          <ImagePreview
+            src={localSource}
+            alt={`blur ${fileName}`}
+            smart={false}
+          />
         )}
       </React.Fragment>
     );
