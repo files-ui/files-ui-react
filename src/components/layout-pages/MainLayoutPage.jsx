@@ -1,4 +1,4 @@
-import { Stack, Box } from "@mui/material";
+import { Stack } from "@mui/material";
 import * as React from "react";
 import NavBarTemplate from "../../templates/NavBarTemplate";
 

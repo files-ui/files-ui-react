@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import { Dropzone } from "../files-ui/components";
-import { FileMosaic } from "../files-ui/components/file-mosaic";
-import DescParagraph from "./demo-components/desc-paragraph/DescParagraph";
-import SubTitle from "./demo-components/sub-title/SubTitle";
+import { Dropzone } from "../../../files-ui/components";
+import { FileMosaic } from "../../../files-ui/components/file-mosaic";
+import DescParagraph from "../desc-paragraph/DescParagraph";
+import SubTitle from "../sub-title/SubTitle";
 
 const reactFile = {
-  id: "acsacasf",
-  name: "A very very long title for files-ui.jsx",
+  id: "HCVUNULTVJTCRU",
+  name: "A very very long title for a JSX file.jsx",
   type: "text/plain",
   size: 280000,
 };

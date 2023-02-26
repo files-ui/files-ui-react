@@ -1,13 +1,10 @@
 import * as React from "react";
 import { ErrorPageProps } from "./ErrorPageProps";
 import "./ErrorPage.scss";
-import { Box, Button, Stack } from "@mui/material";
-//import { useNavigateToTop } from "../../hooks/useNavigateToTop";
+import { Box, Button } from "@mui/material";
 import MainTitle from "../../components/main-title/MainTitle";
-import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
-import { useNavigateGoBack } from "../../hooks/useNavigateGoBack";
 import { useNavigate } from "react-router-dom";
 
 const ErrorPage: React.FC<ErrorPageProps> = (props: ErrorPageProps) => {

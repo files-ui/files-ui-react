@@ -95,7 +95,7 @@ const useMaterialButtonClassName = (
     const removeStyle = (styleInjected: boolean, idStyles: string) => {
         //console.log("DynamiCSS removing", styleInjected, idStyles);
         if (styleInjected) {
-            const res = DynamiCSS.removeStyleSheet(idStyles);
+            /* const res =  */DynamiCSS.removeStyleSheet(idStyles);
             //console.log("DynamiCSS removing res", res);
 
             setStyleInjected(false);

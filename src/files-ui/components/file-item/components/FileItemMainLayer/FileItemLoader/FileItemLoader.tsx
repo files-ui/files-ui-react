@@ -1,9 +1,13 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, Localization, LocalLabels, UPLOADSTATUS } from "../../../../../core";
+import {
+  FileItemLocalizerSelector,
+  Localization,
+  LocalLabels,
+  UPLOADSTATUS,
+} from "../../../../../core";
 import { Clear } from "../../../../icons";
 import { DynamicLoader, BasePreparingLoader } from "../../../../loader";
 import DefaultLoaderNeo from "../../../../loader/DefaultLoader/DefaultLoader";
-import FileItemStatus from "../../FileItemStatus/FileItemStatus";
 import "./FileItemLoader.scss";
 interface FileItemLoaderProps {
   height?: number;
@@ -93,7 +97,12 @@ const FileItemLoader: React.FC<FileItemLoaderProps> = (
             )}
 
             <div className="dui-dynamic-preparing-loader-container">
-              <BasePreparingLoader size={width || 60} x={50} y={50} radius={46} />
+              <BasePreparingLoader
+                size={width || 60}
+                x={50}
+                y={50}
+                radius={46}
+              />
             </div>
           </div>
         </React.Fragment>

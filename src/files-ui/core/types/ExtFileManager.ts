@@ -1,5 +1,4 @@
 import { ExtFileInstance, ExtFile } from "./ExtFile";
-import { UPLOADSTATUS } from "./UploadStatus";
 
 export class ExtFileManager {
     private static nextId: number = 0;
@@ -158,6 +157,7 @@ export class ExtFileManager {
             console.log("FileManagerLog RESULT resultExtList", resultExtList);
 
             const resultSet = ExtFileManager.setFileList(dropzoneId, resultExtList);
+            console.log("FileManagerLog RESULT resultSet", resultSet);
 
             return resultExtList;
             // return ExtFileManager.fileLists[dropzoneId];

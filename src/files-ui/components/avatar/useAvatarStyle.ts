@@ -36,8 +36,9 @@ export const useAvatarStyle = (borderRadius: string | undefined): boolean => {
             setIdAvatarStyles("");
             setStyleInjected(false);
         }
+        // eslint-disable-next-line
     }, []);
-    
+
     React.useEffect(() => {
         /*      if (!borderRadius) {
                  DynamiCSS.removeStyleSheet(idAvatarStyles);
@@ -62,8 +63,7 @@ export const useAvatarStyle = (borderRadius: string | undefined): boolean => {
             console.log("avatar, catch css, modifiying", idAvatarStyles);
             DynamiCSS.editStyleSheet(idAvatarStyles, styleSheet.sheetRules || []);
         }
-
-
+        // eslint-disable-next-line
     }, [borderRadius]);
 
 

@@ -1,19 +1,13 @@
-import Box from "@mui/material/Box";
 import * as React from "react";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
-import NavBarTemplate from "../../templates/NavBarTemplate";
-import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
 import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";
 import Paper from "@mui/material/Paper";
 import AdvancedDropzoneDemo from "../../components/demo-components/dropzone-demo/AdvancedDropzoneDemo";
-import { Alert, AlertTitle } from "@mui/material";
-//import   AdvancedDropzoneCodeJS from "../../components/demo-components/dropzone-demo/AdvancedDropzoneCodeJS";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
-import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import AdvancedDropzoneCodeJS from "../../components/demo-components/dropzone-demo/AdvancedDropzoneCodeJS";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
@@ -57,8 +51,8 @@ const UsagePage = (props) => {
         </Paper>{" "} */}
           <DescParagraph>
             You can play around with this code in the interactive Code Sandbox
-            demo below. Try adding the <CodeHighlight>accept</CodeHighlight> prop to
-            the Dropzone to see the changes:
+            demo below. Try adding the <CodeHighlight>accept</CodeHighlight>{" "}
+            prop to the Dropzone to see the changes:
           </DescParagraph>
           {/*   <iframe
           title="codesandbox"

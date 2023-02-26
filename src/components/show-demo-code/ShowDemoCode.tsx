@@ -6,7 +6,7 @@ import * as React from "react";
 import JSIcon from "../demo-components/icons/JSIcon";
 import TSIcon from "../demo-components/icons/TSIcon";
 import { Highlighter } from "rc-highlight";
-interface ShowCodeProps {
+interface ShowDemoCodeProps {
   codeSandboxJS?: string;
   codeSandboxTS?: string;
   codeSplittedJS?: string;
@@ -15,7 +15,7 @@ interface ShowCodeProps {
   codeCompleteTS?: string;
   splittedOnly?:boolean;
 }
-const ShowCode: React.FC<ShowCodeProps> = (props: ShowCodeProps) => {
+const ShowDemoCode: React.FC<ShowDemoCodeProps> = (props: ShowDemoCodeProps) => {
   const {
     codeSandboxJS = "https://codesandbox.io/s/dropzone-ui-basic-3j01v",
     codeSandboxTS = "https://codesandbox.io/s/dropzone-ui-basic-3j01v",
@@ -105,4 +105,4 @@ const ShowCode: React.FC<ShowCodeProps> = (props: ShowCodeProps) => {
     </React.Fragment>
   );
 };
-export default ShowCode;
+export default ShowDemoCode;

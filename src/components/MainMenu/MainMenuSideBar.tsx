@@ -7,12 +7,11 @@ import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 
 import { MainMenuSideBarItems, MainMenuSideBarProps } from "./MenuSideBarProps";
-import { useNavigate } from "react-router";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import { useNavigateToTop } from "../../hooks/useNavigateToTop";
 
 export default function MainMenuSideBar(props: MainMenuSideBarProps) {
-  const { /* items, */ selectedIndex, setSelectedIndex } = props;
+  const { /* items, */ selectedIndex, /* setSelectedIndex */ } = props;
   const navigate = useNavigateToTop();
 
   const quickStartItemsIni: MainMenuSideBarItems[] = [
@@ -46,9 +45,9 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           onClick: () => navigate("/components/filemosaic"),
         },
         {
-          label: "InputButton",
+          label: "FileInputButton",
           index: 23,
-          onClick: () => navigate("/components/inputbutton"),
+          onClick: () => navigate("/components/fileinputbutton"),
         },
         {
           label: "FileCard",
@@ -80,9 +79,9 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           onClick: () => navigate("/api/filemosaic"),
         },
         {
-          label: "InputButton",
+          label: "FileInputButton",
           index: 33,
-          onClick: () => navigate("/api/inputbutton"),
+          onClick: () => navigate("/api/fileinputbutton"),
         },
         {
           label: "FileCard",
@@ -145,7 +144,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     },
   ];
 
-  const [quickStartItems, setQuickStartItems] =
+  const [quickStartItems, /* setQuickStartItems */] =
     React.useState(quickStartItemsIni);
 
   const [regularItems, setRegularItemsIni] = React.useState(
@@ -154,16 +153,16 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     })
   );
 
-  const handleClick = () => {
+/*   const handleClick = () => {
     //setOpen(!open);
-  };
+  }; */
 
-  const handleCLickItem = (
+/*   const handleCLickItem = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     onClick: Function | undefined
   ): void => {
     onClick?.();
-  };
+  }; */
 
   //const [selectedIndex, setSelectedIndex] = React.useState(1);
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CustomValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, UPLOADSTATUS, validateExtFileList } from "../core";
+import { CustomValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, validateExtFileList } from "../core";
 
 /**
  * Effect for keeping track of changes

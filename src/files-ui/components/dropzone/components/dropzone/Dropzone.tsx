@@ -28,7 +28,7 @@ import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../input-hidden/InputHidden";
 import {
   defaultDrozoneProps,
-  DropzoneActionButton,
+  //DropzoneActionButton,
   DropzoneActions,
   DropzoneProps,
 } from "./DropzoneProps";
@@ -45,7 +45,7 @@ import DropzoneHeader from "../DropzoneHeader/DropzoneHeader";
 import DropzoneFooter from "../DropzoneFooter/DropzoneFooter";
 import DropzoneButtons from "../DropzoneButtons/DropzoneButtons";
 
-import { print_manager } from "../../../../../utils";
+//import { print_manager } from "../../../../../utils";
 
 const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const {
@@ -467,6 +467,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     );
 
     setLocalFiles(validatedFuiFileList);
+    // eslint-disable-next-line
   }, [maxFileSize, accept, maxFiles, localization]);
 
   /**

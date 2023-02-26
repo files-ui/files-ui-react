@@ -1,16 +1,7 @@
-import { ButtonGroup, Stack, Tooltip, IconButton } from "@mui/material";
-import Button from "@mui/material/Button";
-import CodeIcon from "@mui/icons-material/Code";
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
-import { Highlighter } from "rc-highlight";
-//import { Highlighter as HL } from "../../../rc-highlight";
-import * as React from "react";
-import JSIcon from "../icons/JSIcon";
-import TSIcon from "../icons/TSIcon";
-import ShowCode from "../../show-code/ShowCode";
+import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 const BasicDropzoneCode = ({ splittedOnly = false }) => {
   return (
-    <ShowCode
+    <ShowDemoCode
       splittedOnly={splittedOnly}
       codeCompleteJS={completeCodeJS}
       codeCompleteTS={completeCodeTS}

@@ -1,9 +1,9 @@
 import { CustomValidateFileResponse, ExtFile, Localization, UploadConfig, UploadResponse } from "../../core";
 import { DropzoneActions } from "../dropzone/components/dropzone/DropzoneProps";
 import { MaterialButtonProps } from "../material-button/MaterialButtonProps";
-import { OverridableComponentProps } from "../overridable";
+//import { OverridableComponentProps } from "../overridable";
 
-interface InputButtonFullProps extends OverridableComponentProps {
+interface InputButtonFullProps {
     /**
      * Probably one of the most important methods (callbacks).
      * `onChange()` returns as first parameter an array of `ExtFile` objects,
@@ -126,19 +126,23 @@ interface InputButtonFullProps extends OverridableComponentProps {
     actionButtons?: DropzoneActions;
 }
 
+type MaterialButtonPropsOmitInputButtonFullProps = Omit<MaterialButtonProps, keyof InputButtonFullProps>;
 
-export declare type InputButtonProps =
+
+
+export declare type FileInputButtonProps =
 
     {
         [D in keyof InputButtonFullProps]: InputButtonFullProps[D]
     } & {
-        [D in keyof MaterialButtonProps]: MaterialButtonProps[D]
+        [D in keyof MaterialButtonPropsOmitInputButtonFullProps]: MaterialButtonProps[D]
     }
 
 
-export const defaultInputButtonProps: InputButtonProps =
+export const defaultFileInputButtonProps: FileInputButtonProps =
 {
-
+    textDecoration: "uppercase",
+    label:"browse...",
     behaviour: "add",
     disabled: false,
     uploadConfig: {},

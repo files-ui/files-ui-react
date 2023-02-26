@@ -204,6 +204,8 @@ export interface DropzoneFullProps extends OverridableComponentProps {
 
   footerConfg?: FooterConfig;
 }
+
+
 export type HeaderItems = {
   deleteFiles?: boolean;
   cleanFiles?: boolean;
@@ -212,21 +214,15 @@ export type HeaderItems = {
   maxFileSize?: boolean;
   validFilesCount?: boolean;
 }
-
-
 export interface HeaderConfigMap extends OverridableComponentProps {
   customHeader?: JSX.Element;
 }
-
 export type HeaderConfig =
   {
     [P in keyof HeaderConfigMap]: HeaderConfigMap[P]
   } & {
     [H in keyof HeaderItems]: HeaderItems[H]
   }
-
-
-
 export interface FooterConfigMap extends OverridableComponentProps {
   customFooter?: JSX.Element;
 }
@@ -288,10 +284,13 @@ export type DropzoneAdvancedConfig = {
   dropzoneLabel: any;
 }
 
+
+
+type DefDivProps = React.HTMLProps<HTMLDivElement>;
+type DivPropsOmitInputButtonFullProps = Omit<DefDivProps,  keyof DropzoneFullProps>;
+
 export declare type DropzoneProps =
-  /*   {
-      [D in keyof React.HTMLAttributes<HTMLDivElement>]: React.HTMLAttributes<HTMLDivElement>[D]
-    } & */
+DivPropsOmitInputButtonFullProps &
   {
     [D in keyof DropzoneFullProps]: DropzoneFullProps[D]
   }

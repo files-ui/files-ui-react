@@ -1,17 +1,9 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -21,11 +13,6 @@ import { IconButton, Stack, styled, Tooltip } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import DarkModeLightModeButton from "../components/MainPage/DarkModeLightModeButton";
 import MainMenuSideBar from "../components/MainMenu/MainMenuSideBar";
-import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
-import InputIcon from "@mui/icons-material/Input";
-import FileOpenIcon from "@mui/icons-material/FileOpen";
-import { useNavigate } from "react-router";
-import { useNavigateToTop } from "../hooks/useNavigateToTop";
 import logo_text_blue from "../static/files-ui-logo-text-med.png";
 import logo_text_blue_dark from "../static/files-ui-logo-text-med-dark.png";
 
@@ -40,7 +27,7 @@ const StyledImage = styled("img")(({ theme }) => ({
   },
 }));
 function NavBarTemplate(props) {
-  const navigate = useNavigateToTop();
+  //const navigate = useNavigateToTop();
   const { window, children, darkModeOn, handleDarkMode, selectedIndex } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 

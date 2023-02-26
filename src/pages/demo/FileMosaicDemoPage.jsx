@@ -1,11 +1,10 @@
 import Alert from "@mui/material/Alert";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import AlertTitle from "@mui/material/AlertTitle";
 import * as React from "react";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
-import BasicFileMosaicCodeJS from "../../components/demo-components/filemosaic-demo/BasicFileMosaicCodeJS";
-import BasicFileMosaicDemo from "../../components/demo-components/filemosaic-demo/BasicFileMosaicDemo";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
@@ -13,6 +12,10 @@ import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
+import AnchorToTab from "../../components/util-components/AnchorToTab";
+
+import CodeJSFileMosaicBasic from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicBasic";
+import DemoFileMosaicBasic from "../../components/demo-components/filemosaic-demo/DemoFileMosaicBasic";
 
 const FileMosaicDemoPage = (props) => {
   return (
@@ -38,8 +41,13 @@ const FileMosaicDemoPage = (props) => {
           <SubTitle content="Basic FileMosaic" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> supports displaying
-            information from a <TypeHighlight>File</TypeHighlight> object or from
-            individual props.
+            information from a{" "}
+            <TypeHighlight>
+              <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/API/File">
+                File
+              </AnchorToTab>
+            </TypeHighlight>{" "}
+            object or from individual props.
           </DescParagraph>
 
           <Paper
@@ -52,27 +60,36 @@ const FileMosaicDemoPage = (props) => {
             }}
           >
             <Stack spacing={10} direction="row" alignItems={"center"}>
-              <BasicFileMosaicDemo />
+              <DemoFileMosaicBasic />
             </Stack>
           </Paper>
-          <p></p>
-          <BasicFileMosaicCodeJS/>
+
+          <CodeJSFileMosaicBasic />
         </section>
+
         <section id="image-preview">
           <SubTitle content="Image preview" />
           <DescParagraph>
             By setting the <CodeHighlight>preview</CodeHighlight> prop to{" "}
-            <TypeHighlight>true</TypeHighlight> the component will show a image
-            preview using the <CodeHighlight>imageUrl</CodeHighlight>
+            <TypeHighlight>true</TypeHighlight> the component will show an image
+            preview by taking the <CodeHighlight>imageUrl</CodeHighlight>
             prop or by reading the <TypeHighlight>File</TypeHighlight> object if
-            given (file prop).
+            given.
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
             {/* <BasicDemoDropzone /> */}
           </Paper>
-          <p></p>
+
           {/* <BasicDropzoneCodeJS /> */}
+          <Alert severity="info">
+            <AlertTitle> FileInputButton </AlertTitle>
+            For completeness, some of these examples include{" "}
+            <CodeHighlight>{`<FileInputButton/>`} </CodeHighlight>
+            component for allowing the user to select files. For further
+            information of this component check out the{" "}
+            <a href="/components/fileinputbutton">FileInputButton</a> page.
+          </Alert>
         </section>
         <section id="validation">
           <SubTitle content="Validation" />
@@ -101,46 +118,46 @@ const rightMenuItems = [
   {
     id: 0,
     label: "Basic file mosaic",
-    referTo: "/components/file-mosaic#basic-filemosaic",
+    referTo: "/components/filemosaic#basic-filemosaic",
   },
   {
     id: 1,
     label: "Image Preview",
-    referTo: "/components/file-mosaic#file-mosaic-image-preview",
+    referTo: "/components/filemosaic#image-preview",
   },
   {
     id: 2,
     label: "Validation",
-    referTo: "/components/file-mosaic#file-mosaic-validation",
+    referTo: "/components/filemosaic#validation",
   },
   {
     id: 3,
     label: "Uploading",
-    referTo: "/components/file-mosaic#file-mosaic-uploading",
+    referTo: "/components/filemosaic#uploading",
   },
   {
     id: 4,
     label: "Localization",
-    referTo: "/components/file-mosaic#file-mosaic-localization",
+    referTo: "/components/filemosaic#localization",
   },
   {
     id: 5,
     label: "Previews",
-    referTo: "/components/file-mosaic#file-mosaic-previews",
+    referTo: "/components/filemosaic#previews",
   },
   {
     id: 6,
     label: "Actions",
-    referTo: "/components/file-mosaic#actions",
+    referTo: "/components/filemosaic#actions",
   },
   {
     id: 7,
     label: "Default previews",
-    referTo: "/components/file-mosaic#default-previews",
+    referTo: "/components/filemosaic#default-previews",
   },
   {
     id: 8,
     label: "Dark mode",
-    referTo: "/components/file-mosaic#dark-mode",
+    referTo: "/components/filemosaic#dark-mode",
   },
 ];

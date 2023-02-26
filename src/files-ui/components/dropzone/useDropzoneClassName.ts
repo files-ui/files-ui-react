@@ -46,7 +46,7 @@ export default function useDropzoneClassName(
             //already a stylesheet associated
             DynamiCSS.editStyleSheet(idStyles, styleSheet.sheetRules || []);
         }
-        
+
         finalClassName += ` files-ui-dropzone-extra`;
         if (className) {
             finalClassName = `${finalClassName} ${className}`;
@@ -61,7 +61,7 @@ export default function useDropzoneClassName(
         makeClassName(className, isDragging,
             //offset, 
             color, backgroundColor, minHeight);
-
+        // eslint-disable-next-line
     }, [className, isDragging,
         // offset, 
         color, backgroundColor, minHeight]);

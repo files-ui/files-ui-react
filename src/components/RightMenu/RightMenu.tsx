@@ -4,7 +4,7 @@ import * as React from "react";
 import { RightMenuProps } from "./RightMenuProps";
 import "./RightMenu.scss";
 const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
-  const { items, width, baseUrl } = props;
+  const { items, width } = props;
   const [selectedItem, setSelectedItem] = React.useState<number>(0);
   const handleChangeSelectedItem = (newIndex: number) =>
     setSelectedItem(newIndex);

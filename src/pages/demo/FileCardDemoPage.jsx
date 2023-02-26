@@ -7,7 +7,7 @@ import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
-import BasicFileMosaicDemo from "../../components/demo-components/filemosaic-demo/BasicFileMosaicDemo";
+import BasicFileMosaicDemo from "../../components/demo-components/filemosaic-demo/DemoFileMosaicBasic";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import MainTitle from "../../components/main-title/MainTitle";

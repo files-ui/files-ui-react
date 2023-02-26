@@ -16,10 +16,10 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import MainLayoutPage from "../components/layout-pages/MainLayoutPage";
 import FileReaderPage from "../pages/utilities/FileReaderPage";
 import FileUploaderPage from "../pages/utilities/FileUploaderPage";
-import InputButtonDemoPage from "../pages/demo/InputButtonDemoPage";
 import AvatarDemoPage from "../pages/demo/AvatarDemoPage";
-import InputButtonApi from "../pages/api/InputButtonApi";
+import FileInputButtonApi from "../pages/api/FileInputButtonApi";
 import AvatarApi from "../pages/api/AvatarApi";
+import FileInputButtonDemoPage from "../pages/demo/FileInputButtonDemoPage";
 
 const router = createBrowserRouter([
   {
@@ -56,8 +56,8 @@ const router = createBrowserRouter([
         element: <DropzoneDemoPage />,
       },
       {
-        path: "/components/inputbutton",
-        element: <InputButtonDemoPage />,
+        path: "/components/fileinputbutton",
+        element: <FileInputButtonDemoPage />,
       },
       {
         path: "/components/filemosaic",
@@ -82,8 +82,8 @@ const router = createBrowserRouter([
         element: <AvatarApi />,
       },
       {
-        path: "/api/inputbutton",
-        element: <InputButtonApi />,
+        path: "/api/fileinputbutton",
+        element: <FileInputButtonApi />,
       },
       {
         path: "/api/dropzone",

@@ -1,4 +1,4 @@
-export default function (
+export default function addExtraData(
     formData: FormData,
     extraData: Record<string, string> | undefined
 ) {

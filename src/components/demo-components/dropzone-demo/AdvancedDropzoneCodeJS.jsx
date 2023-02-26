@@ -1,9 +1,9 @@
 import * as React from "react";
-import ShowCode from "../../show-code/ShowCode";
+import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 
 const AdvancedDropzoneCodeJS = (props) => {
   return (
-    <ShowCode
+    <ShowDemoCode
       codeCompleteJS={completeCodeJS}
       codeCompleteTS={completeCodeTS}
       codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"

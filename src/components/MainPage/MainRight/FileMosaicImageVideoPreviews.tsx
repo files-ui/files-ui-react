@@ -1,6 +1,4 @@
 import * as React from "react";
-import SubTitle from "../../demo-components/sub-title/SubTitle";
-import MainParagraph from "../../paragraph-main/MainParagraph";
 import { Stack, Paper } from "@mui/material";
 import { FileMosaic } from "../../../files-ui/components/file-mosaic";
 import { ExtFile } from "../../../files-ui/core";

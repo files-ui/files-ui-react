@@ -24,7 +24,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     style: containerStyle,
     deleteButton,
     uploadButton,
-    localization,
+    //localization,
     onAbort,
     onClean,
     onDelete,

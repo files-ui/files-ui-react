@@ -1,7 +1,7 @@
 import * as React from "react";
 import DarkModeLightModeButton from "./DarkModeLightModeButton";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 //import { useNavigate } from "react-router";
 import logo_text_blue from "../../static/files-ui-logo-text-med.png";
 import logo_text_blue_dark from "../../static/files-ui-logo-text-med-dark.png";

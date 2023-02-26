@@ -31,11 +31,15 @@ export interface AvatarFullProps extends OverridableComponentProps {
     smart?: boolean;
 }
 
-export declare type AvatarProps = {
+export declare type AvatarProps =
+  /*   {
+      [D in keyof React.HTMLProps<HTMLDivElement>]: React.HTMLProps<HTMLDivElement>[D]
+    } & */
+{
     [P in keyof AvatarFullProps]: AvatarFullProps[P];
 
 }
-
+//React.HTMLProps<HTMLDivElement>
 export const defaultAvatarProps: AvatarProps =
 {
     variant: "square",

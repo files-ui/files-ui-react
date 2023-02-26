@@ -25,6 +25,7 @@ export const useIsUploading = (uploadStatus: UPLOADSTATUS | undefined): boolean 
                 uploadStatus === "preparing" || uploadStatus === "uploading"
             );
         }
+        // eslint-disable-next-line
     }, [uploadStatus]);
 
 

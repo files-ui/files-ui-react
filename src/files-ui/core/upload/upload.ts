@@ -1,9 +1,9 @@
-import { ExtFile, ExtFileInstance, Method, UPLOADSTATUS } from "../types";
+import { ExtFile, Method, UPLOADSTATUS } from "../types";
 import { ServerResponse, UploadResponse } from "../types/uploadTypes";
 import addExtraDataUpload from "./addExtraData.upload";
 import addHeaders from "./addheaders.upload";
 import { ABORTED_ERROR_RESPONSE, NO_XHR_PROVIDED_ERROR, TIMEOUT_ERROR_RESPONSE, UNEXPECTED_ERROR_RESPONSE } from "./errors.upload";
-import { JsonParseResponse, makeErrorUploadResponse, makeServerResponse, makeSuccessUploadResponse } from "./response.upload";
+import { JsonParseResponse, makeErrorUploadResponse, makeSuccessUploadResponse } from "./response.upload";
 
 
 /**

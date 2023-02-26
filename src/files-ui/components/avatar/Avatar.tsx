@@ -36,8 +36,8 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
 
   //const [isUloading, setIsUploading] = React.useState<boolean>(false);
 
-  const avatarClassNameContainer: string = setAvatarClassNameContainer(variant);
-  const avatarClassNameLayerInfo: string = setAvatarClassNameLayerInfo(variant);
+  //const avatarClassNameContainer: string = setAvatarClassNameContainer(variant);
+  //const avatarClassNameLayerInfo: string = setAvatarClassNameLayerInfo(variant);
 
   const handleClick = () => {
     // alert("Agregar fotooooooo");
@@ -119,7 +119,7 @@ export default Avatar;
  * @param borderRadius the border radius
  * @returns a dynamic css sheet
  */
-const makeDynamicAvatarCSSRules = (
+/* const makeDynamicAvatarCSSRules = (
   borderRadius: string | undefined
 ): DynamicSheet => {
   const styleSheet: DynamicSheet = DynamiCSS.makeStyleSheet({
@@ -134,4 +134,4 @@ const makeDynamicAvatarCSSRules = (
     ],
   });
   return styleSheet;
-};
+}; */

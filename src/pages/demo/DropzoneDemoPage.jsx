@@ -1,4 +1,4 @@
-import { Box, Stack, Paper, Alert, AlertTitle } from "@mui/material";
+import {  Paper, Alert, AlertTitle } from "@mui/material";
 import * as React from "react";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
@@ -6,7 +6,6 @@ import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/
 import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
-import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";

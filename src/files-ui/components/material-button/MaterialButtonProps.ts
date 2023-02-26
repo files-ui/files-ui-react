@@ -1,6 +1,6 @@
 import { OverridableComponentProps } from "../overridable";
 
-interface MaterialButtonPropsInterface extends OverridableComponentProps {
+export interface MaterialButtonPropsInterface extends OverridableComponentProps {
     /////// BUTTON props
     /**
      * The URL to link to when the button is clicked.
@@ -34,18 +34,25 @@ interface MaterialButtonPropsInterface extends OverridableComponentProps {
      */
     disabled?: boolean;
 
-    resetStyles?:boolean;
+    resetStyles?: boolean;
 
 }
-type DefButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+type DefButtonPropsMap = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
+type DefButtonProps= {
+    [F in keyof DefButtonPropsMap]:
+    DefButtonPropsMap[F]
+}
 export type MaterialButtonProps =
     {
         [F in keyof MaterialButtonPropsInterface]:
         MaterialButtonPropsInterface[F]
     }
     &
-    { [K in keyof DefButtonProps]:
-        DefButtonProps[K]
-    }
+    DefButtonProps
+/*     export type  MaterialButtonPropsMap = MaterialButtonPropsInterface & DefButtonProps;
 
+    export type MaterialButtonProps = {
+        [F in keyof MaterialButtonPropsMap]:
+        MaterialButtonPropsMap[F]
+    } */

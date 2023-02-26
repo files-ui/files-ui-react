@@ -1,18 +1,16 @@
-import { Box, Stack, Typography } from "@mui/material";
 import * as React from "react";
+
+import { Stack } from "@mui/material";
 import Overview from "../../components/getting-started/Overview";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
-import NavBarTemplate from "../../templates/NavBarTemplate";
 import logoLight from "../../static/files-ui-logo-blue-wbg.png";
 import logo_blue from "../../static/files-ui-logo-blue.png";
 import "../../styles/GettingStartedPage.scss";
 import InstallationNPM from "../../components/getting-started/InstallationNPM";
 import InstallationYarn from "../../components/getting-started/InstallationYarn";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
-import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";
-import Paper from "@mui/material/Paper";
-import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
+
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
@@ -26,6 +24,7 @@ const GettingStartedPage = ({ darkModeOn }) => {
           <img
             className="fui-logo-img-getting-started"
             src={!darkModeOn ? logo_blue : logoLight}
+            alt="files-ui-logo"
           />
           <MainTitle>Files UI - Getting started!</MainTitle>
         </Stack>

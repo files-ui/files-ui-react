@@ -1,5 +1,5 @@
 import { DropzoneLocalizerSelector } from "../localization";
-import { ExtFile, ExtFileInstance, UploadResponse, UPLOADSTATUS } from "../types";
+import { ExtFile, ExtFileInstance, UploadResponse } from "../types";
 
 /**
  * Updates a extFile and sets its uploadStatus to "uploading"

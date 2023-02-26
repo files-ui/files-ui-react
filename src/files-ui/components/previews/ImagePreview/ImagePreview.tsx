@@ -59,6 +59,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
         getSource(src);
       }
     }
+    // eslint-disable-next-line
   }, [src]);
   //console.log("ImagePreview", src, source);
 

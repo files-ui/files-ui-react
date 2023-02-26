@@ -4,7 +4,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 import "../../styles/GettingStarted.scss";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useNavigate } from "react-router";
+//import { useNavigate } from "react-router";
 import { useNavigateToTop } from "../../hooks/useNavigateToTop";
 const CodeButton = styled(Button)({
   display: "flex",

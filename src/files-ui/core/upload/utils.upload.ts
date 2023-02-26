@@ -1,4 +1,4 @@
-import { ExtFile, ExtFileInstance, Method, ServerResponse, UploadResponse, UPLOADSTATUS } from "../types"
+import { ExtFile, ExtFileInstance, ServerResponse, UploadResponse, UPLOADSTATUS } from "../types"
 
 export const unexpectedErrorUploadResult = (extFile: ExtFile): UploadResponse => {
     return {
@@ -50,7 +50,7 @@ export const completeUploadResult = (
  */
 export const toUploadableExtFileList = (
     extFileList: ExtFile[] | ExtFileInstance[]
-    ): ExtFile[] => {
+): ExtFile[] => {
     if (!extFileList) return [];
     return extFileList.map(extFile => {
         return { ...extFile, xhr: new XMLHttpRequest() }

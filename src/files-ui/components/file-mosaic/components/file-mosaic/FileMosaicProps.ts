@@ -140,7 +140,11 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      */
     downloadUrl?: string;
 }
-
-export type FileMosaicProps = {
-    [F in keyof FileMosaicPropsMap]: FileMosaicPropsMap[F]
-}
+//React.HTMLProps<HTMLDivElement>
+export type FileMosaicProps =
+    /*   {
+        [D in keyof React.HTMLProps<HTMLDivElement>]: React.HTMLProps<HTMLDivElement>[D]
+      } & */
+    {
+        [F in keyof FileMosaicPropsMap]: FileMosaicPropsMap[F]
+    }

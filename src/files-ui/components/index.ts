@@ -7,8 +7,8 @@ export * from "./dropzone";
 export { FileItem } from "./file-item";
 export * from "./file-item";
 
-export { InputButton } from "./input-button";
-export * from "./input-button";
+export { FileInputButton } from "./file-input-button";
+export * from "./file-input-button";
 
 
 // internal components

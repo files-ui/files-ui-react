@@ -1,9 +1,8 @@
 import * as React from "react";
 import "../styles/MainPage.scss";
-import logoLight from "../static/files-ui-logo-blue-wbg.png";
 import logo_blue from "../static/files-ui-logo-blue.png";
 import logo_blue_dark from "../static/files-ui-logo-blue-dark.png";
-import DropzoneMainPage from "../components/DropzoneMainPage";
+import DropzoneMainPage from "../components/demo-components/main-page/DropzoneMainPage";
 
 import GettingStarted from "../components/MainPage/GettingStarted";
 import MainNavBar from "../components/MainPage/MainNavBar";
@@ -31,9 +30,9 @@ const MainPage = ({ darkMode }) => {
         <div className="fui-main-left">
           <div className={"filesui-main-logo-container"}>
             {!darkMode ? (
-              <img className="fui-logo-img" src={logo_blue} />
+              <img className="fui-logo-img" src={logo_blue} alt={"files-ui-logo-blue"}/>
             ) : (
-              <img className="fui-logo-img" src={logo_blue_dark} />
+              <img className="fui-logo-img" src={logo_blue_dark} alt={"files-ui-logo-dark"}/>
             )}
           </div>
 
@@ -65,28 +64,3 @@ const MainPage = ({ darkMode }) => {
   );
 };
 export default MainPage;
-
-{
-  /* return (
-    <div style={containerMainStyle}>
-      <div style={contenedorMosaicStyle}>
-        <FileItemMock mosaic />
-      </div>
-      <div style={{ ...contenedorMosaicStyle, backgroundColor: "#042354" }}>
-        <FileItemMock mosaic darkMode={true} />
-      </div>
-      <div style={contenedorMosaicStyle}>
-        <FileItemMock />
-      </div>
-      <div style={{ ...contenedorMosaicStyle, backgroundColor: "#042354" }}>
-        <FileItemMock darkMode={true} />
-      </div>
-      <div style={contenedorCardStyle}>
-        <FileCardMock />
-      </div>
-      <div style={{ ...contenedorCardStyle, backgroundColor: "#042354" }}>
-        <FileCardMock darkMode={true} />
-      </div> 
-    </div>
-  );*/
-}

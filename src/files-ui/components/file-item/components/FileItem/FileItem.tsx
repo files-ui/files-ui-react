@@ -1,5 +1,5 @@
 import * as React from "react";
-import { fileSizeFormater, shrinkWord } from "../../../../core";
+import { fileSizeFormater } from "../../../../core";
 import DownloadHidden from "../../../download-hidden/DownloadHidden";
 import { mergeProps } from "../../../overridable";
 import { Tooltip } from "../../../tooltip";
@@ -54,7 +54,7 @@ const FileItem: React.FC<FileItemProps> = (props: FileItemProps) => {
 
     onlyImage,
 
-    hd,
+    //hd,
 
     downloadUrl,
 
@@ -214,7 +214,7 @@ const FileItem: React.FC<FileItemProps> = (props: FileItemProps) => {
     //zindex
     //create menu component
     // evt.preventDefault();
-    // onRightClick?.(evt);
+    onRightClick?.(evt);
   }
   //console.log("FileItem onCancel", onCancel);
 

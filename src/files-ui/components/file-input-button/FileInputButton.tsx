@@ -26,9 +26,14 @@ import useDropzoneFileListUpdater from "../../hooks/useDropzoneFileUpdater";
 import InputHidden from "../input-hidden/InputHidden";
 import { MaterialButton } from "../material-button";
 import { mergeProps } from "../overridable";
-import { defaultInputButtonProps, InputButtonProps } from "./InputButtonProps";
+import {
+  defaultFileInputButtonProps,
+  FileInputButtonProps,
+} from "./InputButtonProps";
 
-const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
+const FileInputButton: React.FC<FileInputButtonProps> = (
+  props: FileInputButtonProps
+) => {
   const {
     accept,
     maxFileSize,
@@ -50,7 +55,7 @@ const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
     variant,
     textDecoration,
     resetStyles,
-  } = mergeProps(props, defaultInputButtonProps);
+  } = mergeProps(props, defaultFileInputButtonProps);
   const {
     url,
     method,
@@ -354,4 +359,4 @@ const InputButton: React.FC<InputButtonProps> = (props: InputButtonProps) => {
     </>
   );
 };
-export default InputButton;
+export default FileInputButton;

@@ -1,6 +1,5 @@
 import * as React from "react";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
-import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import MainTitle from "../../components/main-title/MainTitle";
 
 const DropzoneApi = (props) => {

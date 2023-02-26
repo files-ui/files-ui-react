@@ -5,10 +5,10 @@ const DropLayer: React.FC<DropLayerProps> = (props: DropLayerProps) => {
   const { onDrop, onDragLeave, className: classNameLayer, open, style } = props;
   //console.log("DropLayer", classNameLayer);
 
-  const onDragEnd = (evt: React.DragEvent<HTMLDivElement>) => {
+ /*  const onDragEnd = (evt: React.DragEvent<HTMLDivElement>) => {
     //console.log("Drag ended");
     onDragLeave?.(evt);
-  };
+  }; */
 
   return (
     <div

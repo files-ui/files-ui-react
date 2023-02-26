@@ -58,7 +58,7 @@ export function createRippleButton<
     buttonAnchorDiv.clientWidth,
     buttonAnchorDiv.clientHeight
   );
-  const radius = diameter / 2;
+  //const radius = diameter / 2;
 
   circle.style.width = circle.style.height = `${diameter}px`;
   /* circle.style.left = `${event.clientX - radius

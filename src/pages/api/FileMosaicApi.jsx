@@ -3,7 +3,6 @@ import * as React from "react";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
-import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenu from "../../components/RightMenu/RightMenu";

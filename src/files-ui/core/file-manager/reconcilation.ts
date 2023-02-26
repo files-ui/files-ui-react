@@ -26,7 +26,8 @@ export const extFileReconcilation = (
             (F) => arrOfExtFiles?.findIndex(I => I.id === F.id) === -1
         );
 
-
+        console.log("reconciliation incommingTemp", incommingTemp);
+        
 
         //different sizes not allowed
         if (arrOfExtFiles.length !== extFileIncomming.length || extFileIncomming.length === 0) {

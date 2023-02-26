@@ -51,6 +51,7 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
     if (statusHistory.length > 1) {
       elevate();
     }
+            // eslint-disable-next-line
   }, [statusHistory.length]);
 
   const PreparingStatus = () => {
