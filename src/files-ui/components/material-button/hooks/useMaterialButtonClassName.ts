@@ -12,6 +12,8 @@ const useMaterialButtonClassName = (
     idClassName?: number | string,
     resetStyles?: boolean
 ): string | undefined => {
+    console.log("useMaterialButtonClassName", variant, disabled, color, textColor,
+        textDecoration, className, idClassName, resetStyles);
 
     const baseClassName: string = "material-button-root material-button";
 

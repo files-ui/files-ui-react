@@ -35,7 +35,7 @@ const DemoFileMosaicImagePreview: React.FC<DemoFileMosaicImagePreviewProps> = (
           preview
         />
       ) : (
-        <FileInputButton value={value ? [value] : []} onChange={updateFile} />
+        <FileInputButton value={value ? [value] : []} onChange={updateFile} accept="image/*"/>
       )}
       <FileMosaic {...sampleFileProps} alwaysActive info />
     </>

@@ -7,14 +7,16 @@ import {
   LocalLabels,
   UPLOADSTATUS,
 } from "../../../../core";
-import {
-  CheckCircle,
-  Clear,
-  //CloudDone,
-  DoDisturb,
-  //UploadError,
-} from "../../../icons";
+import { CheckCircle, Clear, DoDisturb } from "../../../icons";
 import { DynamicLoader } from "../../../loader";
+import {
+  AbortedStatus,
+  EmptyStatus,
+  ErrorStatus,
+  PreparingStatus,
+  SuccessStatus,
+  UploadingStatus,
+} from "../../../file-status";
 
 const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
   props: FileMosaicUploadLayerProps
@@ -48,118 +50,54 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
       0 - (statusHistory.length - 1) * 132 + "px";
   };
   React.useEffect(() => {
-    if (statusHistory.length > 1) {
-      elevate();
-    }
+    if (statusHistory.length > 1) elevate();
     // eslint-disable-next-line
   }, [statusHistory.length]);
 
-  const PreparingStatus = React.useMemo(
-    () => () =>
-      (
-        <React.Fragment>
-          <InfiniteLoader onClick={onCancel} size={65} />
-          <span>{FileItemStatusLocalizer.preparing as string}</span>
-        </React.Fragment>
-      ),
-    []
-  );
-  const UploadingStatus = React.useMemo(
-    () => () =>
-      (
-        <React.Fragment>
-          {progress !== undefined ? (
-            <DynamicLoader
-              size={70}
-              x={35}
-              y={35}
-              radius={32}
-              percentage={progress}
-              width={6}
-              hidePerncentage={progress === undefined || onAbort !== undefined}
-              onClick={onAbort}
-            />
-          ) : (
-            <InfiniteLoader onClick={onAbort} size={70} />
-          )}
-          <span> {FileItemStatusLocalizer.uploading as string}</span>
-        </React.Fragment>
-      ),
-    [progress, onAbort, FileItemStatusLocalizer]
-  );
-
-  const SuccessStatus = () => {
-    return (
-      <React.Fragment>
-        <CheckCircle
-          color="#4caf50"
-          size={65}
-          //style={{ backgroundColor: "rgba(255,255,255,0.8)", borderRadius: "50%", padding: 8 }}
-        />
-        <span> {FileItemStatusLocalizer.success as string}</span>
-      </React.Fragment>
-    );
-  };
-  const ErrorStatus = () => {
-    return (
-      <React.Fragment>
-        <Clear
-          color="rgba(255,255,255,0.4)"
-          style={{
-            backgroundColor: "rgba(244, 67, 54, 0.8)",
-            borderRadius: "50%",
-          }}
-          size={65}
-        />
-        <span> {FileItemStatusLocalizer.error as string}</span>
-      </React.Fragment>
-    );
-  };
-  const AbortedStatus = () => {
-    return (
-      <React.Fragment>
-        <DoDisturb color="#f44336" size={65} />
-        <span> {FileItemStatusLocalizer.aborted as string}</span>
-      </React.Fragment>
-    );
-  };
-  const Empty = () => {
-    return (
-      <React.Fragment>
-        <div style={{ width: "100%", height: "132px" }}>
-          {/*  <span> VACIOOOOO</span> */}
-        </div>
-      </React.Fragment>
-    );
-  };
-
-  const StatusSelector = (status: UPLOADSTATUS | undefined) => {
-    switch (status) {
-      case "preparing":
-        return <PreparingStatus />;
-      case "uploading":
-        return <UploadingStatus />;
-      case "error":
-        return <ErrorStatus />;
-      case "success":
-        return <SuccessStatus />;
-      case "aborted":
-        return <AbortedStatus />;
-      default:
-        return <Empty />;
-    }
-  };
   //default phase
 
   return (
     <div className={"elevation-layer-container"} ref={elevationContainerRef}>
       <div className="elevation-list" ref={listContainerStoryRef}>
         {statusHistory.map((status, index) => {
-          return (
-            <div className="elevation-item" key={index + 1}>
-              {StatusSelector(status)}
-            </div>
-          );
+          switch (status) {
+            case "preparing":
+              return (
+                <div className="elevation-item" key={index + 1}>
+                  <PreparingStatus onCancel={onCancel}/>
+                </div>
+              );
+            case "uploading":
+              return (
+                <div className="elevation-item" key={index + 1}>
+                  <UploadingStatus onAbort={onAbort} progress={progress}/>
+                </div>
+              );
+            case "error":
+              return (
+                <div className="elevation-item" key={index + 1}>
+                  <ErrorStatus />
+                </div>
+              );
+            case "success":
+              return (
+                <div className="elevation-item" key={index + 1}>
+                  <SuccessStatus />
+                </div>
+              );
+            case "aborted":
+              return (
+                <div className="elevation-item" key={index + 1}>
+                  <AbortedStatus />
+                </div>
+              );
+            default:
+              return (
+                <div className="elevation-item" key={index + 1}>
+                  <EmptyStatus />
+                </div>
+              );
+          }
         })}
       </div>
     </div>

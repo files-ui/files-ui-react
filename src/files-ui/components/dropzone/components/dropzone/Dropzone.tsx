@@ -675,7 +675,24 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   if (!dropzoneClassName) return <></>;
   return (
     <React.Fragment>
-      <DropzoneActionButtons visible={actionButtonsPosition === "top"} />
+      {actionButtonsPosition === "top" && (
+        <DropzoneButtons
+          abortButton={isUploading ? abortButton : undefined}
+          onAbort={handleAbortUpload}
+          deleteButton={deleteButton}
+          onDelete={!isUploading ? handleReset : undefined}
+          uploadButton={!isUploading && !autoUpload ? uploadButton : undefined}
+          onUpload={!autoUpload ? () => uploadfiles(localFiles) : undefined}
+          cleanButton={
+            validateFilesFlag && !isUploading && !autoClean
+              ? cleanButton
+              : undefined
+          }
+          onClean={handleClean}
+          style={containerStyle}
+          className={containerClassName}
+        />
+      )}
       <div
         style={style}
         className={dropzoneClassName}
@@ -752,7 +769,24 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         <DropzoneDisabledLayer open={disabled} />
       </div>
 
-      <DropzoneActionButtons visible={actionButtonsPosition === "bottom"} />
+      {actionButtonsPosition === "bottom" && (
+        <DropzoneButtons
+          abortButton={isUploading ? abortButton : undefined}
+          onAbort={handleAbortUpload}
+          deleteButton={deleteButton}
+          onDelete={!isUploading ? handleReset : undefined}
+          uploadButton={!isUploading && !autoUpload ? uploadButton : undefined}
+          onUpload={!autoUpload ? () => uploadfiles(localFiles) : undefined}
+          cleanButton={
+            validateFilesFlag && !isUploading && !autoClean
+              ? cleanButton
+              : undefined
+          }
+          onClean={handleClean}
+          style={containerStyle}
+          className={containerClassName}
+        />
+      )}
     </React.Fragment>
   );
 };
