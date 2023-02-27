@@ -67,7 +67,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     style,
     textColor,
     validator,
-    value,
+    value = [],
     uploadConfig,
     backgroundColor,
     disableRipple,

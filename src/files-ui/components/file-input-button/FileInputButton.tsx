@@ -9,7 +9,7 @@ import {
   fakeFuiUpload,
   fileListToExtFileArray,
   FileValidatorProps,
-  FunctionLabel,
+  //FunctionLabel,
   handleClickInput,
   instantPreparingToUploadOne,
   isValidateActive,
@@ -18,7 +18,8 @@ import {
   sleepTransition,
   toUploadableExtFileList,
   UploadConfig,
-  uploadOnePromiseXHR,
+  uploadExtFile,
+  //uploadOnePromiseXHR,
   UploadResponse,
   validateExtFileList,
 } from "../../core";
@@ -42,7 +43,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     uploadConfig,
     onChange,
     behaviour,
-    value,
+    value = [],
     localization,
     disabled,
     onUploadFinish,
@@ -88,6 +89,17 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
   //state for managing the number of valid files
   //state for managing the files locally
+  console.table({
+    inputButtonId,
+    value,
+    isUploading,
+    maxFileSize,
+    accept,
+    maxFiles,
+    validator,
+    localization,
+    validateFilesFlag,
+  });
   const [localFiles, numberOfValidFiles, setLocalFiles]: [
     ExtFile[],
     number,
@@ -183,7 +195,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     // workaround for preventing getting the uploadStatus as undefined
     /*  arrOfExtFilesInstances.forEach((F) => {
     F.uploadStatus = "preparing";
-  }); */
+      }); */
     //variable for storing responses
     //console.log("uploadfiles after sleep response",response);
     console.log("FileManagerLog after sleep", arrOfExtFilesInstances);
@@ -210,20 +222,43 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
         //UPLOADING => UPLOAD()
         //upload one file and notify about change
-        const uploadResponse: UploadResponse = fakeUpload
-          ? await fakeFuiUpload(currentExtFileInstance, DropzoneLocalizer)
-          : await uploadOnePromiseXHR(
-              currentExtFileInstance,
-              url,
-              method,
-              headers,
-              uploadLabel
-            );
+        let uploadResponse: UploadResponse;
+        try {
+          uploadResponse = fakeUpload
+            ? await fakeFuiUpload(currentExtFileInstance, DropzoneLocalizer)
+            : await uploadExtFile(
+                currentExtFileInstance,
+                url,
+                method,
+                headers,
+                uploadLabel
+              );
+        } catch (error) {
+          uploadResponse = {
+            id: currentExtFileInstance.id,
+            serverResponse: {
+              success: false,
+              message: "Error on upload: unexpected error " + error,
+              payload: {},
+            },
+            uploadedFile: { ...currentExtFileInstance },
+          };
+        }
 
         const { uploadedFile } = uploadResponse;
         //update instances
         currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
         currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
+
+        //add fake progress only on fakeupload
+        if (fakeUpload) {
+          console.log(
+            "Adding fake progress",
+            fakeUpload,
+            uploadedFile.progress
+          );
+          currentExtFileInstance.progress = uploadedFile.progress;
+        }
         //CHANGE
         if (!(currentExtFileInstance.uploadStatus === "aborted"))
           await sleepTransition();
@@ -244,10 +279,10 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     // upload group finished :D
     onUploadFinish?.(serverResponses);
 
-    const finishUploadMessenger: FunctionLabel =
+    /* const finishUploadMessenger: FunctionLabel =
       DropzoneLocalizer.uploadFinished as FunctionLabel;
 
-    /*  setLocalMessage(
+   setLocalMessage(
       finishUploadMessenger(missingUpload - totalRejected, totalRejected)
     ); */
     setIsUploading(false);

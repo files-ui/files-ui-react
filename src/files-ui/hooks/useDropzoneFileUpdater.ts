@@ -35,7 +35,7 @@ const useDropzoneFileListUpdater = (
     React.useEffect(() => {
         let arrOfExtFiles: ExtFileInstance[] | undefined =
             ExtFileManager.getExtFileInstanceList(dropzoneId);
-        console.log("value changed", isUploading, value.map(F => F.uploadStatus));
+        console.log("value changed", isUploading, value.map(F => F.uploadStatus),dropzoneId);
         // console.log("value changed", value.map(F => F.uploadStatus));
         if (!isUploading) {
             setLocalFiles(value);
