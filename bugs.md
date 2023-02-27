@@ -2,6 +2,8 @@
 
 ## File Item (mosaic)
 
+- on change progress the loader is reredered again and again, I think that the 3 states or layers must be there from the begining
+  "preparing", "uploading", "result" - on cancel, the 2nd layer will dissapear, it will not be any big deal
 - After uploading, progress must be reiitialized to 0
 - [SOLVED] FileiTEMmAINlAYER WORKS STRANGE AT THE TIME NEW fILEiTEM IS ADDED
 - Fileptions (menu collapsed from click in option icon)

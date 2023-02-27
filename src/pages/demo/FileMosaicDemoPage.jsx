@@ -16,6 +16,13 @@ import AnchorToTab from "../../components/util-components/AnchorToTab";
 
 import CodeJSFileMosaicBasic from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicBasic";
 import DemoFileMosaicBasic from "../../components/demo-components/filemosaic-demo/DemoFileMosaicBasic";
+import DemoFileMosaicImagePreview from "../../components/demo-components/filemosaic-demo/DemoFileMosaicImagePreview";
+import CodeJSFileMosaicImagePreview from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicImagePreview";
+import DemoContainerFileMosaic from "../../components/demo-components/filemosaic-demo/DemoContainerFileMosaic";
+import CodeJSFileMosaicValidation from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicValidation";
+import DemoFileMosaicValidation from "../../components/demo-components/filemosaic-demo/DemoFileMosaicValidation";
+import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
+import DemoFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/DemoFileMosaicUploadStatus";
 
 const FileMosaicDemoPage = (props) => {
   return (
@@ -50,21 +57,20 @@ const FileMosaicDemoPage = (props) => {
             object or from individual props.
           </DescParagraph>
 
-          <Paper
-            variant="outlined"
-            style={{
-              padding: "25px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Stack spacing={10} direction="row" alignItems={"center"}>
-              <DemoFileMosaicBasic />
-            </Stack>
-          </Paper>
+          <DemoContainerFileMosaic>
+            <DemoFileMosaicBasic />
+          </DemoContainerFileMosaic>
 
           <CodeJSFileMosaicBasic />
+
+          <Alert severity="info">
+            <AlertTitle> FileInputButton </AlertTitle>
+            For completeness, some of these examples include{" "}
+            <CodeHighlight>{`<FileInputButton/>`} </CodeHighlight>
+            component for allowing the user to select files. For further
+            information of this component check out the{" "}
+            <a href="/components/fileinputbutton">FileInputButton</a> page.
+          </Alert>
         </section>
 
         <section id="image-preview">
@@ -77,18 +83,21 @@ const FileMosaicDemoPage = (props) => {
             given.
           </DescParagraph>
 
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            {/* <BasicDemoDropzone /> */}
-          </Paper>
+          <DemoContainerFileMosaic>
+            <DemoFileMosaicImagePreview />
+          </DemoContainerFileMosaic>
 
-          {/* <BasicDropzoneCodeJS /> */}
+          <CodeJSFileMosaicImagePreview />
           <Alert severity="info">
-            <AlertTitle> FileInputButton </AlertTitle>
-            For completeness, some of these examples include{" "}
-            <CodeHighlight>{`<FileInputButton/>`} </CodeHighlight>
-            component for allowing the user to select files. For further
-            information of this component check out the{" "}
-            <a href="/components/fileinputbutton">FileInputButton</a> page.
+            As you can notice, when
+            <CodeHighlight>{`imageUrl`}</CodeHighlight> prop is present, the{" "}
+            <CodeHighlight>{`preview`}</CodeHighlight> prop is not needed since
+            it has more priority.
+            <br />
+            On the other side, for displaying an image preview as a result of
+            reading an image File it is necesary to set the{" "}
+            <CodeHighlight>{`preview`}</CodeHighlight> prop, otherwise a default
+            image preview will be shown.
           </Alert>
         </section>
         <section id="validation">
@@ -97,14 +106,49 @@ const FileMosaicDemoPage = (props) => {
             The <CodeHighlight>valid</CodeHighlight> prop can be set to{" "}
             <TypeHighlight>true</TypeHighlight>,{" "}
             <TypeHighlight>false</TypeHighlight> or{" "}
-            <TypeHighlight>undefined</TypeHighlight>
+            <TypeHighlight>undefined</TypeHighlight>.
           </DescParagraph>
 
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            {/* <BasicDemoDropzone /> */}
+          <DemoContainerFileMosaic>
+            <DemoFileMosaicValidation />
+          </DemoContainerFileMosaic>
+
+          <CodeJSFileMosaicValidation />
+        </section>
+
+        <section id="uploading">
+          <SubTitle content="Uploading status" />
+          <DescParagraph>
+            The <CodeHighlight>uploadStatus</CodeHighlight> prop can be set to{" "}
+            <TypeHighlight>"preparing"</TypeHighlight>,{" "}
+            <TypeHighlight>"uploading"</TypeHighlight>,{" "}
+            <TypeHighlight>"aborted"</TypeHighlight>,{" "}
+            <TypeHighlight>"error"</TypeHighlight> or{" "}
+            <TypeHighlight>"success"</TypeHighlight>. Also the{" "}
+            <CodeHighlight>uploadMessage</CodeHighlight> prop is used for
+            displaying the error or success message and the{" "}
+            <CodeHighlight>progress</CodeHighlight> prop can be used to show the
+            current progress of the upload process.
+            <br />
+            Each of the following examples demonstrates one state combination of
+            the FileMosaic component.
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: "7px",
+            }}
+          >
+            <DemoFileMosaicUploadStatus />
           </Paper>
-          <p></p>
-          {/* <BasicDropzoneCodeJS /> */}
+
+          <CodeJSFileMosaicUploadStatus />
         </section>
       </MainContentContainer>
       <RightMenuContainer>

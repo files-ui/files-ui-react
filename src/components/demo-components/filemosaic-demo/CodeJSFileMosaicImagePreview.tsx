@@ -1,7 +1,7 @@
 import * as React from "react";
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 
-const CodeJSFileMosaicBasic = (props) => {
+const CodeJSFileMosaicImagePreview = () => {
   return (
     <ShowDemoCode
       codeCompleteJS={completeCodeJS}
@@ -13,33 +13,35 @@ const CodeJSFileMosaicBasic = (props) => {
     />
   );
 };
-export default CodeJSFileMosaicBasic;
+export default CodeJSFileMosaicImagePreview;
 
 const splittedCodeJS = `<>
   {value ? (
-    <FileMosaic {...value} onDelete={removeFile} alwaysActive info />
+    <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
   ) : (
-    <FileInputButton onChange={updateFile} />
+    <FileInputButton onChange={updateFile} accept="image/*"/>
   )}
   <FileMosaic {...sampleFileProps} alwaysActive info />
 </>
 
 // file props
 const sampleFileProps = {
-  id: ":0:",
-  size: 28 * 1024 * 1024,
-  type: "plain/javascript",
-  name: "file created from props.jsx",
+    id: "fileId",
+    size: 28 * 1024 * 1024,
+    type: "image/gif",
+    name: "Thor arrives wakanda.jpg",
+    imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };`;
 
 const completeCodeJS = `import * as React from "react";
 import { InputButton, FileMosaic } from "@files-ui/react";
 
 const sampleFileProps = {
-  id: ":0:",
-  size: 28 * 1024 * 1024,
-  type: "plain/javascript",
-  name: "file created from props.jsx",
+    id: "fileId",
+    size: 28 * 1024 * 1024,
+    type: "image/gif",
+    name: "Thor arrives wakanda.jpg",
+    imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };
 
 export default function App() {
@@ -55,9 +57,9 @@ export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} alwaysActive info />
+        <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
       ) : (
-        <FileInputButton onChange={updateFile} />
+        <FileInputButton onChange={updateFile} accept="image/*"/>
       )}
       <FileMosaic {...sampleFileProps} alwaysActive info />
     </div>
@@ -65,29 +67,31 @@ export default function App() {
 };`;
 
 const splittedCodeTS = `<>
-  {value ? (
-    <FileMosaic {...value} onDelete={removeFile} alwaysActive info />
-  ) : (
-    <FileInputButton onChange={updateFile} />
-  )}
-  <FileMosaic {...sampleFileProps} alwaysActive info />
+{value ? (
+  <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
+) : (
+  <FileInputButton onChange={updateFile} accept="image/*"/>
+)}
+<FileMosaic {...sampleFileProps} alwaysActive info />
 </>
 
 // file props
 const sampleFileProps: ExtFile = {
-  id: ":0:",
+  id: "fileId",
   size: 28 * 1024 * 1024,
-  type: "plain/javascript",
-  name: "file created from props.jsx",
+  type: "image/gif",
+  name: "Thor arrives wakanda.jpg",
+  imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };`;
 const completeCodeTS = `import * as React from "react";
 import { InputButton, FileMosaic, ExtFile } from "@files-ui/react";
 
-const sampleFileProps:ExtFile = {
-  id: ":0:",
-  size: 28 * 1024 * 1024,
-  type: "plain/javascript",
-  name: "file created from props.jsx",
+const sampleFileProps: ExtFile = {
+    id: "fileId",
+    size: 28 * 1024 * 1024,
+    type: "image/gif",
+    name: "Thor arrives wakanda.jpg",
+    imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };
 
 export default function App() {
@@ -103,9 +107,9 @@ export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} alwaysActive info />
+        <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
       ) : (
-        <FileInputButton onChange={updateFile} />
+        <FileInputButton onChange={updateFile} accept="image/*"/>
       )}
       <FileMosaic {...sampleFileProps} alwaysActive info />
     </div>

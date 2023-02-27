@@ -2,10 +2,10 @@ import * as React from "react";
 import { FileInputButton, FileMosaic } from "../../../files-ui";
 
 const sampleFileProps = {
-  id: ":0:",
+  id: "fileId",
   size: 28 * 1024 * 1024,
   type: "plain/javascript",
-  name: "fileeeeee.jsx",
+  name: "file created from props.jsx",
 };
 const DemoFileMosaicBasic = (props) => {
   const [value, setValue] = React.useState(undefined);
@@ -21,11 +21,11 @@ const DemoFileMosaicBasic = (props) => {
   return (
     <>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} alwaysActive info />
+        <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
       ) : (
-        <FileInputButton onChange={updateFile} />
+        <FileInputButton value={value?[value]:[]} onChange={updateFile} />
       )}
-      <FileMosaic {...sampleFileProps} alwaysActive info />
+      <FileMosaic {...sampleFileProps} alwaysActive info preview/>
     </>
   );
 };
