@@ -13,14 +13,14 @@ const sampleFilesProps = [
     size: 28 * 1024 * 1024,
     type: "image/png",
     name: "valid file created from props.png",
-    valid: true,
+    valid: false,
   },
   {
     id: "fileId-3",
     size: 28 * 1024 * 1024,
     type: "image/jpeg",
     name: "non valid file created from props.jpg",
-    valid: false,
+    valid: true,
   },
 ];
 

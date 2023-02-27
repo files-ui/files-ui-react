@@ -64,10 +64,10 @@ export default function AdvancedDropzoneDemo() {
         onChange={updateFiles}
         minHeight="195px"
         value={extFiles}
-        maxFiles={3}
-        maxFileSize={2998000 * 20}
+        /* maxFiles={3}
+        maxFileSize={2998000 * 20} */
         label="Drag'n drop files here or click to browse"
-        accept=".png,image/*, video/*"
+       // accept=".png,image/*, video/*"
         uploadConfig={{
           /* autoUpload: true */
           method: "POST",

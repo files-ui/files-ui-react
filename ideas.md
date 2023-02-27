@@ -9,7 +9,7 @@
 ## Phrases
 
 - Stop pain with developing a complex widget, don't need to create a file upload component from scratch
-- If you need to do it from scratch, there is an example [show some basic code]
+- If you need to do it from scratch, there is an example [show some basic code] Bellow main page component
 
 
 
