@@ -15,9 +15,7 @@ export default function AdvancedDropzoneDemo() {
   const [extFiles, setExtFiles] = useState([]);
 
   const [imageSrc, setImageSrc] = React.useState(undefined);
-  const [videoSrc, setVideoSrc] = React.useState(
-    undefined
-  );
+  const [videoSrc, setVideoSrc] = React.useState(undefined);
 
   const updateFiles = (incommingFiles) => {
     console.log("incomming extFiles", incommingFiles);
@@ -35,15 +33,15 @@ export default function AdvancedDropzoneDemo() {
   const handleFinish = (res) => {
     console.log("finish", res);
   };
-   const handleWatch = (videoSource) => {
+  const handleWatch = (videoSource) => {
     console.log(
       "handleWatch videoSource",
       "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4"
     );
     //setVideoSrc(videoSource);
-   //
-   setVideoSrc(videoSource);
-   // setVideoSrc("https://www.w3schools.com/tags/movie.mp4");
+    //
+    setVideoSrc(videoSource);
+    // setVideoSrc("https://www.w3schools.com/tags/movie.mp4");
   };
 
   useEffect(() => {
@@ -57,6 +55,16 @@ export default function AdvancedDropzoneDemo() {
       console.log("checkFiles error", error);
     }
   }
+  const handleAbort = (id) => {
+   // alert(id);
+    setExtFiles(
+      extFiles.map((ef) => {
+        if (ef.id === id) {
+          return { ...ef, uploadStatus: undefined };
+        } else return { ...ef };
+      })
+    );
+  };
   return (
     <>
       <Dropzone
@@ -67,7 +75,7 @@ export default function AdvancedDropzoneDemo() {
         /* maxFiles={3}
         maxFileSize={2998000 * 20} */
         label="Drag'n drop files here or click to browse"
-       // accept=".png,image/*, video/*"
+        // accept=".png,image/*, video/*"
         uploadConfig={{
           /* autoUpload: true */
           method: "POST",
@@ -98,6 +106,7 @@ export default function AdvancedDropzoneDemo() {
               onDelete={onDelete}
               onSee={handleSee}
               onWatch={handleWatch}
+              onAbort={handleAbort}
               resultOnTooltip
               alwaysActive
               preview
