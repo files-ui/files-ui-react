@@ -15,7 +15,10 @@ const useProgress = (
     const [localProgress, setLocalProgress] = React.useState<number | undefined>(undefined);
 
     if (progress !== undefined) {
-        setLocalProgress(progress);
+        if (localProgress !== progress) {
+            setLocalProgress(progress);
+        }
+
     } else {
         if (xhr !== undefined && xhr !== null && xhr.upload.onprogress === null) {
             // xhr was given but it was not initialized the `onprogress` event
