@@ -111,7 +111,7 @@ export const sleepTransition = (
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(true);
-        }, 1200);
+        }, 1500);
     });
 }
 

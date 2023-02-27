@@ -138,7 +138,7 @@ export {
     sleepPreparing,
     uploadOne,
     uploadOneExtFile,
-    cleanInput, addClassName, getRandomInt
+    cleanInput, addClassName, getRandomInt, isUploadAbleExtFile
 } from "./utils";
 
 export {
