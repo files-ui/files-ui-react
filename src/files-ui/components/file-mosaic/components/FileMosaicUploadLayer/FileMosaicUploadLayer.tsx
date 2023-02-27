@@ -135,10 +135,10 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
 
   const StatusSelector = (status: UPLOADSTATUS | undefined) => {
     switch (status) {
-      case "preparing":
+      /* case "preparing":
         return <PreparingStatus />;
       case "uploading":
-        return <UploadingStatus />;
+        return <UploadingStatus />; */
       case "error":
         return <ErrorStatus />;
       case "success":
@@ -157,7 +157,34 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
         {statusHistory.map((status, index) => {
           return (
             <div className="elevation-item" key={index + 1}>
-              {StatusSelector(status)}
+              {status === "preparing" ? (
+                <React.Fragment>
+                  <InfiniteLoader onClick={onCancel} size={65} />
+                  <span>{FileItemStatusLocalizer.preparing as string}</span>
+                </React.Fragment>
+              ) : status === "uploading" ? (
+                <React.Fragment>
+                  {progress !== undefined ? (
+                    <DynamicLoader
+                      size={70}
+                      x={35}
+                      y={35}
+                      radius={32}
+                      percentage={progress}
+                      width={6}
+                      hidePerncentage={
+                        progress === undefined || onAbort !== undefined
+                      }
+                      onClick={onAbort}
+                    />
+                  ) : (
+                    <InfiniteLoader onClick={onAbort} size={70} />
+                  )}
+                  <span> {FileItemStatusLocalizer.uploading as string}</span>
+                </React.Fragment>
+              ) : (
+                StatusSelector(status)
+              )}
             </div>
           );
         })}

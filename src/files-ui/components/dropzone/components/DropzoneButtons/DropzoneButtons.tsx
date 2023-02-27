@@ -53,6 +53,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     containerClassName
   );
 
+  
   return (
     <div className={finalClassName} style={containerStyle}>
       {actionButtonsList.map(

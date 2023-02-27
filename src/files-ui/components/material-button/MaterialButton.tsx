@@ -47,6 +47,7 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
 
     onClick?.(e as React.MouseEvent<HTMLButtonElement, MouseEvent>);
   }
+
   if (materialButtonClassName!==undefined || resetStyles)
     return React.createElement(href ? "a" : "button", {
       className: resetStyles && className ? className : materialButtonClassName,
