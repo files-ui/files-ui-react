@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FileMosaic } from "../../../files-ui";
-import { ExtFile } from "../../../files-ui/core";
+import { ExtFile, getRandomInt } from "../../../files-ui/core";
 const preparingFiles: ExtFile[] = [
   {
     id: "fileId-1",
@@ -73,6 +73,7 @@ const uploadResulFiles: ExtFile[] = [
     uploadMessage: "File was uploaded correctly to Files-ui earthquakes",
   },
 ];
+
 const FlexRowContainer = (props: { children: React.ReactNode }) => {
   return (
     <div
@@ -88,6 +89,41 @@ const FlexRowContainer = (props: { children: React.ReactNode }) => {
   );
 };
 const DemoFileMosaicUploadStatus = () => {
+  const [progress, setProgress] = React.useState(28);
+  const [progress2, setProgress2] = React.useState(28);
+  React.useEffect(() => {
+    const _myInterval = setInterval(() => {
+      setProgress((_progress) => {
+        if (_progress === 100) {
+          return 0;
+        }
+        const offset = getRandomInt(5, 14);
+        const newProgress = _progress + offset;
+        if (newProgress > 100) {
+          return 100;
+        } else {
+          return newProgress;
+        }
+      });
+      setProgress2((_progress) => {
+        if (_progress === 100) {
+          return 0;
+        }
+        const offset = getRandomInt(10, 24);
+        const newProgress = _progress + offset;
+        if (newProgress > 100) {
+          return 100;
+        } else {
+          return newProgress;
+        }
+      });
+    }, 2000);
+
+    return () => {
+      console.log("clear interval", _myInterval);
+      clearInterval(_myInterval as NodeJS.Timer);
+    };
+  }, []);
   return (
     <>
       <FlexRowContainer>
@@ -97,16 +133,20 @@ const DemoFileMosaicUploadStatus = () => {
 
       <FlexRowContainer>
         <FileMosaic {...uploadingFiles[0]} />
-        <FileMosaic {...uploadingFiles[0]} progress={70} />
+        <FileMosaic {...uploadingFiles[0]} progress={progress} />
         <FileMosaic {...uploadingFiles[2]} onAbort={() => {}} />
-         <FileMosaic {...uploadingFiles[3]} onAbort={()=>{}}/>
+        <FileMosaic
+          {...uploadingFiles[3]}
+          onAbort={() => {}}
+          progress={progress2}
+        />
       </FlexRowContainer>
 
       <FlexRowContainer>
-        <FileMosaic {...uploadResulFiles[0]} resultOnTooltip/>
-        <FileMosaic {...uploadResulFiles[1]} resultOnTooltip/>
-        <FileMosaic {...uploadResulFiles[2]} resultOnTooltip/>
-        <FileMosaic {...uploadResulFiles[3]} resultOnTooltip/>
+        <FileMosaic {...uploadResulFiles[0]} resultOnTooltip />
+        <FileMosaic {...uploadResulFiles[1]} resultOnTooltip />
+        <FileMosaic {...uploadResulFiles[2]} resultOnTooltip />
+        <FileMosaic {...uploadResulFiles[3]} resultOnTooltip />
       </FlexRowContainer>
     </>
   );

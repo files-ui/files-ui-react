@@ -51,17 +51,19 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
     if (statusHistory.length > 1) {
       elevate();
     }
-            // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [statusHistory.length]);
 
-  const PreparingStatus = () => {
-    return (
-      <React.Fragment>
-        <InfiniteLoader onClick={onCancel} size={65} />
-        <span>{FileItemStatusLocalizer.preparing as string}</span>
-      </React.Fragment>
-    );
-  };
+  const PreparingStatus = React.useMemo(
+    () => () =>
+      (
+        <React.Fragment>
+          <InfiniteLoader onClick={onCancel} size={65} />
+          <span>{FileItemStatusLocalizer.preparing as string}</span>
+        </React.Fragment>
+      ),
+    []
+  );
   const UploadingStatus = React.useMemo(
     () => () =>
       (

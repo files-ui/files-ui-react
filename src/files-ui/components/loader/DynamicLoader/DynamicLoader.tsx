@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Clear } from "../../icons";
 import { parseSize } from "../../icons/utils/utils";
-//import BasePreparingLoader from "../BasePreparingLoader/BasePreparingLoader";
 import LoaderContainer from "../LoaderContainer/LoaderContainer";
 import { DynamicLoaderProps } from "./DynamicLoaderProps";
 
@@ -24,7 +23,8 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
     onClick,
   } = props;
 
-  console.log("percentage", percentage);
+  console.table(props);
+  //console.log("percentage", percentage);
 
   const finalRadius = radius || 28;
   const finalX = x || 30;
