@@ -325,7 +325,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         }
 
         serverResponses.push(uploadResponse);
-      }else{
+      } else {
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
       }
     }
@@ -350,12 +350,15 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
     if (!listExtFileLocal) return;
     listExtFileLocal.forEach((extFileInstance: ExtFileInstance) => {
-      if (extFileInstance.uploadStatus === "uploading") {
+      if (
+        extFileInstance.uploadStatus === "uploading" ||
+        extFileInstance.uploadStatus === "preparing"
+      ) {
         if (extFileInstance.xhr !== null && extFileInstance.xhr !== undefined)
           extFileInstance.xhr.abort();
+        extFileInstance.uploadStatus = "aborted";
+        extFileInstance.uploadMessage = "Upload was aborted by user";
       }
-      extFileInstance.uploadStatus = "aborted";
-      //console.log("Aborting extFileInstance", extFileInstance.xhr);
     });
   };
 
