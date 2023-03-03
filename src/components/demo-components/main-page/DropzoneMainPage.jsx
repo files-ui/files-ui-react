@@ -17,7 +17,7 @@ const DropzoneMainPage = ({ darkMode = false }) => {
   const [files, setFiles] = React.useState(baseFiles);
   const updateFiles = (incommingFiles) => {
     //do something with the files
-    console.log("MainPage incommingFiles",incommingFiles);
+    console.log("MainPage incommingFiles", incommingFiles);
 
     setFiles(incommingFiles);
     //even your own upload implementation
@@ -41,11 +41,12 @@ const DropzoneMainPage = ({ darkMode = false }) => {
         // minHeight="400px"
         onChange={updateFiles}
         value={files}
-        maxFileSize={28*1024}
+        maxFileSize={28 * 1024 * 10}
         maxFiles={5}
         accept=".jpg, .png, application/json, video/*"
         fakeUpload
         behaviour="add"
+        uploadConfig={{ autoUpload: true , url:"fdbd"}}
         //uploadConfig={{ autoUpload: true, url:"fdbd" }}
       >
         {files.length > 0 &&

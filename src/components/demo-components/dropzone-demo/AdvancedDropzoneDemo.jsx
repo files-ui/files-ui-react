@@ -60,11 +60,21 @@ export default function AdvancedDropzoneDemo() {
     setExtFiles(
       extFiles.map((ef) => {
         if (ef.id === id) {
-          return { ...ef, uploadStatus: undefined };
+          return { ...ef, uploadStatus: "aborted" };
         } else return { ...ef };
       })
     );
   };
+  const handleCancel= (id) => {
+    // alert(id);
+     setExtFiles(
+       extFiles.map((ef) => {
+         if (ef.id === id) {
+           return { ...ef, uploadStatus: undefined };
+         } else return { ...ef };
+       })
+     );
+   };
   return (
     <>
       <Dropzone
@@ -107,6 +117,7 @@ export default function AdvancedDropzoneDemo() {
               onSee={handleSee}
               onWatch={handleWatch}
               onAbort={handleAbort}
+              onCancel={handleCancel}
               resultOnTooltip
               alwaysActive
               preview
