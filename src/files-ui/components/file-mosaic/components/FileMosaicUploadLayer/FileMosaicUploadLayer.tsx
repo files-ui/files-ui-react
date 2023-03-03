@@ -26,7 +26,10 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
 
   React.useEffect(() => {
     setStatusHistory((statusHistory: Array<UPLOADSTATUS | undefined>) => {
-      if (statusHistory[statusHistory.length - 1] === "preparing") {
+      if (
+        statusHistory[statusHistory.length - 1] === "preparing" &&
+        uploadStatus === "uploading"
+      ) {
         const tempStatusHistory = [...statusHistory];
         tempStatusHistory[statusHistory.length - 1] = uploadStatus;
         //replace
