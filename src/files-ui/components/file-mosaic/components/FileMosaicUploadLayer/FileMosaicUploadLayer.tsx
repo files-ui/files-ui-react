@@ -1,14 +1,8 @@
 import * as React from "react";
 import { FileMosaicUploadLayerProps } from "./FileMosaicUploadLayerProps";
 import "./FileMosaicUploadLayer.scss";
-import InfiniteLoader from "../../../loader/InfiniteLoader/InfiniteLoader";
-import {
-  FileItemLocalizerSelector,
-  LocalLabels,
-  UPLOADSTATUS,
-} from "../../../../core";
-import { CheckCircle, Clear, DoDisturb } from "../../../icons";
-import { DynamicLoader } from "../../../loader";
+import { UPLOADSTATUS } from "../../../../core";
+
 import {
   AbortedStatus,
   EmptyStatus,
@@ -26,16 +20,21 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
   const elevationContainerRef = React.useRef<HTMLDivElement | null>(null);
   const listContainerStoryRef = React.useRef<HTMLDivElement | null>(null);
 
-  const FileItemStatusLocalizer: LocalLabels = FileItemLocalizerSelector(
-    localization
-  ).status as LocalLabels;
-
   const [statusHistory, setStatusHistory] = React.useState<
     Array<UPLOADSTATUS | undefined>
   >([undefined]);
 
   React.useEffect(() => {
     setStatusHistory((statusHistory: Array<UPLOADSTATUS | undefined>) => {
+      if (
+        statusHistory[statusHistory.length - 1] === "preparing" &&
+        uploadStatus === "uploading"
+      ) {
+        const tempStatusHistory = [...statusHistory];
+        tempStatusHistory[statusHistory.length - 1] = uploadStatus;
+        //replace
+        return [...tempStatusHistory];
+      }
       return [...statusHistory, uploadStatus];
     });
   }, [uploadStatus]);
@@ -64,31 +63,38 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
             case "preparing":
               return (
                 <div className="elevation-item" key={index + 1}>
-                  <PreparingStatus onCancel={onCancel}/>
+                  <PreparingStatus
+                    onCancel={onCancel}
+                    localization={localization}
+                  />
                 </div>
               );
             case "uploading":
               return (
                 <div className="elevation-item" key={index + 1}>
-                  <UploadingStatus onAbort={onAbort} progress={progress}/>
+                  <UploadingStatus
+                    onAbort={onAbort}
+                    progress={progress}
+                    localization={localization}
+                  />
                 </div>
               );
             case "error":
               return (
                 <div className="elevation-item" key={index + 1}>
-                  <ErrorStatus />
+                  <ErrorStatus localization={localization} />
                 </div>
               );
             case "success":
               return (
                 <div className="elevation-item" key={index + 1}>
-                  <SuccessStatus />
+                  <SuccessStatus localization={localization} />
                 </div>
               );
             case "aborted":
               return (
                 <div className="elevation-item" key={index + 1}>
-                  <AbortedStatus />
+                  <AbortedStatus localization={localization} />
                 </div>
               );
             default:

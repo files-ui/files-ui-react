@@ -96,19 +96,26 @@ export class ExtFileManager {
         validateFiles: boolean,
         cleanOnUpload: boolean
     ): ExtFileInstance[] | undefined {
+        console.log("setFileListMapPreparing before if", dropzoneId, localFiles, cleanOnUpload);
 
         if (!(typeof dropzoneId === "number" || typeof dropzoneId === "string")) return undefined;
 
+        console.log("setFileListMapPreparing before try", localFiles, cleanOnUpload);
         try {
-            let resultExtList: ExtFileInstance[] = [];
-            //remove non valids if cleanOnUpload is true and validateFiles is also true
-            let temLocalFiles: ExtFile[] = [];
 
-            if (cleanOnUpload) {
+            let resultExtList: ExtFileInstance[] = [];
+
+            //initializes the extFileLInstance list
+            let temLocalFiles: ExtFile[] = [...localFiles];
+
+            //remove non valids if cleanOnUpload is true and validateFiles is also true
+            if (cleanOnUpload && validateFiles) {
                 // clean on Upload is true, so non valid files must be removed
-                temLocalFiles = localFiles.filter(extFile => extFile.valid)
+                temLocalFiles = temLocalFiles.filter(extFile => extFile.valid)
                 console.log("temLocalFiles filter", temLocalFiles);
             }
+
+            console.log("setFileListMapPreparing after remove non valids", temLocalFiles);
 
             if (validateFiles) {
                 // validation flag was set to true, so only valid=true files will be set to "preparing"
@@ -126,7 +133,7 @@ export class ExtFileManager {
                         });
             } else {
                 // all files will be set to "preparing" whether the valid value
-                // except those diles with uploadStatus ==="success"
+                // except those files with uploadStatus ==="success"
                 temLocalFiles =
                     temLocalFiles
                         .map(extFile => {
@@ -138,31 +145,19 @@ export class ExtFileManager {
                         });
             }
 
-            console.log("FileManagerLog RESULT temLocalFiles", temLocalFiles);
+            console.log("setFileListMapPreparing result", temLocalFiles);
 
-            //sets on preparing stage all files according to the following criteria:
-            // If the uploadStatus is diferent than "sucess" AND
-            // If validateFiles is true and the file is true OR validateFiles is false
-            // then update the files on preparing stage. Otherwise keep the extFile props.
-            /*  for (let i = 0; i < resultExtList.length; i++) {
-                 const extFileInstance: ExtFileInstance = resultExtList[i];
-                 const { valid, uploadStatus } = extFileInstance;
-                 console.log("upload setFileListMapPreparing resultExtList[i]", (uploadStatus !== "success") && ((validateFiles && valid) || !validateFiles));
- 
-                 if ((uploadStatus !== "success") && ((validateFiles && valid) || !validateFiles))
-                     resultExtList[i].uploadStatus = "preparing";
-             } */
-
+            //converto to Object instances
             resultExtList = temLocalFiles.map(F => new ExtFileInstance(F));
-            console.log("FileManagerLog RESULT resultExtList", resultExtList);
+            console.log("setFileListMapPreparing RESULT resultExtList", resultExtList);
 
             const resultSet = ExtFileManager.setFileList(dropzoneId, resultExtList);
-            console.log("FileManagerLog RESULT resultSet", resultSet);
+            console.log("setFileListMapPreparing RESULT resultSet", resultSet);
 
             return resultExtList;
             // return ExtFileManager.fileLists[dropzoneId];
         } catch (error) {
-            console.error("upload setFileListMapPreparing Error on get List", error);
+            console.error("setFileListMapPreparing Error on get List", error);
             return undefined;
         }
 

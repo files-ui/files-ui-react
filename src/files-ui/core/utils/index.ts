@@ -37,3 +37,5 @@ export { cleanInput } from "./input.utils";
 
 
 export { addClassName } from "./addClassName";
+
+export {isUploadAbleExtFile} from "./isUploadAbleExtFile";

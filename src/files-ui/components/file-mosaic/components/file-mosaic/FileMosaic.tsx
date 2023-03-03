@@ -60,7 +60,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onRightClick,
   } = props;
 
-  console.log("FileMosaic progress "+ id, progress);
+  console.log("FileMosaic progress " + id, progress);
   //ref for anchor download element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
 
@@ -87,7 +87,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   ); */
   const localProgress: number | undefined = useProgress(progress, xhr);
 
-  console.log("FileMosaic progress localProgress "+ localProgress);
+  console.log("FileMosaic progress localProgress " + localProgress);
 
   //Initialize File Item
   const [isReady, isImage, isVideo, url, imageSource]: [
@@ -281,8 +281,15 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
             <FileMosaicUploadLayer
               uploadStatus={uploadStatus}
               progress={localProgress}
-              onCancel={onCancel}
-              onAbort={onAbort}
+              onCancel={onCancel ? () => onCancel?.(id) : undefined}
+              onAbort={
+                onAbort
+                  ? () => {
+                      xhr?.abort();
+                      onAbort?.(id);
+                    }
+                  : undefined
+              }
               localization={localization}
             />
           </Layer>

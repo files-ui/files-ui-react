@@ -7,11 +7,11 @@ import { FileIdGenerator } from "./IdGenerator";
  * @returns an array of ExtFile objects
  */
 export const fileListToExtFileArray = (fileList: FileList): ExtFile[] => {
-    let filesValidated: ExtFile[] = [];
+    let extFileArray: ExtFile[] = [];
     for (let i = 0, f: File; (f = fileList[i]); i++) {
-        filesValidated.push({ id: FileIdGenerator.getNextId(), file: f, name: f.name, size: f.size, type: f.type });
+        extFileArray.push({ id: FileIdGenerator.getNextId(), file: f, name: f.name, size: f.size, type: f.type });
     }
-    return filesValidated;
+    return extFileArray;
 };
 
 /**
@@ -20,9 +20,9 @@ export const fileListToExtFileArray = (fileList: FileList): ExtFile[] => {
  * @returns an array of ExtFile instances
  */
 export const fileListToExtFileInstanceArray = (fileList: FileList): ExtFileInstance[] => {
-    let filesValidated: ExtFileInstance[] = [];
+    let extFileArray: ExtFileInstance[] = [];
     for (let i = 0, f: File; (f = fileList[i]); i++) {
-        filesValidated.push(new ExtFileInstance({ id: FileIdGenerator.getNextId(), file: f, name: f.name, size: f.size, type: f.type  }));
+        extFileArray.push(new ExtFileInstance({ id: FileIdGenerator.getNextId(), file: f, name: f.name, size: f.size, type: f.type  }));
     }
-    return filesValidated;
+    return extFileArray;
 };

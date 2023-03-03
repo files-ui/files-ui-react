@@ -47,6 +47,7 @@ export const makeErrorUploadResponse = (
     extFile: ExtFile,
     responseFui: ServerResponse
 ): UploadResponse => {
+    console.log("makeErrorUploadResponse", extFile, responseFui);
     return {
         id: extFile.id,
         serverResponse: responseFui,
