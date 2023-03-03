@@ -281,11 +281,15 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
             <FileMosaicUploadLayer
               uploadStatus={uploadStatus}
               progress={localProgress}
-              onCancel={() => onCancel?.(id)}
-              onAbort={() => {
-                xhr?.abort();
-                onAbort?.(id);
-              }}
+              onCancel={onCancel ? () => onCancel?.(id) : undefined}
+              onAbort={
+                onAbort
+                  ? () => {
+                      xhr?.abort();
+                      onAbort?.(id);
+                    }
+                  : undefined
+              }
               localization={localization}
             />
           </Layer>
