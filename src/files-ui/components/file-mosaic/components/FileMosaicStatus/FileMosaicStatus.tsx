@@ -22,7 +22,7 @@ const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
       </div>
     );
   }
-  if (uploadStatus === "error") {
+  if (uploadStatus === "error" || uploadStatus === "aborted") {
     return (
       <div className="files-ui-file-item-status-container file-status-error">
         <UploadError
