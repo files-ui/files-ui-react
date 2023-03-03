@@ -115,3 +115,22 @@ export const sleepTransition = (
     });
 }
 
+export const sanitizeArrExtFile = (arrExtFile: ExtFileInstance[]): ExtFile[] => {
+    /*  console.log("sanitizeArrExtFile", arrExtFile.length, arrExtFile.filter((extFileInstance: ExtFileInstance) => extFileInstance.extraData?.deleted)
+     .map((extFileInstance: ExtFileInstance) => extFileInstance.toExtFile()).length);
+      */
+
+    return arrExtFile.filter((extFileInstance: ExtFileInstance) =>
+        !extFileInstance.extraData?.deleted)
+        .map((extFileInstance: ExtFileInstance) => {
+            if (extFileInstance.uploadStatus === "aborted") {
+                if(!extFileInstance.uploadMessage){
+                    extFileInstance.uploadMessage="Upload aborted";
+                }
+                extFileInstance.uploadStatus = "error";
+            }
+
+            return extFileInstance.toExtFile()
+        });
+
+}
