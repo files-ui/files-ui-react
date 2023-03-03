@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CustomValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, validateExtFileList } from "../core";
+import { CustomValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "../core";
 
 /**
  * Effect for keeping track of changes
@@ -51,36 +51,30 @@ const useDropzoneFileListUpdater = (
                     //if the current Ext file is not present anymore
                     //add deleted flag
                     const extFileIndex: number = value.findIndex((extFile: ExtFile) => extFile.id === extFileInstance.id)
-                    if (extFileIndex === -1) {
 
+                    if (extFileIndex === -1) {
                         extFileInstance.extraData = { deleted: true }
                         console.log("extFileUpdater not found", extFileInstance.id);
                     } else {
-                        extFileInstance.uploadStatus = value[extFileIndex].uploadStatus;
-                        extFileInstance.uploadMessage = value[extFileIndex].uploadMessage;
-                        if (value[extFileIndex].uploadStatus === undefined) {
-                            console.log("extFileUpdater canceled", extFileInstance.id);
+                        const currExtFileObj: ExtFile = value[extFileIndex];
 
-                        } else if (value[extFileIndex].uploadStatus === "aborted") {
-                            console.log("extFileUpdater aborted", extFileInstance.id);
-
-                        }
+                        setNextUploadStatus(extFileInstance, currExtFileObj);
                     }
                 })
 
-                /*   if (arrOfExtFiles.length !== value.length || value.length === 0) {
-                      return;
-                  }
-                  for (let i = 0; i < arrOfExtFiles.length; i++) {
-                      if (
-                          (value[i].uploadStatus === undefined)
-                          &&
-                          (arrOfExtFiles[i].uploadStatus === "preparing")
-                      ) {
-                          console.log("useDropzoneFileListUpdater onCancel i", i);
-                          arrOfExtFiles[i].uploadStatus = undefined;
-                      }
-                  } */
+                /*if (arrOfExtFiles.length !== value.length || value.length === 0) {
+                    return;
+                }
+                for (let i = 0; i < arrOfExtFiles.length; i++) {
+                    if (
+                        (value[i].uploadStatus === undefined)
+                        &&
+                        (arrOfExtFiles[i].uploadStatus === "preparing")
+                    ) {
+                        console.log("useDropzoneFileListUpdater onCancel i", i);
+                        arrOfExtFiles[i].uploadStatus = undefined;
+                    }
+                } */
             }
         }
         // eslint-disable-next-line
