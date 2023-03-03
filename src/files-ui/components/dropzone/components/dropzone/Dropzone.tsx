@@ -24,6 +24,7 @@ import {
   toUploadableExtFileList,
   cleanInput,
   isUploadAbleExtFile,
+  sanitizeArrExtFile,
 } from "../../../../core";
 import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../input-hidden/InputHidden";
@@ -223,7 +224,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         dropzoneId,
         localFiles,
         validateFilesFlag as boolean,
-        cleanOnUpload as boolean,
+        cleanOnUpload as boolean
       ) || [];
 
     const newExtFileLocal: ExtFile[] = [...arrOfExtFilesInstances].map((x) =>
@@ -252,20 +253,27 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     //Uplad files one by one
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
+
       console.log(
         "FileManagerLog currentExtFileInstance " + i,
         currentExtFileInstance
       );
 
-      if (currentExtFileInstance.uploadStatus === "preparing") {
+      if (
+        currentExtFileInstance.uploadStatus === "preparing" &&
+        !currentExtFileInstance.extraData?.deleted
+      ) {
         //set stage to "uploading" in one file and notify change
         // PREPARING => UPLOADING
+        await sleepTransition();
+
         instantPreparingToUploadOne(currentExtFileInstance);
+
         setLocalMessage(
           uploadingMessenger(`${++currentCountUpload}/${missingUpload}`)
         );
         //CHANGE
-        handleFilesChange([...arrOfExtFilesInstances], true);
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
         //UPLOADING => UPLOAD()
         //upload one file and notify about change
@@ -310,18 +318,19 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         if (!(currentExtFileInstance.uploadStatus === "aborted"))
           await sleepTransition();
 
-        const newExtFileList: ExtFile[] = arrOfExtFilesInstances.map(
-          (x: ExtFileInstance) => x.toExtFile()
-        );
-        handleFilesChange(newExtFileList, true);
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
         if (uploadedFile.uploadStatus === "error") {
           totalRejected++;
         }
 
         serverResponses.push(uploadResponse);
+      }else{
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
       }
     }
+
+    handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
     // upload group finished :D
     onUploadFinish?.(serverResponses);
@@ -335,15 +344,18 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   };
 
   const handleAbortUpload = () => {
-
     const listExtFileLocal: ExtFileInstance[] | undefined =
       ExtFileManager.getExtFileInstanceList(dropzoneId);
-      console.log("Aborting", listExtFileLocal, dropzoneId);
+    console.log("Aborting", listExtFileLocal, dropzoneId);
 
     if (!listExtFileLocal) return;
-    listExtFileLocal.forEach((extFileInstance) => {
-      console.log("Aborting extFileInstance",extFileInstance.xhr);
-      extFileInstance.xhr?.abort();
+    listExtFileLocal.forEach((extFileInstance: ExtFileInstance) => {
+      if (extFileInstance.uploadStatus === "uploading") {
+        if (extFileInstance.xhr !== null && extFileInstance.xhr !== undefined)
+          extFileInstance.xhr.abort();
+      }
+      extFileInstance.uploadStatus = "aborted";
+      //console.log("Aborting extFileInstance", extFileInstance.xhr);
     });
   };
 

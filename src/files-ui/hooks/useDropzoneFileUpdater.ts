@@ -35,27 +35,52 @@ const useDropzoneFileListUpdater = (
     React.useEffect(() => {
         let arrOfExtFiles: ExtFileInstance[] | undefined =
             ExtFileManager.getExtFileInstanceList(dropzoneId);
-        console.log("value changed", isUploading, value.map(F => F.uploadStatus),dropzoneId);
+        console.log("value changed", isUploading, value.map(F => F.uploadStatus), dropzoneId);
         // console.log("value changed", value.map(F => F.uploadStatus));
         if (!isUploading) {
             setLocalFiles(value);
         } else {
             // when is uploading
             if (arrOfExtFiles) {
+                //lenght of the new arr can be equal or lower
+                //when lower, it means a file was deleted, it will be removed only if was not uploaded
+                //when same lenght it means that a file could be
 
-                if (arrOfExtFiles.length !== value.length || value.length === 0) {
-                    return;
-                }
-                for (let i = 0; i < arrOfExtFiles.length; i++) {
-                    if (
-                        (value[i].uploadStatus === undefined)
-                        &&
-                        (arrOfExtFiles[i].uploadStatus === "preparing")
-                    ) {
-                        console.log("useDropzoneFileListUpdater onCancel i", i);
-                        arrOfExtFiles[i].uploadStatus = undefined;
+                //no mather the size, it will search for the missing and the status that changed
+                arrOfExtFiles.forEach((extFileInstance: ExtFileInstance) => {
+                    //if the current Ext file is not present anymore
+                    //add deleted flag
+                    const extFileIndex: number = value.findIndex((extFile: ExtFile) => extFile.id === extFileInstance.id)
+                    if (extFileIndex === -1) {
+
+                        extFileInstance.extraData = { deleted: true }
+                        console.log("extFileUpdater not found", extFileInstance.id);
+                    } else {
+                        extFileInstance.uploadStatus = value[extFileIndex].uploadStatus;
+                        extFileInstance.uploadMessage = value[extFileIndex].uploadMessage;
+                        if (value[extFileIndex].uploadStatus === undefined) {
+                            console.log("extFileUpdater canceled", extFileInstance.id);
+
+                        } else if (value[extFileIndex].uploadStatus === "aborted") {
+                            console.log("extFileUpdater aborted", extFileInstance.id);
+
+                        }
                     }
-                }
+                })
+
+                /*   if (arrOfExtFiles.length !== value.length || value.length === 0) {
+                      return;
+                  }
+                  for (let i = 0; i < arrOfExtFiles.length; i++) {
+                      if (
+                          (value[i].uploadStatus === undefined)
+                          &&
+                          (arrOfExtFiles[i].uploadStatus === "preparing")
+                      ) {
+                          console.log("useDropzoneFileListUpdater onCancel i", i);
+                          arrOfExtFiles[i].uploadStatus = undefined;
+                      }
+                  } */
             }
         }
         // eslint-disable-next-line
