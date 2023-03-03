@@ -118,7 +118,8 @@ export {
     addExtraData,
     addHeaders,
     sanitizeArrExtFile,
-    unexpectedErrorUploadResult
+    unexpectedErrorUploadResult,
+    setNextUploadStatus
 } from "./upload";
 
 export {

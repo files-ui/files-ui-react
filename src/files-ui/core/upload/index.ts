@@ -30,5 +30,6 @@ export {
     completeUploadResult,
     sanitizeArrExtFile,
     unableToUploadResult,
-    unexpectedErrorUploadResult
+    unexpectedErrorUploadResult,
+    setNextUploadStatus
 } from "./utils.upload";
