@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CustomValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, validateExtFileList } from "../core";
+import { CustomValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "../core";
 
 /**
  * Effect for keeping track of changes
@@ -35,15 +35,34 @@ const useDropzoneFileListUpdater = (
     React.useEffect(() => {
         let arrOfExtFiles: ExtFileInstance[] | undefined =
             ExtFileManager.getExtFileInstanceList(dropzoneId);
-        console.log("value changed", isUploading, value.map(F => F.uploadStatus),dropzoneId);
+        console.log("value changed", isUploading, value.map(F => F.uploadStatus), dropzoneId);
         // console.log("value changed", value.map(F => F.uploadStatus));
         if (!isUploading) {
             setLocalFiles(value);
         } else {
             // when is uploading
             if (arrOfExtFiles) {
+                //lenght of the new arr can be equal or lower
+                //when lower, it means a file was deleted, it will be removed only if was not uploaded
+                //when same lenght it means that a file could be
 
-                if (arrOfExtFiles.length !== value.length || value.length === 0) {
+                //no mather the size, it will search for the missing and the status that changed
+                arrOfExtFiles.forEach((extFileInstance: ExtFileInstance) => {
+                    //if the current Ext file is not present anymore
+                    //add deleted flag
+                    const extFileIndex: number = value.findIndex((extFile: ExtFile) => extFile.id === extFileInstance.id)
+
+                    if (extFileIndex === -1) {
+                        extFileInstance.extraData = { deleted: true }
+                        console.log("extFileUpdater not found", extFileInstance.id);
+                    } else {
+                        const currExtFileObj: ExtFile = value[extFileIndex];
+
+                        setNextUploadStatus(extFileInstance, currExtFileObj);
+                    }
+                })
+
+                /*if (arrOfExtFiles.length !== value.length || value.length === 0) {
                     return;
                 }
                 for (let i = 0; i < arrOfExtFiles.length; i++) {
@@ -55,7 +74,7 @@ const useDropzoneFileListUpdater = (
                         console.log("useDropzoneFileListUpdater onCancel i", i);
                         arrOfExtFiles[i].uploadStatus = undefined;
                     }
-                }
+                } */
             }
         }
         // eslint-disable-next-line

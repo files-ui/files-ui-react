@@ -19,7 +19,6 @@ import {
   toUploadableExtFileList,
   UploadConfig,
   uploadExtFile,
-  //uploadOnePromiseXHR,
   UploadResponse,
   validateExtFileList,
 } from "../../core";

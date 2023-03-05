@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import {
   DropzoneLocalizerSelector,
@@ -179,11 +178,12 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
-    // set uploading flag to true
+    //set uploading flag to true
     setIsUploading(true);
-    // avoid calling upload if not allowed
-    //      flag is already true or there isnt files
-    //      url was not provided
+
+    //avoid to call upload if not allowed
+    // flag is already true or there isnt files
+    //url was not provided
     if (isUploading || localFiles.length === 0 || !url) {
       setIsUploading(false);
       return;

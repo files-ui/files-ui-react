@@ -104,7 +104,6 @@ export {
     sleepTransition,
     toUploadableExtFileList,
     unableToUploadResult,
-    uploadOnePromiseXHR,
     makeServerResponse,
     uploadFile,
     uploadFormData,
@@ -117,7 +116,10 @@ export {
     makeErrorUploadResponse,
     makeSuccessUploadResponse,
     addExtraData,
-    addHeaders
+    addHeaders,
+    sanitizeArrExtFile,
+    unexpectedErrorUploadResult,
+    setNextUploadStatus
 } from "./upload";
 
 export {
@@ -138,7 +140,7 @@ export {
     sleepPreparing,
     uploadOne,
     uploadOneExtFile,
-    cleanInput, addClassName, getRandomInt
+    cleanInput, addClassName, getRandomInt, isUploadAbleExtFile
 } from "./utils";
 
 export {

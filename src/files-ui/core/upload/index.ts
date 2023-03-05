@@ -2,9 +2,6 @@ export {
 
     uploadExtFile,
     FuiUpload,
-    completeUploadResult,
-    unableToUploadResult,
-    uploadOnePromiseXHR,
     uploadFile,
     uploadFormData,
 } from "./upload";
@@ -30,15 +27,9 @@ export {
     preparingToUploadOne,
     sleepTransition,
     toUploadableExtFileList,
-} from "./utils.upload";
-/* export {
-    FuiUpload,
     completeUploadResult,
-    instantPreparingToUploadOne,
-    preparingToUploadOne,
-    sleepTransition,
-    toUploadableExtFileList,
+    sanitizeArrExtFile,
     unableToUploadResult,
     unexpectedErrorUploadResult,
-    uploadOnePromiseXHR
-} from "./upload.utils"; */
+    setNextUploadStatus
+} from "./utils.upload";

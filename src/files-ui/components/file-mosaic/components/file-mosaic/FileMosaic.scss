@@ -93,6 +93,19 @@
       text-align: left;
 
       scrollbar-width: thin;
+      &::-webkit-scrollbar {
+        width: 9px;
+      }
+  
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+  
+      &::-webkit-scrollbar-thumb {
+        background-color: #646c7fa9;
+        border-radius: 20px;
+        border: transparent;
+      }
       line-height: 1.5;
       letter-spacing: 0.02857em;
       font-family: "Poppins", sans-serif;
@@ -123,19 +136,7 @@
     }
 
     ///
-    &::-webkit-scrollbar {
-      width: 9px;
-    }
 
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #646c7fa9;
-      border-radius: 20px;
-      border: transparent;
-    }
   }
 
   .files-ui-file-mosaic-file-name {

@@ -4,6 +4,7 @@ import addExtraDataUpload from "./addExtraData.upload";
 import addHeaders from "./addheaders.upload";
 import { ABORTED_ERROR_RESPONSE, NO_XHR_PROVIDED_ERROR, TIMEOUT_ERROR_RESPONSE, UNEXPECTED_ERROR_RESPONSE } from "./errors.upload";
 import { JsonParseResponse, makeErrorUploadResponse, makeSuccessUploadResponse } from "./response.upload";
+import { completeUploadResult, unableToUploadResult } from "./utils.upload";
 
 
 /**
@@ -23,30 +24,55 @@ export const uploadFormData = (
     headers: Record<string, string> | undefined
 ) => {
     return new Promise<ServerResponse>((resolve, reject) => {
-        console.log("uploadFile", xhr, method, endpoint, data, headers);
+        console.log("Fui_uploadFormData uploadFile", xhr, method, endpoint, data, headers);
 
         const finalMethod: Method = ["POST", "PUT", "PATCH"].includes(method.toUpperCase()) ? method : "POST";
 
+        let lastLastState: number = -1;
+        let lastState: number = 0;
+        let jumped: boolean = false;
+
         xhr.upload.onload = () => {
-            console.log("uploadFile onLoad", xhr.readyState, xhr.response);
+            console.log("Fui_uploadFormData uploadFile onLoad", xhr.readyState, xhr.response);
         };
         xhr.upload.ontimeout = () => resolve(TIMEOUT_ERROR_RESPONSE);
-        xhr.upload.onabort = () => resolve(ABORTED_ERROR_RESPONSE);
+        xhr.upload.onabort = () => {
+            console.log("Fui_uploadFormData ABORTEEEEDDDD");
+            resolve(ABORTED_ERROR_RESPONSE);
+        };
+        xhr.onloadend = async (e) => {
+            console.log("onloadend loaded", e.loaded);
+            console.log("onloadend total", e.total);
+            console.log("onloadend lengthComputable", e.lengthComputable);
+
+        }
         // listen for `progress` event
         //currently listening on FileItem component hook
         xhr.onreadystatechange = async (e) => {
             //console.log("Finished", xhr);
-            console.log("uploadFile onreadystatechange", xhr.readyState, xhr.response);
+
+            console.log("Fui_uploadFormData uploadFile onreadystatechange e.type", e.type);
+            console.log("Fui_uploadFormData uploadFile onreadystatechange", xhr.readyState, xhr.response);
+
+            lastLastState = lastState;
+            lastState = xhr.readyState;
+
             if (xhr.readyState === 4) {
                 if (xhr.response !== "") {
                     //there is th answer
                     resolve(JsonParseResponse(xhr));
                 } else {
                     //error unexpected
-                    resolve(UNEXPECTED_ERROR_RESPONSE);
+                    console.log("Fui_uploadFormData EMPTY status", xhr.status);
+                    console.log("Fui_uploadFormData EMPTY readyState", xhr.readyState);
+                    console.log("Fui_uploadFormData EMPTY upload", xhr.upload);
+                    //console.log("Fui_uploadFormData EMPTY abort", xhr.abort);
+                    //const jumped = lastLastState - lastLastState !== 1;
+                    resolve(ABORTED_ERROR_RESPONSE);
+
                 }
             } else {
-                console.log("FuiUpload NOT YET" + xhr.readyState);
+                console.log("Fui_uploadFormData FuiUpload NOT YET" + xhr.readyState);
             }
         };
         // open request
@@ -152,102 +178,11 @@ export function uploadFile(
     });
 }
 
-export const unableToUploadResult = (
-    extFile: ExtFile
-): UploadResponse => {
-    return {
-        id: extFile.id,
-        uploadedFile: {
-            ...extFile,
-            uploadMessage: "Unable to upload. XHR was not provided",
-            uploadStatus: "error"
-        },
-        serverResponse: {
-        }
-    }
-}
-
-export const completeUploadResult = (
-    extFile: ExtFile,
-    serverResponse: ServerResponse,
-    result: UPLOADSTATUS
-): UploadResponse => {
-    return {
-        id: extFile.id,
-        uploadedFile: {
-            ...extFile,
-            uploadMessage: serverResponse.message,
-            uploadStatus: result
-        },
-        serverResponse: serverResponse
-    }
-}
-
-/**
- * @deprecated
- */
-export const uploadOnePromiseXHR = async (
-    extFile: ExtFile,
-    url: string,
-    method?: Method,
-    headers?: Record<string, string>,
-    uploadLabel?: string,
-    extraData?: Record<string, any>
-): Promise<UploadResponse> => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const uploader: XMLHttpRequest | undefined = extFile.xhr;
-            if (!uploader) {
-                const duiUploadResponse: UploadResponse = unableToUploadResult(extFile);
-                resolve(duiUploadResponse);
-                return;
-            }
-            const localMethod: Method = (method) || "POST";
-            const fileToUpload: File = extFile.file as File;
-
-            const formData = new FormData();
-            if (typeof uploadLabel === "string" && uploadLabel.length > 0) {
-                formData.append(uploadLabel, fileToUpload
-                    //, extFile.file?.name
-                );
-                //add extraData that will be obtained from req.body
-
-            } else
-                formData.append("file", fileToUpload);
-
-            const finalExtraData: Record<string, any> =
-                { otherValue: "other valueee haaaa", param2: { tecnica: "KIKOHUUUU", friend: "Chaos", age: 25 }, ...extraData };
 
 
-            if (finalExtraData) {
-                const extraDataKeys: string[] = Object.keys(finalExtraData);
-                extraDataKeys.forEach(key => {
-                    const finalValue: string = typeof finalExtraData[key] === "string" ? finalExtraData[key] : JSON.stringify(finalExtraData[key]);
-                    formData.append(key, finalValue);
 
-                });
-            }
-            let serverResponse: ServerResponse;
 
-            //console.log();
-            serverResponse = await FuiUpload(uploader, localMethod, url, formData, headers || {});
 
-            if (serverResponse.success) {
-                const duiUploadResponse: UploadResponse = completeUploadResult(extFile, serverResponse, "success");
-                resolve(duiUploadResponse);
-            } else {
-                // success is false
-                const duiUploadResponse: UploadResponse = completeUploadResult(extFile, serverResponse, "error");
-                resolve(duiUploadResponse);
-            }
-        } catch (error) {
-            // on error
-            console.log("uploadOnePromiseXHR ERROR", error);
-            const duiUploadResponse: UploadResponse = unableToUploadResult(extFile);
-            resolve(duiUploadResponse);
-        }
-    });
-};
 
 /**
  * @deprecated
