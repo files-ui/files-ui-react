@@ -124,8 +124,13 @@ export const sleepTransition = (time = 1500
 }
 
 export const sanitizeArrExtFile = (arrExtFile: ExtFileInstance[]): ExtFile[] => {
+    console.log(
+        "sanitizeArrExtFile",
+        arrExtFile.map((F) => { return { status: F.uploadStatus, message: F.uploadMessage } })
+    );
     return arrExtFile.filter((extFileInstance: ExtFileInstance) =>
         !extFileInstance.extraData?.deleted)
+
         .map((extFileInstance: ExtFileInstance) => {
             if (extFileInstance.uploadStatus === "aborted"
                 && !extFileInstance.uploadMessage) {
@@ -133,7 +138,7 @@ export const sanitizeArrExtFile = (arrExtFile: ExtFileInstance[]): ExtFile[] => 
                 //extFileInstance.uploadStatus = "error";
             }
 
-            return extFileInstance.toExtFile()
+            return ExtFileInstance.toExtFile(extFileInstance) as ExtFile
         });
 }
 /**
@@ -148,19 +153,23 @@ export const setNextUploadStatus = (
     const prevStatus: UPLOADSTATUS | undefined = extFileInstance.uploadStatus;
     const nextStstaus: UPLOADSTATUS | undefined = extFileobj.uploadStatus;
 
+    console.log("setNextUploadStatus", prevStatus, nextStstaus);
+    console.log("setNextUploadStatus", extFileInstance.uploadMessage, extFileobj.uploadMessage);
     if (
         prevStatus === "preparing" &&
         ["aborted", undefined].includes(nextStstaus)
     ) {
         extFileInstance.uploadStatus = undefined;
+        extFileInstance.uploadMessage = extFileobj.uploadMessage;
+
     } else if (
         prevStatus === "uploading" &&
         ["aborted", undefined].includes(nextStstaus)
     ) {
         extFileInstance.uploadStatus = "aborted";
+        extFileInstance.uploadMessage = extFileobj.uploadMessage;
 
     }
-    extFileInstance.uploadMessage = extFileobj.uploadMessage;
 
 }
 

@@ -319,22 +319,33 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
         currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
 
-        console.log("fake uploadResponse currentExtFileInstance", currentExtFileInstance);
+        console.log(
+          "fake uploadResponse currentExtFileInstance",
+          currentExtFileInstance
+        );
+        console.log(
+          "fake uploadResponse currentExtFileInstance",
+          currentExtFileInstance.uploadStatus
+        );
+        console.log(
+          "fake uploadResponse currentExtFileInstance",
+          currentExtFileInstance.uploadMessage
+        );
+
+        console.log(
+          "pre sanitizeArrExtFile",
+          arrOfExtFilesInstances.map((F) => {return{status:F.uploadStatus,message:F.uploadMessage}})
+        );
 
 
-        //add fake progress only on fakeupload
-        /*         if (fakeUpload) {
-          console.log(
-            "Adding fake progress",
-            fakeUpload,
-            uploadedFile.progress
-          );
-          currentExtFileInstance.progress = uploadedFile.progress;
-        } */
         //CHANGE
         if (!(currentExtFileInstance.uploadStatus === "aborted"))
           await sleepTransition();
 
+        console.log(
+          "pre sanitizeArrExtFile",
+          arrOfExtFilesInstances.map((F) => {return{status:F.uploadStatus,message:F.uploadMessage}})
+        );
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
         if (uploadedFile.uploadStatus === "error") {
@@ -427,7 +438,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   ): void => {
     console.log(
       "handleFilesChange",
-      extFileList.map((F) => F.uploadStatus)
+      extFileList.map((F) => F.uploadMessage)
     );
     let finalExtFileList: ExtFile[] =
       behaviour === "add" && !isUploading

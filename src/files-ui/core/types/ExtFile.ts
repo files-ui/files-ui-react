@@ -200,7 +200,7 @@ export class ExtFileInstance {
 
     }
 
-    static toExtFile(extFile: ExtFileInstance): ExtFile {
+    static toExtFile(extFileInstance: ExtFileInstance): ExtFile {
         const
             {
                 id,
@@ -219,7 +219,7 @@ export class ExtFileInstance {
                 extraUploadData,
                 serverResponse,
                 downloadUrl
-            } = extFile;
+            } = extFileInstance;
         return {
             id,
             file,
@@ -276,8 +276,9 @@ export class ExtFileInstance {
             extraUploadData,
             serverResponse,
             downloadUrl
-        };
-        return result;
+        } as ExtFile;
+        console.log("incomming result", { ...result });
+        return { ...result };
     }
 
     static mock = (): ExtFileInstance => {
