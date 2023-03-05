@@ -1,4 +1,4 @@
-import { Alert } from "@mui/material";
+import { Alert, IconButton, Tooltip } from "@mui/material";
 import * as React from "react";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
@@ -7,7 +7,7 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import { FileMosaicAPIPropsRows } from "../../data/FileMosaicAPIPropsRows";
-
+import FilterListIcon from "@mui/icons-material/FilterList";
 import PropsTableApi from "./PropsTableApi";
 
 const rightMenuItems = [
@@ -39,14 +39,15 @@ const FileMosaicApi = (props) => {
               visit the component demo pages:
               <ul>
                 <li>
-                  <a href="/components/filemosaic">FileMosaic. </a>
+                  <a href="/components/filemosaic">FileMosaic</a>
+                </li>
+                <li>
+                  <a href="/components/dropzone">Dropzone</a>
                 </li>
               </ul>
             </Alert>
           </section>
           <section id="filemosaic-props">
-            <SubTitle content="Props" />
-
             <PropsTableApi rows={FileMosaicAPIPropsRows} />
           </section>
         </MainContentContainer>
