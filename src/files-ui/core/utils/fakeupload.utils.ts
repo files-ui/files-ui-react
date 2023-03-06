@@ -1,3 +1,4 @@
+
 import { DropzoneLocalizerSelector } from "../localization";
 import { ExtFile, ExtFileInstance, UploadResponse } from "../types";
 
@@ -105,9 +106,11 @@ export const uploadOneExtFile = (
  * @returns a duiUploadResponse object that describes the result
  */
 export const fakeFuiUpload = (
-    extFile: ExtFileInstance,
+    extFileInstance: ExtFileInstance,
     DropzoneLocalizer = DropzoneLocalizerSelector("EN-en")
 ): Promise<UploadResponse> => {
+    const extFile:ExtFile = extFileInstance.toExtFile();
+    
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const randomNumber: number = Math.floor(Math.random() * 10);
@@ -144,3 +147,4 @@ export const fakeFuiUpload = (
         }, 1700);
     });
 };
+

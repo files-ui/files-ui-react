@@ -1,3 +1,4 @@
+
 import { ExtFile, ExtFileInstance, ServerResponse, UploadResponse, UPLOADSTATUS } from "../types"
 
 export const unexpectedErrorUploadResult = (extFile: ExtFile): UploadResponse => {
@@ -6,10 +7,13 @@ export const unexpectedErrorUploadResult = (extFile: ExtFile): UploadResponse =>
         uploadedFile:
         {
             ...extFile,
-            uploadMessage: "Unable to upload. xhr object was not provided",
+            uploadMessage: "Unexpected error",
             uploadStatus: "error"
         },
         serverResponse: {
+            success: false,
+            message: "Error on upload: unexpected error ",
+            payload: {},
         }
     }
 }
@@ -24,20 +28,23 @@ export const unableToUploadResult = (
             uploadStatus: "error"
         },
         serverResponse: {
+            success: false,
+            message: "Error on upload: Unable to upload. XHR was not provided ",
+            payload: {},
         }
     }
 }
 export const completeUploadResult = (
     extFile: ExtFile,
     serverResponse: ServerResponse,
-    result: UPLOADSTATUS
+    uploadStatusresult: UPLOADSTATUS
 ): UploadResponse => {
     return {
         id: extFile.id,
         uploadedFile: {
             ...extFile,
             uploadMessage: serverResponse.message,
-            uploadStatus: result
+            uploadStatus: uploadStatusresult
         },
         serverResponse: serverResponse
     }
@@ -104,20 +111,26 @@ export const preparingToUploadOne = (
 /**
  * Sleeps for 1200 miliseconds for showing a better transition
  * on uploading
+ * @param time the time to sleep in miliseconds
  * @returns true is everything is ok
  */
-export const sleepTransition = (
+export const sleepTransition = (time = 1500
 ): Promise<boolean> => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(true);
-        }, 1500);
+        }, time);
     });
 }
 
 export const sanitizeArrExtFile = (arrExtFile: ExtFileInstance[]): ExtFile[] => {
+    console.log(
+        "sanitizeArrExtFile",
+        arrExtFile.map((F) => { return { status: F.uploadStatus, message: F.uploadMessage } })
+    );
     return arrExtFile.filter((extFileInstance: ExtFileInstance) =>
         !extFileInstance.extraData?.deleted)
+
         .map((extFileInstance: ExtFileInstance) => {
             if (extFileInstance.uploadStatus === "aborted"
                 && !extFileInstance.uploadMessage) {
@@ -125,7 +138,7 @@ export const sanitizeArrExtFile = (arrExtFile: ExtFileInstance[]): ExtFile[] => 
                 //extFileInstance.uploadStatus = "error";
             }
 
-            return extFileInstance.toExtFile()
+            return ExtFileInstance.toExtFile(extFileInstance) as ExtFile
         });
 }
 /**
@@ -140,18 +153,23 @@ export const setNextUploadStatus = (
     const prevStatus: UPLOADSTATUS | undefined = extFileInstance.uploadStatus;
     const nextStstaus: UPLOADSTATUS | undefined = extFileobj.uploadStatus;
 
+    console.log("setNextUploadStatus", prevStatus, nextStstaus);
+    console.log("setNextUploadStatus", extFileInstance.uploadMessage, extFileobj.uploadMessage);
     if (
         prevStatus === "preparing" &&
         ["aborted", undefined].includes(nextStstaus)
     ) {
         extFileInstance.uploadStatus = undefined;
+        extFileInstance.uploadMessage = extFileobj.uploadMessage;
+
     } else if (
         prevStatus === "uploading" &&
         ["aborted", undefined].includes(nextStstaus)
     ) {
         extFileInstance.uploadStatus = "aborted";
+        extFileInstance.uploadMessage = extFileobj.uploadMessage;
 
     }
-    extFileInstance.uploadMessage = extFileobj.uploadMessage;
 
 }
+
