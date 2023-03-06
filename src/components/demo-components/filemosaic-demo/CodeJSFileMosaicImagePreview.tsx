@@ -17,18 +17,18 @@ export default CodeJSFileMosaicImagePreview;
 
 const splittedCodeJS = `<>
   {value ? (
-    <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
+    <FileMosaic {...value} onDelete={removeFile} info preview/>
   ) : (
     <FileInputButton onChange={updateFile} accept="image/*"/>
   )}
-  <FileMosaic {...sampleFileProps} alwaysActive info />
+  <FileMosaic {...sampleFileProps} info/>
 </>
 
 // file props
 const sampleFileProps = {
     id: "fileId",
     size: 28 * 1024 * 1024,
-    type: "image/gif",
+    type: "image/jpeg",
     name: "Thor arrives wakanda.jpg",
     imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };`;
@@ -39,7 +39,7 @@ import { InputButton, FileMosaic } from "@files-ui/react";
 const sampleFileProps = {
     id: "fileId",
     size: 28 * 1024 * 1024,
-    type: "image/gif",
+    type: "image/jpeg",
     name: "Thor arrives wakanda.jpg",
     imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };
@@ -57,29 +57,29 @@ export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
+        <FileMosaic {...value} onDelete={removeFile} info preview/>
       ) : (
         <FileInputButton onChange={updateFile} accept="image/*"/>
       )}
-      <FileMosaic {...sampleFileProps} alwaysActive info />
+      <FileMosaic {...sampleFileProps} info/>
     </div>
   );
 };`;
 
 const splittedCodeTS = `<>
 {value ? (
-  <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
+  <FileMosaic {...value} onDelete={removeFile} info preview/>
 ) : (
   <FileInputButton onChange={updateFile} accept="image/*"/>
 )}
-<FileMosaic {...sampleFileProps} alwaysActive info />
+<FileMosaic {...sampleFileProps} info/>
 </>
 
 // file props
 const sampleFileProps: ExtFile = {
   id: "fileId",
   size: 28 * 1024 * 1024,
-  type: "image/gif",
+  type: "image/jpeg",
   name: "Thor arrives wakanda.jpg",
   imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };`;
@@ -89,7 +89,7 @@ import { InputButton, FileMosaic, ExtFile } from "@files-ui/react";
 const sampleFileProps: ExtFile = {
     id: "fileId",
     size: 28 * 1024 * 1024,
-    type: "image/gif",
+    type: "image/jpeg",
     name: "Thor arrives wakanda.jpg",
     imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };
@@ -107,11 +107,11 @@ export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
+        <FileMosaic {...value} onDelete={removeFile} info preview/>
       ) : (
         <FileInputButton onChange={updateFile} accept="image/*"/>
       )}
-      <FileMosaic {...sampleFileProps} alwaysActive info />
+      <FileMosaic {...sampleFileProps} info/>
     </div>
   );
 };`;

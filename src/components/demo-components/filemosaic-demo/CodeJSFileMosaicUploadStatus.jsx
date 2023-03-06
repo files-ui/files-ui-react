@@ -26,7 +26,7 @@ const sampleFilesProps = [
     {
         id: "fileId-1",
         size: 28 * 1024 * 1024,
-        type: "plain/javascript",
+        type: "text/plain",
         name: "file created from props.jsx",
     },
     {
@@ -52,7 +52,7 @@ const sampleFilesProps = [
   {
     id: "fileId-1",
     size: 28 * 1024 * 1024,
-    type: "plain/javascript",
+    type: "text/plain",
     name: "file created from props.jsx",
   },
   {
@@ -93,7 +93,7 @@ const sampleFilesProps:ExtFile[] = [
     {
         id: "fileId-1",
         size: 28 * 1024 * 1024,
-        type: "plain/javascript",
+        type: "text/plain",
         name: "file created from props.jsx",
     },
     {
@@ -118,7 +118,7 @@ const sampleFilesProps: ExtFile[] = [
   {
     id: "fileId-1",
     size: 28 * 1024 * 1024,
-    type: "plain/javascript",
+    type: "text/plain",
     name: "file created from props.jsx",
   },
   {

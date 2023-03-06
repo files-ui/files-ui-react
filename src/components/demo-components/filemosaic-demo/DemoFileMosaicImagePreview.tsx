@@ -27,17 +27,15 @@ const DemoFileMosaicImagePreview: React.FC<DemoFileMosaicImagePreviewProps> = (
   return (
     <>
       {value ? (
-        <FileMosaic
-          {...value}
-          onDelete={removeFile}
-          alwaysActive
-          info
-          preview
-        />
+        <FileMosaic {...value} onDelete={removeFile} info preview/>
       ) : (
-        <FileInputButton value={value ? [value] : []} onChange={updateFile} accept="image/*"/>
+        <FileInputButton
+          value={value ? [value] : []}
+          onChange={updateFile}
+          accept="image/*"
+        />
       )}
-      <FileMosaic {...sampleFileProps} alwaysActive info />
+      <FileMosaic {...sampleFileProps} info/>
     </>
   );
 };

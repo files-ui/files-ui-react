@@ -32,7 +32,7 @@ const FileMosaicDemoPage = (props) => {
         <MainParagraph>
           File mosaics are compact elements that represent a file in the UI.
           They can be used for just showing general info of the file, or either
-          allow the user to interact with them.
+          to allow the user to interact with them.
         </MainParagraph>
         <DescParagraph>
           This widget allow users to see information of{" "}
@@ -40,21 +40,22 @@ const FileMosaicDemoPage = (props) => {
         </DescParagraph>
         <Alert severity="info">
           While included here as a standalone component, the most common use
-          will be as a result of the "onChange" event of {"<Dropzone/>"} or{" "}
-          {"<InputButton/>"} components, so some of the behavior demonstrated
-          here is not shown in context.{" "}
+          will be to display the result of the "onChange" event of{" "}
+          <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> or{" "}
+          <CodeHighlight>{"<InputButton/>"}</CodeHighlight> components, so some
+          of the behavior demonstrated here is not totally shown in context.{" "}
         </Alert>
         <section id="basic-filemosaic">
           <SubTitle content="Basic FileMosaic" />
           <DescParagraph>
-            The <CodeHighlight>FileMosaic</CodeHighlight> supports displaying
-            information from a{" "}
+            The <CodeHighlight>FileMosaic</CodeHighlight> component supports
+            displaying information from a{" "}
             <TypeHighlight>
               <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/API/File">
                 File
               </AnchorToTab>
             </TypeHighlight>{" "}
-            object or from individual props.
+            object or from given props.
           </DescParagraph>
 
           <DemoContainerFileMosaic>
@@ -71,6 +72,19 @@ const FileMosaicDemoPage = (props) => {
             information of this component check out the{" "}
             <a href="/components/fileinputbutton">FileInputButton</a> page.
           </Alert>
+          <br />
+          <Alert severity="info">
+            <AlertTitle> ExtFile </AlertTitle>
+            {/*  This is an info alert — <strong>check it out!</strong>
+             */}
+            <strong>ExtFile type </strong>
+            is explicity used in the
+            <strong> Typescript</strong> example and is implicity used in the{" "}
+            <strong>Javascript</strong> example for handling the metadata that
+            makes possible the information exchange between components. For
+            further information about this data type check out the{" "}
+            <a href="/types#ext-file">ExtFile-API. </a>
+          </Alert>
         </section>
 
         <section id="image-preview">
@@ -78,9 +92,10 @@ const FileMosaicDemoPage = (props) => {
           <DescParagraph>
             By setting the <CodeHighlight>preview</CodeHighlight> prop to{" "}
             <TypeHighlight>true</TypeHighlight> the component will show an image
-            preview by taking the <CodeHighlight>imageUrl</CodeHighlight>
-            prop or by reading the <TypeHighlight>File</TypeHighlight> object if
-            given.
+            preview instead of a file icons. To acomplish this task this
+            component will take the <CodeHighlight>imageUrl</CodeHighlight>
+            prop or will read the <TypeHighlight>File</TypeHighlight> object if
+            given and if it is an image.
           </DescParagraph>
 
           <DemoContainerFileMosaic>
@@ -97,9 +112,10 @@ const FileMosaicDemoPage = (props) => {
             On the other side, for displaying an image preview as a result of
             reading an image File it is necesary to set the{" "}
             <CodeHighlight>{`preview`}</CodeHighlight> prop, otherwise a default
-            image preview will be shown.
+            image preview will be shown in order to save memory.
           </Alert>
         </section>
+
         <section id="validation">
           <SubTitle content="Validation" />
           <DescParagraph>
@@ -114,6 +130,24 @@ const FileMosaicDemoPage = (props) => {
           </DemoContainerFileMosaic>
 
           <CodeJSFileMosaicValidation />
+          <Alert severity="info">
+            Typically, <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> or{" "}
+            <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components set
+            this prop when validating the input from a given criteria. You can
+            see the behaviour mentioned in the following demos:
+            <ul>
+              <li>
+                <AnchorToTab href="/components/dropzone#validation">
+                  Dropzone validation
+                </AnchorToTab>
+              </li>
+              <li>
+                <AnchorToTab href="/components/fileinputbutton#validation">
+                  FileInputButton validation
+                </AnchorToTab>
+              </li>
+            </ul>
+          </Alert>
         </section>
 
         <section id="uploading">
@@ -149,6 +183,32 @@ const FileMosaicDemoPage = (props) => {
           </Paper>
 
           <CodeJSFileMosaicUploadStatus />
+
+          <Alert severity="info">
+            As you can see, you have full control of the FileMosaic upload
+            props. You can take advantage of them to ake your own upload
+            function and show the user the progress.
+            <br />{" "}
+            On the other hand, you can also leverage the capability of{" "}
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> and{" "}
+            <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components
+            since they also manage the{" "}
+            <TypeHighlight>{"uploadStatus"}</TypeHighlight>
+            prop for you when upload is enabled. You can see the behaviour
+            mentioned in the following demos:
+            <ul>
+              <li>
+                <AnchorToTab href="/components/dropzone#">
+                  Dropzone upload
+                </AnchorToTab>
+              </li>
+              <li>
+                <AnchorToTab href="/components/fileinputbutton#validation">
+                  FileInputButton upload
+                </AnchorToTab>
+              </li>
+            </ul>
+          </Alert>
         </section>
       </MainContentContainer>
       <RightMenuContainer>
