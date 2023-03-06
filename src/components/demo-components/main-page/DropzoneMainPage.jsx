@@ -41,13 +41,12 @@ const DropzoneMainPage = ({ darkMode = false }) => {
         // minHeight="400px"
         onChange={updateFiles}
         value={files}
-        maxFileSize={28 * 1024 * 10}
+        maxFileSize={28 * 1024 * 1024}
         maxFiles={5}
-        accept=".jpg, .png, application/json, video/*"
+        accept=".jpg, .png, application/json, video/*, .pdf"
         fakeUpload
         behaviour="add"
         uploadConfig={{ autoUpload: true , url:"fdbd"}}
-        //uploadConfig={{ autoUpload: true, url:"fdbd" }}
       >
         {files.length > 0 &&
           files.map((file) => (
@@ -62,6 +61,7 @@ const DropzoneMainPage = ({ darkMode = false }) => {
               hd
               onSee={handleSee}
               resultOnTooltip
+              //uploadMessage="llalalal"
             />
           ))}
       </Dropzone>

@@ -8,6 +8,7 @@ import {
 } from "../../../files-ui";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ExtFileInstance } from "../../../files-ui/core";
 const REMOTE =
   "https://files-ui-express-static-file-storage.vercel.app/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
 //const LOCAL = "http://localhost/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
@@ -19,6 +20,15 @@ export default function AdvancedDropzoneDemo() {
 
   const updateFiles = (incommingFiles) => {
     console.log("incomming extFiles", incommingFiles);
+    const arrExtFIleInstances = incommingFiles.map(
+      (extFile) => new ExtFileInstance(extFile)
+    );
+    const listExtFileObjects = arrExtFIleInstances.map((extFileInstance) =>
+      extFileInstance.toExtFile()
+    );
+    console.log("incomming arrExtFIleInstances", arrExtFIleInstances);
+    console.log("incomming listExtFileObjects", listExtFileObjects);
+
     setExtFiles(incommingFiles);
   };
   const onDelete = (id) => {
@@ -56,7 +66,7 @@ export default function AdvancedDropzoneDemo() {
     }
   }
   const handleAbort = (id) => {
-   // alert(id);
+    // alert(id);
     setExtFiles(
       extFiles.map((ef) => {
         if (ef.id === id) {
@@ -65,16 +75,16 @@ export default function AdvancedDropzoneDemo() {
       })
     );
   };
-  const handleCancel= (id) => {
+  const handleCancel = (id) => {
     // alert(id);
-     setExtFiles(
-       extFiles.map((ef) => {
-         if (ef.id === id) {
-           return { ...ef, uploadStatus: undefined };
-         } else return { ...ef };
-       })
-     );
-   };
+    setExtFiles(
+      extFiles.map((ef) => {
+        if (ef.id === id) {
+          return { ...ef, uploadStatus: undefined };
+        } else return { ...ef };
+      })
+    );
+  };
   return (
     <>
       <Dropzone
