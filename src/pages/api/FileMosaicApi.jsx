@@ -45,7 +45,7 @@ const FileMosaicApi = (props) => {
             </Alert>
           </section>
           <section id="filemosaic-props">
-            <SubTitle content="Props" />
+            {/* <SubTitle content="Props" /> */}
 
             <PropsTableApi rows={FileMosaicAPIPropsRows} />
           </section>

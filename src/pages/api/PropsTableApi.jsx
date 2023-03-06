@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
+import LowPriorityIcon from "@mui/icons-material/LowPriority";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import { Tooltip, IconButton, Stack } from "@mui/material";
 
@@ -30,14 +31,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+function compareNames(a, b) {
+  if (a?.name < b?.name) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
 
 export default function PropsTableApi({ rows = [] }) {
   const [sorted, setSorted] = React.useState(false);
+  const [localRows, setLocalRows] = React.useState(rows);
+
   const handleSort = () => {
     setSorted((_sorted) => {
       const resultSorted = !_sorted;
-      if(resultSorted){
-
+      const rowsToSort = [...rows];
+      if (resultSorted) {
+        setLocalRows(rowsToSort.sort(compareNames));
+      } else {
+        setLocalRows(rowsToSort);
       }
       return resultSorted;
     });
@@ -46,23 +59,21 @@ export default function PropsTableApi({ rows = [] }) {
     <React.Fragment>
       <Stack
         direction={"row"}
-        justifyContent="space-between"
+        justifyContent="flex-start"
         alignItems={"center"}
+        spacing={2}
       >
-        <SubTitle content="Props" />
-
-        <Tooltip
-          title={sorted ? "Unsort alphabetically" : "Sort alphabetically"}
-        >
+        <SubTitle content="Props" />{" "}
+        <Tooltip title={sorted ? "Sort by importance" : "Sort alphabetically"}>
           <IconButton
             style={{ borderRadius: "50%", border: "0.5px solid #eaeef3" }}
             onClick={handleSort}
             aria-label="upload picture"
             component="label"
           >
-            <SortByAlphaIcon />
+            {sorted ? <SortByAlphaIcon /> : <LowPriorityIcon />}
           </IconButton>
-        </Tooltip>
+        </Tooltip>{" "}
       </Stack>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -79,7 +90,7 @@ export default function PropsTableApi({ rows = [] }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {localRows.map((row) => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell
                   component="th"
