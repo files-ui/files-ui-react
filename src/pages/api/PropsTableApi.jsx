@@ -7,6 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
+import LowPriorityIcon from "@mui/icons-material/LowPriority";
+import SubTitle from "../../components/demo-components/sub-title/SubTitle";
+import { Tooltip, IconButton, Stack } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -27,44 +31,91 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+function compareNames(a, b) {
+  if (a?.name < b?.name) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
 
 export default function PropsTableApi({ rows = [] }) {
+  const [sorted, setSorted] = React.useState(false);
+  const [localRows, setLocalRows] = React.useState(rows);
+
+  const handleSort = () => {
+    setSorted((_sorted) => {
+      const resultSorted = !_sorted;
+      const rowsToSort = [...rows];
+      if (resultSorted) {
+        setLocalRows(rowsToSort.sort(compareNames));
+      } else {
+        setLocalRows(rowsToSort);
+      }
+      return resultSorted;
+    });
+  };
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell /* width={"30%"} */>Name</StyledTableCell>
-            <StyledTableCell align="left" /* width={"30%"} */>
-              Type
-            </StyledTableCell>
-            <StyledTableCell align="left">Default</StyledTableCell>
-            <StyledTableCell align="left" /*  width={"30%"} */>
-              Description
-            </StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell
-                component="th"
-                scope="row"
-                style={{
-                  wordBreak: row.name.length > 12 ? "break-word" : "normal",
-                }}
-              >
-                {row.name}
+    <React.Fragment>
+      <Stack
+        direction={"row"}
+        justifyContent="flex-start"
+        alignItems={"center"}
+        spacing={2}
+      >
+        <SubTitle content="Props" />{" "}
+        <Tooltip title={sorted ? "Sort by importance" : "Sort alphabetically"}>
+          <IconButton
+            style={{ borderRadius: "50%", border: "0.5px solid #eaeef3" }}
+            onClick={handleSort}
+            aria-label="upload picture"
+            component="label"
+          >
+            {sorted ? <SortByAlphaIcon /> : <LowPriorityIcon />}
+          </IconButton>
+        </Tooltip>{" "}
+      </Stack>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell /* width={"30%"} */>Name</StyledTableCell>
+              <StyledTableCell align="left" /* width={"30%"} */>
+                Type
               </StyledTableCell>
-              <StyledTableCell align="left" style={{ wordBreak: "break-word" }}>
-                {row.type}
+              <StyledTableCell align="left">Default</StyledTableCell>
+              <StyledTableCell align="left" /*  width={"30%"} */>
+                Description
               </StyledTableCell>
-              <StyledTableCell align="left">{row.default}</StyledTableCell>
-              <StyledTableCell align="left">{row.description}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {localRows.map((row) => (
+              <StyledTableRow key={row.name}>
+                <StyledTableCell
+                  component="th"
+                  scope="row"
+                  style={{
+                    wordBreak: row.name.length > 12 ? "break-word" : "normal",
+                  }}
+                >
+                  {row.name}
+                </StyledTableCell>
+                <StyledTableCell
+                  align="left"
+                  style={{ wordBreak: "break-word" }}
+                >
+                  {row.type}
+                </StyledTableCell>
+                <StyledTableCell align="left">{row.default}</StyledTableCell>
+                <StyledTableCell align="left">
+                  {row.description}
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </React.Fragment>
   );
 }
