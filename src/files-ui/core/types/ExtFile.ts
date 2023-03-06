@@ -200,85 +200,33 @@ export class ExtFileInstance {
 
     }
 
+    /**
+     * Copies all non undefined attributes from ExtFileInstance to a new ExtFile object
+     * @param extFileInstance the instance of ExtFile
+     * @returns an ExtFile object
+     */
     static toExtFile(extFileInstance: ExtFileInstance): ExtFile {
-        const
-            {
-                id,
-                file,
-                name,
-                size,
-                type,
-                imageUrl,
-                valid,
-                errors,
-                uploadMessage,
-                uploadStatus,
-                progress,
-                xhr,
-                extraData,
-                extraUploadData,
-                serverResponse,
-                downloadUrl
-            } = extFileInstance;
-        return {
-            id,
-            file,
-            name,
-            size,
-            type,
-            imageUrl,
-            valid,
-            errors,
-            uploadMessage,
-            uploadStatus,
-            progress,
-            xhr,
-            extraData,
-            extraUploadData,
-            serverResponse,
-            downloadUrl
-        };
-    }
-    toExtFile(): ExtFile {
-        const {
-            id,
-            file,
-            name,
-            size,
-            type,
-            imageUrl,
-            valid,
-            errors,
-            uploadMessage,
-            uploadStatus,
-            progress,
-            xhr,
-            extraData,
-            extraUploadData,
-            serverResponse,
-            downloadUrl
-        } = this;
+        console.log("before toExtFile()", extFileInstance);
 
-        const result: ExtFile = {
-            id,
-            file,
-            name,
-            size,
-            type,
-            imageUrl,
-            valid,
-            errors,
-            uploadMessage,
-            uploadStatus,
-            progress,
-            xhr,
-            extraData,
-            extraUploadData,
-            serverResponse,
-            downloadUrl
-        } as ExtFile;
-        console.log("incomming result", { ...result });
-        return { ...result };
+        let extFileClone: ExtFile = {}; // the new empty object
+        const extFileInstanceKeys = Object.keys(extFileInstance) as [keyof ExtFile];
+        const extFileInstanceValues = Object.values(extFileInstance);
+        // let's copy all user properties into it
+        for (let i = 0; i < extFileInstanceKeys.length; i++) {
+            if (extFileInstanceValues[i] !== undefined) {
+                extFileClone[extFileInstanceKeys[i]] = extFileInstanceValues[i];
+            }
+        }
+        console.log("after toExtFile()", extFileClone);
+
+        return extFileClone;
+    }
+    /**
+     * Copies all non undefined attributes from ExtFileInstance to a new ExtFile object.
+     * @returns an ExtFile object
+     */
+    toExtFile(): ExtFile {
+        return ExtFileInstance.toExtFile(this);
     }
 
     static mock = (): ExtFileInstance => {
