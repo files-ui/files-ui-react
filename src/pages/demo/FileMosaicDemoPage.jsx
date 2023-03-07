@@ -60,6 +60,9 @@ const FileMosaicDemoPage = (props) => {
               </AnchorToTab>
             </TypeHighlight>{" "}
             object or from given props.
+            <br />
+            Also, the <TypeHighlight>onDelete</TypeHighlight> prop is used to
+            remove the file selection.
           </DescParagraph>
 
           <DemoContainerFileMosaic>
@@ -96,10 +99,15 @@ const FileMosaicDemoPage = (props) => {
           <DescParagraph>
             By setting the <CodeHighlight>preview</CodeHighlight> prop to{" "}
             <TypeHighlight>true</TypeHighlight> the component will show an image
-            preview instead of a file icon. To acomplish this task this
-            component will take the <CodeHighlight>imageUrl</CodeHighlight>
+            preview instead of a file icon.
+            <br />
+            To acomplish this task this component will take the{" "}
+            <CodeHighlight>imageUrl</CodeHighlight>
             prop or will read the <TypeHighlight>File</TypeHighlight> object if
             given and if it is an image.
+            <br />
+            Finally, the <TypeHighlight>info</TypeHighlight> prop is used to
+            show the complete information of the file.
           </DescParagraph>
 
           <DemoContainerFileMosaic>
@@ -213,7 +221,7 @@ const FileMosaicDemoPage = (props) => {
             </ul>
           </Alert>
         </section>
-        <section id="dark mode">
+        <section id="dark-mode">
           <SubTitle content="Dark mode" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> component supports
@@ -225,7 +233,7 @@ const FileMosaicDemoPage = (props) => {
           <Paper
             variant="outlined"
             style={{
-              padding: "25px",
+              //padding: "25px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -246,30 +254,20 @@ const FileMosaicDemoPage = (props) => {
             <CodeHighlight>{"localization"}</CodeHighlight> prop. So far only
             the following languages are supported:
             <ul>
-              <li>
-                <TypeHighlight>English</TypeHighlight>
-              </li>
-              <li>
-                <TypeHighlight>Spanish</TypeHighlight>
-              </li>
-              <li>
-                <TypeHighlight>French</TypeHighlight>
-              </li>
-              <li>
-                <TypeHighlight>Italian</TypeHighlight>
-              </li>
-              <li>
-                <TypeHighlight>Portuguese</TypeHighlight>
-              </li>
-              <li>
-                <TypeHighlight>Russian</TypeHighlight>
-              </li>
-              <li>
-                <TypeHighlight>Chinnese (simplified)</TypeHighlight>
-              </li>
-              <li>
-                <TypeHighlight>Chinnese (traditional)</TypeHighlight>
-              </li>
+              {[
+                "English",
+                "Spanish",
+                "French",
+                "Italian",
+                "Portuguese",
+                "Russian",
+                "Chinnese (simplified)",
+                "Chinnese (traditional)",
+              ].map((x) => (
+                <li>
+                  <TypeHighlight>{x}</TypeHighlight>
+                </li>
+              ))}
             </ul>
           </DescParagraph>
 
@@ -286,23 +284,50 @@ const FileMosaicDemoPage = (props) => {
           >
             <DemoFileMosaicLocalization />
           </Paper>
-
           <CodeJSFileMosaicLocalization />
         </section>
 
-        <section id="file icon">
+        <section id="file-icon">
           <SubTitle content="File Icons (extensive list)" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> component supports
-            several file types to properly set a file icon. The complete list of file icons is the following:
+            several file types to properly set a file icon. The complete list of
+            file icons is the following:
           </DescParagraph>
-
-          <DemoContainerFileMosaic
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px 0",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              //flexDirection: "column",
+              gap: "10px",
+              flexWrap: "wrap",
+            }}
           >
             <DemoFileMosaicFileIcons />
-          </DemoContainerFileMosaic>
+          </Paper>
+        </section>
 
-        
+        <section id="api">
+          <SubTitle content="API" />
+          <DescParagraph>
+            See the documentation below for a complete reference to all of the
+            props available to the components mentioned here.
+          </DescParagraph>
+          <ul>
+            <li>
+              <AnchorToTab href="/api/filemosaic">
+                {"<FileMosaic/>"}
+              </AnchorToTab>
+            </li>
+            <li>
+              <AnchorToTab href="/api/fileinputbuttom">
+                {"<FileInputButton/>"}
+              </AnchorToTab>
+            </li>
+          </ul>
         </section>
       </MainContentContainer>
       <RightMenuContainer>
@@ -334,28 +359,18 @@ const rightMenuItems = [
     referTo: "/components/filemosaic#uploading",
   },
   {
+    id: 8,
+    label: "Dark mode",
+    referTo: "/components/filemosaic#dark-mode",
+  },
+  {
     id: 4,
     label: "Localization",
     referTo: "/components/filemosaic#localization",
   },
   {
-    id: 5,
-    label: "Previews",
-    referTo: "/components/filemosaic#previews",
-  },
-  {
-    id: 6,
-    label: "Actions",
-    referTo: "/components/filemosaic#actions",
-  },
-  {
-    id: 7,
-    label: "Default previews",
-    referTo: "/components/filemosaic#default-previews",
-  },
-  {
-    id: 8,
-    label: "Dark mode",
-    referTo: "/components/filemosaic#dark-mode",
+    id: 9,
+    label: "File Icons",
+    referTo: "/components/filemosaic#file-icon",
   },
 ];

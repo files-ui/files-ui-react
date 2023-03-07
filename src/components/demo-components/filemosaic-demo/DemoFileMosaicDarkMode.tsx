@@ -19,7 +19,7 @@ const DemoFileMosaicDarkMode = () => {
           justifyContent: "center",
           width: "50%",
           backgroundColor: "white",
-          padding: "10px 0",
+          padding: "15px 0",
         }}
       >
         <FileMosaic {...sampleFileProps} info onDelete={removeFile} />
@@ -30,7 +30,7 @@ const DemoFileMosaicDarkMode = () => {
           justifyContent: "center",
           width: "50%",
           backgroundColor: "#121212",
-          padding: "10px 0",
+          padding: "15px 0",
         }}
       >
         <FileMosaic {...sampleFileProps} info darkMode onDelete={removeFile} />
