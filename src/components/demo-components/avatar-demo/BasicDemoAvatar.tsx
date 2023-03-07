@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Avatar } from "../../../files-ui";
-import { ServerResponse, uploadFile } from "../../../files-ui/core";
+import { Avatar,ServerResponse, uploadFile } from "../../../files-ui";
+
 const REMOTE =
   "https://files-ui-express-static-file-storage.vercel.app/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
 

@@ -1,6 +1,5 @@
 import * as React from "react";
-import FileCard from "../files-ui/components/file-card/FileCard";
-import { ExtFile } from "../files-ui/core";
+import { FileCard, ExtFile } from "../files-ui";
 const baseFiles: ExtFile[] = [
   {
     id: Math.random(),
@@ -15,7 +14,7 @@ const baseFiles: ExtFile[] = [
     type: "image/png",
     size: 280000,
     valid: true,
-    uploadStatus:"uploading",
+    uploadStatus: "uploading",
     imageUrl:
       "https://super-ficcion.com/wp-content/uploads/2022/10/como-podria-regresar-iron-man-1-780x470.webp",
   },
@@ -40,7 +39,7 @@ const FileCardMock = ({ darkMode = false, elevation = 2 }) => {
           //hd
           elevation={2}
           darkMode={darkMode}
-          onCancel={()=>{}}
+          onCancel={() => {}}
           progress={25}
         />
       ))}

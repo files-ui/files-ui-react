@@ -1,6 +1,10 @@
 import * as React from "react";
-import { FileCard, FileInputButton, FileMosaic } from "../../../files-ui";
-import { ExtFile } from "../../../files-ui/core";
+import {
+  FileCard,
+  FileInputButton,
+  FileMosaic,
+  ExtFile,
+} from "../../../files-ui";
 
 interface DemoFileMosaicImagePreviewProps {
   card?: boolean;

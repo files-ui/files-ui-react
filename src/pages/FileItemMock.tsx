@@ -1,10 +1,12 @@
 import * as React from "react";
 import { FileItem } from "../files-ui";
-import { FileMosaic, FileMosaicProps } from "../files-ui/components/file-mosaic";
-import { BasePreparingLoader } from "../files-ui/components/loader";
-import InfiniteLoader from "../files-ui/components/loader/InfiniteLoader/InfiniteLoader";
-import LoaderContainer from "../files-ui/components/loader/LoaderContainer/LoaderContainer";
-import { ExtFile, UPLOADSTATUS } from "../files-ui/core";
+import {
+  FileMosaic,
+  FileMosaicProps,
+  ExtFile,
+  UPLOADSTATUS,
+} from "../files-ui";
+
 const baseFiles: ExtFile[] = [
   {
     id: Math.random(),

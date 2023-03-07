@@ -1,4 +1,4 @@
-import { ExtFile, ExtFileInstance } from "./files-ui/core";
+import { ExtFile, ExtFileInstance } from "./files-ui";
 
 export const print_manager = (extFileList: ExtFile[] | ExtFileInstance[] | undefined, message: string = ""): void => {
     if (extFileList)
