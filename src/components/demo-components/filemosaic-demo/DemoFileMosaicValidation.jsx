@@ -14,6 +14,7 @@ const sampleFilesProps = [
     type: "image/png",
     name: "valid file created from props.png",
     valid: false,
+    errors: ["File is too big", "File type is not allowed"]
   },
   {
     id: "fileId-3",
@@ -28,7 +29,7 @@ const DemoFileMosaicValidation = () => {
   return (
     <>
       {sampleFilesProps.map((extFile) => (
-        <FileMosaic key={extFile.id} {...extFile} alwaysActive info preview />
+        <FileMosaic key={extFile.id} {...extFile} info />
       ))}
     </>
   );

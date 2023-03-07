@@ -15,14 +15,22 @@ const CodeJSFileMosaicValidation = () => {
 };
 export default CodeJSFileMosaicValidation;
 
-const splittedCodeJS = `<>
-  {sampleFilesProps.map((extFile) => (
-    <FileMosaic key={extFile.id} {...extFile} info/>
-  ))}
-</>`;
+const splittedCodeJS = ``;
+const splittedCodeTS = ``;
 
 const completeCodeJS = `import * as React from "react";
 import { FileMosaic } from "../../../files-ui";
+
+const DemoFileMosaicValidation = () => {
+  return (
+    <div style={{display:"flex", gap:"10px"}}>
+      {sampleFilesProps.map((extFile) => (
+        <FileMosaic key={extFile.id} valid={extFile.valid} {...extFile} info/>
+      ))}
+    </div>
+  );
+};
+export default DemoFileMosaicValidation;
 
 const sampleFilesProps = [
   {
@@ -36,35 +44,31 @@ const sampleFilesProps = [
     size: 28 * 1024 * 1024,
     type: "image/png",
     name: "valid file created from props.png",
-    valid: true,
+    valid: false,
+    errors: ["File is too big", "File type is not allowed"]
   },
   {
     id: "fileId-3",
     size: 28 * 1024 * 1024,
     type: "image/jpeg",
     name: "non valid file created from props.jpg",
-    valid: false,
+    valid: true,
   },
-];
+];`;
+
+const completeCodeTS = `import * as React from "react";
+import { FileMosaic, ExtFile } from "../../../files-ui";
 
 const DemoFileMosaicValidation = () => {
   return (
-    <>
-      {sampleFilesProps.map((extFile) => (
-        <FileMosaic key={extFile.id} {...extFile} info/>
+    <div style={{display:"flex", gap:"10px"}}>
+      {sampleFilesProps.map((extFile: ExtFile) => (
+        <FileMosaic key={extFile.id} valid={extFile.valid} {...extFile} info/>
       ))}
-    </>
+    </div>
   );
 };
-export default DemoFileMosaicValidation;`;
-
-const splittedCodeTS = `<>
-  {sampleFilesProps.map((extFile:ExtFile) => (
-    <FileMosaic key={extFile.id} {...extFile} info/>
-  ))}
-</>`;
-const completeCodeTS = `import * as React from "react";
-import { FileMosaic, ExtFile } from "../../../files-ui";
+export default DemoFileMosaicValidation;
 
 const sampleFilesProps: ExtFile[] = [
   {
@@ -78,24 +82,14 @@ const sampleFilesProps: ExtFile[] = [
     size: 28 * 1024 * 1024,
     type: "image/png",
     name: "valid file created from props.png",
-    valid: true,
+    valid: false,
+    errors: ["File is too big", "File type is not allowed"]
   },
   {
     id: "fileId-3",
     size: 28 * 1024 * 1024,
     type: "image/jpeg",
     name: "non valid file created from props.jpg",
-    valid: false,
+    valid: true,
   },
-];
-
-const DemoFileMosaicValidation = () => {
-  return (
-    <>
-      {sampleFilesProps.map((extFile: ExtFile) => (
-        <FileMosaic key={extFile.id} {...extFile} info/>
-      ))}
-    </>
-  );
-};
-export default DemoFileMosaicValidation;`;
+];`;

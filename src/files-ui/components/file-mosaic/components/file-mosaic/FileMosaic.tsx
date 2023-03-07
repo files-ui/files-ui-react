@@ -43,7 +43,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
 
     alwaysActive = true,
 
-    resultOnTooltip,
+    resultOnTooltip = true,
 
     downloadUrl,
 

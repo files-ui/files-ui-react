@@ -22,3 +22,9 @@ export * from "./components/previews";
 
 export { VideoPreview } from "./components/previews";
 export * from "./components/previews";
+
+export { useFakeProgress } from "./hooks";
+
+
+export {createListOfMultiTypeFile} from "./core";
+export type { ExtFile, ExtFileInstance, ExtFileListMap, ExtFileManager, UPLOADSTATUS, Localization } from "./core";

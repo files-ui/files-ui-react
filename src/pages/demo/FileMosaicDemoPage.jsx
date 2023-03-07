@@ -1,6 +1,5 @@
 import Alert from "@mui/material/Alert";
 import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
 import AlertTitle from "@mui/material/AlertTitle";
 import * as React from "react";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
@@ -23,6 +22,11 @@ import CodeJSFileMosaicValidation from "../../components/demo-components/filemos
 import DemoFileMosaicValidation from "../../components/demo-components/filemosaic-demo/DemoFileMosaicValidation";
 import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
 import DemoFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/DemoFileMosaicUploadStatus";
+import DemoFileMosaicLocalization from "../../components/demo-components/filemosaic-demo/DemoFileMosaicLocalization";
+import CodeJSFileMosaicLocalization from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicLocalization";
+import DemoFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/DemoFileMosaicDarkMode";
+import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicDarkMode";
+import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
 
 const FileMosaicDemoPage = (props) => {
   return (
@@ -92,7 +96,7 @@ const FileMosaicDemoPage = (props) => {
           <DescParagraph>
             By setting the <CodeHighlight>preview</CodeHighlight> prop to{" "}
             <TypeHighlight>true</TypeHighlight> the component will show an image
-            preview instead of a file icons. To acomplish this task this
+            preview instead of a file icon. To acomplish this task this
             component will take the <CodeHighlight>imageUrl</CodeHighlight>
             prop or will read the <TypeHighlight>File</TypeHighlight> object if
             given and if it is an image.
@@ -160,7 +164,7 @@ const FileMosaicDemoPage = (props) => {
             <TypeHighlight>"error"</TypeHighlight> or{" "}
             <TypeHighlight>"success"</TypeHighlight>. Also the{" "}
             <CodeHighlight>uploadMessage</CodeHighlight> prop is used for
-            displaying the error or success message and the{" "}
+            displaying the error or success message. Finally, the{" "}
             <CodeHighlight>progress</CodeHighlight> prop can be used to show the
             current progress of the upload process.
             <br />
@@ -188,8 +192,7 @@ const FileMosaicDemoPage = (props) => {
             As you can see, you have full control of the FileMosaic upload
             props. You can take advantage of them to ake your own upload
             function and show the user the progress.
-            <br />{" "}
-            On the other hand, you can also leverage the capability of{" "}
+            <br /> On the other hand, you can also leverage the capability of{" "}
             <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> and{" "}
             <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components
             since they also manage the{" "}
@@ -198,17 +201,108 @@ const FileMosaicDemoPage = (props) => {
             mentioned in the following demos:
             <ul>
               <li>
-                <AnchorToTab href="/components/dropzone#">
+                <AnchorToTab href="/components/dropzone#uploading">
                   Dropzone upload
                 </AnchorToTab>
               </li>
               <li>
-                <AnchorToTab href="/components/fileinputbutton#validation">
+                <AnchorToTab href="/components/fileinputbutton#uploading">
                   FileInputButton upload
                 </AnchorToTab>
               </li>
             </ul>
           </Alert>
+        </section>
+        <section id="dark mode">
+          <SubTitle content="Dark mode" />
+          <DescParagraph>
+            The <CodeHighlight>FileMosaic</CodeHighlight> component supports
+            dark mode by setting the prop{" "}
+            <TypeHighlight>darkMode</TypeHighlight> to{" "}
+            <TypeHighlight>true</TypeHighlight>.
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <DemoFileMosaicDarkMode />
+          </Paper>
+
+          <CodeJSFileMosaicDarkMode />
+        </section>
+        <section id="localization">
+          <SubTitle content="Localization" />
+          <DescParagraph>
+            The <CodeHighlight>FileMosaic</CodeHighlight> component has
+            multilanguage support. You can change the language in wich labels
+            are displayed by setting the{" "}
+            <CodeHighlight>{"localization"}</CodeHighlight> prop. So far only
+            the following languages are supported:
+            <ul>
+              <li>
+                <TypeHighlight>English</TypeHighlight>
+              </li>
+              <li>
+                <TypeHighlight>Spanish</TypeHighlight>
+              </li>
+              <li>
+                <TypeHighlight>French</TypeHighlight>
+              </li>
+              <li>
+                <TypeHighlight>Italian</TypeHighlight>
+              </li>
+              <li>
+                <TypeHighlight>Portuguese</TypeHighlight>
+              </li>
+              <li>
+                <TypeHighlight>Russian</TypeHighlight>
+              </li>
+              <li>
+                <TypeHighlight>Chinnese (simplified)</TypeHighlight>
+              </li>
+              <li>
+                <TypeHighlight>Chinnese (traditional)</TypeHighlight>
+              </li>
+            </ul>
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <DemoFileMosaicLocalization />
+          </Paper>
+
+          <CodeJSFileMosaicLocalization />
+        </section>
+
+        <section id="file icon">
+          <SubTitle content="File Icons (extensive list)" />
+          <DescParagraph>
+            The <CodeHighlight>FileMosaic</CodeHighlight> component supports
+            aseveral file types to properly set a file icon. The complete list of file icons is the following:
+          </DescParagraph>
+
+          <DemoContainerFileMosaic
+          >
+            <DemoFileMosaicFileIcons />
+          </DemoContainerFileMosaic>
+
+        
         </section>
       </MainContentContainer>
       <RightMenuContainer>
