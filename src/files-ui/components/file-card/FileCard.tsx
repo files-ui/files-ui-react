@@ -17,6 +17,7 @@ import { useIsUploading } from "../file-mosaic/hooks/useIsUploading";
 import LayerContainer from "../file-mosaic/components/file-mosaic-layer/LayerContainer";
 import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 import FileMosaicImageLayer from "../file-mosaic/components/FIleMosaicImageLayer/FileMosaicImageLayer";
+import FileCardRightLayer from "./FileCardRightLayer";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -251,59 +252,72 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
           style={style}
         >
           <Layer className="file-card-main-layer" visible={true}>
-            {/** ICON/IMAGE LAYER */}
-            <div className="file-card-icon-container">
-              <LayerContainer className="file-card-icon-layer">
-                {/** IMAGE LAYER BLUR */}
-                <Layer
-                  className="file-card-icon-layer blur"
-                  visible={backgroundBlurImage}
-                >
-                  <FileMosaicImageLayer
-                    imageSource={imageSource}
-                    url={url}
-                    fileName={localName}
-                    isBlur={true}
-                  />
-                </Layer>
-                {/** IMAGE LAYER NO BLUR */}
-                <Layer className="file-card-icon-layer" visible={true}>
-                  <FileMosaicImageLayer
-                    imageSource={imageSource}
-                    url={url}
-                    fileName={localName}
-                    isBlur={false}
-                  />
-                </Layer>
-              </LayerContainer>
-            </div>
-
-            <div
-              className={
-                darkMode ? "file-card-data dark-mode" : "file-card-data"
-              }
-            >
-              <div className={"file-card-name"}>
-                {shrinkWord(localName, true)}
+            <div className="file-card-icon-plus-data">
+              <div className="file-card-icon-container">
+                <LayerContainer className="file-card-icon-layer">
+                  {/** IMAGE LAYER BLUR */}
+                  <Layer
+                    className="file-card-icon-layer blur"
+                    visible={backgroundBlurImage}
+                  >
+                    <FileMosaicImageLayer
+                      imageSource={imageSource}
+                      url={url}
+                      fileName={localName}
+                      isBlur={true}
+                    />
+                  </Layer>
+                  {/** IMAGE LAYER NO BLUR */}
+                  <Layer className="file-card-icon-layer" visible={true}>
+                    <FileMosaicImageLayer
+                      imageSource={imageSource}
+                      url={url}
+                      fileName={localName}
+                      isBlur={false}
+                    />
+                  </Layer>
+                </LayerContainer>
               </div>
 
-              <div className={"file-card-size"}>{sizeFormatted}</div>
-              <div className={"file-card-size"}>{shrinkWord(localType)}</div>
-            </div>
-            <div className="files-ui-file-card-right">
-              <Clear
-                style={{ position: "absolute", right: 0, top: 0 }}
+              <div
                 className={
-                  darkMode
-                    ? "files-ui-file-icon dark-mode"
-                    : "files-ui-file-icon"
+                  darkMode ? "file-card-data dark-mode" : "file-card-data"
                 }
-                color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-                onClick={handleDelete}
-                size="small"
-                colorFill="transparent"
-              />
+              >
+                <div className={"file-card-name"}>
+                  {/* {shrinkWord(localName, true)} */}
+                  {localName}
+                </div>
+
+                <div className={"file-card-size"}>{sizeFormatted}</div>
+                <div className={"file-card-size"}>{shrinkWord(localType)}</div>
+              </div>
             </div>
+          </Layer>
+          <Layer
+            className="files-ui-file-card-right-layer"
+            visible={!isUploading}
+          >
+            <FileCardRightLayer
+              deleteIcon={onDelete !== undefined}
+              onDelete={handleDelete}
+              darkMode={darkMode}
+              valid={valid}
+              uploadStatus={uploadStatus}
+              localization={localization}
+              sizeFormatted={sizeFormatted}
+              imageIcon={isImage && onSee !== undefined}
+              onSee={() => onSee?.(imageSource)}
+              videoIcon={isVideo && onWatch !== undefined}
+              onWatch={() => onWatch?.(file)}
+              downloadIcon={
+                onDownload !== undefined || downloadUrl !== undefined
+              }
+              onDownload={handleDownload}
+              infoIcon={info !== undefined}
+              onOpenInfo={handleOpenInfo}
+              isActive={alwaysActive || hovering}
+            />
           </Layer>
           <Layer className="file-card-upload-layer" visible={isUploading}>
             Upload Layer
