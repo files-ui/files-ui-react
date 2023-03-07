@@ -294,7 +294,7 @@ const FileMosaicDemoPage = (props) => {
           <SubTitle content="File Icons (extensive list)" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> component supports
-            aseveral file types to properly set a file icon. The complete list of file icons is the following:
+            several file types to properly set a file icon. The complete list of file icons is the following:
           </DescParagraph>
 
           <DemoContainerFileMosaic
