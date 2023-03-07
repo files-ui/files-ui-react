@@ -7,6 +7,9 @@ export * from "./components/avatar/Avatar";
 export { FileItem } from "./components";
 export * from "./components";
 
+export { default as FileCard } from "./components/file-card/FileCard";
+export * from "./components/file-card/FileCard";
+
 export { default as FileMosaic } from "./components/file-mosaic/components/file-mosaic/FileMosaic";
 export * from "./components/file-mosaic/components/file-mosaic/FileMosaic";
 
@@ -21,6 +24,6 @@ export * from "./components/previews/VideoPreview/VideoPreview";
 
 export { useFakeProgress } from "./hooks";
 
-export {createListOfMultiTypeFile} from "./core";
+export { createListOfMultiTypeFile } from "./core";
 
 export type { ExtFile, ExtFileInstance, ExtFileListMap, ExtFileManager, UPLOADSTATUS, Localization } from "./core";

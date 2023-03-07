@@ -1,8 +1,10 @@
 import * as React from "react";
-import { FileInputButton, FileMosaic } from "../../../files-ui";
+import { FileCard, FileInputButton, FileMosaic } from "../../../files-ui";
 import { ExtFile } from "../../../files-ui/core";
 
-interface DemoFileMosaicImagePreviewProps {}
+interface DemoFileMosaicImagePreviewProps {
+  card?: boolean;
+}
 
 const sampleFileProps: ExtFile = {
   id: "fileId",
@@ -24,10 +26,25 @@ const DemoFileMosaicImagePreview: React.FC<DemoFileMosaicImagePreviewProps> = (
   const removeFile = () => {
     setValue(undefined);
   };
+  if (props.card)
+    return (
+      <>
+        {value ? (
+          <FileCard {...value} onDelete={removeFile} info preview />
+        ) : (
+          <FileInputButton
+            value={value ? [value] : []}
+            onChange={updateFile}
+            accept="image/*"
+          />
+        )}
+        <FileCard {...sampleFileProps} info />
+      </>
+    );
   return (
     <>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} info preview/>
+        <FileMosaic {...value} onDelete={removeFile} info preview />
       ) : (
         <FileInputButton
           value={value ? [value] : []}
@@ -35,7 +52,7 @@ const DemoFileMosaicImagePreview: React.FC<DemoFileMosaicImagePreviewProps> = (
           accept="image/*"
         />
       )}
-      <FileMosaic {...sampleFileProps} info/>
+      <FileMosaic {...sampleFileProps} info />
     </>
   );
 };

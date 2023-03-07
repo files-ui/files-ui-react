@@ -2,15 +2,18 @@ import * as React from "react";
 import { FileCardProps, FileCardPropsDefault } from "./FileCardProps";
 import "./FileCard.scss";
 import "./FileCardPaper.scss";
-import FileItemImage from "../FileItemImage/FileItemImage";
-import useFileItemInitializer from "../../hooks/useFileItemInitializer";
-import { getLocalFileItemData } from "../../utils/getLocalFileItemData";
-import { Clear } from "../../../icons";
-import { fileSizeFormater, shrinkWord } from "../../../../core";
-import { mergeProps } from "../../../overridable";
-import { showFileItemComponent } from "../../utils/showFileItemComponent";
-import useFileItemProgress from "../../hooks/useFileItemProgress";
-import MainLayerBodyNeo from "../FileItemMainLayer/MainLayerBody/MainLayerBodyNeo";
+import FileItemImage from "../file-item/components/FileItemImage/FileItemImage";
+import useFileItemInitializer from "../file-item/hooks/useFileItemInitializer";
+import { getLocalFileItemData } from "../file-item/utils/getLocalFileItemData";
+import { Clear } from "../icons";
+import { fileSizeFormater, shrinkWord } from "../../core";
+import { mergeProps } from "../overridable";
+import { showFileItemComponent } from "../file-item/utils/showFileItemComponent";
+import useFileItemProgress from "../file-item/hooks/useFileItemProgress";
+import MainLayerBodyNeo from "../file-item/components/FileItemMainLayer/MainLayerBody/MainLayerBodyNeo";
+import useProgress from "../file-mosaic/hooks/useProgress";
+import useFileMosaicInitializer from "../file-mosaic/hooks/useFileMosaicInitializer";
+import { useIsUploading } from "../file-mosaic/hooks/useIsUploading";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -30,7 +33,7 @@ const setFinalElevation = (elevation: string | number): number => {
 };
 const makeFileCardClassName = (
   elevation: FileCardProps["elevation"],
-  darkMode: boolean,
+  darkMode: boolean | undefined,
   className: string | undefined
 ): string => {
   console.log("FileCard makeFileCardClassName", elevation, darkMode, className);
@@ -51,43 +54,56 @@ const makeFileCardClassName = (
 
 const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   const {
+    style,
+    className,
+
     file,
     name: propName,
     size: propSize,
     type: propType,
-    onDelete,
-    onSee,
-    onWatch,
-    style,
-    preview,
-    //onlyImage,
-    info,
+
     id,
     valid,
+    errors,
     uploadStatus,
     uploadMessage,
-    hd,
-    localization,
-    errors,
-    imageUrl,
-    elevation,
-    alwaysActive,
-    resultOnTooltip,
-    downloadUrl,
-    onDownload,
     progress,
-    onAbort,
+
     xhr,
-    onCancel,
-    showProgress,
-    className,
-    onDoubleClick,
-    onRightClick,
-    backgroundBlurImage,
+
+    localization,
+    preview,
+    imageUrl,
+    info,
+    backgroundBlurImage = true,
     darkMode,
-  } = mergeProps(props, FileCardPropsDefault);
+
+    alwaysActive = true,
+
+    resultOnTooltip = true,
+
+    downloadUrl,
+
+    onDelete,
+    onCancel,
+    onAbort,
+
+    onDownload,
+    onSee,
+    onWatch,
+
+    onDoubleClick,
+    onClick,
+    onRightClick,
+
+    elevation=2,
+
+    //} = mergeProps(props, FileCardPropsDefault);
+  } = props;
 
   //ref for anchor element
+  const downloadRef = React.useRef<HTMLAnchorElement>(null);
+
   const downloadAnchorRef = React.useRef<HTMLAnchorElement>(null);
 
   //className created
@@ -95,12 +111,6 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     elevation,
     darkMode,
     className
-  );
-
-  const showFileItem: boolean = showFileItemComponent(
-    file,
-    propName
-    // Boolean(rootClassNameCreated)
   );
 
   // local properties from file
@@ -111,15 +121,16 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   ] = getLocalFileItemData(file, propName, propType, propSize);
 
   // handle progress
-  const localProgress = useFileItemProgress(progress, showProgress, xhr);
+  const localProgress: number | undefined = useProgress(progress, xhr);
 
   //Initialize File Item
-  const [isImage, isVideo, url, imageSource]: [
+  const [isReady, isImage, isVideo, url, imageSource]: [
+    boolean,
     boolean,
     boolean,
     string,
     string | undefined
-  ] = useFileItemInitializer(
+  ] = useFileMosaicInitializer(
     file,
     propName,
     propType,
@@ -133,7 +144,43 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     ? fileSizeFormater(localSize)
     : "0 KB";
 
+  //alwaysActive
+  const [showInfo, setShowInfo] = React.useState<boolean>(false);
+
+  /********* ALWAYS ACTIVE LOGIC  ***************/
+  //state for actionOnHover
+  const [hovering, setHovering] = React.useState<boolean>(false);
+  const handleOnHoverEnter: React.MouseEventHandler<HTMLDivElement> = () => {
+    if (alwaysActive) return;
+    setHovering(true);
+  };
+  const handleOnHoverLeave: React.MouseEventHandler<HTMLDivElement> = () => {
+    if (alwaysActive) return;
+    setHovering(false);
+  };
+
+  /***************** HANDLERS **********/
+  //delete file item
+  const handleDelete = (): void => onDelete?.(id);
+
+  //open info layer
+  const handleOpenInfo = (): void => setShowInfo(true);
+
+  //close info layer
+  const handleCloseInfo = (): void => setShowInfo(false);
+
+  const isUploading: boolean = useIsUploading(uploadStatus);
+
+  React.useEffect(() => {
+    //console.log("Change isUploading", isUploading);
+    if (isUploading && showInfo) {
+      handleCloseInfo();
+    }
+    // eslint-disable-next-line
+  }, [isUploading]);
+
   /*************** Click ***************/
+  /*************** CLICK ***************/
   /**
    * TO-DO: Add functionallity on click event
    * @param e event object
@@ -143,44 +190,32 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   ): void {
     //avoid children to trigger onClick ripple from parent
     e.stopPropagation();
+    onClick?.(e);
+  }
+  const handleDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
+    evt: React.MouseEvent
+  ): void => {
+    alert("double click on file");
+    evt.preventDefault();
+
+    onDoubleClick?.(evt);
+  };
+  function handleRightClick(evt: React.MouseEvent) {
+    // alert("right click!!!!");
+    //get coordinates
+    //zindex
+    //create menu component
+    // evt.preventDefault();
+    onRightClick?.(evt);
   }
 
-  /***************** HANDLERS **********/
-  //delete file item
-  const handleDelete = (): void => {
-    onDelete?.(id);
-  };
-  //open info layer
-  /*  const handleOpenInfo = () => {
-    setShowInfo(true);
-  }; */
-  //close info layer
-  /*   const handleCloseInfo = () => {
-    setShowInfo(false);
-  }; */
-  //handle watch video
-  const handleOpenVideo = async () => {
-    if (file) onWatch?.(file);
-  };
-  //open image
-  const handleOpenImage = async () => {
-    if (imageSource) {
-      //  if (hd) {
-      //    const response = await readImagePromise(file);
-      //    onSee?.(response || "");
-      //  } else {
-      onSee?.(imageSource);
-      //}
-    }
-  };
-
-  /********** DOWNLOAD HANDLERS **********/
+  // DOWNLOAD FILE
   /**
    * onDownload, form 1
    * Trigger dowload directly performing a click on anchor element
    */
   const innerDownload = () => {
-    const anchorElement = downloadAnchorRef.current;
+    const anchorElement = downloadRef.current;
     if (anchorElement) {
       anchorElement.click();
     }
@@ -196,42 +231,8 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
       innerDownload();
     }
   };
-  /**
-   * Perform abort event when xhr is given
-   */
-  const handleAbort = (): void => {
-    //trigger abort event
-    xhr?.abort();
-    // handle externally the abort event
-    onAbort?.(id);
-  };
-  /**
-   * Handle onCancel event
-   */
-  const handleCancel = (): void => {
-    // handle externally the cancel event
-    onCancel?.(id);
-  };
 
-  const handleDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
-    evt: React.MouseEvent
-  ): void => {
-    alert("double click on file");
-    evt.preventDefault();
-
-    onDoubleClick?.(evt);
-  };
-  function handleRightClick(evt: React.MouseEvent) {
-    // alert("right click!!!!");
-    //get coordinates
-    //zindex
-    //create menu component
-    // evt.preventDefault();
-    // onRightClick?.(evt);
-  }
-  //console.log("FileItem onCancel", onCancel);
-
-  if (showFileItem) {
+  if (isReady) {
     return (
       <div
         className={finalClassName}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import FileCard from "../files-ui/components/file-item/components/FileCard/FileCard";
+import FileCard from "../files-ui/components/file-card/FileCard";
 import { ExtFile } from "../files-ui/core";
 const baseFiles: ExtFile[] = [
   {
@@ -37,7 +37,7 @@ const FileCardMock = ({ darkMode = false, elevation = 2 }) => {
           onSee={handleSee}
           info
           alwaysActive
-          hd
+          //hd
           elevation={2}
           darkMode={darkMode}
           onCancel={()=>{}}
