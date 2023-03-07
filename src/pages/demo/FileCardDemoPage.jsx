@@ -18,6 +18,9 @@ import { AlertTitle } from "@mui/material";
 import DemoFileMosaicImagePreview from "../../components/demo-components/filemosaic-demo/DemoFileMosaicImagePreview";
 import CodeJSFileMosaicImagePreview from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicImagePreview";
 import DemoContainerFileMosaic from "../../components/demo-components/filemosaic-demo/DemoContainerFileMosaic";
+import DemoFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/DemoFileMosaicDarkMode";
+import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicDarkMode";
+import AnchorToTab from "../../components/util-components/AnchorToTab";
 
 const FileCardDemoPage = (props) => {
   return (
@@ -116,20 +119,114 @@ const FileCardDemoPage = (props) => {
             image preview will be shown in order to save memory.
           </Alert>
         </section>
-        <section id="validation">
-          <SubTitle content="Validation" />
+        {/** VALIDATION UPLOAD AND MORE */}
+        <section id="dark-mode">
+          <SubTitle content="Dark mode" />
           <DescParagraph>
-            The <CodeHighlight>valid</CodeHighlight> prop can be set to{" "}
-            <TypeHighlight>true</TypeHighlight>,{" "}
-            <TypeHighlight>false</TypeHighlight> or{" "}
-            <TypeHighlight>undefined</TypeHighlight>
+            The <CodeHighlight>FileCard</CodeHighlight> component supports
+            dark mode by setting the prop{" "}
+            <TypeHighlight>darkMode</TypeHighlight> to{" "}
+            <TypeHighlight>true</TypeHighlight>.
           </DescParagraph>
 
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            {/* <BasicDemoDropzone /> */}
+          <Paper
+            variant="outlined"
+            style={{
+              //padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <DemoFileMosaicDarkMode card />
           </Paper>
-          <p></p>
-          {/* <BasicDropzoneCodeJS /> */}
+
+          <CodeJSFileMosaicDarkMode card />
+        </section>
+    {/*     <section id="localization">
+          <SubTitle content="Localization" />
+          <DescParagraph>
+            The <CodeHighlight>FileMosaic</CodeHighlight> component has
+            multilanguage support. You can change the language in wich labels
+            are displayed by setting the{" "}
+            <CodeHighlight>{"localization"}</CodeHighlight> prop. So far only
+            the following languages are supported:
+            <ul>
+              {[
+                "English",
+                "Spanish",
+                "French",
+                "Italian",
+                "Portuguese",
+                "Russian",
+                "Chinnese (simplified)",
+                "Chinnese (traditional)",
+              ].map((x) => (
+                <li>
+                  <TypeHighlight>{x}</TypeHighlight>
+                </li>
+              ))}
+            </ul>
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <DemoFileMosaicLocalization />
+          </Paper>
+          <CodeJSFileMosaicLocalization />
+        </section>
+
+        <section id="file-icon">
+          <SubTitle content="File Icons (extensive list)" />
+          <DescParagraph>
+            The <CodeHighlight>FileMosaic</CodeHighlight> component supports
+            several file types to properly set a file icon. The complete list of
+            file icons is the following:
+          </DescParagraph>
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px 0",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              //flexDirection: "column",
+              gap: "10px",
+              flexWrap: "wrap",
+            }}
+          >
+            <DemoFileMosaicFileIcons />
+          </Paper>
+        </section> */}
+
+        <section id="api">
+          <SubTitle content="API" />
+          <DescParagraph>
+            See the documentation below for a complete reference to all of the
+            props available to the components mentioned here.
+          </DescParagraph>
+          <ul>
+            <li>
+              <AnchorToTab href="/api/filecard">
+                {"<FileMosaic/>"}
+              </AnchorToTab>
+            </li>
+            <li>
+              <AnchorToTab href="/api/fileinputbuttom">
+                {"<FileInputButton/>"}
+              </AnchorToTab>
+            </li>
+          </ul>
         </section>
       </MainContentContainer>
       <RightMenuContainer>
