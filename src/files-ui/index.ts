@@ -7,24 +7,20 @@ export * from "./components/avatar/Avatar";
 export { FileItem } from "./components";
 export * from "./components";
 
+export { default as FileMosaic } from "./components/file-mosaic/components/file-mosaic/FileMosaic";
+export * from "./components/file-mosaic/components/file-mosaic/FileMosaic";
 
-export { FileMosaic } from "./components/file-mosaic";
-export * from "./components/file-mosaic";
+export { default as FullScreen } from "./components/previews/FullScreen/FullScreen";
+export * from "./components/previews/FullScreen/FullScreen";
 
+export { default as ImagePreview } from "./components/previews/ImagePreview/ImagePreview";
+export * from "./components/previews/ImagePreview/ImagePreview";
 
-
-export { FullScreen } from "./components/previews";
-export * from "./components/previews";
-
-
-export { ImagePreview } from "./components/previews";
-export * from "./components/previews";
-
-export { VideoPreview } from "./components/previews";
-export * from "./components/previews";
+export { default as VideoPreview } from "./components/previews/VideoPreview/VideoPreview";
+export * from "./components/previews/VideoPreview/VideoPreview";
 
 export { useFakeProgress } from "./hooks";
 
-
 export {createListOfMultiTypeFile} from "./core";
+
 export type { ExtFile, ExtFileInstance, ExtFileListMap, ExtFileManager, UPLOADSTATUS, Localization } from "./core";
