@@ -15,135 +15,254 @@ const CodeJSFileMosaicUploadStatus = () => {
 };
 export default CodeJSFileMosaicUploadStatus;
 
-const splittedCodeJS = `<>
-  {sampleFilesProps.map((extFile) => (
-    <FileMosaic key={extFile.id} {...extFile} alwaysActive info preview />
-  ))}
-</>
+const splittedCodeJS = ``;
 
-// file props
-const sampleFilesProps = [
-    {
-        id: "fileId-1",
-        size: 28 * 1024 * 1024,
-        type: "plain/javascript",
-        name: "file created from props.jsx",
-    },
-    {
-        id: "fileId-2",
-        size: 28 * 1024 * 1024,
-        type: "image/png",
-        name: "valid file created from props.png",
-        valid: true,
-    },
-    {
-        id: "fileId-3",
-        size: 28 * 1024 * 1024,
-        type: "image/jpeg",
-        name: "non valid file created from props.jpg",
-        valid: false,
-    },
-];`;
+const splittedCodeTS = ``;
 
 const completeCodeJS = `import * as React from "react";
-import { FileMosaic } from "../../../files-ui";
+import {
+  FileMosaic,
+  useFakeProgress,
+} from "@files-ui/react";
 
-const sampleFilesProps = [
-  {
-    id: "fileId-1",
-    size: 28 * 1024 * 1024,
-    type: "plain/javascript",
-    name: "file created from props.jsx",
-  },
+const DemoFileMosaicUploadStatus = () => {
+  const progress = useFakeProgress();
+
+  const [status1, setStatus1] = React.useState("uploading");
+  const [status2, setStatus2] = React.useState("uploading");
+  const [status3, setStatus3] = React.useState("uploading");
+
+  React.useEffect(() => {
+    //schedule an interval
+    const _myInterval = setInterval(() => {
+      //set the uploadstatus result
+      setStatus1((_status) => setNextUploadState(_status, "aborted"));
+      setStatus2((_status) => setNextUploadState(_status, "error"));
+      setStatus3((_status) => setNextUploadState(_status, "success"));
+    }, 5000);
+
+    //clean
+    return () => {
+      console.log("clear interval", _myInterval);
+      clearInterval(_myInterval);
+    };
+  }, []);
+
+  const handleCancel = (id) => {
+    console.log("Upload canceled in file: " + id);
+  };
+  const handleAbort = (id) => {
+    console.log("Upload aborted in file: " + id);
+  };
+  return (
+    <>
+      <FlexRowContainer>
+        <FileMosaic {...preparingFile} />
+        <FileMosaic {...preparingFile} onCancel={handleCancel} />
+      </FlexRowContainer>
+
+      <FlexRowContainer>
+        <FileMosaic {...uploadingFile} />
+        <FileMosaic {...uploadingFile} progress={progress} />
+        <FileMosaic {...uploadingFile} onAbort={handleAbort} />
+        <FileMosaic {...uploadingFile} onAbort={handleAbort} progress={progress} />
+      </FlexRowContainer>
+
+      <FlexRowContainer>
+        <FileMosaic {...uploadResultFiles[0]} uploadStatus={status1} />
+        <FileMosaic {...uploadResultFiles[1]} uploadStatus={status2} />
+        <FileMosaic {...uploadResultFiles[2]} uploadStatus={status3} />
+      </FlexRowContainer>
+    </>
+  );
+};
+export default DemoFileMosaicUploadStatus;
+
+const FlexRowContainer = ({ children }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly",
+        width: "100%",
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+const setNextUploadState = (
+  prevState,
+  nextStatus
+) => {
+  if (prevState === "uploading") return nextStatus;
+  else return "uploading";
+};
+
+const preparingFile = {
+  id: "fileId-0",
+  size: 28 * 1024 * 1024,
+  type: "text/plain",
+  name: "preparing file.jsx",
+  uploadStatus: "preparing",
+};
+
+const uploadingFile = {
+  id: "fileId-1",
+  size: 28 * 1024 * 1024,
+  type: "image/png",
+  name: "uploading file.png",
+  uploadStatus: "uploading",
+};
+
+const uploadResultFiles = [
   {
     id: "fileId-2",
     size: 28 * 1024 * 1024,
-    type: "image/png",
-    name: "valid file created from props.png",
-    valid: true,
+    type: "image/gif",
+    name: "upload aborted file.gif",
+    uploadMessage: "Upload was aborted by the user",
   },
   {
     id: "fileId-3",
     size: 28 * 1024 * 1024,
     type: "image/jpeg",
-    name: "non valid file created from props.jpg",
-    valid: false,
+    name: "upload with error file.jpg",
+    uploadMessage:
+      "File couldn't be uploaded to Files-ui earthquakes. File was too big.",
   },
-];
-
-const DemoFileMosaicValidation = () => {
-  return (
-    <>
-      {sampleFilesProps.map((extFile) => (
-        <FileMosaic key={extFile.id} {...extFile} alwaysActive info preview />
-      ))}
-    </>
-  );
-};
-export default DemoFileMosaicValidation;`;
-
-const splittedCodeTS = `<>
-  {sampleFilesProps.map((extFile:ExtFile) => (
-    <FileMosaic key={extFile.id} {...extFile} alwaysActive info preview />
-  ))}
-</>
-
-// file props
-const sampleFilesProps:ExtFile[] = [
-    {
-        id: "fileId-1",
-        size: 28 * 1024 * 1024,
-        type: "plain/javascript",
-        name: "file created from props.jsx",
-    },
-    {
-        id: "fileId-2",
-        size: 28 * 1024 * 1024,
-        type: "image/png",
-        name: "valid file created from props.png",
-        valid: true,
-    },
-    {
-        id: "fileId-3",
-        size: 28 * 1024 * 1024,
-        type: "image/jpeg",
-        name: "non valid file created from props.jpg",
-        valid: false,
-    },
+  {
+    id: "fileId-4",
+    size: 28 * 1024 * 1024,
+    type: "image/png",
+    name: "successfully uploaded file.png",
+    uploadMessage: "File was uploaded correctly to Files-ui earthquakes",
+  },
 ];`;
-const completeCodeTS = `import * as React from "react";
-import { FileMosaic, ExtFile } from "../../../files-ui";
 
-const sampleFilesProps: ExtFile[] = [
-  {
-    id: "fileId-1",
-    size: 28 * 1024 * 1024,
-    type: "plain/javascript",
-    name: "file created from props.jsx",
-  },
+const completeCodeTS = `import * as React from "react";
+import {
+  FileMosaic,
+  useFakeProgress,
+  ExtFile,
+  UPLOADSTATUS,
+} from "@files-ui/react";
+
+const DemoFileMosaicUploadStatus = () => {
+  const progress = useFakeProgress();
+
+  const [status1, setStatus1] = React.useState<UPLOADSTATUS>("uploading");
+  const [status2, setStatus2] = React.useState<UPLOADSTATUS>("uploading");
+  const [status3, setStatus3] = React.useState<UPLOADSTATUS>("uploading");
+
+  React.useEffect(() => {
+    //schedule an interval
+    const _myInterval = setInterval(() => {
+      //set the uploadstatus result
+      setStatus1((_status) => setNextUploadState(_status, "aborted"));
+      setStatus2((_status) => setNextUploadState(_status, "error"));
+      setStatus3((_status) => setNextUploadState(_status, "success"));
+    }, 5000);
+
+    //clean
+    return () => {
+      console.log("clear interval", _myInterval);
+      clearInterval(_myInterval as NodeJS.Timer);
+    };
+  }, []);
+
+  const handleCancel = (id: string | number | undefined) => {
+    console.log("Upload canceled in file: " + id);
+  };
+  const handleAbort = (id: string | number | undefined) => {
+    console.log("Upload aborted in file: " + id);
+  };
+  return (
+    <>
+      <FlexRowContainer>
+        <FileMosaic {...preparingFile} />
+        <FileMosaic {...preparingFile} onCancel={handleCancel} />
+      </FlexRowContainer>
+
+      <FlexRowContainer>
+        <FileMosaic {...uploadingFile} />
+        <FileMosaic {...uploadingFile} progress={progress} />
+        <FileMosaic {...uploadingFile} onAbort={handleAbort} />
+        <FileMosaic {...uploadingFile} onAbort={handleAbort} progress={progress} />
+      </FlexRowContainer>
+
+      <FlexRowContainer>
+        <FileMosaic {...uploadResultFiles[0]} uploadStatus={status1} />
+        <FileMosaic {...uploadResultFiles[1]} uploadStatus={status2} />
+        <FileMosaic {...uploadResultFiles[2]} uploadStatus={status3} />
+      </FlexRowContainer>
+    </>
+  );
+};
+export default DemoFileMosaicUploadStatus;
+
+const FlexRowContainer = (props: { children: React.ReactNode }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly",
+        width: "100%",
+      }}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+const setNextUploadState = (
+  prevState: UPLOADSTATUS,
+  nextStatus: UPLOADSTATUS
+): UPLOADSTATUS => {
+  if (prevState === "uploading") return nextStatus;
+  else return "uploading";
+};
+
+const preparingFile: ExtFile = {
+  id: "fileId-0",
+  size: 28 * 1024 * 1024,
+  type: "text/plain",
+  name: "preparing file.jsx",
+  uploadStatus: "preparing",
+};
+
+const uploadingFile: ExtFile = {
+  id: "fileId-1",
+  size: 28 * 1024 * 1024,
+  type: "image/png",
+  name: "uploading file.png",
+  uploadStatus: "uploading",
+};
+
+const uploadResultFiles: ExtFile[] = [
   {
     id: "fileId-2",
     size: 28 * 1024 * 1024,
-    type: "image/png",
-    name: "valid file created from props.png",
-    valid: true,
+    type: "image/gif",
+    name: "upload aborted file.gif",
+    uploadMessage: "Upload was aborted by the user",
   },
   {
     id: "fileId-3",
     size: 28 * 1024 * 1024,
     type: "image/jpeg",
-    name: "non valid file created from props.jpg",
-    valid: false,
+    name: "upload with error file.jpg",
+    uploadMessage:
+      "File couldn't be uploaded to Files-ui earthquakes. File was too big.",
   },
-];
-
-const DemoFileMosaicValidation = () => {
-  return (
-    <>
-      {sampleFilesProps.map((extFile: ExtFile) => (
-        <FileMosaic key={extFile.id} {...extFile} alwaysActive info preview />
-      ))}
-    </>
-  );
-};
-export default DemoFileMosaicValidation;`;
+  {
+    id: "fileId-4",
+    size: 28 * 1024 * 1024,
+    type: "image/png",
+    name: "successfully uploaded file.png",
+    uploadMessage: "File was uploaded correctly to Files-ui earthquakes",
+  },
+];`;

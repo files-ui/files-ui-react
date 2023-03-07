@@ -4,7 +4,7 @@ import { FileInputButton, FileMosaic } from "../../../files-ui";
 const sampleFileProps = {
   id: "fileId",
   size: 28 * 1024 * 1024,
-  type: "plain/javascript",
+  type: "text/plain",
   name: "file created from props.jsx",
 };
 const DemoFileMosaicBasic = (props) => {
@@ -21,11 +21,11 @@ const DemoFileMosaicBasic = (props) => {
   return (
     <>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} alwaysActive info preview/>
+        <FileMosaic {...value} onDelete={removeFile} info/>
       ) : (
-        <FileInputButton value={value?[value]:[]} onChange={updateFile} />
+        <FileInputButton value={value ? [value] : []} onChange={updateFile} />
       )}
-      <FileMosaic {...sampleFileProps} alwaysActive info preview/>
+      <FileMosaic {...sampleFileProps} info/>
     </>
   );
 };

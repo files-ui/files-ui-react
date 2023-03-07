@@ -41,9 +41,9 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     backgroundBlurImage = true,
     darkMode,
 
-    alwaysActive,
+    alwaysActive = true,
 
-    resultOnTooltip,
+    resultOnTooltip = true,
 
     downloadUrl,
 

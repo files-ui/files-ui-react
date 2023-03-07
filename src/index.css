@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
- a {
+a {
   color: rgb(0, 121, 244);
-} 
+}
+
+section {
+  scroll-margin-top: 64px;
+}
