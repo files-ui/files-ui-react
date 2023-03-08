@@ -4,9 +4,10 @@ import {
   useFakeProgress,
   ExtFile,
   UPLOADSTATUS,
+  FileCard,
 } from "../../../files-ui";
 
-const DemoFileMosaicUploadStatus = () => {
+const DemoFileMosaicUploadStatus = (props:{card?:boolean}) => {
   const progress = useFakeProgress();
 
   const [status1, setStatus1] = React.useState<UPLOADSTATUS>("uploading");
@@ -35,6 +36,32 @@ const DemoFileMosaicUploadStatus = () => {
   const handleAbort = (id: string | number | undefined) => {
     console.log("Upload aborted in file: " + id);
   };
+  if(props.card)
+  return (
+<>
+      <FlexRowContainer card>
+        <FileCard {...preparingFile} />
+        <FileCard {...preparingFile} onCancel={handleCancel} />
+      </FlexRowContainer>
+
+      <FlexRowContainer card>
+        <FileCard {...uploadingFile} />
+        <FileCard {...uploadingFile} progress={progress} />
+        <FileCard {...uploadingFile} onAbort={handleAbort} />
+        <FileCard
+          {...uploadingFile}
+          onAbort={handleAbort}
+          progress={progress}
+        />
+      </FlexRowContainer>
+
+      <FlexRowContainer card>
+        <FileCard {...uploadResultFiles[0]} uploadStatus={status1} />
+        <FileCard {...uploadResultFiles[1]} uploadStatus={status2} />
+        <FileCard {...uploadResultFiles[2]} uploadStatus={status3} />
+      </FlexRowContainer>
+    </>
+  )
   return (
     <>
       <FlexRowContainer>
@@ -63,7 +90,7 @@ const DemoFileMosaicUploadStatus = () => {
 };
 export default DemoFileMosaicUploadStatus;
 
-const FlexRowContainer = (props: { children: React.ReactNode }) => {
+const FlexRowContainer = (props: { children: React.ReactNode, card?:boolean }) => {
   return (
     <div
       style={{
@@ -71,6 +98,7 @@ const FlexRowContainer = (props: { children: React.ReactNode }) => {
         flexWrap: "wrap",
         justifyContent: "space-evenly",
         width: "100%",
+        flexDirection:props.card?"column":"row"
       }}
     >
       {props.children}

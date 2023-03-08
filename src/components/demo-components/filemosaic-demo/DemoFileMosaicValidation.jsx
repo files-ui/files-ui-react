@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileMosaic } from "../../../files-ui";
+import { FileCard, FileMosaic } from "../../../files-ui";
 
 const sampleFilesProps = [
   {
@@ -14,7 +14,7 @@ const sampleFilesProps = [
     type: "image/png",
     name: "valid file created from props.png",
     valid: false,
-    errors: ["File is too big", "File type is not allowed"]
+    errors: ["File is too big", "File type is not allowed"],
   },
   {
     id: "fileId-3",
@@ -25,7 +25,16 @@ const sampleFilesProps = [
   },
 ];
 
-const DemoFileMosaicValidation = () => {
+const DemoFileMosaicValidation = ({ card }) => {
+  if (card)
+    return (
+      <>
+        {sampleFilesProps.map((extFile) => (
+          <FileCard key={extFile.id} {...extFile} info />
+        ))}
+      </>
+    );
+
   return (
     <>
       {sampleFilesProps.map((extFile) => (

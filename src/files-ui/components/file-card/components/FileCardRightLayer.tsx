@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Localization, UPLOADSTATUS } from "../../core";
+import { Localization, UPLOADSTATUS } from "../../../core";
 import {
   Clear,
   DownloadFile,
   InfoDisney,
   PlayIcon,
   Visibility,
-} from "../icons";
+} from "../../icons";
 import "./FileMosaicRightLayer.scss";
 declare type FileCardRightLayerProps = {
   darkMode?: boolean;

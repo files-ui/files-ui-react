@@ -12,7 +12,7 @@
   position: relative;
   font-size: 15px;
   font-weight: 400;
-  width: 380px;
+  width: 350px;
   .files-ui-file-card-main-layer-container {
     width: 380px;
     box-sizing: border-box;
@@ -35,7 +35,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap:5px;
+        gap: 5px;
         .file-card-icon-container {
           //margin: 0 10px;
           width: 100px;
@@ -120,16 +120,11 @@
       justify-content: space-between;
       flex-direction: column;
       padding: 3px;
-      width: 60px;
+      width: 36px;
       //background-color: aquamarine;
       height: 100%;
     }
     .file-card-upload-layer {
-      position: absolute;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
       display: flex;
       box-sizing: border-box;
       //background-color: rgba(0, 0, 0, 0.5);
@@ -152,6 +147,65 @@
       overflow: hidden;
       align-items: center;
       justify-content: flex-end;
+    }
+    .file-card-info-layer-container {
+      display: flex;
+      box-sizing: border-box;
+      //background-color: rgba(0, 0, 0, 0.5);
+      background: linear-gradient(
+        to right,
+
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.9)
+      );
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+      font-size: 1em;
+      overflow: hidden;
+      align-items: center;
+      justify-content: flex-end;
+      .file-card-file-info {
+        width: 250px;
+        height: 100px;
+        text-align: left;
+        scrollbar-width: thin;
+        overflow: auto;
+        scrollbar-color: #646c7fa9 transparent;
+
+        &::-webkit-scrollbar {
+          width: 9px;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: #646c7fa9;
+          border-radius: 20px;
+          border: transparent;
+        }
+        .files-ui-file-card-info-layer-header {
+          display: flex;
+          width: 100%;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .heading {
+          font-weight: 600;
+          padding: 0 5px;
+        }
+        .label {
+          padding: 0 5px;
+          font-weight: 399;
+        }
+      }
     }
   }
 }

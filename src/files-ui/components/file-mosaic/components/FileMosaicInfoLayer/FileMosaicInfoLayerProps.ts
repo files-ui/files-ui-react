@@ -1,6 +1,6 @@
 import { Localization, UPLOADSTATUS } from "../../../../core";
 
-export interface FileMosaicInfoLayerProps{
+export type FileMosaicInfoLayerProps = {
     valid: boolean | null | undefined;
     uploadStatus?: UPLOADSTATUS;
     localization?: Localization;

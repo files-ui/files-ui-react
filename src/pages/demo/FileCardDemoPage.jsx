@@ -7,7 +7,6 @@ import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
-import BasicFileMosaicDemo from "../../components/demo-components/filemosaic-demo/DemoFileMosaicBasic";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import MainTitle from "../../components/main-title/MainTitle";
@@ -21,6 +20,10 @@ import DemoContainerFileMosaic from "../../components/demo-components/filemosaic
 import DemoFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/DemoFileMosaicDarkMode";
 import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicDarkMode";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
+import DemoFileMosaicValidation from "../../components/demo-components/filemosaic-demo/DemoFileMosaicValidation";
+import CodeJSFileMosaicValidation from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicValidation";
+import DemoFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/DemoFileMosaicUploadStatus";
+import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
 
 const FileCardDemoPage = (props) => {
   return (
@@ -28,42 +31,42 @@ const FileCardDemoPage = (props) => {
       <MainContentContainer>
         <MainTitle>FileCard</MainTitle>
         <MainParagraph>
-          File cards, as well as file mosaics, are compact elements that
-          represent a file in the UI. They can be used for just showing general
-          info of the file, or either allow the user to interact with them.
+          File cards are compact elements that represent a file in the UI. They
+          can be used for just showing general info of the file, or either to
+          allow the user to interact with them.
         </MainParagraph>
         <DescParagraph>
-          This widget allow users to see information of Files and / or trigger
-          actions.
+          This widget allow users to see information of{" "}
+          <TypeHighlight> Files</TypeHighlight> and / or trigger actions.
         </DescParagraph>
         <Alert severity="info">
           While included here as a standalone component, the most common use
-          will be as a result of the "onChange" event of {"<Dropzone/>"} or{" "}
-          {"<InputButton/>"} components, so some of the behavior demonstrated
-          here is not shown in context.{" "}
+          will be to display the result of the "onChange" event of{" "}
+          <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> or{" "}
+          <CodeHighlight>{"<InputButton/>"}</CodeHighlight> components, so some
+          of the behavior demonstrated here is not totally shown in context.{" "}
         </Alert>
         <section id="basic-filecard">
           <SubTitle content="Basic FileCard" />
           <DescParagraph>
-            The <CodeHighlight>FileCard</CodeHighlight> supports displaying
-            information from <TypeHighlight>File</TypeHighlight> object or
-            individual props.
+            The <CodeHighlight>FileCard</CodeHighlight> component supports
+            displaying information from a{" "}
+            <TypeHighlight>
+              <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/API/File">
+                File
+              </AnchorToTab>
+            </TypeHighlight>{" "}
+            object or from given props.
+            <br />
+            Also, the <TypeHighlight>onDelete</TypeHighlight> prop is used to
+            remove the file selection.
           </DescParagraph>
 
-          <Paper
-            variant="outlined"
-            style={{
-              padding: "25px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Stack spacing={2} direction="row" alignItems={"center"}>
-              <DemoFileCardBasic />
-            </Stack>
-          </Paper>
+          <DemoContainerFileMosaic>
+            <DemoFileCardBasic />
+          </DemoContainerFileMosaic>
           <CodeJSFileCardBasic />
+
           <Alert severity="info">
             <AlertTitle> FileInputButton </AlertTitle>
             For completeness, some of these examples include{" "}
@@ -106,7 +109,7 @@ const FileCardDemoPage = (props) => {
             <DemoFileMosaicImagePreview card />
           </DemoContainerFileMosaic>
 
-          <CodeJSFileMosaicImagePreview card/>
+          <CodeJSFileMosaicImagePreview card />
           <Alert severity="info">
             As you can notice, when
             <CodeHighlight>{`imageUrl`}</CodeHighlight> prop is present, the{" "}
@@ -120,12 +123,107 @@ const FileCardDemoPage = (props) => {
           </Alert>
         </section>
         {/** VALIDATION UPLOAD AND MORE */}
+
+        <section id="validation">
+          <SubTitle content="Validation" />
+          <DescParagraph>
+            The <CodeHighlight>valid</CodeHighlight> prop can be set to{" "}
+            <TypeHighlight>true</TypeHighlight>,{" "}
+            <TypeHighlight>false</TypeHighlight> or{" "}
+            <TypeHighlight>undefined</TypeHighlight>.
+          </DescParagraph>
+
+          <DemoContainerFileMosaic>
+            <DemoFileMosaicValidation card />
+          </DemoContainerFileMosaic>
+
+          <CodeJSFileMosaicValidation />
+          <Alert severity="info">
+            Typically, <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> or{" "}
+            <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components set
+            this prop when validating the input from a given criteria. You can
+            see the behaviour mentioned in the following demos:
+            <ul>
+              <li>
+                <AnchorToTab href="/components/dropzone#validation">
+                  Dropzone validation
+                </AnchorToTab>
+              </li>
+              <li>
+                <AnchorToTab href="/components/fileinputbutton#validation">
+                  FileInputButton validation
+                </AnchorToTab>
+              </li>
+            </ul>
+          </Alert>
+        </section>
+
+        <section id="uploading">
+          <SubTitle content="Uploading status" />
+          <DescParagraph>
+            The <CodeHighlight>uploadStatus</CodeHighlight> prop can be set to{" "}
+            <TypeHighlight>"preparing"</TypeHighlight>,{" "}
+            <TypeHighlight>"uploading"</TypeHighlight>,{" "}
+            <TypeHighlight>"aborted"</TypeHighlight>,{" "}
+            <TypeHighlight>"error"</TypeHighlight> or{" "}
+            <TypeHighlight>"success"</TypeHighlight>. Also the{" "}
+            <CodeHighlight>uploadMessage</CodeHighlight> prop is used for
+            displaying the error or success message. Finally, the{" "}
+            <CodeHighlight>progress</CodeHighlight> prop can be used to show the
+            current progress of the upload process.
+            <br />
+            Each of the following examples demonstrates one state combination of
+            the FileMosaic component.
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "row",
+              gap: "7px",
+              flexWrap: "wrap",
+            }}
+          >
+            <DemoFileMosaicUploadStatus card />
+          </Paper>
+
+          <CodeJSFileMosaicUploadStatus card />
+
+          <Alert severity="info">
+            As you can see, you have full control of the FileCard upload
+            props. You can take advantage of them to ake your own upload
+            function and show the user the progress.
+            <br /> On the other hand, you can also leverage the capability of{" "}
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> and{" "}
+            <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components
+            since they also manage the{" "}
+            <TypeHighlight>{"uploadStatus"}</TypeHighlight>
+            prop for you when upload is enabled. You can see the behaviour
+            mentioned in the following demos:
+            <ul>
+              <li>
+                <AnchorToTab href="/components/dropzone#uploading">
+                  Dropzone upload
+                </AnchorToTab>
+              </li>
+              <li>
+                <AnchorToTab href="/components/fileinputbutton#uploading">
+                  FileInputButton upload
+                </AnchorToTab>
+              </li>
+            </ul>
+          </Alert>
+        </section>
+
         <section id="dark-mode">
           <SubTitle content="Dark mode" />
           <DescParagraph>
-            The <CodeHighlight>FileCard</CodeHighlight> component supports
-            dark mode by setting the prop{" "}
-            <TypeHighlight>darkMode</TypeHighlight> to{" "}
+            The <CodeHighlight>FileCard</CodeHighlight> component supports dark
+            mode by setting the prop <TypeHighlight>darkMode</TypeHighlight> to{" "}
             <TypeHighlight>true</TypeHighlight>.
           </DescParagraph>
 
@@ -144,7 +242,7 @@ const FileCardDemoPage = (props) => {
 
           <CodeJSFileMosaicDarkMode card />
         </section>
-    {/*     <section id="localization">
+        {/*     <section id="localization">
           <SubTitle content="Localization" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> component has
@@ -217,9 +315,7 @@ const FileCardDemoPage = (props) => {
           </DescParagraph>
           <ul>
             <li>
-              <AnchorToTab href="/api/filecard">
-                {"<FileMosaic/>"}
-              </AnchorToTab>
+              <AnchorToTab href="/api/filecard">{"<FileMosaic/>"}</AnchorToTab>
             </li>
             <li>
               <AnchorToTab href="/api/fileinputbuttom">

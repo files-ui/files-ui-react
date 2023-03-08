@@ -1,23 +1,17 @@
 import * as React from "react";
-import { FileCardProps, FileCardPropsDefault } from "./FileCardProps";
+import { FileCardProps } from "./FileCardProps";
 import "./FileCard.scss";
-import "./FileCardPaper.scss";
-import FileItemImage from "../file-item/components/FileItemImage/FileItemImage";
-import useFileItemInitializer from "../file-item/hooks/useFileItemInitializer";
+import "./components/FileCardPaper.scss";
 import { getLocalFileItemData } from "../file-item/utils/getLocalFileItemData";
-import { Clear } from "../icons";
 import { fileSizeFormater, shrinkWord } from "../../core";
-import { mergeProps } from "../overridable";
-import { showFileItemComponent } from "../file-item/utils/showFileItemComponent";
-import useFileItemProgress from "../file-item/hooks/useFileItemProgress";
-import MainLayerBodyNeo from "../file-item/components/FileItemMainLayer/MainLayerBody/MainLayerBodyNeo";
 import useProgress from "../file-mosaic/hooks/useProgress";
 import useFileMosaicInitializer from "../file-mosaic/hooks/useFileMosaicInitializer";
 import { useIsUploading } from "../file-mosaic/hooks/useIsUploading";
 import LayerContainer from "../file-mosaic/components/file-mosaic-layer/LayerContainer";
 import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 import FileMosaicImageLayer from "../file-mosaic/components/FIleMosaicImageLayer/FileMosaicImageLayer";
-import FileCardRightLayer from "./FileCardRightLayer";
+import FileCardRightLayer from "./components/FileCardRightLayer";
+import FileCardInfoLayer from "./components/FileCardInfoLayer";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -317,6 +311,16 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
               infoIcon={info !== undefined}
               onOpenInfo={handleOpenInfo}
               isActive={alwaysActive || hovering}
+            />
+          </Layer>
+          <Layer className="file-card-info-layer-container" visible={showInfo}>
+            <FileCardInfoLayer
+              onCloseInfo={handleCloseInfo}
+              valid={valid}
+              localization={localization}
+              localName={localName}
+              sizeFormatted={sizeFormatted}
+              localType={localType}
             />
           </Layer>
           <Layer className="file-card-upload-layer" visible={isUploading}>
