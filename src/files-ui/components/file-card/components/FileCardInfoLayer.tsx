@@ -17,19 +17,18 @@ const FileCardInfoLayer: React.FC<FileCardInfoLayerProps> = (
   } = props;
   return (
     <div className="file-card-file-info">
-      <div className="files-ui-file-card-info-layer-header">
+      {/*   <FileMosaicStatus
+        style={{ margin: 0, right: 5, bottom: 0, position:"absolute" }}
+          valid={valid}
+          uploadStatus={uploadStatus}
+          localization={localization}
+        /> */}
         <Cancel
-          style={{ margin: 0, right: 0, top: 0 }}
+          style={{ margin: 0, right: 5, top: 0, position:"absolute" }}
           color="rgba(255,255,255,0.8)"
           onClick={onCloseInfo}
           colorFill="black"
         />
-        <FileMosaicStatus
-          valid={valid}
-          uploadStatus={uploadStatus}
-          localization={localization}
-        />
-      </div>
       <div className="heading">Name:</div>
       <div className="label">{localName}</div>
       <div className="heading">Size:</div>

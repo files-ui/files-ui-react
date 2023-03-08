@@ -12,6 +12,9 @@ import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 import FileMosaicImageLayer from "../file-mosaic/components/FIleMosaicImageLayer/FileMosaicImageLayer";
 import FileCardRightLayer from "./components/FileCardRightLayer";
 import FileCardInfoLayer from "./components/FileCardInfoLayer";
+import FileMosaicStatus from "../file-mosaic/components/FileMosaicStatus/FileMosaicStatus";
+import FileCardUploadLayer from "./components/FileCardUploadLayer";
+import { Tooltip } from "../tooltip";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -35,7 +38,8 @@ const makeFileCardClassName = (
   className: string | undefined
 ): string => {
   console.log("FileCard makeFileCardClassName", elevation, darkMode, className);
-  let finalClassName: string = "files-ui-file-card-main-container";
+  let finalClassName: string = "files-ui-file-card-main-container files-ui-tooltip card";
+
   if (elevation) {
     finalClassName += " elevation-" + setFinalElevation(elevation);
   }
@@ -247,6 +251,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
         >
           <Layer className="file-card-main-layer" visible={true}>
             <div className="file-card-icon-plus-data">
+              {/** ICON + STATUS */}
               <div className="file-card-icon-container">
                 <LayerContainer className="file-card-icon-layer">
                   {/** IMAGE LAYER BLUR */}
@@ -270,19 +275,22 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
                       isBlur={false}
                     />
                   </Layer>
+                  <Layer className="file-card-status-layer" visible={true}>
+                    <FileMosaicStatus
+                      valid={valid}
+                      uploadStatus={uploadStatus}
+                      localization={localization}
+                    />
+                  </Layer>
                 </LayerContainer>
               </div>
-
+              {/**  DATA  */}
               <div
                 className={
                   darkMode ? "file-card-data dark-mode" : "file-card-data"
                 }
               >
-                <div className={"file-card-name"}>
-                  {/* {shrinkWord(localName, true)} */}
-                  {localName}
-                </div>
-
+                <div className={"file-card-name"}>{localName}</div>
                 <div className={"file-card-size"}>{sizeFormatted}</div>
                 <div className={"file-card-size"}>{shrinkWord(localType)}</div>
               </div>
@@ -313,6 +321,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
               isActive={alwaysActive || hovering}
             />
           </Layer>
+
           <Layer className="file-card-info-layer-container" visible={showInfo}>
             <FileCardInfoLayer
               onCloseInfo={handleCloseInfo}
@@ -323,47 +332,43 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
               localType={localType}
             />
           </Layer>
-          <Layer className="file-card-upload-layer" visible={isUploading}>
-            Upload Layer
+
+          {/** UPLOAD LAYER */}
+          <Layer
+            className="file-card-upload-layer-container"
+            visible={isUploading}
+          >
+            <div className="files-ui-file-card-upload-layer">
+              <FileCardUploadLayer
+                uploadStatus={uploadStatus}
+                progress={localProgress}
+                onCancel={onCancel ? () => onCancel?.(id) : undefined}
+                onAbort={
+                  onAbort
+                    ? () => {
+                        xhr?.abort();
+                        onAbort?.(id);
+                      }
+                    : undefined
+                }
+                localization={localization}
+              />
+            </div>
           </Layer>
         </LayerContainer>
-        {/* <FileItemImage
-          imageSource={imageSource}
-          url={url}
-          fileName={localName}
-          backgroundBlurImage={backgroundBlurImage as boolean}
-          card={true}
+       
+        <Tooltip
+          open={resultOnTooltip}
+          uploadStatus={uploadStatus}
+          valid={valid}
+          errors={errors}
+          uploadMessage={uploadMessage}
         />
-
-        <div
-          className={darkMode ? "file-card-data dark-mode" : "file-card-data"}
-        >
-          <div className={"file-card-name"}>{shrinkWord(localName, true)}</div>
-
-          <div className={"file-card-size"}>{sizeFormatted}</div>
-          <div className={"file-card-size"}>{shrinkWord(localType)}</div>
-        </div>
-
-        <div className="files-ui-file-card-right">
-          <Clear
-            style={{ position: "absolute", right: 0, top: 0 }}
-            className="dui-file-item-icon"
-            color="rgba(255,255,255,0.851)"
-            onClick={handleDelete}
-            size="small"
-            colorFill="transparent"
-          />
-          <MainLayerBodyNeo
-            hide={false}
-            uploadStatus={uploadStatus}
-            localization={localization}
-            progress={progress}
-            onAbort={onAbort}
-            valid={valid}
-            hovering={true}
-            onCancel={onCancel}
-          />
-        </div> */}
+        {downloadUrl && (
+          <a ref={downloadRef} href={downloadUrl} download={localName} hidden>
+            download_file
+          </a>
+        )}
       </div>
     );
   }

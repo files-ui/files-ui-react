@@ -235,6 +235,7 @@ const FileCardDemoPage = (props) => {
               alignItems: "center",
               justifyContent: "center",
               width: "100%",
+              flexWrap:"wrap"
             }}
           >
             <DemoFileMosaicDarkMode card />

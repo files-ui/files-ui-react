@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
 .files-ui-file-card-main-container {
   border-radius: 8px;
-  overflow: hidden;
+  //overflow: hidden;
   color: rgba(0, 0, 0, 0.858);
   display: flex;
   flex-direction: row;
@@ -14,6 +14,8 @@
   font-weight: 400;
   width: 350px;
   .files-ui-file-card-main-layer-container {
+    border-radius: 8px;
+    overflow: hidden;
     width: 380px;
     box-sizing: border-box;
     height: 100px;
@@ -74,6 +76,13 @@
               }
             }
           }
+          .file-card-status-layer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 5px;
+            box-sizing: border-box;
+          }
         }
         .file-card-data {
           line-height: 18px;
@@ -124,7 +133,7 @@
       //background-color: aquamarine;
       height: 100%;
     }
-    .file-card-upload-layer {
+    .file-card-upload-layer-container {
       display: flex;
       box-sizing: border-box;
       //background-color: rgba(0, 0, 0, 0.5);
@@ -147,6 +156,7 @@
       overflow: hidden;
       align-items: center;
       justify-content: flex-end;
+      height: 100%;
     }
     .file-card-info-layer-container {
       display: flex;
@@ -178,6 +188,7 @@
         scrollbar-width: thin;
         overflow: auto;
         scrollbar-color: #646c7fa9 transparent;
+       // position: relative;
 
         &::-webkit-scrollbar {
           width: 9px;
@@ -196,6 +207,9 @@
           flex-direction: row;
           align-items: center;
           justify-content: flex-end;
+         /*  position: absolute;
+          top: 5;
+          right: 5; */
         }
         .heading {
           font-weight: 600;

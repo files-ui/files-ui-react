@@ -8,7 +8,7 @@ import { FileItemLocalizerSelector, LocalLabels } from "../../../../core";
 const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
   props: FileMosaicStatusProps
 ) => {
-  const { valid, uploadStatus, localization } = props;
+  const { valid, uploadStatus, localization, style } = props;
 
   const FileItemStatusLocalizer: LocalLabels = FileItemLocalizerSelector(
     localization
@@ -16,7 +16,7 @@ const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
 
   if (uploadStatus === "success") {
     return (
-      <div className="files-ui-file-item-status-container file-status-ok">
+      <div className="files-ui-file-item-status-container file-status-ok" style={style}>
         <CloudDone color="#4caf50" size="small" className="status-icon" />
         {FileItemStatusLocalizer.success as string}
       </div>
@@ -24,7 +24,7 @@ const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
   }
   if (uploadStatus === "error" || uploadStatus === "aborted") {
     return (
-      <div className="files-ui-file-item-status-container file-status-error">
+      <div className="files-ui-file-item-status-container file-status-error" style={style}>
         <UploadError
           color="#f44336"
           size="semi-medium"
@@ -37,14 +37,14 @@ const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
   if (valid !== undefined && valid !== null) {
     if (valid) {
       return (
-        <div className="files-ui-file-item-status-container file-status-ok">
+        <div className="files-ui-file-item-status-container file-status-ok" style={style}>
           <CheckCircle color="#4caf50" size="small" className="status-icon" />
           {FileItemStatusLocalizer.valid as string}
         </div>
       );
     } else {
       return (
-        <div className="files-ui-file-item-status-container file-status-error">
+        <div className="files-ui-file-item-status-container file-status-error" style={style}>
           <DoDisturb color="#f44336" size="small" className="status-icon" />
           {FileItemStatusLocalizer.denied as string}
         </div>

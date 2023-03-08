@@ -6,6 +6,7 @@ const sampleFileProps: ExtFile = {
   size: 28 * 1024 * 1024,
   type: "text/plain",
   name: "file created from props.jsx",
+  valid: true,
 };
 const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
   const removeFile = (id: string | number | undefined) => {
@@ -18,9 +19,10 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
           style={{
             display: "flex",
             justifyContent: "center",
-            width: "50%",
+            minWidth: "50%",
             backgroundColor: "white",
             padding: "15px 0",
+            flexGrow:1
           }}
         >
           <FileCard {...sampleFileProps} info onDelete={removeFile} />
@@ -29,9 +31,10 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
           style={{
             display: "flex",
             justifyContent: "center",
-            width: "50%",
+            minWidth: "50%",
             backgroundColor: "#121212",
             padding: "15px 0",
+            flexGrow: 1,
           }}
         >
           <FileCard {...sampleFileProps} info darkMode onDelete={removeFile} />
@@ -44,9 +47,10 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          width: "50%",
+          minWidth: "50%",
           backgroundColor: "white",
           padding: "15px 0",
+          flexGrow: 1,
         }}
       >
         <FileMosaic {...sampleFileProps} info onDelete={removeFile} />
@@ -55,9 +59,11 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
         style={{
           display: "flex",
           justifyContent: "center",
-          width: "50%",
+          minWidth: "50%",
           backgroundColor: "#121212",
           padding: "15px 0",
+          flexGrow: 1,
+
         }}
       >
         <FileMosaic {...sampleFileProps} info darkMode onDelete={removeFile} />
