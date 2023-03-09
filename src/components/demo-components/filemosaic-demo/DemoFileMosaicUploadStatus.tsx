@@ -7,8 +7,8 @@ import {
   FileCard,
 } from "../../../files-ui";
 import TypeHighlight from "../../typeHighlight/TypeHighlight";
-import DemoContainerFileMosaic from "./DemoContainerFileMosaic";
 
+import "./DemoFileMosaicUpload.scss";
 const DemoFileMosaicUploadStatus = (props: { card?: boolean }) => {
   const progress = useFakeProgress();
 
@@ -95,14 +95,20 @@ export default DemoFileMosaicUploadStatus;
 const FlexRowContainer = (props: {
   children: React.ReactNode;
   card?: boolean;
-  title?:string
+  title?: string;
 }) => {
+  const { children, card, title } = props;
   return (
     <React.Fragment>
-      <TypeHighlight>{props.title}</TypeHighlight>
-      <DemoContainerFileMosaic card={props.card}>
-        {props.children}
-      </DemoContainerFileMosaic>
+      {!card && <h4 style={{ margin: 0 }}>{title}</h4>}
+      <div
+        className={
+          card ? "flex-container-group-card" : "flex-container-group-mosaic"
+        }
+      >
+        {card && <h4 style={{ margin: 0 }}>{title}</h4>}
+        {children}
+      </div>
     </React.Fragment>
   );
 };

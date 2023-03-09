@@ -217,19 +217,9 @@ const FileCardDemoPage = (props) => {
             <TypeHighlight>true</TypeHighlight>.
           </DescParagraph>
 
-          <Paper
-            variant="outlined"
-            style={{
-              padding: "25px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              gap: "20px",
-            }}
-          >
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
             <DemoFileMosaicDarkMode card />
-          </Paper>
+          </div>
 
           <CodeJSFileMosaicDarkMode card />
         </section>

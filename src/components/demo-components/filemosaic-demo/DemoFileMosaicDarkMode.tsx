@@ -19,9 +19,8 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
           style={{
             display: "flex",
             justifyContent: "center",
-            minWidth: "50%",
             backgroundColor: "white",
-            padding: "15px 0",
+            padding: "25px 0",
             flexGrow:1
           }}
         >
@@ -31,9 +30,8 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
           style={{
             display: "flex",
             justifyContent: "center",
-            minWidth: "50%",
             backgroundColor: "#121212",
-            padding: "15px 0",
+            padding: "25px 0",
             flexGrow: 1,
           }}
         >

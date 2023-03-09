@@ -39,14 +39,14 @@ const Demo${card?"FileCard":"FileMosaic"}DarkMode = () => {
     console.log("delete button clicked on file: " + id);
   };
   return (
-    <>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          width: "50%",
           backgroundColor: "white",
-          padding: "10px 0",
+          padding: "25px 0",
+          flexGrow:1
         }}
       >
         <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} />
@@ -55,18 +55,17 @@ const Demo${card?"FileCard":"FileMosaic"}DarkMode = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          width: "50%",
-          backgroundColor: "#121212",
-          padding: "10px 0",
+          backgroundColor: "white",
+          padding: "25px 0",
+          flexGrow:1
         }}
       >
         <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info darkMode onDelete={removeFile} />
       </div>
-    </>
+    </div>
   );
 };
-export default Demo${card?"FileCard":"FileMosaic"}DarkMode;
-`;
+export default Demo${card?"FileCard":"FileMosaic"}DarkMode;`;
 
 const completeCodeTS = (card?: boolean) => `import * as React from "react";
 import { ExtFile, ${card?"FileCard":"FileMosaic"} } from "@files-ui/react";
@@ -82,14 +81,14 @@ const Demo${card?"FileCard":"FileMosaic"}DarkMode = () => {
     console.log("delete button clicked on file: " + id);
   };
   return (
-    <>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          width: "50%",
           backgroundColor: "white",
-          padding: "10px 0",
+          padding: "25px 0",
+          flexGrow:1
         }}
       >
         <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} />
@@ -98,15 +97,14 @@ const Demo${card?"FileCard":"FileMosaic"}DarkMode = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          width: "50%",
-          backgroundColor: "#121212",
-          padding: "10px 0",
+          backgroundColor: "white",
+          padding: "25px 0",
+          flexGrow:1
         }}
       >
         <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info darkMode onDelete={removeFile} />
       </div>
-    </>
+    </div>
   );
 };
-export default Demo${card?"FileCard":"FileMosaic"}DarkMode;
-`;
+export default Demo${card?"FileCard":"FileMosaic"}DarkMode;`;
