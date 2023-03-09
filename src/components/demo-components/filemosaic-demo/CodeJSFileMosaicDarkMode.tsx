@@ -55,7 +55,7 @@ const Demo${card?"FileCard":"FileMosaic"}DarkMode = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          backgroundColor: "white",
+          backgroundColor: "#121212",
           padding: "25px 0",
           flexGrow:1
         }}

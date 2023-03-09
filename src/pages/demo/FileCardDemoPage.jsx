@@ -210,84 +210,53 @@ const FileCardDemoPage = (props) => {
         </section>
 
         <section id="dark-mode">
-          <SubTitle content="Dark mode" />
+          <SubTitle content="Dark mode and Elevation" />
           <DescParagraph>
             The <CodeHighlight>FileCard</CodeHighlight> component supports dark
             mode by setting the prop <TypeHighlight>darkMode</TypeHighlight> to{" "}
-            <TypeHighlight>true</TypeHighlight>.
+            <TypeHighlight>true</TypeHighlight>. The elevation can be used to
+            establish a hierarchy between other content. In practical terms, the
+            elevation controls the size of the shadow applied to the surface. In
+            dark mode, raising the elevation also makes the surface lighter.
           </DescParagraph>
 
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              width: "100%",
+              padding: "25px 0",
+            }}
+          >
             <DemoFileMosaicDarkMode card />
           </div>
 
           <CodeJSFileMosaicDarkMode card />
         </section>
-        {/*     <section id="localization">
-          <SubTitle content="Localization" />
+    {/*     <section id="actions">
+          <SubTitle content="Actions: info, delete, see, watch, download" />
           <DescParagraph>
-            The <CodeHighlight>FileMosaic</CodeHighlight> component has
-            multilanguage support. You can change the language in wich labels
-            are displayed by setting the{" "}
-            <CodeHighlight>{"localization"}</CodeHighlight> prop. So far only
-            the following languages are supported:
-            <ul>
-              {[
-                "English",
-                "Spanish",
-                "French",
-                "Italian",
-                "Portuguese",
-                "Russian",
-                "Chinnese (simplified)",
-                "Chinnese (traditional)",
-              ].map((x) => (
-                <li>
-                  <TypeHighlight>{x}</TypeHighlight>
-                </li>
-              ))}
-            </ul>
+            The <CodeHighlight>FileCard</CodeHighlight> component supports dark
+            mode by setting the prop <TypeHighlight>darkMode</TypeHighlight> to{" "}
+            <TypeHighlight>true</TypeHighlight>. The elevation can be used to
+            establish a hierarchy between other content. In practical terms, the
+            elevation controls the size of the shadow applied to the surface. In
+            dark mode, raising the elevation also makes the surface lighter.
           </DescParagraph>
 
-          <Paper
-            variant="outlined"
+          <div
             style={{
-              padding: "25px",
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              gap: "20px",
-            }}
-          >
-            <DemoFileMosaicLocalization />
-          </Paper>
-          <CodeJSFileMosaicLocalization />
-        </section>
-
-        <section id="file-icon">
-          <SubTitle content="File Icons (extensive list)" />
-          <DescParagraph>
-            The <CodeHighlight>FileMosaic</CodeHighlight> component supports
-            several file types to properly set a file icon. The complete list of
-            file icons is the following:
-          </DescParagraph>
-          <Paper
-            variant="outlined"
-            style={{
-              padding: "25px 0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              //flexDirection: "column",
-              gap: "10px",
               flexWrap: "wrap",
+              width: "100%",
+              padding: "25px 0",
             }}
           >
-            <DemoFileMosaicFileIcons />
-          </Paper>
-        </section> */}
+            <DemoFileMosaicDarkMode card />
+          </div>
 
+          <CodeJSFileMosaicDarkMode card />
+        </section> */}
         <section id="api">
           <SubTitle content="API" />
           <DescParagraph>
@@ -356,7 +325,7 @@ const rightMenuItems = [
   },
   {
     id: 8,
-    label: "Dark mode",
+    label: "Dark mode & elevation",
     referTo: "/components/file-mosaic#dark-mode",
   },
 ];
