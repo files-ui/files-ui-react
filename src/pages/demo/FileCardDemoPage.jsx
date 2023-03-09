@@ -24,6 +24,8 @@ import DemoFileMosaicValidation from "../../components/demo-components/filemosai
 import CodeJSFileMosaicValidation from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicValidation";
 import DemoFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/DemoFileMosaicUploadStatus";
 import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
+import DemoFileCardActions from "../../components/demo-components/filemosaic-demo/DemoFileCradActions";
+import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
 
 const FileCardDemoPage = (props) => {
   return (
@@ -233,15 +235,44 @@ const FileCardDemoPage = (props) => {
 
           <CodeJSFileMosaicDarkMode card />
         </section>
-    {/*     <section id="actions">
+
+        <section id="actions">
           <SubTitle content="Actions: info, delete, see, watch, download" />
           <DescParagraph>
-            The <CodeHighlight>FileCard</CodeHighlight> component supports dark
-            mode by setting the prop <TypeHighlight>darkMode</TypeHighlight> to{" "}
-            <TypeHighlight>true</TypeHighlight>. The elevation can be used to
-            establish a hierarchy between other content. In practical terms, the
-            elevation controls the size of the shadow applied to the surface. In
-            dark mode, raising the elevation also makes the surface lighter.
+            You can use the following actions.
+            <ul>
+              <li>
+                FileCard with the <CodeHighlight>onDelete</CodeHighlight> prop
+                will display a delete icon
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>info</CodeHighlight> prop will
+                display an "info" icon that will display an info layer.
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>onSee</CodeHighlight> prop will
+                display the "see" button that can be used to retrieve an image
+                URI obtained from reading a <TypeHighlight>File</TypeHighlight>{" "}
+                object if given or just the{" "}
+                <TypeHighlight>imageUrl</TypeHighlight> prop if given. The file
+                must be an image.
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>onWatch</CodeHighlight> prop
+                will display the "play" icon that can be used to retrieve the
+                video as a <TypeHighlight>File</TypeHighlight> object if given
+                or just the <TypeHighlight>videoUrl</TypeHighlight> prop if
+                given. The file must be an video.
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>downloadUrl</CodeHighlight>{" "}
+                prop will display the "download" icon that can be used to start
+                the download. If the <CodeHighlight>onDownload</CodeHighlight>{" "}
+                prop is given, the "download" icon will also be visible, but it
+                will be taken as the user will perform their own download.
+              </li>
+            </ul>
+           
           </DescParagraph>
 
           <div
@@ -250,13 +281,16 @@ const FileCardDemoPage = (props) => {
               flexWrap: "wrap",
               width: "100%",
               padding: "25px 0",
+              flexDirection: "row",
+              alignItems:"center",
+              justifyContent:"center",
+              gap:"28px"
             }}
           >
-            <DemoFileMosaicDarkMode card />
+            <DemoFileCardActions card />
           </div>
-
-          <CodeJSFileMosaicDarkMode card />
-        </section> */}
+          <CodeJSFileCardActions card />
+        </section>
         <section id="api">
           <SubTitle content="API" />
           <DescParagraph>
