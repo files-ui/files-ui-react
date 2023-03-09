@@ -19,14 +19,16 @@ const useFileMosaicInitializer = (
     valid: boolean | undefined | null,
     preview: boolean,
     imageUrl: string | undefined,
+    videoUrl: string | undefined,
     xhr?: XMLHttpRequest,
 
-): [boolean,boolean, boolean, string, string | undefined] => {
+): [boolean,boolean, boolean, string, string | undefined, File |string | undefined] => {
 
     const [isImage, setIsImage] = React.useState<boolean>(false);
     const [isVideo, setIsVideo] = React.useState<boolean>(false);
     const [url, setUrl] = React.useState<string>("");
     const [imageSource, setImageSource] = React.useState<string | undefined>(undefined);
+    const [videoSource, setVideoSource] = React.useState<File | string | undefined>(undefined);
     const [isReady,setIsReady]=React.useState(false);
 
 
@@ -37,6 +39,7 @@ const useFileMosaicInitializer = (
         valid: boolean | undefined | null,
         preview: boolean,
         imageUrl: string | undefined,
+        videoUrl: string | undefined,
         xhr?: XMLHttpRequest,
         progress?: number
     ) => {
@@ -57,10 +60,15 @@ const useFileMosaicInitializer = (
             setImageSource(imageUrl);
             setIsReady(true);
             return;
-        } else {
+        } else if(videoUrl){
+            setIsVideo(true);
+            setVideoSource(videoUrl);
+            setIsReady(true);
+        }else {
             const [headerMime, tailMime] = getHeaderAndTail(file, type);
 
             setIsImage(headerMime === "image");
+            
             setIsVideo(
                 headerMime === "video" && ["mp4", "ogg", "webm"].includes(tailMime)
             );
@@ -93,7 +101,7 @@ const useFileMosaicInitializer = (
 
     //////   CLEAN UP
     React.useEffect(() => {
-        init(file, name, type, valid, preview || false, imageUrl);
+        init(file, name, type, valid, preview || false, imageUrl,videoUrl);
         return () => {
             setImageSource(undefined);
             setIsImage(false);
@@ -101,8 +109,9 @@ const useFileMosaicInitializer = (
             setIsReady(false);
         };
         // eslint-disable-next-line
-    }, [file, name, type, valid, preview, imageUrl,]);
-    return [isReady,isImage, isVideo, url, imageSource];
+    }, [file, name, type, valid, preview, imageUrl,videoUrl]);
+
+    return [isReady,isImage, isVideo, url, imageSource,videoSource];
 }
 export default useFileMosaicInitializer;
 

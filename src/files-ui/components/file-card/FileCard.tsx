@@ -77,6 +77,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     localization,
     preview,
     imageUrl,
+    videoUrl,
     info,
     backgroundBlurImage = true,
     darkMode,
@@ -107,8 +108,6 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   //ref for anchor element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
 
-  const downloadAnchorRef = React.useRef<HTMLAnchorElement>(null);
-
   //className created
   const finalClassName: string = makeFileCardClassName(
     elevation,
@@ -127,21 +126,22 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   const localProgress: number | undefined = useProgress(progress, xhr);
 
   //Initialize File Item
-  const [isReady, isImage, isVideo, url, imageSource]: [
+  const [isReady, isImage, isVideo, url, imageSource, videoSource]: [
     boolean,
     boolean,
     boolean,
     string,
-    string | undefined
+    string | undefined,
+    File | string | undefined
   ] = useFileMosaicInitializer(
     file,
     propName,
     propType,
     valid,
     preview as boolean,
-    imageUrl
+    imageUrl,
+    videoUrl
   );
-
   //The size formatted and rounded in 2 decimals
   const sizeFormatted: string = localSize
     ? fileSizeFormater(localSize)
@@ -343,15 +343,11 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
         <FileCardRightActions
           deleteIcon={onDelete !== undefined}
           onDelete={handleDelete}
-          darkMode={darkMode}
-          valid={valid}
-          uploadStatus={uploadStatus}
-          localization={localization}
-          sizeFormatted={sizeFormatted}
+          darkMode={darkMode}          
           imageIcon={isImage && onSee !== undefined}
           onSee={() => onSee?.(imageSource)}
           videoIcon={isVideo && onWatch !== undefined}
-          onWatch={() => onWatch?.(file)}
+          onWatch={() => onWatch?.(videoSource)}
           downloadIcon={onDownload !== undefined || downloadUrl !== undefined}
           onDownload={handleDownload}
           infoIcon={info !== undefined}

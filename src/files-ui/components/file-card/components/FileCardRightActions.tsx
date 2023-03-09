@@ -13,13 +13,7 @@ declare type FileCardRightActionsProps = {
   darkMode?: boolean;
   deleteIcon?: boolean;
   onDelete?: Function;
-
-  valid: boolean | null | undefined;
-  uploadStatus?: UPLOADSTATUS;
-  localization?: Localization;
-
-  sizeFormatted: string;
-
+  
   imageIcon: boolean;
   onSee: ((imageSource: string | undefined) => void) | undefined;
 
@@ -49,87 +43,84 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
     onOpenInfo,
     onSee,
     onWatch,
-    sizeFormatted,
-    valid,
-    videoIcon,
-    localization,
-    uploadStatus,
-    isActive,
-    visible
-  } = props;
-if(visible)
-  return (
-    <>
-      <div className="file-card-right-layer-header">
-        {isActive && deleteIcon && (
-          <Clear
-            className={
-              darkMode ? "files-ui-file-icon dark-mode" : "files-ui-file-icon"
-            }
-            color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-            onClick={onDelete}
-            size="small"
-            colorFill="transparent"
-          />
-        )}
-      </div>
-      <div className="file-card-right-layer-footer">
-        {isActive && (
-          <React.Fragment>
-            {imageIcon && (
-              <Visibility
-                className={
-                  darkMode
-                    ? "files-ui-file-icon dark-mode"
-                    : "files-ui-file-icon"
-                }
-                color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-                onClick={onSee}
-                size="small"
-              />
-            )}
 
-            {videoIcon && (
-              <PlayIcon
-                className={
-                  darkMode
-                    ? "files-ui-file-icon dark-mode"
-                    : "files-ui-file-icon"
-                }
-                color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-                onClick={onWatch}
-                size="small"
-              />
-            )}
-            {downloadIcon && (
-              <DownloadFile
-                className={
-                  darkMode
-                    ? "files-ui-file-icon dark-mode"
-                    : "files-ui-file-icon"
-                }
-                color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-                onClick={onDownload}
-                size="small"
-              />
-            )}
-            {infoIcon && (
-              <InfoDisney
-                className={
-                  darkMode
-                    ? "files-ui-file-icon dark-mode"
-                    : "files-ui-file-icon"
-                }
-                onClick={onOpenInfo}
-                color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-                size="micro"
-              />
-            )}
-          </React.Fragment>
-        )}
-      </div>
-    </>
-  )
-  return <></>
+    videoIcon,
+    isActive,
+    visible,
+  } = props;
+  if (visible)
+    return (
+      <>
+        <div className="file-card-right-layer-header">
+          {isActive && deleteIcon && (
+            <Clear
+              className={
+                darkMode ? "files-ui-file-icon dark-mode" : "files-ui-file-icon"
+              }
+              color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
+              onClick={onDelete}
+              size="small"
+              colorFill="transparent"
+            />
+          )}
+        </div>
+        <div className="file-card-right-layer-footer">
+          {isActive && (
+            <React.Fragment>
+              {imageIcon && (
+                <Visibility
+                  className={
+                    darkMode
+                      ? "files-ui-file-icon dark-mode"
+                      : "files-ui-file-icon"
+                  }
+                  color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
+                  onClick={onSee}
+                  size="small"
+                />
+              )}
+
+              {videoIcon && (
+                <PlayIcon
+                  className={
+                    darkMode
+                      ? "files-ui-file-icon dark-mode"
+                      : "files-ui-file-icon"
+                  }
+                  color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
+                  onClick={onWatch}
+                  size="small"
+                />
+              )}
+              {downloadIcon && (
+                <DownloadFile
+                  className={
+                    darkMode
+                      ? "files-ui-file-icon dark-mode"
+                      : "files-ui-file-icon"
+                  }
+                  color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
+                  onClick={onDownload}
+                  size="small"
+                />
+              )}
+              {infoIcon && (
+                <InfoDisney
+                  className={
+                    darkMode
+                      ? "files-ui-file-icon dark-mode"
+                      : "files-ui-file-icon"
+                  }
+                  onClick={onOpenInfo}
+                  color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
+                  size="micro"
+                />
+              )}
+            </React.Fragment>
+          )}
+        </div>
+      </>
+    );
+  return <></>;
 };
 export default FileCardRightActions;
