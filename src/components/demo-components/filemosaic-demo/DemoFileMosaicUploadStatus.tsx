@@ -6,8 +6,10 @@ import {
   UPLOADSTATUS,
   FileCard,
 } from "../../../files-ui";
+import TypeHighlight from "../../typeHighlight/TypeHighlight";
+import DemoContainerFileMosaic from "./DemoContainerFileMosaic";
 
-const DemoFileMosaicUploadStatus = (props:{card?:boolean}) => {
+const DemoFileMosaicUploadStatus = (props: { card?: boolean }) => {
   const progress = useFakeProgress();
 
   const [status1, setStatus1] = React.useState<UPLOADSTATUS>("uploading");
@@ -36,40 +38,40 @@ const DemoFileMosaicUploadStatus = (props:{card?:boolean}) => {
   const handleAbort = (id: string | number | undefined) => {
     console.log("Upload aborted in file: " + id);
   };
-  if(props.card)
-  return (
-<>
-      <FlexRowContainer card>
-        <FileCard {...preparingFile} />
-        <FileCard {...preparingFile} onCancel={handleCancel} />
-      </FlexRowContainer>
+  if (props.card)
+    return (
+      <>
+        <FlexRowContainer card title={"preparing stage"}>
+          <FileCard {...preparingFile} />
+          <FileCard {...preparingFile} onCancel={handleCancel} />
+        </FlexRowContainer>
 
-      <FlexRowContainer card>
-        <FileCard {...uploadingFile} />
-        <FileCard {...uploadingFile} progress={progress} />
-        <FileCard {...uploadingFile} onAbort={handleAbort} />
-        <FileCard
-          {...uploadingFile}
-          onAbort={handleAbort}
-          progress={progress}
-        />
-      </FlexRowContainer>
+        <FlexRowContainer card title={"uploading stage"}>
+          <FileCard {...uploadingFile} />
+          <FileCard {...uploadingFile} progress={progress} />
+          <FileCard {...uploadingFile} onAbort={handleAbort} />
+          <FileCard
+            {...uploadingFile}
+            onAbort={handleAbort}
+            progress={progress}
+          />
+        </FlexRowContainer>
 
-      <FlexRowContainer card>
-        <FileCard {...uploadResultFiles[0]} uploadStatus={status1} />
-        <FileCard {...uploadResultFiles[1]} uploadStatus={status2} />
-        <FileCard {...uploadResultFiles[2]} uploadStatus={status3} />
-      </FlexRowContainer>
-    </>
-  )
+        <FlexRowContainer card title={"upload result stage"}>
+          <FileCard {...uploadResultFiles[0]} uploadStatus={status1} />
+          <FileCard {...uploadResultFiles[1]} uploadStatus={status2} />
+          <FileCard {...uploadResultFiles[2]} uploadStatus={status3} />
+        </FlexRowContainer>
+      </>
+    );
   return (
     <>
-      <FlexRowContainer>
+      <FlexRowContainer title={"preparing stage"}>
         <FileMosaic {...preparingFile} />
         <FileMosaic {...preparingFile} onCancel={handleCancel} />
       </FlexRowContainer>
 
-      <FlexRowContainer>
+      <FlexRowContainer title={"uploading stage"}>
         <FileMosaic {...uploadingFile} />
         <FileMosaic {...uploadingFile} progress={progress} />
         <FileMosaic {...uploadingFile} onAbort={handleAbort} />
@@ -80,7 +82,7 @@ const DemoFileMosaicUploadStatus = (props:{card?:boolean}) => {
         />
       </FlexRowContainer>
 
-      <FlexRowContainer>
+      <FlexRowContainer title={"upload result stage"}>
         <FileMosaic {...uploadResultFiles[0]} uploadStatus={status1} />
         <FileMosaic {...uploadResultFiles[1]} uploadStatus={status2} />
         <FileMosaic {...uploadResultFiles[2]} uploadStatus={status3} />
@@ -90,19 +92,18 @@ const DemoFileMosaicUploadStatus = (props:{card?:boolean}) => {
 };
 export default DemoFileMosaicUploadStatus;
 
-const FlexRowContainer = (props: { children: React.ReactNode, card?:boolean }) => {
+const FlexRowContainer = (props: {
+  children: React.ReactNode;
+  card?: boolean;
+  title?:string
+}) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-evenly",
-        width: "100%",
-        flexDirection:props.card?"column":"row"
-      }}
-    >
-      {props.children}
-    </div>
+    <React.Fragment>
+      <TypeHighlight>{props.title}</TypeHighlight>
+      <DemoContainerFileMosaic card={props.card}>
+        {props.children}
+      </DemoContainerFileMosaic>
+    </React.Fragment>
   );
 };
 

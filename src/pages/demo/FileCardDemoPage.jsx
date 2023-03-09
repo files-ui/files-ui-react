@@ -65,7 +65,7 @@ const FileCardDemoPage = (props) => {
           <DemoContainerFileMosaic>
             <DemoFileCardBasic />
           </DemoContainerFileMosaic>
-          <CodeJSFileCardBasic card/>
+          <CodeJSFileCardBasic card />
 
           <Alert severity="info">
             <AlertTitle> FileInputButton </AlertTitle>
@@ -137,7 +137,8 @@ const FileCardDemoPage = (props) => {
             <DemoFileMosaicValidation card />
           </DemoContainerFileMosaic>
 
-          <CodeJSFileMosaicValidation card/>
+          <CodeJSFileMosaicValidation card />
+
           <Alert severity="info">
             Typically, <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> or{" "}
             <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components set
@@ -176,27 +177,16 @@ const FileCardDemoPage = (props) => {
             the FileMosaic component.
           </DescParagraph>
 
-          <Paper
-            variant="outlined"
-            style={{
-              padding: "25px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-              gap: "7px",
-              flexWrap: "wrap",
-            }}
-          >
+          <DemoContainerFileMosaic card>
             <DemoFileMosaicUploadStatus card />
-          </Paper>
+          </DemoContainerFileMosaic>
 
           <CodeJSFileMosaicUploadStatus card />
 
           <Alert severity="info">
-            As you can see, you have full control of the FileCard upload
-            props. You can take advantage of them to ake your own upload
-            function and show the user the progress.
+            As you can see, you have full control of the FileCard upload props.
+            You can take advantage of them to ake your own upload function and
+            show the user the progress.
             <br /> On the other hand, you can also leverage the capability of{" "}
             <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> and{" "}
             <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components
@@ -230,12 +220,12 @@ const FileCardDemoPage = (props) => {
           <Paper
             variant="outlined"
             style={{
-              //padding: "25px",
+              padding: "25px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "100%",
-              flexWrap:"wrap"
+              flexDirection: "column",
+              gap: "20px",
             }}
           >
             <DemoFileMosaicDarkMode card />

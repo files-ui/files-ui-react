@@ -33,7 +33,7 @@ const sampleFileProps = {
 };`;
 
 const completeCodeJS = (card) => `import * as React from "react";
-import { InputButton, FileMosaic } from "@files-ui/react";
+import { InputButton, FileCard } from "@files-ui/react";
 
 const sampleFileProps = {
   id: ":0:",
@@ -83,7 +83,7 @@ const sampleFileProps: ExtFile = {
   name: "file created from props.jsx",
 };`;
 const completeCodeTS = (card) => `import * as React from "react";
-import { InputButton, FileMosaic, ExtFile } from "@files-ui/react";
+import { InputButton, FileCard, ExtFile } from "@files-ui/react";
 
 const sampleFileProps:ExtFile = {
   id: ":0:",

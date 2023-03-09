@@ -35,7 +35,7 @@ const sampleFileProps = {
 };`;
 
 const completeCodeJS = (card:boolean)=>`import * as React from "react";
-import { InputButton, FileMosaic } from "@files-ui/react";
+import { InputButton, ${card?"FileCard":"FileMosaic"} } from "@files-ui/react";
 
 const sampleFileProps = {
     id: "fileId",
@@ -85,7 +85,7 @@ const sampleFileProps: ExtFile = {
   imageUrl:"https://cdn.wallpapersafari.com/0/95/1zms6H.jpg"
 };`;
 const completeCodeTS = (card:boolean)=>`import * as React from "react";
-import { InputButton, FileMosaic, ExtFile } from "@files-ui/react";
+import { InputButton, ${card?"FileCard":"FileMosaic"}, ExtFile } from "@files-ui/react";
 
 const sampleFileProps: ExtFile = {
     id: "fileId",

@@ -1,31 +1,32 @@
 import * as React from "react";
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 
-const CodeJSFileMosaicDarkMode = () => {
+const CodeJSFileMosaicDarkMode = (props: { card?: boolean }) => {
+  const { card } = props;
   return (
     <ShowDemoCode
-      codeCompleteJS={completeCodeJS}
-      codeCompleteTS={completeCodeTS}
+      codeCompleteJS={completeCodeJS(card)}
+      codeCompleteTS={completeCodeTS(card)}
       codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
       codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
-      codeSplittedJS={splittedCodeJS}
-      codeSplittedTS={splittedCodeTS}
+      codeSplittedJS={splittedCodeJS(card)}
+      codeSplittedTS={splittedCodeTS(card)}
     />
   );
 };
 export default CodeJSFileMosaicDarkMode;
 
-const splittedCodeJS = `<>
-  <FileMosaic {...sampleFileProps} info onDelete={removeFile} />
-  <FileMosaic {...sampleFileProps} info onDelete={removeFile} darkMode/>
+const splittedCodeJS = (card?: boolean) => `<>
+  <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} />
+  <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} darkMode/>
 </>`;
-const splittedCodeTS = `<>
-<FileMosaic {...sampleFileProps} info onDelete={removeFile} />
-<FileMosaic {...sampleFileProps} info onDelete={removeFile} darkMode/>
+const splittedCodeTS = (card?: boolean) => `<>
+<${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} />
+<${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} darkMode/>
 </>`;
 
-const completeCodeJS = `import * as React from "react";
-import { FileMosaic } from "@files-ui/react";
+const completeCodeJS = (card?: boolean) => `import * as React from "react";
+import { ${card?"FileCard":"FileMosaic"} } from "@files-ui/react";
 
 const sampleFileProps = {
   id: "fileId",
@@ -33,7 +34,7 @@ const sampleFileProps = {
   type: "text/plain",
   name: "file created from props.jsx",
 };
-const DemoFileMosaicDarkMode = () => {
+const Demo${card?"FileCard":"FileMosaic"}DarkMode = () => {
   const removeFile = (id) => {
     console.log("delete button clicked on file: " + id);
   };
@@ -48,7 +49,7 @@ const DemoFileMosaicDarkMode = () => {
           padding: "10px 0",
         }}
       >
-        <FileMosaic {...sampleFileProps} info onDelete={removeFile} />
+        <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} />
       </div>
       <div
         style={{
@@ -59,16 +60,16 @@ const DemoFileMosaicDarkMode = () => {
           padding: "10px 0",
         }}
       >
-        <FileMosaic {...sampleFileProps} info darkMode onDelete={removeFile} />
+        <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info darkMode onDelete={removeFile} />
       </div>
     </>
   );
 };
-export default DemoFileMosaicDarkMode;
+export default Demo${card?"FileCard":"FileMosaic"}DarkMode;
 `;
 
-const completeCodeTS = `import * as React from "react";
-import { ExtFile, FileMosaic } from "@files-ui/react";
+const completeCodeTS = (card?: boolean) => `import * as React from "react";
+import { ExtFile, ${card?"FileCard":"FileMosaic"} } from "@files-ui/react";
 
 const sampleFileProps: ExtFile = {
   id: "fileId",
@@ -76,7 +77,7 @@ const sampleFileProps: ExtFile = {
   type: "text/plain",
   name: "file created from props.jsx",
 };
-const DemoFileMosaicDarkMode = () => {
+const Demo${card?"FileCard":"FileMosaic"}DarkMode = () => {
   const removeFile = (id: string | number | undefined) => {
     console.log("delete button clicked on file: " + id);
   };
@@ -91,7 +92,7 @@ const DemoFileMosaicDarkMode = () => {
           padding: "10px 0",
         }}
       >
-        <FileMosaic {...sampleFileProps} info onDelete={removeFile} />
+        <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info onDelete={removeFile} />
       </div>
       <div
         style={{
@@ -102,10 +103,10 @@ const DemoFileMosaicDarkMode = () => {
           padding: "10px 0",
         }}
       >
-        <FileMosaic {...sampleFileProps} info darkMode onDelete={removeFile} />
+        <${card?"FileCard":"FileMosaic"} {...sampleFileProps} info darkMode onDelete={removeFile} />
       </div>
     </>
   );
 };
-export default DemoFileMosaicDarkMode;
+export default Demo${card?"FileCard":"FileMosaic"}DarkMode;
 `;
