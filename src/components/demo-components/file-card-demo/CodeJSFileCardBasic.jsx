@@ -1,27 +1,27 @@
 import * as React from "react";
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 
-const CodeJSFileCardBasic = (props) => {
+const CodeJSFileCardBasic = ({ card }) => {
   return (
     <ShowDemoCode
-      codeCompleteJS={completeCodeJS}
-      codeCompleteTS={completeCodeTS}
+      codeCompleteJS={completeCodeJS(card)}
+      codeCompleteTS={completeCodeTS(card)}
       codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
       codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
-      codeSplittedJS={splittedCodeJS}
-      codeSplittedTS={splittedCodeTS}
+      codeSplittedJS={splittedCodeJS(card)}
+      codeSplittedTS={splittedCodeTS(card)}
     />
   );
 };
 export default CodeJSFileCardBasic;
 
-const splittedCodeJS = `<>
+const splittedCodeJS = (card) => `<>
   {value ? (
-    <FileMosaic {...value} onDelete={removeFile} />
+    <${!card ? "FileMosaic" : "FileCard"} {...value} onDelete={removeFile} />
   ) : (
     <FileInputButton value={value ? [value] : []} onChange={updateFile} />
   )}
-  <FileMosaic {...sampleFileProps} />
+  <${!card ? "FileMosaic" : "FileCard"} {...sampleFileProps} />
 </>
 
 // file props
@@ -32,7 +32,7 @@ const sampleFileProps = {
   name: "file created from props.jsx",
 };`;
 
-const completeCodeJS = `import * as React from "react";
+const completeCodeJS = (card) => `import * as React from "react";
 import { InputButton, FileMosaic } from "@files-ui/react";
 
 const sampleFileProps = {
@@ -55,22 +55,24 @@ export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} info/>
+        <${
+          !card ? "FileMosaic" : "FileCard"
+        } {...value} onDelete={removeFile} info/>
       ) : (
         <FileInputButton value={value ? [value] : []} onChange={updateFile} />
       )}
-      <FileMosaic {...sampleFileProps} info/>
+      <${!card ? "FileMosaic" : "FileCard"} {...sampleFileProps} info/>
     </div>
   );
 };`;
 
-const splittedCodeTS = `<>
+const splittedCodeTS = (card) => `<>
   {value ? (
-    <FileMosaic {...value} onDelete={removeFile} info/>
+    <${!card ? "FileMosaic" : "FileCard"} {...value} onDelete={removeFile} info/>
   ) : (
     <FileInputButton value={value ? [value] : []} onChange={updateFile} />
   )}
-  <FileMosaic {...sampleFileProps} info/>
+  <${!card ? "FileMosaic" : "FileCard"} {...sampleFileProps} info/>
 </>
 
 // file props
@@ -80,7 +82,7 @@ const sampleFileProps: ExtFile = {
   type: "text/plain",
   name: "file created from props.jsx",
 };`;
-const completeCodeTS = `import * as React from "react";
+const completeCodeTS = (card) => `import * as React from "react";
 import { InputButton, FileMosaic, ExtFile } from "@files-ui/react";
 
 const sampleFileProps:ExtFile = {
@@ -103,11 +105,13 @@ export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {value ? (
-        <FileMosaic {...value} onDelete={removeFile} info/>
+        <${
+          !card ? "FileMosaic" : "FileCard"
+        } {...value} onDelete={removeFile} info/>
       ) : (
         <FileInputButton value={value ? [value] : []} onChange={updateFile} />
       )}
-      <FileMosaic {...sampleFileProps} info/>
+      <${!card ? "FileMosaic" : "FileCard"} {...sampleFileProps} info/>
     </div>
   );
 };`;

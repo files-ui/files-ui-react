@@ -10,7 +10,7 @@ import { useIsUploading } from "../file-mosaic/hooks/useIsUploading";
 import LayerContainer from "../file-mosaic/components/file-mosaic-layer/LayerContainer";
 import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 import FileMosaicImageLayer from "../file-mosaic/components/FIleMosaicImageLayer/FileMosaicImageLayer";
-import FileCardRightLayer from "./components/FileCardRightLayer";
+import FileCardRightActions from "./components/FileCardRightActions";
 import FileCardInfoLayer from "./components/FileCardInfoLayer";
 import FileMosaicStatus from "../file-mosaic/components/FileMosaicStatus/FileMosaicStatus";
 import FileCardUploadLayer from "./components/FileCardUploadLayer";
@@ -38,7 +38,8 @@ const makeFileCardClassName = (
   className: string | undefined
 ): string => {
   console.log("FileCard makeFileCardClassName", elevation, darkMode, className);
-  let finalClassName: string = "files-ui-file-card-main-container files-ui-tooltip card";
+  let finalClassName: string =
+    "files-ui-file-card-main-container files-ui-tooltip card";
 
   if (elevation) {
     finalClassName += " elevation-" + setFinalElevation(elevation);
@@ -296,31 +297,13 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
               </div>
             </div>
           </Layer>
-          <Layer
+
+          {/* <Layer
             className="files-ui-file-card-right-layer"
             visible={!isUploading}
-          >
-            <FileCardRightLayer
-              deleteIcon={onDelete !== undefined}
-              onDelete={handleDelete}
-              darkMode={darkMode}
-              valid={valid}
-              uploadStatus={uploadStatus}
-              localization={localization}
-              sizeFormatted={sizeFormatted}
-              imageIcon={isImage && onSee !== undefined}
-              onSee={() => onSee?.(imageSource)}
-              videoIcon={isVideo && onWatch !== undefined}
-              onWatch={() => onWatch?.(file)}
-              downloadIcon={
-                onDownload !== undefined || downloadUrl !== undefined
-              }
-              onDownload={handleDownload}
-              infoIcon={info !== undefined}
-              onOpenInfo={handleOpenInfo}
-              isActive={alwaysActive || hovering}
-            />
-          </Layer>
+          > */}
+
+          {/* </Layer> */}
 
           <Layer className="file-card-info-layer-container" visible={showInfo}>
             <FileCardInfoLayer
@@ -356,7 +339,27 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
             </div>
           </Layer>
         </LayerContainer>
-       
+
+        <FileCardRightActions
+          deleteIcon={onDelete !== undefined}
+          onDelete={handleDelete}
+          darkMode={darkMode}
+          valid={valid}
+          uploadStatus={uploadStatus}
+          localization={localization}
+          sizeFormatted={sizeFormatted}
+          imageIcon={isImage && onSee !== undefined}
+          onSee={() => onSee?.(imageSource)}
+          videoIcon={isVideo && onWatch !== undefined}
+          onWatch={() => onWatch?.(file)}
+          downloadIcon={onDownload !== undefined || downloadUrl !== undefined}
+          onDownload={handleDownload}
+          infoIcon={info !== undefined}
+          onOpenInfo={handleOpenInfo}
+          isActive={alwaysActive || hovering}
+          visible={!isUploading && !showInfo}
+        />
+
         <Tooltip
           open={resultOnTooltip}
           uploadStatus={uploadStatus}

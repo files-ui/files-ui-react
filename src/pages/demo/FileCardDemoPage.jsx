@@ -65,7 +65,7 @@ const FileCardDemoPage = (props) => {
           <DemoContainerFileMosaic>
             <DemoFileCardBasic />
           </DemoContainerFileMosaic>
-          <CodeJSFileCardBasic />
+          <CodeJSFileCardBasic card/>
 
           <Alert severity="info">
             <AlertTitle> FileInputButton </AlertTitle>
@@ -133,11 +133,11 @@ const FileCardDemoPage = (props) => {
             <TypeHighlight>undefined</TypeHighlight>.
           </DescParagraph>
 
-          <DemoContainerFileMosaic>
+          <DemoContainerFileMosaic card>
             <DemoFileMosaicValidation card />
           </DemoContainerFileMosaic>
 
-          <CodeJSFileMosaicValidation />
+          <CodeJSFileMosaicValidation card/>
           <Alert severity="info">
             Typically, <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> or{" "}
             <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> components set

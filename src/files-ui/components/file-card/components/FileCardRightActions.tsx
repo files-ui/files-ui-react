@@ -7,8 +7,9 @@ import {
   PlayIcon,
   Visibility,
 } from "../../icons";
-import "./FileMosaicRightLayer.scss";
-declare type FileCardRightLayerProps = {
+import "./FileCardRightActions.scss";
+
+declare type FileCardRightActionsProps = {
   darkMode?: boolean;
   deleteIcon?: boolean;
   onDelete?: Function;
@@ -32,9 +33,10 @@ declare type FileCardRightLayerProps = {
   onOpenInfo: Function | undefined;
 
   isActive?: boolean;
+  visible?: boolean;
 };
-const FileCardRightLayer: React.FC<FileCardRightLayerProps> = (
-  props: FileCardRightLayerProps
+const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
+  props: FileCardRightActionsProps
 ) => {
   const {
     darkMode,
@@ -53,8 +55,9 @@ const FileCardRightLayer: React.FC<FileCardRightLayerProps> = (
     localization,
     uploadStatus,
     isActive,
+    visible
   } = props;
-
+if(visible)
   return (
     <>
       <div className="file-card-right-layer-header">
@@ -126,6 +129,7 @@ const FileCardRightLayer: React.FC<FileCardRightLayerProps> = (
         )}
       </div>
     </>
-  );
+  )
+  return <></>
 };
-export default FileCardRightLayer;
+export default FileCardRightActions;

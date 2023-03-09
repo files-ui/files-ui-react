@@ -6,17 +6,17 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 10px;
+  //margin: 10px;
   min-height: 100px;
   box-sizing: border-box;
   position: relative;
   font-size: 15px;
   font-weight: 400;
-  width: 350px;
+  width: 320px;
   .files-ui-file-card-main-layer-container {
     border-radius: 8px;
     overflow: hidden;
-    width: 380px;
+    width: 320px;
     box-sizing: border-box;
     height: 100px;
     box-sizing: border-box;
@@ -85,9 +85,12 @@
           }
         }
         .file-card-data {
-          line-height: 18px;
+          padding-right: 10px;
+          box-sizing: border-box;
+          line-height: 19px;
           font-weight: 500;
-          width: 250px;
+          //width: 250px;
+          width: calc(100% - 100px);
           //flex-grow: 1;
           word-break: break-all;
           color: black;
@@ -101,12 +104,12 @@
           }
           .file-card-size {
             font-weight: 400;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
           }
           .file-card-name {
             //letter-spacing: 0.09em;
             font-size: 1rem;
-            text-align: center;
+            //text-align: center;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -121,18 +124,6 @@
       }
     }
 
-    .files-ui-file-card-right-layer {
-      right: 0;
-      left: unset;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: column;
-      padding: 3px;
-      width: 36px;
-      //background-color: aquamarine;
-      height: 100%;
-    }
     .file-card-upload-layer-container {
       display: flex;
       box-sizing: border-box;
@@ -182,13 +173,13 @@
       align-items: center;
       justify-content: flex-end;
       .file-card-file-info {
-        width: 250px;
+        width: calc(100% - 100px);
         height: 100px;
         text-align: left;
         scrollbar-width: thin;
         overflow: auto;
         scrollbar-color: #646c7fa9 transparent;
-       // position: relative;
+        // position: relative;
 
         &::-webkit-scrollbar {
           width: 9px;
@@ -207,7 +198,7 @@
           flex-direction: row;
           align-items: center;
           justify-content: flex-end;
-         /*  position: absolute;
+          /*  position: absolute;
           top: 5;
           right: 5; */
         }
