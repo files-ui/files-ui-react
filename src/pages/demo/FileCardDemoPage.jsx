@@ -2,9 +2,6 @@ import * as React from "react";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import RightMenu from "../../components/RightMenu/RightMenu";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
@@ -13,7 +10,7 @@ import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import DemoFileCardBasic from "../../components/demo-components/file-card-demo/DemoFileCardBasic";
 import CodeJSFileCardBasic from "../../components/demo-components/file-card-demo/CodeJSFileCardBasic";
-import { AlertTitle } from "@mui/material";
+import { AlertTitle, Alert, Paper } from "@mui/material";
 import DemoFileMosaicImagePreview from "../../components/demo-components/filemosaic-demo/DemoFileMosaicImagePreview";
 import CodeJSFileMosaicImagePreview from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicImagePreview";
 import DemoContainerFileMosaic from "../../components/demo-components/filemosaic-demo/DemoContainerFileMosaic";
@@ -176,7 +173,7 @@ const FileCardDemoPage = (props) => {
             current progress of the upload process.
             <br />
             Each of the following examples demonstrates one state combination of
-            the FileMosaic component.
+            the FileCard component.
           </DescParagraph>
 
           <DemoContainerFileMosaic card>
@@ -210,7 +207,96 @@ const FileCardDemoPage = (props) => {
             </ul>
           </Alert>
         </section>
+        <section id="actions">
+          <SubTitle content="Actions: info, delete, see, watch, download" />
+          <DescParagraph>
+            You can use the following actions.
+            <ul>
+              <li>
+                FileCard with the <CodeHighlight>onDelete</CodeHighlight> prop
+                will display a delete icon.
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>info</CodeHighlight> prop will
+                display an "info" icon that will display an info layer.
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>onSee</CodeHighlight> prop will
+                display the "see" button that can be used to retrieve an image
+                <TypeHighlight>URI</TypeHighlight> obtained by reading a{" "}
+                <TypeHighlight>File</TypeHighlight> object if given or just the{" "}
+                <TypeHighlight>imageUrl</TypeHighlight> prop if given. In the
+                first case, the file must be an image.
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>onWatch</CodeHighlight> prop
+                will display the "play" icon that can be used to retrieve the
+                video as a <TypeHighlight>File</TypeHighlight> object if given
+                or just the <TypeHighlight>videoUrl</TypeHighlight> prop if
+                given. The file must be an video.
+              </li>
+              <li>
+                FileCard with the <CodeHighlight>downloadUrl</CodeHighlight>{" "}
+                prop will display the "download" icon that can be used to start
+                the download. If the <CodeHighlight>onDownload</CodeHighlight>{" "}
+                prop is given, the "download" icon will also be visible, but it
+                will be taken as the user will perform their own download.
+              </li>
+            </ul>
+          </DescParagraph>
 
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "7px",
+              flexWrap: "wrap",
+              width: "100%",
+              //padding: "25px 0",
+              flexDirection: "row",
+            }}
+          >
+            <DemoFileCardActions card />
+          </Paper>
+          <CodeJSFileCardActions card />
+          <Alert severity="info">
+            <AlertTitle>
+              {" "}
+              <strong>downloadUrl</strong> and <strong>onDownload</strong> props
+            </AlertTitle>
+            {/*  This is an info alert — <strong>check it out!</strong>
+             */}
+            When only <CodeHighlight>downloadUrl</CodeHighlight> is specifyed,
+            FileCard will perform the download only for{" "}
+            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">
+              same-origin URLs
+            </AnchorToTab>{" "}
+            since it uses the{" "}
+            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">
+              anchor
+            </AnchorToTab>{" "}
+            tag under the hood.
+            <br />
+            If the resource is located in any other host, it will open a new tab
+            and display the content.
+            <br />
+            For avoiding that behaviour you can do you own download
+            implementation by overriding the download function by setting the{" "}
+            <CodeHighlight>onDownload</CodeHighlight> prop.
+            <br />
+            You can check an example here:
+            <ul>
+              <li>
+                <AnchorToTab href="/utilities-methods/file-downloader">
+                  {"Download a File"}
+                </AnchorToTab>
+              </li>
+            </ul>
+          </Alert>
+        </section>
         <section id="dark-mode">
           <SubTitle content="Dark mode and Elevation" />
           <DescParagraph>
@@ -236,61 +322,6 @@ const FileCardDemoPage = (props) => {
           <CodeJSFileMosaicDarkMode card />
         </section>
 
-        <section id="actions">
-          <SubTitle content="Actions: info, delete, see, watch, download" />
-          <DescParagraph>
-            You can use the following actions.
-            <ul>
-              <li>
-                FileCard with the <CodeHighlight>onDelete</CodeHighlight> prop
-                will display a delete icon
-              </li>
-              <li>
-                FileCard with the <CodeHighlight>info</CodeHighlight> prop will
-                display an "info" icon that will display an info layer.
-              </li>
-              <li>
-                FileCard with the <CodeHighlight>onSee</CodeHighlight> prop will
-                display the "see" button that can be used to retrieve an image
-                URI obtained from reading a <TypeHighlight>File</TypeHighlight>{" "}
-                object if given or just the{" "}
-                <TypeHighlight>imageUrl</TypeHighlight> prop if given. The file
-                must be an image.
-              </li>
-              <li>
-                FileCard with the <CodeHighlight>onWatch</CodeHighlight> prop
-                will display the "play" icon that can be used to retrieve the
-                video as a <TypeHighlight>File</TypeHighlight> object if given
-                or just the <TypeHighlight>videoUrl</TypeHighlight> prop if
-                given. The file must be an video.
-              </li>
-              <li>
-                FileCard with the <CodeHighlight>downloadUrl</CodeHighlight>{" "}
-                prop will display the "download" icon that can be used to start
-                the download. If the <CodeHighlight>onDownload</CodeHighlight>{" "}
-                prop is given, the "download" icon will also be visible, but it
-                will be taken as the user will perform their own download.
-              </li>
-            </ul>
-           
-          </DescParagraph>
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: "100%",
-              padding: "25px 0",
-              flexDirection: "row",
-              alignItems:"center",
-              justifyContent:"center",
-              gap:"28px"
-            }}
-          >
-            <DemoFileCardActions card />
-          </div>
-          <CodeJSFileCardActions card />
-        </section>
         <section id="api">
           <SubTitle content="API" />
           <DescParagraph>
@@ -299,9 +330,9 @@ const FileCardDemoPage = (props) => {
           </DescParagraph>
           <ul>
             <li>
-              <AnchorToTab href="/api/filecard">{"<FileMosaic/>"}</AnchorToTab>
+              <AnchorToTab href="/api/filecard">{"<FileCard/>"}</AnchorToTab>
             </li>
-            <li>
+            <li>|
               <AnchorToTab href="/api/fileinputbuttom">
                 {"<FileInputButton/>"}
               </AnchorToTab>
@@ -319,47 +350,37 @@ export default FileCardDemoPage;
 const rightMenuItems = [
   {
     id: 0,
-    label: "Basic file mosaic",
-    referTo: "/components/file-mosaic#basic-filecard",
+    label: "Basic file card",
+    referTo: "/components/filecard#basic-filecard",
   },
   {
     id: 1,
     label: "Image Preview",
-    referTo: "/components/file-mosaic#file-mosaic-image-preview",
+    referTo: "/components/filecard#image-preview",
   },
   {
     id: 2,
     label: "Validation",
-    referTo: "/components/file-mosaic#file-mosaic-validation",
+    referTo: "/components/filecard#validation",
   },
   {
     id: 3,
     label: "Uploading",
-    referTo: "/components/file-mosaic#file-mosaic-uploading",
+    referTo: "/components/filecard#uploading",
   },
   {
     id: 4,
-    label: "Localization",
-    referTo: "/components/file-mosaic#file-mosaic-localization",
+    label: "Actions",
+    referTo: "/components/filecard#actions",
   },
   {
     id: 5,
-    label: "Previews",
-    referTo: "/components/file-mosaic#file-mosaic-previews",
+    label: "Dark mode",
+    referTo: "/components/filecard#dark-mode",
   },
   {
     id: 6,
-    label: "Actions",
-    referTo: "/components/file-mosaic#actions",
-  },
-  {
-    id: 7,
-    label: "Default previews",
-    referTo: "/components/file-mosaic#default-previews",
-  },
-  {
-    id: 8,
-    label: "Dark mode & elevation",
-    referTo: "/components/file-mosaic#dark-mode",
+    label: "API",
+    referTo: "/components/filecard#api",
   },
 ];

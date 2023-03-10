@@ -1,9 +1,17 @@
 import * as React from "react";
 import { Stack, Paper } from "@mui/material";
-import { FileMosaic, ExtFile } from "../../../files-ui";
+import { FileMosaic, ExtFile, FileMosaicProps } from "../../../files-ui";
 import DescParagraph from "../../demo-components/desc-paragraph/DescParagraph";
 import { FullScreen, ImagePreview, VideoPreview } from "../../../files-ui";
+import {
+  NarutoAndSasukeVsMomoshikiEN,
+  NarutoAndSasukeVsMomoshikiES,
+  ThorArrivesWakandaEN,
+  ThorArrivesWakandaES,
+} from "../../../data/videoLinks";
 
+const VIDEO_URL =
+  "https://srv23.y2mate.is/download?file=cd448fa7c7fe6c301970e890794fb682137140";
 interface FileMosaicImageVideoPreviewsProps {
   darkMode?: boolean;
 }
@@ -22,18 +30,88 @@ const FileMosaicImageVideoPreviews: React.FC<
   };
 
   const handleWatch = (videoSource: File | string | undefined) => {
-    console.log(
-      "handleWatch videoSource",
-      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4"
-    );
+    console.log("handleWatch videoSource", videoSource);
     //setVideoSrc(videoSource);
     //
-    setVideoSrc(
-      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4"
-    );
+    setVideoSrc(videoSource);
     // setVideoSrc("https://www.w3schools.com/tags/movie.mp4");
   };
+  const handleDownload = async (
+    fileId: FileMosaicProps["id"],
+    downloadUrl?: string
+  ) => {
+    console.log("Download fileId", fileId);
+    console.log("Download fileName", files.filter(x=>x.id===fileId)[0]);
+    console.log("Download downloadUrl", downloadUrl);
+    if (!downloadUrl) return;
+    try {
+      const image = await fetch(downloadUrl);
+      const imageBlob = await image.blob();
+      const imageURL = URL.createObjectURL(imageBlob);
 
+      const anchor = document.createElement("a");
+      anchor.href = imageURL;
+      anchor.download = "fileName.jpg";
+
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+      URL.revokeObjectURL(imageURL);
+      /*  const resJson = await response.json();
+      console.log("Download", resJson); */
+    } catch (error) {
+      console.log("Download error", error);
+      console.error( error);
+    }
+  };
+  const handleDownloadXHR = async (
+    fileId: FileMosaicProps["id"],
+    downloadUrl?: string
+  ) => {
+
+    console.log("Download fileId", fileId);
+    console.log("Download fileName", files.filter(x=>x.id===fileId)[0].name);
+    console.log("Download downloadUrl", downloadUrl);
+    if (!downloadUrl) return;
+    try {
+      const request = new XMLHttpRequest();
+      request.responseType="blob";
+      request.open("get", downloadUrl, true);
+      request.send();
+
+      request.onreadystatechange=function(){
+        if(this.readyState==4 && this.status==200){
+          const imageURL = window.URL.createObjectURL(this.response);
+
+          const anchor = document.createElement("a");
+          anchor.href = imageURL;
+          anchor.download = "fileNamess.jpg";
+          document.body.appendChild(anchor);
+          anchor.click();
+
+        }else{
+          console.log("not yet");
+        }
+      }
+
+      const image = await fetch(downloadUrl);
+      const imageBlob = await image.blob();
+      const imageURL = URL.createObjectURL(imageBlob);
+
+      const anchor = document.createElement("a");
+      anchor.href = imageURL;
+      anchor.download = "fileName.jpg";
+
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+      URL.revokeObjectURL(imageURL);
+      /*  const resJson = await response.json();
+      console.log("Download", resJson); */
+    } catch (error) {
+      console.log("Download error", error);
+    }
+  };
   return (
     <div style={{ width: "100%" }}>
       <h3>Or check the previews!</h3>
@@ -67,6 +145,7 @@ const FileMosaicImageVideoPreviews: React.FC<
               onWatch={handleWatch}
               {...f.extraData}
               alwaysActive
+              onDownload={f.downloadUrl ? handleDownload : undefined}
             />
           ))}
           <FullScreen
@@ -79,7 +158,7 @@ const FileMosaicImageVideoPreviews: React.FC<
             open={videoSrc !== undefined}
             onClose={() => setVideoSrc(undefined)}
           >
-            <VideoPreview videoSrc={videoSrc} autoPlay controls />
+            <VideoPreview src={videoSrc} autoPlay controls />
           </FullScreen>
         </Stack>
       </Paper>
@@ -91,10 +170,12 @@ export default FileMosaicImageVideoPreviews;
 const files: ExtFile[] = [
   {
     id: 0,
-    name: "image-preview.png",
-    type: "image/png",
+    name: "mark45.jpg",
+    type: "image/jpeg",
     size: 282000,
     imageUrl: "https://i.ytimg.com/vi/98FO19TuI9A/maxresdefault.jpg",
+    downloadUrl: "https://i.ytimg.com/vi/98FO19TuI9A/maxresdefault.jpg",
+
   },
 
   {
@@ -102,8 +183,8 @@ const files: ExtFile[] = [
     name: "video-preview.mp4",
     type: "video/mp4",
     size: 282000,
-    downloadUrl:
-      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4",
+    downloadUrl: VIDEO_URL,
+    extraData: { videoUrl: VIDEO_URL },
   },
   {
     id: 3,
@@ -122,9 +203,46 @@ const files: ExtFile[] = [
     type: "image/png",
     size: 282000,
     downloadUrl:
-      "https://i.pinimg.com/236x/3e/e9/46/3ee946b27fd1cc5eb0b485e4a0669534.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/768px-Facebook_f_logo_%282019%29.svg.png",
 
     imageUrl:
-      "https://i.pinimg.com/236x/3e/e9/46/3ee946b27fd1cc5eb0b485e4a0669534.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/768px-Facebook_f_logo_%282019%29.svg.png",
+
+  },
+];
+
+const videos: ExtFile[] = [
+  {
+    id: 0,
+    name: "ThorArrivesWakandaEN.mp4",
+    type: "video/mp4",
+    size: 282000,
+    downloadUrl: ThorArrivesWakandaEN,
+    extraData: { videoUrl: ThorArrivesWakandaEN },
+  },
+  {
+    id: 1,
+    name: "ThorArrivesWakandaES.mp4",
+    type: "video/mp4",
+    size: 282000,
+    downloadUrl: ThorArrivesWakandaES,
+    extraData: { videoUrl: ThorArrivesWakandaES },
+  },
+
+  {
+    id: 1,
+    name: "NarutoAndSasukeVsMomoshikiEN.mp4",
+    type: "video/mp4",
+    size: 282000,
+    downloadUrl: NarutoAndSasukeVsMomoshikiEN,
+    extraData: { videoUrl: NarutoAndSasukeVsMomoshikiEN },
+  },
+  {
+    id: 1,
+    name: "NarutoAndSasukeVsMomoshikiES.mp4",
+    type: "video/mp4",
+    size: 282000,
+    downloadUrl: NarutoAndSasukeVsMomoshikiES,
+    extraData: { videoUrl: NarutoAndSasukeVsMomoshikiES },
   },
 ];
