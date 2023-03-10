@@ -2,7 +2,7 @@ import { OverridableComponentProps } from "../overridable/OverridableComponentsP
 export interface AvatarFullProps extends OverridableComponentProps {
     variant?: "square" | "circle";
     borderRadius?: string;
-    src?: string;
+    src?: string | File;
     onChange?: Function,
     /**
      * Alternative label when an error occurs

@@ -2,13 +2,8 @@ import * as React from "react";
 import { mergeProps } from "../overridable/mergeProps";
 import { AvatarProps, defaultAvatarProps } from "./AvatarProps";
 import "./Avatar.scss";
-import {
-  setAvatarClassNameContainer,
-  setAvatarClassNameLayerInfo,
-} from "./useAvatarClassName";
 import InputHidden from "../input-hidden/InputHidden";
 import { useAvatarStyle } from "./useAvatarStyle";
-import { DynamicSheet, DynamiCSS } from "@dynamicss/dynamicss";
 import { ImagePreview } from "../previews";
 import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
