@@ -310,7 +310,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
           uploadMessage={uploadMessage}
         />
         {downloadUrl && (
-          <a ref={downloadRef} href={downloadUrl} download={localName} hidden>
+          <a ref={downloadRef}  target={"_blank"} href={downloadUrl} download={localName} hidden>
             download_file
           </a>
         )}
