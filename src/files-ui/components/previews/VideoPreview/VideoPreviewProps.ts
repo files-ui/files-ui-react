@@ -6,22 +6,20 @@ export interface VideoPreviewPropsMap extends OverridableComponentProps {
      * video source in string format or File object
      * FileItemComponent returns this value in onWatch handler
      */
-    videoSrc?: File | string;
+    src?: File | string;
 
 }
 
 
-type DefVideoProps = React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement>;
+type DefVideoProps = React.HTMLProps<HTMLVideoElement>;
+type VideoPropsOmitVideoPreviewPropsMap = Omit<DefVideoProps, keyof VideoPreviewPropsMap>;
 
 
-export type VideoPreviewProps =
+export type VideoPreviewProps = VideoPropsOmitVideoPreviewPropsMap &
     {
         [F in keyof VideoPreviewPropsMap]:
         VideoPreviewPropsMap[F]
     }
-    &
-    { [K in keyof DefVideoProps]:
-        DefVideoProps[K]
-    }
+
 
 

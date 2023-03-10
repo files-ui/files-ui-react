@@ -1,6 +1,4 @@
-import Alert from "@mui/material/Alert";
-import Paper from "@mui/material/Paper";
-import AlertTitle from "@mui/material/AlertTitle";
+import { Alert, AlertTitle, Paper } from "@mui/material";
 import * as React from "react";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
@@ -27,6 +25,8 @@ import CodeJSFileMosaicLocalization from "../../components/demo-components/filem
 import DemoFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/DemoFileMosaicDarkMode";
 import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicDarkMode";
 import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
+import DemoFileCardActions from "../../components/demo-components/filemosaic-demo/DemoFileCradActions";
+import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
 
 const FileMosaicDemoPage = (props) => {
   return (
@@ -221,6 +221,96 @@ const FileMosaicDemoPage = (props) => {
             </ul>
           </Alert>
         </section>
+        <section id="actions">
+          <SubTitle content="Actions: info, delete, see, watch, download" />
+          <DescParagraph>
+            You can use the following actions.
+            <ul>
+              <li>
+                FileMosaic with the <CodeHighlight>onDelete</CodeHighlight> prop
+                will display a delete icon.
+              </li>
+              <li>
+                FileMosaic with the <CodeHighlight>info</CodeHighlight> prop
+                will display an "info" icon that will display an info layer.
+              </li>
+              <li>
+                FileMosaic with the <CodeHighlight>onSee</CodeHighlight> prop
+                will display the "see" button that can be used to retrieve an
+                image <TypeHighlight>URI</TypeHighlight> obtained by reading a{" "}
+                <TypeHighlight>File</TypeHighlight> object if given or just the{" "}
+                <TypeHighlight>imageUrl</TypeHighlight> prop if given. In the
+                first case, the file must be an image.
+              </li>
+              <li>
+                FileMosaic with the <CodeHighlight>onWatch</CodeHighlight> prop
+                will display the "play" icon that can be used to retrieve the
+                video as a <TypeHighlight>File</TypeHighlight> object if given
+                or just the <TypeHighlight>videoUrl</TypeHighlight> prop if
+                given. The file must be an video.
+              </li>
+              <li>
+                FileMosaic with the <CodeHighlight>downloadUrl</CodeHighlight>{" "}
+                prop will display the "download" icon that can be used to start
+                the download. If the <CodeHighlight>onDownload</CodeHighlight>{" "}
+                prop is given, the "download" icon will also be visible, but it
+                will be taken as the user will perform their own download.
+              </li>
+            </ul>
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "7px",
+              flexWrap: "wrap",
+              width: "100%",
+              //padding: "25px 0",
+              flexDirection: "row",
+            }}
+          >
+            <DemoFileCardActions />
+          </Paper>
+          <CodeJSFileCardActions />
+          <Alert severity="info">
+            <AlertTitle>
+              {" "}
+              <strong>downloadUrl</strong> and <strong>onDownload</strong> props
+            </AlertTitle>
+            {/*  This is an info alert — <strong>check it out!</strong>
+             */}
+            When only <CodeHighlight>downloadUrl</CodeHighlight> is specifyed,
+            FileMosaic will perform the download only for{" "}
+            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">
+              same-origin URLs
+            </AnchorToTab>{" "}
+            since it uses the{" "}
+            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">
+              anchor
+            </AnchorToTab>{" "}
+            tag under the hood.
+            <br />
+            If the resource is located in any other host, it will open a new tab
+            and display the content.
+            <br />
+            For avoiding that behaviour you can do you own download
+            implementation by overriding the download function by setting the{" "}
+            <CodeHighlight>onDownload</CodeHighlight> prop.
+            <br />
+            You can check an example here:
+            <ul>
+              <li>
+                <AnchorToTab href="/utilities-methods/file-downloader">
+                  {"Download a File"}
+                </AnchorToTab>
+              </li>
+            </ul>
+          </Alert>
+        </section>
         <section id="dark-mode">
           <SubTitle content="Dark mode" />
           <DescParagraph>
@@ -245,7 +335,8 @@ const FileMosaicDemoPage = (props) => {
 
           <CodeJSFileMosaicDarkMode />
         </section>
-        <section id="localization">
+
+        {/*   <section id="localization">
           <SubTitle content="Localization" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> component has
@@ -285,9 +376,9 @@ const FileMosaicDemoPage = (props) => {
             <DemoFileMosaicLocalization />
           </Paper>
           <CodeJSFileMosaicLocalization />
-        </section>
+        </section> */}
 
-        <section id="file-icon">
+        {/*  <section id="file-icon">
           <SubTitle content="File Icons (extensive list)" />
           <DescParagraph>
             The <CodeHighlight>FileMosaic</CodeHighlight> component supports
@@ -308,7 +399,7 @@ const FileMosaicDemoPage = (props) => {
           >
             <DemoFileMosaicFileIcons />
           </Paper>
-        </section>
+        </section> */}
 
         <section id="api">
           <SubTitle content="API" />
@@ -359,18 +450,18 @@ const rightMenuItems = [
     referTo: "/components/filemosaic#uploading",
   },
   {
-    id: 8,
+    id: 4,
+    label: "Actions",
+    referTo: "/components/filemosaic#actions",
+  },
+  {
+    id: 5,
     label: "Dark mode",
     referTo: "/components/filemosaic#dark-mode",
   },
   {
-    id: 4,
-    label: "Localization",
-    referTo: "/components/filemosaic#localization",
-  },
-  {
-    id: 9,
-    label: "File Icons",
-    referTo: "/components/filemosaic#file-icon",
+    id: 6,
+    label: "API",
+    referTo: "/components/filemosaic#api",
   },
 ];

@@ -20,6 +20,7 @@ import AvatarDemoPage from "../pages/demo/AvatarDemoPage";
 import FileInputButtonApi from "../pages/api/FileInputButtonApi";
 import AvatarApi from "../pages/api/AvatarApi";
 import FileInputButtonDemoPage from "../pages/demo/FileInputButtonDemoPage";
+import FileDownloadPage from "../pages/download-page/FileDownloadPage";
 
 const router = createBrowserRouter([
   {
@@ -127,6 +128,10 @@ const router = createBrowserRouter([
       {
         path: "/utilities-methods/file-uploader",
         element: <FileUploaderPage />,
+      },
+      {
+        path: "/utilities-methods/file-downloader",
+        element: <FileDownloadPage />,
       },
     ],
   },

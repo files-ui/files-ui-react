@@ -22,4 +22,7 @@ export interface FileMosaicStatusProps {
     */
     localization?: Localization;
 
+
+    style?:React.CSSProperties;
+
 }

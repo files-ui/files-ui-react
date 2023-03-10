@@ -1,0 +1,27 @@
+.file-card-right-layer-header {
+  margin-top: 3px;
+  margin-right: 3px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: unset;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+}
+.file-card-right-layer-footer {
+  margin-bottom: 3px;
+  margin-right: 3px;
+  left: unset;
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  //height: 20px;
+  //width: 100%;
+  bottom: 0;
+  right: 0;
+}

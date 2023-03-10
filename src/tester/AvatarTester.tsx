@@ -1,12 +1,6 @@
 import * as React from "react";
 import { Avatar } from "../files-ui";
-import {
-  ServerResponse,
-  //UploadPromiseResponse,
-  //uploadPromiseXHR,
-} from "../files-ui/core";
-
-import { uploadFile } from "../files-ui/core";
+import { ServerResponse, uploadFile } from "../files-ui";
 
 export const resultURL: string =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1YdE-2sQT4na6RwujeATyMBcCXqg0Gf76TYTplRkMkq0wIi_SewCDq6VeUGxPwpK_Qd8&usqp=CAU";
@@ -25,10 +19,10 @@ const rowStyle: React.CSSProperties = {
   gap: "15px",
 };
 
-
-const REMOTE = "https://files-ui-express-static-file-storage.vercel.app/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
-const LOCAL = "http://localhost/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
-
+const REMOTE =
+  "https://files-ui-express-static-file-storage.vercel.app/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
+const LOCAL =
+  "http://localhost/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
 
 interface AvatarTesterProps {}
 const AvatarTester: React.FC<AvatarTesterProps> = (
@@ -38,7 +32,7 @@ const AvatarTester: React.FC<AvatarTesterProps> = (
     undefined
   );
 
- /*  const handleChange = async (file: File) => {
+  /*  const handleChange = async (file: File) => {
     const endpoint: string = "http://localhost:2800/upload-avatar";
     const response: UploadPromiseResponse = await uploadPromiseXHR(
       { id: 0, file: file, xhr: new XMLHttpRequest() },

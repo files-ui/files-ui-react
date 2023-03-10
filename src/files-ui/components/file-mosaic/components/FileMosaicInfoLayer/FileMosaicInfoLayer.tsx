@@ -19,7 +19,7 @@ const FileMosaicInfoLayer: React.FC<FileMosaicInfoLayerProps> = (
     <React.Fragment>
       <div className="files-ui-file-mosaic-info-layer-header">
         <Cancel
-          style={{ margin: 0, right: 0, top: 0 }}
+          //style={{ margin: 0, right: 0, top: 0 }}
           color="rgba(255,255,255,0.8)"
           onClick={onCloseInfo}
           colorFill="black"

@@ -17,7 +17,7 @@ const ErrorStatus: React.FC<ErrorStatusProps> = (props: ErrorStatusProps) => {
           backgroundColor: "rgba(244, 67, 54, 0.8)",
           borderRadius: "50%",
         }}
-        size={size || 65}
+        size={size || 65} 
       />
       <span> {FileItemStatusLocalizer.error as string}</span>
     </React.Fragment>

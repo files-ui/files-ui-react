@@ -1,36 +1,35 @@
 import * as React from "react";
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 
-const CodeJSFileMosaicValidation = () => {
+const CodeJSFileMosaicValidation = (card) => {
   return (
     <ShowDemoCode
-      codeCompleteJS={completeCodeJS}
-      codeCompleteTS={completeCodeTS}
+      codeCompleteJS={completeCodeJS(card)}
+      codeCompleteTS={completeCodeTS(card)}
       codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
       codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
-      codeSplittedJS={splittedCodeJS}
-      codeSplittedTS={splittedCodeTS}
+      codeSplittedJS={splittedCodeJS(card)}
+      codeSplittedTS={splittedCodeTS(card)}
     />
   );
 };
 export default CodeJSFileMosaicValidation;
 
-const splittedCodeJS = ``;
-const splittedCodeTS = ``;
+const splittedCodeJS = (card)=>``;
+const splittedCodeTS = (card)=>``;
 
-const completeCodeJS = `import * as React from "react";
-import { FileMosaic } from "../../../files-ui";
+const completeCodeJS = (card)=>`import * as React from "react";
+import { ${card?"FileCard":"FileMosaic"} } from "@files-ui/react";
 
-const DemoFileMosaicValidation = () => {
+export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {sampleFilesProps.map((extFile) => (
-        <FileMosaic key={extFile.id} valid={extFile.valid} {...extFile} info/>
+        <${card?"FileCard":"FileMosaic"} key={extFile.id} valid={extFile.valid} {...extFile} info/>
       ))}
     </div>
   );
 };
-export default DemoFileMosaicValidation;
 
 const sampleFilesProps = [
   {
@@ -56,19 +55,18 @@ const sampleFilesProps = [
   },
 ];`;
 
-const completeCodeTS = `import * as React from "react";
-import { FileMosaic, ExtFile } from "../../../files-ui";
+const completeCodeTS = (card)=>`import * as React from "react";
+import { ${card?"FileCard":"FileMosaic"}, ExtFile } from "@files-ui/react";
 
-const DemoFileMosaicValidation = () => {
+export default function App() {
   return (
     <div style={{display:"flex", gap:"10px"}}>
       {sampleFilesProps.map((extFile: ExtFile) => (
-        <FileMosaic key={extFile.id} valid={extFile.valid} {...extFile} info/>
+        <${card?"FileCard":"FileMosaic"} key={extFile.id} valid={extFile.valid} {...extFile} info/>
       ))}
     </div>
   );
 };
-export default DemoFileMosaicValidation;
 
 const sampleFilesProps: ExtFile[] = [
   {

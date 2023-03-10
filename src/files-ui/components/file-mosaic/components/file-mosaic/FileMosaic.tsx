@@ -37,6 +37,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     localization,
     preview,
     imageUrl,
+    videoUrl,
     info,
     backgroundBlurImage = true,
     darkMode,
@@ -60,7 +61,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onRightClick,
   } = props;
 
-  console.log("FileMosaic progress " + id, progress);
+  // console.log("FileMosaic progress " + id, progress);
   //ref for anchor download element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
 
@@ -87,22 +88,24 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   ); */
   const localProgress: number | undefined = useProgress(progress, xhr);
 
-  console.log("FileMosaic progress localProgress " + localProgress);
+  //console.log("FileMosaic progress localProgress " + localProgress);
 
   //Initialize File Item
-  const [isReady, isImage, isVideo, url, imageSource]: [
+  const [isReady, isImage, isVideo, url, imageSource, videoSource]: [
     boolean,
     boolean,
     boolean,
     string,
-    string | undefined
+    string | undefined,
+    File | string | undefined
   ] = useFileMosaicInitializer(
     file,
     propName,
     propType,
     valid,
     preview as boolean,
-    imageUrl
+    imageUrl,
+    videoUrl
   );
 
   //The size formatted and rounded in 2 decimals
@@ -250,7 +253,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
               imageIcon={isImage && onSee !== undefined}
               onSee={() => onSee?.(imageSource)}
               videoIcon={isVideo && onWatch !== undefined}
-              onWatch={() => onWatch?.(file)}
+              onWatch={() => onWatch?.(videoSource)}
               downloadIcon={
                 onDownload !== undefined || downloadUrl !== undefined
               }
@@ -307,7 +310,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
           uploadMessage={uploadMessage}
         />
         {downloadUrl && (
-          <a ref={downloadRef} href={downloadUrl} download={localName} hidden>
+          <a ref={downloadRef}  target={"_blank"} href={downloadUrl} download={localName} hidden>
             download_file
           </a>
         )}

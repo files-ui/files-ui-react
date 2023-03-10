@@ -4,9 +4,12 @@ import {
   useFakeProgress,
   ExtFile,
   UPLOADSTATUS,
+  FileCard,
 } from "../../../files-ui";
+import TypeHighlight from "../../typeHighlight/TypeHighlight";
 
-const DemoFileMosaicUploadStatus = () => {
+import "./DemoFileMosaicUpload.scss";
+const DemoFileMosaicUploadStatus = (props: { card?: boolean }) => {
   const progress = useFakeProgress();
 
   const [status1, setStatus1] = React.useState<UPLOADSTATUS>("uploading");
@@ -35,14 +38,40 @@ const DemoFileMosaicUploadStatus = () => {
   const handleAbort = (id: string | number | undefined) => {
     console.log("Upload aborted in file: " + id);
   };
+  if (props.card)
+    return (
+      <>
+        <FlexRowContainer card title={"preparing stage"}>
+          <FileCard {...preparingFile} />
+          <FileCard {...preparingFile} onCancel={handleCancel} />
+        </FlexRowContainer>
+
+        <FlexRowContainer card title={"uploading stage"}>
+          <FileCard {...uploadingFile} />
+          <FileCard {...uploadingFile} progress={progress} />
+          <FileCard {...uploadingFile} onAbort={handleAbort} />
+          <FileCard
+            {...uploadingFile}
+            onAbort={handleAbort}
+            progress={progress}
+          />
+        </FlexRowContainer>
+
+        <FlexRowContainer card title={"upload result stage"}>
+          <FileCard {...uploadResultFiles[0]} uploadStatus={status1} />
+          <FileCard {...uploadResultFiles[1]} uploadStatus={status2} />
+          <FileCard {...uploadResultFiles[2]} uploadStatus={status3} />
+        </FlexRowContainer>
+      </>
+    );
   return (
     <>
-      <FlexRowContainer>
+      <FlexRowContainer title={"preparing stage"}>
         <FileMosaic {...preparingFile} />
         <FileMosaic {...preparingFile} onCancel={handleCancel} />
       </FlexRowContainer>
 
-      <FlexRowContainer>
+      <FlexRowContainer title={"uploading stage"}>
         <FileMosaic {...uploadingFile} />
         <FileMosaic {...uploadingFile} progress={progress} />
         <FileMosaic {...uploadingFile} onAbort={handleAbort} />
@@ -53,7 +82,7 @@ const DemoFileMosaicUploadStatus = () => {
         />
       </FlexRowContainer>
 
-      <FlexRowContainer>
+      <FlexRowContainer title={"upload result stage"}>
         <FileMosaic {...uploadResultFiles[0]} uploadStatus={status1} />
         <FileMosaic {...uploadResultFiles[1]} uploadStatus={status2} />
         <FileMosaic {...uploadResultFiles[2]} uploadStatus={status3} />
@@ -63,18 +92,24 @@ const DemoFileMosaicUploadStatus = () => {
 };
 export default DemoFileMosaicUploadStatus;
 
-const FlexRowContainer = (props: { children: React.ReactNode }) => {
+const FlexRowContainer = (props: {
+  children: React.ReactNode;
+  card?: boolean;
+  title?: string;
+}) => {
+  const { children, card, title } = props;
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-evenly",
-        width: "100%",
-      }}
-    >
-      {props.children}
-    </div>
+    <React.Fragment>
+      {!card && <h4 style={{ margin: 0 }}>{title}</h4>}
+      <div
+        className={
+          card ? "flex-container-group-card" : "flex-container-group-mosaic"
+        }
+      >
+        {card && <h4 style={{ margin: 0 }}>{title}</h4>}
+        {children}
+      </div>
+    </React.Fragment>
   );
 };
 

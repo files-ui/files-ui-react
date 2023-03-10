@@ -4,7 +4,12 @@ import { VideoPreviewProps } from "./VideoPreviewProps";
 const VideoPreview: React.FC<VideoPreviewProps> = (
   props: VideoPreviewProps
 ) => {
-  const { videoSrc, /* autoPlay, controls,  */style, className, ...others } = props;
+  const {
+    src: videoSrc,
+    /* autoPlay, controls,  */ style,
+    className,
+    ...others
+  } = props;
 
   const videoRef = React.useRef<HTMLVideoElement>(null);
 

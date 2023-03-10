@@ -1,7 +1,7 @@
-import { Paper, Stack } from "@mui/material";
+import { Paper, Stack, Box } from "@mui/material";
 import * as React from "react";
 
-const DemoContainerFileMosaic = ({ children }) => {
+const DemoContainerFileMosaic = ({ children, card }) => {
   return (
     <Paper
       variant="outlined"
@@ -12,15 +12,21 @@ const DemoContainerFileMosaic = ({ children }) => {
         justifyContent: "center",
       }}
     >
-      <Stack
-        spacing={4}
-        direction="row"
-        alignItems={"center"}
-        flexWrap="wrap"
-        justifyContent={"space-evenly"}
+      <Box
+        sx={{
+          display: "flex",
+          gap: "20px",
+          flexWrap: "wrap",
+          flexDirection: { xs: card ? "column" : undefined, md: "row" },
+          justifyContent: {
+            xs: "center",
+            md: "space-evenly",
+          },
+          alignItems: { xs: "center" },
+        }}
       >
         {children}
-      </Stack>
+      </Box>
     </Paper>
   );
 };

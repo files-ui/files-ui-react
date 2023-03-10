@@ -56,9 +56,15 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
     /**
      * A string representation or web url of the image
      * that will be set to the "src" prop of an <img/> tag
-     * <img src={`${url}`} />
+     * <img src={`${imageUrl}`} />
      */
     imageUrl?: string;
+    /**
+     * A string representation or web url of the video
+     * that will be set to the "src" prop of an <video/> tag
+     * <video src={`${videoUrl}`} />
+     */
+    videoUrl?: string;
     /**
     * If true, a background blur image will be shown
     */
@@ -91,7 +97,7 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
     /**
      * A function that return a file object when "play" button is presssed or clicked
      */
-    onWatch?: (videoSource: File | undefined) => void;
+    onWatch?: (videoSource: File | string | undefined) => void;
     /**
      * Event that is triggered when `delete` button is clicked or pressed.
      * If present, `delete` button will be visible.
