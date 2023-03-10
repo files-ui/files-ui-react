@@ -22,14 +22,14 @@ const useFileMosaicInitializer = (
     videoUrl: string | undefined,
     xhr?: XMLHttpRequest,
 
-): [boolean,boolean, boolean, string, string | undefined, File |string | undefined] => {
+): [boolean, boolean, boolean, string, string | undefined, File | string | undefined] => {
 
     const [isImage, setIsImage] = React.useState<boolean>(false);
     const [isVideo, setIsVideo] = React.useState<boolean>(false);
     const [url, setUrl] = React.useState<string>("");
     const [imageSource, setImageSource] = React.useState<string | undefined>(undefined);
     const [videoSource, setVideoSource] = React.useState<File | string | undefined>(undefined);
-    const [isReady,setIsReady]=React.useState(false);
+    const [isReady, setIsReady] = React.useState(false);
 
 
     const init = async (
@@ -54,21 +54,27 @@ const useFileMosaicInitializer = (
         //console.log("init", url);
 
         setUrl(url);
-
-        if (imageUrl) {
+        //In case is a video and also has a image preview
+        if (imageUrl && videoUrl) {
+            setIsVideo(true);
+            setImageSource(imageUrl);
+            setVideoSource(videoUrl);
+            setIsReady(true);
+            return;
+        } else if (imageUrl) {
             setIsImage(true);
             setImageSource(imageUrl);
             setIsReady(true);
             return;
-        } else if(videoUrl){
+        } else if (videoUrl) {
             setIsVideo(true);
             setVideoSource(videoUrl);
             setIsReady(true);
-        }else {
+        } else {
             const [headerMime, tailMime] = getHeaderAndTail(file, type);
 
             setIsImage(headerMime === "image");
-            
+
             setIsVideo(
                 headerMime === "video" && ["mp4", "ogg", "webm"].includes(tailMime)
             );
@@ -101,7 +107,7 @@ const useFileMosaicInitializer = (
 
     //////   CLEAN UP
     React.useEffect(() => {
-        init(file, name, type, valid, preview || false, imageUrl,videoUrl);
+        init(file, name, type, valid, preview || false, imageUrl, videoUrl);
         return () => {
             setImageSource(undefined);
             setIsImage(false);
@@ -109,9 +115,9 @@ const useFileMosaicInitializer = (
             setIsReady(false);
         };
         // eslint-disable-next-line
-    }, [file, name, type, valid, preview, imageUrl,videoUrl]);
+    }, [file, name, type, valid, preview, imageUrl, videoUrl]);
 
-    return [isReady,isImage, isVideo, url, imageSource,videoSource];
+    return [isReady, isImage, isVideo, url, imageSource, videoSource];
 }
 export default useFileMosaicInitializer;
 
