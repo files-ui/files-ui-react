@@ -12,6 +12,7 @@ import FileMosaicImageVideoPreviews from "../components/MainPage/MainRight/FileM
 import { Divider } from "@mui/material";
 import ExtraComponentsMainPage from "../components/MainPage/SecondaryRight/ExtraComponentsMainPage";
 import ExtraComponentsMainPageInputButton from "../components/MainPage/SecondaryRight/ExtraComponentsMainPageInputButton";
+import ExtraComponentsMainPageAvatar from "../components/MainPage/SecondaryRight/ExtraComponentsMainPageAvatar";
 
 const MainPage = ({ darkMode }) => {
   const [darkModeOn, setDarkModeOn] = React.useState(false);
@@ -90,7 +91,7 @@ const MainPage = ({ darkMode }) => {
               <ExtraComponentsMainPageInputButton darkMode={darkModeOn} />
             </div>
             <div className="secondary-item">
-              <ExtraComponentsMainPage darkMode={darkModeOn} />
+              <ExtraComponentsMainPageAvatar darkMode={darkModeOn} />
             </div>
           </div>
         </div>

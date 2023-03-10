@@ -7,6 +7,7 @@ import {
   ImagePreview,
   VideoPreview,
   FileInputButton,
+  Avatar,
 } from "../../../files-ui";
 import AnchorToTab from "../../util-components/AnchorToTab";
 import TypeHighlight from "../../typeHighlight/TypeHighlight";
@@ -14,19 +15,18 @@ import TypeHighlight from "../../typeHighlight/TypeHighlight";
 interface ExtraComponentsMainPageProps {
   darkMode?: boolean;
 }
-const ExtraComponentsMainPageInputButton: React.FC<
-  ExtraComponentsMainPageProps
-> = (props: ExtraComponentsMainPageProps) => {
+const ExtraComponentsMainPageAvatar: React.FC<ExtraComponentsMainPageProps> = (
+  props: ExtraComponentsMainPageProps
+) => {
   const { darkMode } = props;
-  const [value, setValue] = React.useState<ExtFile | undefined>(undefined);
+  const [isUloading, setIsUploading] = React.useState<boolean>(false);
 
-  const updateFile = (incommingFiles: ExtFile[]) => {
-    console.log("incomming extFiles", incommingFiles);
-    setValue(incommingFiles[0]);
-  };
+  const [avatarSrc, setAvatarSrc] = React.useState<string | undefined | File>(
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaKgRXvIBtfmfJ49rSmVbPLTgRqPPYjMA_94o0KD4WtHK55Oh_MYbVF8JmPqyddweUx8Y&usqp=CAU"
+  );
 
-  const removeFile = () => {
-    setValue(undefined);
+  const handleChange = async (file: File) => {
+    setAvatarSrc(file);
   };
   return (
     <Paper
@@ -35,7 +35,7 @@ const ExtraComponentsMainPageInputButton: React.FC<
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent:"space-between",
+        justifyContent: "space-between",
         padding: "20px 0",
         boxSizing: "border-box",
         backgroundColor: darkMode ? "#121212" : "rgba(0, 0, 0, 0.06)",
@@ -43,8 +43,8 @@ const ExtraComponentsMainPageInputButton: React.FC<
       }}
     >
       <TypeHighlight>
-        <AnchorToTab href="/components/fileinputbutton">
-          <h3 style={{ margin: 0 }}>{"<FileInputButton/>"}</h3>
+        <AnchorToTab href="/components/avatar">
+          <h3 style={{ margin: 0 }}>{"<Avatar/>"}</h3>
         </AnchorToTab>
       </TypeHighlight>
       <Stack
@@ -54,21 +54,25 @@ const ExtraComponentsMainPageInputButton: React.FC<
         justifyContent={"space-evenly"}
         sx={{
           flexWrap: "wrap",
-          flexGrow:1,
-          //height: "100%",
+          flexGrow: 1,
         }}
       >
-        {value ? (
-          <FileCard {...value} onDelete={removeFile} info preview darkMode={darkMode}/>
-        ) : (
-          <FileInputButton value={value ? [value] : []} onChange={updateFile} />
-        )}
-        <FileCard {...sampleFileProps} info darkMode={darkMode}/>
+        <Avatar
+          src={avatarSrc}
+          onChange={handleChange}
+          isUloading={isUloading}
+        />
+        <Avatar
+          src={avatarSrc}
+          smart={true}
+          onChange={handleChange}
+          isUloading={isUloading}
+        />
       </Stack>
     </Paper>
   );
 };
-export default ExtraComponentsMainPageInputButton;
+export default ExtraComponentsMainPageAvatar;
 
 const sampleFileProps: ExtFile = {
   id: "fileId",
