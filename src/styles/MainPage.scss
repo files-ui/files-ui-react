@@ -22,7 +22,7 @@ $border-color-dark: #0a1929;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-
+  color: #0a1929;
   .filesui-nav {
     transition: all 0.4s ease-in-out;
     color: #042354;
@@ -173,7 +173,55 @@ $border-color-dark: #0a1929;
     justify-content: center;
     gap: 10px;
   }
+  .files-ui-secondary-container {
+    width: 100%;
+    background-color: #f3f6f9;
+    &.darkmode {
+      background-color: #001e3c;
+    }
+    padding-bottom: 28px;
+    .secondary-content {
+      margin: auto;
+      width: 100%;
+      max-width: 1280px;
+      //min-height: calc(100vh - 64px);
 
+      .secondary-content-flex {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 30px;
+        box-sizing: border-box;
+        padding: 0 28px;
+        flex-wrap: wrap;
+        .secondary-item {
+          flex-grow: 1;
+          min-width: 30%;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .secondary-right {
+          width: 100%;
+        }
+        .secondary-left {
+          width: 100%;
+        }
+      }
+      .secondary-right {
+        box-sizing: border-box;
+        width: 50%;
+        margin: auto;
+      }
+      .secondary-left {
+        box-sizing: border-box;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  }
   .gradient-span {
     font-weight: 700;
     background: linear-gradient(

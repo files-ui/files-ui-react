@@ -1,6 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { PhotoCameraProps } from "./PhotoCameraProps";
+import { handleClickUtil } from "../../../core";
 
 const PhotoCamera: React.FC<PhotoCameraProps> = (props: PhotoCameraProps) => {
   const { size, color, colorFill, onClick, style, className } = props;
@@ -15,7 +16,10 @@ const PhotoCamera: React.FC<PhotoCameraProps> = (props: PhotoCameraProps) => {
       viewBox="0 0 24 24"
       width={`${finalSize}px`}
       fill={color ? color : "#000000"}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e) => {
+        handleClickUtil(e);
+        onClick?.(e);
+      }}
     >
       <path
         d="M0 0h24v24H0V0z"

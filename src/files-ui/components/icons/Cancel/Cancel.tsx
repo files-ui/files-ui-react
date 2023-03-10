@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { parseSize } from "../utils/utils";
 import { CancelProps } from "./CancelProps";
+import { handleClickUtil } from "../../../core";
 
 const Cancel: FC<CancelProps> = (props: CancelProps) => {
   const { size, color, colorFill, onClick, style, className } = props;
@@ -9,7 +10,10 @@ const Cancel: FC<CancelProps> = (props: CancelProps) => {
   return (
     <svg
       style={onClick ? { ...{ cursor: "pointer", ...finalStyle } } : finalStyle}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e) => {
+        handleClickUtil(e);
+        onClick?.(e);
+      }}
       xmlns="http://www.w3.org/2000/svg"
       height={`${finalSize}px`}
       viewBox="0 0 24 24"

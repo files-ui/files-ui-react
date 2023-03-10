@@ -1,4 +1,5 @@
 import * as React from "react";
+import { handleClickUtil } from "../../core";
 export type DownloadHiddenProps = {
   downloadUrl?: string;
   anchorRef: React.RefObject<HTMLAnchorElement>;
@@ -9,13 +10,20 @@ const DownloadHidden: React.FC<DownloadHiddenProps> = (
   props: DownloadHiddenProps
 ) => {
   const { downloadUrl, anchorRef, fileName } = props;
+  function handleClick<T extends HTMLAnchorElement>(
+    evt: React.MouseEvent<T, MouseEvent>
+  ): void {
+    evt.stopPropagation();
+  }
   if (downloadUrl)
     return (
       <a
         ref={anchorRef}
+        target={"_blank"}
         href={downloadUrl}
         download={fileName}
-        style={{ display: "none" }}
+        hidden
+        onClick={handleClick}
       >
         download_file
       </a>

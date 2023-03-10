@@ -1,6 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { PersonProps } from "./PersonProps";
+import { handleClickUtil } from "../../../core";
 
 const Person: React.FC<PersonProps> = (props: PersonProps) => {
   const { size, color, colorFill, onClick, style, className } = props;
@@ -15,7 +16,10 @@ const Person: React.FC<PersonProps> = (props: PersonProps) => {
       viewBox="0 0 24 24"
       width={`${finalSize}px`}
       fill={color ? color : "#000000"}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e) => {
+        handleClickUtil(e);
+        onClick?.(e);
+      }}
     >
       <path
         d="M0 0h24v24H0z"

@@ -1,5 +1,9 @@
 import * as React from "react";
-import { addClassName, fileSizeFormater } from "../../../../core";
+import {
+  addClassName,
+  fileSizeFormater,
+  handleClickUtil,
+} from "../../../../core";
 import { FileMosaicProps } from "./FileMosaicProps";
 import "./FileMosaic.scss";
 import LayerContainer from "../file-mosaic-layer/LayerContainer";
@@ -11,9 +15,11 @@ import useFileMosaicInitializer from "../../hooks/useFileMosaicInitializer";
 import FileMosaicImageLayer from "../FIleMosaicImageLayer/FileMosaicImageLayer";
 import { useIsUploading } from "../../hooks/useIsUploading";
 import { Tooltip } from "../../../tooltip";
-import FileMosaicMainLayer from "../FileMosaicMainLayer.tsx/FileMosaicMainLayer";
+
 import FileMosaicInfoLayer from "../FileMosaicInfoLayer/FileMosaicInfoLayer";
 import useProgress from "../../hooks/useProgress";
+import DownloadHidden from "../../../download-hidden/DownloadHidden";
+import FileMosaicMainLayer from "../FileMosaicMainLayer.tsx/FileMosaicMainLayer";
 
 const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const {
@@ -61,13 +67,15 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onRightClick,
   } = props;
 
-  // console.log("FileMosaic progress " + id, progress);
   //ref for anchor download element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
 
   const finalClassName: string = addClassName(
-    "files-ui-file-mosaic-main-container files-ui-tooltip",
-    className
+    addClassName(
+      "files-ui-file-mosaic-main-container files-ui-tooltip",
+      className
+    ),
+    onClick ? "clickable" : undefined
   );
 
   const fileMosaicFileNameClassName: string = darkMode
@@ -82,10 +90,6 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   ] = getLocalFileItemData(file, propName, propType, propSize);
 
   // handle progress
-  /* const localProgress: number | undefined = React.useMemo(
-    () => getProgress(progress, xhr),
-    [progress, xhr]
-  ); */
   const localProgress: number | undefined = useProgress(progress, xhr);
 
   //console.log("FileMosaic progress localProgress " + localProgress);
@@ -198,6 +202,10 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
       innerDownload();
     }
   };
+  const handleAbort = () => {
+    xhr?.abort();
+    onAbort?.(id);
+  };
 
   if (isReady)
     return (
@@ -265,7 +273,11 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
           </Layer>
 
           {/** INFO LAYER */}
-          <Layer className="files-ui-file-mosaic-info-layer" visible={showInfo}>
+          <Layer
+            className="files-ui-file-mosaic-info-layer"
+            visible={showInfo}
+            onClick={handleClickUtil}
+          >
             <FileMosaicInfoLayer
               onCloseInfo={handleCloseInfo}
               valid={valid}
@@ -280,19 +292,13 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
           <Layer
             className="files-ui-file-mosaic-upload-layer"
             visible={isUploading}
+            onClick={handleClickUtil}
           >
             <FileMosaicUploadLayer
               uploadStatus={uploadStatus}
               progress={localProgress}
               onCancel={onCancel ? () => onCancel?.(id) : undefined}
-              onAbort={
-                onAbort
-                  ? () => {
-                      xhr?.abort();
-                      onAbort?.(id);
-                    }
-                  : undefined
-              }
+              onAbort={onAbort ? handleAbort : undefined}
               localization={localization}
             />
           </Layer>
@@ -309,11 +315,11 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
           errors={errors}
           uploadMessage={uploadMessage}
         />
-        {downloadUrl && (
-          <a ref={downloadRef}  target={"_blank"} href={downloadUrl} download={localName} hidden>
-            download_file
-          </a>
-        )}
+        <DownloadHidden
+          fileName={localName}
+          anchorRef={downloadRef}
+          downloadUrl={downloadUrl}
+        />
       </div>
     );
   return <></>;

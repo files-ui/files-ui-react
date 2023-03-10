@@ -82,7 +82,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
           onClick={(evt) => {
             evt.preventDefault();
           }}
-          width={finalWidth}
+          width={!smart && !finalWidth?"100%":finalWidth}
           height={finalHeight}
           src={source}
           alt={alt}

@@ -1,8 +1,14 @@
 import * as React from "react";
+//import { handleClickUtil } from "../../core";
 import { InputHiddenProps } from "./InputHiddenProps";
 
 const InputHidden: React.FC<InputHiddenProps> = (props: InputHiddenProps) => {
   const { onChange, inputRef, accept, multiple } = props;
+  /* function handleClick<T extends HTMLInputElement>(
+    evt: React.MouseEvent<T, MouseEvent>
+  ): void {
+    handleClickUtil(evt);
+  } */
   return (
     <React.Fragment>
       <input
@@ -13,6 +19,7 @@ const InputHidden: React.FC<InputHiddenProps> = (props: InputHiddenProps) => {
         type="file"
         accept={accept}
         multiple={multiple}
+        //onClick={handleClick}
       />
     </React.Fragment>
   );

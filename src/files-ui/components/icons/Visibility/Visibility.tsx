@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { parseSize } from "../utils/utils";
 import { VisibilityProps } from "./VisibilityProps";
+import { handleClickUtil } from "../../../core";
 
 const Visibility: FC<VisibilityProps> = (props: VisibilityProps) => {
   const { size, color, colorFill, onClick, style, className } = props;
@@ -16,7 +17,10 @@ const Visibility: FC<VisibilityProps> = (props: VisibilityProps) => {
       viewBox="0 0 24 24"
       width={`${finalSize}px`}
       fill={color ? color : "#000000"}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e) => {
+        handleClickUtil(e);
+        onClick?.(e);
+      }}
     >
       <path d="M0 0h24v24H0V0z" fill="none" />
       <path

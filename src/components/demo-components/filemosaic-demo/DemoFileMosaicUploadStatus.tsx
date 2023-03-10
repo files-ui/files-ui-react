@@ -42,50 +42,51 @@ const DemoFileMosaicUploadStatus = (props: { card?: boolean }) => {
     return (
       <>
         <FlexRowContainer card title={"preparing stage"}>
-          <FileCard {...preparingFile} />
-          <FileCard {...preparingFile} onCancel={handleCancel} />
+          <FileCard {...preparingFile}  onClick={()=>alert("haaaaaa")}/>
+          <FileCard {...preparingFile} onCancel={handleCancel}  onClick={()=>alert("haaaaaa")}/>
         </FlexRowContainer>
 
         <FlexRowContainer card title={"uploading stage"}>
-          <FileCard {...uploadingFile} />
-          <FileCard {...uploadingFile} progress={progress} />
-          <FileCard {...uploadingFile} onAbort={handleAbort} />
+          <FileCard {...uploadingFile}  onClick={()=>alert("haaaaaa")}/>
+          <FileCard {...uploadingFile} progress={progress} onClick={()=>alert("haaaaaa")} />
+          <FileCard {...uploadingFile} onAbort={handleAbort}  onClick={()=>alert("haaaaaa")}/>
           <FileCard
             {...uploadingFile}
             onAbort={handleAbort}
-            progress={progress}
+            progress={progress} onClick={()=>alert("haaaaaa")}
           />
         </FlexRowContainer>
 
         <FlexRowContainer card title={"upload result stage"}>
-          <FileCard {...uploadResultFiles[0]} uploadStatus={status1} />
-          <FileCard {...uploadResultFiles[1]} uploadStatus={status2} />
-          <FileCard {...uploadResultFiles[2]} uploadStatus={status3} />
+          <FileCard {...uploadResultFiles[0]} uploadStatus={status1}  onClick={()=>alert("haaaaaa")}/>
+          <FileCard {...uploadResultFiles[1]} uploadStatus={status2}  onClick={()=>alert("haaaaaa")}/>
+          <FileCard {...uploadResultFiles[2]} uploadStatus={status3}  onClick={()=>alert("haaaaaa")}/>
         </FlexRowContainer>
       </>
     );
   return (
     <>
       <FlexRowContainer title={"preparing stage"}>
-        <FileMosaic {...preparingFile} />
-        <FileMosaic {...preparingFile} onCancel={handleCancel} />
+        <FileMosaic {...preparingFile}  onClick={()=>alert("haaaaaa")}/>
+        <FileMosaic {...preparingFile} onCancel={handleCancel}  onClick={()=>alert("haaaaaa")}/>
       </FlexRowContainer>
 
       <FlexRowContainer title={"uploading stage"}>
-        <FileMosaic {...uploadingFile} />
-        <FileMosaic {...uploadingFile} progress={progress} />
-        <FileMosaic {...uploadingFile} onAbort={handleAbort} />
+        <FileMosaic {...uploadingFile}  onClick={()=>alert("haaaaaa")}/>
+        <FileMosaic {...uploadingFile} progress={progress}  onClick={()=>alert("haaaaaa")}/>
+        <FileMosaic {...uploadingFile} onAbort={handleAbort}  onClick={()=>alert("haaaaaa")}/>
         <FileMosaic
           {...uploadingFile}
           onAbort={handleAbort}
           progress={progress}
+           onClick={()=>alert("haaaaaa")}
         />
       </FlexRowContainer>
 
       <FlexRowContainer title={"upload result stage"}>
-        <FileMosaic {...uploadResultFiles[0]} uploadStatus={status1} />
-        <FileMosaic {...uploadResultFiles[1]} uploadStatus={status2} />
-        <FileMosaic {...uploadResultFiles[2]} uploadStatus={status3} />
+        <FileMosaic {...uploadResultFiles[0]} uploadStatus={status1} onClick={()=>alert("haaaaaa")} />
+        <FileMosaic {...uploadResultFiles[1]} uploadStatus={status2} onClick={()=>alert("haaaaaa")} />
+        <FileMosaic {...uploadResultFiles[2]} uploadStatus={status3} onClick={()=>alert("haaaaaa")}/>
       </FlexRowContainer>
     </>
   );
