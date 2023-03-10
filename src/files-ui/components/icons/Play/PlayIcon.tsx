@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { parseSize } from "../utils/utils";
 import { PlayIconProps } from "./PlayIconProps";
+import { handleClickUtil } from "../../../core";
 
 const PlayIcon: FC<PlayIconProps> = (props: PlayIconProps) => {
   const { size, color, colorFill, onClick, style, className } = props;
@@ -15,7 +16,10 @@ const PlayIcon: FC<PlayIconProps> = (props: PlayIconProps) => {
       viewBox="0 0 24 24"
       width={`${finalSize}px`}
       fill={color ? color : "#000000"}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e) => {
+        handleClickUtil(e);
+        onClick?.(e);
+      }}
     >
       <path
         d="M0 0h24v24H0V0z"

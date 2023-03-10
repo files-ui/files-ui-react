@@ -3,7 +3,7 @@ import { FileCardProps } from "./FileCardProps";
 import "./FileCard.scss";
 import "./components/FileCardPaper.scss";
 import { getLocalFileItemData } from "../file-item/utils/getLocalFileItemData";
-import { fileSizeFormater, shrinkWord } from "../../core";
+import { fileSizeFormater, handleClickUtil, shrinkWord } from "../../core";
 import useProgress from "../file-mosaic/hooks/useProgress";
 import useFileMosaicInitializer from "../file-mosaic/hooks/useFileMosaicInitializer";
 import { useIsUploading } from "../file-mosaic/hooks/useIsUploading";
@@ -15,6 +15,7 @@ import FileCardInfoLayer from "./components/FileCardInfoLayer";
 import FileMosaicStatus from "../file-mosaic/components/FileMosaicStatus/FileMosaicStatus";
 import FileCardUploadLayer from "./components/FileCardUploadLayer";
 import { Tooltip } from "../tooltip";
+import DownloadHidden from "../download-hidden/DownloadHidden";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -35,7 +36,8 @@ const setFinalElevation = (elevation: string | number): number => {
 const makeFileCardClassName = (
   elevation: FileCardProps["elevation"],
   darkMode: boolean | undefined,
-  className: string | undefined
+  className: string | undefined,
+  clickable?: boolean
 ): string => {
   console.log("FileCard makeFileCardClassName", elevation, darkMode, className);
   let finalClassName: string =
@@ -47,6 +49,7 @@ const makeFileCardClassName = (
   if (darkMode) {
     finalClassName += " dark-mode";
   }
+  if (clickable) finalClassName += " clickable";
   if (className) {
     finalClassName += ` ${className}`;
   }
@@ -112,7 +115,8 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   const finalClassName: string = makeFileCardClassName(
     elevation,
     darkMode,
-    className
+    className,
+    onClick !== undefined
   );
 
   // local properties from file
@@ -176,14 +180,12 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
 
   React.useEffect(() => {
     //console.log("Change isUploading", isUploading);
-    if (isUploading && showInfo) {
-      handleCloseInfo();
-    }
+    if (isUploading && showInfo) handleCloseInfo();
+
     // eslint-disable-next-line
   }, [isUploading]);
 
   /*************** Click ***************/
-  /*************** CLICK ***************/
   /**
    * TO-DO: Add functionallity on click event
    * @param e event object
@@ -198,9 +200,8 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   const handleDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
     evt: React.MouseEvent
   ): void => {
-    alert("double click on file");
+    //alert("double click on file");
     evt.preventDefault();
-
     onDoubleClick?.(evt);
   };
   function handleRightClick(evt: React.MouseEvent) {
@@ -235,6 +236,11 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     }
   };
 
+  const handleAbort = () => {
+    xhr?.abort();
+    onAbort?.(id);
+  };
+
   if (isReady) {
     return (
       <div
@@ -246,10 +252,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
         onDoubleClick={handleDoubleClick}
         onContextMenu={handleRightClick}
       >
-        <LayerContainer
-          className="files-ui-file-card-main-layer-container"
-          style={style}
-        >
+        <LayerContainer className="files-ui-file-card-main-layer-container">
           <Layer className="file-card-main-layer" visible={true}>
             <div className="file-card-icon-plus-data">
               {/** ICON + STATUS */}
@@ -262,8 +265,8 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
                   >
                     <FileMosaicImageLayer
                       imageSource={imageSource}
-                      url={url}
                       fileName={localName}
+                      url={url}
                       isBlur={true}
                     />
                   </Layer>
@@ -297,15 +300,13 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
               </div>
             </div>
           </Layer>
-
-          {/* <Layer
-            className="files-ui-file-card-right-layer"
-            visible={!isUploading}
-          > */}
-
-          {/* </Layer> */}
-
-          <Layer className="file-card-info-layer-container" visible={showInfo}>
+          
+          {/** INFO LAYER */}
+          <Layer
+            className="file-card-info-layer-container"
+            visible={showInfo}
+            onClick={handleClickUtil}
+          >
             <FileCardInfoLayer
               onCloseInfo={handleCloseInfo}
               valid={valid}
@@ -320,30 +321,24 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
           <Layer
             className="file-card-upload-layer-container"
             visible={isUploading}
+            onClick={handleClickUtil}
           >
             <div className="files-ui-file-card-upload-layer">
               <FileCardUploadLayer
                 uploadStatus={uploadStatus}
                 progress={localProgress}
                 onCancel={onCancel ? () => onCancel?.(id) : undefined}
-                onAbort={
-                  onAbort
-                    ? () => {
-                        xhr?.abort();
-                        onAbort?.(id);
-                      }
-                    : undefined
-                }
+                onAbort={onAbort ? handleAbort : undefined}
                 localization={localization}
               />
             </div>
           </Layer>
-        </LayerContainer>
 
+        </LayerContainer>
         <FileCardRightActions
           deleteIcon={onDelete !== undefined}
           onDelete={handleDelete}
-          darkMode={darkMode}          
+          darkMode={darkMode}
           imageIcon={isImage && onSee !== undefined}
           onSee={() => onSee?.(imageSource)}
           videoIcon={isVideo && onWatch !== undefined}
@@ -355,7 +350,6 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
           isActive={alwaysActive || hovering}
           visible={!isUploading && !showInfo}
         />
-
         <Tooltip
           open={resultOnTooltip}
           uploadStatus={uploadStatus}
@@ -363,11 +357,11 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
           errors={errors}
           uploadMessage={uploadMessage}
         />
-        {downloadUrl && (
-          <a ref={downloadRef} href={downloadUrl} download={localName} hidden>
-            download_file
-          </a>
-        )}
+        <DownloadHidden
+          fileName={localName}
+          anchorRef={downloadRef}
+          downloadUrl={downloadUrl}
+        />
       </div>
     );
   }

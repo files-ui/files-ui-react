@@ -51,7 +51,7 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
   if (visible)
     return (
       <>
-        <div className="file-card-right-layer-header">
+        <div className="file-card-right-layer-header" >
           {isActive && deleteIcon && (
             <Clear
               className={

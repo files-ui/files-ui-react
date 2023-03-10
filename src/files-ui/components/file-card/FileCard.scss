@@ -126,6 +126,7 @@
     }
 
     .file-card-upload-layer-container {
+      cursor: default;
       display: flex;
       box-sizing: border-box;
       //background-color: rgba(0, 0, 0, 0.5);
@@ -147,6 +148,8 @@
       height: 100%;
     }
     .file-card-info-layer-container {
+      cursor: default;
+
       display: flex;
       box-sizing: border-box;
       //background-color: rgba(0, 0, 0, 0.5);
@@ -209,6 +212,30 @@
           font-weight: 399;
         }
       }
+    }
+  }
+  &.clickable{
+    cursor: pointer;
+  }
+}
+
+//// ICONS
+.files-ui-file-icon {
+  font-size: 0.7rem;
+  min-width: 19px;
+  min-height: 19px;
+  margin: 0;
+  padding: 2px 2px;
+  border-radius: 50%;
+  background-color: rgba(32, 33, 36, 0.65);
+  word-break: break-word;
+  &:hover {
+    background-color: rgba(32, 33, 36, 0.85);
+  }
+  &.dark-mode {
+    background-color: rgba(154, 160, 166, 0.65);
+    &:hover {
+      background-color: rgba(154, 160, 166, 0.85);
     }
   }
 }

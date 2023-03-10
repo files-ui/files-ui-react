@@ -365,6 +365,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
   };
   // HANDLERS for CLICK
   function handleClick(): void {
+    console.log("HAAAAAAAA");
     //handleClickUtil(evt);
     if (disabled) return;
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { handleClickUtil } from "../../../core";
 import { parseSize } from "../utils/utils";
 import { DownloadFileProps } from "./DownloadFileProps";
 
@@ -18,7 +19,10 @@ const DownloadFile: React.FC<DownloadFileProps> = (
       viewBox="0 0 24 24"
       width={`${finalSize}px`}
       fill={color || "#000000"}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e) => {
+        handleClickUtil(e);
+        onClick?.(e);
+      }}
     >
       <g>
         <rect fill={colorFill || "none"} height={finalSize} width={finalSize} />

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { InfoDisneyProps } from "./InfoDisneyProps";
+import { handleClickUtil } from "../../../core";
 
 const InfoDisney: React.FC<InfoDisneyProps> = (props: InfoDisneyProps) => {
   const {
@@ -28,7 +29,10 @@ const InfoDisney: React.FC<InfoDisneyProps> = (props: InfoDisneyProps) => {
       xmlns="http://www.w3.org/2000/svg"
       height={`${finalSize}px`}
       width={`${finalSize}px`}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e) => {
+        handleClickUtil(e);
+        onClick?.(e);
+      }}
       //style="height: 32px; min-width: 32px; width: 32px; z-index: auto;"
       //class="sc-htoDjs bUEQUS"
     >

@@ -3,7 +3,7 @@
  * @param evt click event handler object
  */
 export function
-    handleClickUtil<T extends HTMLDivElement | HTMLButtonElement | HTMLAnchorElement>
+    handleClickUtil<T extends HTMLDivElement | HTMLButtonElement | HTMLAnchorElement | SVGSVGElement | HTMLInputElement>
     (
         evt: React.MouseEvent<T, MouseEvent>
     ) {
@@ -18,6 +18,7 @@ export function
 export const handleClickInput = (
     input: HTMLInputElement | null
 ) => {
+    console.log("handleClickInput:", input);
     if (!input) return;
     input.click();
 }
