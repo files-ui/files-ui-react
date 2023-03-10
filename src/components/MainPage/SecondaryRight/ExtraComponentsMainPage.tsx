@@ -1,7 +1,14 @@
 import * as React from "react";
 import { Stack, Paper } from "@mui/material";
-import { FileCard,ExtFile , FullScreen, ImagePreview, VideoPreview} from "../../../files-ui";
-
+import {
+  FileCard,
+  ExtFile,
+  FullScreen,
+  ImagePreview,
+  VideoPreview,
+} from "../../../files-ui";
+import AnchorToTab from "../../util-components/AnchorToTab";
+import TypeHighlight from "../../typeHighlight/TypeHighlight";
 
 interface ExtraComponentsMainPageProps {
   darkMode?: boolean;
@@ -34,9 +41,6 @@ const ExtraComponentsMainPage: React.FC<ExtraComponentsMainPageProps> = (
   };
 
   return (
-    <div style={{ width: "100%" }}>
-      <h3>FileCard:</h3>
-
       <Paper
         variant="outlined"
         sx={{
@@ -54,17 +58,30 @@ const ExtraComponentsMainPage: React.FC<ExtraComponentsMainPageProps> = (
             flexWrap: "wrap",
           }}
         >
-          {files.map((f: ExtFile, index: number) => (
-            <FileCard
-              key={index}
-              //darkMode={darkMode}
-              {...f}
-              onSee={handleSee}
-              onWatch={handleWatch}
-              {...f.extraData}
-              alwaysActive
-            />
-          ))}
+          <>
+            <TypeHighlight>
+              <AnchorToTab href="/components/filecard">
+                {" "}
+                <h3 style={{margin:0}}>{"<FileCard/>"}</h3>{" "}
+              </AnchorToTab>
+            </TypeHighlight>
+
+            {files.map((f: ExtFile, index: number) => (
+              <FileCard
+                onClick={() => {
+                  alert("haaa");
+                }}
+                key={index}
+                //darkMode={darkMode}
+                {...f}
+                onSee={handleSee}
+                onWatch={handleWatch}
+                {...f.extraData}
+                info
+                darkMode={darkMode}
+              />
+            ))}
+          </>
           <FullScreen
             open={imageSrc !== undefined}
             onClose={() => setImageSrc(undefined)}
@@ -79,19 +96,18 @@ const ExtraComponentsMainPage: React.FC<ExtraComponentsMainPageProps> = (
           </FullScreen>
         </Stack>
       </Paper>
-    </div>
   );
 };
 export default ExtraComponentsMainPage;
 
 const files: ExtFile[] = [
-  {
+  /* {
     id: 0,
     name: "image-preview.png",
     type: "image/png",
     size: 282000,
     imageUrl: "https://i.ytimg.com/vi/98FO19TuI9A/maxresdefault.jpg",
-  },
+  }, */
 
   {
     id: 2,
