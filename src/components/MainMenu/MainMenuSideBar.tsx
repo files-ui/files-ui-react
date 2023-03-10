@@ -140,6 +140,12 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           index: 72,
           onClick: () => navigate("/utilities-methods/file-uploader"),
         },
+        
+        {
+          label: "File download",
+          index: 73,
+          onClick: () => navigate("/utilities-methods/file-downloader"),
+        },
       ],
     },
   ];
