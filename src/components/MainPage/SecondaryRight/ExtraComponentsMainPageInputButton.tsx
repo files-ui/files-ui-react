@@ -42,7 +42,7 @@ const ExtraComponentsMainPageInputButton: React.FC<
         height: "100%",
       }}
     >
-      <TypeHighlight>
+      <TypeHighlight size="1.1rem">
         <AnchorToTab href="/components/fileinputbutton">
           <h3 style={{ margin: 0 }}>{"<FileInputButton/>"}</h3>
         </AnchorToTab>

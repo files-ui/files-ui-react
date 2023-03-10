@@ -75,15 +75,13 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
               </div>
             </Layer>
           ) : src ? (
-            <>
-              <ImagePreview
-                className={`fui-avatar-image`}
-                src={src}
-                alt={alt}
-                onError={handleError}
-                smart={smart}
-              />
-            </>
+            <ImagePreview
+              className={`fui-avatar-image`}
+              src={src}
+              alt={alt}
+              onError={handleError}
+              smart={smart}
+            />
           ) : (
             <div className={"fui-avatar-label"}>{emptyLabel}</div>
           )}

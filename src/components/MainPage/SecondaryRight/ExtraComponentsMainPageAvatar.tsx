@@ -8,6 +8,7 @@ import {
   VideoPreview,
   FileInputButton,
   Avatar,
+  MaterialButton,
 } from "../../../files-ui";
 import AnchorToTab from "../../util-components/AnchorToTab";
 import TypeHighlight from "../../typeHighlight/TypeHighlight";
@@ -40,9 +41,10 @@ const ExtraComponentsMainPageAvatar: React.FC<ExtraComponentsMainPageProps> = (
         boxSizing: "border-box",
         backgroundColor: darkMode ? "#121212" : "rgba(0, 0, 0, 0.06)",
         height: "100%",
+        flexGrow: 1,
       }}
     >
-      <TypeHighlight>
+      <TypeHighlight size="1.1rem">
         <AnchorToTab href="/components/avatar">
           <h3 style={{ margin: 0 }}>{"<Avatar/>"}</h3>
         </AnchorToTab>
@@ -61,13 +63,16 @@ const ExtraComponentsMainPageAvatar: React.FC<ExtraComponentsMainPageProps> = (
           src={avatarSrc}
           onChange={handleChange}
           isUloading={isUloading}
+          smart={false}
+          variant={"circle"}
         />
-        <Avatar
-          src={avatarSrc}
-          smart={true}
-          onChange={handleChange}
-          isUloading={isUloading}
-        />
+
+        <MaterialButton
+          onClick={() => setAvatarSrc(undefined)}
+          disabled={avatarSrc === undefined}
+        >
+          remove avatar
+        </MaterialButton>
       </Stack>
     </Paper>
   );

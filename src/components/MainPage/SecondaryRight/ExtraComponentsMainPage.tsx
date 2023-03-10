@@ -9,6 +9,7 @@ import {
 } from "../../../files-ui";
 import AnchorToTab from "../../util-components/AnchorToTab";
 import TypeHighlight from "../../typeHighlight/TypeHighlight";
+import { ThorArrivesWakandaES } from "../../../data/videoLinks";
 
 interface ExtraComponentsMainPageProps {
   darkMode?: boolean;
@@ -28,74 +29,71 @@ const ExtraComponentsMainPage: React.FC<ExtraComponentsMainPageProps> = (
   };
 
   const handleWatch = (videoSource: File | string | undefined) => {
-    console.log(
-      "handleWatch videoSource",
-      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4"
-    );
+    console.log("handleWatch videoSource", videoSource);
     //setVideoSrc(videoSource);
     //
-    setVideoSrc(
-      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4"
-    );
+    setVideoSrc(videoSource);
     // setVideoSrc("https://www.w3schools.com/tags/movie.mp4");
   };
 
   return (
-      <Paper
-        variant="outlined"
+    <Paper
+      variant="outlined"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "20px 0",
+        boxSizing: "border-box",
+        backgroundColor: darkMode ? "#121212" : "rgba(0, 0, 0, 0.06)",
+        height: "100%",
+      }}
+    >
+      <TypeHighlight size="1.1rem">
+        <AnchorToTab href="/components/filecard">
+          <h3 style={{ margin: 0 }}>{"<FileCard/>"}</h3>
+        </AnchorToTab>
+      </TypeHighlight>
+      <Stack
+        direction={"column"}
+        spacing={2}
+        alignItems="center"
+        justifyContent={"space-evenly"}
         sx={{
-          padding: "20px 0",
-          boxSizing: "border-box",
-          backgroundColor: darkMode ? "#121212" : "rgba(0, 0, 0, 0.06)",
+          flexWrap: "wrap",
+          flexGrow: 1,
         }}
       >
-        <Stack
-          direction={"column"}
-          spacing={2}
-          alignItems="center"
-          justifyContent={"space-evenly"}
-          sx={{
-            flexWrap: "wrap",
-          }}
+        {files.map((f: ExtFile, index: number) => (
+          <FileCard
+            onClick={() => {
+              alert("haaa");
+            }}
+            key={index}
+            //darkMode={darkMode}
+            {...f}
+            onSee={handleSee}
+            onWatch={handleWatch}
+            {...f.extraData}
+            info
+            darkMode={darkMode}
+          />
+        ))}
+        <FullScreen
+          open={imageSrc !== undefined}
+          onClose={() => setImageSrc(undefined)}
         >
-          <>
-            <TypeHighlight>
-              <AnchorToTab href="/components/filecard">
-                {" "}
-                <h3 style={{margin:0}}>{"<FileCard/>"}</h3>{" "}
-              </AnchorToTab>
-            </TypeHighlight>
-
-            {files.map((f: ExtFile, index: number) => (
-              <FileCard
-                onClick={() => {
-                  alert("haaa");
-                }}
-                key={index}
-                //darkMode={darkMode}
-                {...f}
-                onSee={handleSee}
-                onWatch={handleWatch}
-                {...f.extraData}
-                info
-                darkMode={darkMode}
-              />
-            ))}
-          </>
-          <FullScreen
-            open={imageSrc !== undefined}
-            onClose={() => setImageSrc(undefined)}
-          >
-            <ImagePreview src={imageSrc} />
-          </FullScreen>
-          <FullScreen
-            open={videoSrc !== undefined}
-            onClose={() => setVideoSrc(undefined)}
-          >
-            <VideoPreview src={videoSrc} autoPlay controls />
-          </FullScreen>
-        </Stack>
-      </Paper>
+          <ImagePreview src={imageSrc} />
+        </FullScreen>
+        <FullScreen
+          open={videoSrc !== undefined}
+          onClose={() => setVideoSrc(undefined)}
+        >
+          <VideoPreview src={videoSrc} autoPlay controls />
+        </FullScreen>
+      </Stack>
+    </Paper>
   );
 };
 export default ExtraComponentsMainPage;
@@ -111,11 +109,13 @@ const files: ExtFile[] = [
 
   {
     id: 2,
-    name: "video-preview.mp4",
+    name: "ThorArrivesWakandaES.mp4",
     type: "video/mp4",
     size: 282000,
-    downloadUrl:
-      "https://files-ui-temp-storage.s3.amazonaws.com/2029385a4ed32ff10beeb94c0585e8ac1a8c377c68d22ef25ce5863694a5499e.mp4",
+    imageUrl:
+      "https://e0.pxfuel.com/wallpapers/626/685/desktop-wallpaper-avengers-infinity-war-thor-arrives-in-wakanda-bring-me-thanos.jpg",
+    downloadUrl: ThorArrivesWakandaES,
+    extraData: { videoUrl: ThorArrivesWakandaES },
   },
   {
     id: 3,

@@ -41,7 +41,7 @@ const FileMosaicImageVideoPreviews: React.FC<
     downloadUrl?: string
   ) => {
     console.log("Download fileId", fileId);
-    console.log("Download fileName", files.filter(x=>x.id===fileId)[0]);
+    console.log("Download fileName", files.filter((x) => x.id === fileId)[0]);
     console.log("Download downloadUrl", downloadUrl);
     if (!downloadUrl) return;
     try {
@@ -61,26 +61,28 @@ const FileMosaicImageVideoPreviews: React.FC<
       console.log("Download", resJson); */
     } catch (error) {
       console.log("Download error", error);
-      console.error( error);
+      console.error(error);
     }
   };
   const handleDownloadXHR = async (
     fileId: FileMosaicProps["id"],
     downloadUrl?: string
   ) => {
-
     console.log("Download fileId", fileId);
-    console.log("Download fileName", files.filter(x=>x.id===fileId)[0].name);
+    console.log(
+      "Download fileName",
+      files.filter((x) => x.id === fileId)[0].name
+    );
     console.log("Download downloadUrl", downloadUrl);
     if (!downloadUrl) return;
     try {
       const request = new XMLHttpRequest();
-      request.responseType="blob";
+      request.responseType = "blob";
       request.open("get", downloadUrl, true);
       request.send();
 
-      request.onreadystatechange=function(){
-        if(this.readyState==4 && this.status==200){
+      request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
           const imageURL = window.URL.createObjectURL(this.response);
 
           const anchor = document.createElement("a");
@@ -88,11 +90,10 @@ const FileMosaicImageVideoPreviews: React.FC<
           anchor.download = "fileNamess.jpg";
           document.body.appendChild(anchor);
           anchor.click();
-
-        }else{
+        } else {
           console.log("not yet");
         }
-      }
+      };
 
       const image = await fetch(downloadUrl);
       const imageBlob = await image.blob();
@@ -174,17 +175,18 @@ const files: ExtFile[] = [
     type: "image/jpeg",
     size: 282000,
     imageUrl: "https://i.ytimg.com/vi/98FO19TuI9A/maxresdefault.jpg",
-    downloadUrl: "https://i.ytimg.com/vi/98FO19TuI9A/maxresdefault.jpg",
-
+    //downloadUrl: "https://i.ytimg.com/vi/98FO19TuI9A/maxresdefault.jpg",
   },
 
   {
-    id: 2,
-    name: "video-preview.mp4",
+    id: 1,
+    name: "ThorArrivesWakandaES.mp4",
     type: "video/mp4",
     size: 282000,
-    downloadUrl: VIDEO_URL,
-    extraData: { videoUrl: VIDEO_URL },
+    imageUrl:
+      "https://e0.pxfuel.com/wallpapers/626/685/desktop-wallpaper-avengers-infinity-war-thor-arrives-in-wakanda-bring-me-thanos.jpg",
+    downloadUrl: ThorArrivesWakandaES,
+    extraData: { videoUrl: ThorArrivesWakandaES },
   },
   {
     id: 3,
@@ -199,18 +201,19 @@ const files: ExtFile[] = [
   },
   {
     id: 1,
-    name: "ironman.png",
+    name: "facebook logo.png",
     type: "image/png",
     size: 282000,
     downloadUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/768px-Facebook_f_logo_%282019%29.svg.png",
-
     imageUrl:
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/768px-Facebook_f_logo_%282019%29.svg.png",
-
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/768px-Facebook_f_logo_%282019%29.svg.png",
+    extraData: {
+      backgroundBlurImage: false,
+    },
   },
 ];
-
+/* 
 const videos: ExtFile[] = [
   {
     id: 0,
@@ -225,6 +228,8 @@ const videos: ExtFile[] = [
     name: "ThorArrivesWakandaES.mp4",
     type: "video/mp4",
     size: 282000,
+    imageUrl:
+      "https://e0.pxfuel.com/wallpapers/626/685/desktop-wallpaper-avengers-infinity-war-thor-arrives-in-wakanda-bring-me-thanos.jpg",
     downloadUrl: ThorArrivesWakandaES,
     extraData: { videoUrl: ThorArrivesWakandaES },
   },
@@ -246,3 +251,4 @@ const videos: ExtFile[] = [
     extraData: { videoUrl: NarutoAndSasukeVsMomoshikiES },
   },
 ];
+ */
