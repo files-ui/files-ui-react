@@ -145,6 +145,22 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      * In case onDownload prop is given
      */
     downloadUrl?: string;
+    /**
+     * If not present, image width will be set to 100%.
+     * 
+     * If present, image will be analized and displayed according to its heigh and width.
+     * Image width height greater than its width has a "portrait" orientation.
+     * Otherwise it has a "landscape" orientation.
+     * - If value is "orientation", image will be displayed complete by giving 100% 
+     * to width prop if the orientation is "landscape". 
+     * When orientation is "portrait", height prop will be set to 100%. Some images 
+     * will show an empty space.
+     * - If value is "center", image will be centered and will not be displayed complete.
+     * This the empty space is avoided. This is achived by giving 100% to width prop if 
+     * the orientation is "portrait". When orientation is "landscape", height prop will be set to 100%.
+     * @default orientation
+     */
+    smartImgFit?: false | "orientation" | "center";
 }
 //React.HTMLProps<HTMLDivElement>
 export type FileMosaicProps =
