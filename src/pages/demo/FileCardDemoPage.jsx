@@ -23,6 +23,8 @@ import DemoFileMosaicUploadStatus from "../../components/demo-components/filemos
 import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
 import DemoFileCardActions from "../../components/demo-components/filemosaic-demo/DemoFileCradActions";
 import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
+import DemoFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/DemoFileMosaicSmartImgFit";
+import CodeJSFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicSmartImgFit";
 
 const FileCardDemoPage = (props) => {
   return (
@@ -321,7 +323,22 @@ const FileCardDemoPage = (props) => {
 
           <CodeJSFileMosaicDarkMode card />
         </section>
+        <section id="smart-image-fit">
+          <SubTitle content="Smart image fit" />
+          <DescParagraph>
+            <CodeHighlight>FileCard</CodeHighlight> with
+            <TypeHighlight>smartImgFit</TypeHighlight> prop will display image
+            according to its heigh and width. Image width height greater than
+            its width has a "portrait" orientation. Otherwise it has a
+            "landscape" orientation.
+          </DescParagraph>
 
+          <DemoContainerFileMosaic>
+            <DemoFileMosaicSmartImgFit card />
+          </DemoContainerFileMosaic>
+
+          <CodeJSFileMosaicSmartImgFit card />
+        </section>
         <section id="api">
           <SubTitle content="API" />
           <DescParagraph>
@@ -332,7 +349,8 @@ const FileCardDemoPage = (props) => {
             <li>
               <AnchorToTab href="/api/filecard">{"<FileCard/>"}</AnchorToTab>
             </li>
-            <li>|
+            <li>
+              |
               <AnchorToTab href="/api/fileinputbuttom">
                 {"<FileInputButton/>"}
               </AnchorToTab>
