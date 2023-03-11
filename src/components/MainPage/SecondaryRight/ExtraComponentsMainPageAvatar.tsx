@@ -63,10 +63,18 @@ const ExtraComponentsMainPageAvatar: React.FC<ExtraComponentsMainPageProps> = (
           src={avatarSrc}
           onChange={handleChange}
           isUloading={isUloading}
-          smart={false}
-          variant={"circle"}
+          smartImgFit={"center"}
+          style={{ width: "170px", height: "170px" }}
+          //variant={"circle"}
         />
-
+        <Avatar
+          src={avatarSrc}
+          onChange={handleChange}
+          isUloading={isUloading}
+          smartImgFit={"center"}
+          variant={"circle"}
+          style={{ width: "170px", height: "170px" }}
+        />
         <MaterialButton
           onClick={() => setAvatarSrc(undefined)}
           disabled={avatarSrc === undefined}

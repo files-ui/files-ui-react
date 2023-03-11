@@ -27,6 +27,8 @@ import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosai
 import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
 import DemoFileCardActions from "../../components/demo-components/filemosaic-demo/DemoFileCradActions";
 import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
+import DemoFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/DemoFileMosaicSmartImgFit";
+import CodeJSFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicSmartImgFit";
 
 const FileMosaicDemoPage = (props) => {
   return (
@@ -334,6 +336,23 @@ const FileMosaicDemoPage = (props) => {
           </Paper>
 
           <CodeJSFileMosaicDarkMode />
+        </section>
+
+        <section id="smart-image-fit">
+          <SubTitle content="Smart image fit" />
+          <DescParagraph>
+            <CodeHighlight>FileMosaic</CodeHighlight> with
+            <TypeHighlight>smartImgFit</TypeHighlight> prop will display image
+            according to its heigh and width. Image width height greater than
+            its width has a "portrait" orientation. Otherwise it has a
+            "landscape" orientation.
+          </DescParagraph>
+
+          <DemoContainerFileMosaic>
+            <DemoFileMosaicSmartImgFit />
+          </DemoContainerFileMosaic>
+
+          <CodeJSFileMosaicSmartImgFit />
         </section>
 
         {/*   <section id="localization">

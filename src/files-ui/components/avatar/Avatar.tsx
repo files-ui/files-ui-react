@@ -21,7 +21,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     uploadingLabel,
     isUloading,
     onError,
-    smart,
+    smartImgFit,
   } = mergeProps(props, defaultAvatarProps);
 
   const inputRef: React.RefObject<HTMLInputElement> =
@@ -80,7 +80,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
               src={src}
               alt={alt}
               onError={handleError}
-              smart={smart}
+              smartImgFit={smartImgFit}
             />
           ) : (
             <div className={"fui-avatar-label"}>{emptyLabel}</div>

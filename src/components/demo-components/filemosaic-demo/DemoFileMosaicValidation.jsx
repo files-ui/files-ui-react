@@ -1,6 +1,26 @@
 import * as React from "react";
 import { FileCard, FileMosaic } from "../../../files-ui";
 
+const DemoFileMosaicValidation = ({ card }) => {
+  if (card)
+    return (
+      <>
+        {sampleFilesProps.map((extFile) => (
+          <FileCard key={extFile.id} {...extFile} info />
+        ))}
+      </>
+    );
+
+  return (
+    <>
+      {sampleFilesProps.map((extFile) => (
+        <FileMosaic key={extFile.id} {...extFile} info />
+      ))}
+    </>
+  );
+};
+export default DemoFileMosaicValidation;
+
 const sampleFilesProps = [
   {
     id: "fileId-1",
@@ -24,23 +44,3 @@ const sampleFilesProps = [
     valid: true,
   },
 ];
-
-const DemoFileMosaicValidation = ({ card }) => {
-  if (card)
-    return (
-      <>
-        {sampleFilesProps.map((extFile) => (
-          <FileCard key={extFile.id} {...extFile} info />
-        ))}
-      </>
-    );
-
-  return (
-    <>
-      {sampleFilesProps.map((extFile) => (
-        <FileMosaic key={extFile.id} {...extFile} info />
-      ))}
-    </>
-  );
-};
-export default DemoFileMosaicValidation;

@@ -11,8 +11,21 @@ import "./ImagePreview.scss";
 const ImagePreview: React.FC<ImagePreviewProps> = (
   props: ImagePreviewProps
 ) => {
-  const { src, alt, className, style, width, height, onError, smart } =
-    mergeProps(props, ImagePreviewDefaultProps);
+  const {
+    src,
+    alt,
+    className,
+    style,
+    width,
+    height,
+    onError,
+    smart,
+    smartImgFit,
+  } = mergeProps(props, ImagePreviewDefaultProps);
+
+  const [[finalHeight, finalWidth], setfinalDimensions] = React.useState<
+    [number | undefined, number | undefined]
+  >([undefined, undefined]);
 
   //console.table({ src, alt, className, style, width, height });
   const [source, setSource] = React.useState<string | undefined>(undefined);
@@ -30,21 +43,42 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
 
     setSource(imageSource);
 
-    if (!smart) return;
+    let finalHeight = undefined;
+    let finalWidth = undefined;
 
-    const orientation: "landscape" | "portrait" = await getImageOrientation(
-      imageSource
-    );
-    setOrientation(orientation);
+    if (!smartImgFit) {
+      //if not given
+      finalWidth = 100;
+    } else {
+      const orientation: "landscape" | "portrait" = await getImageOrientation(
+        imageSource
+      );
+      if (orientation === "landscape") {
+        if (smartImgFit === "orientation") {
+          finalHeight = undefined;
+          finalWidth = 100;
+        } else {
+          finalHeight = 100;
+          finalWidth = undefined;
+        }
+      } else {
+        if (smartImgFit === "center") {
+          finalHeight = undefined;
+          finalWidth = 100;
+        } else {
+          finalHeight = 100;
+          finalWidth = undefined;
+        }
+      }
+    }
 
+    setfinalDimensions([finalHeight, finalWidth]);
     setSource(imageSource);
   };
 
   React.useEffect(() => {
     //if not undefined
-    if (!src) {
-      return;
-    }
+    if (!src) return;
     //console.log("ImagePreview There is source :D");
 
     if (typeof src === "string") {
@@ -53,20 +87,18 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
     } else {
       //if a File object is given, check if is a supported format and read it
       const headerMime = src.type ? src.type.split("/")[0] : "octet";
-
-      if (headerMime === "image") {
-        //set the video source and create the uri string if is a supported video format
+      if (headerMime === "image")
+        //set the image source and create the uri string if it's a supported image format
         getSource(src);
-      }
     }
     // eslint-disable-next-line
   }, [src]);
   //console.log("ImagePreview", src, source);
 
-  const finalWidth: string | number | undefined =
+  /* const finalWidth: string | number | undefined =
     width || (orientation === "landscape" && smart ? "100%" : undefined);
   const finalHeight: string | number | undefined =
-    height || (orientation === "portrait" && smart ? "100%" : undefined);
+    height || (orientation === "portrait" && smart ? "100%" : undefined); */
 
   console.log("Image result", finalHeight, finalWidth, orientation, smart);
   const handleError = (evt: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -76,14 +108,14 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
 
   return (
     <React.Fragment>
-      {src && source && (
+      {src && source && (finalHeight || finalWidth) && (
         <img
           style={style || {}}
           onClick={(evt) => {
             evt.preventDefault();
           }}
-          width={!smart && !finalWidth?"100%":finalWidth}
-          height={finalHeight}
+          width={finalWidth?`${finalWidth}%`:finalWidth}
+          height={finalHeight?`${finalHeight}%`:finalHeight}
           src={source}
           alt={alt}
           className={className}

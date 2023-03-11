@@ -104,7 +104,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     onRightClick,
 
     elevation = 4,
-
+    smartImgFit = "orientation",
     //} = mergeProps(props, FileCardPropsDefault);
   } = props;
 
@@ -268,6 +268,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
                       fileName={localName}
                       url={url}
                       isBlur={true}
+                      smartImgFit={false}
                     />
                   </Layer>
                   {/** IMAGE LAYER NO BLUR */}
@@ -277,6 +278,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
                       url={url}
                       fileName={localName}
                       isBlur={false}
+                      smartImgFit={smartImgFit}
                     />
                   </Layer>
                   <Layer className="file-card-status-layer" visible={true}>
@@ -300,7 +302,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
               </div>
             </div>
           </Layer>
-          
+
           {/** INFO LAYER */}
           <Layer
             className="file-card-info-layer-container"
@@ -333,7 +335,6 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
               />
             </div>
           </Layer>
-
         </LayerContainer>
         <FileCardRightActions
           deleteIcon={onDelete !== undefined}

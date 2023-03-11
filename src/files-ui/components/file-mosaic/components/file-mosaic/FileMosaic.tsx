@@ -65,6 +65,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onDoubleClick,
     onClick,
     onRightClick,
+    smartImgFit,
   } = props;
 
   //ref for anchor download element
@@ -232,6 +233,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
               url={url}
               fileName={localName}
               isBlur={true}
+              smartImgFit={false}
             />
           </Layer>
 
@@ -242,6 +244,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
               url={url}
               fileName={localName}
               isBlur={false}
+              smartImgFit={smartImgFit}
             />
           </Layer>
 
