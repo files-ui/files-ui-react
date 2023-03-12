@@ -9,6 +9,7 @@ export default function FileCardMosaicSwitch({
   value,
   onChange,
   withInput = false,
+  row = false,
 }) {
   //const [value, setValue] = React.useState('female');
 
@@ -25,7 +26,7 @@ export default function FileCardMosaicSwitch({
         name="controlled-radio-buttons-group"
         value={value}
         onChange={handleChange}
-        row="horizontal"
+        row={row ? undefined : "horizontal"}
       >
         <FormControlLabel
           value="FileMosaic"

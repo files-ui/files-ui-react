@@ -62,11 +62,12 @@ const LocalizationPage = (props) => {
               value={component}
               onChange={handleChangeComponent}
               withInput
+              row
             />
             <Paper
               variant="outlined"
               style={{
-                padding: "25px",
+                padding: "25px 10px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

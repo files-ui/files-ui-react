@@ -11,21 +11,11 @@ export default function BasicDemoDropzone() {
   const removeFile = (id) => {
     setFiles(files.filter((x) => x.id !== id));
   };
-  return ( 
-    <Dropzone
-      //style={{ minWidth: "505px" }}
-      onChange={updateFiles}
-      value={files}
-    >
+  return (
+    <Dropzone onChange={updateFiles} value={files}>
       {files.length > 0 &&
         files.map((file) => (
-          <FileMosaic
-            key={file.id}
-            {...file}
-            onDelete={removeFile}
-            info
-            alwaysActive
-          />
+          <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>
   );

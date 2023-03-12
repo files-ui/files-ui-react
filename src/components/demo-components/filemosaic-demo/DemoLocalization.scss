@@ -1,0 +1,41 @@
+.demo-localization-container-dz-fm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  .demo-localization-item {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+  @media (max-width: 960px) {
+    flex-direction: column;
+    .demo-localization-item {
+      width: 100%;
+    }
+  }
+}
+
+.demo-localization-container-fib-fc {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  .demo-localization-item {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+  @media (max-width: 960px) {
+    .demo-localization-item {
+      width: 100%;
+    }
+  }
+}

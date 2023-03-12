@@ -15,23 +15,21 @@ const BasicDropzoneCode = ({ splittedOnly = false }) => {
 export default BasicDropzoneCode;
 
 const splittedCodeJS = `<Dropzone
-  style={{ minWidth: "505px" }}
   onChange={updateFiles}
   value={files}
 >
   {files.length > 0 &&
     files.map((file) => (
-      <FileMosaic key={file.id} {...file} onDelete={removeFile} info alwaysActive/>
+      <FileMosaic key={file.id} {...file} onDelete={removeFile} info/>
     ))}
 </Dropzone>`;
 const splittedCodeTS = `<Dropzone
-  style={{ minWidth: "505px" }}
   onChange={updateFiles}
   value={files}
 >
   {files.length > 0 &&
     files.map((file: ExtFile) => (
-      <FileMosaic key={file.id} {...file} onDelete={removeFile} info={true} alwaysActive={true}/>
+      <FileMosaic key={file.id} {...file} onDelete={removeFile} info={true}/>
     ))}
 </Dropzone>`;
 const completeCodeJS = `import { Dropzone,FileMosaic } from "@files-ui/react";
