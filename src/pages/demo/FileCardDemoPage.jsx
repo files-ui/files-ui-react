@@ -350,9 +350,23 @@ const FileCardDemoPage = (props) => {
               <AnchorToTab href="/api/filecard">{"<FileCard/>"}</AnchorToTab>
             </li>
             <li>
-              |
               <AnchorToTab href="/api/fileinputbuttom">
                 {"<FileInputButton/>"}
+              </AnchorToTab>
+            </li>
+            <li>
+              <AnchorToTab href="/api/preview#fullscreen">
+                {"<FullScreen/>"}
+              </AnchorToTab>
+            </li>
+            <li>
+              <AnchorToTab href="/api/preview#imagepreview">
+                {"<ImagePreview/>"}
+              </AnchorToTab>
+            </li>
+            <li>
+              <AnchorToTab href="/api/preview#videopreview">
+                {"<VideoPreview/>"}
               </AnchorToTab>
             </li>
           </ul>
