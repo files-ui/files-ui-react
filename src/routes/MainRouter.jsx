@@ -21,6 +21,7 @@ import FileInputButtonApi from "../pages/api/FileInputButtonApi";
 import AvatarApi from "../pages/api/AvatarApi";
 import FileInputButtonDemoPage from "../pages/demo/FileInputButtonDemoPage";
 import FileDownloadPage from "../pages/download-page/FileDownloadPage";
+import FileIconsPage from "../pages/file-icons/FileIconsPage";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
         element: <FileCardApi />,
       },
     ],
+  },
+  {
+    path: "/file-icons",
+    element: <FileIconsPage />,
   },
   {
     path: "/server-side",
