@@ -91,6 +91,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     ...rest
   } = mergeProps(props, defaultDrozoneProps);
   console.log("Dropzone props", children);
+  console.log("Dropzone value", value);
   const {
     url,
     method,
