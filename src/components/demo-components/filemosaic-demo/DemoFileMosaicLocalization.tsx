@@ -1,8 +1,8 @@
 import * as React from "react";
-import { ExtFile, FileMosaic, Localization } from "../../../files-ui";
+import { Dropzone, ExtFile, FileMosaic, Localization } from "../../../files-ui";
 import { Autocomplete, TextField } from "@mui/material";
 
-const DemoFileMosaicLocalization = () => {
+const DemoFileMosaicLocalization = (props: { card: boolean }) => {
   const [localization, setLocalization] = React.useState<
     Localization | undefined
   >(undefined);
@@ -11,7 +11,7 @@ const DemoFileMosaicLocalization = () => {
     console.log(value);
     setLocalization(value?.value);
   };
-
+  if (props.card) return <></>;
   return (
     <>
       <Autocomplete
@@ -29,20 +29,50 @@ const DemoFileMosaicLocalization = () => {
         style={{
           display: "flex",
           flexWrap: "wrap",
-          justifyContent: "space-evenly",
+          justifyContent: "center",
           width: "100%",
           gap: "50px",
         }}
       >
-        {extFiles.map((extFile, index) => (
-          <FileMosaic
-            key={index}
-            {...extFile}
-            localization={localization}
-            onDelete={() => {}}
-            info
-          />
-        ))}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexGrow: 1,
+            flexWrap:"wrap"
+          }}
+        >
+           <Dropzone
+          /* style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexGrow: 1,
+          }} */
+          localization={localization}
+        ></Dropzone>
+        </div>
+       
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexGrow: 1,
+            flexWrap:"wrap"
+          }}
+        >
+          {extFiles.map((extFile, index) => (
+            <FileMosaic
+              key={index}
+              {...extFile}
+              localization={localization}
+              onDelete={() => {}}
+              info
+            />
+          ))}
+        </div>
       </div>
     </>
   );

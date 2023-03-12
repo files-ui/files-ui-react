@@ -22,6 +22,7 @@ import AvatarApi from "../pages/api/AvatarApi";
 import FileInputButtonDemoPage from "../pages/demo/FileInputButtonDemoPage";
 import FileDownloadPage from "../pages/download-page/FileDownloadPage";
 import FileIconsPage from "../pages/file-icons/FileIconsPage";
+import LocalizationPage from "../pages/localization/LocalizationPage";
 
 const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
   {
     path: "/file-icons",
     element: <FileIconsPage />,
+  },
+  {
+    path: "/localization",
+    element: <LocalizationPage />,
   },
   {
     path: "/server-side",

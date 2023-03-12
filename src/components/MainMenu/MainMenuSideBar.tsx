@@ -11,7 +11,7 @@ import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import { useNavigateToTop } from "../../hooks/useNavigateToTop";
 
 export default function MainMenuSideBar(props: MainMenuSideBarProps) {
-  const { /* items, */ selectedIndex, /* setSelectedIndex */ } = props;
+  const { /* items, */ selectedIndex /* setSelectedIndex */ } = props;
   const navigate = useNavigateToTop();
 
   const quickStartItemsIni: MainMenuSideBarItems[] = [
@@ -110,29 +110,34 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
         },
       ],
     },
-     {
+    {
       label: "File icons",
       index: 4,
       onClick: () => navigate("/file-icons"),
     },
     {
-      label: "Server side",
+      label: "Localization",
       index: 5,
+      onClick: () => navigate("/localization"),
+    },
+    {
+      label: "Server side",
+      index: 6,
       onClick: () => navigate("/server-side"),
     },
     {
       label: "Code Generator",
-      index: 6,
+      index: 7,
       onClick: () => navigate("/code-generator"),
     },
     {
       label: "Types",
-      index: 7,
+      index: 8,
       onClick: () => navigate("/types"),
     },
     {
       label: "Utilities Methods",
-      index: 8,
+      index: 9,
       subMenu: [
         {
           label: "File readers",
@@ -145,7 +150,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           index: 82,
           onClick: () => navigate("/utilities-methods/file-uploader"),
         },
-        
+
         {
           label: "File download",
           index: 83,
@@ -155,7 +160,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     },
   ];
 
-  const [quickStartItems, /* setQuickStartItems */] =
+  const [quickStartItems /* setQuickStartItems */] =
     React.useState(quickStartItemsIni);
 
   const [regularItems, setRegularItemsIni] = React.useState(
@@ -164,11 +169,11 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     })
   );
 
-/*   const handleClick = () => {
+  /*   const handleClick = () => {
     //setOpen(!open);
   }; */
 
-/*   const handleCLickItem = (
+  /*   const handleCLickItem = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     onClick: Function | undefined
   ): void => {
@@ -288,7 +293,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
                 <ListItemButton
                   style={{ padding: "2px 20px" }}
                   key={indexBase}
-                 // selected={subMenu === undefined && selectedIndex === index}
+                  // selected={subMenu === undefined && selectedIndex === index}
                   selected={isOpen && selectedIndex === index}
                   onClick={(event) =>
                     handleListItemClick(
