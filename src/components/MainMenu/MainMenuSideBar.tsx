@@ -110,40 +110,45 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
         },
       ],
     },
+     {
+      label: "File icons",
+      index: 4,
+      onClick: () => navigate("/file-icons"),
+    },
     {
       label: "Server side",
-      index: 4,
+      index: 5,
       onClick: () => navigate("/server-side"),
     },
     {
       label: "Code Generator",
-      index: 5,
+      index: 6,
       onClick: () => navigate("/code-generator"),
     },
     {
       label: "Types",
-      index: 6,
+      index: 7,
       onClick: () => navigate("/types"),
     },
     {
       label: "Utilities Methods",
-      index: 7,
+      index: 8,
       subMenu: [
         {
           label: "File readers",
-          index: 71,
+          index: 81,
           onClick: () => navigate("/utilities-methods/file-reader"),
         },
 
         {
           label: "File uploader",
-          index: 72,
+          index: 82,
           onClick: () => navigate("/utilities-methods/file-uploader"),
         },
         
         {
           label: "File download",
-          index: 73,
+          index: 83,
           onClick: () => navigate("/utilities-methods/file-downloader"),
         },
       ],
