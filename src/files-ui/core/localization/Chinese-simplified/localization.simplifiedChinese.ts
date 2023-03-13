@@ -23,7 +23,7 @@ export const DropzoneSimplifiedChinese: LocalLabels = {
 }
 
 /**
- * English translation for FileItem component
+ * Chinnese translation for FileItem component
  */
 export const FileItemSimplifiedChinese: LocalLabels = {
     fullInfoLayer: {
@@ -32,7 +32,7 @@ export const FileItemSimplifiedChinese: LocalLabels = {
         type: "文件类型: "
     },
     status: {
-        preparing:"准备",
+        preparing:"预加载",
         uploading: "上传",
         success: "成功",
         valid: "接受的文件",
