@@ -67,6 +67,8 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onRightClick,
     smartImgFit,
   } = props;
+//localizers
+
 
   //ref for anchor download element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
@@ -208,6 +210,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onAbort?.(id);
   };
 
+ 
   if (isReady)
     return (
       <div

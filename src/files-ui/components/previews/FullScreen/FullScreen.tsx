@@ -12,6 +12,19 @@ const FullScreen: React.FC<FullScreenProps> = (props: FullScreenProps) => {
     e.stopPropagation();
     onClose?.();
   }
+  React.useEffect(() => {
+    const handleCloseEsc = (evt: KeyboardEvent) => {
+      if (evt.key === "Escape") onClose?.();
+    };
+    console.log("adding listener");
+
+    document.addEventListener("keydown", handleCloseEsc);
+
+    return () => {
+      console.log("removing listener");
+      document.removeEventListener("keydown", handleCloseEsc);
+    };
+  }, []);
 
   return (
     <div

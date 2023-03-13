@@ -20,8 +20,8 @@ import CodeJSFileMosaicValidation from "../../components/demo-components/filemos
 import DemoFileMosaicValidation from "../../components/demo-components/filemosaic-demo/DemoFileMosaicValidation";
 import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
 import DemoFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/DemoFileMosaicUploadStatus";
-import DemoFileMosaicLocalization from "../../components/demo-components/filemosaic-demo/DemoFileMosaicLocalization";
-import CodeJSFileMosaicLocalization from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicLocalization";
+import DemoFileMosaicLocalization from "../../components/demo-components/localization/DemoFileMosaicLocalization";
+import CodeJSFileMosaicLocalization from "../../components/demo-components/localization/CodeJSFileMosaicLocalization";
 import DemoFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/DemoFileMosaicDarkMode";
 import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicDarkMode";
 import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
@@ -354,71 +354,6 @@ const FileMosaicDemoPage = (props) => {
 
           <CodeJSFileMosaicSmartImgFit />
         </section>
-
-        {/*   <section id="localization">
-          <SubTitle content="Localization" />
-          <DescParagraph>
-            The <CodeHighlight>FileMosaic</CodeHighlight> component has
-            multilanguage support. You can change the language in wich labels
-            are displayed by setting the{" "}
-            <CodeHighlight>{"localization"}</CodeHighlight> prop. So far only
-            the following languages are supported:
-            <ul>
-              {[
-                "English",
-                "Spanish",
-                "French",
-                "Italian",
-                "Portuguese",
-                "Russian",
-                "Chinnese (simplified)",
-                "Chinnese (traditional)",
-              ].map((x) => (
-                <li>
-                  <TypeHighlight>{x}</TypeHighlight>
-                </li>
-              ))}
-            </ul>
-          </DescParagraph>
-
-          <Paper
-            variant="outlined"
-            style={{
-              padding: "25px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              gap: "20px",
-            }}
-          >
-            <DemoFileMosaicLocalization />
-          </Paper>
-          <CodeJSFileMosaicLocalization />
-        </section> */}
-
-        {/*  <section id="file-icon">
-          <SubTitle content="File Icons (extensive list)" />
-          <DescParagraph>
-            The <CodeHighlight>FileMosaic</CodeHighlight> component supports
-            several file types to properly set a file icon. The complete list of
-            file icons is the following:
-          </DescParagraph>
-          <Paper
-            variant="outlined"
-            style={{
-              padding: "25px 0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              //flexDirection: "column",
-              gap: "10px",
-              flexWrap: "wrap",
-            }}
-          >
-            <DemoFileMosaicFileIcons />
-          </Paper>
-        </section> */}
 
         <section id="api">
           <SubTitle content="API" />

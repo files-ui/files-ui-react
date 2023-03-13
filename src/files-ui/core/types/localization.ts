@@ -12,7 +12,7 @@ export type Localization =
 
 export type FunctionLabel = ((s1: string | number, s2?: string | number, s3?: string) => string);
 
-export interface LocalLabels {
+export type LocalLabels = {
     [label: string]: string | FunctionLabel | LocalLabels;
 }
 //export const DropzoneLocalizer

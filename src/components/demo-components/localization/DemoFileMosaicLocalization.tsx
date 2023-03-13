@@ -1,8 +1,15 @@
 import * as React from "react";
-import { ExtFile, FileMosaic, Localization } from "../../../files-ui";
+import {
+  Dropzone,
+  ExtFile,
+  FileMosaic,
+  Localization,
+  FileInputButton,
+  FileCard,
+} from "../../../files-ui";
 import { Autocomplete, TextField } from "@mui/material";
-
-const DemoFileMosaicLocalization = () => {
+import "./DemoLocalization.css";
+const DemoFileMosaicLocalization = (props: { card: boolean }) => {
   const [localization, setLocalization] = React.useState<
     Localization | undefined
   >(undefined);
@@ -11,7 +18,6 @@ const DemoFileMosaicLocalization = () => {
     console.log(value);
     setLocalization(value?.value);
   };
-
   return (
     <>
       <Autocomplete
@@ -25,25 +31,54 @@ const DemoFileMosaicLocalization = () => {
         getOptionLabel={(option) => option.language}
         renderInput={(params) => <TextField {...params} label="Localization" />}
       />
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-          width: "100%",
-          gap: "50px",
-        }}
-      >
-        {extFiles.map((extFile, index) => (
-          <FileMosaic
-            key={index}
-            {...extFile}
-            localization={localization}
-            onDelete={() => {}}
-            info
-          />
-        ))}
-      </div>
+      {props.card ? (
+        <div className="demo-localization-container">
+          <div className="inputbutton-container">
+            <FileInputButton
+              //style={{ width: "400px" }}
+              value={[]}
+              localization={localization}
+            ></FileInputButton>
+          </div>
+
+          <div className="filecard-container">
+            {extFiles.map((extFile, index) => (
+              <FileCard
+                key={index}
+                {...extFile}
+                localization={localization}
+                onDelete={() => {}}
+                info
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="demo-localization-container">
+          <div className="dropzone-filemosaic-container">
+            <Dropzone
+              //value={[]}
+              accept={"image/*"}
+              maxFileSize={28 * 1024 * 1024}
+              maxFiles={10}
+              //style={{ width: "400px" }}
+              localization={localization}
+            ></Dropzone>
+          </div>
+
+          <div className="dropzone-filemosaic-container">
+            {extFiles.map((extFile, index) => (
+              <FileMosaic
+                key={index}
+                {...extFile}
+                localization={localization}
+                onDelete={() => {}}
+                info
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };

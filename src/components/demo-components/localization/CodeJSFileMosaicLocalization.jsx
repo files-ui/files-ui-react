@@ -1,11 +1,11 @@
 import * as React from "react";
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 
-const CodeJSFileMosaicLocalization = (props) => {
+const CodeJSFileMosaicLocalization = ({ card }) => {
   return (
     <ShowDemoCode
-      codeCompleteJS={completeCodeJS}
-      codeCompleteTS={completeCodeTS}
+      codeCompleteJS={completeCodeJS(card)}
+      codeCompleteTS={completeCodeTS(card)}
       codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
       codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
       codeSplittedJS={splittedCodeJS}
@@ -18,18 +18,18 @@ export default CodeJSFileMosaicLocalization;
 const splittedCodeJS = ``;
 const splittedCodeTS = ``;
 
-
-const completeCodeJS = `import * as React from "react";
-import { FileMosaic } from "@files-ui/react";
+const completeCodeJS = (card) => `import * as React from "react";
+import { ${card ? "FileCard" : `FileMosaic`} } from "@files-ui/react";
+import "./styles.css";
 import { Autocomplete, TextField } from "@mui/material";
 
-const DemoFileMosaicLocalization = () => {
+const App = () => {
   const [localization, setLocalization] = React.useState(undefined);
 
   const hadleSelect = (value) => {
     console.log(value);
     setLocalization(value?.value);
- };
+  };
   return (
     <>
       <Autocomplete
@@ -43,25 +43,48 @@ const DemoFileMosaicLocalization = () => {
         getOptionLabel={(option) => option.language}
         renderInput={(params) => <TextField {...params} label="Localization" />}
       />
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-          width: "100%",
-          gap: "50px",
-        }}
-      >
-        {extFiles.map((extFile, index) => (
-          <FileMosaic
-            key={index}
-            {...extFile}
+      ${
+        !card
+          ? `<div className="demo-localization-container">
+        <div className="dropzone-filemosaic-container">
+          <Dropzone
+            accept={"image/*"}
+            maxFileSize={28 * 1024 * 1024}
+            maxFiles={10}
             localization={localization}
-            onDelete={() => {}}
-            info
-          />
-        ))}
-      </div>
+          ></Dropzone>
+        </div>
+        <div className="dropzone-filemosaic-container">
+          {extFiles.map((extFile, index) => (
+            <FileMosaic
+              key={index}
+              {...extFile}
+              localization={localization}
+              onDelete={() => {}}
+              info
+            />
+          ))}
+        </div>
+      </div>`
+          : `<div className="demo-localization-container">
+        <div className="inputbutton-container">
+          <FileInputButton
+            localization={localization}
+          ></FileInputButton>
+        </div>
+        <div className="filecard-container">
+          {extFiles.map((extFile, index) => (
+            <FileCard
+              key={index}
+              {...extFile}
+              localization={localization}
+              onDelete={() => {}}
+              info
+            />
+          ))}
+        </div>
+      </div>`
+      }
     </>
   );
 };
@@ -88,7 +111,6 @@ const extFiles = [
     id: 1,
     valid: false,
     name: "file_localization.docx",
-
     size: 28 * 1024,
     errors: ["pdf not allowed", "file is too big"],
   },
@@ -138,11 +160,14 @@ const extFiles = [
   },
 ];`;
 
-const completeCodeTS = `import * as React from "react";
-import { ExtFile, FileMosaic, Localization } from "@files-ui/react";
+const completeCodeTS = (card) => `import * as React from "react";
+import { ExtFile, ${
+  card ? "FileCard" : `FileMosaic`
+}, Localization } from "@files-ui/react";
+import "./styles.css";
 import { Autocomplete, TextField } from "@mui/material";
 
-const DemoFileMosaicLocalization = () => {
+const App = () => {
   const [localization, setLocalization] = React.useState<
     Localization | undefined
   >(undefined);
@@ -150,7 +175,7 @@ const DemoFileMosaicLocalization = () => {
   const hadleSelect = (value: LanguageItem | null) => {
     console.log(value);
     setLocalization(value?.value);
- };
+  };
 
   return (
     <>
@@ -165,25 +190,48 @@ const DemoFileMosaicLocalization = () => {
         getOptionLabel={(option) => option.language}
         renderInput={(params) => <TextField {...params} label="Localization" />}
       />
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-evenly",
-          width: "100%",
-          gap: "50px",
-        }}
-      >
-        {extFiles.map((extFile, index) => (
-          <FileMosaic
-            key={index}
-            {...extFile}
+      ${
+        !card
+          ? `<div className="demo-localization-container">
+        <div className="dropzone-filemosaic-container">
+          <Dropzone
+            accept={"image/*"}
+            maxFileSize={28 * 1024 * 1024}
+            maxFiles={10}
             localization={localization}
-            onDelete={() => {}}
-            info
-          />
-        ))}
-      </div>
+          ></Dropzone>
+        </div>
+        <div className="dropzone-filemosaic-container">
+          {extFiles.map((extFile, index) => (
+            <FileMosaic
+              key={index}
+              {...extFile}
+              localization={localization}
+              onDelete={() => {}}
+              info
+            />
+          ))}
+        </div>
+      </div>`
+          : `<div className="demo-localization-container">
+        <div className="inputbutton-container">
+          <FileInputButton
+            localization={localization}
+          ></FileInputButton>
+        </div>
+        <div className="filecard-container">
+          {extFiles.map((extFile, index) => (
+            <FileCard
+              key={index}
+              {...extFile}
+              localization={localization}
+              onDelete={() => {}}
+              info
+            />
+          ))}
+        </div>
+      </div>`
+      }
     </>
   );
 };

@@ -287,10 +287,10 @@ export type DropzoneAdvancedConfig = {
 
 
 type DefDivProps = React.HTMLProps<HTMLDivElement>;
-type DivPropsOmitInputButtonFullProps = Omit<DefDivProps,  keyof DropzoneFullProps>;
+type DivPropsOmitDropzoneFullProps = Omit<DefDivProps, keyof DropzoneFullProps>;
 
 export declare type DropzoneProps =
-DivPropsOmitInputButtonFullProps &
+  DivPropsOmitDropzoneFullProps &
   {
     [D in keyof DropzoneFullProps]: DropzoneFullProps[D]
   }
@@ -305,5 +305,6 @@ export const defaultDrozoneProps: DropzoneProps =
   uploadConfig: {},
   actionButtons: {},
   header: true,
-  footer: true
+  footer: true,
+  value: [],
 }

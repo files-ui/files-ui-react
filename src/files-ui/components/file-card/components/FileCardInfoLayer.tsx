@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FileItemLocalizerSelector, LocalLabels } from "../../../core";
 import { FileMosaicInfoLayerProps } from "../../file-mosaic/components/FileMosaicInfoLayer/FileMosaicInfoLayerProps";
 import FileMosaicStatus from "../../file-mosaic/components/FileMosaicStatus/FileMosaicStatus";
 import { Cancel } from "../../icons";
@@ -15,25 +16,27 @@ const FileCardInfoLayer: React.FC<FileCardInfoLayerProps> = (
     sizeFormatted,
     localType,
   } = props;
+  const FileItemLocalizer: LocalLabels =
+    FileItemLocalizerSelector(localization);
+
+  const {
+    name: nameLabel,
+    size: sizeLabel,
+    type: typeLabel,
+  } = FileItemLocalizer.fullInfoLayer as LocalLabels;
   return (
     <div className="file-card-file-info">
-      {/*   <FileMosaicStatus
-        style={{ margin: 0, right: 5, bottom: 0, position:"absolute" }}
-          valid={valid}
-          uploadStatus={uploadStatus}
-          localization={localization}
-        /> */}
-        <Cancel
-          style={{ margin: 0, right: 5, top: 0, position:"absolute" }}
-          color="rgba(255,255,255,0.8)"
-          onClick={onCloseInfo}
-          colorFill="black"
-        />
-      <div className="heading">Name:</div>
+      <Cancel
+        style={{ margin: 0, right: 5, top: 0, position: "absolute" }}
+        color="rgba(255,255,255,0.8)"
+        onClick={onCloseInfo}
+        colorFill="black"
+      />
+      <div className="heading">{nameLabel as string}</div>
       <div className="label">{localName}</div>
-      <div className="heading">Size:</div>
+      <div className="heading">{sizeLabel as string}</div>
       <div className="label">{sizeFormatted}</div>
-      <div className="heading">Type:</div>
+      <div className="heading">{typeLabel as string}</div>
       <div className="label">{localType}</div>
     </div>
   );
