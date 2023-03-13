@@ -8,7 +8,7 @@ import {
   FileCard,
 } from "../../../files-ui";
 import { Autocomplete, TextField } from "@mui/material";
-import "./DemoLocalization.scss";
+import "./DemoLocalization.css";
 const DemoFileMosaicLocalization = (props: { card: boolean }) => {
   const [localization, setLocalization] = React.useState<
     Localization | undefined
@@ -32,8 +32,8 @@ const DemoFileMosaicLocalization = (props: { card: boolean }) => {
         renderInput={(params) => <TextField {...params} label="Localization" />}
       />
       {props.card ? (
-        <div className="demo-localization-container-dz-fm">
-          <div className="demo-localization-item">
+        <div className="demo-localization-container">
+          <div className="inputbutton-container">
             <FileInputButton
               //style={{ width: "400px" }}
               value={[]}
@@ -41,7 +41,7 @@ const DemoFileMosaicLocalization = (props: { card: boolean }) => {
             ></FileInputButton>
           </div>
 
-          <div className="demo-localization-item">
+          <div className="filecard-container">
             {extFiles.map((extFile, index) => (
               <FileCard
                 key={index}
@@ -54,19 +54,19 @@ const DemoFileMosaicLocalization = (props: { card: boolean }) => {
           </div>
         </div>
       ) : (
-        <div className="demo-localization-container-dz-fm">
-          <div className="demo-localization-item">
+        <div className="demo-localization-container">
+          <div className="dropzone-filemosaic-container">
             <Dropzone
-              value={extFiles}
+              //value={[]}
               accept={"image/*"}
-              maxFileSize={28*1024*1024}
+              maxFileSize={28 * 1024 * 1024}
               maxFiles={10}
               //style={{ width: "400px" }}
               localization={localization}
             ></Dropzone>
           </div>
 
-          <div className="demo-localization-item">
+          <div className="dropzone-filemosaic-container">
             {extFiles.map((extFile, index) => (
               <FileMosaic
                 key={index}

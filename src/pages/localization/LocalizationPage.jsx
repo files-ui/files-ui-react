@@ -8,13 +8,12 @@ import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import Paper from "@mui/material/Paper";
-import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
 import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
-import AnchorToTab from "../../components/util-components/AnchorToTab";
+// import AnchorToTab from "../../components/util-components/AnchorToTab";
 import FileCardMosaicSwitch from "../../components/switch/FileCardMosaicSwitch";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
-import DemoFileMosaicLocalization from "../../components/demo-components/filemosaic-demo/DemoFileMosaicLocalization";
-import CodeJSFileMosaicLocalization from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicLocalization";
+import DemoFileMosaicLocalization from "../../components/demo-components/localization/DemoFileMosaicLocalization";
+import CodeJSFileMosaicLocalization from "../../components/demo-components/localization/CodeJSFileMosaicLocalization";
 
 const LocalizationPage = (props) => {
   const [component, setComponent] = React.useState("FileMosaic");
@@ -34,11 +33,11 @@ const LocalizationPage = (props) => {
             locales, follow the instructions below.
           </MainParagraph>
 
-          <section id="locale-text">
+          <section id="locale-texts">
             <SubTitle content="Locale texts" />
             <DescParagraph>
               Files UI components have multilanguage support. You can change the
-              language in wich labels are displayed by setting the{" "}
+              language in wich the labels are displayed by setting the{" "}
               <CodeHighlight>{"localization"}</CodeHighlight> prop. So far only
               the following languages are supported:
               <ul>
@@ -53,7 +52,7 @@ const LocalizationPage = (props) => {
                   "Chinnese (traditional)",
                 ].map((x) => (
                   <li>
-                    <TypeHighlight>{x}</TypeHighlight>
+                    <TypeHighlight key={x}>{x}</TypeHighlight>
                   </li>
                 ))}
               </ul>
@@ -93,7 +92,7 @@ export default LocalizationPage;
 const rightMenuItems = [
   {
     id: 0,
-    label: "Complete list",
-    referTo: "/file-icons#complete-list",
+    label: "Locale texts",
+    referTo: "/file-icons#locale-texts",
   },
 ];
