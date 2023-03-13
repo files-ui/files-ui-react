@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FileItemLocalizerSelector, LocalLabels } from "../../../../core";
 import { Cancel } from "../../../icons";
 import FileMosaicStatus from "../FileMosaicStatus/FileMosaicStatus";
 import { FileMosaicInfoLayerProps } from "./FileMosaicInfoLayerProps";
@@ -15,6 +16,16 @@ const FileMosaicInfoLayer: React.FC<FileMosaicInfoLayerProps> = (
     sizeFormatted,
     localType,
   } = props;
+
+  const FileItemLocalizer: LocalLabels =
+    FileItemLocalizerSelector(localization);
+
+  const {
+    name: nameLabel,
+    size: sizeLabel,
+    type: typeLabel,
+  } = FileItemLocalizer.fullInfoLayer as LocalLabels;
+
   return (
     <React.Fragment>
       <div className="files-ui-file-mosaic-info-layer-header">
@@ -30,11 +41,11 @@ const FileMosaicInfoLayer: React.FC<FileMosaicInfoLayerProps> = (
           localization={localization}
         />
       </div>
-      <div className="heading">Name:</div>
+      <div className="heading">{nameLabel as string}</div>
       <div className="label">{localName}</div>
-      <div className="heading">Size:</div>
+      <div className="heading">{sizeLabel as string}</div>
       <div className="label">{sizeFormatted}</div>
-      <div className="heading">Type:</div>
+      <div className="heading">{typeLabel as string}</div>
       <div className="label">{localType}</div>
     </React.Fragment>
   );
