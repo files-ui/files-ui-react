@@ -32,9 +32,6 @@ const FullScreen: React.FC<FullScreenProps> = (props: FullScreenProps) => {
         open ? "fui-fullscreen-container show-fs" : "fui-fullscreen-container"
       }
       onClick={handleClose}
-      onKeyPress={(evt) => {
-        if (evt.key === "Escape") onClose?.();
-      }}
     >
       {open && (
         <div
