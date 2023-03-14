@@ -4,7 +4,9 @@ import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";
 import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
+import CodeDemoDropzoneCustomValidation from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneCustomValidation";
 import CodeDemoDropzoneValidation from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneValidation";
+import DemoDropzoneCustomValidation from "../../components/demo-components/dropzone-demo/DemoDropzoneCustomValidation";
 import DemoDropzoneValidation from "../../components/demo-components/dropzone-demo/DemoDropzoneValidation";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
@@ -178,7 +180,7 @@ const DropzoneDemoPage = (props) => {
         <section id="custom-validation">
           <SubTitle content="Custom validation" />
           <DescParagraph>
-            You can also "override the Dropzone validation operation by giving a
+            You can also override the Dropzone validation operation by giving a
             custom validation function that must fit the following signature:{" "}
             <CodeHighlight>
               {"validator?: (f: "}
@@ -194,10 +196,10 @@ const DropzoneDemoPage = (props) => {
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <BasicDemoDropzone />
+            <DemoDropzoneCustomValidation />
           </Paper>
 
-          <BasicDropzoneCodeJS />
+          <CodeDemoDropzoneCustomValidation />
         </section>
         {/* 
       <section id="dropzone-events">
@@ -226,26 +228,30 @@ const DropzoneDemoPage = (props) => {
 
         <p></p>
         <BasicDropzoneCodeJS />
-      </section>
-      <section id="api">
-        <SubTitle content="API" />
-        <DescParagraph>
-          See the documentation below for a complete reference to all of the
-          props and classes available to the components mentioned here.
-          <ul>
-            <li>
-              <CodeHighlight>
-                <a href="/api/dropzone">{"<Dropzone />"}</a>
-              </CodeHighlight>
-            </li>
-            <li>
-              <CodeHighlight>
-                <a href="/api/filemosaic">{"<FileMosaic />"}</a>
-              </CodeHighlight>
-            </li>
-          </ul>
-        </DescParagraph>
-      </section> */}
+      </section>*/}
+        <section id="api">
+          <SubTitle content="API" />
+          <DescParagraph>
+            See the documentation below for a complete reference to all of the
+            props and classes available to the components mentioned here.
+            <ul>
+              <li>
+                <CodeHighlight>
+                  <AnchorToTab href="/api/dropzone">
+                    {"<Dropzone />"}
+                  </AnchorToTab>
+                </CodeHighlight>
+              </li>
+              <li>
+                <CodeHighlight>
+                  <AnchorToTab href="/api/filemosaic">
+                    {"<FileMosaic />"}
+                  </AnchorToTab>
+                </CodeHighlight>
+              </li>
+            </ul>
+          </DescParagraph>
+        </section>
       </MainContentContainer>
 
       <RightMenuContainer>

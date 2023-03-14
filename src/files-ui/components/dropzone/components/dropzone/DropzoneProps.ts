@@ -254,11 +254,11 @@ export type FooterConfig =
 
 
 export type DropzoneActionButton = {
-  children: React.ReactNode;
-  label: string;
+  children?: React.ReactNode;
+  label?: string;
   style?: React.CSSProperties;
   className?: string;
-  resetStyles: boolean;
+  resetStyles?: boolean;
   onClick?: Function;
 }
 
