@@ -82,9 +82,9 @@ const DropzoneDemoPage = (props) => {
             <li>
               The file(s) must be validated or not. If validation is required,
               it can be done by taking into account a predefined set of allowed{" "}
-              <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">
+              <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">
                 Common MIME Types
-              </a>
+              </AnchorToTab>
               ; specifiying the max file size (in bytes) and/or the max amount
               of files.
             </li>
@@ -114,7 +114,10 @@ const DropzoneDemoPage = (props) => {
             <CodeHighlight>{`<FileMosaic/>`} </CodeHighlight>
             component for showing the files selected by the user with minimun
             props too. For further information of this component check out the{" "}
-            <a href="/components/filemosaic">FileMosaic</a> page.
+            <AnchorToTab href="/components/filemosaic">
+              FileMosaic
+            </AnchorToTab>{" "}
+            page.
           </Alert>
           <br />
           <Alert severity="info">
@@ -127,7 +130,7 @@ const DropzoneDemoPage = (props) => {
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <a href="/types#ext-file">ExtFile-API. </a>
+            <AnchorToTab href="/types#ext-file">ExtFile-API. </AnchorToTab>
           </Alert>
         </section>
 
@@ -203,73 +206,76 @@ const DropzoneDemoPage = (props) => {
         <section id="uploading">
           <SubTitle content="Uploading" />
           <DescParagraph>
-            For uploading the prop{" "}
-            <AnchorToTab href="/types#UploadConfig">uploadConfig</AnchorToTab>{" "}
-            must be given. In this prop you can specify the method, the url,
-            headers and also extra upload data. The type definition for the prop
-            mmentioned can be found{" "}
+            For uploading , the prop <TypeHighlight>uploadConfig</TypeHighlight>{" "}
+            must be given. This prop recieves an object in which you can specify
+            the HTTP method, the url, the headers and also extra data to be
+            uploaded. The type definition for the prop mentioned can be found{" "}
             <AnchorToTab href="/types#UploadConfig">here</AnchorToTab>.
           </DescParagraph>
 
-         
           <Paper variant="outlined" style={{ padding: "25px" }}>
             <DemoDropzoneUploading />
           </Paper>
 
           <CodeDemoDropzoneUploading />
           <Alert severity="info">
-            <AlertTitle> Removing non valid Files </AlertTitle>
-            We call "clean" to the operation of removing non valid files. Apart
-            from deleting them individually, there are some other ways in which
-            you can remove all of them. You can try the following props in the{" "}
-            {"<Dropzone/>"} component:
+            <AlertTitle> Fake uploading </AlertTitle>
+            By giving this prop, the {"<Dropzone/>"} component will simulate the
+            upload operation by randomly set the upload status and message in
+            ech uploadable <TypeHighlight>ExtFile</TypeHighlight>. It also will
+            set a fake progress.
+          </Alert>
+          <br />
+          <Alert severity="info">
+            <AlertTitle> Upload config properties </AlertTitle>
+            Apart from the properties you can see in the example above, there
+            are more of them that can make the upload process to behave
+            differently.
             <ul>
               <li>
-                <TypeHighlight>cleanFiles</TypeHighlight> : This will make
-                dropzone header to dislay the "clean" icon which can trigger the
-                "clean" operation.
+                <TypeHighlight>autoUpload</TypeHighlight> : By setting this prop
+                to true, the upload process will start automatically just after
+                the user drops or selects files.
               </li>
               <li>
-                <TypeHighlight>actionButtons</TypeHighlight> : By setting this
-                prop properly, a button will be visible and will trigger the
-                "clean" operation (This is the way used in this demo).
-              </li>
-              <li>
-                <TypeHighlight>autoClean</TypeHighlight> : By setting this prop,
-                non valid files will be automatically discarted and will not be
-                given in the <CodeHighlight>onChange</CodeHighlight> event.
+                <TypeHighlight>cleanOnUpload</TypeHighlight> : By setting this
+                prop, you can control whether the upload process should "clean"
+                the non valid files before uploading or not By default this
+                value is true.
               </li>
             </ul>
+            More information about the uploadConfig type structure can be found{" "}
+            <AnchorToTab href="/types#UploadConfig">here</AnchorToTab>.
           </Alert>
         </section>
-        {/* 
-      <section id="dropzone-events">
-        <SubTitle content="Dropzone events" />
-        <DescParagraph>
-          You can handle the following events:
-          <ul>
-            <li>
-              Dropzone with the <code className="code">onDelete</code> prop
-              defined can delete all the files associated with the{" "}
-              <code className="code">value</code> prop.
-            </li>
-            <li>
-              {" "}
-              Dropzone with the <code className="code">onDelete</code> prop
-              defined can delete all the files associated with the{" "}
-              <code className="code">value</code> prop..
-            </li>
-            <li>Accept an specific size (in bytes) of files.</li>
-          </ul>
-        </DescParagraph>
 
-        <Paper variant="outlined" style={{ padding: "25px" }}>
-          <BasicDemoDropzone />
-        </Paper>
+        <section id="dropzone-events">
+          <SubTitle content="Dropzone events" />
+          <DescParagraph>
+            You can handle the following events:
+            <ul>
+              <li>
+                Dropzone with the <code className="code">onDelete</code> prop
+                defined can delete all the files associated with the{" "}
+                <code className="code">value</code> prop.
+              </li>
+              <li>
+                {" "}
+                Dropzone with the <code className="code">onDelete</code> prop
+                defined can delete all the files associated with the{" "}
+                <code className="code">value</code> prop..
+              </li>
+              <li>Accept an specific size (in bytes) of files.</li>
+            </ul>
+          </DescParagraph>
 
-        <p></p>
-        <BasicDropzoneCodeJS />
-      </section>*/}
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <BasicDemoDropzone />
+          </Paper>
+
+          <p></p>
+          <BasicDropzoneCodeJS />
+        </section>
         <section id="api">
           <SubTitle content="API" />
           <DescParagraph>
