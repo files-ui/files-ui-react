@@ -5,8 +5,10 @@ import DescParagraph from "../../components/demo-components/desc-paragraph/DescP
 import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";
 import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
 import CodeDemoDropzoneCustomValidation from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneCustomValidation";
+import CodeDemoDropzoneUploading from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneUploading";
 import CodeDemoDropzoneValidation from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneValidation";
 import DemoDropzoneCustomValidation from "../../components/demo-components/dropzone-demo/DemoDropzoneCustomValidation";
+import DemoDropzoneUploading from "../../components/demo-components/dropzone-demo/DemoDropzoneUploading";
 import DemoDropzoneValidation from "../../components/demo-components/dropzone-demo/DemoDropzoneValidation";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
@@ -192,12 +194,53 @@ const DropzoneDemoPage = (props) => {
             <TypeHighlight>maxFileSize</TypeHighlight> and{" "}
             <TypeHighlight>maxFiles</TypeHighlight> props.
           </DescParagraph>
-
           <Paper variant="outlined" style={{ padding: "25px" }}>
             <DemoDropzoneCustomValidation />
           </Paper>
-
           <CodeDemoDropzoneCustomValidation />
+        </section>
+
+        <section id="uploading">
+          <SubTitle content="Uploading" />
+          <DescParagraph>
+            For uploading the prop{" "}
+            <AnchorToTab href="/types#UploadConfig">uploadConfig</AnchorToTab>{" "}
+            must be given. In this prop you can specify the method, the url,
+            headers and also extra upload data. The type definition for the prop
+            mmentioned can be found{" "}
+            <AnchorToTab href="/types#UploadConfig">here</AnchorToTab>.
+          </DescParagraph>
+
+         
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneUploading />
+          </Paper>
+
+          <CodeDemoDropzoneUploading />
+          <Alert severity="info">
+            <AlertTitle> Removing non valid Files </AlertTitle>
+            We call "clean" to the operation of removing non valid files. Apart
+            from deleting them individually, there are some other ways in which
+            you can remove all of them. You can try the following props in the{" "}
+            {"<Dropzone/>"} component:
+            <ul>
+              <li>
+                <TypeHighlight>cleanFiles</TypeHighlight> : This will make
+                dropzone header to dislay the "clean" icon which can trigger the
+                "clean" operation.
+              </li>
+              <li>
+                <TypeHighlight>actionButtons</TypeHighlight> : By setting this
+                prop properly, a button will be visible and will trigger the
+                "clean" operation (This is the way used in this demo).
+              </li>
+              <li>
+                <TypeHighlight>autoClean</TypeHighlight> : By setting this prop,
+                non valid files will be automatically discarted and will not be
+                given in the <CodeHighlight>onChange</CodeHighlight> event.
+              </li>
+            </ul>
+          </Alert>
         </section>
         {/* 
       <section id="dropzone-events">

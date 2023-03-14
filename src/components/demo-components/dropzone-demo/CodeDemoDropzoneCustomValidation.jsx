@@ -14,34 +14,8 @@ const CodeDemoDropzoneCustomValidation = ({ splittedOnly = false }) => {
 };
 export default CodeDemoDropzoneCustomValidation;
 
-const splittedCodeJS = `<Dropzone
-    onChange={updateFiles}
-    value={files}
-    accept={"image/*"}
-    maxFileSize={28 * 1024}
-    maxFiles={2}
-    cleanFiles
-    validator={myOwnValidation}
-  >
-  {files.length > 0 &&
-    files.map((file) => (
-      <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-    ))}
-</Dropzone>`;
-const splittedCodeTS = `<Dropzone
-    onChange={updateFiles}
-    value={files}
-    accept={"image/*"}
-    maxFileSize={28 * 1024}
-    maxFiles={2}
-    cleanFiles
-    validator={myOwnValidation}
-  >
-  {files.length > 0 &&
-    files.map((file: ExtFile) => (
-      <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-    ))}
-</Dropzone>`;
+const splittedCodeJS = ``;
+const splittedCodeTS = ``;
 const completeCodeJS = `import { Dropzone, FileMosaic } from "@files-ui/react";
 import * as React from "react";
 //validate files
@@ -50,7 +24,7 @@ import * as React from "react";
 const myOwnValidation = (file) => {
   let errorList= [];
   let validResult = true;
-  const regExPrefix = /\btest_file\w+/;
+  const regExPrefix = /\\btest_file\\w+/;
   if (!file.name.match(regExPrefix)) {
     validResult = false;
     errorList.push('Prefix "test_file" was not present in the file name');
