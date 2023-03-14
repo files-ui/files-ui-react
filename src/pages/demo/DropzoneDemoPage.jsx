@@ -29,14 +29,9 @@ const rightMenuItems = [
     referTo: "/components/dropzone#validation",
   },
   {
-    id: 1,
+    id: 2,
     label: "Custom validation",
     referTo: "/components/dropzone#custom-validation",
-  },
-  {
-    id: 2,
-    label: "Dropzone events",
-    referTo: "/components/dropzone#dropzone-events",
   },
   {
     id: 3,
@@ -45,18 +40,18 @@ const rightMenuItems = [
   },
   {
     id: 4,
+    label: "Dropzone events",
+    referTo: "/components/dropzone#dropzone-events",
+  },
+  {
+    id: 5,
     label: "Styling",
     referTo: "/components/dropzone#styling",
   },
   {
-    id: 5,
+    id: 6,
     label: "Localization",
     referTo: "/components/dropzone#localization",
-  },
-  {
-    id: 6,
-    label: "Dark mode",
-    referTo: "/components/dropzone#dark-mode",
   },
 ];
 const DropzoneDemoPage = (props) => {
@@ -143,7 +138,7 @@ const DropzoneDemoPage = (props) => {
             <ol>
               <li>Accepting specific file types.</li>
               <li>Accepting an specific number of files.</li>
-              <li>Accepting an specific size (in bytes) for files.</li>
+              <li>Accepting files with an specific size (in bytes).</li>
             </ol>
           </DescParagraph>
 
@@ -153,9 +148,9 @@ const DropzoneDemoPage = (props) => {
           <CodeDemoDropzoneValidation />
           <Alert severity="info">
             <AlertTitle> Removing non valid Files </AlertTitle>
-            We call "clean" the operation of removing non valid files. Apart
-            from deleting them individually there are some other ways in wich
-            you can delete them. You can try the following props in the{" "}
+            We call "clean" to the operation of removing non valid files. Apart
+            from deleting them individually, there are some other ways in which
+            you can remove all of them. You can try the following props in the{" "}
             {"<Dropzone/>"} component:
             <ul>
               <li>
@@ -170,7 +165,7 @@ const DropzoneDemoPage = (props) => {
               </li>
               <li>
                 <TypeHighlight>autoClean</TypeHighlight> : By setting this prop,
-                non valid files will automatically discarted and will not be
+                non valid files will be automatically discarted and will not be
                 given in the <CodeHighlight>onChange</CodeHighlight> event.
               </li>
             </ul>
@@ -192,7 +187,10 @@ const DropzoneDemoPage = (props) => {
                 CustomValidateFileResponse
               </AnchorToTab>
             </CodeHighlight>
-            .
+            . Custom validator can work together with{" "}
+            <TypeHighlight>accept</TypeHighlight>,{" "}
+            <TypeHighlight>maxFileSize</TypeHighlight> and{" "}
+            <TypeHighlight>maxFiles</TypeHighlight> props.
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>

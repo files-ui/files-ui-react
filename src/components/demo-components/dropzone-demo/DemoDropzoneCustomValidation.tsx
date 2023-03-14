@@ -4,11 +4,20 @@ import {
   ExtFile,
   FileMosaic,
   FileMosaicProps,
+  CustomValidateFileResponse,
 } from "../../../files-ui";
-import { CustomValidateFileResponse } from "../../../files-ui/core";
+
+//validate files
+// file name must start with the following prefix: "test_file"
+// (e.g. a valid file name could be "test_file_photo.png")
 const myOwnValidation = (file: File): CustomValidateFileResponse => {
   let errorList: string[] = [];
-  let validResult: boolean = false;
+  let validResult: boolean = true;
+  const regExPrefix: RegExp = /\btest_file\w+/;
+  if (!file.name.match(regExPrefix)) {
+    validResult = false;
+    errorList.push('Prefix "test_file" was not present in the file name');
+  }
   return { valid: validResult, errors: errorList };
 };
 const DemoDropzoneCustomValidation = () => {
@@ -28,8 +37,7 @@ const DemoDropzoneCustomValidation = () => {
       accept={"image/*"}
       maxFileSize={28 * 1024}
       maxFiles={2}
-      //cleanFiles
-      actionButtons={{ position: "bottom", cleanButton: {} }}
+      cleanFiles
       validator={myOwnValidation}
     >
       {files.length > 0 &&
