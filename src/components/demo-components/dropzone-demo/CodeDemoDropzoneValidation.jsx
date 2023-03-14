@@ -1,5 +1,5 @@
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-const BasicDropzoneCode = ({ splittedOnly = false }) => {
+const CodeDemoDropzoneValidation = ({ splittedOnly = false }) => {
   return (
     <ShowDemoCode
       splittedOnly={splittedOnly}
@@ -12,11 +12,16 @@ const BasicDropzoneCode = ({ splittedOnly = false }) => {
     />
   );
 };
-export default BasicDropzoneCode;
+export default CodeDemoDropzoneValidation;
 
 const splittedCodeJS = `<Dropzone
-  onChange={updateFiles}
-  value={files}
+    onChange={updateFiles}
+    value={files}
+    accept="image/*"
+    maxFileSize={28 * 1024}
+    maxFiles={2}
+    //cleanFiles
+    actionButtons={{ position: "bottom", cleanButton: {} }}
 >
   {files.length > 0 &&
     files.map((file) => (
@@ -24,8 +29,13 @@ const splittedCodeJS = `<Dropzone
     ))}
 </Dropzone>`;
 const splittedCodeTS = `<Dropzone
-  onChange={updateFiles}
-  value={files}
+    onChange={updateFiles}
+    value={files}
+    accept="image/*"
+    maxFileSize={28 * 1024}
+    maxFiles={2}
+    //cleanFiles
+    actionButtons={{ position: "bottom", cleanButton: {} }}
 >
   {files.length > 0 &&
     files.map((file: ExtFile) => (
@@ -35,7 +45,7 @@ const splittedCodeTS = `<Dropzone
 const completeCodeJS = `import { Dropzone,FileMosaic } from "@files-ui/react";
 import * as React from "react";
 
-export default function BasicDemoDropzone() {
+export default function App() {
   const [files, setFiles] = React.useState([]);
   const updateFiles = (incommingFiles) => {
     //do something with the files
@@ -47,8 +57,13 @@ export default function BasicDemoDropzone() {
   };
   return (
     <Dropzone
-      onChange={updateFiles}
-      value={files}
+        onChange={updateFiles}
+        value={files}
+        accept="image/*"
+        maxFileSize={28 * 1024}
+        maxFiles={2}
+        //cleanFiles
+        actionButtons={{ position: "bottom", cleanButton: {} }}
     >
       {files.length > 0 &&
         files.map((file) => (
@@ -61,7 +76,7 @@ export default function BasicDemoDropzone() {
 const completeCodeTS = `import { Dropzone, FileMosaic, ExtFile } from "@files-ui/react";
 import * as React from "react";
 
-export default function BasicDemoDropzone() {
+export default function App() {
   const [files, setFiles] = React.useState<ExtFile[]>([]);
   const updateFiles = (incommingFiles:ExtFile[]) => {
     //do something with the files
@@ -73,8 +88,13 @@ export default function BasicDemoDropzone() {
   };
   return (
     <Dropzone
-      onChange={updateFiles}
-      value={files}
+        onChange={updateFiles}
+        value={files}
+        accept="image/*"
+        maxFileSize={28 * 1024}
+        maxFiles={2}
+        //cleanFiles
+        actionButtons={{ position: "bottom", cleanButton: {} }}
     >
       {files.length > 0 &&
         files.map((file:ExtFile) => (

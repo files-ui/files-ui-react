@@ -1,9 +1,11 @@
-import {  Paper, Alert, AlertTitle } from "@mui/material";
+import { Paper, Alert, AlertTitle } from "@mui/material";
 import * as React from "react";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";
 import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
+import CodeDemoDropzoneValidation from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneValidation";
+import DemoDropzoneValidation from "../../components/demo-components/dropzone-demo/DemoDropzoneValidation";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
@@ -11,6 +13,7 @@ import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
+import AnchorToTab from "../../components/util-components/AnchorToTab";
 
 const rightMenuItems = [
   {
@@ -97,8 +100,8 @@ const DropzoneDemoPage = (props) => {
         <section id="basic-dropzone">
           <SubTitle content="Basic Dropzone" />
           <DescParagraph>
-            In this demo we set dropzone with the minimun props that allows you
-            to get done fast. These props are{" "}
+            In this demo we set dropzone with the minimum props that allows you
+            to get your task done fast. These props are{" "}
             <CodeHighlight>onChange</CodeHighlight> and{" "}
             <CodeHighlight>value</CodeHighlight>.
           </DescParagraph>
@@ -132,37 +135,60 @@ const DropzoneDemoPage = (props) => {
         <section id="validation">
           <SubTitle content="Validation" />
           <DescParagraph>
-            You can either "tell" Dropzone component to validate user files by
-            providing one or more of these criteria:
+            In this demo you can see how{" "}
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component covers the
+            following features when it comes to validating files.
             <ol>
-              <li>Accept specific file types.</li>
-              <li>Accept an specific number of files.</li>
-              <li>Accept an specific size (in bytes) of files.</li>
+              <li>Accepting specific file types.</li>
+              <li>Accepting an specific number of files.</li>
+              <li>Accepting an specific size (in bytes) for files.</li>
             </ol>
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <BasicDemoDropzone />
+            <DemoDropzoneValidation />
           </Paper>
-
-          <p></p>
-          <BasicDropzoneCodeJS />
+          <CodeDemoDropzoneValidation />
+          <Alert severity="info">
+            <AlertTitle> Removing non valid Files </AlertTitle>
+            We call "clean" the operation of removing non valid files. Apart
+            from deleting them individually there are some other ways in wich
+            you can delete them. You can try the following props in the{" "}
+            {"<Dropzone/>"} component:
+            <ul>
+              <li>
+                <TypeHighlight>cleanFiles</TypeHighlight> : This will make
+                dropzone header to dislay the "clean" icon which can trigger the
+                "clean" operation.
+              </li>
+              <li>
+                <TypeHighlight>actionButtons</TypeHighlight> : By setting this
+                prop properly, a button will be visible and will trigger the
+                "clean" operation (This is the way used in this demo).
+              </li>
+              <li>
+                <TypeHighlight>autoClean</TypeHighlight> : By setting this prop,
+                non valid files will automatically discarted and will not be
+                given in the <CodeHighlight>onChange</CodeHighlight> event.
+              </li>
+            </ul>
+          </Alert>
         </section>
 
         <section id="custom-validation">
           <SubTitle content="Custom validation" />
           <DescParagraph>
-            You can also "override the Dropzone validation by giving a custom
-            validation function that must fit the following signature:{" "}
+            You can also "override the Dropzone validation operation by giving a
+            custom validation function that must fit the following signature:{" "}
             <CodeHighlight>
               {"validator?: (f: "}
-              <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">
+              <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/API/File">
                 File
-              </a>
+              </AnchorToTab>
               {") => "}
-              <a href="/types#custom-validate-file-response">
+              <AnchorToTab href="/types#custom-validate-file-response">
                 CustomValidateFileResponse
-              </a>
+              </AnchorToTab>
             </CodeHighlight>
             .
           </DescParagraph>
@@ -171,7 +197,6 @@ const DropzoneDemoPage = (props) => {
             <BasicDemoDropzone />
           </Paper>
 
-          <p></p>
           <BasicDropzoneCodeJS />
         </section>
         {/* 
