@@ -17,13 +17,12 @@ const FullScreen: React.FC<FullScreenProps> = (props: FullScreenProps) => {
       if (evt.key === "Escape") onClose?.();
     };
     console.log("adding listener");
-
     document.addEventListener("keydown", handleCloseEsc);
-
     return () => {
       console.log("removing listener");
       document.removeEventListener("keydown", handleCloseEsc);
     };
+    // eslint-disable-next-line
   }, []);
 
   return (
