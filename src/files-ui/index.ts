@@ -31,4 +31,4 @@ export { useFakeProgress } from "./hooks";
 
 export { createListOfMultiTypeFile, uploadFile, uploadFormData, uploadExtFile, ExtFileInstance, ExtFileManager } from "./core";
 
-export type { ExtFile, ExtFileListMap, UPLOADSTATUS, Localization, ServerResponse, UploadResponse, UploadConfig } from "./core";
+export type { ExtFile, ExtFileListMap, UPLOADSTATUS, Localization, ServerResponse, UploadResponse, UploadConfig, CustomValidateFileResponse } from "./core";
