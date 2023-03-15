@@ -29,9 +29,8 @@ const DropzoneDemoPage = (props) => {
 
         <MainParagraph>
           The "dropzone" component is a special{" "}
-          <CodeHighlight>input</CodeHighlight> enhanced by the capability of
-          allowing users to either drag and drop files there or picking files
-          from a file dialog.
+          <CodeHighlight>input</CodeHighlight> enhanced by the ability to allow
+          users to drag and drop files there or choose files from a file dialog.
         </MainParagraph>
 
         <DescParagraph>
@@ -307,7 +306,7 @@ const DropzoneDemoPage = (props) => {
                 Dropzone with the{" "}
                 <TypeHighlight>headerConfig.uploadFiles</TypeHighlight> prop set
                 to <TypeHighlight>true</TypeHighlight> will display a button
-                which starts the upload process. 
+                which starts the upload process.
               </li>
               <li>
                 Dropzone with the{" "}
@@ -350,9 +349,8 @@ const DropzoneDemoPage = (props) => {
                 Dropzone with the{" "}
                 <TypeHighlight>footerConfig.allowedTypesLabel</TypeHighlight>{" "}
                 prop set to <TypeHighlight>false</TypeHighlight> will hide the
-                label that indicates the files types allowed.
-                <br />
-                This label will be hidden
+                label that indicates the files types allowed. This label will be
+                hidden
                 <strong>when the "upload" process is active</strong>.
               </li>
               <li>
