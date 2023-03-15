@@ -32,6 +32,7 @@ import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../input-hidden/InputHidden";
 import {
   defaultDrozoneProps,
+  DEFAULT_BORDER_RADIUS,
   //DropzoneActionButton,
   DropzoneActions,
   DropzoneProps,
@@ -55,45 +56,60 @@ import DropzoneButtons from "../DropzoneButtons/DropzoneButtons";
 
 const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const {
+    //basic
+    onChange,
+    value = [],
+    //validation
     accept,
-    behaviour,
-    children,
-    className,
-    clickable,
-    color,
-    disabled,
-    dropOnLayer,
-    label,
-    localization,
     maxFileSize,
     maxFiles,
-    onChange,
-    onDragEnter,
-    onDragLeave,
-    style,
-    textColor,
     validator,
-    value = [],
-    uploadConfig,
-    backgroundColor,
-    disableRipple,
-    fakeUpload,
-    footer,
-    header,
-    minHeight,
     cleanFiles,
     onClean,
     autoClean,
+    //uploading
+    uploadConfig,
+    fakeUpload,
     onUploadStart,
     onUploadFinish,
+    //styling
+
+    backgroundColor,
+    minHeight,
+    color,
+    style,
+    textColor,
+    className,
+    //label
+    label,
+    //localization
+    localization,
+    //ripple
+    disableRipple,
+    //drag operations
+    onDragEnter,
+    onDragLeave,
+    //action butotns
     actionButtons,
+    //drop layer
+    dropOnLayer,
+    //header and footer
+    header,
+    footer,
     headerConfig = {},
     footerConfg = {},
+    //disabled
+    disabled,
+    //open file dialog
+    clickable,
+    //add or replace
+    behaviour,
+    //content
+    children,
     //advancedConfig,
     ...rest
   } = mergeProps(props, defaultDrozoneProps);
-  console.log("Dropzone props", children);
-  console.log("Dropzone value", value);
+
   const {
     url,
     method,
@@ -113,24 +129,27 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     style: containerStyle,
     className: containerClassName,
   } = actionButtons as DropzoneActions;
+  const styleBorderRadius: string | number | undefined = style?.borderRadius;
 
-  /*  const {
-    cleanFiles: cleanFilesHeader,
-    deleteFiles,
-    maxFileSize: maxFileSizeHeader,
-    uploadFiles,
-    uploading,
-    validFilesCount,
+  const {
+    cleanFiles: cleanFilesHeader = true,
+    deleteFiles: deleteFilesHeader = true,
+    maxFileSize: maxFileSizeHeader = true,
+    uploadFiles: uploadFilesHeader = true,
+    uploadingIcon: uploadingIconHedaer = true,
+    validFilesCount: validFilesCountHeader = true,
     customHeader,
+    className: classNameHeader,
+    resetStyles: resetStylesHeader = false,
+    style: styleHeader,
   }: HeaderConfig = headerConfig;
 
   const {
-    allowedTypesLabel,
-    noMissingFilesLabel,
-    uploadProgressMessage,
-    uploadResultMessage,
     customFooter,
-  }: FooterConfig = footerConfg; */
+    noMissingFilesLabel = true,
+    uploadProgressMessage = true,
+    uploadResultMessage = true,
+  }: FooterConfig = footerConfg;
   //console.log("Dropzone props", dropOnLayer);
   //localizers
   const DropzoneLocalizer: LocalLabels =
@@ -232,12 +251,15 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     if (!(missingUpload > 0)) {
       console.log("upload start: noFilesMessage", missingUpload);
 
-      setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
+      if (noMissingFilesLabel)
+        setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
+
       setIsUploading(false);
       return;
     }
 
-    setLocalMessage(uploadingMessenger(`${missingUpload}/${totalNumber}`));
+    if (uploadProgressMessage)
+      setLocalMessage(uploadingMessenger(`${missingUpload}/${totalNumber}`));
     //  setIsUploading(true);
     //PREPARING stage
     console.log("validateFilesFlag", validateFilesFlag);
@@ -293,9 +315,10 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         instantPreparingToUploadOne(currentExtFileInstance);
 
         //messge in footer
-        setLocalMessage(
-          uploadingMessenger(`${++currentCountUpload}/${missingUpload}`)
-        );
+        if (uploadProgressMessage)
+          setLocalMessage(
+            uploadingMessenger(`${++currentCountUpload}/${missingUpload}`)
+          );
 
         //CHANGE FILES
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
@@ -391,9 +414,10 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
     const finishUploadMessenger: FunctionLabel =
       DropzoneLocalizer.uploadFinished as FunctionLabel;
-    setLocalMessage(
-      finishUploadMessenger(missingUpload - totalRejected, totalRejected)
-    );
+    if (uploadResultMessage)
+      setLocalMessage(
+        finishUploadMessenger(missingUpload - totalRejected, totalRejected)
+      );
     setTimeout(() => {
       setIsUploading(false);
     }, 2000);
@@ -421,10 +445,11 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   //the final className
   const dropzoneClassName: string | undefined = useDropzoneClassName(
     className,
-    isDragging,
-    header,
-    footer,
+    isDragging && Boolean(dropOnLayer),
+    // header,
+    // footer,
     color,
+    //style?.borderRadius || borderRadius,
     backgroundColor,
     minHeight
   );
@@ -666,6 +691,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           <div
             ref={fuiRippleRefAbs}
             className="dropzone-ui-base-ripple-absolute"
+            style={{borderRadius:style?.borderRadius}}
+
           >
             <div
               ref={fuiRippleRefRel}
@@ -673,42 +700,72 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
             ></div>
           </div>
         )}
-
-        {header && (
-          <DropzoneHeader
-            onReset={!isUploading ? handleReset : undefined}
-            maxFileSize={maxFileSize}
-            maxFiles={maxFiles}
-            localization={localization}
-            urlPresent={url !== undefined}
-            onUploadStart={
-              !autoUpload && !uploadButton
-                ? () => uploadfiles(localFiles)
-                : undefined
-            }
-            numberOfValidFiles={numberOfValidFiles}
-            //onClean={autoClean ? undefined : cleanButton ? undefined : onClean}
-            onClean={
-              isUploading || cleanButton || autoClean
-                ? undefined
-                : (cleanFiles || onClean) && validateFilesFlag
-                ? handleClean
-                : undefined
-            }
-          />
-        )}
+        <React.Fragment>
+          {header ? (
+            <>
+              {customHeader ? (
+                <>{customHeader}</>
+              ) : (
+                <DropzoneHeader
+                  style={styleHeader}
+                  className={classNameHeader}
+                  resetStyles={resetStylesHeader}
+                  borderRadius={styleBorderRadius}
+                  isUploading={isUploading && uploadingIconHedaer}
+                  onReset={
+                    !isUploading && deleteFilesHeader ? handleReset : undefined
+                  }
+                  maxFileSize={
+                    maxFileSize && maxFileSizeHeader ? maxFileSize : undefined
+                  }
+                  maxFiles={
+                    maxFiles && validFilesCountHeader ? maxFiles : undefined
+                  }
+                  localization={localization}
+                  urlPresent={url !== undefined && uploadFilesHeader}
+                  onUploadStart={
+                    !autoUpload && !uploadButton
+                      ? () => uploadfiles(localFiles)
+                      : undefined
+                  }
+                  numberOfValidFiles={numberOfValidFiles}
+                  //onClean={autoClean ? undefined : cleanButton ? undefined : onClean}
+                  onClean={
+                    !cleanFilesHeader || isUploading || cleanButton || autoClean
+                      ? undefined
+                      : (cleanFiles || onClean) && validateFilesFlag
+                      ? handleClean
+                      : undefined
+                  }
+                />
+              )}
+            </>
+          ) : (
+            <></>
+          )}
+        </React.Fragment>
 
         <DropzoneChildren label={label} localization={localization}>
           {children}
         </DropzoneChildren>
 
-        {footer && (
-          <DropzoneFooter
-            accept={accept}
-            message={isUploading ? localMessage : undefined}
-            localization={localization}
-          />
-        )}
+        <React.Fragment>
+          {customFooter ? (
+            <>{customFooter}</>
+          ) : (
+            <>
+              {footer && (
+                <DropzoneFooter
+                  borderRadius={styleBorderRadius}
+                  accept={accept}
+                  message={isUploading ? localMessage : undefined}
+                  localization={localization}
+                  {...footerConfg}
+                />
+              )}
+            </>
+          )}
+        </React.Fragment>
 
         {dropOnLayer && (
           <DropLayer
@@ -716,6 +773,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
             className={dropLayerClassName}
             onDragLeave={handleDragLeave}
             onDrop={kamui}
+            style={{borderRadius:style?.borderRadius}}
           />
         )}
 

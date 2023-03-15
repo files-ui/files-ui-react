@@ -1,40 +1,70 @@
 import * as React from "react";
 import {
+  addClassName,
   DropzoneLocalizerSelector,
   FunctionLabel,
   handleClickUtil,
   Localization,
   LocalLabels,
 } from "../../../../core";
+import { FooterConfig } from "../dropzone/DropzoneProps";
 
-export interface DropzoneFooterNeoProps {
+export interface DropzoneFooterProps extends FooterConfig {
   accept?: string;
   message?: string;
   localization?: Localization;
+  borderRadius?: string | number;
+  style?: React.CSSProperties;
+  className?: string;
+  resetStyles?: boolean;
 }
-const DropzoneFooter: React.FC<DropzoneFooterNeoProps> = (
-  props: DropzoneFooterNeoProps
+const DropzoneFooter: React.FC<DropzoneFooterProps> = (
+  props: DropzoneFooterProps
 ) => {
-  const { accept, message, localization } = props;
+  const {
+    accept,
+    message,
+    localization,
+    borderRadius,
+    style,
+    className = "",
+    resetStyles = false,
+    allowedTypesLabel = true,
+  } = props;
 
   const DropzoneFooterLocalizer: LocalLabels = DropzoneLocalizerSelector(
     localization
   ).footer as LocalLabels;
   const accepCustomMessenger: FunctionLabel =
     DropzoneFooterLocalizer.acceptCustom as FunctionLabel;
-    
+
   function handleClick<T extends HTMLDivElement>(
     evt: React.MouseEvent<T, MouseEvent>
   ): void {
     handleClickUtil(evt);
   }
+  const finalClassName = resetStyles
+    ? className
+    : addClassName("files-ui-footer files-ui-footer-border", className);
+  
+    const finalStyle = resetStyles
+    ? style
+    : {
+        ...style,
+        borderBotomLeftRadius: borderRadius,
+        borderBotomRightRadius: borderRadius,
+      };
+  console.log("files-ui-footer", finalStyle);
+
   return (
-    <div className="files-ui-footer" onClick={handleClick}>
+    <div className={finalClassName} onClick={handleClick} style={finalStyle}>
       <>
         {message
           ? message
           : !accept
-          ? DropzoneFooterLocalizer.acceptAll
+          ? allowedTypesLabel
+            ? DropzoneFooterLocalizer.acceptAll
+            : undefined
           : accepCustomMessenger(accept)}
       </>
     </div>

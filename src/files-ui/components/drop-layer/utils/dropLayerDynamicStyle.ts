@@ -1,6 +1,7 @@
 import { asureColor, colourNameToHex, hexColorToRGB } from "../../../core";
+import { DEFAULT_BORDER_RADIUS } from "../../dropzone/components/dropzone/DropzoneProps";
 
-export const dropLayerDynamicStyle = (styleId:string, color: string | undefined) => {
+export const dropLayerDynamicStyle = (styleId: string, color: string | undefined, isDragging: boolean | undefined) => {
 
     return {
         id: "files-ui-styles-drop-layer",
@@ -8,20 +9,22 @@ export const dropLayerDynamicStyle = (styleId:string, color: string | undefined)
             {
                 className: `dropzone-ui-layer`,
                 rules: {
+
                     backgroundColor: hexColorToRGB(
                         asureColor(colourNameToHex(color)),
                         0.4
-                    ),
+                    ), borderRadius: DEFAULT_BORDER_RADIUS,
                     position: "absolute",
                     left: 0,
                     top: 0,
                     width: "0%",
                     height: "0%",
-                    border: `2px dashed ${hexColorToRGB(
+                    border: isDragging ? `2px dashed ${hexColorToRGB(
                         asureColor(colourNameToHex(color)),
                         1
-                    )}`,
+                    )}` : undefined,
                     zIndex: 20,
+
                 },
             },
             {

@@ -65,6 +65,7 @@
   font-family: inherit;
   //padding-right: 10px;
   font-size: 1rem;
+  background-color: rgba(0, 128, 128, 0.249);
   @media (max-width: 960px) {
     //width: calc(100% - 1px);
     //padding-right: 1px;
@@ -73,8 +74,8 @@
 }
 
 .files-ui-footer {
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+/*   border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px; */
   box-sizing: border-box;
   cursor: text;
   /* height: 23px;
@@ -100,7 +101,10 @@
   -webkit-line-clamp: 1; /* number of lines to show */
   line-clamp: 1;
   -webkit-box-orient: vertical;
-  //background-color: brown;
+
+  
+  background-color: rgba(0, 128, 128, 0.249);
+
 
   @media (max-width: 960px) {
     //width: calc(100% - 1px);

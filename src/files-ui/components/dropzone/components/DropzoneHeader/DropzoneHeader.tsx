@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  addClassName,
   DropzoneLocalizerSelector,
   fileSizeFormater,
   FunctionLabel,
@@ -7,8 +8,9 @@ import {
   LocalLabels,
 } from "../../../../core";
 import { UploadingProcess, Clean, Cancel, Upload } from "../../../icons";
+import { HeaderConfig } from "../dropzone/DropzoneProps";
 
-export interface DropzoneHeaderProps {
+export type DropzoneHeaderProps = {
   maxFileSize?: number;
   numberOfValidFiles?: number;
   maxFiles?: number;
@@ -17,13 +19,12 @@ export interface DropzoneHeaderProps {
   urlPresent?: boolean;
   onClean?: Function;
   isUploading?: boolean;
-  /**
-   * language to be used
-   * for now
-   * only English and Spanish is supported
-   */
   localization?: Localization;
-}
+  borderRadius?: string | number;
+  style?: React.CSSProperties;
+  className?: string;
+  resetStyles?: boolean;
+};
 
 const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
   props: DropzoneHeaderProps
@@ -38,6 +39,10 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     isUploading,
     urlPresent,
     localization,
+    borderRadius,
+    style,
+    className = "",
+    resetStyles,
   } = props;
 
   const DropzoneHeaderLocalizer: LocalLabels = DropzoneLocalizerSelector(
@@ -64,20 +69,13 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
           </React.Fragment>
         );
       }
-
       result.push(<React.Fragment>{","}&nbsp;</React.Fragment>);
     }
 
     const maxFileSizeMessenger: FunctionLabel =
       DropzoneHeaderLocalizer.maxSizeMessage as FunctionLabel;
     if (maxFileSize) {
-      result.push(
-        maxFileSizeMessenger(fileSizeFormater(maxFileSize))
-
-        /* localization === "ES-es"
-          ? `Tam. máximo de archivo ${fileSizeFormater(maxFileSize)} | `
-          : `Max File size: ${fileSizeFormater(maxFileSize)} | `, */
-      );
+      result.push(maxFileSizeMessenger(fileSizeFormater(maxFileSize)));
       result.push(<React.Fragment>{","}&nbsp;</React.Fragment>);
     }
     const validFileSizeMessenger: FunctionLabel =
@@ -86,9 +84,6 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     if (maxFiles) {
       result.push(
         validFileSizeMessenger(numberOfValidFiles as number, maxFiles)
-        /*  localization === "ES-es"
-          ? `Archivos ${numberOfValidFiles}/${maxFiles} | Válidos: ${numberOfValidFiles} | `
-          : `Files ${numberOfValidFiles}/${maxFiles} | Valid: ${numberOfValidFiles} | `, */
       );
       result.push(<React.Fragment>{","}&nbsp;</React.Fragment>);
     }
@@ -103,19 +98,31 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
         <Cancel
           color="#646c7f"
           onClick={() => onReset?.()}
-         // colorFill="rgba(255,255,255,0.8)"
+          // colorFill="rgba(255,255,255,0.8)"
         />
       );
     }
     return result;
   };
+  function handleClick<T extends HTMLDivElement>(
+    evt: React.MouseEvent<T, MouseEvent>
+  ): void {
+    evt.stopPropagation();
+  }
+
+  const finalClassName = resetStyles
+    ? className
+    : addClassName("files-ui-header files-ui-header-border", className);
+  const finalStyle = resetStyles
+    ? style
+    : {
+        ...style,
+        borderTopLeftRadius: borderRadius,
+        borderTopRightRadius: borderRadius,
+      };
+
   return (
-    <div
-      className="files-ui-header"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-    >
+    <div className={finalClassName} onClick={handleClick} style={finalStyle}>
       {makeHeader().map((HeaderItem, index) => (
         <span key={index} style={{ display: "flex" }}>
           {HeaderItem}

@@ -114,7 +114,8 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   onUploadFinish?: (extFiles: ExtFile[]) => void;
 
 
-  ///////////////          STYLING          ///////////                             
+  ///////////////          STYLING          ///////////    
+  //borderRadius?: string | number;
   /**
    * The background color for dropzone container,
    * @default 'transparent'
@@ -132,7 +133,8 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    *    "1rem"
    */
   minHeight?: string | number;
-  // LABEL   
+
+  ///////////////// LABEL ///////////////   
   /**
   * The label to place when no files were selected
   */
@@ -227,9 +229,12 @@ export type HeaderConfig = {
   deleteFiles?: boolean;
   cleanFiles?: boolean;
   uploadFiles?: boolean;
-  uploading?: boolean;
+  uploadingIcon?: boolean;
   maxFileSize?: boolean;
   validFilesCount?: boolean;
+  style?: React.CSSProperties;
+  className?:string;
+  resetStyles?:boolean;
 }
 
 export type FooterConfig = {
@@ -294,8 +299,10 @@ export const defaultDrozoneProps: DropzoneProps =
   header: true,
   footer: true,
   value: [],
+  //borderRadius: "8px"
 }
 
+export const DEFAULT_BORDER_RADIUS = "8px";
 
 
 /* 

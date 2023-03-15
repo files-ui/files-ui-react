@@ -27,7 +27,7 @@ const useDropLayerClassName = (
             isDragging?: boolean
         ) => {
             let finalClassName: string = "";
-            let styleSheet: DynamicSheet = dropLayerDynamicStyle(DROP_LAYER_STYLE_ID, color);
+            let styleSheet: DynamicSheet = dropLayerDynamicStyle(DROP_LAYER_STYLE_ID, color, isDragging);
             let idStyle: string = "";
 
             if (!styleInjected) {
