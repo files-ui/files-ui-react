@@ -4,9 +4,11 @@ import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";
 import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
+import CodeDemoDropzoneActionButtons from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneActionButtons";
 import CodeDemoDropzoneCustomValidation from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneCustomValidation";
 import CodeDemoDropzoneUploading from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneUploading";
 import CodeDemoDropzoneValidation from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneValidation";
+import DemoDropzoneActionButtons from "../../components/demo-components/dropzone-demo/DemoDropzoneActionButtons";
 import DemoDropzoneCustomValidation from "../../components/demo-components/dropzone-demo/DemoDropzoneCustomValidation";
 import DemoDropzoneUploading from "../../components/demo-components/dropzone-demo/DemoDropzoneUploading";
 import DemoDropzoneValidation from "../../components/demo-components/dropzone-demo/DemoDropzoneValidation";
@@ -225,31 +227,55 @@ const DropzoneDemoPage = (props) => {
           </Alert>
         </section>
 
-        <section id="dropzone-events">
-          <SubTitle content="Dropzone events" />
+        <section id="action-buttons">
+          <SubTitle content="Dropzone with action buttons" />
           <DescParagraph>
-            You can handle the following events:
+            If you need to display buttons that trigger the default events in
+            the <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component, you
+            can do it by adding the <TypeHighlight>actionButtons</TypeHighlight>{" "}
+            prop. This will add buttons to the top or to the bottom of this
+            component.
             <ul>
               <li>
-                Dropzone with the <code className="code">onDelete</code> prop
-                defined can delete all the files associated with the{" "}
-                <code className="code">value</code> prop.
+                Dropzone with the{" "}
+                <TypeHighlight>actionButtons.cleanButton</TypeHighlight> prop
+                defined will display a button which triggers the clean process.
+                <br />
+                This button will be visible only{" "}
+                <strong>when the "upload" process is not active</strong>.
               </li>
               <li>
-                {" "}
-                Dropzone with the <code className="code">onDelete</code> prop
-                defined can delete all the files associated with the{" "}
-                <code className="code">value</code> prop..
+                Dropzone with the{" "}
+                <TypeHighlight>actionButtons.deleteButton</TypeHighlight> prop
+                defined will display a button which deletes all files. This
+                button will be visible only during the "upload" process.
+                <br />
+                button will be visible only{" "}
+                <strong>when the "upload" process is not active</strong>.
               </li>
-              <li>Accept an specific size (in bytes) of files.</li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>actionButtons.uploadButton</TypeHighlight> prop
+                defined will display a button which starts the upload process.
+                This button will <strong>not</strong> be visible{" "}
+                <strong>during the "upload" process</strong>.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>actionButtons.abortButton</TypeHighlight> prop
+                defined will display a button which stops the upload process.
+                <br />
+                This button will be visible only{" "}
+                <strong>during the "upload" process</strong>.
+              </li>
             </ul>
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <BasicDemoDropzone />
+            <DemoDropzoneActionButtons />
           </Paper>
 
-          <BasicDropzoneCodeJS />
+          <CodeDemoDropzoneActionButtons />
         </section>
         <section id="api">
           <SubTitle content="API" />
