@@ -16,7 +16,7 @@ import {
   FunctionLabel,
   ExtFileManager,
   sleepPreparing,
-  UploadResponse,
+  //UploadResponse,
   instantPreparingToUploadOne,
   fakeFuiUpload,
   uploadExtFile,
@@ -35,8 +35,10 @@ import {
   //DropzoneActionButton,
   DropzoneActions,
   DropzoneProps,
+  FooterConfig,
+  HeaderConfig,
 } from "./DropzoneProps";
-import DropzoneChildren from "./../../DropzoneChildren";
+import DropzoneChildren from "../DropzoneChildren/DropzoneChildren";
 import useDropzoneClassName from "./../../useDropzoneClassName";
 import DropzoneDisabledLayer from "../DropzoneDisabledLayer/DropzoneDisabledLayer";
 
@@ -85,8 +87,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     onUploadStart,
     onUploadFinish,
     actionButtons,
-    headerConfig,
-    footerConfg,
+    headerConfig = {},
+    footerConfg = {},
     //advancedConfig,
     ...rest
   } = mergeProps(props, defaultDrozoneProps);
@@ -111,6 +113,24 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     style: containerStyle,
     className: containerClassName,
   } = actionButtons as DropzoneActions;
+
+  /*  const {
+    cleanFiles: cleanFilesHeader,
+    deleteFiles,
+    maxFileSize: maxFileSizeHeader,
+    uploadFiles,
+    uploading,
+    validFilesCount,
+    customHeader,
+  }: HeaderConfig = headerConfig;
+
+  const {
+    allowedTypesLabel,
+    noMissingFilesLabel,
+    uploadProgressMessage,
+    uploadResultMessage,
+    customFooter,
+  }: FooterConfig = footerConfg; */
   //console.log("Dropzone props", dropOnLayer);
   //localizers
   const DropzoneLocalizer: LocalLabels =

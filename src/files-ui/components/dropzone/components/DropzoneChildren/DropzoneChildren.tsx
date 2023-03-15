@@ -3,7 +3,8 @@ import {
   DropzoneLocalizerSelector,
   Localization,
   LocalLabels,
-} from "../../core";
+} from "../../../../core";
+import "./DropzoneChildren.scss";
 
 declare type DropzoneChildrenProps = {
   children?: React.ReactNode | [];
@@ -20,12 +21,14 @@ const DropzoneChildren: React.FC<DropzoneChildrenProps> = (
 
   //children will be always consider as more important
   if (children) {
-    return <React.Fragment>{children}</React.Fragment>;
+    return (
+      <div className="files-ui-dropzone-children-container">{children}</div>
+    );
   } else
     return (
-      <React.Fragment>
+      <div className="files-ui-dropzone-children-container">
         <label> {label || (DropzoneLocalizer.defaultLabel as string)}</label>
-      </React.Fragment>
+      </div>
     );
 };
 export default DropzoneChildren;
