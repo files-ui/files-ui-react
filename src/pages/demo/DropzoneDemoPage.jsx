@@ -19,43 +19,6 @@ import RightMenu from "../../components/RightMenu/RightMenu";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 
-const rightMenuItems = [
-  {
-    id: 0,
-    label: "Basic dropzone",
-    referTo: "/components/dropzone#basic-dropzone",
-  },
-  {
-    id: 1,
-    label: "Validation",
-    referTo: "/components/dropzone#validation",
-  },
-  {
-    id: 2,
-    label: "Custom validation",
-    referTo: "/components/dropzone#custom-validation",
-  },
-  {
-    id: 3,
-    label: "Uploading",
-    referTo: "/components/dropzone#uploading",
-  },
-  {
-    id: 4,
-    label: "Dropzone events",
-    referTo: "/components/dropzone#dropzone-events",
-  },
-  {
-    id: 5,
-    label: "Styling",
-    referTo: "/components/dropzone#styling",
-  },
-  {
-    id: 6,
-    label: "Localization",
-    referTo: "/components/dropzone#localization",
-  },
-];
 const DropzoneDemoPage = (props) => {
   return (
     <React.Fragment>
@@ -160,8 +123,8 @@ const DropzoneDemoPage = (props) => {
             <ul>
               <li>
                 <TypeHighlight>cleanFiles</TypeHighlight> : This will make
-                dropzone header to dislay the "clean" icon which can trigger the
-                "clean" operation.
+                dropzone header to display the "clean" icon which can trigger
+                the "clean" operation.
               </li>
               <li>
                 <TypeHighlight>actionButtons</TypeHighlight> : By setting this
@@ -219,7 +182,20 @@ const DropzoneDemoPage = (props) => {
 
           <CodeDemoDropzoneUploading />
           <Alert severity="info">
-            <AlertTitle> Fake uploading </AlertTitle>
+            <AlertTitle> Server response </AlertTitle>
+            For uploading files through files-ui, server must return the
+            response with the structure of the{" "}
+            <TypeHighlight>
+              {" "}
+              <AnchorToTab href="/types#ServerResponse">
+                ServerResponse
+              </AnchorToTab>
+            </TypeHighlight>{" "}
+            type.
+          </Alert>
+          <br />
+          <Alert severity="info">
+            <AlertTitle> "fakeUpload" </AlertTitle>
             By giving this prop, the {"<Dropzone/>"} component will simulate the
             upload operation by randomly set the upload status and message in
             ech uploadable <TypeHighlight>ExtFile</TypeHighlight>. It also will
@@ -273,7 +249,6 @@ const DropzoneDemoPage = (props) => {
             <BasicDemoDropzone />
           </Paper>
 
-          <p></p>
           <BasicDropzoneCodeJS />
         </section>
         <section id="api">
@@ -308,3 +283,86 @@ const DropzoneDemoPage = (props) => {
   );
 };
 export default DropzoneDemoPage;
+
+const rightMenuItems = [
+  {
+    id: 0,
+    label: "Basic dropzone",
+    referTo: "/components/dropzone#basic-dropzone",
+  },
+  {
+    id: 1,
+    label: "Validation",
+    referTo: "/components/dropzone#validation",
+  },
+  {
+    id: 2,
+    label: "Custom validation",
+    referTo: "/components/dropzone#custom-validation",
+  },
+  {
+    id: 3,
+    label: "Uploading",
+    referTo: "/components/dropzone#uploading",
+  },
+  /*  {
+    id: 4,
+    label: "Dropzone events",
+    referTo: "/components/dropzone#dropzone-events",
+  }, */
+  {
+    id: 5,
+    label: "Action buttons",
+    referTo: "/components/dropzone#action-buttons",
+  },
+  {
+    id: 9,
+    label: "Header config",
+    referTo: "/components/dropzone#header-config",
+  },
+  {
+    id: 10,
+    label: "Footer config",
+    referTo: "/components/dropzone#footer-config",
+  },
+  {
+    id: 6,
+    label: "Styling",
+    referTo: "/components/dropzone#styling",
+  },
+  {
+    id: 8,
+    label: "Ripple",
+    referTo: "/components/dropzone#ripple",
+  },
+  {
+    id: 11,
+    label: "Disabled",
+    referTo: "/components/dropzone#disabled",
+  },
+  {
+    id: 12,
+    label: "Clickable",
+    referTo: "/components/dropzone#clickable",
+  },
+  {
+    id: 13,
+    label: "Drop Layer",
+    referTo: "/components/dropzone#drop-layer",
+  },
+  {
+    id: 14,
+    label: "Label",
+    referTo: "/components/dropzone#label",
+  },
+  {
+    id: 15,
+    label: "Add or replace",
+    referTo: "/components/dropzone#add-or-replace",
+  },
+  {
+    id: 7,
+    label: "Localization",
+    referTo: "/components/dropzone#localization",
+  },
+];
