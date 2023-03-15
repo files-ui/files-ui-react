@@ -247,10 +247,9 @@ const DropzoneDemoPage = (props) => {
               <li>
                 Dropzone with the{" "}
                 <TypeHighlight>actionButtons.deleteButton</TypeHighlight> prop
-                defined will display a button which deletes all files. This
-                button will be visible only during the "upload" process.
+                defined will display a button which deletes all files.
                 <br />
-                button will be visible only{" "}
+                this button will be visible only{" "}
                 <strong>when the "upload" process is not active</strong>.
               </li>
               <li>
@@ -277,6 +276,120 @@ const DropzoneDemoPage = (props) => {
 
           <CodeDemoDropzoneActionButtons />
         </section>
+
+        <section id="header-config">
+          <SubTitle content="Dropzone header config" />
+          <DescParagraph>
+            You can use the <TypeHighlight>headerConfig</TypeHighlight> prop to
+            define what will be displayed in the header. Type definition can be
+            found <AnchorToTab href="/types#header-config">here</AnchorToTab>
+            <ul>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>headerConfig.deleteFiles</TypeHighlight> prop set
+                to <TypeHighlight>true</TypeHighlight> will display a delete
+                button which triggers the delete process.
+                <br />
+                This button will be visible only{" "}
+                <strong>when the "upload" process is not active</strong>.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>headerConfig.cleanFiles</TypeHighlight> prop set
+                to <TypeHighlight>true</TypeHighlight> will display a "clean"
+                buton. This button will be visible only during the "upload"
+                process.
+                <br />
+                button will be visible only{" "}
+                <strong>when the "upload" process is not active</strong>.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>headerConfig.uploadFiles</TypeHighlight> prop set
+                to <TypeHighlight>true</TypeHighlight> will display a button
+                which starts the upload process. 
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>headerConfig.uploading</TypeHighlight> prop set
+                to <TypeHighlight>true</TypeHighlight> will display a loading
+                icon <strong>during the "upload" process</strong>.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>headerConfig.maxFileSize</TypeHighlight> prop set
+                to <TypeHighlight>true</TypeHighlight> will display the max file
+                size label.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>headerConfig.validFilesCount</TypeHighlight> prop
+                set to <TypeHighlight>true</TypeHighlight> will display the
+                current count of valid files.
+              </li>
+            </ul>
+            By default all of these values are set to{" "}
+            <TypeHighlight>true</TypeHighlight>.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneActionButtons />
+          </Paper>
+
+          <CodeDemoDropzoneActionButtons />
+        </section>
+
+        <section id="footer-config">
+          <SubTitle content="Dropzone footer config" />
+          <DescParagraph>
+            You can use the <TypeHighlight>footerConfig</TypeHighlight> prop to
+            define what will be displayed in the footer. Type definition can be
+            found <AnchorToTab href="/types#footer-config">here</AnchorToTab>
+            <ul>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>footerConfig.allowedTypesLabel</TypeHighlight>{" "}
+                prop set to <TypeHighlight>false</TypeHighlight> will hide the
+                label that indicates the files types allowed.
+                <br />
+                This label will be hidden
+                <strong>when the "upload" process is active</strong>.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>
+                  footerConfig.uploadProgressMessage
+                </TypeHighlight>{" "}
+                prop set to <TypeHighlight>false</TypeHighlight> will not
+                display the label with the upload progress. This label will be
+                visible<strong> only during the "upload" process</strong>.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>footerConfig.uploadResultMessage</TypeHighlight>{" "}
+                prop set to <TypeHighlight>false</TypeHighlight> will not
+                display a label at the end of the upload process. This label can{" "}
+                be visible for 2 seconds just{" "}
+                <strong>after the "upload" process finishes</strong>.
+              </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>footerConfig.noMissingFilesLabel</TypeHighlight>{" "}
+                prop set to <TypeHighlight>false</TypeHighlight> will not
+                display a label when upload starts with no uploadable files.
+              </li>
+            </ul>
+            By default all of these values are set to{" "}
+            <TypeHighlight>true</TypeHighlight>.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneActionButtons />
+          </Paper>
+
+          <CodeDemoDropzoneActionButtons />
+        </section>
+
         <section id="api">
           <SubTitle content="API" />
           <DescParagraph>
