@@ -40,10 +40,10 @@ export function createFuiRippleFromDiv
 
   fuiContainerRel.appendChild(circle);
   //remove trash
-  /*  setTimeout(() => {
+  setTimeout(() => {
     fuiContainerAbs.style.display = "none";
     circle?.remove();
-  }, 501);  */
+  }, 501);
 }
 
 
