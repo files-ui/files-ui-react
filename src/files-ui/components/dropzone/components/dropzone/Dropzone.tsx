@@ -611,28 +611,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     }
   };
 
-  const DropzoneActionButtons = ({ visible = true }) => {
-    if (!visible) return <></>;
-    else
-      return (
-        <DropzoneButtons
-          abortButton={isUploading ? abortButton : undefined}
-          onAbort={handleAbortUpload}
-          deleteButton={deleteButton}
-          onDelete={!isUploading ? handleReset : undefined}
-          uploadButton={!isUploading && !autoUpload ? uploadButton : undefined}
-          onUpload={!autoUpload ? () => uploadfiles(localFiles) : undefined}
-          cleanButton={
-            validateFilesFlag && !isUploading && !autoClean
-              ? cleanButton
-              : undefined
-          }
-          onClean={handleClean}
-          style={containerStyle}
-          className={containerClassName}
-        />
-      );
-  };
   if (!dropzoneClassName) return <></>;
   return (
     <React.Fragment>
@@ -652,6 +630,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           onClean={handleClean}
           style={containerStyle}
           className={containerClassName}
+          top={true}
         />
       )}
       <div
@@ -746,6 +725,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           onClean={handleClean}
           style={containerStyle}
           className={containerClassName}
+          top={false}
         />
       )}
     </React.Fragment>
