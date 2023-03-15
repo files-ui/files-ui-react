@@ -9,14 +9,18 @@ import {
   fakeFuiUpload,
   fileListToExtFileArray,
   FileValidatorProps,
+  getRandomInt,
   //FunctionLabel,
   handleClickInput,
   instantPreparingToUploadOne,
+  isUploadAbleExtFile,
   isValidateActive,
   LocalLabels,
+  sanitizeArrExtFile,
   sleepPreparing,
   sleepTransition,
   toUploadableExtFileList,
+  unexpectedErrorUploadResult,
   UploadConfig,
   uploadExtFile,
   UploadResponse,
@@ -134,36 +138,48 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
-    if (!url) return;
-
+    //set uploading flag to true
     setIsUploading(true);
-    print_manager(localFiles, "start");
-    // set flag to true
-    // recieve on the new list
-    // initialize new list of ExtFileInstances
-    let arrOfExtFilesInstances: ExtFileInstance[] = [];
+
     //avoid to call upload if not allowed
-    if (isUploading || localFiles.length === 0 || !arrOfExtFilesInstances) {
+    // flag is already true or there isnt files
+    //url was not provided
+    if (isUploading || localFiles.length === 0 || !url) {
+      setIsUploading(false);
       return;
     }
+    // initialize a new list of ExtFileInstances
+    let arrOfExtFilesInstances: ExtFileInstance[] = [];
 
     const totalNumber: number = localFiles.length;
-    const missingUpload: number = localFiles.filter((x: ExtFile) => {
-      return (
-        (!validateFilesFlag || (validateFilesFlag && x.valid)) &&
-        x.uploadStatus !== "success"
-      );
-    }).length;
+    console.log("upload start: totalNumber", totalNumber);
+
+    const missingUpload: number = localFiles.filter((extFile: ExtFile) =>
+      isUploadAbleExtFile(extFile, validateFilesFlag)
+    ).length;
+
+    console.log("upload start: missingUpload", missingUpload);
 
     let totalRejected: number = 0;
     let currentCountUpload: number = 0;
 
+    /* const uploadingMessenger: FunctionLabel =
+      DropzoneLocalizer.uploadingMessage as FunctionLabel; */
+
+    //no missing to upload
+    if (!(missingUpload > 0)) {
+      console.log("upload start: noFilesMessage", missingUpload);
+
+      //setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
+      setIsUploading(false);
+      return;
+    }
+
+    //setLocalMessage(uploadingMessenger(`${missingUpload}/${totalNumber}`));
     //  setIsUploading(true);
     //PREPARING stage
-    //use methods to update on static class
-    //obtain a fresher dui file list
-    console.log("***** before setFileListMapPreparing");
-    console.table(localFiles);
+    console.log("validateFilesFlag", validateFilesFlag);
+
     arrOfExtFilesInstances =
       ExtFileManager.setFileListMapPreparing(
         inputButtonId,
@@ -172,8 +188,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         cleanOnUpload as boolean
       ) || [];
 
-    console.log("***** FileManagerLog  setFileListMapPreparing");
-    console.table(arrOfExtFilesInstances);
     const newExtFileLocal: ExtFile[] = [...arrOfExtFilesInstances].map((x) =>
       x.toExtFile()
     );
@@ -191,100 +205,135 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     //AWAIT when preparing time is given
     //general sleep for all files
     await sleepPreparing(preparingTime);
-    // workaround for preventing getting the uploadStatus as undefined
-    /*  arrOfExtFilesInstances.forEach((F) => {
-    F.uploadStatus = "preparing";
-      }); */
-    //variable for storing responses
-    //console.log("uploadfiles after sleep response",response);
+
     console.log("FileManagerLog after sleep", arrOfExtFilesInstances);
 
     //return;
-    let serverResponses: Array<UploadResponse> = [];
+    let serverResponses: Array<ExtFile> = [];
 
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
+
       console.log(
         "FileManagerLog currentExtFileInstance " + i,
         currentExtFileInstance
       );
 
-      if (currentExtFileInstance.uploadStatus === "preparing") {
+      if (
+        currentExtFileInstance.uploadStatus === "preparing" &&
+        !currentExtFileInstance.extraData?.deleted
+      ) {
         //set stage to "uploading" in one file and notify change
         // PREPARING => UPLOADING
+        await sleepTransition();
+
         instantPreparingToUploadOne(currentExtFileInstance);
-        /*   setLocalMessage(
-          uploadingMessenger(`${++currentCountUpload}/${missingUpload}`)
-        ); */
-        //CHANGE
-        handleFilesChange([...arrOfExtFilesInstances], true);
+
+        //messge in footer
+        /* setLocalMessage(
+        uploadingMessenger(`${++currentCountUpload}/${missingUpload}`)
+      ); */
+
+        //CHANGE FILES
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
         //UPLOADING => UPLOAD()
         //upload one file and notify about change
-        let uploadResponse: UploadResponse;
-        try {
-          uploadResponse = fakeUpload
-            ? await fakeFuiUpload(currentExtFileInstance, DropzoneLocalizer)
-            : await uploadExtFile(
-                currentExtFileInstance,
-                url,
-                method,
-                headers,
-                uploadLabel
-              );
-        } catch (error) {
-          uploadResponse = {
-            id: currentExtFileInstance.id,
-            serverResponse: {
-              success: false,
-              message: "Error on upload: unexpected error " + error,
-              payload: {},
-            },
-            uploadedFile: { ...currentExtFileInstance },
-          };
+        let uploadResponse: ExtFile;
+
+        if (fakeUpload) {
+          uploadResponse = await fakeFuiUpload(
+            currentExtFileInstance,
+            DropzoneLocalizer
+          );
+
+          let fakeProgress = 0;
+          while (fakeProgress < 100) {
+            fakeProgress += getRandomInt(21, 35);
+            currentExtFileInstance.progress =
+              fakeProgress > 100 ? 100 : fakeProgress;
+            await sleepTransition(1000);
+            handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+          }
+        } else {
+          try {
+            uploadResponse = await uploadExtFile(
+              currentExtFileInstance,
+              url,
+              method,
+              headers,
+              uploadLabel
+            );
+          } catch (error) {
+            uploadResponse = unexpectedErrorUploadResult(
+              currentExtFileInstance.toExtFile()
+            );
+          }
         }
 
-        const { uploadedFile } = uploadResponse;
+        const uploadedFile = uploadResponse;
+        console.log("fake uploadResponse uploadedFile", uploadedFile);
+
         //update instances
         currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
         currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
 
-        //add fake progress only on fakeupload
-        if (fakeUpload) {
-          console.log(
-            "Adding fake progress",
-            fakeUpload,
-            uploadedFile.progress
-          );
-          currentExtFileInstance.progress = uploadedFile.progress;
-        }
+        console.log(
+          "fake uploadResponse currentExtFileInstance",
+          currentExtFileInstance
+        );
+        console.log(
+          "fake uploadResponse currentExtFileInstance",
+          currentExtFileInstance.uploadStatus
+        );
+        console.log(
+          "fake uploadResponse currentExtFileInstance",
+          currentExtFileInstance.uploadMessage
+        );
+
+        console.log(
+          "pre sanitizeArrExtFile",
+          arrOfExtFilesInstances.map((F) => {
+            return { status: F.uploadStatus, message: F.uploadMessage };
+          })
+        );
+
         //CHANGE
         if (!(currentExtFileInstance.uploadStatus === "aborted"))
           await sleepTransition();
 
-        handleFilesChange(
-          arrOfExtFilesInstances.map((x: ExtFileInstance) => x.toExtFile()),
-          true
+        console.log(
+          "pre sanitizeArrExtFile",
+          arrOfExtFilesInstances.map((F) => {
+            return { status: F.uploadStatus, message: F.uploadMessage };
+          })
         );
+
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
         if (uploadedFile.uploadStatus === "error") {
           totalRejected++;
         }
 
         serverResponses.push(uploadResponse);
+      } else {
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
       }
     }
 
+    handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+
     // upload group finished :D
     onUploadFinish?.(serverResponses);
-
-    /* const finishUploadMessenger: FunctionLabel =
+    /* 
+    const finishUploadMessenger: FunctionLabel =
       DropzoneLocalizer.uploadFinished as FunctionLabel;
-
-   setLocalMessage(
+    setLocalMessage(
       finishUploadMessenger(missingUpload - totalRejected, totalRejected)
     ); */
-    setIsUploading(false);
+    setTimeout(() => {
+      setIsUploading(false);
+    }, 2000);
   };
   /**
    * Performs the changes in the FuiFile list.

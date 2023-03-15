@@ -31,51 +31,6 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   */
   value?: ExtFile[];
 
-  ///////////////          STYLING          ///////////                             
-  /**
-   * The background color for dropzone container,
-   * @default 'transparent'
-   */
-  backgroundColor?: string;
-  /**
-   * The min height of the container in string format
-   * If the value is given un number format "px" will be assumed
-   * @default "190px"
-   * 
-   * examples: 
-   *    "50vh"
-   *    "20%"
-   *    "40em"
-   *    "1rem"
-   */
-  minHeight?: string | number;
-  ///////////////          DISPLAY SETTINGS          ///////////    
-  /**
-   * If false, hides the dropzone footer
-   * By default is true
-   */
-  footer?: boolean;
-  /**
-   * If false, hides the dropzone header
-   * By default is true
-   */
-  header?: boolean;
-  /**
-  * The label to place when no files were selected
-  */
-  label?: string;
-  /**
-  * The language to be used in Dropzone labels
-  * Currently only English, French , Portuguese, Chinnese (traditional and simplyfied), Russian and Spanish are supported
-  * @default "EN-en"
-  */
-  localization?: Localization;
-  /**
-   * If true, will show a ripple everytime
-   * the user drops files or selects files
-   */
-  disableRipple?: boolean;
-
   ///////////////         VALIDATION STAGE        ///////////////
   /**
    * The max file size allowed in bytes
@@ -127,37 +82,6 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * This flag will only work if validation is active.
    */
   cleanFiles?: boolean;
-  ///////// INPUT
-  /** 
-  * If true, the dropzone component itself will be clickable
-  * If false, the file dialog will not be opened
-  * @default true
-  */
-  clickable?: boolean;
-  /**
-   * The behaviour when new files are selected or dropped
-   * @default 'add'
-   */
-  behaviour?: 'add' | 'replace';
-  /**
-  * If `true`, the component is disabled.
-  * @default false
-  */
-  disabled?: boolean;
-  /**
-   * If `true`, the drop operation will be performed in a layer that covers the complete component container.
-   * @default true
-   */
-  dropOnLayer?: boolean;
-  /**
-   * Method for performing specific tasks on drag enter operations
-   */
-  onDragEnter?: (evt: React.DragEvent<HTMLDivElement>) => void;
-  /**
-   * Method for performing specific tasks on drag leave operations
-   */
-  onDragLeave?: (evt: React.DragEvent<HTMLDivElement>) => void;
-
 
   ///////////////         UPLOAD STAGE        ///////////////
   /**
@@ -180,16 +104,66 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * Unlike Onchange, onUploadStart will only return a list of files thta are candidates to be uploaded,
    * in case they are valid or upload status is "error"
    */
-  onUploadStart?: (files: ExtFile[]) => void;
+  onUploadStart?: (extFiles: ExtFile[]) => void;
   /**
   * This event returns as first aparameter the list of responses for each file following the structure:
   * responses = [
   *  {id: <the file id>, serverResponse: the server response}
   * ]
   */
-  onUploadFinish?: (responses: UploadResponse[]) => void;
+  onUploadFinish?: (extFiles: ExtFile[]) => void;
 
 
+  ///////////////          STYLING          ///////////                             
+  /**
+   * The background color for dropzone container,
+   * @default 'transparent'
+   */
+  backgroundColor?: string;
+  /**
+   * The min height of the container in string format
+   * If the value is given un number format "px" will be assumed
+   * @default "190px"
+   * 
+   * examples: 
+   *    "50vh"
+   *    "20%"
+   *    "40em"
+   *    "1rem"
+   */
+  minHeight?: string | number;
+  // LABEL   
+  /**
+  * The label to place when no files were selected
+  */
+  label?: string;
+
+  //LOCALIZATION
+  /**
+  * The language to be used in Dropzone labels
+  * @default "EN-en"
+  */
+  localization?: Localization;
+
+  //RIPPLE
+  /**
+   * If true, will not show a ripple effect everytime
+   * the user drops files or clicks the dropzone for selecting files
+   * @default false
+   */
+  disableRipple?: boolean;
+
+
+  /**
+   * Method for performing specific tasks on drag enter operations
+   */
+  onDragEnter?: (evt: React.DragEvent<HTMLDivElement>) => void;
+  /**
+   * Method for performing specific tasks on drag leave operations
+   */
+  onDragLeave?: (evt: React.DragEvent<HTMLDivElement>) => void;
+
+  //ACTION BUTTONS
   /**
    * The configuration needed for uploading the files.
    * When "uploadConfig" is not given or uploadConfig.url is undefined
@@ -198,15 +172,58 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    */
   actionButtons?: DropzoneActions;
 
-  //advancedConfig?: DropzoneAdvancedConfig;
+  ///////// DROP LAYER
+  /**
+   * If `true`, the drop operation will be performed in a layer that covers the complete component container.
+   * @default true
+   */
+  dropOnLayer?: boolean;
 
+  // HEADER AND FOOTER
+  /**
+   * If false, hides the dropzone footer
+   * @default true
+   */
+  footer?: boolean;
+  /**
+   * If false, hides the dropzone header
+   * @default true
+   */
+  header?: boolean;
+  /**
+   * Configuration related to the dropzone header
+   */
   headerConfig?: HeaderConfig;
-
+  /**
+   * Configuration  related to the dropzone footer
+   */
   footerConfg?: FooterConfig;
+
+  //DISABLED
+  /**
+  * If `true`, the component is disabled.
+  * @default false
+  */
+  disabled?: boolean;
+  //CLICKABLE
+  /** 
+    * If true, the dropzone component itself will be clickable
+    * If false, the file dialog will not be opened
+    * @default true
+    */
+  clickable?: boolean;
+
+  // ADD OR REPLACE
+  /**
+   * The behaviour when new files are selected or dropped
+   * @default 'add'
+   */
+  behaviour?: 'add' | 'replace';
 }
 
 
-export type HeaderItems = {
+export type HeaderConfig = {
+  customHeader?: JSX.Element;
   deleteFiles?: boolean;
   cleanFiles?: boolean;
   uploadFiles?: boolean;
@@ -214,19 +231,8 @@ export type HeaderItems = {
   maxFileSize?: boolean;
   validFilesCount?: boolean;
 }
-export interface HeaderConfigMap extends OverridableComponentProps {
-  customHeader?: JSX.Element;
-}
-export type HeaderConfig =
-  {
-    [P in keyof HeaderConfigMap]: HeaderConfigMap[P]
-  } & {
-    [H in keyof HeaderItems]: HeaderItems[H]
-  }
-export interface FooterConfigMap extends OverridableComponentProps {
-  customFooter?: JSX.Element;
-}
-export type FooterItems = {
+
+export type FooterConfig = {
   /**
    * Allowed types: .png,image/*
    */
@@ -243,14 +249,8 @@ export type FooterItems = {
    * 
    */
   noMissingFilesLabel?: boolean;
+  customFooter?: JSX.Element;
 }
-
-export type FooterConfig =
-  {
-    [P in keyof FooterConfigMap]: FooterConfigMap[P]
-  } & {
-    [H in keyof FooterItems]: FooterItems[H]
-  }
 
 
 export type DropzoneActionButton = {
@@ -271,19 +271,6 @@ export interface DropzoneActions {
   deleteButton?: DropzoneActionButton;
   cleanButton?: DropzoneActionButton;
 }
-
-
-export interface AdvancedConfigItem {
-  style?: React.CSSProperties;
-  className?: string;
-}
-
-export type DropzoneAdvancedConfig = {
-  dropzoneLayer: any;
-  dropzoneContainer: any;
-  dropzoneLabel: any;
-}
-
 
 
 type DefDivProps = React.HTMLProps<HTMLDivElement>;
@@ -308,3 +295,18 @@ export const defaultDrozoneProps: DropzoneProps =
   footer: true,
   value: [],
 }
+
+
+
+/* 
+export interface AdvancedConfigItem {
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+export type DropzoneAdvancedConfig = {
+  dropzoneLayer: any;
+  dropzoneContainer: any;
+  dropzoneLabel: any;
+}
+ */

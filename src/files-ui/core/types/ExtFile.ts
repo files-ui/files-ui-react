@@ -29,7 +29,9 @@ export declare type ExtFile = {
      * The size of the file. Used mostly for displaying file data from server.
      */
     size?: number;
-
+    /**
+     * Link, URI or string representation of an image
+     */
     imageUrl?: string;
     /**
      * a flag that determines whether the file is valid, not valid or it is not validated.

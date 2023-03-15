@@ -221,6 +221,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     //  setIsUploading(true);
     //PREPARING stage
     console.log("validateFilesFlag", validateFilesFlag);
+    onUploadStart?.(localFiles);
 
     arrOfExtFilesInstances =
       ExtFileManager.setFileListMapPreparing(
@@ -251,8 +252,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     console.log("FileManagerLog after sleep", arrOfExtFilesInstances);
 
     //return;
-    let serverResponses: Array<UploadResponse> = [];
-
+    let serverResponses: Array<ExtFile> = [];
     //Uplad files one by one
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
@@ -282,13 +282,14 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
         //UPLOADING => UPLOAD()
         //upload one file and notify about change
-        let uploadResponse: UploadResponse;
+        let uploadResponse: ExtFile;
 
         if (fakeUpload) {
           uploadResponse = await fakeFuiUpload(
             currentExtFileInstance,
             DropzoneLocalizer
           );
+
           let fakeProgress = 0;
           while (fakeProgress < 100) {
             fakeProgress += getRandomInt(21, 35);
@@ -313,7 +314,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           }
         }
 
-        const { uploadedFile } = uploadResponse;
+        const uploadedFile = uploadResponse;
         console.log("fake uploadResponse uploadedFile", uploadedFile);
 
         //update instances
@@ -335,9 +336,10 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
         console.log(
           "pre sanitizeArrExtFile",
-          arrOfExtFilesInstances.map((F) => {return{status:F.uploadStatus,message:F.uploadMessage}})
+          arrOfExtFilesInstances.map((F) => {
+            return { status: F.uploadStatus, message: F.uploadMessage };
+          })
         );
-
 
         //CHANGE
         if (!(currentExtFileInstance.uploadStatus === "aborted"))
@@ -345,8 +347,11 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
         console.log(
           "pre sanitizeArrExtFile",
-          arrOfExtFilesInstances.map((F) => {return{status:F.uploadStatus,message:F.uploadMessage}})
+          arrOfExtFilesInstances.map((F) => {
+            return { status: F.uploadStatus, message: F.uploadMessage };
+          })
         );
+
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
         if (uploadedFile.uploadStatus === "error") {
@@ -369,7 +374,9 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     setLocalMessage(
       finishUploadMessenger(missingUpload - totalRejected, totalRejected)
     );
-    setIsUploading(false);
+    setTimeout(() => {
+      setIsUploading(false);
+    }, 2000);
   };
 
   const handleAbortUpload = () => {

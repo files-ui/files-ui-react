@@ -1,15 +1,11 @@
 
 import { ExtFile, ExtFileInstance, ServerResponse, UploadResponse, UPLOADSTATUS } from "../types"
 
-export const unexpectedErrorUploadResult = (extFile: ExtFile): UploadResponse => {
+export const unexpectedErrorUploadResult = (extFile: ExtFile): ExtFile => {
     return {
-        id: extFile.id,
-        uploadedFile:
-        {
-            ...extFile,
-            uploadMessage: "Unexpected error",
-            uploadStatus: "error"
-        },
+        ...extFile,
+        uploadMessage: "Unexpected error",
+        uploadStatus: "error",
         serverResponse: {
             success: false,
             message: "Error on upload: unexpected error ",

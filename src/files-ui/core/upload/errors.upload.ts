@@ -22,16 +22,13 @@ export const UNEXPECTED_ERROR_RESPONSE = {
     payload: {}
 }
 
-export const NO_XHR_PROVIDED_ERROR = (extFile: ExtFile): UploadResponse => {
+export const NO_XHR_PROVIDED_ERROR = (extFile: ExtFile): ExtFile => {
     return {
-        uploadedFile:
-        {
-            ...extFile,
-            uploadMessage: "Unable to upload. xhr object was not provided",
-            uploadStatus: "error"
-        },
 
-        id: extFile.id,
-        serverResponse: {}
+        ...extFile,
+        uploadMessage: "Unable to upload. xhr object was not provided",
+        uploadStatus: "error",
+
+        serverResponse: { success: false, }
     }
 }
