@@ -6,7 +6,6 @@ import {
   FullScreen,
   ImagePreview,
   VideoPreview,
-  
 } from "../../../files-ui";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -21,12 +20,12 @@ export default function AdvancedDropzoneDemo() {
 
   const updateFiles = (incommingFiles) => {
     console.log("incomming extFiles", incommingFiles);
-   const arrExtFIleInstances = incommingFiles.map(
+    const arrExtFIleInstances = incommingFiles.map(
       (extFile) => new ExtFileInstance(extFile)
     );
-    
+
     console.log("incomming arrExtFIleInstances", arrExtFIleInstances);
-   /*   const listExtFileObjects = arrExtFIleInstances.map((extFileInstance) =>
+    /*   const listExtFileObjects = arrExtFIleInstances.map((extFileInstance) =>
       extFileInstance.toExtFile()
     );
    
@@ -40,11 +39,12 @@ export default function AdvancedDropzoneDemo() {
   const handleSee = (imageSource) => {
     setImageSrc(imageSource);
   };
-/*   const onClean = () => {
-    setExtFiles(extFiles.filter((ef) => ef.valid !== false));
-  }; */
+
+  const handleStart = (res) => {
+    console.log("advanced demo start upload", res);
+  };
   const handleFinish = (res) => {
-    console.log("finish", res);
+    console.log("advanced demo finish upload", res);
   };
   const handleWatch = (videoSource) => {
     console.log(
@@ -106,6 +106,7 @@ export default function AdvancedDropzoneDemo() {
           //url: "http://localhost:2800/file/28048465460",
           cleanOnUpload: true,
         }}
+        onUploadStart={handleStart}
         onUploadFinish={handleFinish}
         //fakeUpload
         actionButtons={{
