@@ -199,7 +199,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   /**
    * Configuration  related to the dropzone footer
    */
-  footerConfg?: FooterConfig;
+  footerConfig?: FooterConfig;
 
   //DISABLED
   /**
@@ -233,8 +233,8 @@ export type HeaderConfig = {
   maxFileSize?: boolean;
   validFilesCount?: boolean;
   style?: React.CSSProperties;
-  className?:string;
-  resetStyles?:boolean;
+  className?: string;
+  resetStyles?: boolean;
 }
 
 export type FooterConfig = {
@@ -254,12 +254,15 @@ export type FooterConfig = {
    * 
    */
   noMissingFilesLabel?: boolean;
+
+  customMessage?: JSX.Element;
+  
   customFooter?: JSX.Element;
 }
 
 
 export type DropzoneActionButton = {
-  children?: React.ReactNode;
+  children?: JSX.Element;
   label?: string;
   style?: React.CSSProperties;
   className?: string;

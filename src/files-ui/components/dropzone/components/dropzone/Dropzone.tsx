@@ -98,7 +98,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     header,
     footer,
     headerConfig = {},
-    footerConfg = {},
+    footerConfig = {},
     //disabled
     disabled,
     //open file dialog
@@ -150,7 +150,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     noMissingFilesLabel = true,
     uploadProgressMessage = true,
     uploadResultMessage = true,
-  }: FooterConfig = footerConfg;
+  }: FooterConfig = footerConfig;
   //console.log("Dropzone props", dropOnLayer);
   //localizers
   const DropzoneLocalizer: LocalLabels =
@@ -643,7 +643,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       setLocalFiles(localFiles.filter((f) => f.valid));
     }
   };
-
+console.log("Dropzone styleHeader",styleHeader);
   if (!dropzoneClassName) return <></>;
   return (
     <React.Fragment>
@@ -748,7 +748,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
                   accept={accept}
                   message={isUploading ? localMessage : undefined}
                   localization={localization}
-                  {...footerConfg}
+                  {...footerConfig}
                 />
               )}
             </>

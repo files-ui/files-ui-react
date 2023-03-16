@@ -20,6 +20,10 @@ import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
+import DemoDropzoneFooterConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneFooterConfig";
+import DemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneHeaderConfig";
+import CodeDemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneHeaderConfig";
+import CodeDemoDropzoneFooterConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneFooterConfig";
 
 const DropzoneDemoPage = (props) => {
   return (
@@ -332,10 +336,10 @@ const DropzoneDemoPage = (props) => {
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneActionButtons />
+            <DemoDropzoneHeaderConfig />
           </Paper>
 
-          <CodeDemoDropzoneActionButtons />
+          <CodeDemoDropzoneHeaderConfig />
         </section>
 
         <section id="footer-config">
@@ -376,16 +380,21 @@ const DropzoneDemoPage = (props) => {
                 prop set to <TypeHighlight>false</TypeHighlight> will not
                 display a label when upload starts with no uploadable files.
               </li>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>footerConfig.customMessage</TypeHighlight> prop
+                defined will be considered the message to display in the footer.
+              </li>
             </ul>
             By default all of these values are set to{" "}
             <TypeHighlight>true</TypeHighlight>.
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneActionButtons />
+            <DemoDropzoneFooterConfig />
           </Paper>
 
-          <CodeDemoDropzoneActionButtons />
+          <CodeDemoDropzoneFooterConfig />
         </section>
 
         <section id="api">

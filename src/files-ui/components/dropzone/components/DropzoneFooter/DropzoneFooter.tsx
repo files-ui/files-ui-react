@@ -30,6 +30,7 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
     className = "",
     resetStyles = false,
     allowedTypesLabel = true,
+    customMessage = undefined,
   } = props;
 
   const DropzoneFooterLocalizer: LocalLabels = DropzoneLocalizerSelector(
@@ -45,9 +46,12 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
   }
   const finalClassName = resetStyles
     ? className
-    : addClassName("files-ui-footer files-ui-footer-border-rd-top-bg-color", className);
-  
-    const finalStyle = resetStyles
+    : addClassName(
+        "files-ui-footer files-ui-footer-border-rd-top-bg-color",
+        className
+      );
+
+  const finalStyle = resetStyles
     ? style
     : {
         ...style,
@@ -58,15 +62,19 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
 
   return (
     <div className={finalClassName} onClick={handleClick} style={finalStyle}>
-      <>
-        {message
-          ? message
-          : !accept
-          ? allowedTypesLabel
-            ? DropzoneFooterLocalizer.acceptAll
-            : undefined
-          : accepCustomMessenger(accept)}
-      </>
+      {customMessage ? (
+        <>{customMessage}</>
+      ) : (
+        <>
+          {message
+            ? message
+            : !accept
+            ? allowedTypesLabel
+              ? DropzoneFooterLocalizer.acceptAll
+              : undefined
+            : accepCustomMessenger(accept)}
+        </>
+      )}
     </div>
   );
 };

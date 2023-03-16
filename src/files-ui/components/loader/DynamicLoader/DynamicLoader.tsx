@@ -75,59 +75,61 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
   if (percentage !== undefined)
     return (
       <LoaderContainer size={size}>
-        <svg
-          className="dui_svg_circle_loader"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          width={`${finalSize}px`}
-          height={`${finalSize}px`}
-          style={finalStyle}
-        >
-          <circle
-            style={{
-              transform: "rotate(-90deg)",
-              transformOrigin: "center",
-            }}
-            stroke={color || "#14ff00"}
-            cx={`${finalX}`}
-            cy={`${finalY}`}
-            r={`${finalRadius}`}
-            strokeWidth={`${width || 8}px`}
-            //className="circle_loader"
-            id="circle"
-            ref={circleRef}
-            fill="none"
-          ></circle>
-
-          {!hidePerncentage && percentage !== undefined && (
-            <text
-              className="dui-text-dynamic-loader"
-              x={`${finalX}`}
-              y={`${(finalX * 7) / 6}`}
-            >
-              {`${percentage.toFixed(0)} %`}
-            </text>
-          )}
-        </svg>
-        {onClick && (
-          <div
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+        <>
+          <svg
+            className="dui_svg_circle_loader"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            width={`${finalSize}px`}
+            height={`${finalSize}px`}
+            style={finalStyle}
           >
-            <Clear
-              color={"rgba(255,255,255,0.75)"}
-              size={45}
-              onClick={onClick}
-              //colorFill="transparent"
-            />
-          </div>
-        )}
+            <circle
+              style={{
+                transform: "rotate(-90deg)",
+                transformOrigin: "center",
+              }}
+              stroke={color || "#14ff00"}
+              cx={`${finalX}`}
+              cy={`${finalY}`}
+              r={`${finalRadius}`}
+              strokeWidth={`${width || 8}px`}
+              //className="circle_loader"
+              id="circle"
+              ref={circleRef}
+              fill="none"
+            ></circle>
+
+            {!hidePerncentage && percentage !== undefined && (
+              <text
+                className="dui-text-dynamic-loader"
+                x={`${finalX}`}
+                y={`${(finalX * 7) / 6}`}
+              >
+                {`${percentage.toFixed(0)} %`}
+              </text>
+            )}
+          </svg>
+          {onClick && (
+            <div
+              style={{
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Clear
+                color={"rgba(255,255,255,0.75)"}
+                size={45}
+                onClick={onClick}
+                //colorFill="transparent"
+              />
+            </div>
+          )}
+        </>
       </LoaderContainer>
     );
   else {

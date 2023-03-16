@@ -14,26 +14,28 @@ const InfiniteLoader: React.FC<InfiniteLoaderProps> = (
   } = props;
   return (
     <LoaderContainer onClick={onClick} size={size}>
-      <BasePreparingLoader size={size} />
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {onClick && (
-          <Clear
-            color={"rgba(255,255,255,0.75)"}
-            size={45}
-            onClick={onClick}
-            //colorFill="transparent"
-          />
-        )}
-      </div>
+      <>
+        <BasePreparingLoader size={size} />
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {onClick && (
+            <Clear
+              color={"rgba(255,255,255,0.75)"}
+              size={45}
+              onClick={onClick}
+              //colorFill="transparent"
+            />
+          )}
+        </div>
+      </>
     </LoaderContainer>
   );
 };
