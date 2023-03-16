@@ -1,5 +1,9 @@
 # Future Possible Features
 
+## DROP
+WHen data transfer only text or iimage in string, event
+files dissapear in "replace". create a text file in memoory
+
 ## UTILS
 
 - custom icons
