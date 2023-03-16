@@ -124,7 +124,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   /**
    * The min height of the container in string format
    * If the value is given un number format "px" will be assumed
-   * @default "190px"
+   * @default "180px"
    * 
    * examples: 
    *    "50vh"

@@ -24,6 +24,13 @@ import DemoDropzoneFooterConfig from "../../components/demo-components/dropzone-
 import DemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneHeaderConfig";
 import CodeDemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneHeaderConfig";
 import CodeDemoDropzoneFooterConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneFooterConfig";
+import DemoDropzoneStyling from "../../components/demo-components/dropzone-demo/DemoDropzoneStyling";
+import DemoDropzoneBehaviour from "../../components/demo-components/dropzone-demo/DemoDropzoneBehaviour";
+import DemoDropzoneLabel from "../../components/demo-components/dropzone-demo/DemoDropzoneLabel";
+import DemoDropzoneDropLayer from "../../components/demo-components/dropzone-demo/DemoDropzoneDropLayer";
+import DemoDropzoneClickable from "../../components/demo-components/dropzone-demo/DemoDropzoneClickable";
+import DemoDropzoneDisabled from "../../components/demo-components/dropzone-demo/DemoDropzoneDisabled";
+import DemoDropzoneRipple from "../../components/demo-components/dropzone-demo/DemoDropzoneRipple";
 
 const DropzoneDemoPage = (props) => {
   return (
@@ -284,8 +291,27 @@ const DropzoneDemoPage = (props) => {
           <SubTitle content="Dropzone header config" />
           <DescParagraph>
             You can use the <TypeHighlight>headerConfig</TypeHighlight> prop to
-            define what will be displayed in the header. Type definition can be
-            found <AnchorToTab href="/types#header-config">here</AnchorToTab>
+            define what will be displayed in the header.
+            <ul>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>headerConfig.customHeader</TypeHighlight> prop
+                defined will display this prop replacing the entire default
+                header.
+              </li>
+            </ul>
+            By default all of these values are set to{" "}
+            <TypeHighlight>true</TypeHighlight>.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneHeaderConfig />
+          </Paper>
+
+          <CodeDemoDropzoneHeaderConfig />
+          <Alert severity="info">
+            <AlertTitle> HeaderConfig </AlertTitle>
+            There are more options that can be defined such as:
             <ul>
               <li>
                 Dropzone with the{" "}
@@ -331,31 +357,43 @@ const DropzoneDemoPage = (props) => {
                 current count of valid files.
               </li>
             </ul>
-            By default all of these values are set to{" "}
-            <TypeHighlight>true</TypeHighlight>.
-          </DescParagraph>
-
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneHeaderConfig />
-          </Paper>
-
-          <CodeDemoDropzoneHeaderConfig />
+            By default all of these values are set to
+            <TypeHighlight>true</TypeHighlight>. The complete type definition
+            can be found{" "}
+            <AnchorToTab href="/types#header-config">here</AnchorToTab>.
+          </Alert>
         </section>
 
         <section id="footer-config">
           <SubTitle content="Dropzone footer config" />
           <DescParagraph>
             You can use the <TypeHighlight>footerConfig</TypeHighlight> prop to
-            define what will be displayed in the footer. Type definition can be
-            found <AnchorToTab href="/types#footer-config">here</AnchorToTab>
+            define what will be displayed in the footer.
+            <ul>
+              <li>
+                Dropzone with the{" "}
+                <TypeHighlight>footerConfig.customMessage</TypeHighlight> prop
+                defined will be considered the message to display in the footer.
+              </li>
+            </ul>
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneFooterConfig />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig />
+
+          <Alert severity="info">
+            <AlertTitle> FooterConfig </AlertTitle>
+            There are more options that can be defined such as:
             <ul>
               <li>
                 Dropzone with the{" "}
                 <TypeHighlight>footerConfig.allowedTypesLabel</TypeHighlight>{" "}
                 prop set to <TypeHighlight>false</TypeHighlight> will hide the
                 label that indicates the files types allowed. This label will be
-                hidden
-                <strong>when the "upload" process is active</strong>.
+                hidden <strong>when the "upload" process is active</strong>.
               </li>
               <li>
                 Dropzone with the{" "}
@@ -382,19 +420,184 @@ const DropzoneDemoPage = (props) => {
               </li>
               <li>
                 Dropzone with the{" "}
-                <TypeHighlight>footerConfig.customMessage</TypeHighlight> prop
-                defined will be considered the message to display in the footer.
+                <TypeHighlight>footerConfig.style</TypeHighlight> prop set to{" "}
+                <TypeHighlight>false</TypeHighlight>defined will override the
+                styles associated to the footer component.
               </li>
             </ul>
-            By default all of these values are set to{" "}
+            By default all of these values are set to
             <TypeHighlight>true</TypeHighlight>.
+            <br />
+            The complete type definition can be found{" "}
+            <AnchorToTab href="/types#footer-config">here</AnchorToTab>.
+          </Alert>
+        </section>
+
+        <section id="styling">
+          <SubTitle content="Styling Dropzone" />
+          <DescParagraph>
+            You can use change the look and feel of the{" "}
+            <CodeHighlight>Dropzone</CodeHighlight> component
+            <ul>
+              <li>
+                Dropzone with the <TypeHighlight>color</TypeHighlight> prop
+                defined will use this color for border, drop layer, font color
+                and ripple.
+              </li>
+              <li>
+                Dropzone with the <TypeHighlight>backgroundColor</TypeHighlight>{" "}
+                prop defined will use this color for the background.
+              </li>
+              <li>
+                Dropzone with the <TypeHighlight>minHeight</TypeHighlight> prop
+                defined will use this value to define the minimum height of the
+                component.
+              </li>
+            </ul>
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneFooterConfig />
+            <DemoDropzoneStyling />
           </Paper>
 
           <CodeDemoDropzoneFooterConfig />
+        </section>
+
+        <section id="ripple">
+          <SubTitle content="Ripple" />
+          <DescParagraph>
+            According to{" "}
+            <AnchorToTab href="https://m2.material.io/develop/ios/supporting/ripple">
+              Material Design
+            </AnchorToTab>
+            , the Ripple component provides a radial action in the form of a
+            visual ripple expanding outward from the user's touch. Ripple is a
+            visual form of feedback for touch events providing users a clear
+            signal that an element is being touched. In this component, a ripple
+            is displayed after 2 user actions:
+            <ul>
+              <li>When user clicks or touches the component.</li>
+              <li>Just after user dropped files.</li>
+            </ul>
+            For disabling the ripple effect you can set the{" "}
+            <TypeHighlight>disableRipple</TypeHighlight> prop to false.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneRipple />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig />
+        </section>
+
+        <section id="disabled">
+          <SubTitle content="Disabled Dropzone" />
+          <DescParagraph>
+            According to{" "}
+            <AnchorToTab href="https://m2.material.io/develop/ios/supporting/ripple">
+              Material Design
+            </AnchorToTab>{" "}
+            a disabled state communicates when a component or element isn’t
+            interactive, and should be deemphasized in a UI.
+            <TypeHighlight>disabled</TypeHighlight> prop to true.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneDisabled />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig />
+        </section>
+
+        <section id="clickable">
+          <SubTitle content="Clickable Dropzone" />
+          <DescParagraph>
+            Dropzone with the
+            <TypeHighlight>clickable</TypeHighlight> prop set to false will not
+            open the file dialog to select files when user clicks the component.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneClickable />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig />
+        </section>
+
+        <section id="drop-layer">
+          <SubTitle content="Drop Layer" />
+          <DescParagraph>
+            Dropzone with the
+            <TypeHighlight>dropOnLayer</TypeHighlight> prop set to false will
+            not perform the drop operation in a layer that covers the complete
+            component container.
+            <br />
+            In this demo try to drag and drop files in both dropzones to see the
+            difference.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneDropLayer />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig />
+        </section>
+
+        <section id="label">
+          <SubTitle content="Label" />
+          <DescParagraph>
+            You can specify a fixed label for{" "}
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component to display
+            when there isn't any files.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneLabel />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig />
+        </section>
+
+        <section id="add-or-replace">
+          <SubTitle content="Add or replace files" />
+          <DescParagraph>
+            There are 2 different behaviours when user selects or drops new
+            files:
+            <ul>
+              <li>
+                Dropzone with the <CodeHighlight>behaviour</CodeHighlight> set
+                to <TypeHighlight>"add"</TypeHighlight> will add the new files
+                to the current array of ExtFiles.
+              </li>
+              <li>
+                Dropzone with the <CodeHighlight>behaviour</CodeHighlight> set
+                to <TypeHighlight>"replace"</TypeHighlight> will replace the
+                current array of ExtFiles with the new ones.
+              </li>
+            </ul>
+            In this demo try to select or drop files more than once on each
+            dropzone to see the difference.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneBehaviour />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig />
+        </section>
+
+        <section id="localization">
+          <SubTitle content="Localization" />
+          <DescParagraph>
+            The localization demo for this component can be found in the{" "}
+            <AnchorToTab href="/localization">localization page</AnchorToTab>
+          </DescParagraph>
+
+          {/*   <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneFooterConfig />
+          </Paper>
+
+          <CodeDemoDropzoneFooterConfig /> */}
         </section>
 
         <section id="api">

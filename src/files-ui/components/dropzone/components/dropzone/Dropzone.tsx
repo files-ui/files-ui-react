@@ -74,7 +74,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     onUploadStart,
     onUploadFinish,
     //styling
-
     backgroundColor,
     minHeight,
     color,
