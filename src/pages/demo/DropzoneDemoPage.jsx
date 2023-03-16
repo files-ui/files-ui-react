@@ -31,6 +31,7 @@ import DemoDropzoneDropLayer from "../../components/demo-components/dropzone-dem
 import DemoDropzoneClickable from "../../components/demo-components/dropzone-demo/DemoDropzoneClickable";
 import DemoDropzoneDisabled from "../../components/demo-components/dropzone-demo/DemoDropzoneDisabled";
 import DemoDropzoneRipple from "../../components/demo-components/dropzone-demo/DemoDropzoneRipple";
+import CodeDemoDropzoneStyling from "../../components/demo-components/dropzone-demo/CodeDropzoneDemoStyling";
 
 const DropzoneDemoPage = (props) => {
   return (
@@ -445,13 +446,14 @@ const DropzoneDemoPage = (props) => {
                 and ripple.
               </li>
               <li>
-                Dropzone with the <TypeHighlight>backgroundColor</TypeHighlight>{" "}
-                prop defined will use this color for the background.
-              </li>
-              <li>
                 Dropzone with the <TypeHighlight>minHeight</TypeHighlight> prop
                 defined will use this value to define the minimum height of the
                 component.
+              </li>
+              <li>
+                Dropzone with the <TypeHighlight>background</TypeHighlight> prop
+                defined will use this value for the background. You can set nice
+                gradients or even a background image.
               </li>
             </ul>
           </DescParagraph>
@@ -460,7 +462,7 @@ const DropzoneDemoPage = (props) => {
             <DemoDropzoneStyling />
           </Paper>
 
-          <CodeDemoDropzoneFooterConfig />
+          <CodeDemoDropzoneStyling />
         </section>
 
         <section id="ripple">

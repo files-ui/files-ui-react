@@ -12,7 +12,14 @@ const DemoDropzoneStyling = (props) => {
     setFiles(files.filter((x) => x.id !== id));
   };
   return (
-    <div style={{ display: "flex" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+        gap: "20px",
+        flexWrap: "wrap",
+      }}
+    >
       <Dropzone
         style={{ width: "300px" }}
         onChange={updateFiles}
@@ -28,7 +35,9 @@ const DemoDropzoneStyling = (props) => {
         style={{ width: "300px" }}
         onChange={updateFiles}
         value={files}
-        minHeight="100px"
+        minHeight="120px"
+        header={false}
+        footer={false}
       >
         {files.length > 0 &&
           files.map((file) => (
@@ -39,7 +48,7 @@ const DemoDropzoneStyling = (props) => {
         style={{ width: "300px" }}
         onChange={updateFiles}
         value={files}
-        backgroundColor="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
+        background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
       >
         {files.length > 0 &&
           files.map((file) => (
