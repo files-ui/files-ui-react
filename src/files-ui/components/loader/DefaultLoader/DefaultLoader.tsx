@@ -1,19 +1,17 @@
-
-
 import * as React from "react";
-import { asureColor, colourNameToHex, hexColorToRGB } from "../../../core/color";
+import { completeAsureColor } from "../../../core";
 import "./DefaultLoader.scss";
 interface DefaultLoaderNeoProps {
   color?: string;
   label?: string;
 }
 const makeDefaultLoaderNeoColor = (color?: string): string => {
-  return hexColorToRGB(asureColor(colourNameToHex(color)), 0.5);
+  return completeAsureColor(color, 0.5);
 };
 const DefaultLoader: React.FC<DefaultLoaderNeoProps> = (
   props: DefaultLoaderNeoProps
 ) => {
-  const { color = "#8b6b10",label } = props;
+  const { color = "#8b6b10", label } = props;
   //console.log("color label loader", color,label);
   return (
     <svg
@@ -130,7 +128,7 @@ const DefaultLoader: React.FC<DefaultLoaderNeoProps> = (
         y={`90`}
         fill={`${color}`}
       >
-        {label ||`loading`}
+        {label || `loading`}
       </text>
     </svg>
   );
