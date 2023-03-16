@@ -6,5 +6,6 @@ export {
     darkerColor,
     hexColorToRGB,
     hexTodec,
-    isHexColor
+    isHexColor,
+    completeAsureColor
 } from "./colors";

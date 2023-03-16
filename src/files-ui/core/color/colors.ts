@@ -5,7 +5,7 @@ import { NAMED_COLORS } from "./namedColors";
  * @param colorInput 
  * @returns the darked color in
  */
- export const darkerColor = (colorInput: string, percentage = 25): string => {
+export const darkerColor = (colorInput: string, percentage = 25): string => {
     let darkedColor = "";
     const reduce = (100 - percentage) / 100;
     let component1: number = 0;
@@ -206,11 +206,26 @@ export const hexTodec = (letter: string): number => {
  * @param color param color given by user
  * @returns returns the same color 
  */
- export const asureColor = (color?: string): string => {
+export const asureColor = (color?: string): string => {
     if (color !== undefined && color !== "") {
         return color;
     } else {
-        return "#646c7f";
+        return DEFAULT_FONT_COLOR;
     }
 }
+/** 
+ * Asure a base color. When not given or when given an incorrect color format
+ * default color is this kind of grey #5d6475
+ * 
+ * @param color param color given by user
+ * @returns returns the same color 
+ */
+export const completeAsureColor = (color?: string, perc = 1): string => {
 
+    return hexColorToRGB(asureColor(colourNameToHex(color)), perc);
+
+}
+
+
+
+export const DEFAULT_FONT_COLOR = "#646c7f";

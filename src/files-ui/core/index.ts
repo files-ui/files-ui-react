@@ -163,7 +163,8 @@ export {
     hexColorToRGB,
     hexTodec,
     isHexColor,
-    NAMED_COLORS
+    NAMED_COLORS,
+    completeAsureColor
 } from "./color";
 
 export {
