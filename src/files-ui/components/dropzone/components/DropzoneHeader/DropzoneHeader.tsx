@@ -8,7 +8,6 @@ import {
   LocalLabels,
 } from "../../../../core";
 import { UploadingProcess, Clean, Cancel, Upload } from "../../../icons";
-import { HeaderConfig } from "../dropzone/DropzoneProps";
 
 export type DropzoneHeaderProps = {
   maxFileSize?: number;

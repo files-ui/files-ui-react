@@ -1,4 +1,4 @@
-import { ExtFile, CustomValidateFileResponse, Localization, UploadConfig, UploadResponse } from "../../../../core";
+import { ExtFile, CustomValidateFileResponse, Localization, UploadConfig } from "../../../../core";
 
 import * as React from "react";
 import { OverridableComponentProps } from "../../../overridable";
