@@ -6,12 +6,14 @@ import {
   DropzoneActions,
 } from "../dropzone/DropzoneProps";
 import "./DropzoneButtons.scss";
+
 interface DropzoneButtonsProps extends DropzoneActions {
   localization?: Localization;
   onAbort?: Function;
   onDelete?: Function;
   onUpload?: Function;
   onClean?: Function;
+  top?: boolean;
 }
 
 const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
@@ -29,6 +31,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     onClean,
     onDelete,
     onUpload,
+    top
   } = props;
 
   const actionButtonsList: DropzoneActionButton[] = [
@@ -49,11 +52,10 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
   ) as DropzoneActionButton[];
 
   const finalClassName = addClassName(
-    "files-ui-buttons-container",
+    "files-ui-buttons-container" + `${top ? " top" : " bottom"}`,
     containerClassName
   );
 
-  
   return (
     <div className={finalClassName} style={containerStyle}>
       {actionButtonsList.map(

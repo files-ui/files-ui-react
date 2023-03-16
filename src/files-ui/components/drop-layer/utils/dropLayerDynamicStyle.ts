@@ -1,34 +1,33 @@
-import { asureColor, colourNameToHex, hexColorToRGB } from "../../../core";
+import { completeAsureColor } from "../../../core";
+import { DEFAULT_BORDER_RADIUS } from "../../dropzone/components/dropzone/DropzoneProps";
 
-export const dropLayerDynamicStyle = (styleId:string, color: string | undefined) => {
-
+export const makeDropLayerDynamicStyle = (
+    dropzoneId: string,
+    color: string | undefined,
+) => {
     return {
-        id: "files-ui-styles-drop-layer",
+        id: "files-ui-drop-layer-style-id-" + dropzoneId,
         sheetRules: [
             {
-                className: `dropzone-ui-layer`,
+                className: `dropzone-layer-${dropzoneId}`,
                 rules: {
-                    backgroundColor: hexColorToRGB(
-                        asureColor(colourNameToHex(color)),
-                        0.4
-                    ),
+                    backgroundColor: completeAsureColor(color, 0.4),
+                    borderRadius: DEFAULT_BORDER_RADIUS,
                     position: "absolute",
                     left: 0,
                     top: 0,
                     width: "0%",
                     height: "0%",
-                    border: `2px dashed ${hexColorToRGB(
-                        asureColor(colourNameToHex(color)),
-                        1
-                    )}`,
                     zIndex: 20,
+                    border: `0px dashed ${completeAsureColor(color)}`
                 },
             },
             {
-                className: `dui-layer-drag`,
+                className: `dropzone-layer-drag`,
                 rules: {
                     width: "100%",
                     height: "100%",
+                    borderWidth:"2px"
                 },
             }
         ],

@@ -100,7 +100,7 @@ export const uploadExtFile = async (
     method?: Method,
     headers?: Record<string, string>,
     uploadLabel?: string,
-): Promise<UploadResponse> => {
+): Promise<ExtFile> => {
     return new Promise(async (resolve, reject) => {
         try {
             const uploader: XMLHttpRequest | undefined = extFile.xhr;

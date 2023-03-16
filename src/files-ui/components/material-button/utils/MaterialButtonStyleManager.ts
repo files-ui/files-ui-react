@@ -1,4 +1,4 @@
-import { asureColor, colourNameToHex, darkerColor, hexColorToRGB } from "../../../core";
+import { asureColor, colourNameToHex, completeAsureColor, darkerColor } from "../../../core";
 import { DynamicSheet, DynamicSheetRule } from "@dynamicss/dynamicss";
 
 export default class MaterialButtonStyleManager {
@@ -55,58 +55,40 @@ export default class MaterialButtonStyleManager {
                 case "contained":
                     sheetRules[0].rules = {
                         color: asureColor(colourNameToHex(textColor)),
-                        backgroundColor: hexColorToRGB(
-                            asureColor(colourNameToHex(color)),
-                            1
-                        ),
+                        backgroundColor: completeAsureColor(color),
                         textDecoration: textDecoration
                     };
                     sheetRules[1].rules = {
                         ":hover": {
                             backgroundColor: darkerColor(
-                                hexColorToRGB(
-                                    asureColor(colourNameToHex(color)),
-                                    1
-                                )
+                                completeAsureColor(color)
                             ),
                         },
                     };
                     break;
                 case "outlined":
                     sheetRules[0].rules = {
-                        border: `1px solid ${hexColorToRGB(
-                            asureColor(colourNameToHex(color)),
-                            0.5
-                        )}`,
-                        color: asureColor(colourNameToHex(color)),
+                        border: `1px solid ${completeAsureColor(color, 0.5)}`,
+                        color: completeAsureColor(color),
                         backgroundColor: "transparent",
                         textDecoration: textDecoration
                     };
                     sheetRules[1].rules = {
                         ":hover": {
-                            border: `1px solid ${hexColorToRGB(
-                                asureColor(colourNameToHex(color)),
-                                1
-                            )}`,
-                            backgroundColor: hexColorToRGB(
-                                asureColor(colourNameToHex(color)),
-                                0.085
-                            ),
+                            border: `1px solid ${completeAsureColor(color, 1)}`,
+                            backgroundColor: completeAsureColor(color, 0.085),
                         },
                     };
                     break;
                 case "text":
                     sheetRules[0].rules = {
-                        color: asureColor(colourNameToHex(color)),
+                        color: completeAsureColor(color),
                         backgroundColor: "transparent",
                         textDecoration: textDecoration
                     };
                     sheetRules[1].rules = {
                         ":hover": {
-                            backgroundColor: hexColorToRGB(
-                                asureColor(colourNameToHex(color)),
-                                0.085
-                            ),
+                            backgroundColor: completeAsureColor(color, 0.085),
                         },
                     };
                     break;

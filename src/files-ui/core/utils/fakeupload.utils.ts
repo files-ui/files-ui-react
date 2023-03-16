@@ -108,7 +108,51 @@ export const uploadOneExtFile = (
 export const fakeFuiUpload = (
     extFileInstance: ExtFileInstance,
     DropzoneLocalizer = DropzoneLocalizerSelector("EN-en")
+): Promise<ExtFile> => {
+    
+    const extFile:ExtFile = extFileInstance.toExtFile();
+    
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const randomNumber: number = Math.floor(Math.random() * 10);
+            if (randomNumber % 2 === 0) {
+                const success = true;
+                const message = DropzoneLocalizer.fakeuploadsuccess as string;
+                const payload = { url: "" };
+                resolve({
+                    ...extFile,
+                    serverResponse: { success, message, payload },
+                    uploadStatus: "success",
+                    uploadMessage: message,
+
+                });
+            } else {
+                const success = false;
+                const message = DropzoneLocalizer.fakeUploadError as string;
+                const payload = {};
+                resolve({
+                    ...extFile,
+                    serverResponse: { success, message, payload },
+                    uploadStatus: "error",
+                    uploadMessage: message,
+                });
+            }
+        }, 1700);
+    });
+};
+
+
+/**
+ * 
+ * @param extFile the extFile to upload 
+ * @param DropzoneLocalizer the localization
+ * @returns a duiUploadResponse object that describes the result
+ */
+export const fakeFuiUploadExtFile = (
+    extFileInstance: ExtFileInstance,
+    DropzoneLocalizer = DropzoneLocalizerSelector("EN-en")
 ): Promise<UploadResponse> => {
+    
     const extFile:ExtFile = extFileInstance.toExtFile();
     
     return new Promise((resolve, reject) => {
@@ -118,6 +162,7 @@ export const fakeFuiUpload = (
                 const status = true;
                 const message = DropzoneLocalizer.fakeuploadsuccess as string;
                 const payload = { url: "" };
+
                 resolve({
                     id: extFile.id,
                     serverResponse: { status, message, payload },
@@ -147,4 +192,3 @@ export const fakeFuiUpload = (
         }, 1700);
     });
 };
-

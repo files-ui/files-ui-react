@@ -1,5 +1,4 @@
-import { Dropzone } from "../../../files-ui";
-import { FileMosaic } from "../../../files-ui/components/file-mosaic";
+import { Dropzone, FileMosaic } from "../../../files-ui";
 import * as React from "react";
 export default function BasicDemoDropzone() {
   const [files, setFiles] = React.useState([]);

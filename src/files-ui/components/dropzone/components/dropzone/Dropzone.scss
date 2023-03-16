@@ -1,23 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
 
 .fui-dropzone-root {
-  min-height: 180px;
   width: 100%;
   min-width: 150px;
+  min-height: 180px;
 
   position: relative;
 
   // DISPLAY
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  //flex-wrap: wrap;
+  flex-direction: column;
   gap: 0 8px;
-  justify-content: center;
-  align-items: center;
-  padding: 23px 0px;
+  //justify-content: center;
+  //align-items: center;
+  //padding: 23px 0px; 
 
   /// label
-  color: #646c7f;
+  //color: #646c7f;
   text-rendering: optimizeLegibility;
   font-size: 1.5em;
   font-family: inherit;
@@ -48,10 +48,14 @@
 }
 
 .files-ui-header {
-  height: 22px;
-  position: absolute;
-  cursor: text;
+  min-height: 23px;
+  //-color: brown;
+  //box-sizing: border-box;
+  /*  height: 22px;
+  position: absolute; 
   top: 0;
+  */
+  cursor: text;
   display: flex;
   //width: calc(100% - 10px);
   width: 100%;
@@ -60,32 +64,33 @@
   justify-content: flex-end;
   //font-family: "Poppins", sans-serif;
   font-family: inherit;
-  padding-right: 10px;
+  //padding-right: 10px;
   font-size: 1rem;
+  //background-color: rgba(0, 128, 128, 0.249);
   @media (max-width: 960px) {
-    width: calc(100% - 1px);
-    padding-right: 1px;
+    //width: calc(100% - 1px);
+    //padding-right: 1px;
     font-size: 0.8rem;
   }
 }
 
 .files-ui-footer {
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+/*   border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px; */
   box-sizing: border-box;
-  height: 23px;
-  position: absolute;
   cursor: text;
+  /* height: 23px;
+  position: absolute;
   bottom: 0;
-  left: 0;
+  left: 0; */
   // width: calc(100% - 10px);
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  border-top: 1px dotted grey;
-  background-color: #80808021;
+  //border-top: 1px dotted grey;
+  //background-color: rgba(128, 128, 128, 0.129);
   font-family: "Poppins", sans-serif;
   font-family: inherit;
   padding-left: 10px;
@@ -98,8 +103,12 @@
   line-clamp: 1;
   -webkit-box-orient: vertical;
 
+  
+  //background-color: rgba(0, 128, 128, 0.249);
+
+
   @media (max-width: 960px) {
-    width: calc(100% - 1px);
+    //width: calc(100% - 1px);
     padding-left: 1px;
     font-size: 0.9rem;
   }

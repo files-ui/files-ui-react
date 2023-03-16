@@ -8,11 +8,12 @@
 
 ## Phrases
 
-- Stop pain with developing a complex widget, don't need to create a file upload component from scratch
-- If you need to do it from scratch, there is an example [show some basic code] Bellow main page component
+- Stop pain with developing a complex widget, don't need to create a file upload component from scratch [landingpage_section_3]
+- If you need to do it from scratch, there is an example [show some basic code] Bellow main page component[landing_sec_3_pat_2]
 
 
 
 ## MIgrating from dropzone-ui
+[landing_Sec_3_or_4]
 
 ## Migrating from react-dropzone

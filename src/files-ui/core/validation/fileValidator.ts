@@ -119,16 +119,26 @@ export const validateExtFile = (
 ): ExtFile => {
     let extFileResult: ExtFile = { ...extFile };
     let errors: string[] = [];
+    //TO-DO: Add extra validation for individual props even if FIle object was not given
     if (!extFile.file) {
         return { ...extFileResult }
     }
+
+    //TO-DO: add "overrideValidation" prop to ignore the rest of validators like accept and maxFileSize
     if (validator) {
-        return { ...extFileResult, ...validator(extFileResult.file as File) };
+        const resultCustomValidation: CustomValidateFileResponse = validator(extFileResult.file as File);
+        const { errors: errorsResult } = resultCustomValidation;
+        if (errorsResult)
+            errors.push(...errorsResult)
+        //return { ...extFileResult, ...validator(extFileResult.file as File) };
     }
+
     const { maxFileSize, accept } = validatorProps;
     console.log("Validation", maxFileSize, accept);
     //check file size
     const file: File = extFile.file;
+
+
     if (maxFileSize && file.size > maxFileSize) {
         const maxFileSizeErrorMessenger: FunctionLabel = localErrors.maxSizeError as FunctionLabel;
 
@@ -142,7 +152,7 @@ export const validateExtFile = (
     }
     const isValid: boolean = errors.length === 0;
     extFileResult = { ...extFileResult, valid: isValid, errors: !isValid ? errors : undefined };
-    console.log("validation extFileResult",extFileResult);
+    console.log("validation extFileResult", extFileResult);
     return extFileResult;
 
 }

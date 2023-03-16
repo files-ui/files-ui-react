@@ -1,8 +1,10 @@
 import { DynamicSheet, DynamiCSS } from "@dynamicss/dynamicss";
 import * as React from "react";
-import { dropLayerDynamicStyle } from "../utils/dropLayerDynamicStyle";
+import { makeDropLayerDynamicStyle } from "../utils/dropLayerDynamicStyle";
 
-const DROP_LAYER_STYLE_ID: string = "files-ui-styles-drop-layer";
+const BASE_DROP_LAYER_STYLE: string = "files-ui-styles-drop-layer";
+
+
 /**
  * 
  * @param color 
@@ -11,26 +13,48 @@ const DROP_LAYER_STYLE_ID: string = "files-ui-styles-drop-layer";
  * @returns the classname for layer
  */
 const useDropLayerClassName = (
+    dropzoneId: string,
     color?: string,
-    isDragging?: boolean,
+    //isDragging?: boolean,
     makeClassName?: boolean
 ): string => {
     const [idStyles, setIdStyles] = React.useState<string>("");
     const [styleInjected, setStyleInjected] = React.useState<boolean>(false);
     const [classNameCreated, setClassNameCreated] = React.useState<string>("");
 
+    const finalDropzoneId: string = (color === undefined) ? "default" : dropzoneId.replaceAll(":", "_");
+
+
     React.useEffect(() => {
         //console.log("useDropLayerClassName", color, isDragging, makeClassName);
 
         const handleInserStyle = (
-            color: string,
-            isDragging?: boolean
+            color?: string,
+            //isDragging?: boolean
         ) => {
             let finalClassName: string = "";
-            let styleSheet: DynamicSheet = dropLayerDynamicStyle(DROP_LAYER_STYLE_ID, color);
+            let styleSheet: DynamicSheet = makeDropLayerDynamicStyle(finalDropzoneId, color
+                //isDragging
+            );
             let idStyle: string = "";
 
-            if (!styleInjected) {
+            console.log("useDropLayerClassName handleInserStyle", color, styleSheet);
+
+
+            if (finalDropzoneId === "default" && !styleInjected) {
+                //check if already inserted
+                if (DynamiCSS.existStyleSheet(finalDropzoneId)) {
+                    setStyleInjected(true);
+                    setIdStyles(idStyle);
+
+                } else {
+                    idStyle = DynamiCSS.insertStyleSheet(styleSheet);
+                    setIdStyles(idStyle);
+                    if (idStyle !== "") {
+                        setStyleInjected(true);
+                    }
+                }
+            } else if (!styleInjected) {
                 idStyle = DynamiCSS.insertStyleSheet(styleSheet);
                 setIdStyles(idStyle);
                 if (idStyle !== "") {
@@ -40,22 +64,26 @@ const useDropLayerClassName = (
                 //already a stylesheet associated
                 DynamiCSS.editStyleSheet(idStyles, styleSheet.sheetRules || []);
             }
-            finalClassName += `dropzone-ui-layer`;
+            finalClassName += `dropzone-layer-${finalDropzoneId}`;
 
-            if (isDragging) {
-                finalClassName += ` dui-layer-drag`;
-            }
+            /*  if (isDragging) {
+                 finalClassName += ` dropzone-layer-drag`;
+             } */
             setClassNameCreated(finalClassName);
         };
 
         //console.log("=>", isDragging);
 
         if (makeClassName) {
-            handleInserStyle(color as string, isDragging);
+            handleInserStyle(color,
+                //  isDragging
+            );
         }
 
         // eslint-disable-next-line
-    }, [color, isDragging, makeClassName]);
+    }, [color,
+        // isDragging,
+        makeClassName]);
 
     return classNameCreated;
 }

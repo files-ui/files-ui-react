@@ -14,6 +14,7 @@
 - Validate with accept prop
 - Validate with maxFileSize prop
 - Validate with maxFiles prop
+- custom validation
 
 ## Read
 
@@ -31,6 +32,6 @@
 - ImagePreview
 - VideoPreview
 - PDFPreview
-- JsonPreview fix rc-highlight
-- FullScreenPreview
+- JsonPreview [DONE]fix rc-highlight
+- FullScreenPreview => FullScreen
 - DropLayer

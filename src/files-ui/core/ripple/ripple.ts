@@ -1,8 +1,7 @@
-import { asureColor, colourNameToHex, hexColorToRGB } from "../color";
+import { completeAsureColor, hexColorToRGB } from "../color";
 
 const asureRippleColor = (color: string): string => {
-  return hexColorToRGB(
-    asureColor(colourNameToHex(color)),
+  return completeAsureColor(color,
     0.4
   );
 }
@@ -40,10 +39,10 @@ export function createFuiRippleFromDiv
 
   fuiContainerRel.appendChild(circle);
   //remove trash
-  /*  setTimeout(() => {
+  setTimeout(() => {
     fuiContainerAbs.style.display = "none";
     circle?.remove();
-  }, 501);  */
+  }, 501);
 }
 
 
@@ -69,10 +68,7 @@ export function createRippleButton<
   circle.classList.add("ripple");
 
   if (variant !== "contained") {
-    circle.style.backgroundColor = hexColorToRGB(
-      asureColor(colourNameToHex(color)),
-      0.4
-    );
+    circle.style.backgroundColor = asureRippleColor(color);
   } else {
 
     circle.style.backgroundColor = hexColorToRGB("#ffffff", 0.4);

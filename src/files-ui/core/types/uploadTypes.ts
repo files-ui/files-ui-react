@@ -18,7 +18,7 @@ export declare type UploadResponse = {
 }
 export type ServerResponse = {
     success: boolean;
-    message: string;
-    payload: any;
+    message?: string;
+    payload?: any;
 }
 

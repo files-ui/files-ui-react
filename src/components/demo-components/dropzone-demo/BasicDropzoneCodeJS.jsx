@@ -47,7 +47,6 @@ export default function BasicDemoDropzone() {
   };
   return (
     <Dropzone
-      style={{ minWidth: "505px" }}
       onChange={updateFiles}
       value={files}
     >
@@ -74,7 +73,6 @@ export default function BasicDemoDropzone() {
   };
   return (
     <Dropzone
-      style={{ minWidth: "505px" }}
       onChange={updateFiles}
       value={files}
     >

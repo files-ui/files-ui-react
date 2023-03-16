@@ -29,16 +29,13 @@ export const JsonParseResponse = (xhr: XMLHttpRequest): ServerResponse => {
 export const makeSuccessUploadResponse = (
     extFile: ExtFile,
     responseFui: ServerResponse
-): UploadResponse => {
+): ExtFile => {
     return {
-        id: extFile.id,
+        ...extFile,
         serverResponse: responseFui,
-        uploadedFile:
-        {
-            ...extFile,
-            uploadMessage: responseFui.message,
-            uploadStatus: "success"
-        },
+        uploadMessage: responseFui.message,
+        uploadStatus: "success"
+
     }
 }
 
@@ -46,17 +43,13 @@ export const makeSuccessUploadResponse = (
 export const makeErrorUploadResponse = (
     extFile: ExtFile,
     responseFui: ServerResponse
-): UploadResponse => {
+): ExtFile => {
     console.log("makeErrorUploadResponse", extFile, responseFui);
     return {
-        id: extFile.id,
+        ...extFile,
+        uploadMessage: responseFui.message,
+        uploadStatus: "error", 
         serverResponse: responseFui,
-        uploadedFile:
-        {
-            ...extFile,
-            uploadMessage: responseFui.message,
-            uploadStatus: "error"
-        },
     }
 }
 

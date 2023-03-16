@@ -44,8 +44,8 @@ interface InputButtonFullProps {
 
     ///////////////         VALIDATION STAGE        ///////////////
     /**
-     * The max file size allowed in bytes
-     */
+   * The max file size allowed in bytes
+   */
     maxFileSize?: number;
     /**
      * The max number of files to be accepted.
@@ -74,24 +74,21 @@ interface InputButtonFullProps {
      * ```
      */
     validator?: (f: File) => CustomValidateFileResponse;
+
     /**
- * Flag that indicates that dropzone will automatically remove non valid files.
- * This will happen every time user drops files or selects files from file dialog.
- * This flag will only work if validation is active.
- */
+     * Flag that indicates that dropzone will automatically remove non valid files.
+     * This will happen every time user drops files or selects files from file dialog.
+     * This flag will only work if validation is active.
+     */
     autoClean?: boolean;
-    /**
-   * The behaviour when new files are selected or dropped
-   * @default 'add'
-   */
-    behaviour?: 'add' | 'replace';
+
     ///////////////         UPLOAD STAGE        ///////////////
     /**
-    * The configuration needed for uploading the files.
-    * When "uploadConfig" is not given or uploadConfig.url is undefined
-    * the upload button will not be visible
-    * and uploadOnDrop flag will not work
-    */
+  * The configuration needed for uploading the files.
+  * When "uploadConfig" is not given or uploadConfig.url is undefined
+  * the upload button will not be visible
+  * and uploadOnDrop flag will not work
+  */
     uploadConfig?: UploadConfig;
     /**
      * Flag that indicates Dropzone to perform a fake upload process.
@@ -101,29 +98,34 @@ interface InputButtonFullProps {
      */
     fakeUpload?: boolean;
     /**
- * This event is triggered when upload process starts
- * also returns the list of files that will be uploaded,
- * Unlike Onchange, onUploadStart will only return a list of files thta are candidates to be uploaded,
- * in case they are valid or upload status is "error"
- */
-    onUploadStart?: (files: ExtFile[]) => void;
+     * This event is triggered when upload process starts
+     * also returns the list of files that will be uploaded,
+     * Unlike Onchange, onUploadStart will only return a list of files thta are candidates to be uploaded,
+     * in case they are valid or upload status is "error"
+     */
+    onUploadStart?: (extFiles: ExtFile[]) => void;
     /**
     * This event returns as first aparameter the list of responses for each file following the structure:
     * responses = [
     *  {id: <the file id>, serverResponse: the server response}
     * ]
     */
-    onUploadFinish?: (responses: UploadResponse[]) => void;
+    onUploadFinish?: (extFiles: ExtFile[]) => void;
 
-
-
-    /**
-     * The configuration needed for uploading the files.
-     * When "uploadConfig" is not given or uploadConfig.url is undefined
-     * the upload button will not be visible
-     * and uploadOnDrop flag will not work
-     */
-    actionButtons?: DropzoneActions;
+  //ACTION BUTTONS
+  /**
+   * The configuration needed for uploading the files.
+   * When "uploadConfig" is not given or uploadConfig.url is undefined
+   * the upload button will not be visible
+   * and uploadOnDrop flag will not work
+   */
+  actionButtons?: DropzoneActions;
+  // ADD OR REPLACE
+  /**
+   * The behaviour when new files are selected or dropped
+   * @default 'add'
+   */
+  behaviour?: 'add' | 'replace';
 }
 
 type MaterialButtonPropsOmitInputButtonFullProps = Omit<MaterialButtonProps, keyof InputButtonFullProps>;

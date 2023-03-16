@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  addClassName,
   DropzoneLocalizerSelector,
   fileSizeFormater,
   FunctionLabel,
@@ -8,7 +9,8 @@ import {
 } from "../../../../core";
 import { UploadingProcess, Clean, Cancel, Upload } from "../../../icons";
 
-export interface DropzoneHeaderProps {
+export type DropzoneHeaderProps = {
+  firstClassName?: string;
   maxFileSize?: number;
   numberOfValidFiles?: number;
   maxFiles?: number;
@@ -17,13 +19,13 @@ export interface DropzoneHeaderProps {
   urlPresent?: boolean;
   onClean?: Function;
   isUploading?: boolean;
-  /**
-   * language to be used
-   * for now
-   * only English and Spanish is supported
-   */
   localization?: Localization;
-}
+  borderRadius?: string | number;
+  style?: React.CSSProperties;
+  className?: string;
+  resetStyles?: boolean;
+  color?: string;
+};
 
 const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
   props: DropzoneHeaderProps
@@ -38,6 +40,12 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     isUploading,
     urlPresent,
     localization,
+    borderRadius,
+    style,
+    className = "",
+    resetStyles,
+    color,
+    firstClassName="",
   } = props;
 
   const DropzoneHeaderLocalizer: LocalLabels = DropzoneLocalizerSelector(
@@ -55,29 +63,22 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
 
     if (onUploadStart && urlPresent && numberOfValidFiles) {
       if (isUploading) {
-        result.push(<UploadingProcess spin={true} color="#646c7f" />);
+        result.push(<UploadingProcess spin={true} color={color} />);
       } else {
         result.push(
           <React.Fragment>
             <>{DropzoneHeaderLocalizer.uploadFilesMessage}</>
-            <Upload color="#646c7f" onClick={handleStartUploading} />
+            <Upload color={color} onClick={handleStartUploading} />
           </React.Fragment>
         );
       }
-
       result.push(<React.Fragment>{","}&nbsp;</React.Fragment>);
     }
 
     const maxFileSizeMessenger: FunctionLabel =
       DropzoneHeaderLocalizer.maxSizeMessage as FunctionLabel;
     if (maxFileSize) {
-      result.push(
-        maxFileSizeMessenger(fileSizeFormater(maxFileSize))
-
-        /* localization === "ES-es"
-          ? `Tam. máximo de archivo ${fileSizeFormater(maxFileSize)} | `
-          : `Max File size: ${fileSizeFormater(maxFileSize)} | `, */
-      );
+      result.push(maxFileSizeMessenger(fileSizeFormater(maxFileSize)));
       result.push(<React.Fragment>{","}&nbsp;</React.Fragment>);
     }
     const validFileSizeMessenger: FunctionLabel =
@@ -86,36 +87,48 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     if (maxFiles) {
       result.push(
         validFileSizeMessenger(numberOfValidFiles as number, maxFiles)
-        /*  localization === "ES-es"
-          ? `Archivos ${numberOfValidFiles}/${maxFiles} | Válidos: ${numberOfValidFiles} | `
-          : `Files ${numberOfValidFiles}/${maxFiles} | Valid: ${numberOfValidFiles} | `, */
       );
       result.push(<React.Fragment>{","}&nbsp;</React.Fragment>);
     }
     //clean not valid files on click
     if (onClean) {
       result.push(
-        <Clean color="#646c7f" onClick={handleClean} size="semi-medium" />
+        <Clean color={color} onClick={handleClean} size="semi-medium" />
       );
     }
     if (onReset) {
       result.push(
         <Cancel
-          color="#646c7f"
+          color={color}
           onClick={() => onReset?.()}
-         // colorFill="rgba(255,255,255,0.8)"
+          // colorFill="rgba(255,255,255,0.8)"
         />
       );
     }
     return result;
   };
+  function handleClick<T extends HTMLDivElement>(
+    evt: React.MouseEvent<T, MouseEvent>
+  ): void {
+    evt.stopPropagation();
+  }
+
+  const finalClassName = resetStyles
+    ? className
+    : addClassName("files-ui-header" + " " + firstClassName, className);
+  const finalStyle = resetStyles
+    ? style
+    : {
+        ...style,
+        borderTopLeftRadius: borderRadius,
+        borderTopRightRadius: borderRadius,
+      };
+  console.log("headerx resetStyles", resetStyles);
+  console.log("headerx style", style);
+
+  console.log("headerx finalStyle", finalStyle);
   return (
-    <div
-      className="files-ui-header"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-    >
+    <div className={finalClassName} onClick={handleClick} style={finalStyle}>
       {makeHeader().map((HeaderItem, index) => (
         <span key={index} style={{ display: "flex" }}>
           {HeaderItem}

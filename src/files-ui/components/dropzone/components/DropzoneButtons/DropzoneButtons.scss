@@ -7,6 +7,13 @@
   align-items: center;
   justify-content: flex-end;
   box-sizing: border-box;
-  padding: 10px 0;
+  //padding: 10px 0;
   gap: 10px;
+
+  &.top {
+    padding-bottom: 10px;
+  }
+  &.bottom {
+    padding-top: 10px;
+  }
 }
