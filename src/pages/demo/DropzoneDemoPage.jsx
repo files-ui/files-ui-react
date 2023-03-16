@@ -34,6 +34,10 @@ import DemoDropzoneRipple from "../../components/demo-components/dropzone-demo/D
 import CodeDemoDropzoneStyling from "../../components/demo-components/dropzone-demo/CodeDropzoneDemoStyling";
 import CodeDemoDropzoneRipple from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneRipple";
 import CodeDemoDropzoneDisabled from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneDisabled";
+import CodeDemoDropzoneClickable from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneClickable";
+import CodeDemoDropzoneDropLayer from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneDropLayer";
+import CodeDemoDropzoneBehaviour from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneBehaviour";
+import CodeDemoDropzoneLabel from "../../components/demo-components/dropzone-demo/CodeDropzoneDemoLabel";
 
 const DropzoneDemoPage = (props) => {
   return (
@@ -467,6 +471,21 @@ const DropzoneDemoPage = (props) => {
           <CodeDemoDropzoneStyling />
         </section>
 
+        <section id="label">
+          <SubTitle content="Label" />
+          <DescParagraph>
+            You can specify a fixed label for{" "}
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component to display
+            when there isn't any files.
+          </DescParagraph>
+
+          <Paper variant="outlined" style={{ padding: "25px" }}>
+            <DemoDropzoneLabel />
+          </Paper>
+
+          <CodeDemoDropzoneLabel />
+        </section>
+
         <section id="ripple">
           <SubTitle content="Ripple" />
           <DescParagraph>
@@ -525,7 +544,7 @@ const DropzoneDemoPage = (props) => {
             <DemoDropzoneClickable />
           </Paper>
 
-          <CodeDemoDropzoneFooterConfig />
+          <CodeDemoDropzoneClickable />
         </section>
 
         <section id="drop-layer">
@@ -544,22 +563,7 @@ const DropzoneDemoPage = (props) => {
             <DemoDropzoneDropLayer />
           </Paper>
 
-          <CodeDemoDropzoneFooterConfig />
-        </section>
-
-        <section id="label">
-          <SubTitle content="Label" />
-          <DescParagraph>
-            You can specify a fixed label for{" "}
-            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component to display
-            when there isn't any files.
-          </DescParagraph>
-
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneLabel />
-          </Paper>
-
-          <CodeDemoDropzoneFooterConfig />
+          <CodeDemoDropzoneDropLayer />
         </section>
 
         <section id="add-or-replace">
@@ -587,7 +591,7 @@ const DropzoneDemoPage = (props) => {
             <DemoDropzoneBehaviour />
           </Paper>
 
-          <CodeDemoDropzoneFooterConfig />
+          <CodeDemoDropzoneBehaviour />
         </section>
 
         <section id="localization">
@@ -684,6 +688,11 @@ const rightMenuItems = [
     referTo: "/components/dropzone#styling",
   },
   {
+    id: 14,
+    label: "Label",
+    referTo: "/components/dropzone#label",
+  },
+  {
     id: 8,
     label: "Ripple",
     referTo: "/components/dropzone#ripple",
@@ -702,11 +711,6 @@ const rightMenuItems = [
     id: 13,
     label: "Drop Layer",
     referTo: "/components/dropzone#drop-layer",
-  },
-  {
-    id: 14,
-    label: "Label",
-    referTo: "/components/dropzone#label",
   },
   {
     id: 15,
