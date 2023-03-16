@@ -1,6 +1,7 @@
 # Future Possible Features
 
 ## DROP
+
 WHen data transfer only text or iimage in string, event
 files dissapear in "replace". create a text file in memoory
 
@@ -9,8 +10,8 @@ files dissapear in "replace". create a text file in memoory
 - custom icons
 - menu icon for FileItem ( FileOptions (menu collapsed from click in option icon) )
 - [DONE]: Outside actions or buttons for Dropzone
-- [WIP]:header and footer custom props
-- FileItem: checkbox support
+- [DONE]:header and footer custom props
+- [NOT_YET]: FileItem: checkbox support
 - [DONE] FileItem: ( smart prop ) detect when width of image is greater than height or viceversa in order to decide the orientation
 
 ## Upload
