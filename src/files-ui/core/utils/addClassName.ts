@@ -8,9 +8,7 @@ export const addClassName = (
     baseClassName: string,
     className: string | undefined
 ): string => {
-    let result: string = baseClassName;
-    if (className) {
-        result = `${result} ${className}`;
-    }
-    return result;
+    if (className)
+        return `${baseClassName} ${className}`;
+    return baseClassName;
 }

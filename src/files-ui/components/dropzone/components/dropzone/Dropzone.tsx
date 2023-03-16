@@ -27,6 +27,7 @@ import {
   sanitizeArrExtFile,
   unexpectedErrorUploadResult,
   getRandomInt,
+  addClassName,
 } from "../../../../core";
 import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../input-hidden/InputHidden";
@@ -430,14 +431,20 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   };
 
   //the final className
-  const [dropzoneClassName, headerClassName, footerClassName]: [
+  const [
+    dropzoneClassName,
+    headerClassName,
+    footerClassName,
+    disabledLayerClassName,
+  ]: [
+    string | undefined,
     string | undefined,
     string | undefined,
     string | undefined
   ] = useDropzoneClassName(
     dropzoneId,
     className,
-    isDragging && Boolean(dropOnLayer),
+    //isDragging && Boolean(dropOnLayer),
     // header,
     // footer,
     color,
@@ -571,6 +578,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     evt: React.DragEvent<HTMLDivElement>
   ) => {
     handleDragUtil(evt);
+    if (disabled) return;
+
     setIsDragging(true);
     /* setTimeout(() => {
       setIsDragging((_isDragging) => {
@@ -585,6 +594,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const handleDragLeave: React.DragEventHandler<HTMLDivElement> = (
     evt: React.DragEvent<HTMLDivElement>
   ) => {
+    if (disabled) return;
     handleDragUtil(evt);
     setIsDragging(false);
   };
@@ -613,7 +623,11 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     evt: React.DragEvent<HTMLDivElement>
   ): Promise<void> => {
     handleDropUtil(evt);
+
+    if (disabled) return;
+
     if (!disableRipple) makeRipple();
+
     setIsDragging(false);
 
     if (isUploading) return;
@@ -657,7 +671,14 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     }
   };
   console.log("Dropzone styleHeader", styleHeader);
-  if (!dropzoneClassName) return <></>;
+
+  const finalDropzoneClassName: string | undefined = !dropzoneClassName
+    ? undefined
+    : isDragging || disabled
+    ? addClassName(dropzoneClassName, "files-ui-root-border-hide")
+    : dropzoneClassName;
+
+  if (!finalDropzoneClassName) return <></>;
   return (
     <React.Fragment>
       {actionButtonsPosition === "top" && (
@@ -681,7 +702,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       )}
       <div
         style={style}
-        className={dropzoneClassName}
+        className={finalDropzoneClassName}
         {...rest}
         onClick={handleClick}
         onDragOver={handleDragEnter}
@@ -791,7 +812,10 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           onChange={handleChangeInput}
         />
 
-        <DropzoneDisabledLayer open={disabled} />
+        <DropzoneDisabledLayer
+          open={disabled}
+          className={disabledLayerClassName}
+        />
       </div>
 
       {actionButtonsPosition === "bottom" && (

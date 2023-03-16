@@ -1,13 +1,18 @@
 import * as React from "react";
-import { handleClickUtil, handleDragUtil } from "../../../../core";
+import { addClassName, handleClickUtil, handleDragUtil, handleDropUtil } from "../../../../core";
 import "./DropzoneDisabledLayer.scss";
 export declare type DropzoneDisabledLayerProps = {
   open?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  //TO-DO: aloow to se a custom children
+  //for disabled layer and also drop layer
 };
 const DropzoneDisabledLayer: React.FC<DropzoneDisabledLayerProps> = (
   props: DropzoneDisabledLayerProps
 ) => {
-  const { open } = props;
+  const { open, className, style } = props;
+
   function handleClick<T extends HTMLDivElement>(
     evt: React.MouseEvent<T, MouseEvent>
   ): void {
@@ -18,12 +23,20 @@ const DropzoneDisabledLayer: React.FC<DropzoneDisabledLayerProps> = (
   ) => {
     handleDragUtil(evt);
   };
+
+  const handleDrop : React.DragEventHandler<HTMLDivElement> = async (
+    evt: React.DragEvent<HTMLDivElement>
+  ): Promise<void> => {
+    handleDropUtil(evt);
+  }
+  const finalDisabledLayerClassName:string = addClassName("dropzone-ui-disabled-root",className);
   if (open) {
     return (
       <div
-        className="dropzone-ui-disabled-root"
-        onDrop={handleDrag}
-        onDrag={handleDrag}
+        style={style}
+        className={finalDisabledLayerClassName}
+        onDrop={handleDrop}
+        onDragOver={handleDrag}
         onClick={handleClick}
       ></div>
     );

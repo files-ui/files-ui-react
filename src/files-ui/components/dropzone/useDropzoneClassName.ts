@@ -6,14 +6,14 @@ import { DEFAULT_BORDER_RADIUS } from "./components/dropzone/DropzoneProps";
 export default function useDropzoneClassName(
     dropzoneId: string,
     className: string | undefined,
-    isDragging: boolean,
+    //isDragging: boolean,
     //header: boolean | undefined = false,
     //footer: boolean | undefined = false,
     color: string | undefined,
     //borderRadius: string | number | undefined,
     background: string | undefined,
     minHeight: string | number | undefined
-): [string | undefined, string | undefined, string | undefined] {
+): [string | undefined, string | undefined, string | undefined, string | undefined] {
     //console.log("useDropzoneClassName", className, isDragging, header, footer, color, background, minHeight);
     const finalDropzoneId: string = (color === undefined && background === undefined && minHeight === undefined) ? "default" : dropzoneId.replaceAll(":", "_");
 
@@ -24,12 +24,13 @@ export default function useDropzoneClassName(
     const [finalClassName, setFinalClassName] = React.useState<string | undefined>(undefined);
     const [finalClassNameHeader, setFinalClassNameHeader] = React.useState<string | undefined>(undefined);
     const [finalClassNameFooter, setFinalClassNameFooter] = React.useState<string | undefined>(undefined);
+    const [finalClassNameDisabled, setFinalClassNameDisabled] = React.useState<string | undefined>(undefined);
 
     //const [offset, setOffset] = React.useState<number>(0);
 
     const makeClassName = (
         className: string | undefined,
-        isDragging: boolean,
+        //isDragging: boolean,
         // offset: number,
         color: string | undefined,
         //borderRadius: string | number | undefined,
@@ -44,7 +45,7 @@ export default function useDropzoneClassName(
         let styleSheet: DynamicSheet = makeDynamicDropzoneStyleSheet(
             finalDropzoneId,
             // offset,
-            isDragging,
+            //isDragging,
             color,
             background,
             minHeight,
@@ -68,29 +69,32 @@ export default function useDropzoneClassName(
         if (className) {
             finalClassName = `${finalClassName} ${className}`;
         }
-        if (isDragging) {
+        /* if (isDragging) {
             finalClassName = `${finalClassName} fui-hide-border`;
-        }
+        } */
 
         setFinalClassName(finalClassName);
         setFinalClassNameHeader(`files-ui-header-border-rd-${finalDropzoneId}`);
         setFinalClassNameFooter(`files-ui-footer-border-rd-top-bg-color-${finalDropzoneId}`);
+        setFinalClassNameDisabled(`files-ui-disabled-layer-color-${finalDropzoneId}`);
     }
 
     React.useEffect(() => {
-        makeClassName(className, isDragging,
+        makeClassName(className, 
+            //isDragging,
             //offset, 
             color,
             // borderRadius, 
             background, minHeight);
         // eslint-disable-next-line
-    }, [className, isDragging,
+    }, [className, 
+        //isDragging,
         // offset, 
         color,
         //borderRadius, 
         background, minHeight]);
 
-    return [finalClassName, finalClassNameHeader, finalClassNameFooter];
+    return [finalClassName, finalClassNameHeader, finalClassNameFooter, finalClassNameDisabled];
 }
 
 
@@ -99,7 +103,7 @@ export default function useDropzoneClassName(
 const makeDynamicDropzoneStyleSheet = (
     dropzoneId: string,
     // offset: number,
-    isDragging: boolean,
+    //isDragging: boolean,
     color: string | undefined,
     background: string | undefined,
     minHeight: string | number | undefined,
@@ -110,13 +114,19 @@ const makeDynamicDropzoneStyleSheet = (
         className: `files-ui-dropzone-extra-${dropzoneId}`,
         rules: {
             color: completeAsureColor(color),
-            border: `1px dashed ${isDragging ? "transparent" : completeAsureColor(color)}`,
+            border: `1px dashed ${completeAsureColor(color)}`,
             borderRadius: DEFAULT_BORDER_RADIUS,
             background: background,
             minHeight: typeof minHeight === "number" ? `${minHeight}px` : minHeight,
         },
     };
 
+    const rootColorBorderStyleHideBorder: DynamicSheetRule = {
+        className: `files-ui-root-border-hide`,
+        rules: {
+            borderColor: "transparent",
+        },
+    }
     const headerBorderStyle: DynamicSheetRule = {
         className: `files-ui-header-border-rd-${dropzoneId}`,
         rules: {
@@ -134,14 +144,22 @@ const makeDynamicDropzoneStyleSheet = (
 
         },
     };
-    const sheetRules: DynamicSheetRule[] = [rootColorBorderStyle];
+    const disabledLayerStyle: DynamicSheetRule = {
+        className: `files-ui-disabled-layer-color-${dropzoneId}`,
+        rules: {
+            borderRadius: DEFAULT_BORDER_RADIUS,
+            background: completeAsureColor(color, 0.38),
+        }
+    }
+    const sheetRules: DynamicSheetRule[] =
+        [
+            rootColorBorderStyle,
+            rootColorBorderStyleHideBorder, 
+            headerBorderStyle, 
+            footerBorderStyle, 
+            disabledLayerStyle
+        ];
 
-    if (footerBorderStyle !== undefined) {
-        sheetRules.push(footerBorderStyle);
-    }
-    if (headerBorderStyle !== undefined) {
-        sheetRules.push(headerBorderStyle);
-    }
 
     return {
         id: "files-dropzone-ui-style-id-" + dropzoneId,
