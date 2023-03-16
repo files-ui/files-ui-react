@@ -114,7 +114,7 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
 
   const finalClassName = resetStyles
     ? className
-    : addClassName("files-ui-header files-ui-header-border", className);
+    : addClassName("files-ui-header files-ui-header-border-rd", className);
   const finalStyle = resetStyles
     ? style
     : {

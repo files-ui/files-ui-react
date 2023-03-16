@@ -103,19 +103,22 @@ const makeDynamicDropzoneStyleSheet = (
             minHeight: typeof minHeight === "number" ? `${minHeight}px` : minHeight,
         },
     };
-    const footerBorderStyle: DynamicSheetRule = {
-        className: `files-ui-footer-border-bg-color`,
-        rules: {
-            "border-bottom-left-radius": DEFAULT_BORDER_RADIUS,
-            "border-bottom-right-radius": DEFAULT_BORDER_RADIUS,
-            backgroundColor: completeAsureColor(color, 0.129)
-        },
-    };
+   
     const headerBorderStyle: DynamicSheetRule = {
-        className: `files-ui-header-border`,
+        className: `files-ui-header-border-rd`,
         rules: {
             "border-top-left-radius": DEFAULT_BORDER_RADIUS,
             "border-top-right-radius": DEFAULT_BORDER_RADIUS,
+        },
+    };
+     const footerBorderStyle: DynamicSheetRule = {
+        className: `files-ui-footer-border-rd-top-bg-color`,
+        rules: {
+            "border-bottom-left-radius": DEFAULT_BORDER_RADIUS,
+            "border-bottom-right-radius": DEFAULT_BORDER_RADIUS,
+            backgroundColor: completeAsureColor(color, 0.129),
+            borderTop: `1px dotted ${completeAsureColor(color)}`
+
         },
     };
     const sheetRules: DynamicSheetRule[] = [rootColorBorderStyle];
