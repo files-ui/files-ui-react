@@ -120,7 +120,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * The background color for dropzone container,
    * @default 'transparent'
    */
-  backgroundColor?: string;
+  background?: string;
   /**
    * The min height of the container in string format
    * If the value is given un number format "px" will be assumed

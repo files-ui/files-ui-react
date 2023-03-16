@@ -10,6 +10,7 @@ import {
 import { UploadingProcess, Clean, Cancel, Upload } from "../../../icons";
 
 export type DropzoneHeaderProps = {
+  firstClassName?: string;
   maxFileSize?: number;
   numberOfValidFiles?: number;
   maxFiles?: number;
@@ -23,7 +24,7 @@ export type DropzoneHeaderProps = {
   style?: React.CSSProperties;
   className?: string;
   resetStyles?: boolean;
-  color?:string;
+  color?: string;
 };
 
 const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
@@ -43,7 +44,8 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     style,
     className = "",
     resetStyles,
-    color
+    color,
+    firstClassName="",
   } = props;
 
   const DropzoneHeaderLocalizer: LocalLabels = DropzoneLocalizerSelector(
@@ -113,7 +115,7 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
 
   const finalClassName = resetStyles
     ? className
-    : addClassName("files-ui-header files-ui-header-border-rd", className);
+    : addClassName("files-ui-header" + " " + firstClassName, className);
   const finalStyle = resetStyles
     ? style
     : {
@@ -121,10 +123,10 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
         borderTopLeftRadius: borderRadius,
         borderTopRightRadius: borderRadius,
       };
-console.log("headerx resetStyles", resetStyles);
-console.log("headerx style", style);
+  console.log("headerx resetStyles", resetStyles);
+  console.log("headerx style", style);
 
-console.log("headerx finalStyle", finalStyle);
+  console.log("headerx finalStyle", finalStyle);
   return (
     <div className={finalClassName} onClick={handleClick} style={finalStyle}>
       {makeHeader().map((HeaderItem, index) => (

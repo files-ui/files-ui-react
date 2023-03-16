@@ -74,7 +74,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     onUploadStart,
     onUploadFinish,
     //styling
-    backgroundColor,
+    background,
     minHeight,
     color,
     style,
@@ -430,20 +430,26 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   };
 
   //the final className
-  const dropzoneClassName: string | undefined = useDropzoneClassName(
+  const [dropzoneClassName, headerClassName, footerClassName]: [
+    string | undefined,
+    string | undefined,
+    string | undefined
+  ] = useDropzoneClassName(
+    dropzoneId,
     className,
     isDragging && Boolean(dropOnLayer),
     // header,
     // footer,
     color,
     //style?.borderRadius || borderRadius,
-    backgroundColor,
+    background,
     minHeight
   );
 
   const dropLayerClassName: string = useDropLayerClassName(
+    dropzoneId,
     color as string,
-    isDragging,
+    // isDragging,
     !onDragEnter && !onDragLeave
   );
 
@@ -566,6 +572,14 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   ) => {
     handleDragUtil(evt);
     setIsDragging(true);
+    /* setTimeout(() => {
+      setIsDragging((_isDragging) => {
+        //if (_isDragging) {
+          return false;
+        //}
+        //return true;
+      });
+    }, 2000); */
     //console.log("handleDragEnter");
   };
   const handleDragLeave: React.DragEventHandler<HTMLDivElement> = (
@@ -642,7 +656,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       setLocalFiles(localFiles.filter((f) => f.valid));
     }
   };
-console.log("Dropzone styleHeader",styleHeader);
+  console.log("Dropzone styleHeader", styleHeader);
   if (!dropzoneClassName) return <></>;
   return (
     <React.Fragment>
@@ -693,6 +707,7 @@ console.log("Dropzone styleHeader",styleHeader);
                 <>{customHeader}</>
               ) : (
                 <DropzoneHeader
+                  firstClassName={headerClassName}
                   color={completeAsureColor(color)}
                   style={styleHeader}
                   className={classNameHeader}
@@ -743,6 +758,7 @@ console.log("Dropzone styleHeader",styleHeader);
             <>
               {footer && (
                 <DropzoneFooter
+                  firstClassName={footerClassName}
                   borderRadius={styleBorderRadius}
                   accept={accept}
                   message={isUploading ? localMessage : undefined}
@@ -757,7 +773,11 @@ console.log("Dropzone styleHeader",styleHeader);
         {dropOnLayer && (
           <DropLayer
             open={isDragging}
-            className={dropLayerClassName}
+            className={
+              !isDragging
+                ? dropLayerClassName
+                : `${dropLayerClassName} dropzone-layer-drag`
+            }
             onDragLeave={handleDragLeave}
             onDrop={kamui}
             style={{ borderRadius: style?.borderRadius }}

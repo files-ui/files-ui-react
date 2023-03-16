@@ -10,6 +10,7 @@ import {
 import { FooterConfig } from "../dropzone/DropzoneProps";
 
 export interface DropzoneFooterProps extends FooterConfig {
+  firstClassName?: string;
   accept?: string;
   message?: string;
   localization?: Localization;
@@ -31,6 +32,7 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
     resetStyles = false,
     allowedTypesLabel = true,
     customMessage = undefined,
+    firstClassName = "",
   } = props;
 
   const DropzoneFooterLocalizer: LocalLabels = DropzoneLocalizerSelector(
@@ -46,10 +48,7 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
   }
   const finalClassName = resetStyles
     ? className
-    : addClassName(
-        "files-ui-footer files-ui-footer-border-rd-top-bg-color",
-        className
-      );
+    : addClassName("files-ui-footer" + " " + firstClassName, className);
 
   const finalStyle = resetStyles
     ? style
