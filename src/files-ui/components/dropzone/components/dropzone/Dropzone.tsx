@@ -674,7 +674,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
   const finalDropzoneClassNameBorder: string | undefined = !dropzoneClassName
     ? undefined
-    : isDragging || disabled
+    : (isDragging && dropOnLayer) || disabled
     ? addClassName(dropzoneClassName, "files-ui-root-border-hide")
     : dropzoneClassName;
 
