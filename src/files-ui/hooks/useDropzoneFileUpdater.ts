@@ -25,8 +25,9 @@ const useDropzoneFileListUpdater = (
     localization?: Localization,
     validateFilesFlag?: boolean
 ): [ExtFile[], number, React.Dispatch<React.SetStateAction<ExtFile[]>>] => {
-
-    console.log("FileListUpdater",dropzoneId, value, isUploading, maxFileSize, accept, maxFiles, validateFilesFlag);
+    console.log("incomming extfiles fileupdater value", value.map(x => x.uploadStatus));
+    
+    console.log("FileListUpdater", dropzoneId, value, isUploading, maxFileSize, accept, maxFiles, validateFilesFlag);
 
     //state for managing the files locally
     const [localFiles, setLocalFiles] = React.useState<ExtFile[]>([]);

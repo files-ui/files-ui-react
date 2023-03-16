@@ -19,7 +19,8 @@ export default function AdvancedDropzoneDemo() {
   const [videoSrc, setVideoSrc] = React.useState(undefined);
 
   const updateFiles = (incommingFiles) => {
-    console.log("incomming extFiles", incommingFiles);
+    console.log("incomming extFiles outside", incommingFiles.map(x=>x.uploadStatus));
+
     const arrExtFIleInstances = incommingFiles.map(
       (extFile) => new ExtFileInstance(extFile)
     );

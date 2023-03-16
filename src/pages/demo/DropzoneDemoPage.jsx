@@ -1,5 +1,5 @@
-import { Paper, Alert, AlertTitle } from "@mui/material";
 import * as React from "react";
+import { Paper, Alert, AlertTitle } from "@mui/material";
 import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";

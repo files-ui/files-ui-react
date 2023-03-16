@@ -32,7 +32,7 @@ import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../input-hidden/InputHidden";
 import {
   defaultDrozoneProps,
-  DEFAULT_BORDER_RADIUS,
+  // DEFAULT_BORDER_RADIUS,
   //DropzoneActionButton,
   DropzoneActions,
   DropzoneProps,
@@ -219,17 +219,29 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
+    console.log(
+      "incomming extfiles uploadfiles localFiles",
+      localFiles.map((x) => x.uploadStatus)
+    );
     //set uploading flag to true
     setIsUploading(true);
 
     //avoid to call upload if not allowed
     // flag is already true or there isnt files
     //url was not provided
+
     if (isUploading || localFiles.length === 0 || !url) {
       setIsUploading(false);
       return;
     }
+    if (localFiles.length === 0) {
+      setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
+      setTimeout(() => {
+        setIsUploading(false);
+      }, 1500);
 
+      return;
+    }
     // initialize a new list of ExtFileInstances
     let arrOfExtFilesInstances: ExtFileInstance[] = [];
 
@@ -251,11 +263,13 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     //no missing to upload
     if (!(missingUpload > 0)) {
       console.log("upload start: noFilesMessage", missingUpload);
+      setTimeout(() => {
+        if (noMissingFilesLabel)
+          setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
 
-      if (noMissingFilesLabel)
-        setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
+        setIsUploading(false);
+      }, 1500);
 
-      setIsUploading(false);
       return;
     }
 
@@ -365,36 +379,9 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
         currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
 
-        console.log(
-          "fake uploadResponse currentExtFileInstance",
-          currentExtFileInstance
-        );
-        console.log(
-          "fake uploadResponse currentExtFileInstance",
-          currentExtFileInstance.uploadStatus
-        );
-        console.log(
-          "fake uploadResponse currentExtFileInstance",
-          currentExtFileInstance.uploadMessage
-        );
-
-        console.log(
-          "pre sanitizeArrExtFile",
-          arrOfExtFilesInstances.map((F) => {
-            return { status: F.uploadStatus, message: F.uploadMessage };
-          })
-        );
-
         //CHANGE
         if (!(currentExtFileInstance.uploadStatus === "aborted"))
           await sleepTransition();
-
-        console.log(
-          "pre sanitizeArrExtFile",
-          arrOfExtFilesInstances.map((F) => {
-            return { status: F.uploadStatus, message: F.uploadMessage };
-          })
-        );
 
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
 
@@ -408,7 +395,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       }
     }
 
-    handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+    setLocalFiles(sanitizeArrExtFile(arrOfExtFilesInstances));
 
     // upload group finished :D
     onUploadFinish?.(serverResponses);
