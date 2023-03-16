@@ -45,7 +45,7 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
   }
   const finalClassName = resetStyles
     ? className
-    : addClassName("files-ui-footer files-ui-footer-border", className);
+    : addClassName("files-ui-footer files-ui-footer-border-bg-color", className);
   
     const finalStyle = resetStyles
     ? style

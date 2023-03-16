@@ -24,6 +24,7 @@ export type DropzoneHeaderProps = {
   style?: React.CSSProperties;
   className?: string;
   resetStyles?: boolean;
+  color?:string;
 };
 
 const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
@@ -43,6 +44,7 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     style,
     className = "",
     resetStyles,
+    color
   } = props;
 
   const DropzoneHeaderLocalizer: LocalLabels = DropzoneLocalizerSelector(
@@ -60,12 +62,12 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
 
     if (onUploadStart && urlPresent && numberOfValidFiles) {
       if (isUploading) {
-        result.push(<UploadingProcess spin={true} color="#646c7f" />);
+        result.push(<UploadingProcess spin={true} color={color} />);
       } else {
         result.push(
           <React.Fragment>
             <>{DropzoneHeaderLocalizer.uploadFilesMessage}</>
-            <Upload color="#646c7f" onClick={handleStartUploading} />
+            <Upload color={color} onClick={handleStartUploading} />
           </React.Fragment>
         );
       }
@@ -90,13 +92,13 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     //clean not valid files on click
     if (onClean) {
       result.push(
-        <Clean color="#646c7f" onClick={handleClean} size="semi-medium" />
+        <Clean color={color} onClick={handleClean} size="semi-medium" />
       );
     }
     if (onReset) {
       result.push(
         <Cancel
-          color="#646c7f"
+          color={color}
           onClick={() => onReset?.()}
           // colorFill="rgba(255,255,255,0.8)"
         />

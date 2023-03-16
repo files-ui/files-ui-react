@@ -51,6 +51,7 @@ import useDropzoneFileListUpdater from "../../../../hooks/useDropzoneFileUpdater
 import DropzoneHeader from "../DropzoneHeader/DropzoneHeader";
 import DropzoneFooter from "../DropzoneFooter/DropzoneFooter";
 import DropzoneButtons from "../DropzoneButtons/DropzoneButtons";
+import { completeAsureColor } from "../../../../core";
 
 //import { print_manager } from "../../../../../utils";
 
@@ -691,8 +692,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           <div
             ref={fuiRippleRefAbs}
             className="dropzone-ui-base-ripple-absolute"
-            style={{borderRadius:style?.borderRadius}}
-
+            style={{ borderRadius: style?.borderRadius }}
           >
             <div
               ref={fuiRippleRefRel}
@@ -707,6 +707,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
                 <>{customHeader}</>
               ) : (
                 <DropzoneHeader
+                  color={completeAsureColor(color)}
                   style={styleHeader}
                   className={classNameHeader}
                   resetStyles={resetStylesHeader}
@@ -773,7 +774,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
             className={dropLayerClassName}
             onDragLeave={handleDragLeave}
             onDrop={kamui}
-            style={{borderRadius:style?.borderRadius}}
+            style={{ borderRadius: style?.borderRadius }}
           />
         )}
 

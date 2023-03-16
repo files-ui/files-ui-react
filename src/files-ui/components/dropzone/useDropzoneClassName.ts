@@ -1,6 +1,6 @@
 import { DynamicSheet, DynamicSheetRule, DynamiCSS } from "@dynamicss/dynamicss";
 import * as React from "react";
-import { asureColor, colourNameToHex, hexColorToRGB } from "../../core";
+import { completeAsureColor } from "../../core";
 import { DEFAULT_BORDER_RADIUS } from "./components/dropzone/DropzoneProps";
 
 export default function useDropzoneClassName(
@@ -96,20 +96,19 @@ const makeDynamicDropzoneStyleSheet = (
     const rootColorBorderStyle: DynamicSheetRule = {
         className: `files-ui-dropzone-extra`,
         rules: {
-            border: `1px dashed ${isDragging?"transparent":hexColorToRGB(
-                asureColor(colourNameToHex(color)),
-                1
-            )}`,
+            color: completeAsureColor(color),
+            border: `1px dashed ${isDragging ? "transparent" : completeAsureColor(color)}`,
             borderRadius: DEFAULT_BORDER_RADIUS,
             backgroundColor: backgroundColor,
             minHeight: typeof minHeight === "number" ? `${minHeight}px` : minHeight,
         },
     };
     const footerBorderStyle: DynamicSheetRule = {
-        className: `files-ui-footer-border`,
+        className: `files-ui-footer-border-bg-color`,
         rules: {
             "border-bottom-left-radius": DEFAULT_BORDER_RADIUS,
             "border-bottom-right-radius": DEFAULT_BORDER_RADIUS,
+            backgroundColor: completeAsureColor(color, 0.129)
         },
     };
     const headerBorderStyle: DynamicSheetRule = {
