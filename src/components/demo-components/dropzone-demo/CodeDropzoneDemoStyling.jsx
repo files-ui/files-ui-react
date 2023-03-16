@@ -20,12 +20,12 @@ const splittedCodeJS = `<Dropzone color="#6200EE">{/** files */}</Dropzone>
     header={false}
     footer={false}
 >
-    {/** files */}
+  {/** files */}
 </Dropzone>
 <Dropzone
     background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
 >
-    {/** files */}
+  {/** files */}
 </Dropzone>`;
 const splittedCodeTS = `<Dropzone color="#6200EE">{/** files */}</Dropzone>
 <Dropzone
@@ -33,12 +33,12 @@ const splittedCodeTS = `<Dropzone color="#6200EE">{/** files */}</Dropzone>
     header={false}
     footer={false}
 >
-    {/** files */}
+  {/** files */}
 </Dropzone>
 <Dropzone
     background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
 >
-    {/** files */}
+  {/** files */}
 </Dropzone>`;
 const completeCodeJS = `import * as React from "react";
 import { Dropzone } from "@files-ui/react";
@@ -60,7 +60,7 @@ export default function App() {
             value={files}
             color="#6200EE"
         >
-        {/** Files*/}
+          {/** Files*/}
         </Dropzone>
         <Dropzone
             style={{ width: "300px" }}
@@ -68,13 +68,13 @@ export default function App() {
             header={false}
             footer={false}
         >
-        {/** Files*/}
+          {/** Files*/}
         </Dropzone>
         <Dropzone
           style={{ width: "300px" }}
           background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
         >
-        {/** Files*/}
+          {/** Files*/}
         </Dropzone>
     </div>
   );
@@ -107,26 +107,23 @@ export default function App() {
           style={{ width: "300px" }}
           color="#6200EE"
         >
-        {/** Files*/}
+          {/** Files*/}
         </Dropzone>
         <Dropzone
-            style={{ width: "300px" }}
-            minHeight="120px"
-            header={false}
-            footer={false}
+          style={{ width: "300px" }}
+          minHeight="120px"
+          header={false}
+          footer={false}
         >
-        {/** Files*/}
+          {/** Files*/}
         </Dropzone>
         <Dropzone
-            style={{ width: "300px" }}
-            onChange={updateFiles}
-            value={files}
-            background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
+          style={{ width: "300px" }}
+          onChange={updateFiles}
+          value={files}
+          background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
         >
-            {files.length > 0 &&
-            files.map((file: ExtFile) => (
-                <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-            ))}
+          {/** Files*/}
         </Dropzone>
     </div>
   );
