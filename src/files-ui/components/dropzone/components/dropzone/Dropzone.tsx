@@ -672,13 +672,21 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   };
   console.log("Dropzone styleHeader", styleHeader);
 
-  const finalDropzoneClassName: string | undefined = !dropzoneClassName
+  const finalDropzoneClassNameBorder: string | undefined = !dropzoneClassName
     ? undefined
     : isDragging || disabled
     ? addClassName(dropzoneClassName, "files-ui-root-border-hide")
     : dropzoneClassName;
 
-  if (!finalDropzoneClassName) return <></>;
+  const finalDropzoneClassNameBorderClickable: string | undefined =
+    !finalDropzoneClassNameBorder
+      ? undefined
+      : clickable && !disabled
+      ? addClassName(finalDropzoneClassNameBorder, "clickable")
+      : finalDropzoneClassNameBorder;
+
+  if (!finalDropzoneClassNameBorderClickable) return <></>;
+
   return (
     <React.Fragment>
       {actionButtonsPosition === "top" && (
@@ -702,7 +710,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       )}
       <div
         style={style}
-        className={finalDropzoneClassName}
+        className={finalDropzoneClassNameBorderClickable}
         {...rest}
         onClick={handleClick}
         onDragOver={handleDragEnter}
