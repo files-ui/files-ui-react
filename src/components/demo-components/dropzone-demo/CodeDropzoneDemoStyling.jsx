@@ -41,18 +41,9 @@ const splittedCodeTS = `<Dropzone color="#6200EE">{/** files */}</Dropzone>
     {/** files */}
 </Dropzone>`;
 const completeCodeJS = `import * as React from "react";
-import { Dropzone, FileMosaic } from "@files-ui/react";
+import { Dropzone } from "@files-ui/react";
 
 export default function App() {
-  const [files, setFiles] = React.useState([]);
-  const updateFiles = (incommingFiles) => {
-    //do something with the files
-    setFiles(incommingFiles);
-    //even your own upload implementation
-  };
-  const removeFile = (id) => {
-    setFiles(files.filter((x) => x.id !== id));
-  };
   return (
     <div
       style={{
@@ -60,6 +51,7 @@ export default function App() {
         justifyContent: "space-evenly",
         gap: "20px",
         flexWrap: "wrap",
+        alignItems:"flex-start"
       }}
     >
         <Dropzone
@@ -68,34 +60,21 @@ export default function App() {
             value={files}
             color="#6200EE"
         >
-        {files.length > 0 &&
-            files.map((file) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-            ))}
+        {/** Files*/}
         </Dropzone>
         <Dropzone
             style={{ width: "300px" }}
-            onChange={updateFiles}
-            value={files}
             minHeight="120px"
             header={false}
             footer={false}
         >
-        {files.length > 0 &&
-          files.map((file) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-          ))}
+        {/** Files*/}
         </Dropzone>
         <Dropzone
-            style={{ width: "300px" }}
-            onChange={updateFiles}
-            value={files}
-            background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
+          style={{ width: "300px" }}
+          background="radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);"
         >
-            {files.length > 0 &&
-            files.map((file) => (
-                <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-            ))}
+        {/** Files*/}
         </Dropzone>
     </div>
   );
@@ -121,31 +100,22 @@ export default function App() {
         justifyContent: "space-evenly",
         gap: "20px",
         flexWrap: "wrap",
+        alignItems:"flex-start"
       }}
     >
         <Dropzone
-            style={{ width: "300px" }}
-            onChange={updateFiles}
-            value={files}
-            color="#6200EE"
+          style={{ width: "300px" }}
+          color="#6200EE"
         >
-        {files.length > 0 &&
-            files.map((file: ExtFile) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-            ))}
+        {/** Files*/}
         </Dropzone>
         <Dropzone
             style={{ width: "300px" }}
-            onChange={updateFiles}
-            value={files}
             minHeight="120px"
             header={false}
             footer={false}
         >
-        {files.length > 0 &&
-          files.map((file: ExtFile) => (
-            <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
-          ))}
+        {/** Files*/}
         </Dropzone>
         <Dropzone
             style={{ width: "300px" }}

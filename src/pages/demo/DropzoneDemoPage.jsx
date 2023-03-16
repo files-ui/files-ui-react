@@ -32,6 +32,8 @@ import DemoDropzoneClickable from "../../components/demo-components/dropzone-dem
 import DemoDropzoneDisabled from "../../components/demo-components/dropzone-demo/DemoDropzoneDisabled";
 import DemoDropzoneRipple from "../../components/demo-components/dropzone-demo/DemoDropzoneRipple";
 import CodeDemoDropzoneStyling from "../../components/demo-components/dropzone-demo/CodeDropzoneDemoStyling";
+import CodeDemoDropzoneRipple from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneRipple";
+import CodeDemoDropzoneDisabled from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneDisabled";
 
 const DropzoneDemoPage = (props) => {
   return (
@@ -482,14 +484,14 @@ const DropzoneDemoPage = (props) => {
               <li>Just after user dropped files.</li>
             </ul>
             For disabling the ripple effect you can set the{" "}
-            <TypeHighlight>disableRipple</TypeHighlight> prop to false.
+            <TypeHighlight>disableRipple</TypeHighlight> prop to true.
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
             <DemoDropzoneRipple />
           </Paper>
 
-          <CodeDemoDropzoneFooterConfig />
+          <CodeDemoDropzoneRipple />
         </section>
 
         <section id="disabled">
@@ -508,7 +510,7 @@ const DropzoneDemoPage = (props) => {
             <DemoDropzoneDisabled />
           </Paper>
 
-          <CodeDemoDropzoneFooterConfig />
+          <CodeDemoDropzoneDisabled />
         </section>
 
         <section id="clickable">

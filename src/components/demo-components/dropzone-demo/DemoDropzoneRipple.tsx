@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dropzone } from "../../../files-ui";
 
-const DemoDropzoneDisabled = () => {
+const DemoDropzoneRipple = () => {
   return (
     <div
       style={{
@@ -11,12 +11,11 @@ const DemoDropzoneDisabled = () => {
         flexWrap: "wrap",
       }}
     >
-      <Dropzone style={{ width: "300px" }}>{/**Files */}</Dropzone>
-      <Dropzone style={{ width: "300px" }} disabled>
-        {"Dropzone is disabled"}
-        {/**Files */}
+      <Dropzone style={{ width: "300px" }}>ripple enabled </Dropzone>
+      <Dropzone style={{ width: "300px" }} disableRipple>
+        ripple disabled
       </Dropzone>
     </div>
   );
 };
-export default DemoDropzoneDisabled;
+export default DemoDropzoneRipple;
