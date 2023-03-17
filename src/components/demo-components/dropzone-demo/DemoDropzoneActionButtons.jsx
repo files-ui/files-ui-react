@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dropzone, FileMosaic } from "../../../files-ui";
 
-const DemoDropzoneActionButtons = (props) => {
+const DemoDropzoneActionButtons = ({button}) => {
   const [files, setFiles] = React.useState([]);
   const updateFiles = (incommingFiles) => {
     //do something with the files

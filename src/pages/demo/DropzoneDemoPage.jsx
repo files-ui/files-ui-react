@@ -199,10 +199,11 @@ const DropzoneDemoPage = (props) => {
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneUploading />
+            <DemoDropzoneUploading button/>
           </Paper>
 
-          <CodeDemoDropzoneUploading />
+          <CodeDemoDropzoneUploading button/>
+
           <Alert severity="info">
             <AlertTitle> Server response </AlertTitle>
             For uploading files through files-ui, server must return the
@@ -219,8 +220,8 @@ const DropzoneDemoPage = (props) => {
           <Alert severity="info">
             <AlertTitle> "fakeUpload" </AlertTitle>
             By giving this prop, the {"<Dropzone/>"} component will simulate the
-            upload operation by randomly set the upload status and message in
-            ech uploadable <TypeHighlight>ExtFile</TypeHighlight>. It also will
+            upload operation by randomly set the upload status and message on
+            each uploadable <TypeHighlight>ExtFile</TypeHighlight>. It will also
             set a fake progress.
           </Alert>
           <br />
@@ -238,7 +239,7 @@ const DropzoneDemoPage = (props) => {
               <li>
                 <TypeHighlight>cleanOnUpload</TypeHighlight> : By setting this
                 prop, you can control whether the upload process should "clean"
-                the non valid files before uploading or not By default this
+                the non valid files before uploading or not. By default this
                 value is true.
               </li>
             </ul>

@@ -165,8 +165,9 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
         <section id="custom-validation">
           <SubTitle content="Custom validation" />
           <DescParagraph>
-            You can also override the FileInputButton validation operation by giving a
-            custom validation function that must fit the following signature:{" "}
+            You can also override the FileInputButton validation operation by
+            giving a custom validation function that must fit the following
+            signature:{" "}
             <CodeHighlight>
               {"validator?: (f: "}
               <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/API/File">
@@ -183,9 +184,9 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
             <TypeHighlight>maxFiles</TypeHighlight> props.
           </DescParagraph>
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneCustomValidation button/>
+            <DemoDropzoneCustomValidation button />
           </Paper>
-          <CodeDemoDropzoneCustomValidation button/>
+          <CodeDemoDropzoneCustomValidation button />
         </section>
 
         <section id="uploading">
@@ -199,10 +200,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneUploading />
+            <DemoDropzoneUploading button />
           </Paper>
 
-          <CodeDemoDropzoneUploading />
+          <CodeDemoDropzoneUploading button />
           <Alert severity="info">
             <AlertTitle> Server response </AlertTitle>
             For uploading files through files-ui, server must return the
@@ -218,10 +219,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           <br />
           <Alert severity="info">
             <AlertTitle> "fakeUpload" </AlertTitle>
-            By giving this prop, the {"<Dropzone/>"} component will simulate the
-            upload operation by randomly set the upload status and message in
-            ech uploadable <TypeHighlight>ExtFile</TypeHighlight>. It also will
-            set a fake progress.
+            By giving this prop, the {"<FileInputButton/>"} component will
+            simulate the upload operation by randomly set the upload status and
+            message on each uploadable <TypeHighlight>ExtFile</TypeHighlight>.
+            It will also set a fake progress.
           </Alert>
           <br />
           <Alert severity="info">
@@ -238,7 +239,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
               <li>
                 <TypeHighlight>cleanOnUpload</TypeHighlight> : By setting this
                 prop, you can control whether the upload process should "clean"
-                the non valid files before uploading or not By default this
+                the non valid files before uploading or not. By default this
                 value is true.
               </li>
             </ul>
@@ -248,16 +249,16 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
         </section>
 
         <section id="action-buttons">
-          <SubTitle content="Dropzone with action buttons" />
+          <SubTitle content="FileInputButton with action buttons" />
           <DescParagraph>
             If you need to display buttons that trigger the default events in
-            the <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component, you
-            can do it by adding the <TypeHighlight>actionButtons</TypeHighlight>{" "}
-            prop. This will add buttons to the top or to the bottom of this
-            component.
+            the <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> component,
+            you can do it by adding the{" "}
+            <TypeHighlight>actionButtons</TypeHighlight> prop. This will add
+            buttons to the top or to the bottom of this component.
             <ul>
               <li>
-                Dropzone with the{" "}
+                FileInputButton with the{" "}
                 <TypeHighlight>actionButtons.cleanButton</TypeHighlight> prop
                 defined will display a button which triggers the clean process.
                 <br />
@@ -265,7 +266,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
                 <strong>when the "upload" process is not active</strong>.
               </li>
               <li>
-                Dropzone with the{" "}
+                FileInputButton with the{" "}
                 <TypeHighlight>actionButtons.deleteButton</TypeHighlight> prop
                 defined will display a button which deletes all files.
                 <br />
@@ -273,14 +274,14 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
                 <strong>when the "upload" process is not active</strong>.
               </li>
               <li>
-                Dropzone with the{" "}
+                FileInputButton with the{" "}
                 <TypeHighlight>actionButtons.uploadButton</TypeHighlight> prop
                 defined will display a button which starts the upload process.
                 This button will <strong>not</strong> be visible{" "}
                 <strong>during the "upload" process</strong>.
               </li>
               <li>
-                Dropzone with the{" "}
+                FileInputButton with the{" "}
                 <TypeHighlight>actionButtons.abortButton</TypeHighlight> prop
                 defined will display a button which stops the upload process.
                 <br />
@@ -291,10 +292,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneActionButtons />
+            <DemoDropzoneActionButtons button />
           </Paper>
 
-          <CodeDemoDropzoneActionButtons />
+          <CodeDemoDropzoneActionButtons button />
         </section>
 
         <section id="header-config">
