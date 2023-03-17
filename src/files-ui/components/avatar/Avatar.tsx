@@ -9,19 +9,23 @@ import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const {
-    style,
+    
+    readOnly,
     src,
-    onChange,
     alt,
+    onChange,
     emptyLabel,
     changeLabel,
-    readOnly,
+    
     variant,
     borderRadius,
     uploadingLabel,
     isUloading,
     onError,
+
     smartImgFit,
+
+    style,
   } = mergeProps(props, defaultAvatarProps);
 
   const inputRef: React.RefObject<HTMLInputElement> =

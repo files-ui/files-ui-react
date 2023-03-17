@@ -12,6 +12,7 @@ import {
 } from "../../../files-ui";
 import AnchorToTab from "../../util-components/AnchorToTab";
 import TypeHighlight from "../../typeHighlight/TypeHighlight";
+import { BIA_URL } from "../../../data/imagesURL";
 
 interface ExtraComponentsMainPageProps {
   darkMode?: boolean;
@@ -23,7 +24,7 @@ const ExtraComponentsMainPageAvatar: React.FC<ExtraComponentsMainPageProps> = (
   const [isUloading, setIsUploading] = React.useState<boolean>(false);
 
   const [avatarSrc, setAvatarSrc] = React.useState<string | undefined | File>(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaKgRXvIBtfmfJ49rSmVbPLTgRqPPYjMA_94o0KD4WtHK55Oh_MYbVF8JmPqyddweUx8Y&usqp=CAU"
+    BIA_URL
   );
 
   const handleChange = async (file: File) => {
