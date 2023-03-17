@@ -507,7 +507,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         />
       )}
       <MaterialButton
-        disabled
+        disabled={disabled}
         className={className}
         style={style}
         color={color}
