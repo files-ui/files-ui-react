@@ -62,6 +62,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     color,
     style,
     textColor,
+    textTransform,
     className,
     //label
     label,
@@ -69,9 +70,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     localization,
     //ripple
     disableRipple,
-    //drag operations
-    onDragEnter,
-    onDragLeave,
     //action butotns
     actionButtons,
     //drop layer
@@ -83,7 +81,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     //footerConfig = {},
     //disabled
     disabled,
-    //open file dialog
     //clickable,
     //add or replace
     behaviour,
@@ -92,7 +89,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     //advancedConfig,
 
     variant,
-    textTransform,
     resetStyles,
     ...rest
   } = mergeProps(props, defaultFileInputButtonProps);
