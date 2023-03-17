@@ -143,7 +143,7 @@ export declare type FileInputButtonProps =
 
 export const defaultFileInputButtonProps: FileInputButtonProps =
 {
-    textDecoration: "uppercase",
+    textTransform: "uppercase",
     label: "browse...",
     behaviour: "add",
     disabled: false,

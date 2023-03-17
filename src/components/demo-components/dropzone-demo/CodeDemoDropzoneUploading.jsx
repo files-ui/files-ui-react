@@ -1,18 +1,21 @@
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-const CodeDemoDropzoneUploading = ({ splittedOnly = false, button=false }) => {
+const CodeDemoDropzoneUploading = ({
+  splittedOnly = false,
+  button = false,
+}) => {
   if (button)
+    return (
+      <ShowDemoCode
+        splittedOnly={splittedOnly}
+        codeCompleteJS={completeCodeJSButton}
+        codeCompleteTS={completeCodeTSButton}
+        codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSplittedJS={splittedCodeJSButton}
+        codeSplittedTS={splittedCodeTSButton}
+      />
+    );
   return (
-    <ShowDemoCode
-      splittedOnly={splittedOnly}
-      codeCompleteJS={completeCodeJSButton}
-      codeCompleteTS={completeCodeTSButton}
-      codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
-      codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
-      codeSplittedJS={splittedCodeJSButton}
-      codeSplittedTS={splittedCodeTSButton}
-    />
-  );
-   return (
     <ShowDemoCode
       splittedOnly={splittedOnly}
       codeCompleteJS={completeCodeJS}
@@ -25,7 +28,6 @@ const CodeDemoDropzoneUploading = ({ splittedOnly = false, button=false }) => {
   );
 };
 export default CodeDemoDropzoneUploading;
-
 
 const splittedCodeJSButton = `<FileInputButton
   onChange={updateFiles}
@@ -79,7 +81,7 @@ const splittedCodeTSButton = `<FileInputButton
 {files.map((file: ExtFile) => (
     <FileCard key={file.id} {...file} onDelete={removeFile} info preview/>
 ))}`;
-const completeCodeJSButton =`import { FileInputButton, FileCard } from "@files-ui/react";
+const completeCodeJSButton = `import { FileInputButton, FileCard } from "@files-ui/react";
 import * as React from "react";
 
 export default function App() {
@@ -217,8 +219,6 @@ export default function App() {
 }`;
 
 /////
-
-
 
 const splittedCodeJS = `<Dropzone
     onChange={updateFiles}

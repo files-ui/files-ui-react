@@ -11,7 +11,7 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
   const {
     disabled,
     href,
-    textDecoration,
+    textTransform:textDecoration,
     variant = "contained",
     color = "#1976d2",
     textColor ="white",

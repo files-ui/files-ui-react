@@ -1,7 +1,48 @@
 import * as React from "react";
-import { Dropzone } from "../../../files-ui";
+import { Dropzone, FileInputButton } from "../../../files-ui";
 
-const DemoDropzoneStyling = () => {
+const DemoDropzoneStyling = ({ button }) => {
+  if (button)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          gap: "20px",
+        }}
+      >
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <FileInputButton>Default color</FileInputButton>
+          <FileInputButton color="#6200EE">Color= "#6200EE"</FileInputButton>
+        </div>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <FileInputButton textColor="teal" color="aliceblue">
+            textColor="teal"
+          </FileInputButton>
+        </div>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <FileInputButton>Contained</FileInputButton>
+          <FileInputButton variant="outlined">Outlined</FileInputButton>
+          <FileInputButton variant="text">Text</FileInputButton>
+        </div>
+
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <FileInputButton textTransform="uppercase">
+            Text transform uppercase
+          </FileInputButton>
+          <FileInputButton textTransform="capitalize">
+            Text transform capitalize
+          </FileInputButton>
+          <FileInputButton textTransform="lowercase">
+            Text transform LOWERCASE
+          </FileInputButton>
+          <FileInputButton textTransform="none">
+            Text transform unset
+          </FileInputButton>
+        </div>
+      </div>
+    );
   return (
     <div
       style={{

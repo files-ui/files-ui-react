@@ -298,181 +298,38 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           <CodeDemoDropzoneActionButtons button />
         </section>
 
-        <section id="header-config">
-          <SubTitle content="Dropzone header config" />
-          <DescParagraph>
-            You can use the <TypeHighlight>headerConfig</TypeHighlight> prop to
-            define what will be displayed in the header.
-            <ul>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>headerConfig.customHeader</TypeHighlight> prop
-                defined will display this prop replacing the entire default
-                header.
-              </li>
-            </ul>
-            By default all of these values are set to{" "}
-            <TypeHighlight>true</TypeHighlight>.
-          </DescParagraph>
-
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneHeaderConfig />
-          </Paper>
-
-          <CodeDemoDropzoneHeaderConfig />
-          <Alert severity="info">
-            <AlertTitle> HeaderConfig </AlertTitle>
-            There are more options that can be defined such as:
-            <ul>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>headerConfig.deleteFiles</TypeHighlight> prop set
-                to <TypeHighlight>true</TypeHighlight> will display a delete
-                button which triggers the delete process.
-                <br />
-                This button will be visible only{" "}
-                <strong>when the "upload" process is not active</strong>.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>headerConfig.cleanFiles</TypeHighlight> prop set
-                to <TypeHighlight>true</TypeHighlight> will display a "clean"
-                buton. This button will be visible only during the "upload"
-                process.
-                <br />
-                button will be visible only{" "}
-                <strong>when the "upload" process is not active</strong>.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>headerConfig.uploadFiles</TypeHighlight> prop set
-                to <TypeHighlight>true</TypeHighlight> will display a button
-                which starts the upload process.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>headerConfig.uploading</TypeHighlight> prop set
-                to <TypeHighlight>true</TypeHighlight> will display a loading
-                icon <strong>during the "upload" process</strong>.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>headerConfig.maxFileSize</TypeHighlight> prop set
-                to <TypeHighlight>true</TypeHighlight> will display the max file
-                size label.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>headerConfig.validFilesCount</TypeHighlight> prop
-                set to <TypeHighlight>true</TypeHighlight> will display the
-                current count of valid files.
-              </li>
-            </ul>
-            By default all of these values are set to
-            <TypeHighlight>true</TypeHighlight>. The complete type definition
-            can be found{" "}
-            <AnchorToTab href="/types#header-config">here</AnchorToTab>.
-          </Alert>
-        </section>
-
-        <section id="footer-config">
-          <SubTitle content="Dropzone footer config" />
-          <DescParagraph>
-            You can use the <TypeHighlight>footerConfig</TypeHighlight> prop to
-            define what will be displayed in the footer.
-            <ul>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>footerConfig.customMessage</TypeHighlight> prop
-                defined will be considered the message to display in the footer.
-              </li>
-            </ul>
-          </DescParagraph>
-
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneFooterConfig />
-          </Paper>
-
-          <CodeDemoDropzoneFooterConfig />
-
-          <Alert severity="info">
-            <AlertTitle> FooterConfig </AlertTitle>
-            There are more options that can be defined such as:
-            <ul>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>footerConfig.allowedTypesLabel</TypeHighlight>{" "}
-                prop set to <TypeHighlight>false</TypeHighlight> will hide the
-                label that indicates the files types allowed. This label will be
-                hidden <strong>when the "upload" process is active</strong>.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>
-                  footerConfig.uploadProgressMessage
-                </TypeHighlight>{" "}
-                prop set to <TypeHighlight>false</TypeHighlight> will not
-                display the label with the upload progress. This label will be
-                visible<strong> only during the "upload" process</strong>.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>footerConfig.uploadResultMessage</TypeHighlight>{" "}
-                prop set to <TypeHighlight>false</TypeHighlight> will not
-                display a label at the end of the upload process. This label can{" "}
-                be visible for 2 seconds just{" "}
-                <strong>after the "upload" process finishes</strong>.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>footerConfig.noMissingFilesLabel</TypeHighlight>{" "}
-                prop set to <TypeHighlight>false</TypeHighlight> will not
-                display a label when upload starts with no uploadable files.
-              </li>
-              <li>
-                Dropzone with the{" "}
-                <TypeHighlight>footerConfig.style</TypeHighlight> prop set to{" "}
-                <TypeHighlight>false</TypeHighlight>defined will override the
-                styles associated to the footer component.
-              </li>
-            </ul>
-            By default all of these values are set to
-            <TypeHighlight>true</TypeHighlight>.
-            <br />
-            The complete type definition can be found{" "}
-            <AnchorToTab href="/types#footer-config">here</AnchorToTab>.
-          </Alert>
-        </section>
-
         <section id="styling">
-          <SubTitle content="Styling Dropzone" />
+          <SubTitle content="Styling FileInputButton" />
           <DescParagraph>
             You can use change the look and feel of the{" "}
-            <CodeHighlight>Dropzone</CodeHighlight> component
+            <CodeHighlight>FileInputButton</CodeHighlight> component
             <ul>
               <li>
-                Dropzone with the <TypeHighlight>color</TypeHighlight> prop
-                defined will use this color for border, drop layer, font color
-                and ripple.
+                FileInputButton with the <TypeHighlight>color</TypeHighlight>{" "}
+                prop defined will use this color as the theme color.
               </li>
               <li>
-                Dropzone with the <TypeHighlight>minHeight</TypeHighlight> prop
-                defined will use this value to define the minimum height of the
-                component.
+                FileInputButton with the{" "}
+                <TypeHighlight>textColor</TypeHighlight> prop defined will use
+                this value to define the color of the text to be displayed.
               </li>
               <li>
-                Dropzone with the <TypeHighlight>background</TypeHighlight> prop
-                defined will use this value for the background. You can set nice
-                gradients or even a background image.
+                FileInputButton with the <TypeHighlight>variant</TypeHighlight>{" "}
+                prop defined can display the button in 3 different variants:
+                contained(default), outlined and text.
+              </li>
+              <li>
+                FileInputButton with the <TypeHighlight>textTransform</TypeHighlight>{" "}
+                prop defined can display the text with a text transform style (e.g. "uppercase").
               </li>
             </ul>
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneStyling />
+            <DemoDropzoneStyling button />
           </Paper>
 
-          <CodeDemoDropzoneStyling />
+          <CodeDemoDropzoneStyling button />
         </section>
 
         <section id="label">

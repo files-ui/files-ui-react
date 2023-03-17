@@ -92,7 +92,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     //advancedConfig,
 
     variant,
-    textDecoration,
+    textTransform,
     resetStyles,
     ...rest
   } = mergeProps(props, defaultFileInputButtonProps);
@@ -514,7 +514,8 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         style={style}
         color={color}
         variant={variant}
-        textDecoration={textDecoration}
+        textTransform={textTransform}
+        textColor={textColor}
         resetStyles={resetStyles}
         onClick={handleClick}
         {...rest}

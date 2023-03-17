@@ -31,7 +31,7 @@ const DemoFileMosaicImgPreview: React.FC<DemoFileMosaicImgPreviewProps> = (
         <FileInputButton
           label="Browse File..."
           onChange={updateFiles}
-          textDecoration="uppercase"
+          textTransform="uppercase"
           accept="image/*"
         />
       )}
