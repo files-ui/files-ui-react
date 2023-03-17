@@ -5,6 +5,8 @@ import {
   FileMosaic,
   FileMosaicProps,
   CustomValidateFileResponse,
+  FileInputButton,
+  FileCard,
 } from "../../../files-ui";
 
 //validate files
@@ -20,7 +22,7 @@ const myOwnValidation = (file: File): CustomValidateFileResponse => {
   }
   return { valid: validResult, errors: errorList };
 };
-const DemoDropzoneCustomValidation = () => {
+const DemoDropzoneCustomValidation = (props: { button: boolean }) => {
   const [files, setFiles] = React.useState<ExtFile[]>([]);
   const updateFiles = (incommingFiles: ExtFile[]) => {
     //do something with the files
@@ -30,6 +32,44 @@ const DemoDropzoneCustomValidation = () => {
   const removeFile = (id: FileMosaicProps["id"]) => {
     setFiles(files.filter((x) => x.id !== id));
   };
+  if (props.button)
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          gap: "10px",
+          flexWrap: "wrap",
+          width: "100%",
+        }}
+      >
+        <FileInputButton
+          onChange={updateFiles}
+          value={files}
+          accept={"image/*"}
+          maxFileSize={280 * 1024}
+          maxFiles={2}
+          //autoClean
+          validator={myOwnValidation}
+        />
+        {files.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: "5px",
+              minWidth: "50%",
+            }}
+          >
+            {files.map((file) => (
+              <FileCard key={file.id} {...file} onDelete={removeFile} info />
+            ))}
+          </div>
+        )}
+      </div>
+    );
   return (
     <Dropzone
       onChange={updateFiles}

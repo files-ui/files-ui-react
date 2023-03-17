@@ -128,8 +128,8 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           <SubTitle content="Validation" />
           <DescParagraph>
             In this demo you can see how{" "}
-            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component covers the
-            following features when it comes to validating files.
+            <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> component
+            covers the following features when it comes to validating files.
             <ol>
               <li>Accepting specific file types.</li>
               <li>Accepting an specific number of files.</li>
@@ -138,21 +138,16 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneValidation />
+            <DemoDropzoneValidation button />
           </Paper>
-          <CodeDemoDropzoneValidation />
+          <CodeDemoDropzoneValidation button />
           <Alert severity="info">
             <AlertTitle> Removing non valid Files </AlertTitle>
             We call "clean" to the operation of removing non valid files. Apart
             from deleting them individually, there are some other ways in which
             you can remove all of them. You can try the following props in the{" "}
-            {"<Dropzone/>"} component:
+            {"<FileInputButton/>"} component:
             <ul>
-              <li>
-                <TypeHighlight>cleanFiles</TypeHighlight> : This will make
-                dropzone header to display the "clean" icon which can trigger
-                the "clean" operation.
-              </li>
               <li>
                 <TypeHighlight>actionButtons</TypeHighlight> : By setting this
                 prop properly, a button will be visible and will trigger the
@@ -170,7 +165,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
         <section id="custom-validation">
           <SubTitle content="Custom validation" />
           <DescParagraph>
-            You can also override the Dropzone validation operation by giving a
+            You can also override the FileInputButton validation operation by giving a
             custom validation function that must fit the following signature:{" "}
             <CodeHighlight>
               {"validator?: (f: "}
@@ -188,9 +183,9 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
             <TypeHighlight>maxFiles</TypeHighlight> props.
           </DescParagraph>
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneCustomValidation />
+            <DemoDropzoneCustomValidation button/>
           </Paper>
-          <CodeDemoDropzoneCustomValidation />
+          <CodeDemoDropzoneCustomValidation button/>
         </section>
 
         <section id="uploading">

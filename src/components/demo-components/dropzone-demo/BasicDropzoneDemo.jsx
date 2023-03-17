@@ -32,9 +32,8 @@ export default function BasicDemoDropzone({ button }) {
           <div
             style={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
+              justifyContent:"center",
+              flexWrap:"wrap",
               gap:"5px",
               minWidth:"50%"
             }}
