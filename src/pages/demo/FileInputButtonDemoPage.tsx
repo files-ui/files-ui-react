@@ -54,10 +54,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
         <MainParagraph>
           The default <CodeHighlight>{'<input type="file"/>'}</CodeHighlight> is
           just a quite boring button. That's why we present the
-          "fileinputbutton" component which is an special{" "}
-          <CodeHighlight>input</CodeHighlight> enhanced by the ability to allow
-          users to choose files from a file dialog and also to validate an
-          upload them.
+          <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> component which
+          is an special <CodeHighlight>input</CodeHighlight> enhanced by the
+          ability to allow users to choose files from a file dialog and also to
+          validate an upload them.
         </MainParagraph>
 
         <DescParagraph>
@@ -319,8 +319,9 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
                 contained(default), outlined and text.
               </li>
               <li>
-                FileInputButton with the <TypeHighlight>textTransform</TypeHighlight>{" "}
-                prop defined can display the text with a text transform style (e.g. "uppercase").
+                FileInputButton with the{" "}
+                <TypeHighlight>textTransform</TypeHighlight> prop defined can
+                display the text with a text transform style (e.g. "uppercase").
               </li>
             </ul>
           </DescParagraph>
@@ -336,15 +337,16 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           <SubTitle content="Label" />
           <DescParagraph>
             You can specify a fixed label for{" "}
-            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component to display
-            when there isn't any files.
+            <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> component.
+            <br />
+            If not given, the default label is "Browse...".
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneLabel />
+            <DemoDropzoneLabel button />
           </Paper>
 
-          <CodeDemoDropzoneLabel />
+          <CodeDemoDropzoneLabel button />
         </section>
 
         <section id="ripple">
@@ -358,24 +360,21 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
             visual ripple expanding outward from the user's touch. Ripple is a
             visual form of feedback for touch events providing users a clear
             signal that an element is being touched. In this component, a ripple
-            is displayed after 2 user actions:
-            <ul>
-              <li>When user clicks or touches the component.</li>
-              <li>Just after user dropped files.</li>
-            </ul>
+            is displayed When user clicks or touches the component.
+            <br />
             For disabling the ripple effect you can set the{" "}
             <TypeHighlight>disableRipple</TypeHighlight> prop to true.
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneRipple />
+            <DemoDropzoneRipple button/>
           </Paper>
 
-          <CodeDemoDropzoneRipple />
+          <CodeDemoDropzoneRipple button/>
         </section>
 
         <section id="disabled">
-          <SubTitle content="Disabled Dropzone" />
+          <SubTitle content="Disabled FileInputButton" />
           <DescParagraph>
             According to{" "}
             <AnchorToTab href="https://m2.material.io/develop/ios/supporting/ripple">
@@ -387,10 +386,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneDisabled />
+            <DemoDropzoneDisabled button/>
           </Paper>
 
-          <CodeDemoDropzoneDisabled />
+          <CodeDemoDropzoneDisabled button/>
         </section>
 
         <section id="clickable">

@@ -1,7 +1,21 @@
 import * as React from "react";
-import { Dropzone } from "../../../files-ui";
+import { Dropzone, FileInputButton } from "../../../files-ui";
 
-const DemoDropzoneRipple = () => {
+const DemoDropzoneRipple = ({ button = false }) => {
+  if (button)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          gap: "40px",
+          flexWrap: "wrap",
+        }}
+      >
+        <FileInputButton>{"ripple enabled"}</FileInputButton>
+        <FileInputButton disableRipple>{"ripple disabled"}</FileInputButton>
+      </div>
+    );
   return (
     <div
       style={{

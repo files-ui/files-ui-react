@@ -48,7 +48,8 @@ const DropzoneDemoPage = (props) => {
 
         <MainParagraph>
           The default <CodeHighlight>{'<input type="file"/>'}</CodeHighlight> is
-          just a quite boring button. That's why we present the"dropzone"
+          just a quite boring button. That's why we present the{" "}
+          <CodeHighlight>{"<Dropzone/>"}</CodeHighlight>
           component is an special <CodeHighlight>input</CodeHighlight> enhanced
           by the ability to allow users to drag and drop files there or choose
           files from a file dialog and also to validate an upload them.
@@ -84,8 +85,9 @@ const DropzoneDemoPage = (props) => {
         <section id="basic-dropzone">
           <SubTitle content="Basic Dropzone" />
           <DescParagraph>
-            In this demo we set the <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> with the minimum props that allows you
-            to get your task done fast. These props are{" "}
+            In this demo we set the{" "}
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> with the minimum
+            props that allows you to get your task done fast. These props are{" "}
             <CodeHighlight>onChange</CodeHighlight> and{" "}
             <CodeHighlight>value</CodeHighlight>.
           </DescParagraph>
@@ -199,10 +201,10 @@ const DropzoneDemoPage = (props) => {
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneUploading button/>
+            <DemoDropzoneUploading button />
           </Paper>
 
-          <CodeDemoDropzoneUploading button/>
+          <CodeDemoDropzoneUploading button />
 
           <Alert severity="info">
             <AlertTitle> Server response </AlertTitle>

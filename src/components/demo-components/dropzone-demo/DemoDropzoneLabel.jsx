@@ -1,7 +1,22 @@
 import * as React from "react";
-import { Dropzone } from "../../../files-ui";
+import { Dropzone, FileInputButton } from "../../../files-ui";
 
-const DemoDropzoneLabel = () => {
+const DemoDropzoneLabel = ({ button }) => {
+  if (button)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          gap: "40px",
+          flexWrap: "wrap",
+        }}
+      >
+         <FileInputButton/>
+         <FileInputButton>{"Label as children"}</FileInputButton>
+         <FileInputButton label={"Files ui ❤️"}/>
+      </div>
+    );
   return (
     <div
       style={{
@@ -12,10 +27,7 @@ const DemoDropzoneLabel = () => {
       }}
     >
       <Dropzone style={{ width: "300px" }}>{/**Files */}</Dropzone>
-      <Dropzone
-        style={{ width: "300px" }}
-        label={"Files ui ❤️"}
-      >
+      <Dropzone style={{ width: "300px" }} label={"Files ui ❤️"}>
         {/**Files */}
       </Dropzone>
     </div>

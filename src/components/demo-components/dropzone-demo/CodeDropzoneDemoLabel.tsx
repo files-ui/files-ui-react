@@ -1,5 +1,17 @@
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-const CodeDemoDropzoneLabel = ({ splittedOnly = false }) => {
+const CodeDemoDropzoneLabel = ({ splittedOnly = false, button = false }) => {
+  if (button)
+    return (
+      <ShowDemoCode
+        splittedOnly={splittedOnly}
+        codeCompleteJS={completeCodeJSButton}
+        codeCompleteTS={completeCodeTSButton}
+        codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSplittedJS={splittedCodeJSButton}
+        codeSplittedTS={splittedCodeTSButton}
+      />
+    );
   return (
     <ShowDemoCode
       splittedOnly={splittedOnly}
@@ -14,6 +26,32 @@ const CodeDemoDropzoneLabel = ({ splittedOnly = false }) => {
 };
 export default CodeDemoDropzoneLabel;
 
+const splittedCodeJSButton = `<FileInputButton/>
+<FileInputButton>{"Label as children"}</FileInputButton>
+<FileInputButton label={"Files ui ❤️"}/>`;
+const splittedCodeTSButton = splittedCodeJSButton;
+const completeCodeJSButton = `import { FileInputButton } from "@files-ui/react";
+import * as React from "react";
+
+export default function App() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+        gap: "40px",
+        flexWrap: "wrap",
+      }}
+    >
+      <FileInputButton/>
+      <FileInputButton>{"Label as children"}</FileInputButton>
+      <FileInputButton label={"Files ui ❤️"}/>
+    </div>
+  );
+}`;
+const completeCodeTSButton = completeCodeJSButton;
+
+/////
 
 const splittedCodeJS = `<Dropzone style={{ width: "300px" }}>{/**Files */}</Dropzone>
 <Dropzone
@@ -49,4 +87,3 @@ const DemoDropzoneLabel = () => {
   export default DemoDropzoneLabel;`;
 
 const completeCodeTS = completeCodeJS;
-
