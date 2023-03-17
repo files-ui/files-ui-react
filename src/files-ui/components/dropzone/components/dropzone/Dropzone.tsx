@@ -691,6 +691,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     <React.Fragment>
       {actionButtonsPosition === "top" && (
         <DropzoneButtons
+          disabled={disabled}
           abortButton={isUploading ? abortButton : undefined}
           onAbort={handleAbortUpload}
           deleteButton={deleteButton}
@@ -828,6 +829,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
       {actionButtonsPosition === "bottom" && (
         <DropzoneButtons
+          disabled={disabled}
           abortButton={isUploading ? abortButton : undefined}
           onAbort={handleAbortUpload}
           deleteButton={deleteButton}

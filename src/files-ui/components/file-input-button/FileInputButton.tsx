@@ -488,6 +488,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     <React.Fragment>
       {actionButtonsPosition === "top" && (
         <DropzoneButtons
+        disabled={disabled}
           abortButton={isUploading ? abortButton : undefined}
           onAbort={handleAbortUpload}
           deleteButton={deleteButton}
@@ -506,6 +507,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         />
       )}
       <MaterialButton
+        disabled
         className={className}
         style={style}
         color={color}
@@ -527,6 +529,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
       {actionButtonsPosition === "bottom" && (
         <DropzoneButtons
+        disabled={disabled}
           abortButton={isUploading ? abortButton : undefined}
           onAbort={handleAbortUpload}
           deleteButton={deleteButton}

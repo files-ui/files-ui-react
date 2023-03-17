@@ -268,6 +268,7 @@ export type DropzoneActionButton = {
   className?: string;
   resetStyles?: boolean;
   onClick?: Function;
+  disabled?:boolean;
 }
 
 export interface DropzoneActions {
