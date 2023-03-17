@@ -15,7 +15,7 @@ export interface MaterialButtonPropsInterface extends OverridableComponentProps 
      * - none: no text decoration 
      * @default 'uppercase'
      */
-    textDecoration?: "uppercase" | "capitalize" | "lowercase" | "none";
+    textTransform?: "uppercase" | "capitalize" | "lowercase" | "none";
     /**
      * The type of style that will be rendered.
      * - contained: with background color

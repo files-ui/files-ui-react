@@ -1,5 +1,17 @@
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-const CodeDemoDropzoneDisabled = ({ splittedOnly = false }) => {
+const CodeDemoDropzoneDisabled = ({ splittedOnly = false, button = false }) => {
+  if (button)
+    return (
+      <ShowDemoCode
+        splittedOnly={splittedOnly}
+        codeCompleteJS={completeCodeJSButton}
+        codeCompleteTS={completeCodeTSButton}
+        codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSplittedJS={splittedCodeJSButton}
+        codeSplittedTS={splittedCodeTSButton}
+      />
+    );
   return (
     <ShowDemoCode
       splittedOnly={splittedOnly}
@@ -13,6 +25,34 @@ const CodeDemoDropzoneDisabled = ({ splittedOnly = false }) => {
   );
 };
 export default CodeDemoDropzoneDisabled;
+
+
+
+const splittedCodeJSButton = `<FileInputButton>{"input enabled"}</FileInputButton>
+<FileInputButton disabled>{"input disabled"}</FileInputButton>`;
+const splittedCodeTSButton = splittedCodeJSButton;
+const completeCodeJSButton = `import { FileInputButton } from "@files-ui/react";
+import * as React from "react";
+
+export default function App() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+        gap: "40px",
+        flexWrap: "wrap",
+      }}
+    >
+      <FileInputButton>{"input enabled"}</FileInputButton>
+      <FileInputButton disabled>{"input disabled"}</FileInputButton>
+    </div>
+  );
+}`;
+const completeCodeTSButton = completeCodeJSButton;
+
+/////
+
 
 const splittedCodeJS = `<Dropzone style={{ width: "300px" }}>{/**Files */}</Dropzone>
 <Dropzone style={{ width: "300px" }} disabled>

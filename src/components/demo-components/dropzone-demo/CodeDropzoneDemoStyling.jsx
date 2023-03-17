@@ -1,5 +1,17 @@
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-const CodeDemoDropzoneStyling = ({ splittedOnly = false }) => {
+const CodeDemoDropzoneStyling = ({ splittedOnly = false, button }) => {
+  if (button)
+    return (
+      <ShowDemoCode
+        splittedOnly={splittedOnly}
+        codeCompleteJS={completeCodeJSButton}
+        codeCompleteTS={completeCodeTSButton}
+        codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
+        codeSplittedJS={splittedCodeJSButton}
+        codeSplittedTS={splittedCodeTSButton}
+      />
+    );
   return (
     <ShowDemoCode
       splittedOnly={splittedOnly}
@@ -13,6 +25,79 @@ const CodeDemoDropzoneStyling = ({ splittedOnly = false }) => {
   );
 };
 export default CodeDemoDropzoneStyling;
+
+const splittedCodeJSButton = `<FileInputButton>Default color</FileInputButton>
+<FileInputButton color="#6200EE">color="#6200EE"</FileInputButton>
+
+<FileInputButton textColor="teal" color="aliceblue">
+  textColor="teal"
+</FileInputButton>
+
+<FileInputButton>{"Contained"}</FileInputButton>
+<FileInputButton variant="outlined">outlined</FileInputButton>
+<FileInputButton variant="text">{"Text"}</FileInputButton>
+
+<FileInputButton textTransform="uppercase">
+  {"Text transform uppercase"}
+</FileInputButton>
+<FileInputButton textTransform="capitalize">
+  {"Text transform capitalize"}
+</FileInputButton>
+<FileInputButton textTransform="lowercase">
+  {"Text transform LOWERCASE"}
+</FileInputButton>
+<FileInputButton textTransform="none">
+  {"Text transform unset"}
+</FileInputButton>`;
+const splittedCodeTSButton = splittedCodeJSButton;
+const completeCodeJSButton = `import { FileInputButton } from "@files-ui/react";
+import * as React from "react";
+
+export default function App() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        gap: "20px",
+      }}
+    >
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <FileInputButton>Default color</FileInputButton>
+        <FileInputButton color="#6200EE">color="#6200EE"</FileInputButton>
+      </div>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <FileInputButton textColor="teal" color="aliceblue">
+          textColor="teal"
+        </FileInputButton>
+      </div>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <FileInputButton>{"Contained"}</FileInputButton>
+        <FileInputButton variant="outlined">outlined</FileInputButton>
+        <FileInputButton variant="text">{"Text"}</FileInputButton>
+      </div>
+
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <FileInputButton textTransform="uppercase">
+          {"Text transform uppercase"}
+        </FileInputButton>
+        <FileInputButton textTransform="capitalize">
+          {"Text transform capitalize"}
+        </FileInputButton>
+        <FileInputButton textTransform="lowercase">
+          {"Text transform LOWERCASE"}
+        </FileInputButton>
+        <FileInputButton textTransform="none">
+          {"Text transform unset"}
+        </FileInputButton>
+      </div>
+    </div>
+  );
+}`;
+const completeCodeTSButton = completeCodeJSButton;
+
+/////
 
 const splittedCodeJS = `<Dropzone color="#6200EE">{/** files */}</Dropzone>
 <Dropzone

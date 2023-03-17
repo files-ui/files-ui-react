@@ -20,6 +20,7 @@ import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
+
 import DemoDropzoneFooterConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneFooterConfig";
 import DemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneHeaderConfig";
 import CodeDemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneHeaderConfig";
@@ -46,9 +47,12 @@ const DropzoneDemoPage = (props) => {
         <MainTitle>Dropzone</MainTitle>
 
         <MainParagraph>
-          The "dropzone" component is a special{" "}
-          <CodeHighlight>input</CodeHighlight> enhanced by the ability to allow
-          users to drag and drop files there or choose files from a file dialog.
+          The default <CodeHighlight>{'<input type="file"/>'}</CodeHighlight> is
+          just a quite boring button. That's why we present the{" "}
+          <CodeHighlight>{"<Dropzone/>"}</CodeHighlight>
+          component is an special <CodeHighlight>input</CodeHighlight> enhanced
+          by the ability to allow users to drag and drop files there or choose
+          files from a file dialog and also to validate an upload them.
         </MainParagraph>
 
         <DescParagraph>
@@ -81,8 +85,9 @@ const DropzoneDemoPage = (props) => {
         <section id="basic-dropzone">
           <SubTitle content="Basic Dropzone" />
           <DescParagraph>
-            In this demo we set dropzone with the minimum props that allows you
-            to get your task done fast. These props are{" "}
+            In this demo we set the{" "}
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> with the minimum
+            props that allows you to get your task done fast. These props are{" "}
             <CodeHighlight>onChange</CodeHighlight> and{" "}
             <CodeHighlight>value</CodeHighlight>.
           </DescParagraph>
@@ -196,10 +201,11 @@ const DropzoneDemoPage = (props) => {
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneUploading />
+            <DemoDropzoneUploading button />
           </Paper>
 
-          <CodeDemoDropzoneUploading />
+          <CodeDemoDropzoneUploading button />
+
           <Alert severity="info">
             <AlertTitle> Server response </AlertTitle>
             For uploading files through files-ui, server must return the
@@ -216,8 +222,8 @@ const DropzoneDemoPage = (props) => {
           <Alert severity="info">
             <AlertTitle> "fakeUpload" </AlertTitle>
             By giving this prop, the {"<Dropzone/>"} component will simulate the
-            upload operation by randomly set the upload status and message in
-            ech uploadable <TypeHighlight>ExtFile</TypeHighlight>. It also will
+            upload operation by randomly set the upload status and message on
+            each uploadable <TypeHighlight>ExtFile</TypeHighlight>. It will also
             set a fake progress.
           </Alert>
           <br />
@@ -235,7 +241,7 @@ const DropzoneDemoPage = (props) => {
               <li>
                 <TypeHighlight>cleanOnUpload</TypeHighlight> : By setting this
                 prop, you can control whether the upload process should "clean"
-                the non valid files before uploading or not By default this
+                the non valid files before uploading or not. By default this
                 value is true.
               </li>
             </ul>
@@ -597,15 +603,15 @@ const DropzoneDemoPage = (props) => {
         <section id="localization">
           <SubTitle content="Localization" />
           <DescParagraph>
-            The localization demo for this component can be found in the{" "}
-            <AnchorToTab href="/localization">localization page</AnchorToTab>
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component uses the{" "}
+            <TypeHighlight>localization</TypeHighlight> prop in the validation
+            and the upload process for setting status and messages according to the language that
+            this prop refers to. 
+            <br/>
+            The localization demo for this component can be found in
+            the{" "}
+            <AnchorToTab href="/localization">localization page</AnchorToTab>.
           </DescParagraph>
-
-          {/*   <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneFooterConfig />
-          </Paper>
-
-          <CodeDemoDropzoneFooterConfig /> */}
         </section>
 
         <section id="api">

@@ -1,32 +1,86 @@
 import * as React from "react";
-import { Dropzone, ExtFile, FileMosaic, FileMosaicProps } from "../../../files-ui";
+import {
+  Dropzone,
+  ExtFile,
+  FileCard,
+  FileCardProps,
+  FileInputButton,
+  FileMosaic,
+  //FileMosaicProps,
+} from "../../../files-ui";
 
-const DemoDropzoneBehaviour = () => {
+const mainContainerStyle: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "space-evenly",
+  gap: "40px",
+  flexWrap: "wrap",
+  width: "100%",
+};
+const itemContainerStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  minWidth: "40%",
+  gap: "5px",
+  alignItems: "center",
+};
+
+const DemoDropzoneBehaviour = ({ button = false }) => {
   const [filesAdd, setFilesAdd] = React.useState<ExtFile[]>([]);
   const [filesReplace, setFilesReplace] = React.useState<ExtFile[]>([]);
 
-  const updateFilesAdd = (incommingFiles:ExtFile[]) => {
+  const updateFilesAdd = (incommingFiles: ExtFile[]) => {
     setFilesAdd(incommingFiles);
   };
-  const updateFilesReplace = (incommingFiles:ExtFile[]) => {
+  const updateFilesReplace = (incommingFiles: ExtFile[]) => {
     setFilesReplace(incommingFiles);
   };
-  const removeFileAdd = (id:FileMosaicProps["id"]) => {
+  const removeFileAdd = (id: FileCardProps["id"]) => {
     setFilesAdd(filesAdd.filter((x) => x.id !== id));
   };
-  const removeFileReplace = (id:FileMosaicProps["id"]) => {
+  const removeFileReplace = (id: FileCardProps["id"]) => {
     setFilesReplace(filesReplace.filter((x) => x.id !== id));
   };
+  if (button)
+    return (
+      <div style={mainContainerStyle}>
+        <div style={itemContainerStyle}>
+          <FileInputButton
+            onChange={updateFilesAdd}
+            value={filesAdd}
+            label="add"
+          />
+          {filesAdd.map((file) => (
+            <FileCard
+              key={file.id}
+              {...file}
+              onDelete={removeFileAdd}
+              info
+              preview
+            />
+          ))}
+        </div>
+        <div style={itemContainerStyle}>
+          <FileInputButton
+            onChange={updateFilesReplace}
+            value={filesReplace}
+            variant="outlined"
+            label="replace"
+            behaviour="replace"
+          />
+          {filesReplace.map((file) => (
+            <FileCard
+              key={file.id}
+              {...file}
+              onDelete={removeFileReplace}
+              info
+              preview
+            />
+          ))}
+        </div>
+      </div>
+    );
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        gap: "40px",
-        flexWrap: "wrap",
-        width: "100%",
-      }}
-    >
+    <div style={mainContainerStyle}>
       <Dropzone
         style={{ width: "min(100% , 420px)" }}
         onChange={updateFilesAdd}

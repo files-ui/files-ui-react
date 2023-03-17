@@ -14,6 +14,7 @@ interface DropzoneButtonsProps extends DropzoneActions {
   onUpload?: Function;
   onClean?: Function;
   top?: boolean;
+  disabled?: boolean;
 }
 
 const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
@@ -31,7 +32,8 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     onClean,
     onDelete,
     onUpload,
-    top
+    top,
+    disabled,
   } = props;
 
   const actionButtonsList: DropzoneActionButton[] = [
@@ -51,8 +53,9 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     (ab: DropzoneActionButton | undefined) => ab !== undefined
   ) as DropzoneActionButton[];
 
+  const tailClassName:string = `${top ? " top" : " bottom"}`;
   const finalClassName = addClassName(
-    "files-ui-buttons-container" + `${top ? " top" : " bottom"}`,
+    "files-ui-buttons-container" + tailClassName,
     containerClassName
   );
 
@@ -69,6 +72,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
               style={style}
               resetStyles={resetStyles}
               onClick={() => onClick?.()}
+              disabled={disabled}
             >
               {children || label}
             </MaterialButton>

@@ -1,6 +1,11 @@
-import { Dropzone, FileMosaic } from "../../../files-ui";
+import {
+  Dropzone,
+  FileCard,
+  FileInputButton,
+  FileMosaic,
+} from "../../../files-ui";
 import * as React from "react";
-export default function BasicDemoDropzone() {
+export default function BasicDemoDropzone({ button }) {
   const [files, setFiles] = React.useState([]);
   const updateFiles = (incommingFiles) => {
     //do something with the files
@@ -10,6 +15,37 @@ export default function BasicDemoDropzone() {
   const removeFile = (id) => {
     setFiles(files.filter((x) => x.id !== id));
   };
+  if (button) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          gap: "10px",
+          flexWrap: "wrap",
+          width: "100%",
+        }}
+      >
+        <FileInputButton onChange={updateFiles} value={files} />
+        {files.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent:"center",
+              flexWrap:"wrap",
+              gap:"5px",
+              minWidth:"50%"
+            }}
+          >
+            {files.map((file) => (
+              <FileCard key={file.id} {...file} onDelete={removeFile} info />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
   return (
     <Dropzone onChange={updateFiles} value={files}>
       {files.length > 0 &&
