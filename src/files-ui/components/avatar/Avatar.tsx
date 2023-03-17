@@ -9,14 +9,15 @@ import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const {
-    
     readOnly,
     src,
     alt,
+    accept,
+
     onChange,
     emptyLabel,
     changeLabel,
-    
+
     variant,
     borderRadius,
     uploadingLabel,
@@ -26,17 +27,14 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     smartImgFit,
 
     style,
+    ...rest
   } = mergeProps(props, defaultAvatarProps);
+  console.log("Avatar smartImgFit",smartImgFit);
 
   const inputRef: React.RefObject<HTMLInputElement> =
     React.useRef<HTMLInputElement>(null);
 
   const isStyleInjected: boolean = useAvatarStyle(borderRadius);
-
-  //const [isUloading, setIsUploading] = React.useState<boolean>(false);
-
-  //const avatarClassNameContainer: string = setAvatarClassNameContainer(variant);
-  //const avatarClassNameLayerInfo: string = setAvatarClassNameLayerInfo(variant);
 
   const handleClick = () => {
     // alert("Agregar fotooooooo");
@@ -58,6 +56,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const handleError: React.ReactEventHandler<HTMLImageElement> = (
     evt: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
+    console.log("Avatar error", evt);
     onError?.(evt);
   };
 
@@ -69,10 +68,11 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
             variant === "circle" ? " circle" : ""
           }`}
           style={style}
+          {...rest}
         >
           {/**Layer 1 */}
           {isUloading ? (
-            <Layer visible={isUloading}>
+            <Layer visible={true}>
               <div className={"fui-avatar-label"}>
                 <InfiniteLoader />
                 {uploadingLabel}
@@ -97,7 +97,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
               </p>
               <InputHidden
                 multiple={false}
-                accept={""}
+                accept={accept || "image/*"}
                 onChange={handleChangeInput}
                 inputRef={inputRef}
               />

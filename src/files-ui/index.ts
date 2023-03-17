@@ -26,6 +26,7 @@ export type { FileMosaicProps } from "./components/file-mosaic/components/file-m
 export type { DropzoneProps } from "./components/dropzone/components/dropzone/DropzoneProps";
 export type { FileInputButtonProps } from "./components/file-input-button/InputButtonProps";
 export type { FileCardProps } from "./components/file-card/FileCardProps";
+export type { AvatarProps } from "./components/avatar/AvatarProps";
 
 export { useFakeProgress } from "./hooks";
 

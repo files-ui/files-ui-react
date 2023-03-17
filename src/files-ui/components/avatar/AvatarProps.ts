@@ -1,9 +1,10 @@
 import { OverridableComponentProps } from "../overridable/OverridableComponentsProps";
 export interface AvatarFullProps extends OverridableComponentProps {
+    accept?: string;
     variant?: "square" | "circle";
     borderRadius?: string;
     src?: string | File;
-    onChange?: Function,
+    onChange?: (selectedFile: File) => void,
     /**
      * Alternative label when an error occurs
      * on loading the image
@@ -23,12 +24,7 @@ export interface AvatarFullProps extends OverridableComponentProps {
     isUloading?: boolean;
 
     onError?: React.ReactEventHandler<HTMLImageElement>;
-    /**
-     * If true, images will be analized and showed according their orientation
-     * orientation can be landscape if height < width. 
-     * In that case height will be set to 100%. Otherwise width will be set to 100%
-     */
-    smart?: boolean;
+
     /**
      * If not present, image width will be set to 100%.
      * 
@@ -46,12 +42,17 @@ export interface AvatarFullProps extends OverridableComponentProps {
      */
     smartImgFit?: false | "orientation" | "center";
 }
+type DefDivProps = React.HTMLProps<HTMLDivElement>;
+type DivPropsOmitAvatarFullProps = Omit<DefDivProps, keyof AvatarFullProps>;
+
+
+
 
 export declare type AvatarProps =
     /*   {
         [D in keyof React.HTMLProps<HTMLDivElement>]: React.HTMLProps<HTMLDivElement>[D]
       } & */
-    {
+    DivPropsOmitAvatarFullProps & {
         [P in keyof AvatarFullProps]: AvatarFullProps[P];
 
     }
@@ -64,6 +65,6 @@ export const defaultAvatarProps: AvatarProps =
     changeLabel: "Cambiar foto",
     uploadingLabel: "Uploading...",
     readOnly: false,
-    smart: false,
-    smartImgFit: "orientation",
+    //smart: false,
+    smartImgFit: "center",
 }
