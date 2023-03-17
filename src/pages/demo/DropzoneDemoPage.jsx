@@ -20,6 +20,7 @@ import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
+
 import DemoDropzoneFooterConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneFooterConfig";
 import DemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneHeaderConfig";
 import CodeDemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneHeaderConfig";
@@ -46,9 +47,11 @@ const DropzoneDemoPage = (props) => {
         <MainTitle>Dropzone</MainTitle>
 
         <MainParagraph>
-          The "dropzone" component is a special{" "}
-          <CodeHighlight>input</CodeHighlight> enhanced by the ability to allow
-          users to drag and drop files there or choose files from a file dialog.
+          The default <CodeHighlight>{'<input type="file"/>'}</CodeHighlight> is
+          just a quite boring button. That's why we present the"dropzone"
+          component is an special <CodeHighlight>input</CodeHighlight> enhanced
+          by the ability to allow users to drag and drop files there or choose
+          files from a file dialog and also to validate an upload them.
         </MainParagraph>
 
         <DescParagraph>
@@ -81,7 +84,7 @@ const DropzoneDemoPage = (props) => {
         <section id="basic-dropzone">
           <SubTitle content="Basic Dropzone" />
           <DescParagraph>
-            In this demo we set dropzone with the minimum props that allows you
+            In this demo we set the <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> with the minimum props that allows you
             to get your task done fast. These props are{" "}
             <CodeHighlight>onChange</CodeHighlight> and{" "}
             <CodeHighlight>value</CodeHighlight>.

@@ -1,19 +1,25 @@
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-const BasicDropzoneCode = ({ splittedOnly = false }) => {
+const BasicDropzoneCode = ({ splittedOnly = false, button=false }) => {
   return (
     <ShowDemoCode
       splittedOnly={splittedOnly}
-      codeCompleteJS={completeCodeJS}
-      codeCompleteTS={completeCodeTS}
+      codeCompleteJS={button?splittedCodeJSButton:completeCodeJS}
+      codeCompleteTS={button?splittedCodeTSButton:completeCodeTS}
       codeSandboxJS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
       codeSandboxTS="https://codesandbox.io/s/dropzone-ui-basic-3j01v"
-      codeSplittedJS={splittedCodeJS}
-      codeSplittedTS={splittedCodeTS}
+      codeSplittedJS={button?splittedCodeJSButton:splittedCodeJS}
+      codeSplittedTS={button?splittedCodeTSButton:splittedCodeTS}
     />
   );
 };
 export default BasicDropzoneCode;
 
+const splittedCodeJSButton = `<FileInputButton onChange={updateFiles} value={files} />
+{files.map((file) => (
+  <FileCard key={file.id} {...file} onDelete={removeFile} info />
+))}`;
+const splittedCodeTSButton = splittedCodeJSButton;
+//////////
 const splittedCodeJS = `<Dropzone
   onChange={updateFiles}
   value={files}
