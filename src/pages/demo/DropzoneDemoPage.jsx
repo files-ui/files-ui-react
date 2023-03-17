@@ -603,15 +603,15 @@ const DropzoneDemoPage = (props) => {
         <section id="localization">
           <SubTitle content="Localization" />
           <DescParagraph>
-            The localization demo for this component can be found in the{" "}
-            <AnchorToTab href="/localization">localization page</AnchorToTab>
+            <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component uses the{" "}
+            <TypeHighlight>localization</TypeHighlight> prop in the validation
+            and the upload process for setting status and messages according to the language that
+            this prop refers to. 
+            <br/>
+            The localization demo for this component can be found in
+            the{" "}
+            <AnchorToTab href="/localization">localization page</AnchorToTab>.
           </DescParagraph>
-
-          {/*   <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneFooterConfig />
-          </Paper>
-
-          <CodeDemoDropzoneFooterConfig /> */}
         </section>
 
         <section id="api">

@@ -53,8 +53,9 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     (ab: DropzoneActionButton | undefined) => ab !== undefined
   ) as DropzoneActionButton[];
 
+  const tailClassName:string = `${top ? " top" : " bottom"}`;
   const finalClassName = addClassName(
-    "files-ui-buttons-container" + `${top ? " top" : " bottom"}`,
+    "files-ui-buttons-container" + tailClassName,
     containerClassName
   );
 

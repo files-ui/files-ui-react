@@ -14,22 +14,15 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import RightMenu from "../../components/RightMenu/RightMenu";
 
 import BasicDropzoneCodeJS from "../../components/demo-components/dropzone-demo/BasicDropzoneCodeJS";
-import DemoDropzoneFooterConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneFooterConfig";
-import DemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/DemoDropzoneHeaderConfig";
-import CodeDemoDropzoneHeaderConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneHeaderConfig";
-import CodeDemoDropzoneFooterConfig from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneFooterConfig";
+
 import DemoDropzoneStyling from "../../components/demo-components/dropzone-demo/DemoDropzoneStyling";
 import DemoDropzoneBehaviour from "../../components/demo-components/dropzone-demo/DemoDropzoneBehaviour";
 import DemoDropzoneLabel from "../../components/demo-components/dropzone-demo/DemoDropzoneLabel";
-import DemoDropzoneDropLayer from "../../components/demo-components/dropzone-demo/DemoDropzoneDropLayer";
-import DemoDropzoneClickable from "../../components/demo-components/dropzone-demo/DemoDropzoneClickable";
 import DemoDropzoneDisabled from "../../components/demo-components/dropzone-demo/DemoDropzoneDisabled";
 import DemoDropzoneRipple from "../../components/demo-components/dropzone-demo/DemoDropzoneRipple";
 import CodeDemoDropzoneStyling from "../../components/demo-components/dropzone-demo/CodeDropzoneDemoStyling";
 import CodeDemoDropzoneRipple from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneRipple";
 import CodeDemoDropzoneDisabled from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneDisabled";
-import CodeDemoDropzoneClickable from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneClickable";
-import CodeDemoDropzoneDropLayer from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneDropLayer";
 import CodeDemoDropzoneBehaviour from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneBehaviour";
 import CodeDemoDropzoneLabel from "../../components/demo-components/dropzone-demo/CodeDropzoneDemoLabel";
 import BasicDemoDropzone from "../../components/demo-components/dropzone-demo/BasicDropzoneDemo";
@@ -367,10 +360,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneRipple button/>
+            <DemoDropzoneRipple button />
           </Paper>
 
-          <CodeDemoDropzoneRipple button/>
+          <CodeDemoDropzoneRipple button />
         </section>
 
         <section id="disabled">
@@ -386,44 +379,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneDisabled button/>
+            <DemoDropzoneDisabled button />
           </Paper>
 
-          <CodeDemoDropzoneDisabled button/>
-        </section>
-
-        <section id="clickable">
-          <SubTitle content="Clickable Dropzone" />
-          <DescParagraph>
-            Dropzone with the
-            <TypeHighlight>clickable</TypeHighlight> prop set to false will not
-            open the file dialog to select files when user clicks the component.
-          </DescParagraph>
-
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneClickable />
-          </Paper>
-
-          <CodeDemoDropzoneClickable />
-        </section>
-
-        <section id="drop-layer">
-          <SubTitle content="Drop Layer" />
-          <DescParagraph>
-            Dropzone with the
-            <TypeHighlight>dropOnLayer</TypeHighlight> prop set to false will
-            not perform the drop operation in a layer that covers the complete
-            component container.
-            <br />
-            In this demo try to drag and drop files in both dropzones to see the
-            difference.
-          </DescParagraph>
-
-          <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneDropLayer />
-          </Paper>
-
-          <CodeDemoDropzoneDropLayer />
+          <CodeDemoDropzoneDisabled button />
         </section>
 
         <section id="add-or-replace">
@@ -448,24 +407,24 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneBehaviour />
+            <DemoDropzoneBehaviour button />
           </Paper>
 
-          <CodeDemoDropzoneBehaviour />
+          <CodeDemoDropzoneBehaviour button />
         </section>
 
         <section id="localization">
           <SubTitle content="Localization" />
           <DescParagraph>
+            Although the <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight>{" "}
+            allows full control of label, this component uses the{" "}
+            <TypeHighlight>localization</TypeHighlight> prop in the validation
+            and the upload process for setting status and messages according to
+            the language that this prop refers to.
+            <br />
             The localization demo for this component can be found in the{" "}
-            <AnchorToTab href="/localization">localization page</AnchorToTab>
+            <AnchorToTab href="/localization">localization page</AnchorToTab>.
           </DescParagraph>
-
-          {/*   <Paper variant="outlined" style={{ padding: "25px" }}>
-          <DemoDropzoneFooterConfig />
-        </Paper>
-
-        <CodeDemoDropzoneFooterConfig /> */}
         </section>
 
         <section id="api">
@@ -476,15 +435,15 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
             <ul>
               <li>
                 <CodeHighlight>
-                  <AnchorToTab href="/api/dropzone">
-                    {"<Dropzone />"}
+                  <AnchorToTab href="/api/fileinputbutton">
+                    {"<FileInputButton />"}
                   </AnchorToTab>
                 </CodeHighlight>
               </li>
               <li>
                 <CodeHighlight>
-                  <AnchorToTab href="/api/filemosaic">
-                    {"<FileMosaic />"}
+                  <AnchorToTab href="/api/filecard">
+                    {"<FileCard />"}
                   </AnchorToTab>
                 </CodeHighlight>
               </li>
@@ -522,11 +481,6 @@ const rightMenuItems = [
     label: "Uploading",
     referTo: "/components/fileinputbutton#uploading",
   },
-  /*  {
-      id: 4,
-      label: "Dropzone events",
-      referTo: "/components/dropzone#dropzone-events",
-    }, */
   {
     id: 5,
     label: "Action buttons",
