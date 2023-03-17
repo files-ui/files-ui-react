@@ -130,6 +130,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     style: containerStyle,
     className: containerClassName,
   } = actionButtons as DropzoneActions;
+
   const styleBorderRadius: string | number | undefined = style?.borderRadius;
 
   const {
@@ -195,7 +196,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     localization,
     validateFilesFlag
   );
-
   /**
    * Uploads each file in the array of ExtFiles
    * First, sets all the files in preparing status and awaits `preparingTime` miliseconds.
@@ -570,7 +570,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   // HANDLERS for CLICK, DRAG NAD DROP
   function handleClick(): void {
     //handleClickUtil(evt);
-    if (!clickable) return;
+    if (!clickable || disabled || isUploading) return;
     makeRipple();
     handleClickInput(inputRef.current);
   }
@@ -626,11 +626,11 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
     if (disabled) return;
 
+    if (isUploading) return;
+
     if (!disableRipple) makeRipple();
 
     setIsDragging(false);
-
-    if (isUploading) return;
 
     let fileList: FileList = evt.dataTransfer.files;
 
