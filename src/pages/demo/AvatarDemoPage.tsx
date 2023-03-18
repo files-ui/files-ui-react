@@ -15,6 +15,9 @@ import DemoAvatarPickFile from "../../components/demo-components/avatar-demo/Dem
 import CodeDemoAvatarPickFile from "../../components/demo-components/avatar-demo/CodeDemoAvatarPickFile";
 import DemoAvatarFallBack from "../../components/demo-components/avatar-demo/DemoAvatarFallBack";
 import CodeDemoAvatarFallBack from "../../components/demo-components/avatar-demo/CodeDemoAvatarFallBack";
+import AnchorToTab from "../../components/util-components/AnchorToTab";
+import DemoAvatarSmartImgFit from "../../components/demo-components/avatar-demo/DmoAvatarSmartImgFit";
+import CodeDemoAvatarSmartFit from "../../components/demo-components/avatar-demo/CodeDemoAvatarSmartFit";
 
 interface AvatarDemoPageProps {}
 const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
@@ -92,11 +95,57 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
               display: "flex",
               width: "100%",
               justifyContent: "space-evenly",
+              flexWrap: "wrap",
+              gap: "5px",
             }}
           >
             <DemoAvatarFallBack />
           </Paper>
           <CodeDemoAvatarFallBack />
+        </section>
+
+        <section id="smart-image-fit">
+          <SubTitle content="Smart image fit" />
+          <DescParagraph>
+            <CodeHighlight>Avatar</CodeHighlight> with
+            <TypeHighlight>smartImgFit</TypeHighlight> prop will display image
+            according to its heigh and width.
+            <br />
+            Image with height greater than its width has a "portrait"
+            orientation. Otherwise it has a "landscape" orientation.
+            <br />
+            In Avatar component the default value is "center".
+          </DescParagraph>
+
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              //padding:"auto",
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-evenly",
+              flexWrap: "wrap",
+              gap: "50px",
+            }}
+          >
+            <DemoAvatarSmartImgFit />
+          </Paper>
+
+          <CodeDemoAvatarSmartFit />
+        </section>
+
+        <section id="api">
+          <SubTitle content="API" />
+          <DescParagraph>
+            See the documentation below for a complete reference to all of the
+            props available to the components mentioned here.
+          </DescParagraph>
+          <ul>
+            <li>
+              <AnchorToTab href="/api/avatar">{"<Avatar/>"}</AnchorToTab>
+            </li>
+          </ul>
         </section>
       </MainContentContainer>
 
@@ -127,7 +176,7 @@ const rightMenuItems = [
   {
     id: 4,
     label: "Smart image fit",
-    referTo: "/components/filemosaic#smart-image-fit",
+    referTo: "/components/avatar#smart-image-fit",
   },
   {
     id: 5,
@@ -152,6 +201,6 @@ const rightMenuItems = [
   {
     id: 9,
     label: "API",
-    referTo: "/components/filecard#api",
+    referTo: "/components/avatar#api",
   },
 ];
