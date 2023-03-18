@@ -18,6 +18,11 @@ import CodeDemoAvatarFallBack from "../../components/demo-components/avatar-demo
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 import DemoAvatarSmartImgFit from "../../components/demo-components/avatar-demo/DmoAvatarSmartImgFit";
 import CodeDemoAvatarSmartFit from "../../components/demo-components/avatar-demo/CodeDemoAvatarSmartFit";
+import DemoAvatarStyling from "../../components/demo-components/avatar-demo/DemoAvatarStyling";
+import CodeDemoAvatarStyling from "../../components/demo-components/avatar-demo/CodeDemoAvatarStyling";
+import DemoAvatarLabels from "../../components/demo-components/avatar-demo/DemoAvatarLabels";
+import DemoAvatarVariants from "../../components/demo-components/avatar-demo/DemoAvatarVarians";
+import DemoAvatarLoading from "../../components/demo-components/avatar-demo/DemoAvatarLoading";
 
 interface AvatarDemoPageProps {}
 const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
@@ -121,7 +126,6 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
             variant="outlined"
             style={{
               padding: "25px",
-              //padding:"auto",
               display: "flex",
               width: "100%",
               justifyContent: "space-evenly",
@@ -133,6 +137,110 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
           </Paper>
 
           <CodeDemoAvatarSmartFit />
+        </section>
+
+        <section id="loading">
+          <SubTitle content="Loading" />
+          <DescParagraph>
+            You can use the prop <TypeHighlight>isLoading</TypeHighlight> when
+            you want to communicate that something is loading.
+          </DescParagraph>
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+            }}
+          >
+            <DemoAvatarLoading />
+          </Paper>
+          <CodeDemoAvatarBasic />
+        </section>
+
+        <section id="variants">
+          <SubTitle content="Variants" />
+          <DescParagraph>
+            Avatar component comes in 2 variants: "circle" and "square".
+          </DescParagraph>
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-evenly",
+              flexWrap: "wrap",
+              gap: "50px",
+            }}
+          >
+            <DemoAvatarVariants />
+          </Paper>
+          <CodeDemoAvatarBasic />
+        </section>
+
+        <section id="styling">
+          <SubTitle content="Styling" />
+          <DescParagraph>
+            You can define the <TypeHighlight>style</TypeHighlight> prop for
+            changing the styles applied to the main container such us the{" "}
+            <TypeHighlight>width</TypeHighlight> o the{" "}
+            <TypeHighlight>height</TypeHighlight>.
+            <br />
+            Also you can use directly the prop{" "}
+            <TypeHighlight>borderRadius</TypeHighlight> to specify how rounde
+            you preffer the borders.
+          </DescParagraph>
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-evenly",
+              flexWrap: "wrap",
+              gap: "50px",
+            }}
+          >
+            <DemoAvatarStyling />
+          </Paper>
+          <CodeDemoAvatarStyling />
+        </section>
+
+        <section id="labels">
+          <SubTitle content="Labels" />
+          <DescParagraph>
+            You can specify the content of the texts:
+            <ul>
+              <li>
+                <CodeHighlight>emptyLabel</CodeHighlight>: when the source is
+                not set.
+              </li>
+              <li>
+                <CodeHighlight>changeLabel</CodeHighlight>: when there i a valid
+                source set.
+              </li>
+              <li>
+                <CodeHighlight>uploadingLabel</CodeHighlight>: when you want to
+                communicate that something is loading.
+              </li>
+            </ul>
+          </DescParagraph>
+          <Paper
+            variant="outlined"
+            style={{
+              padding: "25px",
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-evenly",
+              flexWrap: "wrap",
+              gap: "50px",
+            }}
+          >
+            <DemoAvatarLabels />
+          </Paper>
+          <CodeDemoAvatarStyling />
         </section>
 
         <section id="api">
@@ -180,8 +288,8 @@ const rightMenuItems = [
   },
   {
     id: 5,
-    label: "Uploading & loading",
-    referTo: "/components/avatar#uploading",
+    label: "Loading",
+    referTo: "/components/avatar#loading",
   },
   {
     id: 6,

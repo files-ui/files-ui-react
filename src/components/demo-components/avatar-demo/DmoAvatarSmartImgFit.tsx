@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Avatar, AvatarProps } from "../../../files-ui";
+import { Avatar } from "../../../files-ui";
 interface DemoAvatarFallBackProps {}
 
 const landscapeImage =

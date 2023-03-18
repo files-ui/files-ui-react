@@ -63,7 +63,7 @@ const ExtraComponentsMainPageAvatar: React.FC<ExtraComponentsMainPageProps> = (
         <Avatar
           src={avatarSrc}
           onChange={handleChange}
-          isUloading={isUloading}
+          isLoading={isUloading}
           smartImgFit={"center"}
           style={{ width: "170px", height: "170px" }}
           //variant={"circle"}
@@ -71,7 +71,7 @@ const ExtraComponentsMainPageAvatar: React.FC<ExtraComponentsMainPageProps> = (
         <Avatar
           src={avatarSrc}
           onChange={handleChange}
-          isUloading={isUloading}
+          isLoading={isUloading}
           smartImgFit={"center"}
           variant={"circle"}
           style={{ width: "170px", height: "170px" }}
