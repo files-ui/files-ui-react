@@ -26,7 +26,7 @@ const DemoAvatarFallBack: React.FC<DemoAvatarFallBackProps> = (
         onError={() => setImageSource2(fallBackImage)}
         onChange={(imgSource) => setImageSource2(imgSource)}
         accept=".pdf, .png"
-        alt="Avatar"
+        alt="Avatar2"
       />
     </>
   );

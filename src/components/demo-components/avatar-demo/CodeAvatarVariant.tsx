@@ -1,7 +1,9 @@
 import * as React from "react";
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-
-const CodeDemoAvatarBasic = () => {
+interface CodeDemoAvatarPickFileProps {}
+const CodeDemoAvatarVariant: React.FC<CodeDemoAvatarPickFileProps> = (
+  props: CodeDemoAvatarPickFileProps
+) => {
   return (
     <ShowDemoCode
       codeCompleteJS={completeCodeJS}
@@ -13,23 +15,24 @@ const CodeDemoAvatarBasic = () => {
     />
   );
 };
-export default CodeDemoAvatarBasic;
+export default CodeDemoAvatarVariant;
 
-const splittedCodeJS = `<Avatar
-  readOnly
-  src={"https://i.pinimg.com/564x/9a/8b/cf/9a8bcfaba81783eff9241538b00343b1.jpg"}
-  alt="Isabella"
-/>`;
+const splittedCodeJS = `<Avatar src={imageSrc} readOnly />
+<Avatar src={imageSrc} variant="circle" readOnly />`;
+
 const splittedCodeTS = splittedCodeJS;
 const completeCodeJS = `import * as React from "react";
 import { Avatar } from "@files-ui/react";
-
 const imageSrc =
   "https://i.pinimg.com/564x/9a/8b/cf/9a8bcfaba81783eff9241538b00343b1.jpg";
 
-const BasicDemoAvatar = () => {
-  return <Avatar readOnly src={imageSrc} alt="Isabella" />;
-};
-export default BasicDemoAvatar;`;
+export default function DemoAvatarVariants = () => {
+  return (
+    <>
+      <Avatar src={imageSrc} readOnly />
+      <Avatar src={imageSrc} variant="circle" readOnly />
+    </>
+  );
+};`;
 
 const completeCodeTS = completeCodeJS;

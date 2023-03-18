@@ -17,7 +17,14 @@ const CodeDemoAvatarSmartFit: React.FC<CodeDemoAvatarPickFileProps> = (
 };
 export default CodeDemoAvatarSmartFit;
 
-const splittedCodeJS = ``;
+const splittedCodeJS = `<Avatar src={landscapeImage} readOnly smartImgFit={false} />
+<Avatar src={landscapeImage} readOnly smartImgFit={"orientation"} />
+<Avatar src={landscapeImage} readOnly smartImgFit={"center"} />
+
+<Avatar src={portraitImage} readOnly smartImgFit={false} />
+<Avatar src={portraitImage} readOnly smartImgFit={"orientation"} />
+<Avatar src={portraitImage} readOnly smartImgFit={"center"} />`;
+
 const splittedCodeTS = splittedCodeJS;
 const completeCodeJS = `import * as React from "react";
 import { Avatar } from "@files-ui/react";
@@ -27,18 +34,18 @@ const landscapeImage =
 const portraitImage =
   "https://i.pinimg.com/originals/b6/1d/6a/b61d6a1079d8e54932dcde9dc260dd2e.gif";
 
-export default function App = () => {
-    return (
-        <>
-          <Avatar src={landscapeImage} readOnly smartImgFit={false} />
-          <Avatar src={landscapeImage} readOnly smartImgFit={"orientation"} />
-          <Avatar src={landscapeImage} readOnly smartImgFit={"center"} />
-    
-          <Avatar src={portraitImage} readOnly smartImgFit={false} />
-          <Avatar src={portraitImage} readOnly smartImgFit={"orientation"} />
-          <Avatar src={portraitImage} readOnly smartImgFit={"center"} />
-        </>
-      );
+export default function DemoAvatarSmartImageFit = () => {
+  return (
+    <>
+      <Avatar src={landscapeImage} readOnly smartImgFit={false} />
+      <Avatar src={landscapeImage} readOnly smartImgFit={"orientation"} />
+      <Avatar src={landscapeImage} readOnly smartImgFit={"center"} />
+
+      <Avatar src={portraitImage} readOnly smartImgFit={false} />
+      <Avatar src={portraitImage} readOnly smartImgFit={"orientation"} />
+      <Avatar src={portraitImage} readOnly smartImgFit={"center"} />
+    </>
+  );
 };`;
 
 const completeCodeTS = completeCodeJS;

@@ -23,6 +23,9 @@ import CodeDemoAvatarStyling from "../../components/demo-components/avatar-demo/
 import DemoAvatarLabels from "../../components/demo-components/avatar-demo/DemoAvatarLabels";
 import DemoAvatarVariants from "../../components/demo-components/avatar-demo/DemoAvatarVarians";
 import DemoAvatarLoading from "../../components/demo-components/avatar-demo/DemoAvatarLoading";
+import CodeDemoAvatarLoading from "../../components/demo-components/avatar-demo/CodeDemoAvatarLoading";
+import CodeDemoAvatarVariant from "../../components/demo-components/avatar-demo/CodeAvatarVariant";
+import CodeDemoAvatarLabels from "../../components/demo-components/avatar-demo/CodeDemoAvatarLabels";
 
 interface AvatarDemoPageProps {}
 const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
@@ -156,7 +159,7 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
           >
             <DemoAvatarLoading />
           </Paper>
-          <CodeDemoAvatarBasic />
+          <CodeDemoAvatarLoading />
         </section>
 
         <section id="variants">
@@ -177,7 +180,7 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
           >
             <DemoAvatarVariants />
           </Paper>
-          <CodeDemoAvatarBasic />
+          <CodeDemoAvatarVariant />
         </section>
 
         <section id="styling">
@@ -240,7 +243,7 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
           >
             <DemoAvatarLabels />
           </Paper>
-          <CodeDemoAvatarStyling />
+          <CodeDemoAvatarLabels />
         </section>
 
         <section id="api">
