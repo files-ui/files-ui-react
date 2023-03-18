@@ -11,9 +11,9 @@ export interface AvatarFullProps extends OverridableComponentProps {
      */
     alt?: string,
 
-    emptyLabel?: string;
-    uploadingLabel?: string;
-    changeLabel?: string;
+    emptyLabel?: React.ReactNode;
+    loadingLabel?: React.ReactNode;
+    changeLabel?: React.ReactNode;
     /**
      * if a src is given, then avatar will show the image
      * or a file error message and will not allow
@@ -21,7 +21,7 @@ export interface AvatarFullProps extends OverridableComponentProps {
      */
     readOnly?: boolean;
 
-    isUloading?: boolean;
+    isLoading?: boolean;
 
     onError?: React.ReactEventHandler<HTMLImageElement>;
 
@@ -63,7 +63,7 @@ export const defaultAvatarProps: AvatarProps =
     alt: `avatar`,
     emptyLabel: "Agregar foto",
     changeLabel: "Cambiar foto",
-    uploadingLabel: "Uploading...",
+    loadingLabel: "Loading...",
     readOnly: false,
     //smart: false,
     smartImgFit: "center",

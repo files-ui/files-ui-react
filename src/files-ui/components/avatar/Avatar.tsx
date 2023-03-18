@@ -20,8 +20,8 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
 
     variant,
     borderRadius,
-    uploadingLabel,
-    isUloading,
+    loadingLabel: uploadingLabel,
+    isLoading: isUloading,
     onError,
 
     smartImgFit,
@@ -29,12 +29,18 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     style,
     ...rest
   } = mergeProps(props, defaultAvatarProps);
-  console.log("Avatar smartImgFit",smartImgFit);
+  console.log("Avatar smartImgFit", smartImgFit);
 
   const inputRef: React.RefObject<HTMLInputElement> =
     React.useRef<HTMLInputElement>(null);
 
-  const isStyleInjected: boolean = useAvatarStyle(borderRadius);
+  const avatarId = React.useId();
+  const finalClassNameBorder: string | undefined = useAvatarStyle(
+    avatarId.replaceAll(":",""),
+    borderRadius
+  );
+
+  console.log("finalClassNameBorder",finalClassNameBorder);
 
   const handleClick = () => {
     // alert("Agregar fotooooooo");
@@ -60,13 +66,16 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     onError?.(evt);
   };
 
-  if (isStyleInjected) {
+  if (!finalClassNameBorder) return <></>;
+  else {
     return (
       <React.Fragment>
         <div
-          className={`fui-avatar-main-container${
-            variant === "circle" ? " circle" : ""
-          }`}
+          className={
+            `fui-avatar-main-container${
+              variant === "circle" ? " circle" : ""
+            }` + " "+finalClassNameBorder
+          }
           style={style}
           {...rest}
         >
@@ -74,7 +83,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
           {isUloading ? (
             <Layer visible={true}>
               <div className={"fui-avatar-label"}>
-                <InfiniteLoader />
+                <InfiniteLoader size={50} />
                 {uploadingLabel}
               </div>
             </Layer>
@@ -92,9 +101,11 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
           {/**Layer 2 */}
           {!readOnly && (
             <>
-              <p className={"fui-avatar-label hide"} onClick={handleClick}>
-                {src ? changeLabel : emptyLabel}
-              </p>
+              {!isUloading && (
+                <div className={"fui-avatar-label hide"} onClick={handleClick}>
+                  {src ? changeLabel : emptyLabel}
+                </div>
+              )}
               <InputHidden
                 multiple={false}
                 accept={accept || "image/*"}
@@ -107,7 +118,6 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
       </React.Fragment>
     );
   }
-  return <React.Fragment></React.Fragment>;
 };
 export default Avatar;
 
