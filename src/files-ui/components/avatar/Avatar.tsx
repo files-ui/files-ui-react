@@ -9,30 +9,38 @@ import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import Layer from "../file-mosaic/components/file-mosaic-layer/Layer";
 const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const {
-    style,
+    readOnly,
     src,
-    onChange,
     alt,
+    accept,
+
+    onChange,
     emptyLabel,
     changeLabel,
-    readOnly,
+
     variant,
     borderRadius,
-    uploadingLabel,
-    isUloading,
+    loadingLabel: uploadingLabel,
+    isLoading: isUloading,
     onError,
+
     smartImgFit,
+
+    style,
+    ...rest
   } = mergeProps(props, defaultAvatarProps);
+  console.log("Avatar smartImgFit", smartImgFit);
 
   const inputRef: React.RefObject<HTMLInputElement> =
     React.useRef<HTMLInputElement>(null);
 
-  const isStyleInjected: boolean = useAvatarStyle(borderRadius);
+  const avatarId = React.useId();
+  const finalClassNameBorder: string | undefined = useAvatarStyle(
+    avatarId.replaceAll(":",""),
+    borderRadius
+  );
 
-  //const [isUloading, setIsUploading] = React.useState<boolean>(false);
-
-  //const avatarClassNameContainer: string = setAvatarClassNameContainer(variant);
-  //const avatarClassNameLayerInfo: string = setAvatarClassNameLayerInfo(variant);
+  console.log("finalClassNameBorder",finalClassNameBorder);
 
   const handleClick = () => {
     // alert("Agregar fotooooooo");
@@ -54,23 +62,28 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const handleError: React.ReactEventHandler<HTMLImageElement> = (
     evt: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
+    console.log("Avatar error", evt);
     onError?.(evt);
   };
 
-  if (isStyleInjected) {
+  if (!finalClassNameBorder) return <></>;
+  else {
     return (
       <React.Fragment>
         <div
-          className={`fui-avatar-main-container${
-            variant === "circle" ? " circle" : ""
-          }`}
+          className={
+            `fui-avatar-main-container${
+              variant === "circle" ? " circle" : ""
+            }` + " "+finalClassNameBorder
+          }
           style={style}
+          {...rest}
         >
           {/**Layer 1 */}
           {isUloading ? (
-            <Layer visible={isUloading}>
+            <Layer visible={true}>
               <div className={"fui-avatar-label"}>
-                <InfiniteLoader />
+                <InfiniteLoader size={50} />
                 {uploadingLabel}
               </div>
             </Layer>
@@ -88,12 +101,14 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
           {/**Layer 2 */}
           {!readOnly && (
             <>
-              <p className={"fui-avatar-label hide"} onClick={handleClick}>
-                {src ? changeLabel : emptyLabel}
-              </p>
+              {!isUloading && (
+                <div className={"fui-avatar-label hide"} onClick={handleClick}>
+                  {src ? changeLabel : emptyLabel}
+                </div>
+              )}
               <InputHidden
                 multiple={false}
-                accept={""}
+                accept={accept || "image/*"}
                 onChange={handleChangeInput}
                 inputRef={inputRef}
               />
@@ -103,7 +118,6 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
       </React.Fragment>
     );
   }
-  return <React.Fragment></React.Fragment>;
 };
 export default Avatar;
 

@@ -26,7 +26,7 @@ interface FileMosaicImageLayerProps {
    * If not present, image width will be set to 100%.
    *
    * If present, image will be analized and displayed according to its heigh and width.
-   * Image width height greater than its width has a "portrait" orientation.
+   * Image with height greater than its width has a "portrait" orientation.
    * Otherwise it has a "landscape" orientation.
    * - If value is "orientation", image will be displayed complete by giving 100%
    * to width prop if the orientation is "landscape".

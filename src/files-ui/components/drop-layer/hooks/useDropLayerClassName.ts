@@ -43,9 +43,9 @@ const useDropLayerClassName = (
 
             if (finalDropzoneId === "default" && !styleInjected) {
                 //check if already inserted
-                if (DynamiCSS.existStyleSheet(finalDropzoneId)) {
+                if (DynamiCSS.existStyleSheet("files-ui-drop-layer-style-id-"+finalDropzoneId)) {
                     setStyleInjected(true);
-                    setIdStyles(idStyle);
+                    setIdStyles("files-ui-drop-layer-style-id-"+finalDropzoneId);
 
                 } else {
                     idStyle = DynamiCSS.insertStyleSheet(styleSheet);

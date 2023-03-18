@@ -9,15 +9,24 @@
  */
 export function getImageOrientation(
     imageSource: string | undefined,
-): Promise<"landscape" | "portrait" > {
+): Promise<"landscape" | "portrait"> {
     return new Promise((resolve, reject) => {
+        console.log("getImageOrientation imageSource", imageSource);
         if (!imageSource || imageSource.length === 0) {
+            console.log("getImageOrientation rejected", imageSource);
+
             reject("landscape");
             return;
         }
         try {
+            console.log("getImageOrientation try ini", imageSource);
+
             let img: HTMLImageElement = new Image();
             img.src = imageSource;
+            img.onerror = (ev: string | Event) => {
+                console.log("getImageOrientation There was a ne error reading", ev);
+                reject("landscape");
+            }
             img.onload = () => {
                 let width: number = img.width;
                 let height: number = img.height;
@@ -28,6 +37,8 @@ export function getImageOrientation(
                 }
             }
         } catch (error) {
+            console.error("An error ocurred when trying to get the image orientation");
+
             if (process.env.NODE_ENV === "development") {
                 console.error("An error ocurred when trying to get the image orientation");
             }

@@ -11,7 +11,7 @@ import { OverridableComponentProps } from "./OverridableComponentsProps";
  export function mergeProps<T extends OverridableComponentProps>
  (incommingProps: T | undefined,
      defaultProps: T): T {
-
+console.log("incommingProps",incommingProps);
  if (!incommingProps) {
      return defaultProps;
  } else {

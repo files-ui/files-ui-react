@@ -343,9 +343,10 @@ const FileMosaicDemoPage = (props) => {
           <DescParagraph>
             <CodeHighlight>FileMosaic</CodeHighlight> with
             <TypeHighlight>smartImgFit</TypeHighlight> prop will display image
-            according to its heigh and width. Image width height greater than
-            its width has a "portrait" orientation. Otherwise it has a
-            "landscape" orientation.
+            according to its heigh and width.
+            <br />
+            Image with height greater than its width has a "portrait"
+            orientation. Otherwise it has a "landscape" orientation.
           </DescParagraph>
 
           <DemoContainerFileMosaic>
@@ -412,6 +413,11 @@ const rightMenuItems = [
     id: 5,
     label: "Dark mode",
     referTo: "/components/filemosaic#dark-mode",
+  },
+  {
+    id: 7,
+    label: "Smart image fit",
+    referTo: "/components/filemosaic#smart-image-fit",
   },
   {
     id: 6,

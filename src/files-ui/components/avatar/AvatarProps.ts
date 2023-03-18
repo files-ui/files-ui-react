@@ -1,18 +1,19 @@
 import { OverridableComponentProps } from "../overridable/OverridableComponentsProps";
 export interface AvatarFullProps extends OverridableComponentProps {
+    accept?: string;
     variant?: "square" | "circle";
     borderRadius?: string;
     src?: string | File;
-    onChange?: Function,
+    onChange?: (selectedFile: File) => void,
     /**
      * Alternative label when an error occurs
      * on loading the image
      */
     alt?: string,
 
-    emptyLabel?: string;
-    uploadingLabel?: string;
-    changeLabel?: string;
+    emptyLabel?: React.ReactNode;
+    loadingLabel?: React.ReactNode;
+    changeLabel?: React.ReactNode;
     /**
      * if a src is given, then avatar will show the image
      * or a file error message and will not allow
@@ -20,20 +21,15 @@ export interface AvatarFullProps extends OverridableComponentProps {
      */
     readOnly?: boolean;
 
-    isUloading?: boolean;
+    isLoading?: boolean;
 
     onError?: React.ReactEventHandler<HTMLImageElement>;
-    /**
-     * If true, images will be analized and showed according their orientation
-     * orientation can be landscape if height < width. 
-     * In that case height will be set to 100%. Otherwise width will be set to 100%
-     */
-    smart?: boolean;
+
     /**
      * If not present, image width will be set to 100%.
      * 
      * If present, image will be analized and displayed according to its heigh and width.
-     * Image width height greater than its width has a "portrait" orientation.
+     * Image with height greater than its width has a "portrait" orientation.
      * Otherwise it has a "landscape" orientation.
      * - If value is "orientation", image will be displayed complete by giving 100% 
      * to width prop if the orientation is "landscape". 
@@ -46,12 +42,17 @@ export interface AvatarFullProps extends OverridableComponentProps {
      */
     smartImgFit?: false | "orientation" | "center";
 }
+type DefDivProps = React.HTMLProps<HTMLDivElement>;
+type DivPropsOmitAvatarFullProps = Omit<DefDivProps, keyof AvatarFullProps>;
+
+
+
 
 export declare type AvatarProps =
     /*   {
         [D in keyof React.HTMLProps<HTMLDivElement>]: React.HTMLProps<HTMLDivElement>[D]
       } & */
-    {
+    DivPropsOmitAvatarFullProps & {
         [P in keyof AvatarFullProps]: AvatarFullProps[P];
 
     }
@@ -62,8 +63,8 @@ export const defaultAvatarProps: AvatarProps =
     alt: `avatar`,
     emptyLabel: "Agregar foto",
     changeLabel: "Cambiar foto",
-    uploadingLabel: "Uploading...",
+    loadingLabel: "Loading...",
     readOnly: false,
-    smart: false,
-    smartImgFit: "orientation",
+    //smart: false,
+    smartImgFit: "center",
 }

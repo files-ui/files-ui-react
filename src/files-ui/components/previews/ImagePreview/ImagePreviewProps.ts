@@ -24,18 +24,13 @@ export interface ImagePreviewFullProps extends OverridableComponentProps {
     /**
      * Fallback when the image is not loaded correctly
      */
-    onError?: React.ReactEventHandler<HTMLImageElement> | undefined;
-    /**
-     * If true, images will be analized and showed according their orientation
-     * orientation can be landscape if height < width. 
-     * In that case height will be set to 100%. Otherwise width will be set to 100%
-     */
-    smart?: boolean;
+    onError?: Function;
+ 
     /**
      * If not present, image width will be set to 100%.
      * 
      * If present, image will be analized and displayed according to its heigh and width.
-     * Image width height greater than its width has a "portrait" orientation.
+     * Image with height greater than its width has a "portrait" orientation.
      * Otherwise it has a "landscape" orientation.
      * - If value is "orientation", image will be displayed complete by giving 100% 
      * to width prop if the orientation is "landscape". 
