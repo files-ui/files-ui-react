@@ -20,11 +20,11 @@ import CodeJSFileMosaicValidation from "../../components/demo-components/filemos
 import DemoFileMosaicValidation from "../../components/demo-components/filemosaic-demo/DemoFileMosaicValidation";
 import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
 import DemoFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/DemoFileMosaicUploadStatus";
-import DemoFileMosaicLocalization from "../../components/demo-components/localization/DemoFileMosaicLocalization";
-import CodeJSFileMosaicLocalization from "../../components/demo-components/localization/CodeJSFileMosaicLocalization";
+//import DemoFileMosaicLocalization from "../../components/demo-components/localization/DemoFileMosaicLocalization";
+//import CodeJSFileMosaicLocalization from "../../components/demo-components/localization/CodeJSFileMosaicLocalization";
 import DemoFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/DemoFileMosaicDarkMode";
 import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicDarkMode";
-import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
+//import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
 import DemoFileCardActions from "../../components/demo-components/filemosaic-demo/DemoFileCradActions";
 import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
 import DemoFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/DemoFileMosaicSmartImgFit";

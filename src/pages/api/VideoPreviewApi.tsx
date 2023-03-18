@@ -1,4 +1,3 @@
-import { Alert } from "@mui/material";
 import * as React from "react";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
@@ -7,29 +6,31 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
-import { FileMosaicAPIPropsRows } from "../../data/FileMosaicAPIPropsRows";
+import Alert from "@mui/material/Alert";
 import PropsTableApi from "./PropsTableApi";
+import { VideoPreviewAPIPropsRows } from "./VideoPreviewAPIPropsRows";
 
 const rightMenuItems = [
   {
     id: 0,
     label: "Demos",
-    referTo: "/api/filemosaic#demo",
+    referTo: "/api/fileinputbutton#demo",
   },
   {
     id: 1,
     label: "Props",
-    referTo: "/api/filemosaic#props",
+    referTo: "/api/fileinputbutton#props",
   },
 ];
-const FileMosaicApi = (props) => {
+
+const VideoPreviewApi = () => {
   return (
     <React.Fragment>
       <MainContentContainer>
-        <MainTitle>FileMosaic API</MainTitle>
+        <MainTitle>VideoPreview API</MainTitle>
         <DescParagraph>
-          API reference docs for the React Filemosaic component. Learn about the
-          props and other APIs of this exported module.
+          API reference docs for the React VideoPreview component. Learn
+          about the props and other APIs of this exported module.
         </DescParagraph>
         <section id="demo">
           <SubTitle content="Demo" />
@@ -43,13 +44,15 @@ const FileMosaicApi = (props) => {
                 </AnchorToTab>
               </li>
               <li>
-                <AnchorToTab href="/components/dropzone">Dropzone</AnchorToTab>
+                <AnchorToTab href="/components/fileinputbutton">
+                  FileInputButton
+                </AnchorToTab>
               </li>
             </ul>
           </Alert>
         </section>
         <section id="props">
-          <PropsTableApi rows={FileMosaicAPIPropsRows} />
+          <PropsTableApi rows={VideoPreviewAPIPropsRows} />
         </section>
       </MainContentContainer>
       <RightMenuContainer>
@@ -58,4 +61,4 @@ const FileMosaicApi = (props) => {
     </React.Fragment>
   );
 };
-export default FileMosaicApi;
+export default VideoPreviewApi;

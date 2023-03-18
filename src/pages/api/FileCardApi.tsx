@@ -7,28 +7,29 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
-import { FileMosaicAPIPropsRows } from "../../data/FileMosaicAPIPropsRows";
+import { FileCardAPIPropsRows } from "../../data/FileCardAPIPropsRows";
 import PropsTableApi from "./PropsTableApi";
 
 const rightMenuItems = [
   {
     id: 0,
     label: "Demos",
-    referTo: "/api/filemosaic#demo",
+    referTo: "/api/filecard#demo",
   },
   {
     id: 1,
     label: "Props",
-    referTo: "/api/filemosaic#props",
+    referTo: "/api/filecard#props",
   },
 ];
-const FileMosaicApi = (props) => {
+
+const FileCardApi = () => {
   return (
     <React.Fragment>
       <MainContentContainer>
-        <MainTitle>FileMosaic API</MainTitle>
+        <MainTitle>FileCard API</MainTitle>
         <DescParagraph>
-          API reference docs for the React Filemosaic component. Learn about the
+          API reference docs for the React Filecard component. Learn about the
           props and other APIs of this exported module.
         </DescParagraph>
         <section id="demo">
@@ -38,9 +39,7 @@ const FileMosaicApi = (props) => {
             the component demo pages:
             <ul>
               <li>
-                <AnchorToTab href="/components/filemosaic">
-                  FileMosaic
-                </AnchorToTab>
+                <AnchorToTab href="/components/filecard">FileCard</AnchorToTab>
               </li>
               <li>
                 <AnchorToTab href="/components/dropzone">Dropzone</AnchorToTab>
@@ -49,7 +48,7 @@ const FileMosaicApi = (props) => {
           </Alert>
         </section>
         <section id="props">
-          <PropsTableApi rows={FileMosaicAPIPropsRows} />
+          <PropsTableApi rows={FileCardAPIPropsRows} />
         </section>
       </MainContentContainer>
       <RightMenuContainer>
@@ -58,4 +57,4 @@ const FileMosaicApi = (props) => {
     </React.Fragment>
   );
 };
-export default FileMosaicApi;
+export default FileCardApi;

@@ -1,4 +1,3 @@
-import { Alert } from "@mui/material";
 import * as React from "react";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
@@ -7,28 +6,29 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
-import { FileMosaicAPIPropsRows } from "../../data/FileMosaicAPIPropsRows";
+import Alert from "@mui/material/Alert";
 import PropsTableApi from "./PropsTableApi";
-
+import { DropzoneAPIPropsRows } from "../../data/DropzoneAPIPropsRows";
 const rightMenuItems = [
   {
     id: 0,
     label: "Demos",
-    referTo: "/api/filemosaic#demo",
+    referTo: "/api/dropzone#demo",
   },
   {
     id: 1,
     label: "Props",
-    referTo: "/api/filemosaic#props",
+    referTo: "/api/dropzone#props",
   },
 ];
-const FileMosaicApi = (props) => {
+
+const DropzoneApi = () => {
   return (
     <React.Fragment>
       <MainContentContainer>
-        <MainTitle>FileMosaic API</MainTitle>
+        <MainTitle>Dropzone API</MainTitle>
         <DescParagraph>
-          API reference docs for the React Filemosaic component. Learn about the
+          API reference docs for the React Dropzone component. Learn about the
           props and other APIs of this exported module.
         </DescParagraph>
         <section id="demo">
@@ -49,7 +49,7 @@ const FileMosaicApi = (props) => {
           </Alert>
         </section>
         <section id="props">
-          <PropsTableApi rows={FileMosaicAPIPropsRows} />
+          <PropsTableApi rows={DropzoneAPIPropsRows} />
         </section>
       </MainContentContainer>
       <RightMenuContainer>
@@ -58,4 +58,4 @@ const FileMosaicApi = (props) => {
     </React.Fragment>
   );
 };
-export default FileMosaicApi;
+export default DropzoneApi;

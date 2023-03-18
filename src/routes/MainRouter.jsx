@@ -23,6 +23,9 @@ import FileInputButtonDemoPage from "../pages/demo/FileInputButtonDemoPage";
 import FileDownloadPage from "../pages/download-page/FileDownloadPage";
 import FileIconsPage from "../pages/file-icons/FileIconsPage";
 import LocalizationPage from "../pages/localization/LocalizationPage";
+import VideoPreviewApi from "../pages/api/VideoPreviewApi";
+import ImagePreviewApi from "../pages/api/ImagePreviewApi";
+import FullScreenApi from "../pages/api/FullScreenApi";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +102,18 @@ const router = createBrowserRouter([
       {
         path: "/api/filecard",
         element: <FileCardApi />,
+      },
+      {
+        path: "/api/fullscreen",
+        element: <FullScreenApi />,
+      },
+      {
+        path: "/api/imagepreview",
+        element: <ImagePreviewApi />,
+      },
+      {
+        path: "/api/videopreview",
+        element: <VideoPreviewApi />,
       },
     ],
   },

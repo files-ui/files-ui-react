@@ -1,6 +1,6 @@
 import CodeHighlight from "../components/codeHighlight/CodeHighlight";
 import TypeHighlight from "../components/typeHighlight/TypeHighlight";
-export const FileMosaicAPIPropsRows = [
+export const FileCardAPIPropsRows = [
   {
     id: 0,
     name: "alwaysActive",
@@ -14,7 +14,7 @@ export const FileMosaicAPIPropsRows = [
       </>
     ),
   },
-  /* {
+  {
     id: 1,
     name: "elevation",
     type: (
@@ -58,7 +58,7 @@ export const FileMosaicAPIPropsRows = [
         24 inclusive.
       </>
     ),
-  }, */
+  },
   {
     id: 2,
     name: "errors",

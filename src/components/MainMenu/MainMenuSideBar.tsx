@@ -91,7 +91,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
         {
           label: "FullScreenPreview",
           index: 34,
-          onClick: () => navigate("/api/fullscreenpreview"),
+          onClick: () => navigate("/api/fullscreen"),
         },
         {
           label: "ImagePreview",
