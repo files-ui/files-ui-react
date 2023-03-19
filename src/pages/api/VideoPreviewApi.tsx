@@ -9,6 +9,8 @@ import Alert from "@mui/material/Alert";
 import PropsTableApi from "./PropsTableApi";
 import { VideoPreviewAPIPropsRows } from "./VideoPreviewAPIPropsRows";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
+import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
+import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 
 const rightMenuItems = [
   {
@@ -29,9 +31,19 @@ const VideoPreviewApi = () => {
       <MainContentContainer>
         <MainTitle>VideoPreview API</MainTitle>
         <MainParagraph>
-          API reference docs for the React VideoPreview component. Learn
-          about the props and other APIs of this exported module.
+          API reference docs for the React VideoPreview component. Learn about
+          the props and other APIs of this exported module.
         </MainParagraph>
+        <DescParagraph>
+          Apart from the props described bellow, the{" "}
+          <CodeHighlight>VideoPreview</CodeHighlight> component accepts all the
+          HTML <CodeHighlight>{"<video/>"}</CodeHighlight> default props. You
+          can check them out{" "}
+          <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes">
+            here
+          </AnchorToTab>
+          .
+        </DescParagraph>
         <section id="demo">
           <SubTitle content="Demo" />
           <Alert severity="info">
@@ -44,9 +56,7 @@ const VideoPreviewApi = () => {
                 </AnchorToTab>
               </li>
               <li>
-                <AnchorToTab href="/components/fileinputbutton">
-                  FileInputButton
-                </AnchorToTab>
+                <AnchorToTab href="/components/filecard">FileCard</AnchorToTab>
               </li>
             </ul>
           </Alert>

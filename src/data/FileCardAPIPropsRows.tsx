@@ -63,7 +63,7 @@ export const FileCardAPIPropsRows = [
     id: 2,
     name: "errors",
     type: <TypeHighlight np>{"string[]"}</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         The list of errors according to the validation criteria or the result of
@@ -81,14 +81,14 @@ export const FileCardAPIPropsRows = [
         <TypeHighlight np>{"number"}</TypeHighlight>
       </>
     ),
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The identifier of the file</>,
   },
   {
     id: 3,
     name: "file",
     type: <TypeHighlight np>{"File"}</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The file object obtained from client drop or selection</>,
   },
   {
@@ -112,7 +112,7 @@ export const FileCardAPIPropsRows = [
   {
     name: "valid",
     type: <TypeHighlight np>{"boolean"}</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         If present, it will show a valid or rejected message ("valid",
@@ -131,7 +131,7 @@ export const FileCardAPIPropsRows = [
     id: 7,
     name: "imageUrl",
     type: <TypeHighlight np>{"string"}</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         A string representation or web url of the image that will be set to the
@@ -182,7 +182,7 @@ export const FileCardAPIPropsRows = [
   {
     name: "progress",
     type: <TypeHighlight np>number</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         The current percentage of upload progress. This value will have a higher
@@ -193,7 +193,7 @@ export const FileCardAPIPropsRows = [
   {
     name: "xhr",
     type: <TypeHighlight np>XMLHttpRequest</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         A reference to the XHR object that allows the upload, progress and abort
@@ -204,7 +204,7 @@ export const FileCardAPIPropsRows = [
   {
     name: "onSee",
     type: <TypeHighlight np>func</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         Callback fired when the see icon is clicked. If set, the see icon will
@@ -351,7 +351,7 @@ export const FileCardAPIPropsRows = [
   {
     name: "resultOnTooltip",
     type: <TypeHighlight np>boolean</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         If present a tooltip that contains the upload message will be diplayed
@@ -362,7 +362,7 @@ export const FileCardAPIPropsRows = [
   {
     name: "downloadUrl",
     type: <TypeHighlight np>string</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         The url to be used to perform a GET request in order to download the

@@ -14,12 +14,12 @@ const rightMenuItems = [
   {
     id: 0,
     label: "Demos",
-    referTo: "/api/fileinputbutton#demo",
+    referTo: "/api/avatar#demo",
   },
   {
     id: 1,
     label: "Props",
-    referTo: "/api/fileinputbutton#props",
+    referTo: "/api/avatar#props",
   },
 ];
 
@@ -29,8 +29,8 @@ const AvatarApi = (props) => {
       <MainContentContainer>
         <MainTitle>Avatar API</MainTitle>
         <MainParagraph>
-          API reference docs for the React Avatar component. Learn
-          about the props and other APIs of this exported module.
+          API reference docs for the React Avatar component. Learn about the
+          props and other APIs of this exported module.
         </MainParagraph>
         <section id="demo">
           <SubTitle content="Demo" />
@@ -39,14 +39,7 @@ const AvatarApi = (props) => {
             the component demo pages:
             <ul>
               <li>
-                <AnchorToTab href="/components/filemosaic">
-                  FileMosaic
-                </AnchorToTab>
-              </li>
-              <li>
-                <AnchorToTab href="/components/fileinputbutton">
-                  FileInputButton
-                </AnchorToTab>
+                <AnchorToTab href="/components/avatar">Avatar</AnchorToTab>
               </li>
             </ul>
           </Alert>

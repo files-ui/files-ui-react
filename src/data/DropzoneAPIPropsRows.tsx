@@ -20,8 +20,10 @@ export const DropzoneAPIPropsRows = [
     default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
-        Callback fired when the delete icon is clicked. If set, the delete icon
-        will be shown.
+        Probably one of the most important methods (callbacks). Returns as first
+        parameter an array of `ExtFile` objects.
+        This callback is fired when the delete
+        icon is clicked. If set, the delete icon will be shown.
         <br />
         <strong>Signature:</strong>
         <br />
@@ -33,7 +35,7 @@ export const DropzoneAPIPropsRows = [
   {
     name: "accept",
     type: <TypeHighlight np>string</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         A comma-separated list of one or more file types, or{" "}
@@ -53,13 +55,13 @@ export const DropzoneAPIPropsRows = [
   {
     name: "maxFiles",
     type: <TypeHighlight np>number</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The max number of files to be accepted.</>,
   },
   {
     name: "maxFileSize",
     type: <TypeHighlight np>number</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The max file size allowed in bytes.</>,
   },
   {
@@ -108,7 +110,7 @@ export const DropzoneAPIPropsRows = [
   {
     name: "cleanFiles",
     type: <TypeHighlight np>boolean</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         If set, "clean" button will be shown and every time user clicks the
@@ -127,7 +129,7 @@ export const DropzoneAPIPropsRows = [
         </AnchorToTab>
       </TypeHighlight>
     ),
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         The configuration needed for uploading the files. If not set or or
@@ -139,7 +141,7 @@ export const DropzoneAPIPropsRows = [
   {
     name: "fakeUpload",
     type: <TypeHighlight np>boolean</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         If set, the component will simulate the upload operation by randomly
@@ -218,13 +220,13 @@ export const DropzoneAPIPropsRows = [
   {
     name: "style",
     type: <TypeHighlight np>React.CSSProperties</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The in-line style object.</>,
   },
   {
     name: "className",
     type: <TypeHighlight np>string</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         The classname to override the css styles in .css or .sass file instead
@@ -236,7 +238,7 @@ export const DropzoneAPIPropsRows = [
   {
     name: "label",
     type: <TypeHighlight np>string</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>The label to place when no files were selected.</>,
   },
   {
@@ -266,7 +268,7 @@ export const DropzoneAPIPropsRows = [
   {
     name: "disableRipple",
     type: <TypeHighlight np>boolean</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         If true, will not show a ripple effect everytime the user drops files or
@@ -317,10 +319,10 @@ export const DropzoneAPIPropsRows = [
         </AnchorToTab>
       </TypeHighlight>
     ),
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
-        If set, buttons will be added on the before or after of the component.
+        If set, buttons will be added before or after of the component.
         This buttons triggresthe common opertions of the component such as
         clean, upload, abort and delete all.
       </>
@@ -329,7 +331,7 @@ export const DropzoneAPIPropsRows = [
   {
     name: "dropOnLayer",
     type: <TypeHighlight np>boolean</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
         If true, the drop operation will be performed in a layer that covers the
@@ -340,13 +342,13 @@ export const DropzoneAPIPropsRows = [
   {
     name: "footer",
     type: <TypeHighlight np>boolean</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>If false, hides the dropzone footer.</>,
   },
   {
     name: "header",
     type: <TypeHighlight np>boolean</TypeHighlight>,
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>If false, hides the dropzone header.</>,
   },
 
@@ -359,7 +361,7 @@ export const DropzoneAPIPropsRows = [
         </AnchorToTab>
       </TypeHighlight>
     ),
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>Configuration related to the dropzone header.</>,
   },
   {
@@ -371,14 +373,14 @@ export const DropzoneAPIPropsRows = [
         </AnchorToTab>
       </TypeHighlight>
     ),
-    default: <TypeHighlight np>undefined</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
     description: <>Configuration related to the dropzone footer.</>,
   },
   {
     name: "disabled",
     type: <TypeHighlight np>boolean</TypeHighlight>,
     default: <TypeHighlight np>false</TypeHighlight>,
-    description: <>If false, hides the dropzone footer.</>,
+    description: <>If true, the component is disabled.</>,
   },
   {
     name: "clickable",

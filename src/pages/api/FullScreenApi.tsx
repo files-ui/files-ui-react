@@ -29,8 +29,8 @@ const FullScreenApi = () => {
       <MainContentContainer>
         <MainTitle>FullScreen API</MainTitle>
         <MainParagraph>
-          API reference docs for the React FullScreen component. Learn
-          about the props and other APIs of this exported module.
+          API reference docs for the React FullScreen component. Learn about the
+          props and other APIs of this exported module.
         </MainParagraph>
         <section id="demo">
           <SubTitle content="Demo" />
@@ -44,9 +44,7 @@ const FullScreenApi = () => {
                 </AnchorToTab>
               </li>
               <li>
-                <AnchorToTab href="/components/fileinputbutton">
-                  FileInputButton
-                </AnchorToTab>
+                <AnchorToTab href="/components/filecard">FileCard</AnchorToTab>
               </li>
             </ul>
           </Alert>

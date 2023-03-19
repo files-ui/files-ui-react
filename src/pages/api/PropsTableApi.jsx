@@ -11,6 +11,7 @@ import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 import LowPriorityIcon from "@mui/icons-material/LowPriority";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import { Tooltip, IconButton, Stack } from "@mui/material";
+import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,7 +41,12 @@ function compareNames(a, b) {
   }
 }
 
-export default function PropsTableApi({ rows = [], title = "" }) {
+export default function PropsTableApi({
+  rows = [],
+  title = "",
+  desc = "",
+  omitDefault = false,
+}) {
   const [sorted, setSorted] = React.useState(false);
   const [localRows, setLocalRows] = React.useState(rows);
 
@@ -76,7 +82,7 @@ export default function PropsTableApi({ rows = [], title = "" }) {
           </IconButton>
         </Tooltip>{" "}
       </Stack>
-
+      {desc.length > 0 && <DescParagraph>{desc}</DescParagraph>}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -85,7 +91,9 @@ export default function PropsTableApi({ rows = [], title = "" }) {
               <StyledTableCell align="left" /* width={"30%"} */>
                 Type
               </StyledTableCell>
-              <StyledTableCell align="left">Default</StyledTableCell>
+              {!omitDefault && (
+                <StyledTableCell align="left">Default</StyledTableCell>
+              )}
               <StyledTableCell
                 align="left"
                 /*  width={"30%"} */
@@ -114,7 +122,11 @@ export default function PropsTableApi({ rows = [], title = "" }) {
                 >
                   {row.type}
                 </StyledTableCell>
-                <StyledTableCell align="left">{row.default}</StyledTableCell>
+                
+                {!omitDefault && (
+                  <StyledTableCell align="left">{row.default}</StyledTableCell>
+                )}
+                
                 <StyledTableCell align="left" style={{ maxWidth: "50%" }}>
                   {row.description}
                 </StyledTableCell>
