@@ -1,5 +1,4 @@
 import * as React from "react";
-import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
@@ -9,6 +8,7 @@ import AnchorToTab from "../../components/util-components/AnchorToTab";
 import Alert from "@mui/material/Alert";
 import PropsTableApi from "./PropsTableApi";
 import { ImagePreviewAPIPropsRows } from "./ImagePreviewAPIPropsRows";
+import MainParagraph from "../../components/paragraph-main/MainParagraph";
 
 const rightMenuItems = [
   {
@@ -28,10 +28,10 @@ const ImagePreviewApi = () => {
     <React.Fragment>
       <MainContentContainer>
         <MainTitle>ImagePreview API</MainTitle>
-        <DescParagraph>
+        <MainParagraph>
           API reference docs for the React ImagePreview component. Learn
           about the props and other APIs of this exported module.
-        </DescParagraph>
+        </MainParagraph>
         <section id="demo">
           <SubTitle content="Demo" />
           <Alert severity="info">

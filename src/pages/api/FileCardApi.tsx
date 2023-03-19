@@ -1,10 +1,10 @@
 import { Alert } from "@mui/material";
 import * as React from "react";
-import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import MainTitle from "../../components/main-title/MainTitle";
+import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 import { FileCardAPIPropsRows } from "../../data/FileCardAPIPropsRows";
@@ -28,10 +28,10 @@ const FileCardApi = () => {
     <React.Fragment>
       <MainContentContainer>
         <MainTitle>FileCard API</MainTitle>
-        <DescParagraph>
+        <MainParagraph>
           API reference docs for the React Filecard component. Learn about the
           props and other APIs of this exported module.
-        </DescParagraph>
+        </MainParagraph>
         <section id="demo">
           <SubTitle content="Demo" />
           <Alert severity="info">

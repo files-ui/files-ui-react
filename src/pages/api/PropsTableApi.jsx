@@ -31,6 +31,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+
 function compareNames(a, b) {
   if (a?.name < b?.name) {
     return -1;
@@ -39,7 +40,7 @@ function compareNames(a, b) {
   }
 }
 
-export default function PropsTableApi({ rows = [] }) {
+export default function PropsTableApi({ rows = [], title = "" }) {
   const [sorted, setSorted] = React.useState(false);
   const [localRows, setLocalRows] = React.useState(rows);
 
@@ -63,7 +64,7 @@ export default function PropsTableApi({ rows = [] }) {
         alignItems={"center"}
         spacing={2}
       >
-        <SubTitle content="Props" />{" "}
+        <SubTitle content={title.length === 0 ? "Props" : title} />{" "}
         <Tooltip title={sorted ? "Sort by importance" : "Sort alphabetically"}>
           <IconButton
             style={{ borderRadius: "50%", border: "0.5px solid #eaeef3" }}
@@ -75,6 +76,7 @@ export default function PropsTableApi({ rows = [] }) {
           </IconButton>
         </Tooltip>{" "}
       </Stack>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -84,7 +86,10 @@ export default function PropsTableApi({ rows = [] }) {
                 Type
               </StyledTableCell>
               <StyledTableCell align="left">Default</StyledTableCell>
-              <StyledTableCell align="left" /*  width={"30%"} */>
+              <StyledTableCell
+                align="left"
+                /*  width={"30%"} */
+              >
                 Description
               </StyledTableCell>
             </TableRow>
@@ -96,19 +101,21 @@ export default function PropsTableApi({ rows = [] }) {
                   component="th"
                   scope="row"
                   style={{
-                    wordBreak: row.name.length > 12 ? "break-word" : "normal",
+                    wordBreak: row.name.length > 20 ? "break-word" : "normal",
                   }}
                 >
                   {row.name}
                 </StyledTableCell>
                 <StyledTableCell
                   align="left"
-                  style={{ wordBreak: "break-word" }}
+                  style={{
+                    wordBreak: row.name.length > 10 ? "break-word" : "normal",
+                  }}
                 >
                   {row.type}
                 </StyledTableCell>
                 <StyledTableCell align="left">{row.default}</StyledTableCell>
-                <StyledTableCell align="left">
+                <StyledTableCell align="left" style={{ maxWidth: "50%" }}>
                   {row.description}
                 </StyledTableCell>
               </StyledTableRow>

@@ -222,7 +222,7 @@ const DropzoneDemoPage = (props) => {
           <Alert severity="info">
             <AlertTitle> "fakeUpload" </AlertTitle>
             By giving this prop, the {"<Dropzone/>"} component will simulate the
-            upload operation by randomly set the upload status and message on
+            upload operation by randomly setting the upload status and message on
             each uploadable <TypeHighlight>ExtFile</TypeHighlight>. It will also
             set a fake progress.
           </Alert>
