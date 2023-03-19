@@ -68,16 +68,16 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
 
       subMenu: [
         {
-          label: "Dropzone",
+          label: "Avatar",
           index: 31,
+          onClick: () => navigate("/api/avatar"),
+        },
+        {
+          label: "Dropzone",
+          index: 32,
           onClick: () => navigate("/api/dropzone"),
         },
 
-        {
-          label: "FileMosaic",
-          index: 32,
-          onClick: () => navigate("/api/filemosaic"),
-        },
         {
           label: "FileInputButton",
           index: 33,
@@ -89,24 +89,24 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           onClick: () => navigate("/api/filecard"),
         },
         {
-          label: "FullScreenPreview",
-          index: 34,
+          label: "FileMosaic",
+          index: 35,
+          onClick: () => navigate("/api/filemosaic"),
+        },
+        {
+          label: "FullScreen",
+          index: 36,
           onClick: () => navigate("/api/fullscreen"),
         },
         {
           label: "ImagePreview",
-          index: 34,
+          index: 37,
           onClick: () => navigate("/api/imagepreview"),
         },
         {
           label: "VideoPreview",
-          index: 34,
+          index: 38,
           onClick: () => navigate("/api/videopreview"),
-        },
-        {
-          label: "Avatar",
-          index: 35,
-          onClick: () => navigate("/api/avatar"),
         },
       ],
     },
