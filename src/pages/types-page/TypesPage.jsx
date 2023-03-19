@@ -1,10 +1,12 @@
 import * as React from "react";
+import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
+import { ExtFileAPIRows } from "../../data/ExtFileAPIRows";
 import PropsTableApi from "../api/PropsTableApi";
 
 const rightMenuItems = [
@@ -13,16 +15,7 @@ const rightMenuItems = [
     label: "ExtFile",
     referTo: "/types#extfile",
   },
-  {
-    id: 2,
-    label: "CustomValidateFileResponse",
-    referTo: "/types#customvalidatefileresponse",
-  },
-  {
-    id: 3,
-    label: "UploadConfig",
-    referTo: "/types#uploadconfig",
-  },
+
   {
     id: 4,
     label: "ActionButtons",
@@ -38,6 +31,26 @@ const rightMenuItems = [
     label: "FooterConfig",
     referTo: "/types#footerconfig",
   },
+  {
+    id: 7,
+    label: "UploadConfig",
+    referTo: "/types#uploadconfig",
+  },
+  {
+    id: 8,
+    label: "ServerResonse",
+    referTo: "/types#uploadconfig",
+  },
+  {
+    id: 2,
+    label: "CustomValidateFileResponse",
+    referTo: "/types#customvalidatefileresponse",
+  },
+  {
+    id: 9,
+    label: "UPLOADSTATUS",
+    referTo: "/types#uploadstatus",
+  },
 ];
 
 const TypesPage = (props) => {
@@ -51,10 +64,15 @@ const TypesPage = (props) => {
             components.
           </MainParagraph>
           <section id="extfile">
-            <PropsTableApi rows={[]} title="ExtFile" />
+            <PropsTableApi
+              title="ExtFile"
+              desc={'This object "extends" the File Object'}
+              omitDefault
+              rows={ExtFileAPIRows}
+            />
           </section>
           <section id="customvalidatefileresponse">
-            <PropsTableApi rows={[]} title="CustomValidateFileResponse" />
+            <PropsTableApi rows={[]} title="ValidateFileResponse" />
           </section>
           <section id="actionbuttons">
             <PropsTableApi rows={[]} title="ActionButtons" />
