@@ -33,24 +33,25 @@ export interface DropzoneFullProps extends OverridableComponentProps {
 
   ///////////////         VALIDATION STAGE        ///////////////
   /**
-   * The max file size allowed in bytes
-   */
-  maxFileSize?: number;
-  /**
-   * The max number of files to be accepted.
-   */
-  maxFiles?: number;
-  /**
   * The default implementation of accept
   * checks the file's mime type or extension
-  * against this list. This is a comma
-  * separated list of mime types or file extensions.
+  * against this list. This is a comma-separated 
+  * list of one or more file types, or unique file type specifiers, 
+  * describing which file types to allow.
   * E.g.: 
   * ```js
   * acccept="image/*, application/pdf, .psd"
   * ```
   */
   accept?: string;
+  /**
+   * The max number of files to be accepted.
+   */
+  maxFiles?: number;
+  /**
+   * The max file size allowed in bytes.
+   */
+  maxFileSize?: number;
   /**
    * The custom validator to validate files that are selected or dropped in dropzone compoent.
    * Must be a function that recieves as first parameter a File Object
@@ -66,13 +67,11 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   /**
    * When given, "clean" button will be visible if validation is active.
    * This event is triggered when "clean button is clicked"
-   * Returns as first parameter the list of files without not valid files
    */
   onClean?: Function;
   /**
-   * Flag that indicates that dropzone will automatically remove non valid files.
-   * This will happen every time user drops files or selects files from file dialog.
-   * This flag will only work if validation is active.
+   * If true, the component will automatically remove non valid files when user 
+   * drops files or selects them from file dialog. This flag will only work if validation is active.
    */
   autoClean?: boolean;
   /**
@@ -88,42 +87,37 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   * The configuration needed for uploading the files.
   * When "uploadConfig" is not given or uploadConfig.url is undefined
   * the upload button will not be visible
-  * and uploadOnDrop flag will not work
+  * and uploadOnDrop prop flag will not work.
   */
   uploadConfig?: UploadConfig;
   /**
-   * Flag that indicates Dropzone to perform a fake upload process.
-   * If given or true, will ignore `uploadConfig` prop, will show
+   * If set, the component will simulate the upload operation by randomly
+        setting the upload status and message on each uploadable{" "}
+        <TypeHighlight>ExtFile</TypeHighlight>. It will also set a fake
+        progress. Also the `uploadConfig` prop will be ignored and will show
    * the upload button
-   * Will respond with random upload status on every uploadable file
    */
   fakeUpload?: boolean;
   /**
-   * This event is triggered when upload process starts
-   * also returns the list of files that will be uploaded,
-   * Unlike Onchange, onUploadStart will only return a list of files thta are candidates to be uploaded,
-   * in case they are valid or upload status is "error"
+   * Callback fired when the upload process starts.
    */
-  onUploadStart?: (extFiles: ExtFile[]) => void;
+  onUploadStart?: (uploadAbleFiles: ExtFile[]) => void;
   /**
-  * This event returns as first aparameter the list of responses for each file following the structure:
-  * responses = [
-  *  {id: <the file id>, serverResponse: the server response}
-  * ]
+  * Callback fired when the upload process ends.
   */
-  onUploadFinish?: (extFiles: ExtFile[]) => void;
+  onUploadFinish?: (uploadedFiles: ExtFile[]) => void;
 
 
   ///////////////          STYLING          ///////////    
   //borderRadius?: string | number;
   /**
-   * The background color for dropzone container,
+   * The background color for dropzone container.
    * @default 'transparent'
    */
   background?: string;
   /**
-   * The min height of the container in string format
-   * If the value is given un number format "px" will be assumed
+   * The min height of the component.
+   * If the value is given in number format, "px" will be assumed
    * @default "180px"
    * 
    * examples: 
@@ -166,11 +160,9 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   onDragLeave?: (evt: React.DragEvent<HTMLDivElement>) => void;
 
   //ACTION BUTTONS
-  /**
-   * The configuration needed for uploading the files.
-   * When "uploadConfig" is not given or uploadConfig.url is undefined
-   * the upload button will not be visible
-   * and uploadOnDrop flag will not work
+  /** If set, buttons will be added on the before or after of the component.
+        This buttons triggresthe common opertions of the component such as
+        clean, upload, abort and delete all.
    */
   actionButtons?: DropzoneActions;
 
@@ -183,21 +175,21 @@ export interface DropzoneFullProps extends OverridableComponentProps {
 
   // HEADER AND FOOTER
   /**
-   * If false, hides the dropzone footer
+   * If false, hides the dropzone footer.
    * @default true
    */
   footer?: boolean;
   /**
-   * If false, hides the dropzone header
+   * If false, hides the dropzone header.
    * @default true
    */
   header?: boolean;
   /**
-   * Configuration related to the dropzone header
+   * Configuration related to the dropzone header.
    */
   headerConfig?: HeaderConfig;
   /**
-   * Configuration  related to the dropzone footer
+   * Configuration  related to the dropzone footer.
    */
   footerConfig?: FooterConfig;
 
@@ -209,8 +201,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   disabled?: boolean;
   //CLICKABLE
   /** 
-    * If true, the dropzone component itself will be clickable
-    * If false, the file dialog will not be opened
+    * If false, the component will not be clickable. So, file dialog will not be opened.
     * @default true
     */
   clickable?: boolean;
@@ -256,7 +247,7 @@ export type FooterConfig = {
   noMissingFilesLabel?: boolean;
 
   customMessage?: JSX.Element;
-  
+
   customFooter?: JSX.Element;
 }
 
@@ -268,7 +259,7 @@ export type DropzoneActionButton = {
   className?: string;
   resetStyles?: boolean;
   onClick?: Function;
-  disabled?:boolean;
+  disabled?: boolean;
 }
 
 export interface DropzoneActions {
@@ -279,6 +270,9 @@ export interface DropzoneActions {
   abortButton?: DropzoneActionButton;
   deleteButton?: DropzoneActionButton;
   cleanButton?: DropzoneActionButton;
+}
+export type ActionButtons = {
+  [P in keyof DropzoneActions]: DropzoneActions[P]
 }
 
 

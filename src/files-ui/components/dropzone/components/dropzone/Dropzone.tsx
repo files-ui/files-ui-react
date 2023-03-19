@@ -32,10 +32,11 @@ import {
 import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../input-hidden/InputHidden";
 import {
+  ActionButtons,
   defaultDrozoneProps,
   // DEFAULT_BORDER_RADIUS,
   //DropzoneActionButton,
-  DropzoneActions,
+  //DropzoneActions,
   DropzoneProps,
   FooterConfig,
   HeaderConfig,
@@ -76,10 +77,10 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     onUploadFinish,
     //styling
     background,
-    minHeight,
     color,
+    minHeight,
     style,
-    textColor,
+    //textColor,
     className,
     //label
     label,
@@ -129,7 +130,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     cleanButton,
     style: containerStyle,
     className: containerClassName,
-  } = actionButtons as DropzoneActions;
+  } = actionButtons as ActionButtons;
 
   const styleBorderRadius: string | number | undefined = style?.borderRadius;
 
