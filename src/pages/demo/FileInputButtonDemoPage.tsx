@@ -168,7 +168,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
               </AnchorToTab>
               {") => "}
               <AnchorToTab href="/types#custom-validate-file-response">
-                CustomValidateFileResponse
+                ValidateFileResponse
               </AnchorToTab>
             </CodeHighlight>
             . Custom validator can work together with{" "}

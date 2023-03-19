@@ -1,5 +1,5 @@
 import * as React from "react";
-import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
+//import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
@@ -43,7 +43,7 @@ const rightMenuItems = [
   },
   {
     id: 2,
-    label: "CustomValidateFileResponse",
+    label: "ValidateFileResponse",
     referTo: "/types#customvalidatefileresponse",
   },
   {

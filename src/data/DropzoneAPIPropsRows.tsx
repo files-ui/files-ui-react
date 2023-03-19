@@ -21,9 +21,8 @@ export const DropzoneAPIPropsRows = [
     description: (
       <>
         Probably one of the most important methods (callbacks). Returns as first
-        parameter an array of `ExtFile` objects.
-        This callback is fired when the delete
-        icon is clicked. If set, the delete icon will be shown.
+        parameter an array of `ExtFile` objects. This callback is fired when the
+        delete icon is clicked. If set, the delete icon will be shown.
         <br />
         <strong>Signature:</strong>
         <br />
@@ -77,8 +76,8 @@ export const DropzoneAPIPropsRows = [
         <br />
         <CodeHighlight>
           {"(f: File) => "}{" "}
-          <AnchorToTab href="/api/dropzone#customvalidatefileresponse">
-            CustomValidateFileResponse
+          <AnchorToTab href="/api/types#validatefileresponse">
+            ValidateFileResponse
           </AnchorToTab>
         </CodeHighlight>
       </>
@@ -124,9 +123,7 @@ export const DropzoneAPIPropsRows = [
     name: "uploadConfig",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/dropzone#uploadconfig">
-          UploadConfig
-        </AnchorToTab>
+        <AnchorToTab href="/api/types#uploadconfig">UploadConfig</AnchorToTab>
       </TypeHighlight>
     ),
     default: <TypeHighlight np></TypeHighlight>,
@@ -314,7 +311,7 @@ export const DropzoneAPIPropsRows = [
     name: "actionButtons",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/dropzone#dropzoneactions">
+        <AnchorToTab href="/api/types#actionbuttons">
           ActionButtons
         </AnchorToTab>
       </TypeHighlight>
@@ -322,9 +319,9 @@ export const DropzoneAPIPropsRows = [
     default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
-        If set, buttons will be added before or after of the component.
-        This buttons triggresthe common opertions of the component such as
-        clean, upload, abort and delete all.
+        If set, buttons will be added before or after of the component. This
+        buttons triggresthe common opertions of the component such as clean,
+        upload, abort and delete all.
       </>
     ),
   },
@@ -356,9 +353,7 @@ export const DropzoneAPIPropsRows = [
     name: "headerConfig",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/dropzone#headerconfig">
-          HeaderConfig
-        </AnchorToTab>
+        <AnchorToTab href="/api/types#headerconfig">HeaderConfig</AnchorToTab>
       </TypeHighlight>
     ),
     default: <TypeHighlight np></TypeHighlight>,
@@ -368,9 +363,7 @@ export const DropzoneAPIPropsRows = [
     name: "footerConfig",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/dropzone#footerconfig">
-          FooterConfig
-        </AnchorToTab>
+        <AnchorToTab href="/api/types#footerconfig">FooterConfig</AnchorToTab>
       </TypeHighlight>
     ),
     default: <TypeHighlight np></TypeHighlight>,

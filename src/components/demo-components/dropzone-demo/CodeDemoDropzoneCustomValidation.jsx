@@ -31,7 +31,7 @@ export default CodeDemoDropzoneCustomValidation;
 
 const splittedCodeJSButton = ``;
 const splittedCodeTSButton = ``;
-const completeCodeJSButton =`import { FileInputButton, FileCard } from "@files-ui/react";
+const completeCodeJSButton = `import { FileInputButton, FileCard } from "@files-ui/react";
 import * as React from "react";
 
 //validate files
@@ -94,16 +94,19 @@ export default function App() {
     </div>
   );
 }`;
-const completeCodeTSButton = `import { FileInputButton, FileCard, ExtFile } from "@files-ui/react";
+const completeCodeTSButton =
+  `import { FileInputButton, FileCard, ExtFile } from "@files-ui/react";
 import * as React from "react";
 
 //validate files
 // file name must start with the following prefix: "test_file"
 // (e.g. a valid file name could be "test_file_photo.png")
-const myOwnValidation = (file: File): CustomValidateFileResponse => {
+const myOwnValidation = (file: File): ValidateFileResponse => {
   let errorList: string[] = [];
   let validResult: boolean = true;
-  const regExPrefix: RegExp = /\btest_file\w+/;
+  ` +
+  // eslint-disable-next-line
+  `const regExPrefix: RegExp = /\btest_file\w+/;
   if (!file.name.match(regExPrefix)) {
     validResult = false;
     errorList.push('Prefix "test_file" was not present in the file name');
@@ -161,11 +164,11 @@ export default function App() {
 
 /////
 
-
 const splittedCodeJS = ``;
 const splittedCodeTS = ``;
 const completeCodeJS = `import { Dropzone, FileMosaic } from "@files-ui/react";
 import * as React from "react";
+
 //validate files
 // file name must start with the following prefix: "test_file"
 // (e.g. a valid file name could be "test_file_photo.png")
@@ -179,6 +182,7 @@ const myOwnValidation = (file) => {
   }
   return { valid: validResult, errors: errorList };
 };
+
 export default function App() {
   const [files, setFiles] = React.useState([]);
   const updateFiles = (incommingFiles) => {
@@ -204,16 +208,16 @@ export default function App() {
   );
 }`;
 
-const completeCodeTS = `import { Dropzone, FileMosaic, ExtFile, CustomValidateFileResponse } from "@files-ui/react";
+const completeCodeTS = `import { Dropzone, FileMosaic, ExtFile, ValidateFileResponse } from "@files-ui/react";
 import * as React from "react";
 
 //validate files
 // file name must start with the following prefix: "test_file"
 // (e.g. a valid file name could be "test_file_photo.png")
-const myOwnValidation = (file: File): CustomValidateFileResponse => {
+const myOwnValidation = (file: File): ValidateFileResponse => {
   let errorList: string[] = [];
   let validResult: boolean = true;
-  const regExPrefix: RegExp = /\btest_file\w+/;
+  const regExPrefix: RegExp = /\\btest_file\\w+/;
   if (!file.name.match(regExPrefix)) {
     validResult = false;
     errorList.push('Prefix "test_file" was not present in the file name');

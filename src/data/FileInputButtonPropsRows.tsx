@@ -77,8 +77,8 @@ export const FileInputButtonPropsRows=[
             <br />
             <CodeHighlight>
               {"(f: File) => "}{" "}
-              <AnchorToTab href="/api/dropzone#customvalidatefileresponse">
-                CustomValidateFileResponse
+              <AnchorToTab href="/api/types#validatefileresponse">
+                ValidateFileResponse
               </AnchorToTab>
             </CodeHighlight>
           </>
@@ -103,7 +103,7 @@ export const FileInputButtonPropsRows=[
         name: "uploadConfig",
         type: (
           <TypeHighlight np>
-            <AnchorToTab href="/api/dropzone#uploadconfig">
+            <AnchorToTab href="/api/types#uploadconfig">
               UploadConfig
             </AnchorToTab>
           </TypeHighlight>
@@ -245,7 +245,7 @@ export const FileInputButtonPropsRows=[
         name: "actionButtons",
         type: (
           <TypeHighlight np>
-            <AnchorToTab href="/api/dropzone#dropzoneactions">
+            <AnchorToTab href="/api/types#actionbuttons">
               ActionButtons
             </AnchorToTab>
           </TypeHighlight>

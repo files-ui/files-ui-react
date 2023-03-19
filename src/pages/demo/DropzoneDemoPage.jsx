@@ -176,7 +176,7 @@ const DropzoneDemoPage = (props) => {
               </AnchorToTab>
               {") => "}
               <AnchorToTab href="/types#custom-validate-file-response">
-                CustomValidateFileResponse
+                ValidateFileResponse
               </AnchorToTab>
             </CodeHighlight>
             . Custom validator can work together with{" "}
