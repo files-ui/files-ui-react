@@ -1,4 +1,4 @@
-import { CustomValidateFileResponse, ExtFile, Localization, UploadConfig } from "../../core";
+import { ValidateFileResponse, ExtFile, Localization, UploadConfig } from "../../core";
 import { DropzoneActions } from "../dropzone/components/dropzone/DropzoneProps";
 import { MaterialButtonProps } from "../material-button/MaterialButtonProps";
 
@@ -66,13 +66,13 @@ interface InputButtonFullProps {
      * Must be a function that recieves as first parameter a File Object
      * and must return a boolean value
      * ```jsx
-     * export type CustomValidateFileResponse = {
+     * export type ValidateFileResponse = {
      *  valid: boolean;
      *  errors?: string[] | undefined;
      * }
      * ```
      */
-    validator?: (f: File) => CustomValidateFileResponse;
+    validator?: (f: File) => ValidateFileResponse;
 
     /**
      * Flag that indicates that dropzone will automatically remove non valid files.

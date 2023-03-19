@@ -1,11 +1,11 @@
 import * as React from "react"
-import { CustomValidateFileResponse } from "../core";
+import { ValidateFileResponse } from "../core";
 
 export const useDropzoneValidation = (
     accept: string | undefined,
     maxFileSize: number | undefined,
     maxFiles: number | undefined,
-    validator: ((f: File) => CustomValidateFileResponse) | undefined
+    validator: ((f: File) => ValidateFileResponse) | undefined
 ) => {
     const [validateFlag, setValidateFlag] = React.useState<boolean>(false);
     React.useEffect(() => {

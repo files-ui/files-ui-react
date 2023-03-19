@@ -1,6 +1,6 @@
 import { ValidateErrorLocalizerSelector } from "../localization";
 import { ExtFile, FunctionLabel, Localization, LocalLabels } from "../types";
-import { CustomValidateFileResponse, FileValidatorProps } from "../types/validation";
+import { ValidateFileResponse, FileValidatorProps } from "../types/validation";
 import { FileIdGenerator } from "../utils/IdGenerator";
 import { separateAccept } from "./separateAccept";
 import { validateAccept } from "./validateAccept";
@@ -19,7 +19,7 @@ export const fileListvalidator = (
     preValidatedFiles: FileList,
     remainingValids: number,
     localValidator: FileValidatorProps,
-    validator: ((f: File) => CustomValidateFileResponse) | undefined,
+    validator: ((f: File) => ValidateFileResponse) | undefined,
     maxFiles?: number,
     localization?: Localization
 ): ExtFile[] => {
@@ -68,7 +68,7 @@ export const validateExtFileList = (
     extFileList: ExtFile[],
     remainingValids: number,
     localValidatorProps: FileValidatorProps,
-    validator: ((f: File) => CustomValidateFileResponse) | undefined,
+    validator: ((f: File) => ValidateFileResponse) | undefined,
     maxFiles: number | undefined,
     localization?: Localization
 ): ExtFile[] => {
@@ -113,7 +113,7 @@ export const validateExtFileList = (
  */
 export const validateExtFile = (
     extFile: ExtFile,
-    validator: undefined | ((f: File) => CustomValidateFileResponse),
+    validator: undefined | ((f: File) => ValidateFileResponse),
     validatorProps: FileValidatorProps,
     localErrors: LocalLabels
 ): ExtFile => {
@@ -126,7 +126,7 @@ export const validateExtFile = (
 
     //TO-DO: add "overrideValidation" prop to ignore the rest of validators like accept and maxFileSize
     if (validator) {
-        const resultCustomValidation: CustomValidateFileResponse = validator(extFileResult.file as File);
+        const resultCustomValidation: ValidateFileResponse = validator(extFileResult.file as File);
         const { errors: errorsResult } = resultCustomValidation;
         if (errorsResult)
             errors.push(...errorsResult)
@@ -168,7 +168,7 @@ export const validateExtFile = (
  */
 export const validateFile = (
     file: File,
-    validator: undefined | ((f: File) => CustomValidateFileResponse),
+    validator: undefined | ((f: File) => ValidateFileResponse),
     validatorProps: FileValidatorProps,
     localErrors: LocalLabels
 ): ExtFile => {

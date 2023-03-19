@@ -10,7 +10,7 @@ export declare type FileValidatorProps = {
     accept?: string;
 }
 
-export declare type CustomValidateFileResponse = {
+export declare type ValidateFileResponse = {
     /**
      * if true, that means the file is valid
      */

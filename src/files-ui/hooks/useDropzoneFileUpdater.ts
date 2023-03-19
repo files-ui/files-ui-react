@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CustomValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "../core";
+import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "../core";
 
 /**
  * Effect for keeping track of changes
@@ -21,7 +21,7 @@ const useDropzoneFileListUpdater = (
     maxFileSize?: number,
     accept?: string,
     maxFiles?: number,
-    validator?: ((f: File) => CustomValidateFileResponse),
+    validator?: ((f: File) => ValidateFileResponse),
     localization?: Localization,
     validateFilesFlag?: boolean
 ): [ExtFile[], number, React.Dispatch<React.SetStateAction<ExtFile[]>>] => {

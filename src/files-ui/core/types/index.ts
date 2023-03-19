@@ -18,6 +18,6 @@ export type { UPLOADSTATUS } from "./UploadStatus";
 
 export type { ServerResponse, UploadPromiseResponse, UploadResponse } from "./uploadTypes";
 
-export type { CustomValidateFileResponse, FileValidatorProps } from "./validation";
+export type { ValidateFileResponse, FileValidatorProps } from "./validation";
 
 export type { UploadConfig } from "./UploadConfig";

@@ -74,7 +74,7 @@ export {
 export type {
     ExtFile,
     Behaviour,
-    CustomValidateFileResponse,
+    ValidateFileResponse,
     ComponentLocalizer,
     ExtFileListMap,
     FileValidatorProps,

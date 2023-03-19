@@ -1,4 +1,4 @@
-import { ExtFile, CustomValidateFileResponse, Localization, UploadConfig } from "../../../../core";
+import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "../../../../core";
 
 import * as React from "react";
 import { OverridableComponentProps } from "../../../overridable";
@@ -57,13 +57,13 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * Must be a function that recieves as first parameter a File Object
    * and must return a boolean value
    * ```jsx
-   * export type CustomValidateFileResponse = {
+   * export type ValidateFileResponse = {
    *  valid: boolean;
    *  errors?: string[] | undefined;
    * }
    * ```
    */
-  validator?: (f: File) => CustomValidateFileResponse;
+  validator?: (f: File) => ValidateFileResponse;
   /**
    * When given, "clean" button will be visible if validation is active.
    * This event is triggered when "clean button is clicked"
