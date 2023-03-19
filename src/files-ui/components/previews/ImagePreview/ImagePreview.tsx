@@ -14,13 +14,13 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
   const {
     src,
     alt,
-    className,
-    style,
     width,
     height,
     onError,
     //smart,
     smartImgFit,
+    style,
+    className,
   } = mergeProps(props, ImagePreviewDefaultProps);
 console.log("ImagePreview smartImgFit",smartImgFit);
   const [[finalHeight, finalWidth], setfinalDimensions] = React.useState<

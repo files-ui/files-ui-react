@@ -30,10 +30,6 @@ export declare type ExtFile = {
      */
     size?: number;
     /**
-     * Link, URI or string representation of an image
-     */
-    imageUrl?: string;
-    /**
      * a flag that determines whether the file is valid, not valid or it is not validated.
      */
     valid?: boolean;
@@ -42,13 +38,17 @@ export declare type ExtFile = {
      */
     errors?: string[];
     /**
+     * The current upload status. (e.g. "uploading")
+     */
+    uploadStatus?: UPLOADSTATUS | undefined;
+    /**
      * A message that shows the result of the upload process
      */
     uploadMessage?: string;
     /**
-     * The current upload status. (e.g. "uploading")
+     * Link, URI or string representation of an image
      */
-    uploadStatus?: UPLOADSTATUS | undefined;
+    imageUrl?: string;
     /**
      * The XMLHttpRequest object for performing uploads to a server
      */
@@ -61,12 +61,11 @@ export declare type ExtFile = {
     progress?: number;
     /**
      * The additional data that will be sent to the server
-     * when filesare uploaded individually
+     * when files are uploaded individually
      */
     extraUploadData?: Record<string, any>;
     /**
-     * Any kind of extra data that could be needed
-     * 
+     * Any kind of extra data that could be needed.
      */
     extraData?: Object;
     /**
@@ -74,9 +73,8 @@ export declare type ExtFile = {
      */
     serverResponse?: ServerResponse;
     /**
-     * Url to perform a GET request in order to download the file.
-     * This action is triggered when download button is clicked or pressed.
-     * In case onDownload prop is given
+     * The url to be used to perform a GET request in order to download the
+        file. If defined, the download icon will be shown.
      */
     downloadUrl?: string;
 }

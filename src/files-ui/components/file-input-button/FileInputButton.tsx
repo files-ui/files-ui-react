@@ -41,8 +41,8 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 ) => {
   const {
     //basic
-    onChange,
     value = [],
+    onChange,
     //validation
     accept,
     maxFileSize,

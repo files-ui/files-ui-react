@@ -7,12 +7,17 @@ export interface FullScreenPropsMap extends OverridableComponentProps {
     */
   open?: boolean;
   /**
-  * handler for on Close operation
+  * 	Callback fired when the component requests to be closed.
   */
   onClose?: Function;
 }
 
+type DefDivProps = React.HTMLProps<HTMLDivElement>;
+type DivPropsOmitFullScreenPropsMap = Omit<DefDivProps, keyof FullScreenPropsMap>;
+
+
 export type FullScreenProps =
+  DivPropsOmitFullScreenPropsMap &
   {
     [F in keyof FullScreenPropsMap]: FullScreenPropsMap[F]
   }

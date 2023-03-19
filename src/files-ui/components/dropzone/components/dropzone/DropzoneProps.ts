@@ -160,7 +160,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   onDragLeave?: (evt: React.DragEvent<HTMLDivElement>) => void;
 
   //ACTION BUTTONS
-  /** If set, buttons will be added on the before or after of the component.
+  /** If set, buttons will be added before or after of the component.
         This buttons triggresthe common opertions of the component such as
         clean, upload, abort and delete all.
    */

@@ -25,7 +25,7 @@ export interface MaterialButtonPropsInterface extends OverridableComponentProps 
      */
     variant?: "text" | "outlined" | "contained";
     /**
-     * The label to place when no files are selected
+     * The text label for the button
      */
     label?: string;
     /**
