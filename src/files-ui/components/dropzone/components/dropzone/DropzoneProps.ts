@@ -249,6 +249,10 @@ export type FooterConfig = {
   customMessage?: JSX.Element;
 
   customFooter?: JSX.Element;
+
+  style?: React.CSSProperties;
+  className?: string;
+  resetStyles?: boolean;
 }
 
 
@@ -263,7 +267,7 @@ export type ActionButtonItem = {
 }
 
 export interface DropzoneActions {
-  position?: "top" | "bottom";
+  position?: "before" | "after";
   style?: React.CSSProperties;
   className?: string;
   uploadButton?: ActionButtonItem;

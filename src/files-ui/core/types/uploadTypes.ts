@@ -16,9 +16,19 @@ export declare type UploadResponse = {
     serverResponse: ServerResponse | {};
     uploadedFile: ExtFile;
 }
+
 export type ServerResponse = {
+    /**
+     * If true, it means that the request was successful.
+     */
     success: boolean;
+    /**
+     * A message that describes the result of the request.
+     */
     message?: string;
+    /**
+     * The response of the server.
+     */
     payload?: any;
 }
 

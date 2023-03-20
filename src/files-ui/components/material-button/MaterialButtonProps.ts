@@ -36,6 +36,14 @@ export interface MaterialButtonPropsInterface extends OverridableComponentProps 
 
     resetStyles?: boolean;
 
+
+      /**
+   * If true, will not show a ripple effect everytime
+   * the user drops files or clicks the dropzone for selecting files
+   * @default false
+   */
+  disableRipple?: boolean;
+
 }
 type DefButtonPropsMap = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
