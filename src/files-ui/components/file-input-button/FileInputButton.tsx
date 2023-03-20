@@ -516,6 +516,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         textColor={textColor}
         resetStyles={resetStyles}
         onClick={handleClick}
+        disableRipple={disableRipple}
         {...rest}
       >
         {children || label}
