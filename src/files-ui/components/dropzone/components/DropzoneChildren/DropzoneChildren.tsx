@@ -16,11 +16,14 @@ const DropzoneChildren: React.FC<DropzoneChildrenProps> = (
   props: DropzoneChildrenProps
 ) => {
   const { children, label, localization } = props;
+  
+  const isEmptyArray = Array.isArray(children) && children.length===0;
+  //console.log("isEmptyArray", isEmptyArray,children);
   const DropzoneLocalizer: LocalLabels =
     DropzoneLocalizerSelector(localization);
 
   //children will be always consider as more important
-  if (children) {
+  if (children && !isEmptyArray) {
     return (
       <div className="files-ui-dropzone-children-container">{children}</div>
     );
