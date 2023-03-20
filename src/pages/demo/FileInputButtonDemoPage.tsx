@@ -402,8 +402,8 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
                 current array of ExtFiles with the new ones.
               </li>
             </ul>
-            In this demo try to select or drop files more than once on each
-            dropzone to see the difference.
+            In this demo try to select files more than once on each
+            fileinputbutton to see the difference.
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
