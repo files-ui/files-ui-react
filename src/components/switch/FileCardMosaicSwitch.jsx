@@ -36,7 +36,7 @@ export default function FileCardMosaicSwitch({
         <FormControlLabel
           value="FileCard"
           control={<Radio />}
-          label={withInput ? "<FileCard/> & <FileCard/>" : "<FileCard/>"}
+          label={withInput ? "<FileCard/> & <FileInputButton/>" : "<FileCard/>"}
         />
       </RadioGroup>
     </FormControl>
