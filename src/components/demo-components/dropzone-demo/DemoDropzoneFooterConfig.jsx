@@ -17,8 +17,7 @@ const DemoDropzoneFooterConfig = (props) => {
       value={files}
       footerConfig={{ customMessage: "This is a custom message..." }}
     >
-      {files.length > 0 &&
-        files.map((file) => (
+      {files.map((file) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>

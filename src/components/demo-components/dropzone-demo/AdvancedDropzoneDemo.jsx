@@ -19,7 +19,10 @@ export default function AdvancedDropzoneDemo() {
   const [videoSrc, setVideoSrc] = React.useState(undefined);
 
   const updateFiles = (incommingFiles) => {
-    console.log("incomming extFiles outside", incommingFiles.map(x=>x.uploadStatus));
+    console.log(
+      "incomming extFiles outside",
+      incommingFiles.map((x) => x.uploadStatus)
+    );
 
     const arrExtFIleInstances = incommingFiles.map(
       (extFile) => new ExtFileInstance(extFile)
@@ -92,39 +95,30 @@ export default function AdvancedDropzoneDemo() {
   return (
     <>
       <Dropzone
-        //onClean={onClean}
         onChange={updateFiles}
         minHeight="195px"
         value={extFiles}
-        /* maxFiles={3}
-        maxFileSize={2998000 * 20} */
+        maxFiles={3}
+        /*maxFileSize={2998000 * 20} */
         label="Drag'n drop files here or click to browse"
         // accept=".png,image/*, video/*"
         uploadConfig={{
           /* autoUpload: true */
           method: "POST",
           url: REMOTE + "/file/28048465460",
-          //url: "http://localhost:2800/file/28048465460",
           cleanOnUpload: true,
         }}
         onUploadStart={handleStart}
         onUploadFinish={handleFinish}
         //fakeUpload
         actionButtons={{
-          position: "bottom",
+          position: "after",
           abortButton: {},
-          // cleanButton: {},
-          deleteButton: {
-            //resetStyles:true
-          },
+          deleteButton: {},
           uploadButton: {},
         }}
-        //onClean={()=>alert("cleaninnng")}
-        //cleanFiles
-        //autoClean
       >
-        {extFiles.length > 0 &&
-          extFiles.map((file) => (
+        {extFiles.map((file) => (
             <FileMosaic
               {...file}
               key={file.id}

@@ -201,10 +201,10 @@ const DropzoneDemoPage = (props) => {
           </DescParagraph>
 
           <Paper variant="outlined" style={{ padding: "25px" }}>
-            <DemoDropzoneUploading button />
+            <DemoDropzoneUploading />
           </Paper>
 
-          <CodeDemoDropzoneUploading button />
+          <CodeDemoDropzoneUploading />
 
           <Alert severity="info">
             <AlertTitle> Server response </AlertTitle>

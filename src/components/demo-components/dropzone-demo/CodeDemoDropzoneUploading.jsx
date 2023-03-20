@@ -239,8 +239,7 @@ const splittedCodeJS = `<Dropzone
     onUploadFinish={handleFinishUpload}
     fakeUpload
 >
-  {files.length > 0 &&
-    files.map((file) => (
+  {files.map((file) => (
       <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview/>
     ))}
 </Dropzone>`;
@@ -263,8 +262,7 @@ const splittedCodeTS = `<Dropzone
     onUploadFinish={handleFinishUpload}
     fakeUpload
 >
-  {files.length > 0 &&
-    files.map((file: ExtFile) => (
+  {files.map((file: ExtFile) => (
       <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview/>
     ))}
 </Dropzone>`;
@@ -300,8 +298,7 @@ export default function App() {
         }}
         fakeUpload
     >
-      {files.length > 0 &&
-        files.map((file) => (
+      {files.map((file) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview/>
         ))}
     </Dropzone>
@@ -340,8 +337,7 @@ export default function App() {
         }}
         fakeUpload
     >
-      {files.length > 0 &&
-        files.map((file:ExtFile) => (
+      {files.map((file:ExtFile) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview/>
         ))}
     </Dropzone>

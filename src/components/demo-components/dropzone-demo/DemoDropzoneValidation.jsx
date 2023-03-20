@@ -63,8 +63,7 @@ const DemoDropzoneValidation = ({ button = false }) => {
       //cleanFiles
       actionButtons={{ position: "bottom", cleanButton: {} }}
     >
-      {files.length > 0 &&
-        files.map((file) => (
+      {files.map((file) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>

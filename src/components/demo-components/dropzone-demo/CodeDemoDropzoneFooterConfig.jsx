@@ -19,8 +19,7 @@ const splittedCodeJS = `<Dropzone
   value={files}
   footerConfig={{ customMessage: "This is a custom message..." }}
 >
-  {files.length > 0 &&
-    files.map((file) => (
+  {files.map((file) => (
       <FileMosaic key={file.id} {...file} onDelete={removeFile} info/>
     ))}
 </Dropzone>`;
@@ -29,8 +28,7 @@ const splittedCodeTS = `<Dropzone
   value={files}
   footerConfig={{ customMessage: "This is a custom message..." }}
 >
-  {files.length > 0 &&
-    files.map((file: ExtFile) => (
+  {files.map((file: ExtFile) => (
       <FileMosaic key={file.id} {...file} onDelete={removeFile} info/>
     ))}
 </Dropzone>`;
@@ -53,8 +51,7 @@ export default function App() {
       value={files}
       footerConfig={{ customMessage: "This is a custom message..." }}
     >
-      {files.length > 0 &&
-        files.map((file) => (
+      {files.map((file) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>
@@ -80,8 +77,7 @@ export default function App() {
       value={files}
       footerConfig={{ customMessage: "This is a custom message..." }}
     >
-      {files.length > 0 &&
-        files.map((file:ExtFile) => (
+      {files.map((file:ExtFile) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>

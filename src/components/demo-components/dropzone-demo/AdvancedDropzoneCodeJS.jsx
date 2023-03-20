@@ -28,8 +28,7 @@ const splittedCodeJS = `<Dropzone
   uploadOnDrop
   fakeUploading
 >
-  {files.length > 0 &&
-     files.map((file) => (
+  {files.map((file) => (
     <FileItem
       {...file}
        key={file.id}
@@ -75,8 +74,7 @@ export default function App() {
     uploadOnDrop
     fakeUploading
     >
-    {files.length > 0 &&
-      files.map((file) => (
+    {files.map((file) => (
       <FileItem
         {...file}
         key={file.id}

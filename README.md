@@ -3,11 +3,6 @@
 </p>
 <h1 align="center">Files ui</h1>
 
-
-
-
-
-
 <div align="center">
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dropzone-ui/react/blob/HEAD/LICENSE)

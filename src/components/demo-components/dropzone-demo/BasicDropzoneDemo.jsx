@@ -48,8 +48,7 @@ export default function BasicDemoDropzone({ button }) {
   }
   return (
     <Dropzone onChange={updateFiles} value={files}>
-      {files.length > 0 &&
-        files.map((file) => (
+      {files.map((file) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>

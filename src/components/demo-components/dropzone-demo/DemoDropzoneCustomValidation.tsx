@@ -80,8 +80,7 @@ const DemoDropzoneCustomValidation = (props: { button: boolean }) => {
       cleanFiles
       validator={myOwnValidation}
     >
-      {files.length > 0 &&
-        files.map((file: ExtFile) => (
+      {files.map((file: ExtFile) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>

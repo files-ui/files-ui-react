@@ -33,7 +33,7 @@ const InteractiveDemo = (props) => {
         uploadOnDrop
         fakeUploading
       >
-        {files.length > 0 &&
+        {/* files.length > 0 && */
           files.map((file) => (
             <FileItem
               {...file}

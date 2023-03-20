@@ -200,8 +200,7 @@ export default function App() {
       cleanFiles
       validator={myOwnValidation}
     >
-      {files.length > 0 &&
-        files.map((file) => (
+      {files.map((file) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info />
         ))}
     </Dropzone>
@@ -242,8 +241,7 @@ export default function App() {
       cleanFiles
       validator={myOwnValidation}
     >
-      {files.length > 0 &&
-        files.map((file:ExtFile) => (
+      {files.map((file:ExtFile) => (
           <FileMosaic key={file.id} {...file} onDelete={removeFile} info={true} />
         ))}
     </Dropzone>
