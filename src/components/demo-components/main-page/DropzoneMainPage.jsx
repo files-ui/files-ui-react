@@ -46,24 +46,23 @@ const DropzoneMainPage = ({ darkMode = false }) => {
         accept=".jpg, .png, application/json, video/*, .pdf"
         fakeUpload
         behaviour="add"
-        uploadConfig={{ autoUpload: true , url:"fdbd"}}
+        uploadConfig={{ autoUpload: true, url: "fdbd" }}
       >
-        {files.length > 0 &&
-          files.map((file) => (
-            <FileMosaic
-              darkMode={darkMode}
-              {...file}
-              preview
-              onDelete={removeFile}
-              key={file.id}
-              info
-              alwaysActive
-              hd
-              onSee={handleSee}
-              resultOnTooltip
-              //uploadMessage="llalalal"
-            />
-          ))}
+        {files.map((file) => (
+          <FileMosaic
+            darkMode={darkMode}
+            {...file}
+            preview
+            onDelete={removeFile}
+            key={file.id}
+            info
+            alwaysActive
+            hd
+            onSee={handleSee}
+            resultOnTooltip
+            //uploadMessage="llalalal"
+          />
+        ))}
       </Dropzone>
 
       <DescParagraph margin="10px 0" darkMode={darkMode}>
