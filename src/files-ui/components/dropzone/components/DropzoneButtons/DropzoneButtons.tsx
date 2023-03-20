@@ -1,10 +1,7 @@
 import * as React from "react";
 import { addClassName, Localization } from "../../../../core";
 import { MaterialButton } from "../../../material-button";
-import {
-  DropzoneActionButton,
-  DropzoneActions,
-} from "../dropzone/DropzoneProps";
+import { ActionButtonItem, DropzoneActions } from "../dropzone/DropzoneProps";
 import "./DropzoneButtons.scss";
 
 interface DropzoneButtonsProps extends DropzoneActions {
@@ -36,24 +33,40 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     disabled,
   } = props;
 
-  const actionButtonsList: DropzoneActionButton[] = [
+  const actionButtonsList: ActionButtonItem[] = [
     cleanButton
-      ? { ...cleanButton, label: "Clean", onClick: onClean }
+      ? {
+          ...cleanButton,
+          label: "Clean",
+          onClick: cleanButton.onClick || onClean,
+        }
       : undefined,
     deleteButton
-      ? { ...deleteButton, label: "Delete", onClick: onDelete }
+      ? {
+          ...deleteButton,
+          label: "Delete",
+          onClick: deleteButton.onClick || onDelete,
+        }
       : undefined,
     uploadButton
-      ? { ...uploadButton, label: "Upload", onClick: onUpload }
+      ? {
+          ...uploadButton,
+          label: "Upload",
+          onClick: uploadButton.onClick || onUpload,
+        }
       : undefined,
     abortButton
-      ? { ...abortButton, label: "Abort", onClick: onAbort }
+      ? {
+          ...abortButton,
+          label: "Abort",
+          onClick: abortButton.onClick || onAbort,
+        }
       : undefined,
   ].filter(
-    (ab: DropzoneActionButton | undefined) => ab !== undefined
-  ) as DropzoneActionButton[];
+    (ab: ActionButtonItem | undefined) => ab !== undefined
+  ) as ActionButtonItem[];
 
-  const tailClassName:string = `${top ? " top" : " bottom"}`;
+  const tailClassName: string = `${top ? " top" : " bottom"}`;
   const finalClassName = addClassName(
     "files-ui-buttons-container" + tailClassName,
     containerClassName
@@ -62,7 +75,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
   return (
     <div className={finalClassName} style={containerStyle}>
       {actionButtonsList.map(
-        (actionButtonProps: DropzoneActionButton, index: number) => {
+        (actionButtonProps: ActionButtonItem, index: number) => {
           const { children, label, resetStyles, className, style, onClick } =
             actionButtonProps;
           return (
@@ -71,7 +84,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
               className={className}
               style={style}
               resetStyles={resetStyles}
-              onClick={() => onClick?.()}
+              onClick={(evt) => onClick?.(evt)}
               disabled={disabled}
             >
               {children || label}

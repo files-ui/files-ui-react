@@ -48,15 +48,15 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      */
     preview?: boolean;
     /** 
-     * whether to show the info layer or not
-     * also whether to make visible the info button or not ,
-     * Only works when given a image file
+     * If true, the info button will be visible
+     * @default false
      */
     info?: boolean;
     /**
      * A string representation or web url of the image
-     * that will be set to the "src" prop of an <img/> tag
-     * <img src={`${imageUrl}`} />
+     * that will be set to the "src" prop of an <img/> If
+     * given, the component will use this image source instead of
+     * reading the image file.
      */
     imageUrl?: string;
     /**
@@ -74,9 +74,8 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
     */
     darkMode?: boolean;
     /**
-     * language to be used
-     * for now
-     * only English and Spanish is supported
+     * The language in which text labels are shown.
+     * @default "EN-en"
      */
     localization?: Localization;
     /**
@@ -86,48 +85,46 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      */
     progress?: number;
     /**
-     * A reference to the XHR object that allows the upload and abort event.
-     *  and progress
+     * A reference to the XHR object that allows the upload, progress and abort events.
      */
     xhr?: XMLHttpRequest;
     /**
-     * A function that return a file object when "see" button is pressed or clicked
+     * Callback fired when the see icon is clicked. If set, the see icon will be shown.
      */
     onSee?: (imageSource: string | undefined) => void;
     /**
-     * A function that return a file object when "play" button is presssed or clicked
+     * Callback fired when the play icon is clicked. If set, the play icon will be shown.
      */
     onWatch?: (videoSource: File | string | undefined) => void;
     /**
-     * Event that is triggered when `delete` button is clicked or pressed.
-     * If present, `delete` button will be visible.
+     * Callback fired when the delete icon is clicked. If set, the delete icon will be shown.
      */
     onDelete?: (fileId: number | string | undefined) => void;
     /**
-     * Event that is triggered when `abort` button is clicked or pressed during `uploading` event
-     * If present, `abort` button in `uploading` phase will be visible.
+     * Callback fired when the abort icon is clicked. If set, the abort icon
+        will be shown during the upload stage.
      */
     onAbort?: (fileId: number | string | undefined) => void;
     /**
-     * Event that is triggered when `cancel` button is clicked or pressed during `preparing` event
-     * If present, `cancel` button in `preparing` phase will be visible.
+     *         Callback fired when the cancel icon is clicked. If set, the cancel icon
+        will be shown only before the upload stage has started during the preparing phase.
      */
     onCancel?: (fileId: number | string | undefined) => void;
     /**
-     * Event that is triggered when `download` button is clicked or pressed.
-     * If present, `download` button will be visible.
+     * Callback fired when the cancel icon is clicked. If set, the cancel icon
+        will be shown only before the upload stage has started.
      */
     onDownload?: (fileId: number | string | undefined, downloadUrl?: string) => void;
     /**
-     * Event that is triggered when user clicks the component
+     * Callback fired when the component is clicked if set.
      */
     onClick?: (evt: React.MouseEvent) => void;
     /**
-     * Event that is triggered when user double clicks the component
+     * Callback fired when the component is double clicked if set.
      */
     onDoubleClick?: (evt: React.MouseEvent) => void;
     /**
-     * Event that is triggered when user right clicks the component
+     * Callback fired when the component is right clicked if set.
      */
     onRightClick?: (evt: React.MouseEvent) => void;
 
@@ -136,11 +133,11 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      */
     alwaysActive?: boolean;
     /**
-     * Where to display result of validation: on InfoLayer or in Tooltip when user hovers the FileItem
+     * If present a tooltip that contains the upload message will be diplayed on hover
      */
     resultOnTooltip?: boolean;
     /**
-     * Url to perform a GET request in order to download the file.
+     * The url to be used to perform a GET request in order to download the file.
      * This action is triggered when download button is clicked or pressed.
      * In case onDownload prop is given
      */

@@ -4,22 +4,22 @@ import { MaterialButtonProps } from "./MaterialButtonProps";
 import "./MaterialButton.scss";
 import { createRippleButton } from "../../core";
 
-
 const MaterialButton: React.FC<MaterialButtonProps> = (
   props: MaterialButtonProps
 ) => {
   const {
     disabled,
     href,
-    textTransform:textDecoration,
+    textTransform: textDecoration,
     variant = "contained",
     color = "#1976d2",
-    textColor ="white",
+    textColor = "white",
     children,
     className,
     style,
     onClick,
     resetStyles,
+    disableRipple,
   } = props;
 
   const idClassName = React.useId();
@@ -32,7 +32,7 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
       textColor,
       textDecoration,
       className,
-      idClassName.replaceAll(":",""),
+      idClassName.replaceAll(":", ""),
       resetStyles
     );
 
@@ -40,15 +40,15 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
     e: React.MouseEvent<T, MouseEvent>
   ): void {
     e.preventDefault();
-  
 
     //ripple
-    createRippleButton(e, variant as string, color as string);
+    if (!disableRipple)
+      createRippleButton(e, variant as string, color as string);
 
     onClick?.(e as React.MouseEvent<HTMLButtonElement, MouseEvent>);
   }
 
-  if (materialButtonClassName!==undefined || resetStyles)
+  if (materialButtonClassName !== undefined || resetStyles)
     return React.createElement(href ? "a" : "button", {
       className: resetStyles && className ? className : materialButtonClassName,
       "data-testid": href ? "dui-anchor" : "dui-button",

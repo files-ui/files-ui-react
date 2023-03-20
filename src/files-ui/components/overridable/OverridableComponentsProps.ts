@@ -5,7 +5,7 @@
  */
 export declare type OverridableComponentProps = {
     /**
-     * The react node children
+     * The content of the component.
      */
     children?: React.ReactNode | string;
     /**

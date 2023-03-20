@@ -1,6 +1,6 @@
 import CodeHighlight from "../components/codeHighlight/CodeHighlight";
 import TypeHighlight from "../components/typeHighlight/TypeHighlight";
-export const FileMosaicAPIPropsRows = [
+export const FileCardAPIPropsRows = [
   {
     id: 0,
     name: "alwaysActive",
@@ -14,7 +14,7 @@ export const FileMosaicAPIPropsRows = [
       </>
     ),
   },
-  /* {
+  {
     id: 1,
     name: "elevation",
     type: (
@@ -58,8 +58,19 @@ export const FileMosaicAPIPropsRows = [
         24 inclusive.
       </>
     ),
-  }, */
-  
+  },
+  {
+    id: 2,
+    name: "errors",
+    type: <TypeHighlight np>{"string[]"}</TypeHighlight>,
+    default: <TypeHighlight np></TypeHighlight>,
+    description: (
+      <>
+        The list of errors according to the validation criteria or the result of
+        the given custom validation function.
+      </>
+    ),
+  },
   {
     id: 5,
     name: "id",
@@ -106,18 +117,6 @@ export const FileMosaicAPIPropsRows = [
       <>
         If present, it will show a valid or rejected message ("valid",
         "denied"). By default valid is <CodeHighlight>undefined</CodeHighlight>.
-      </>
-    ),
-  },
-  {
-    id: 2,
-    name: "errors",
-    type: <TypeHighlight np>{"string[]"}</TypeHighlight>,
-    default: <TypeHighlight np></TypeHighlight>,
-    description: (
-      <>
-        The list of errors according to the validation criteria or the result of
-        the given custom validation function.
       </>
     ),
   },

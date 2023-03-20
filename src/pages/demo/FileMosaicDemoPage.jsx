@@ -20,11 +20,11 @@ import CodeJSFileMosaicValidation from "../../components/demo-components/filemos
 import DemoFileMosaicValidation from "../../components/demo-components/filemosaic-demo/DemoFileMosaicValidation";
 import CodeJSFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicUploadStatus";
 import DemoFileMosaicUploadStatus from "../../components/demo-components/filemosaic-demo/DemoFileMosaicUploadStatus";
-import DemoFileMosaicLocalization from "../../components/demo-components/localization/DemoFileMosaicLocalization";
-import CodeJSFileMosaicLocalization from "../../components/demo-components/localization/CodeJSFileMosaicLocalization";
+//import DemoFileMosaicLocalization from "../../components/demo-components/localization/DemoFileMosaicLocalization";
+//import CodeJSFileMosaicLocalization from "../../components/demo-components/localization/CodeJSFileMosaicLocalization";
 import DemoFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/DemoFileMosaicDarkMode";
 import CodeJSFileMosaicDarkMode from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicDarkMode";
-import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
+//import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic-demo/DemoFileMosaicFileIcons";
 import DemoFileCardActions from "../../components/demo-components/filemosaic-demo/DemoFileCradActions";
 import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
 import DemoFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/DemoFileMosaicSmartImgFit";
@@ -92,7 +92,7 @@ const FileMosaicDemoPage = (props) => {
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <a href="/types#ext-file">ExtFile-API. </a>
+            <a href="/types#extfile">ExtFile-API. </a>
           </Alert>
         </section>
 

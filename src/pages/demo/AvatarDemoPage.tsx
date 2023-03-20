@@ -221,11 +221,11 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
                 not set.
               </li>
               <li>
-                <CodeHighlight>changeLabel</CodeHighlight>: when there i a valid
+                <CodeHighlight>changeLabel</CodeHighlight>: when there is a valid
                 source set.
               </li>
               <li>
-                <CodeHighlight>uploadingLabel</CodeHighlight>: when you want to
+                <CodeHighlight>loadingLabel</CodeHighlight>: when you want to
                 communicate that something is loading.
               </li>
             </ul>

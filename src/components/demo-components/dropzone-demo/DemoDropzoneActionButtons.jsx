@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dropzone, FileCard, FileInputButton, FileMosaic } from "../../../files-ui";
 
-const DemoDropzoneActionButtons = ({ button }) => {
+const DemoActionButtons = ({ button }) => {
   const [files, setFiles] = React.useState([]);
   const updateFiles = (incommingFiles) => {
     //do something with the files
@@ -83,4 +83,4 @@ const DemoDropzoneActionButtons = ({ button }) => {
     </Dropzone>
   );
 };
-export default DemoDropzoneActionButtons;
+export default DemoActionButtons;

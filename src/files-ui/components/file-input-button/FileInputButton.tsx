@@ -41,8 +41,8 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 ) => {
   const {
     //basic
-    onChange,
     value = [],
+    onChange,
     //validation
     accept,
     maxFileSize,
@@ -486,9 +486,9 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
   return (
     <React.Fragment>
-      {actionButtonsPosition === "top" && (
+      {actionButtonsPosition === "before" && (
         <DropzoneButtons
-        disabled={disabled}
+          disabled={disabled}
           abortButton={isUploading ? abortButton : undefined}
           onAbort={handleAbortUpload}
           deleteButton={deleteButton}
@@ -527,9 +527,9 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         onChange={handleChangeInput}
       />
 
-      {actionButtonsPosition === "bottom" && (
+      {actionButtonsPosition === "after" && (
         <DropzoneButtons
-        disabled={disabled}
+          disabled={disabled}
           abortButton={isUploading ? abortButton : undefined}
           onAbort={handleAbortUpload}
           deleteButton={deleteButton}

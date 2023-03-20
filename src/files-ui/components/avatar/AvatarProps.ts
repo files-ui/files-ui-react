@@ -3,27 +3,47 @@ export interface AvatarFullProps extends OverridableComponentProps {
     accept?: string;
     variant?: "square" | "circle";
     borderRadius?: string;
+    /**
+     * Just like any other input component. The value of the input element,
+        required for a controlled component.
+     */
     src?: string | File;
+    /**
+     * Callback fired when an image file is selected.
+     * @param selectedFile The new file selected
+     */
     onChange?: (selectedFile: File) => void,
     /**
      * Alternative label when an error occurs
      * on loading the image
      */
     alt?: string,
-
+    /**
+     * Label to be displayed when image source is not set.
+     */
     emptyLabel?: React.ReactNode;
+    /**
+     * Label to be displayed when "isLoading" prop is set set. This will cover
+        the current image.
+     */
     loadingLabel?: React.ReactNode;
+    /**
+     * Label to be displayed when there is a valid source set.
+     */
     changeLabel?: React.ReactNode;
     /**
-     * if a src is given, then avatar will show the image
-     * or a file error message and will not allow
+     * If true and if a src is given, then avatar will show the image and will not allow
      * the user to change the picture. Also, layer on hover will not be shown
      */
     readOnly?: boolean;
-
+    /**
+     * If true, loadingLabel will be shown.
+     */
     isLoading?: boolean;
-
-    onError?: React.ReactEventHandler<HTMLImageElement>;
+    /**
+     * Callback fired when an error occured on loading the image.
+     */
+    onError?: Function;
 
     /**
      * If not present, image width will be set to 100%.
@@ -38,7 +58,7 @@ export interface AvatarFullProps extends OverridableComponentProps {
      * - If value is "center", image will be centered and will not be displayed complete.
      * This the empty space is avoided. This is achived by giving 100% to width prop if 
      * the orientation is "portrait". When orientation is "landscape", height prop will be set to 100%.
-     * @default orientation
+     * @default center
      */
     smartImgFit?: false | "orientation" | "center";
 }

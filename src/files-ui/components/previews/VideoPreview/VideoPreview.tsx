@@ -6,7 +6,8 @@ const VideoPreview: React.FC<VideoPreviewProps> = (
 ) => {
   const {
     src: videoSrc,
-    /* autoPlay, controls,  */ style,
+    /* autoPlay, controls,  */
+    style,
     className,
     ...others
   } = props;

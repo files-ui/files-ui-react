@@ -1,7 +1,6 @@
-import { CustomValidateFileResponse, ExtFile, Localization, UploadConfig, UploadResponse } from "../../core";
+import { ValidateFileResponse, ExtFile, Localization, UploadConfig } from "../../core";
 import { DropzoneActions } from "../dropzone/components/dropzone/DropzoneProps";
 import { MaterialButtonProps } from "../material-button/MaterialButtonProps";
-//import { OverridableComponentProps } from "../overridable";
 
 interface InputButtonFullProps {
     /**
@@ -37,9 +36,9 @@ interface InputButtonFullProps {
     */
     localization?: Localization;
     /**
-   * If true, will show a ripple everytime
-   * the user drops files or selects files
-   */
+     * If true, will not show a ripple effect everytime the user 
+     * clicks the components for selecting files.
+    */
     disableRipple?: boolean;
 
     ///////////////         VALIDATION STAGE        ///////////////
@@ -67,13 +66,13 @@ interface InputButtonFullProps {
      * Must be a function that recieves as first parameter a File Object
      * and must return a boolean value
      * ```jsx
-     * export type CustomValidateFileResponse = {
+     * export type ValidateFileResponse = {
      *  valid: boolean;
      *  errors?: string[] | undefined;
      * }
      * ```
      */
-    validator?: (f: File) => CustomValidateFileResponse;
+    validator?: (f: File) => ValidateFileResponse;
 
     /**
      * Flag that indicates that dropzone will automatically remove non valid files.
@@ -112,20 +111,18 @@ interface InputButtonFullProps {
     */
     onUploadFinish?: (extFiles: ExtFile[]) => void;
 
-  //ACTION BUTTONS
-  /**
-   * The configuration needed for uploading the files.
-   * When "uploadConfig" is not given or uploadConfig.url is undefined
-   * the upload button will not be visible
-   * and uploadOnDrop flag will not work
-   */
-  actionButtons?: DropzoneActions;
-  // ADD OR REPLACE
-  /**
-   * The behaviour when new files are selected or dropped
-   * @default 'add'
-   */
-  behaviour?: 'add' | 'replace';
+    //ACTION BUTTONS
+    /** If set, buttons will be added before or after of the component.
+          This buttons triggresthe common opertions of the component such as
+          clean, upload, abort and delete all.
+     */
+    actionButtons?: DropzoneActions;
+    // ADD OR REPLACE
+    /**
+     * The behaviour when new files are selected or dropped
+     * @default 'add'
+     */
+    behaviour?: 'add' | 'replace';
 }
 
 type MaterialButtonPropsOmitInputButtonFullProps = Omit<MaterialButtonProps, keyof InputButtonFullProps>;

@@ -112,11 +112,11 @@ const ShowDemoCode: React.FC<ShowDemoCodeProps> = (
           console.log("code copied to clipboard: ");
           console.log(code_);
         }}
-        style={{ 
+        style={{
           margin: "20px 0",
-          fontSize:"15px",
-          lineHeight:"",
-      }}
+          fontSize: "15px",
+          lineHeight: "",
+        }}
       >
         {code}
       </Highlighter>

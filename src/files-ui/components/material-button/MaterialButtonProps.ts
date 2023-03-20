@@ -25,7 +25,7 @@ export interface MaterialButtonPropsInterface extends OverridableComponentProps 
      */
     variant?: "text" | "outlined" | "contained";
     /**
-     * The label to place when no files are selected
+     * The text label for the button
      */
     label?: string;
     /**
@@ -35,6 +35,14 @@ export interface MaterialButtonPropsInterface extends OverridableComponentProps 
     disabled?: boolean;
 
     resetStyles?: boolean;
+
+
+      /**
+   * If true, will not show a ripple effect everytime
+   * the user drops files or clicks the dropzone for selecting files
+   * @default false
+   */
+  disableRipple?: boolean;
 
 }
 type DefButtonPropsMap = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;

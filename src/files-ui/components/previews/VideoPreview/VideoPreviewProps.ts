@@ -3,8 +3,7 @@ import { OverridableComponentProps } from "../../overridable";
 
 export interface VideoPreviewPropsMap extends OverridableComponentProps {
     /**
-     * video source in string format or File object
-     * FileItemComponent returns this value in onWatch handler
+     * The video source in string format or File object.
      */
     src?: File | string;
 

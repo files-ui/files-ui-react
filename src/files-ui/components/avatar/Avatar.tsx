@@ -15,6 +15,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     accept,
 
     onChange,
+
     emptyLabel,
     changeLabel,
 
@@ -36,11 +37,11 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
 
   const avatarId = React.useId();
   const finalClassNameBorder: string | undefined = useAvatarStyle(
-    avatarId.replaceAll(":",""),
+    avatarId.replaceAll(":", ""),
     borderRadius
   );
 
-  console.log("finalClassNameBorder",finalClassNameBorder);
+  console.log("finalClassNameBorder", finalClassNameBorder);
 
   const handleClick = () => {
     // alert("Agregar fotooooooo");
@@ -71,11 +72,9 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     return (
       <React.Fragment>
         <div
-          className={
-            `fui-avatar-main-container${
-              variant === "circle" ? " circle" : ""
-            }` + " "+finalClassNameBorder
-          }
+          className={`fui-avatar-main-container${
+            variant === "circle" ? " circle" : ""
+          } ${finalClassNameBorder}`}
           style={style}
           {...rest}
         >

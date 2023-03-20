@@ -74,7 +74,7 @@ export {
 export type {
     ExtFile,
     Behaviour,
-    CustomValidateFileResponse,
+    ValidateFileResponse,
     ComponentLocalizer,
     ExtFileListMap,
     FileValidatorProps,
@@ -92,7 +92,7 @@ export type {
 
 export {
     //UPLOADSTATUS,
-    ExtFileInstance, ExtFileManager, extFileMock
+    ExtFileInstance, ExtFileManager, extFileMock, createUploadConfig
 } from "./types"
 
 export {

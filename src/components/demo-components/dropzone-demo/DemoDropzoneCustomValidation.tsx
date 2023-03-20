@@ -4,7 +4,7 @@ import {
   ExtFile,
   FileMosaic,
   FileMosaicProps,
-  CustomValidateFileResponse,
+  ValidateFileResponse,
   FileInputButton,
   FileCard,
 } from "../../../files-ui";
@@ -12,7 +12,7 @@ import {
 //validate files
 // file name must start with the following prefix: "test_file"
 // (e.g. a valid file name could be "test_file_photo.png")
-const myOwnValidation = (file: File): CustomValidateFileResponse => {
+const myOwnValidation = (file: File): ValidateFileResponse => {
   let errorList: string[] = [];
   let validResult: boolean = true;
   const regExPrefix: RegExp = /\btest_file\w+/;

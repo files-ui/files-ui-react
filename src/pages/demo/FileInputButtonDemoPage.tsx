@@ -113,7 +113,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <AnchorToTab href="/types#ext-file">ExtFile-API. </AnchorToTab>
+            <AnchorToTab href="/types#extfile">ExtFile-API. </AnchorToTab>
           </Alert>
         </section>
 
@@ -168,7 +168,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
               </AnchorToTab>
               {") => "}
               <AnchorToTab href="/types#custom-validate-file-response">
-                CustomValidateFileResponse
+                ValidateFileResponse
               </AnchorToTab>
             </CodeHighlight>
             . Custom validator can work together with{" "}
@@ -213,7 +213,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           <Alert severity="info">
             <AlertTitle> "fakeUpload" </AlertTitle>
             By giving this prop, the {"<FileInputButton/>"} component will
-            simulate the upload operation by randomly set the upload status and
+            simulate the upload operation by randomly setting the upload status and
             message on each uploadable <TypeHighlight>ExtFile</TypeHighlight>.
             It will also set a fake progress.
           </Alert>
