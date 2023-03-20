@@ -44,7 +44,7 @@ function compareNames(a, b) {
 export default function PropsTableApi({
   rows = [],
   title = "",
-  desc = "",
+  desc=<></>,
   omitDefault = false,
 }) {
   const [sorted, setSorted] = React.useState(false);
@@ -82,7 +82,7 @@ export default function PropsTableApi({
           </IconButton>
         </Tooltip>{" "}
       </Stack>
-      {desc.length > 0 && <DescParagraph>{desc}</DescParagraph>}
+      {desc!==undefined && <DescParagraph>{desc}</DescParagraph>}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>

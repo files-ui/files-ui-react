@@ -113,7 +113,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <AnchorToTab href="/types#ext-file">ExtFile-API. </AnchorToTab>
+            <AnchorToTab href="/types#extfile">ExtFile-API. </AnchorToTab>
           </Alert>
         </section>
 

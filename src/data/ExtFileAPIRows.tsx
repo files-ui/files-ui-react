@@ -65,7 +65,7 @@ export const ExtFileAPIRows = [
     name: "uploadStatus",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/dropzone#uploadstatus">
+        <AnchorToTab href="/types#uploadstatus">
           {"UPLOADSTATUS"}
         </AnchorToTab>
       </TypeHighlight>

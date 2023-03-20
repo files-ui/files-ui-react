@@ -1,5 +1,5 @@
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
-const CodeDemoDropzoneActionButtons = ({ splittedOnly = false, button }) => {
+const CodeDemoActionButtons = ({ splittedOnly = false, button }) => {
   if (button)
     return (
       <ShowDemoCode
@@ -24,7 +24,7 @@ const CodeDemoDropzoneActionButtons = ({ splittedOnly = false, button }) => {
     />
   );
 };
-export default CodeDemoDropzoneActionButtons;
+export default CodeDemoActionButtons;
 
 const splittedCodeJSButton = `<FileInputButton
   onChange={updateFiles}

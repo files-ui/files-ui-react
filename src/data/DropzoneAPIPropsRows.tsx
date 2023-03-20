@@ -76,7 +76,7 @@ export const DropzoneAPIPropsRows = [
         <br />
         <CodeHighlight>
           {"(f: File) => "}{" "}
-          <AnchorToTab href="/api/types#validatefileresponse">
+          <AnchorToTab href="/types#validatefileresponse">
             ValidateFileResponse
           </AnchorToTab>
         </CodeHighlight>
@@ -123,7 +123,7 @@ export const DropzoneAPIPropsRows = [
     name: "uploadConfig",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/types#uploadconfig">UploadConfig</AnchorToTab>
+        <AnchorToTab href="/types#uploadconfig">UploadConfig</AnchorToTab>
       </TypeHighlight>
     ),
     default: <TypeHighlight np></TypeHighlight>,
@@ -311,9 +311,7 @@ export const DropzoneAPIPropsRows = [
     name: "actionButtons",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/types#actionbuttons">
-          ActionButtons
-        </AnchorToTab>
+        <AnchorToTab href="/types#actionbuttons">ActionButtons</AnchorToTab>
       </TypeHighlight>
     ),
     default: <TypeHighlight np></TypeHighlight>,
@@ -353,7 +351,7 @@ export const DropzoneAPIPropsRows = [
     name: "headerConfig",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/types#headerconfig">HeaderConfig</AnchorToTab>
+        <AnchorToTab href="/types#headerconfig">HeaderConfig</AnchorToTab>
       </TypeHighlight>
     ),
     default: <TypeHighlight np></TypeHighlight>,
@@ -363,7 +361,7 @@ export const DropzoneAPIPropsRows = [
     name: "footerConfig",
     type: (
       <TypeHighlight np>
-        <AnchorToTab href="/api/types#footerconfig">FooterConfig</AnchorToTab>
+        <AnchorToTab href="/types#footerconfig">FooterConfig</AnchorToTab>
       </TypeHighlight>
     ),
     default: <TypeHighlight np></TypeHighlight>,

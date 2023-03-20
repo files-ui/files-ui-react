@@ -117,7 +117,7 @@ const DropzoneDemoPage = (props) => {
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <AnchorToTab href="/types#ext-file">ExtFile-API. </AnchorToTab>
+            <AnchorToTab href="/types#extfile">ExtFile-API. </AnchorToTab>
           </Alert>
         </section>
 
@@ -222,9 +222,9 @@ const DropzoneDemoPage = (props) => {
           <Alert severity="info">
             <AlertTitle> "fakeUpload" </AlertTitle>
             By giving this prop, the {"<Dropzone/>"} component will simulate the
-            upload operation by randomly setting the upload status and message on
-            each uploadable <TypeHighlight>ExtFile</TypeHighlight>. It will also
-            set a fake progress.
+            upload operation by randomly setting the upload status and message
+            on each uploadable <TypeHighlight>ExtFile</TypeHighlight>. It will
+            also set a fake progress.
           </Alert>
           <br />
           <Alert severity="info">
@@ -405,8 +405,9 @@ const DropzoneDemoPage = (props) => {
                 Dropzone with the{" "}
                 <TypeHighlight>footerConfig.allowedTypesLabel</TypeHighlight>{" "}
                 prop set to <TypeHighlight>false</TypeHighlight> will hide the
-                label that indicates the files types allowed. This label will be
-                hidden <strong>when the "upload" process is active</strong>.
+                label that indicates the allowed file types. This label is
+                normally hidden{" "}
+                <strong>when the "upload" process is active</strong>.
               </li>
               <li>
                 Dropzone with the{" "}
@@ -414,28 +415,30 @@ const DropzoneDemoPage = (props) => {
                   footerConfig.uploadProgressMessage
                 </TypeHighlight>{" "}
                 prop set to <TypeHighlight>false</TypeHighlight> will not
-                display the label with the upload progress. This label will be
-                visible<strong> only during the "upload" process</strong>.
+                display the that indicates the current upload progress. This
+                label is normally visible
+                <strong> only during the "upload" process</strong>.
               </li>
               <li>
                 Dropzone with the{" "}
                 <TypeHighlight>footerConfig.uploadResultMessage</TypeHighlight>{" "}
                 prop set to <TypeHighlight>false</TypeHighlight> will not
-                display a label at the end of the upload process. This label can{" "}
-                be visible for 2 seconds just{" "}
+                display a label that indicates the final result of the upload
+                progress will not be shown. This label is normally visible for 2
+                seconds just{" "}
                 <strong>after the "upload" process finishes</strong>.
               </li>
               <li>
                 Dropzone with the{" "}
                 <TypeHighlight>footerConfig.noMissingFilesLabel</TypeHighlight>{" "}
                 prop set to <TypeHighlight>false</TypeHighlight> will not
-                display a label when upload starts with no uploadable files.
+                display a label that indicates that there are not files missing
+                to upload.
               </li>
               <li>
                 Dropzone with the{" "}
-                <TypeHighlight>footerConfig.style</TypeHighlight> prop set to{" "}
-                <TypeHighlight>false</TypeHighlight>defined will override the
-                styles associated to the footer component.
+                <TypeHighlight>footerConfig.style</TypeHighlight> prop defined
+                will override the styles associated to the footer component.
               </li>
             </ul>
             By default all of these values are set to
@@ -605,11 +608,10 @@ const DropzoneDemoPage = (props) => {
           <DescParagraph>
             <CodeHighlight>{"<Dropzone/>"}</CodeHighlight> component uses the{" "}
             <TypeHighlight>localization</TypeHighlight> prop in the validation
-            and the upload process for setting status and messages according to the language that
-            this prop refers to. 
-            <br/>
-            The localization demo for this component can be found in
-            the{" "}
+            and the upload process for setting status and messages according to
+            the language that this prop refers to.
+            <br />
+            The localization demo for this component can be found in the{" "}
             <AnchorToTab href="/localization">localization page</AnchorToTab>.
           </DescParagraph>
         </section>

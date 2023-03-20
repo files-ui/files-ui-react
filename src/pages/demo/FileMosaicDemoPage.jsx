@@ -92,7 +92,7 @@ const FileMosaicDemoPage = (props) => {
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <a href="/types#ext-file">ExtFile-API. </a>
+            <a href="/types#extfile">ExtFile-API. </a>
           </Alert>
         </section>
 
