@@ -30,6 +30,23 @@ export type { AvatarProps } from "./components/avatar/AvatarProps";
 
 export { useFakeProgress } from "./hooks";
 
-export { createListOfMultiTypeFile, uploadFile, uploadFormData, uploadExtFile, ExtFileInstance, ExtFileManager } from "./core";
+export {
+    createListOfMultiTypeFile,
+    uploadFile,
+    uploadFormData,
+    uploadExtFile,
+    ExtFileInstance,
+    ExtFileManager,
+    createUploadConfig
+} from "./core";
 
-export type { ExtFile, ExtFileListMap, UPLOADSTATUS, Localization, ServerResponse, UploadResponse, UploadConfig, ValidateFileResponse } from "./core";
+export type {
+    ExtFile,
+    ExtFileListMap,
+    UPLOADSTATUS,
+    Localization,
+    ServerResponse,
+    UploadResponse,
+    UploadConfig,
+    ValidateFileResponse
+} from "./core";

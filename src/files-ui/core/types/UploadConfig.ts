@@ -2,7 +2,7 @@ import { Method } from "./method"
 
 export type UploadConfig = {
     /**
-     * The url endpoint to upload the file
+     * The url endpoint to upload the file.
      * e.g. https://www.myasomwbackend/uploads/file
      */
     url?: string;
@@ -12,7 +12,7 @@ export type UploadConfig = {
      */
     method?: Method;
     /**
-     * request headers for http request
+     * Request headers for http request.
      * e.g.
      * ```jsx
      * headers = { 
@@ -24,7 +24,7 @@ export type UploadConfig = {
     headers?: Record<string, string>;
     /**
      * the label to use in request
-     * On server this must be the label to get the file
+     * On server this must be the label to get the file.
      * @default "file"
      */
     uploadLabel?: string;
@@ -35,23 +35,23 @@ export type UploadConfig = {
      */
     cleanOnUpload?: boolean;
     /**
-     * The time that will last the "preparing" stage
-     * By default is 1500 miliseconds = 1.5 seconds
-     */
-    preparingTime?: number;
-    /**
-     * A message to show in the footer when the uploading process happens
-     */
-    uploadingMessage?: string;
-    /**
      * If true, onDrop event or file selection not only will make Dropzone to return the list of files, but also
      * it will start the upload stage for the files if at least url was set
      * By default is false
      */
     autoUpload?: boolean;
+    /**
+     * The time that will last the "preparing" stage
+     * By default is 1500 miliseconds = 1.5 seconds
+     */
+    preparingTime?: number;
+    /**
+     * A message to show in the footer when the uploading process takes place.
+     */
+    uploadingMessage?: string;
 }
 
-export const createDuiUploadConfig = (
+export const createUploadConfig = (
     url?: string,
     method?: Method,
     headers?: Record<string, string>,

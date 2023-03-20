@@ -21,3 +21,4 @@ export type { ServerResponse, UploadPromiseResponse, UploadResponse } from "./up
 export type { ValidateFileResponse, FileValidatorProps } from "./validation";
 
 export type { UploadConfig } from "./UploadConfig";
+export { createUploadConfig } from "./UploadConfig";

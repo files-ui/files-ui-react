@@ -92,7 +92,7 @@ export type {
 
 export {
     //UPLOADSTATUS,
-    ExtFileInstance, ExtFileManager, extFileMock
+    ExtFileInstance, ExtFileManager, extFileMock, createUploadConfig
 } from "./types"
 
 export {

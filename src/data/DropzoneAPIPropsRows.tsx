@@ -218,7 +218,7 @@ export const DropzoneAPIPropsRows = [
     name: "style",
     type: <TypeHighlight np>React.CSSProperties</TypeHighlight>,
     default: <TypeHighlight np></TypeHighlight>,
-    description: <>The in-line style object.</>,
+    description: <>The in-line style object applied to the main container.</>,
   },
   {
     name: "className",
@@ -227,7 +227,7 @@ export const DropzoneAPIPropsRows = [
     description: (
       <>
         The classname to override the css styles in .css or .sass file instead
-        of using in-line styles.
+        of using in-line styles. Classname is applied to the main container.
       </>
     ),
   },

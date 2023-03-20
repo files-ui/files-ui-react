@@ -6,7 +6,14 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
+import { ActionButtonsAPIRows } from "../../data/ActionButtonsAPIRows";
 import { ExtFileAPIRows } from "../../data/ExtFileAPIRows";
+import { FooterConfigAPIRows } from "../../data/FooterConfigAPIRows";
+import { HeaderConfigAPIRows } from "../../data/HeaderConfigAPIRows";
+import { ServerResponseAPIRows } from "../../data/ServerResponseAPIRows";
+import { UploadConfigAPIRows } from "../../data/UploadConfigAPIRows";
+import { UPLOADSTATUSAPIRows } from "../../data/UploadStatusAPIRows";
+import { ValidateFileResponseAPIrows } from "../../data/ValidateFileResponseAPIrows";
 import PropsTableApi from "../api/PropsTableApi";
 
 const rightMenuItems = [
@@ -15,39 +22,39 @@ const rightMenuItems = [
     label: "ExtFile",
     referTo: "/types#extfile",
   },
-
   {
-    id: 4,
-    label: "ActionButtons",
-    referTo: "/types#actionbuttons",
+    id: 7,
+    label: "ValidateFileResponse",
+    referTo: "/types#validatefileresponse",
   },
   {
     id: 5,
-    label: "HeaderConfig",
-    referTo: "/types#headerconfig",
-  },
-  {
-    id: 6,
-    label: "FooterConfig",
-    referTo: "/types#footerconfig",
-  },
-  {
-    id: 7,
     label: "UploadConfig",
     referTo: "/types#uploadconfig",
   },
   {
-    id: 8,
+    id: 2,
+    label: "ActionButtons",
+    referTo: "/types#actionbuttons",
+  },
+  {
+    id: 3,
+    label: "HeaderConfig",
+    referTo: "/types#headerconfig",
+  },
+  {
+    id: 4,
+    label: "FooterConfig",
+    referTo: "/types#footerconfig",
+  },
+  {
+    id: 6,
     label: "ServerResonse",
     referTo: "/types#uploadconfig",
   },
+
   {
-    id: 2,
-    label: "ValidateFileResponse",
-    referTo: "/types#customvalidatefileresponse",
-  },
-  {
-    id: 9,
+    id: 8,
     label: "UPLOADSTATUS",
     referTo: "/types#uploadstatus",
   },
@@ -71,20 +78,34 @@ const TypesPage = (props) => {
               rows={ExtFileAPIRows}
             />
           </section>
-          <section id="customvalidatefileresponse">
-            <PropsTableApi rows={[]} title="ValidateFileResponse" />
-          </section>
-          <section id="actionbuttons">
-            <PropsTableApi rows={[]} title="ActionButtons" />
+          <section id="validatefileresponse">
+            <PropsTableApi
+              rows={ValidateFileResponseAPIrows}
+              title="ValidateFileResponse"
+              omitDefault
+            />
           </section>
           <section id="uploadconfig">
-            <PropsTableApi rows={[]} title="UploadConfig" />
+            <PropsTableApi rows={UploadConfigAPIRows} title="UploadConfig" />
           </section>
+          <section id="actionbuttons">
+            <PropsTableApi rows={ActionButtonsAPIRows} title="ActionButtons" />
+          </section>
+
           <section id="headerconfig">
-            <PropsTableApi rows={[]} title="HeaderConfig" />
+            <PropsTableApi rows={HeaderConfigAPIRows} title="HeaderConfig" />
           </section>
           <section id="footerconfig">
-            <PropsTableApi rows={[]} title="FooterConfig" />
+            <PropsTableApi rows={FooterConfigAPIRows} title="FooterConfig" />
+          </section>
+          <section id="serverresponse">
+            <PropsTableApi
+              rows={ServerResponseAPIRows}
+              title="ServerResponse"
+            />
+          </section>
+          <section id="uploadstatus">
+            <PropsTableApi rows={UPLOADSTATUSAPIRows} title="UPLOADSTATUS" />
           </section>
         </MainContentContainer>
       </MainLayoutPage>{" "}
