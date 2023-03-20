@@ -1,8 +1,8 @@
 import * as React from "react";
-interface DropzoneActionButtonsProps {}
-const DropzoneActionButtons: React.FC<DropzoneActionButtonsProps> = (
-  props: DropzoneActionButtonsProps
+interface ActionButtonsProps {}
+const ActionButtons: React.FC<ActionButtonsProps> = (
+  props: ActionButtonsProps
 ) => {
-  return <div>DropzoneActionButtons</div>;
+  return <div>ActionButtons</div>;
 };
-export default DropzoneActionButtons;
+export default ActionButtons;

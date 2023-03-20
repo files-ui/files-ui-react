@@ -1,4 +1,4 @@
-import { DropzoneActionButton } from "./components/dropzone/DropzoneProps";
+import { ActionButtonItem } from "./components/dropzone/DropzoneProps";
 
 /**
  * 
@@ -8,14 +8,14 @@ import { DropzoneActionButton } from "./components/dropzone/DropzoneProps";
  * @param other array of other custom action buttons props
  * @returns 
  */
-export const makeListOfActionButtons = (
-  uploadButton: DropzoneActionButton | undefined,
-  abortButton: DropzoneActionButton | undefined,
-  deleteButton: DropzoneActionButton | undefined,
-  cleanButton: DropzoneActionButton | undefined
-): [DropzoneActionButton[], DropzoneActionButton[]] => {
-  let listOfTopButtons: DropzoneActionButton[] = [];
-  let listOfBottomButtons: DropzoneActionButton[] = [];
+export const makeListOfActionButtonItems = (
+  uploadButton: ActionButtonItem | undefined,
+  abortButton: ActionButtonItem | undefined,
+  deleteButton: ActionButtonItem | undefined,
+  cleanButton: ActionButtonItem | undefined
+): [ActionButtonItem[], ActionButtonItem[]] => {
+  let listOfTopButtons: ActionButtonItem[] = [];
+  let listOfBottomButtons: ActionButtonItem[] = [];
  /*  if (uploadButton) {
     uploadButton.position === "top"
       ? listOfTopButtons.push(uploadButton)

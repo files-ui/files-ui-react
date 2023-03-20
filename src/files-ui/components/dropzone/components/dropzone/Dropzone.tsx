@@ -35,7 +35,7 @@ import {
   ActionButtons,
   defaultDrozoneProps,
   // DEFAULT_BORDER_RADIUS,
-  //DropzoneActionButton,
+  //ActionButton,
   //DropzoneActions,
   DropzoneProps,
   FooterConfig,

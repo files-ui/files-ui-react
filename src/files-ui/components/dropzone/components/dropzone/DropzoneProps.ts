@@ -252,7 +252,7 @@ export type FooterConfig = {
 }
 
 
-export type DropzoneActionButton = {
+export type ActionButtonItem = {
   children?: JSX.Element;
   label?: string;
   style?: React.CSSProperties;
@@ -266,10 +266,10 @@ export interface DropzoneActions {
   position?: "top" | "bottom";
   style?: React.CSSProperties;
   className?: string;
-  uploadButton?: DropzoneActionButton;
-  abortButton?: DropzoneActionButton;
-  deleteButton?: DropzoneActionButton;
-  cleanButton?: DropzoneActionButton;
+  uploadButton?: ActionButtonItem;
+  abortButton?: ActionButtonItem;
+  deleteButton?: ActionButtonItem;
+  cleanButton?: ActionButtonItem;
 }
 export type ActionButtons = {
   [P in keyof DropzoneActions]: DropzoneActions[P]

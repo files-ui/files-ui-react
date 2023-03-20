@@ -2,7 +2,7 @@ import * as React from "react";
 import { addClassName, Localization } from "../../../../core";
 import { MaterialButton } from "../../../material-button";
 import {
-  DropzoneActionButton,
+  ActionButtonItem,
   DropzoneActions,
 } from "../dropzone/DropzoneProps";
 import "./DropzoneButtons.scss";
@@ -36,7 +36,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     disabled,
   } = props;
 
-  const actionButtonsList: DropzoneActionButton[] = [
+  const actionButtonsList: ActionButtonItem[] = [
     cleanButton
       ? { ...cleanButton, label: "Clean", onClick: onClean }
       : undefined,
@@ -50,8 +50,8 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
       ? { ...abortButton, label: "Abort", onClick: onAbort }
       : undefined,
   ].filter(
-    (ab: DropzoneActionButton | undefined) => ab !== undefined
-  ) as DropzoneActionButton[];
+    (ab: ActionButtonItem | undefined) => ab !== undefined
+  ) as ActionButtonItem[];
 
   const tailClassName:string = `${top ? " top" : " bottom"}`;
   const finalClassName = addClassName(
@@ -62,7 +62,7 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
   return (
     <div className={finalClassName} style={containerStyle}>
       {actionButtonsList.map(
-        (actionButtonProps: DropzoneActionButton, index: number) => {
+        (actionButtonProps: ActionButtonItem, index: number) => {
           const { children, label, resetStyles, className, style, onClick } =
             actionButtonProps;
           return (
