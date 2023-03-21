@@ -142,10 +142,10 @@ const router = createBrowserRouter([
     path: "/types",
     element: <TypesPage />,
   },
-  {
+/*   {
     path: "/file-reader",
     element: <FileReaderPage />,
-  },
+  }, */
   {
     path: "/file-download",
     element: <FileDownloadPage />,

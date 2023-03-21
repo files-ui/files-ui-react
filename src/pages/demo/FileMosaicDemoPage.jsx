@@ -79,7 +79,7 @@ const FileMosaicDemoPage = (props) => {
             <CodeHighlight>{`<FileInputButton/>`} </CodeHighlight>
             component for allowing the user to select files. For further
             information of this component check out the{" "}
-            <a href="/components/fileinputbutton">FileInputButton</a> page.
+            <AnchorToTab href="/components/fileinputbutton">FileInputButton</AnchorToTab> page.
           </Alert>
           <br />
           <Alert severity="info">
@@ -92,7 +92,7 @@ const FileMosaicDemoPage = (props) => {
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <a href="/types#extfile">ExtFile-API. </a>
+            <AnchorToTab href="/types#extfile">ExtFile-API. </AnchorToTab>
           </Alert>
         </section>
 

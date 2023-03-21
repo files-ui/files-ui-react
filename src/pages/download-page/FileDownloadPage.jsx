@@ -18,7 +18,9 @@ const FileDownloadPage = (props) => {
           </MainParagraph>
         </MainContentContainer>
       </MainLayoutPage>
+<section>
 
+</section>
       <RightMenuContainer>
         <RightMenu width="240px" items={rightMenuItems} />
       </RightMenuContainer>
@@ -30,13 +32,13 @@ export default FileDownloadPage;
 const rightMenuItems = [
   {
     id: 0,
-    label: "From Same host",
-    referTo: "/types#extfile",
+    label: "Same host",
+    referTo: "/file-download#samehost",
   },
   {
     id: 1,
-    label: "From Another host",
-    referTo: "/types#validatefileresponse",
+    label: "Another host",
+    referTo: "/file-download#anotherhost",
   },
   
 ];

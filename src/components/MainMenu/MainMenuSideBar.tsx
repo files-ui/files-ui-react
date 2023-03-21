@@ -143,12 +143,12 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       index: 6,
       onClick: () => navigate("/server-side"),
     },
-    {
+   /*  {
       label: "File readers",
       index: 8,
       onClick: () => navigate("/file-reader"),
     },
-
+ */
     {
       label: "File download",
       index: 9,
