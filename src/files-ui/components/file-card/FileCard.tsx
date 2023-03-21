@@ -147,9 +147,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     videoUrl
   );
   //The size formatted and rounded in 2 decimals
-  const sizeFormatted: string = localSize
-    ? fileSizeFormater(localSize)
-    : "0 KB";
+  const sizeFormatted: string | undefined = fileSizeFormater(localSize);
 
   //alwaysActive
   const [showInfo, setShowInfo] = React.useState<boolean>(false);

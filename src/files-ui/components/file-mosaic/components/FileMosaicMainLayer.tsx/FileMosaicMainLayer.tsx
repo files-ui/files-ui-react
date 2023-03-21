@@ -14,7 +14,8 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = (
   props: FileMosaicMainLayerProps
 ) => {
   const {
-    darkMode,deleteIcon,
+    darkMode,
+    deleteIcon,
     downloadIcon,
     imageIcon,
     infoIcon,
@@ -52,7 +53,9 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = (
             uploadStatus={uploadStatus}
             localization={localization}
           />
-          {isActive && <FileMosaicSize sizeFormatted={sizeFormatted} />}
+          {isActive && sizeFormatted && (
+            <FileMosaicSize sizeFormatted={sizeFormatted} />
+          )}
         </div>
         <div className="file-mosaic-footer-right">
           {isActive && (

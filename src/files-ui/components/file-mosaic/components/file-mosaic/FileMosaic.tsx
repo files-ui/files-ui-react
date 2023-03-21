@@ -65,10 +65,9 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onDoubleClick,
     onClick,
     onRightClick,
-    smartImgFit="orientation",
+    smartImgFit = "orientation",
   } = props;
-//localizers
-
+  //localizers
 
   //ref for anchor download element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
@@ -116,10 +115,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   );
 
   //The size formatted and rounded in 2 decimals
-  const sizeFormatted: string = localSize
-    ? fileSizeFormater(localSize)
-    : "0 KB";
-
+  const sizeFormatted: string| undefined = fileSizeFormater(localSize);
   //alwaysActive
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
 
@@ -210,7 +206,6 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onAbort?.(id);
   };
 
- 
   if (isReady)
     return (
       <div
