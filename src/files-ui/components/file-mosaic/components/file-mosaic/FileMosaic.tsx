@@ -2,13 +2,13 @@ import * as React from "react";
 import {
   addClassName,
   fileSizeFormater,
+  getLocalFileItemData,
   handleClickUtil,
 } from "../../../../core";
 import { FileMosaicProps } from "./FileMosaicProps";
 import "./FileMosaic.scss";
 import LayerContainer from "../file-mosaic-layer/LayerContainer";
 import Layer from "../file-mosaic-layer/Layer";
-import { getLocalFileItemData } from "../../../file-item/utils/getLocalFileItemData";
 import FileMosaicName from "../FileMosaicName/FileMosaicName";
 import FileMosaicUploadLayer from "../FileMosaicUploadLayer/FileMosaicUploadLayer";
 import useFileMosaicInitializer from "../../hooks/useFileMosaicInitializer";

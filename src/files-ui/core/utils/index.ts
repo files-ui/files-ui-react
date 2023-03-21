@@ -38,4 +38,6 @@ export { cleanInput } from "./input.utils";
 
 export { addClassName } from "./addClassName";
 
-export {isUploadAbleExtFile} from "./isUploadAbleExtFile";
+export { isUploadAbleExtFile } from "./isUploadAbleExtFile";
+
+export { getLocalFileItemData } from "./getLocalFileItemData"
