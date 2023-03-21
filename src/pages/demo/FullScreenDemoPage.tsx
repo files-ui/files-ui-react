@@ -12,7 +12,6 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
-import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 interface FullScreenDemoPageProps {}
 const FullScreenDemoPage: React.FC<FullScreenDemoPageProps> = (
