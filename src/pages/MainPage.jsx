@@ -8,7 +8,6 @@ import GettingStarted from "../components/MainPage/GettingStarted";
 import MainNavBar from "../components/MainPage/MainNavBar";
 import MainFooter from "../components/MainPage/MainFooter";
 import FileMosaicImageVideoPreviews from "../components/MainPage/MainRight/FileMosaicImageVideoPreviews";
-//import FileCard from "../files-ui/components/file-item/components/FileCard/FileCard";
 import { Divider } from "@mui/material";
 import ExtraComponentsMainPage from "../components/MainPage/SecondaryRight/ExtraComponentsMainPage";
 import ExtraComponentsMainPageInputButton from "../components/MainPage/SecondaryRight/ExtraComponentsMainPageInputButton";

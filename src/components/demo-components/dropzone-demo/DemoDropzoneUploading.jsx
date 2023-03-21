@@ -16,9 +16,9 @@ const DemoDropzoneUploading = ({ button }) => {
   const removeFile = (id) => {
     setFiles(files.filter((x) => x.id !== id));
   };
-  const handleFinishUpload=(uploadedFiles)=>{
+  const handleFinishUpload = (uploadedFiles) => {
     console.log("Upload has finished", uploadedFiles);
-  }
+  };
   if (button)
     return (
       <div
@@ -38,7 +38,7 @@ const DemoDropzoneUploading = ({ button }) => {
           maxFileSize={28 * 1024 * 1024}
           maxFiles={2}
           actionButtons={{
-            position: "bottom",
+            position: "after",
             uploadButton: {},
             abortButton: {},
           }}
@@ -65,7 +65,13 @@ const DemoDropzoneUploading = ({ button }) => {
             }}
           >
             {files.map((file) => (
-              <FileCard key={file.id} {...file} onDelete={removeFile} info preview/>
+              <FileCard
+                key={file.id}
+                {...file}
+                onDelete={removeFile}
+                info
+                preview
+              />
             ))}
           </div>
         )}
@@ -78,7 +84,7 @@ const DemoDropzoneUploading = ({ button }) => {
       accept={"image/*"}
       maxFileSize={28 * 1024 * 1024}
       maxFiles={2}
-      actionButtons={{ position: "bottom", uploadButton: {}, abortButton: {} }}
+      actionButtons={{ position: "after", uploadButton: {}, abortButton: {} }}
       uploadConfig={{
         url: "https://www.myawsomeserver.com/upload",
         method: "POST",
@@ -92,8 +98,14 @@ const DemoDropzoneUploading = ({ button }) => {
       fakeUpload
     >
       {files.map((file) => (
-          <FileMosaic key={file.id} {...file} onDelete={removeFile} info preview/>
-        ))}
+        <FileMosaic
+          key={file.id}
+          {...file}
+          onDelete={removeFile}
+          info
+          preview
+        />
+      ))}
     </Dropzone>
   );
 };

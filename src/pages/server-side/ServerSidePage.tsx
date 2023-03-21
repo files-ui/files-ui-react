@@ -8,7 +8,9 @@ import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
-
+import { FileMosaic } from "../../files-ui";
+import expressjslogo from "../../static/serverside/expressjslogo.webp";
+import javalogo from "../../static/serverside/springbootjavalogo.png";
 const ServerSidePage = () => {
   return (
     <React.Fragment>
@@ -25,25 +27,57 @@ const ServerSidePage = () => {
           </DescParagraph>
           <section id="expressjs">
             <SubTitle content="Express JS" />
-            <DescParagraph>
-              The following code is just the main part of a project. Check it up
-              in the following{" "}
-              <AnchorToTab href="https://github.com/files-ui/files-ui-web-test/tree/master/expressjs">
-                here
-              </AnchorToTab>
-              .
-            </DescParagraph>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "revert",
+                flexWrap: "nowrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <DescParagraph>
+                The following code is just the main part of a project. Check it
+                up in the following{" "}
+                <AnchorToTab href="https://github.com/files-ui/files-ui-web-test/tree/master/expressjs">
+                  link
+                </AnchorToTab>
+                .
+              </DescParagraph>
+              <FileMosaic
+                {...logoExpress}
+                onClick={() => {
+                  alert("open");
+                }}
+              />
+            </div>
           </section>
           <section id="springboot">
             <SubTitle content="Java - Spring boot" />{" "}
-            <DescParagraph>
-              The following code is just the main part of a project. Check it up
-              in the following{" "}
-              <AnchorToTab href="https://github.com/files-ui/files-ui-web-test/tree/master/springboot">
-                here
-              </AnchorToTab>
-              .
-            </DescParagraph>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "revert",
+                flexWrap: "nowrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <DescParagraph>
+                The following code is just the main part of a project. Check it
+                up in the following{" "}
+                <AnchorToTab href="https://github.com/files-ui/files-ui-web-test/tree/master/springboot">
+                  link
+                </AnchorToTab>
+                .
+              </DescParagraph>
+              <FileMosaic
+                {...logoJava}
+                onClick={() => {
+                  alert("open");
+                }}
+              />
+            </div>
           </section>
         </MainContentContainer>
         <RightMenuContainer>
@@ -67,3 +101,17 @@ const rightMenuItems = [
     referTo: "/server-side#springboot",
   },
 ];
+
+const logoExpress = {
+  id: ":0:",
+  //size: 28 * 1024 * 1024,
+  type: "image/png",
+  imageUrl: expressjslogo,
+};
+
+const logoJava = {
+  id: ":1:",
+  //size: 28 * 1024 * 1024,
+  type: "image/png",
+  imageUrl: javalogo,
+};
