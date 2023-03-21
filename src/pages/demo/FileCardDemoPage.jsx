@@ -277,7 +277,7 @@ const FileCardDemoPage = (props) => {
               same-origin URLs
             </AnchorToTab>{" "}
             since it uses the{" "}
-            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">
+            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes">
               anchor
             </AnchorToTab>{" "}
             tag under the hood.
@@ -292,7 +292,7 @@ const FileCardDemoPage = (props) => {
             You can check an example here:
             <ul>
               <li>
-                <AnchorToTab href="/utilities-methods/file-downloader">
+                <AnchorToTab href="/file-download">
                   {"Download a File"}
                 </AnchorToTab>
               </li>
