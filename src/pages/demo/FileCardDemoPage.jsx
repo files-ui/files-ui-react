@@ -356,17 +356,17 @@ const FileCardDemoPage = (props) => {
               </AnchorToTab>
             </li>
             <li>
-              <AnchorToTab href="/api/preview#fullscreen">
+              <AnchorToTab href="/api/fullscreen">
                 {"<FullScreen/>"}
               </AnchorToTab>
             </li>
             <li>
-              <AnchorToTab href="/api/preview#imagepreview">
+              <AnchorToTab href="/api/imagepreview">
                 {"<ImagePreview/>"}
               </AnchorToTab>
             </li>
             <li>
-              <AnchorToTab href="/api/preview#videopreview">
+              <AnchorToTab href="/api/videopreview">
                 {"<VideoPreview/>"}
               </AnchorToTab>
             </li>

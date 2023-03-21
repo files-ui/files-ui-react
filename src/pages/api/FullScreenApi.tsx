@@ -39,6 +39,16 @@ const FullScreenApi = () => {
             the component demo pages:
             <ul>
               <li>
+                <AnchorToTab href="/components/fullscreen#imagepreview">
+                  ImagePreview (FullScreen)
+                </AnchorToTab>
+              </li>
+              <li>
+                <AnchorToTab href="/components/fullscreen#videopreview">
+                  VideoPreview (FullScreen)
+                </AnchorToTab>
+              </li>
+              <li>
                 <AnchorToTab href="/components/filemosaic">
                   FileMosaic
                 </AnchorToTab>

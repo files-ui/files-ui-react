@@ -20,8 +20,9 @@ export const FullScreenAPIPropRows = [
     default: <TypeHighlight np></TypeHighlight>,
     description: (
       <>
-        The content of the dropozone. Tipically it is an array of{" "}
-        <CodeHighlight>{"<FileMosaic/>"}</CodeHighlight> components.
+        The content of the component. Tipically it is the
+        <CodeHighlight>{"<ImagePreview/>"}</CodeHighlight> or the{" "}
+        <CodeHighlight>{"<VideoPreview/>"}</CodeHighlight> components.
       </>
     ),
   },

@@ -77,6 +77,10 @@ export declare type ExtFile = {
         file. If defined, the download icon will be shown.
      */
     downloadUrl?: string;
+    /**
+     * Link, URI, FIle object or string representation of a video
+     */
+    videoUrl?: string;
 }
 
 /**
@@ -153,6 +157,11 @@ export class ExtFileInstance {
      * In case onDownload prop is given
      */
     public downloadUrl?: string;
+    /**
+     * Link, URI, FIle object or string representation of a video
+     */
+    public videoUrl?: string;
+
     constructor(extFile: ExtFile) {
         const {
             id,
@@ -170,7 +179,7 @@ export class ExtFileInstance {
             extraData,
             extraUploadData,
             serverResponse,
-            downloadUrl
+            downloadUrl, videoUrl
         } = extFile;
 
         this.id = id;
@@ -192,6 +201,7 @@ export class ExtFileInstance {
         this.serverResponse = serverResponse;
 
         this.downloadUrl = downloadUrl;
+        this.videoUrl = videoUrl;
     }
     /**
      * method under construction

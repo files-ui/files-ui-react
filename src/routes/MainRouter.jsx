@@ -26,6 +26,7 @@ import LocalizationPage from "../pages/localization/LocalizationPage";
 import VideoPreviewApi from "../pages/api/VideoPreviewApi";
 import ImagePreviewApi from "../pages/api/ImagePreviewApi";
 import FullScreenApi from "../pages/api/FullScreenApi";
+import FullScreenDemoPage from "../pages/demo/FullScreenDemoPage";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "/components/filecard",
         element: <FileCardDemoPage />,
+      },
+      {
+        path: "/components/fullscreen",
+        element: <FullScreenDemoPage />,
       },
     ],
   },

@@ -4,14 +4,14 @@ import { FileMosaic, ExtFile, FileMosaicProps } from "../../../files-ui";
 import DescParagraph from "../../demo-components/desc-paragraph/DescParagraph";
 import { FullScreen, ImagePreview, VideoPreview } from "../../../files-ui";
 import {
-  NarutoAndSasukeVsMomoshikiEN,
-  NarutoAndSasukeVsMomoshikiES,
-  ThorArrivesWakandaEN,
+  // NarutoAndSasukeVsMomoshikiEN,
+  // NarutoAndSasukeVsMomoshikiES,
+  // ThorArrivesWakandaEN,
   ThorArrivesWakandaES,
 } from "../../../data/videoLinks";
 
-const VIDEO_URL =
-  "https://srv23.y2mate.is/download?file=cd448fa7c7fe6c301970e890794fb682137140";
+/* const VIDEO_URL =
+  "https://srv23.y2mate.is/download?file=cd448fa7c7fe6c301970e890794fb682137140"; */
 interface FileMosaicImageVideoPreviewsProps {
   darkMode?: boolean;
 }
@@ -64,7 +64,7 @@ const FileMosaicImageVideoPreviews: React.FC<
       console.error(error);
     }
   };
-  const handleDownloadXHR = async (
+/*   const handleDownloadXHR = async (
     fileId: FileMosaicProps["id"],
     downloadUrl?: string
   ) => {
@@ -82,7 +82,7 @@ const FileMosaicImageVideoPreviews: React.FC<
       request.send();
 
       request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
           const imageURL = window.URL.createObjectURL(this.response);
 
           const anchor = document.createElement("a");
@@ -107,12 +107,12 @@ const FileMosaicImageVideoPreviews: React.FC<
       anchor.click();
       document.body.removeChild(anchor);
       URL.revokeObjectURL(imageURL);
-      /*  const resJson = await response.json();
-      console.log("Download", resJson); */
+      // const resJson = await response.json();
+      //console.log("Download", resJson); 
     } catch (error) {
       console.log("Download error", error);
     }
-  };
+  }; */
   return (
     <div style={{ width: "100%" }}>
       <h3>Or check the previews!</h3>
@@ -186,7 +186,7 @@ const files: ExtFile[] = [
     imageUrl:
       "https://e0.pxfuel.com/wallpapers/626/685/desktop-wallpaper-avengers-infinity-war-thor-arrives-in-wakanda-bring-me-thanos.jpg",
     downloadUrl: ThorArrivesWakandaES,
-    extraData: { videoUrl: ThorArrivesWakandaES },
+    videoUrl: ThorArrivesWakandaES ,
   },
   {
     id: 3,

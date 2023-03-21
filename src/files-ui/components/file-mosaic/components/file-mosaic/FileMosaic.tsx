@@ -65,7 +65,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onDoubleClick,
     onClick,
     onRightClick,
-    smartImgFit,
+    smartImgFit="orientation",
   } = props;
 //localizers
 

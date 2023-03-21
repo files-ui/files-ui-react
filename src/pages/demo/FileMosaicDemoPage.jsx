@@ -373,6 +373,21 @@ const FileMosaicDemoPage = (props) => {
                 {"<FileInputButton/>"}
               </AnchorToTab>
             </li>
+            <li>
+              <AnchorToTab href="/api/fullscreen">
+                {"<FullScreen/>"}
+              </AnchorToTab>
+            </li>
+            <li>
+              <AnchorToTab href="/api/imagepreview">
+                {"<ImagePreview/>"}
+              </AnchorToTab>
+            </li>
+            <li>
+              <AnchorToTab href="/api/videopreview">
+                {"<VideoPreview/>"}
+              </AnchorToTab>
+            </li>
           </ul>
         </section>
       </MainContentContainer>

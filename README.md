@@ -22,9 +22,8 @@
 </div>
 **Files UI** is a complete library for handling files in the UI. You can validate and upload them.
 
-
 <a href="https://github.com/dropzone-ui/react#readme">
-<img align="center" width="100%" src="https://user-images.githubusercontent.com/43678736/139614260-602b512c-cf78-48fe-ae57-1057e7ec8135.gif" alt="dropone-ui-preview">
+<img align="center" width="100%" src="https://user-images.githubusercontent.com/43678736/139614260-602b512c-cf78-48fe-ae57-1057e7ec8135.gif" alt="files-ui-preview">
 </a>
 
 ## Requirement
@@ -50,7 +49,15 @@ yarn add @files-ui/react
 This project is licensed under the terms of the
 [MIT license](/LICENSE).
 
-<p align="center"><a href="https://github.com/dropzone-ui/react-dropzone#"><img src="http://randojs.com/images/barsSmallTransparentBackground.gif" alt="Animated footer bars" width="100%"/></a></p>
+<p align="center">
+<a href="https://github.com/files-ui/files-ui-react#">
+<img src="http://randojs.com/images/barsSmallTransparentBackground.gif" alt="Animated footer bars" width="100%"/>
+</a>
+</p>
 
 <br/>
-<p align="center"><a href="https://github.com/dropzone-ui/react-dropzone#readme"><img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="28"/></a></p>
+<p align="center">
+<a href="https://github.com/files-ui/files-ui-react#readme">
+<img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="28"/>
+</a>
+</p>
