@@ -178,13 +178,17 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
   }; */
 
   //const [selectedIndex, setSelectedIndex] = React.useState(1);
-
+  function handler(ev:React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    console.log('CTRL pressed during click:', ev.ctrlKey);
+  }
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
     onClick: Function | undefined,
     withSubMenu?: boolean
   ) => {
+    handler(event);
+    
     //setSelectedIndex(index);
     console.log("newIndex",index, withSubMenu);
     if (!withSubMenu) {

@@ -1,4 +1,7 @@
+import { Paper } from "@mui/material";
 import * as React from "react";
+import CodeDemoServerSideJava from "../../components/demo-components/demo-server-side/CodeDemoServerSideJava";
+import CodeDemoServerSideExpress from "../../components/demo-components/demo-server-side/CodeDemoServerSideExpress";
 import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
@@ -11,6 +14,7 @@ import AnchorToTab from "../../components/util-components/AnchorToTab";
 import { FileMosaic } from "../../files-ui";
 import expressjslogo from "../../static/serverside/expressjslogo.webp";
 import javalogo from "../../static/serverside/springbootjavalogo.png";
+import { redirect } from "../../utils/redirect";
 const ServerSidePage = () => {
   return (
     <React.Fragment>
@@ -18,66 +22,88 @@ const ServerSidePage = () => {
         <MainContentContainer>
           <MainTitle>Server Side implementations</MainTitle>
           <MainParagraph>
-            Some implementations for handling correctly the uploaded files using
-            Files UI.
+            Some implementations to correctly handle uploaded files using Files
+            UI.
           </MainParagraph>
           <DescParagraph>
-            If you think there should be added more of them or you want to add
-            your own in any other programming language, please contact us.
+            <ul>
+              <li>
+                If you think more server-side samples should be added or would
+                like to contribute by fixing or adding a new server-side sampler
+                in programming languages not yet covered, please contact us.
+              </li>
+            </ul>
           </DescParagraph>
           <section id="expressjs">
             <SubTitle content="Express JS" />
-            <div
+            <Paper
+              variant="outlined"
               style={{
                 display: "flex",
-                flexDirection: "revert",
+                flexDirection: "row",
                 flexWrap: "nowrap",
                 alignItems: "center",
-                justifyContent: "space-between",
+                padding: "25px",
+                justifyContent: "space-evenly",
               }}
             >
+              <FileMosaic
+                {...logoExpress}
+                onClick={() =>
+                  redirect(
+                    "https://github.com/files-ui/files-ui-web-test/tree/master/expressjs"
+                  )
+                }
+                {...logoExpress.extraData}
+                smartImgFit={"center"}
+              />{" "}
               <DescParagraph>
-                The following code is just the main part of a project. Check it
-                up in the following{" "}
+                The following code is just the main part of a project.
+                <br />
+                Check it up in the following{" "}
                 <AnchorToTab href="https://github.com/files-ui/files-ui-web-test/tree/master/expressjs">
                   link
                 </AnchorToTab>
                 .
+
+
+
               </DescParagraph>
-              <FileMosaic
-                {...logoExpress}
-                onClick={() => {
-                  alert("open");
-                }}
-              />
-            </div>
+            </Paper>
+            <CodeDemoServerSideExpress splittedOnly/>
           </section>
           <section id="springboot">
             <SubTitle content="Java - Spring boot" />{" "}
-            <div
+            <Paper
+              variant="outlined"
               style={{
                 display: "flex",
                 flexDirection: "revert",
                 flexWrap: "nowrap",
                 alignItems: "center",
-                justifyContent: "space-between",
+                justifyContent: "space-evenly",
+                padding: "25px",
               }}
             >
+              <FileMosaic
+                {...logoJava}
+                onClick={() =>
+                  redirect(
+                    "https://github.com/files-ui/files-ui-web-test/tree/master/springboot"
+                  )
+                }
+              />{" "}
               <DescParagraph>
-                The following code is just the main part of a project. Check it
-                up in the following{" "}
+                The following code is just the main part of a project.
+                <br />
+                Check it up in the following{" "}
                 <AnchorToTab href="https://github.com/files-ui/files-ui-web-test/tree/master/springboot">
                   link
                 </AnchorToTab>
                 .
               </DescParagraph>
-              <FileMosaic
-                {...logoJava}
-                onClick={() => {
-                  alert("open");
-                }}
-              />
-            </div>
+            </Paper>
+            <CodeDemoServerSideJava splittedOnly/>
           </section>
         </MainContentContainer>
         <RightMenuContainer>
@@ -107,6 +133,10 @@ const logoExpress = {
   //size: 28 * 1024 * 1024,
   type: "image/png",
   imageUrl: expressjslogo,
+  name: "Click me!",
+  extraData: {
+    backgroundBlurImage: false,
+  },
 };
 
 const logoJava = {
@@ -114,4 +144,5 @@ const logoJava = {
   //size: 28 * 1024 * 1024,
   type: "image/png",
   imageUrl: javalogo,
+  name: "Click me!",
 };
