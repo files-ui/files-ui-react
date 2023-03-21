@@ -1,0 +1,28 @@
+.fui-page-footer-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  .redirect-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .like-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: "960px") {
+    .redirect-container {
+      display: none;
+    }
+    .redirect-small-container {
+      display: flex;
+    }
+    .like-icon-container {
+      width: 100%;
+    }
+  }
+}

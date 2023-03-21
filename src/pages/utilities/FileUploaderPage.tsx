@@ -1,5 +1,6 @@
 import * as React from "react";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
+import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenu from "../../components/RightMenu/RightMenu";
@@ -7,8 +8,13 @@ import RightMenu from "../../components/RightMenu/RightMenu";
 const rightMenuItems = [
   {
     id: 0,
+    label: "Upload to server",
+    referTo: "/file-upload/#uploadtoaws",
+  },
+  {
+    id: 1,
     label: "Upload to AWS",
-    referTo: "/utilities-methods/file-reader/#read-as-url",
+    referTo: "/file-upload/#uploadtoaws",
   },
 ];
 
@@ -18,9 +24,11 @@ const FileUploaderPage: React.FC<FileUploaderPageProps> = (
 ) => {
   return (
     <React.Fragment>
-      <MainContentContainer>
-        <MainTitle>File Upoad</MainTitle>
-      </MainContentContainer>
+      <MainLayoutPage selectedIndex={8}>
+        <MainContentContainer>
+          <MainTitle>File Upload</MainTitle>
+        </MainContentContainer>
+      </MainLayoutPage>
 
       <RightMenuContainer>
         <RightMenu width="240px" items={rightMenuItems} />

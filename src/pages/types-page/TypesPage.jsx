@@ -70,7 +70,7 @@ const rightMenuItems = [
 const TypesPage = (props) => {
   return (
     <React.Fragment>
-      <MainLayoutPage selectedIndex={6}>
+      <MainLayoutPage selectedIndex={7}>
         <MainContentContainer>
           <MainTitle>Types</MainTitle>
           <MainParagraph>

@@ -10,6 +10,9 @@ import { MainMenuSideBarItems, MainMenuSideBarProps } from "./MenuSideBarProps";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import { useNavigateToTop } from "../../hooks/useNavigateToTop";
 
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+
 export default function MainMenuSideBar(props: MainMenuSideBarProps) {
   const { /* items, */ selectedIndex /* setSelectedIndex */ } = props;
   const navigate = useNavigateToTop();
@@ -64,7 +67,6 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           index: 26,
           onClick: () => navigate("/components/fullscreen"),
         },
-       
       ],
     },
     {
@@ -126,43 +128,31 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       index: 5,
       onClick: () => navigate("/localization"),
     },
+    /* {
+      label: "Code Generator",
+      index: 7,
+      onClick: () => navigate("/code-generator"),
+    }, */
+    {
+      label: "Types",
+      index: 7,
+      onClick: () => navigate("/types"),
+    },
     {
       label: "Server side",
       index: 6,
       onClick: () => navigate("/server-side"),
     },
     {
-      label: "Code Generator",
-      index: 7,
-      onClick: () => navigate("/code-generator"),
-    },
-    {
-      label: "Types",
+      label: "File readers",
       index: 8,
-      onClick: () => navigate("/types"),
+      onClick: () => navigate("/file-reader"),
     },
+
     {
-      label: "Utilities Methods",
+      label: "File download",
       index: 9,
-      subMenu: [
-        {
-          label: "File readers",
-          index: 81,
-          onClick: () => navigate("/utilities-methods/file-reader"),
-        },
-
-        {
-          label: "File uploader",
-          index: 82,
-          onClick: () => navigate("/utilities-methods/file-uploader"),
-        },
-
-        {
-          label: "File download",
-          index: 83,
-          onClick: () => navigate("/utilities-methods/file-downloader"),
-        },
-      ],
+      onClick: () => navigate("/file-download"),
     },
   ];
 
@@ -174,6 +164,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       return { ...x, isOpen: x.subMenu && x.index === selectedIndex };
     })
   );
+
 
   /*   const handleClick = () => {
     //setOpen(!open);
@@ -195,11 +186,24 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
     withSubMenu?: boolean
   ) => {
     //setSelectedIndex(index);
+    console.log("newIndex",index, withSubMenu);
     if (!withSubMenu) {
       onClick?.();
     } else {
       setRegularItemsIni((arr) =>
         arr.map((item) => {
+      /*     if (item.subMenu) {
+            const newSubMenu = item.subMenu.map((x) => {
+              if (x.index === index) {
+                return { ...x , };
+              } else {
+                return { ...x };
+              }
+            });
+            return { ...item, subMenu: newSubMenu };
+          } else */
+          
+         
           if (item.index === index) {
             return { ...item, isOpen: !item.isOpen };
           }
@@ -300,7 +304,9 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
                   style={{ padding: "2px 20px" }}
                   key={indexBase}
                   // selected={subMenu === undefined && selectedIndex === index}
-                  selected={isOpen && selectedIndex === index}
+                  selected={
+                    (subMenu === undefined || isOpen) && selectedIndex === index
+                  }
                   onClick={(event) =>
                     handleListItemClick(
                       event,
@@ -321,6 +327,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
                     primary={label || ""}
                     primaryTypographyProps={{ fontWeight: "600" }}
                   />
+                  {subMenu && <>{isOpen ? <ExpandLess /> : <ExpandMore />}</>}
                 </ListItemButton>
 
                 {subMenu && (
@@ -336,6 +343,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
                           <ListItemButton
                             style={{ paddingTop: 0 }}
                             sx={{ pl: 4 }}
+                            //selected={selectedIndex === index}
                             selected={selectedIndex === index}
                             key={index2 + indexBase}
                             onClick={(event) =>
