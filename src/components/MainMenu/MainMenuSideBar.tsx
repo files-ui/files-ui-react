@@ -59,6 +59,12 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
           index: 25,
           onClick: () => navigate("/components/avatar"),
         },
+        {
+          label: "FullScreen (Img & Vid)",
+          index: 26,
+          onClick: () => navigate("/components/fullscreen"),
+        },
+       
       ],
     },
     {
