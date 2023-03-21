@@ -271,7 +271,7 @@ const FileCardDemoPage = (props) => {
             </AlertTitle>
             {/*  This is an info alert — <strong>check it out!</strong>
              */}
-            When only <CodeHighlight>downloadUrl</CodeHighlight> is specifyed,
+            When only <CodeHighlight>downloadUrl</CodeHighlight> is specified,
             FileCard will perform the download only for{" "}
             <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">
               same-origin URLs
