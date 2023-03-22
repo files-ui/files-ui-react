@@ -1,8 +1,7 @@
 import * as React from "react";
 import ShowDemoCode from "../../show-demo-code/ShowDemoCode";
 
-const CodeDemoDownload1 = (props: { card?: boolean }) => {
-  const { card } = props;
+const CodeDemoDownload1 = () => {
   return (
     <ShowDemoCode
       codeCompleteJS={completeCodeJS}
