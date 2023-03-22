@@ -4,21 +4,21 @@ import * as React from "react";
 import { RightMenuProps } from "./RightMenuProps";
 import "./RightMenu.scss";
 const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
-  const { items, width, selectedItemProp:selectedItem=0 } = props;
-  //const [selectedItem, setSelectedItem] = React.useState<number>(selectedItemProp);
-/*   const handleChangeSelectedItem = (newIndex: number) =>
-    setSelectedItem(newIndex); */
+  const { items, width, selectedItemProp: selectedItem = 0 } = props;
+
   const handleClickAnchor = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     onClick: Function | undefined,
     id: number
   ) => {
     onClick?.();
-    //handleChangeSelectedItem(id);
+
   };
+
+  const finalSelectedId = selectedItem;
   return (
     <List
-   // className="section-container"
+      // className="section-container"
       sx={{ width: "100%", maxWidth: width, bgcolor: "background.paper" }}
       component="nav"
       aria-labelledby="nested-list-subheader"
@@ -32,14 +32,13 @@ const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
         {items &&
           items.map(({ isSelected, label, onClick, referTo, id }, index) => {
             const classNameForAnchor: string =
-              selectedItem === id
+              finalSelectedId === id
                 ? "right-menu-anchor-item selected"
                 : "right-menu-anchor-item";
             return (
               <li key={index} style={{ listStyle: "none", margin: 0 }}>
                 <a
                   className={classNameForAnchor}
-                  //href={`${baseUrl}/#${referTo}`}
                   href={`${referTo}`}
                   onClick={(e) => handleClickAnchor(e, onClick, id)}
                 >

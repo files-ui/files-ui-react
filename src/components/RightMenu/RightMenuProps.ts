@@ -11,4 +11,5 @@ export interface RightMenuProps {
     width: string;
     baseUrl?: string;
     selectedItemProp?:number;
+    setSelected?:Function;
 }

@@ -29,94 +29,19 @@ import DemoFileCardActions from "../../components/demo-components/filemosaic-dem
 import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
 import DemoFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/DemoFileMosaicSmartImgFit";
 import CodeJSFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicSmartImgFit";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 const FileMosaicDemoPage = (props) => {
   const [selectedItem, setSelectedItem] = React.useState(0);
 
-  const scrollHandler = () => {
-    let menu = document.querySelector(".section-container");
-
-    const rightMenuItemsWithIdSec = rightMenuItems.map((x) => {
-      return {
-        ...x,
-        idSec: x.referTo.split("#")[1],
-      };
-    });
-
-    const arrElements = rightMenuItemsWithIdSec.map((x) => {
-      return { ...x, element: document.getElementById(x.idSec) };
-    });
-
-    let pos_menu = window.pageYOffset + menu.offsetHeight;
-    console.log("scrollHandler pos_menu", pos_menu);
-
-    const arrElementsEnhanced = arrElements.map((x) => {
-      const element = x.element;
-      const postElement = element.offsetTop + element.offsetHeight;
-      const distance = Math.round(postElement - pos_menu,0);
-      return { ...x, distance };
-    });
-
-    console.log(
-      "scrollHandler distances",
-      pos_menu,
-      arrElementsEnhanced.map(({ distance }) => distance)
-    );
-    console.log(
-      "scrollHandler ids",
-      pos_menu,
-      arrElementsEnhanced.map(({ id }) => id)
-    );
-    let min = Math.min(
-      ...arrElementsEnhanced
-        .map((x) => Math.round(x.distance, 0))
-        .filter((x) => x > 0)
-    );
-
-    console.log(
-      "prev foundelement distance min id",
-      min,
-      arrElementsEnhanced.map((y) => y.distance)
-    );
-
-    arrElementsEnhanced.forEach((x) => {
-      if (x.distance === min) {
-     /*    console.log(
-          "foundelement distance min id",
-          arrElementsEnhanced.map((y) => y.distance),
-          x.distance,
-          min,
-          x.id
-        ); */
-        setSelectedItem((_id) => {
-          return x.id;
-        });
-      }
-    });
-
-    console.log(
-      "distance min",
-      min,
-      arrElementsEnhanced.map((x) => x.distance)
-    );
-
-    // if (min === distance_A) setSelectedItem(0);
-    //document.querySelectorAll(".Menu .Item")[0].classList.add("Highlight");
-    // if (min === distance_B) setSelectedItem(1);
-    // if (min === distance_C) setSelectedItem(2);
-    /*  if (min === distance_B)
-      document.querySelectorAll(".Menu .Item")[1].classList.add("Highlight");
-    if (min === distance_C)
-      document.querySelectorAll(".Menu .Item")[2].classList.add("Highlight"); */
-  };
   React.useEffect(() => {
-    console.log("scrollHandler container");
-
-    window.addEventListener("scroll", scrollHandler);
-
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
     return () => {
-      console.log("foundelement", "removing event");
-      window.removeEventListener("scroll", scrollHandler);
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
     };
   }, []);
 
@@ -488,6 +413,7 @@ const FileMosaicDemoPage = (props) => {
           width="240px"
           items={rightMenuItems}
           selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
         />
       </RightMenuContainer>
     </React.Fragment>

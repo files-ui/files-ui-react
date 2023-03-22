@@ -9,6 +9,7 @@ import Alert from "@mui/material/Alert";
 import PropsTableApi from "./PropsTableApi";
 import { AvatarAPIPropsRows } from "../../data/AvatarAPIPropsRows";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 const rightMenuItems = [
   {
@@ -24,6 +25,15 @@ const rightMenuItems = [
 ];
 
 const AvatarApi = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -49,7 +59,12 @@ const AvatarApi = (props) => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );
