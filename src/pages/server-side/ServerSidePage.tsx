@@ -12,8 +12,6 @@ import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 import { FileMosaic } from "../../files-ui";
-import expressjslogo from "../../static/serverside/expressjslogo.webp";
-import javalogo from "../../static/serverside/springbootjavalogo.png";
 import { redirect } from "../../utils/redirect";
 const ServerSidePage = () => {
   return (
@@ -54,8 +52,8 @@ const ServerSidePage = () => {
                     "https://github.com/files-ui/files-ui-web-test/tree/master/expressjs"
                   )
                 }
-                {...logoExpress.extraData}
-                smartImgFit={"center"}
+                //{...logoExpress.extraData}
+                //smartImgFit={"center"}
               />{" "}
               <DescParagraph>
                 The following code is just the main part of a project.
@@ -132,17 +130,15 @@ const logoExpress = {
   id: ":0:",
   //size: 28 * 1024 * 1024,
   type: "image/png",
-  imageUrl: expressjslogo,
+  imageUrl: "/serverside/nodeexpress.jpg",
   name: "Click me!",
-  extraData: {
-    backgroundBlurImage: false,
-  },
+
 };
 
 const logoJava = {
   id: ":1:",
   //size: 28 * 1024 * 1024,
   type: "image/png",
-  imageUrl: javalogo,
+  imageUrl: "/serverside/springbootjavalogo.png",
   name: "Click me!",
 };
