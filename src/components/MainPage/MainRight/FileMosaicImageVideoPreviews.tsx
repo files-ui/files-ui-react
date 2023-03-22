@@ -40,6 +40,7 @@ const FileMosaicImageVideoPreviews: React.FC<
     fileId: FileMosaicProps["id"],
     downloadUrl?: string
   ) => {
+    
     console.log("Download fileId", fileId);
     console.log("Download fileName", files.filter((x) => x.id === fileId)[0]);
     console.log("Download downloadUrl", downloadUrl);
