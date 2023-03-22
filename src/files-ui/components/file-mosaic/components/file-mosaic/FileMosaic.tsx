@@ -5,8 +5,9 @@ import {
   getLocalFileItemData,
   handleClickUtil,
 } from "../../../../core";
-import { FileMosaicProps } from "./FileMosaicProps";
 import "./FileMosaic.scss";
+import "./../../../icons/IconStyles.scss";
+import { FileMosaicProps } from "./FileMosaicProps";
 import LayerContainer from "../file-mosaic-layer/LayerContainer";
 import Layer from "../file-mosaic-layer/Layer";
 import FileMosaicName from "../FileMosaicName/FileMosaicName";
@@ -115,7 +116,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   );
 
   //The size formatted and rounded in 2 decimals
-  const sizeFormatted: string| undefined = fileSizeFormater(localSize);
+  const sizeFormatted: string | undefined = fileSizeFormater(localSize);
   //alwaysActive
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
 

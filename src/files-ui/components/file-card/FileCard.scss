@@ -220,7 +220,7 @@
 }
 
 //// ICONS
-.files-ui-file-icon {
+/* .files-ui-file-icon {
   font-size: 0.7rem;
   min-width: 19px;
   min-height: 19px;
@@ -229,6 +229,7 @@
   border-radius: 50%;
   background-color: rgba(32, 33, 36, 0.65);
   word-break: break-word;
+  box-sizing: content-box;
   &:hover {
     background-color: rgba(32, 33, 36, 0.85);
   }
@@ -238,4 +239,4 @@
       background-color: rgba(154, 160, 166, 0.85);
     }
   }
-}
+} */
