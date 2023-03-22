@@ -13,10 +13,23 @@ import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
+import { scrollHandler } from "../../utils/scrollHandler";
 interface FullScreenDemoPageProps {}
 const FullScreenDemoPage: React.FC<FullScreenDemoPageProps> = (
   props: FullScreenDemoPageProps
 ) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -127,7 +140,12 @@ const FullScreenDemoPage: React.FC<FullScreenDemoPageProps> = (
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

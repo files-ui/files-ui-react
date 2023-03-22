@@ -26,11 +26,24 @@ import DemoAvatarLoading from "../../components/demo-components/avatar-demo/Demo
 import CodeDemoAvatarLoading from "../../components/demo-components/avatar-demo/CodeDemoAvatarLoading";
 import CodeDemoAvatarVariant from "../../components/demo-components/avatar-demo/CodeAvatarVariant";
 import CodeDemoAvatarLabels from "../../components/demo-components/avatar-demo/CodeDemoAvatarLabels";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 interface AvatarDemoPageProps {}
 const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
   props: AvatarDemoPageProps
 ) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -221,8 +234,8 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
                 not set.
               </li>
               <li>
-                <CodeHighlight>changeLabel</CodeHighlight>: when there is a valid
-                source set.
+                <CodeHighlight>changeLabel</CodeHighlight>: when there is a
+                valid source set.
               </li>
               <li>
                 <CodeHighlight>loadingLabel</CodeHighlight>: when you want to
@@ -261,7 +274,12 @@ const AvatarDemoPage: React.FC<AvatarDemoPageProps> = (
       </MainContentContainer>
 
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

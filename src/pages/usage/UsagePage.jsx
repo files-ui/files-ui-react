@@ -12,6 +12,7 @@ import AdvancedDropzoneCodeJS from "../../components/demo-components/dropzone-de
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import MainTitle from "../../components/main-title/MainTitle";
+import { scrollHandler } from "../../utils/scrollHandler";
 const rightMenuItems = [
   { id: 0, label: "Quick start", referTo: "/usage#quick-start" },
   {
@@ -21,6 +22,18 @@ const rightMenuItems = [
   },
 ];
 const UsagePage = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <MainLayoutPage selectedIndex={1}>
       <MainContentContainer>
@@ -54,21 +67,21 @@ const UsagePage = (props) => {
             demo below. Try adding the <CodeHighlight>accept</CodeHighlight>{" "}
             prop to the Dropzone to see the changes:
           </DescParagraph>
-          {/*   <iframe
-          title="codesandbox"
-          src="https://codesandbox.io/embed/dropzone-ui-basic-3j01v"
-          //src="https://codesandbox.io/embed/u9sy1h?hidenavigation=1&amp;fontsize=14&amp;view=preview"
-          //src="https://codesandbox.io/s/material-ui-u9sy1h"
-          style={{
-            width: "100%",
-            height: "500px",
-            border: "0px none",
-            borderRadius: "4px",
-            overflow: "hidden",
-          }}
-          allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-          sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-        ></iframe> */}
+          <iframe
+            title="codesandbox"
+            src="https://codesandbox.io/embed/dropzone-ui-basic-3j01v"
+            //src="https://codesandbox.io/embed/u9sy1h?hidenavigation=1&amp;fontsize=14&amp;view=preview"
+            //src="https://codesandbox.io/s/material-ui-u9sy1h"
+            style={{
+              width: "100%",
+              height: "500px",
+              border: "0px none",
+              borderRadius: "4px",
+              overflow: "hidden",
+            }}
+            allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+            sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+          ></iframe>
         </section>
 
         <section id="advanced-example">
@@ -100,7 +113,12 @@ const UsagePage = (props) => {
       </MainContentContainer>
 
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </MainLayoutPage>
   );

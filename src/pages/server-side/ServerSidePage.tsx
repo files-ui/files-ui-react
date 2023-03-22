@@ -13,7 +13,20 @@ import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 import { FileMosaic } from "../../files-ui";
 import { redirect } from "../../utils/redirect";
+import { scrollHandler } from "../../utils/scrollHandler";
 const ServerSidePage = () => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainLayoutPage selectedIndex={6}>
@@ -63,12 +76,9 @@ const ServerSidePage = () => {
                   link
                 </AnchorToTab>
                 .
-
-
-
               </DescParagraph>
             </Paper>
-            <CodeDemoServerSideExpress splittedOnly/>
+            <CodeDemoServerSideExpress splittedOnly />
           </section>
           <section id="springboot">
             <SubTitle content="Java - Spring boot" />{" "}
@@ -101,12 +111,18 @@ const ServerSidePage = () => {
                 .
               </DescParagraph>
             </Paper>
-            <CodeDemoServerSideJava splittedOnly/>
+            <CodeDemoServerSideJava splittedOnly />
           </section>
         </MainContentContainer>
         <RightMenuContainer>
-          <RightMenu width="240px" items={rightMenuItems} />
+          <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
         </RightMenuContainer>
+        
       </MainLayoutPage>
     </React.Fragment>
   );
@@ -132,7 +148,6 @@ const logoExpress = {
   type: "image/png",
   imageUrl: "/serverside/nodeexpress.jpg",
   name: "Click me!",
-
 };
 
 const logoJava = {

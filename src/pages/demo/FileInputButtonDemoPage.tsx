@@ -34,11 +34,24 @@ import DemoDropzoneUploading from "../../components/demo-components/dropzone-dem
 import CodeDemoDropzoneUploading from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneUploading";
 import DemoDropzoneActionButtons from "../../components/demo-components/dropzone-demo/DemoDropzoneActionButtons";
 import CodeDemoDropzoneActionButtons from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneActionButtons";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 interface FileInputButtonDemoPageProps {}
 const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
   props: FileInputButtonDemoPageProps
 ) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -213,9 +226,10 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           <Alert severity="info">
             <AlertTitle> "fakeUpload" </AlertTitle>
             By giving this prop, the {"<FileInputButton/>"} component will
-            simulate the upload operation by randomly setting the upload status and
-            message on each uploadable <TypeHighlight>ExtFile</TypeHighlight>.
-            It will also set a fake progress.
+            simulate the upload operation by randomly setting the upload status
+            and message on each uploadable{" "}
+            <TypeHighlight>ExtFile</TypeHighlight>. It will also set a fake
+            progress.
           </Alert>
           <br />
           <Alert severity="info">
@@ -453,7 +467,12 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
       </MainContentContainer>
 
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

@@ -38,32 +38,31 @@ const splittedCodeJS = `<Dropzone
     uploadButton: {},
   }}
   >
-  {extFiles.map((file) => (
-    <FileMosaic
-      {...file}
-      key={file.id}
-      onDelete={onDelete}
-      onSee={handleSee}
-      onWatch={handleWatch}
-      onAbort={handleAbort}
-      onCancel={handleCancel}
-      resultOnTooltip
-      alwaysActive
-      preview
-      info
-    />
-  ))}
+    {extFiles.map((file) => (
+      <FileMosaic
+        {...file}
+        key={file.id}
+        onDelete={onDelete}
+        onSee={handleSee}
+        onWatch={handleWatch}
+        onAbort={handleAbort}
+        onCancel={handleCancel}
+        resultOnTooltip
+        preview
+        info
+      />
+    ))}
 </Dropzone>
 <FullScreen
   open={imageSrc !== undefined}
   onClose={() => setImageSrc(undefined)}
-  >
+>
   <ImagePreview src={imageSrc} />
 </FullScreen>
 <FullScreen
   open={videoSrc !== undefined}
   onClose={() => setVideoSrc(undefined)}
-  >
+>
   <VideoPreview src={videoSrc} autoPlay controls />
 </FullScreen>`;
 const completeCodeJS = `import {
@@ -72,9 +71,9 @@ const completeCodeJS = `import {
   FullScreen,
   ImagePreview,
   VideoPreview,
- } from "@files-ui/react";
+} from "@files-ui/react";
 
- const BASE_URL =
+const BASE_URL =
  "https://files-ui-express-static-file-storage.vercel.app/39d33dff2d41b522c1ea276c4b82507f96b9699493d2e7b3f5c864ba743d9503";
 
 export default function AdvancedDropzoneDemo() {
@@ -122,26 +121,26 @@ export default function AdvancedDropzoneDemo() {
  return (
    <>
      <Dropzone
-       onChange={updateFiles}
-       minHeight="195px"
-       value={extFiles}
-       maxFiles={3}
-       // FmaxFileSize={2998000 * 20}
-       label="Drag'n drop files here or click to browse"
-       // accept=".png,image/*, video/*"
-       uploadConfig={{
-         // autoUpload: true
-         url: BASE_URL + "/file/28048465460",
-         cleanOnUpload: true,
+      onChange={updateFiles}
+      minHeight="195px"
+      value={extFiles}
+      maxFiles={3}
+      // FmaxFileSize={2998000 * 20}
+      label="Drag'n drop files here or click to browse"
+      // accept=".png,image/*, video/*"
+      uploadConfig={{
+        // autoUpload: true
+        url: BASE_URL + "/file/28048465460",
+        cleanOnUpload: true,
       }}
-       onUploadStart={handleStart}
-       onUploadFinish={handleFinish}
-       //fakeUpload
-       actionButtons={{
-         position: "after",
-         abortButton: {},
-         deleteButton: {},
-         uploadButton: {},
+      onUploadStart={handleStart}
+      onUploadFinish={handleFinish}
+      //fakeUpload
+      actionButtons={{
+        position: "after",
+        abortButton: {},
+        deleteButton: {},
+        uploadButton: {},
       }}
      >
        {extFiles.map((file) => (

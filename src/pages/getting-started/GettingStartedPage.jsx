@@ -16,7 +16,21 @@ import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
+import { scrollHandler } from "../../utils/scrollHandler";
 const GettingStartedPage = ({ darkModeOn }) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
+
   return (
     <MainLayoutPage selectedIndex={0}>
       <MainContentContainer>
@@ -63,7 +77,12 @@ const GettingStartedPage = ({ darkModeOn }) => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </MainLayoutPage>
   );
