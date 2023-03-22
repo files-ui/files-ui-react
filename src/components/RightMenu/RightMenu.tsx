@@ -4,20 +4,21 @@ import * as React from "react";
 import { RightMenuProps } from "./RightMenuProps";
 import "./RightMenu.scss";
 const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
-  const { items, width } = props;
-  const [selectedItem, setSelectedItem] = React.useState<number>(0);
-  const handleChangeSelectedItem = (newIndex: number) =>
-    setSelectedItem(newIndex);
+  const { items, width, selectedItemProp:selectedItem=0 } = props;
+  //const [selectedItem, setSelectedItem] = React.useState<number>(selectedItemProp);
+/*   const handleChangeSelectedItem = (newIndex: number) =>
+    setSelectedItem(newIndex); */
   const handleClickAnchor = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     onClick: Function | undefined,
     id: number
   ) => {
     onClick?.();
-    handleChangeSelectedItem(id);
+    //handleChangeSelectedItem(id);
   };
   return (
     <List
+    className="section-container"
       sx={{ width: "100%", maxWidth: width, bgcolor: "background.paper" }}
       component="nav"
       aria-labelledby="nested-list-subheader"

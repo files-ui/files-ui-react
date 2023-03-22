@@ -31,6 +31,80 @@ import DemoFileMosaicSmartImgFit from "../../components/demo-components/filemosa
 import CodeJSFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicSmartImgFit";
 
 const FileMosaicDemoPage = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  const scrollHandler = () => {
+    let menu = document.querySelector(".section-container");
+
+    const rightMenuItemsWithIdSec = rightMenuItems.map((x) => {
+      return {
+        ...x,
+        idSec: x.referTo.split("#")[1],
+      };
+    });
+    /*  console.log(
+      "scrollHandler rightMenuItemsWithIdSec",
+      rightMenuItemsWithIdSec.map((x) => x.idSec)
+    ); */
+    const arrElements = rightMenuItemsWithIdSec.map((x) => {
+      return { ...x, element: document.getElementById(x.idSec) };
+    });
+
+    //console.log("scrollHandler arrElements", arrElements);
+    let pos_menu = window.pageYOffset + menu.offsetHeight;
+
+    //simply chech whicof them is clser to offset toip????
+    console.log("scrollHandler pos_menu", pos_menu);
+
+    const arrElementsEnhanced = arrElements.map((x) => {
+      const element = x.element;
+      const postElement = element.offsetTop + element.offsetHeight;
+      const distance = Math.abs(postElement - pos_menu);
+      return { ...x, distance };
+    });
+
+    console.log(
+      "scrollHandler distances",
+      pos_menu,
+      arrElementsEnhanced.map(({ distance }) => distance)
+    );
+
+    let min = Math.min(...arrElementsEnhanced.map((x) => x.distance));
+
+    arrElementsEnhanced.forEach((x) => {
+      if (x.distance === min) {
+        setSelectedItem(x.id);
+        console.log("foundelement distance", x.distance);
+        console.log("foundelement id", x.id);
+      }
+    });
+
+    console.log(
+      "distance min",
+      min,
+      arrElementsEnhanced.map((x) => x.distance)
+    );
+
+    // if (min === distance_A) setSelectedItem(0);
+    //document.querySelectorAll(".Menu .Item")[0].classList.add("Highlight");
+    // if (min === distance_B) setSelectedItem(1);
+    // if (min === distance_C) setSelectedItem(2);
+    /*  if (min === distance_B)
+      document.querySelectorAll(".Menu .Item")[1].classList.add("Highlight");
+    if (min === distance_C)
+      document.querySelectorAll(".Menu .Item")[2].classList.add("Highlight"); */
+  };
+  React.useEffect(() => {
+    console.log("scrollHandler container");
+
+    window.addEventListener("scroll", scrollHandler);
+
+    return () => {
+      console.log("foundelement","removing event");
+      window.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -79,7 +153,10 @@ const FileMosaicDemoPage = (props) => {
             <CodeHighlight>{`<FileInputButton/>`} </CodeHighlight>
             component for allowing the user to select files. For further
             information of this component check out the{" "}
-            <AnchorToTab href="/components/fileinputbutton">FileInputButton</AnchorToTab> page.
+            <AnchorToTab href="/components/fileinputbutton">
+              FileInputButton
+            </AnchorToTab>{" "}
+            page.
           </Alert>
           <br />
           <Alert severity="info">
@@ -392,12 +469,17 @@ const FileMosaicDemoPage = (props) => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );
 };
 export default FileMosaicDemoPage;
+
 const rightMenuItems = [
   {
     id: 0,
