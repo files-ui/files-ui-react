@@ -6,7 +6,7 @@ import DropzoneDemoPage from "./../pages/demo/DropzoneDemoPage";
 import FileMosaicDemoPage from "./../pages/demo/FileMosaicDemoPage";
 import FileCardDemoPage from "./../pages/demo/FileCardDemoPage";
 import ServerSidePage from "./../pages/server-side/ServerSidePage";
-import CodeGeneratorPage from "./../pages/code-generator/CodeGeneratorPage";
+//import CodeGeneratorPage from "./../pages/code-generator/CodeGeneratorPage";
 import DropzoneApi from "./../pages/api/DropzoneApi";
 import FileMosaicApi from "./../pages/api/FileMosaicApi";
 import FileCardApi from "./../pages/api/FileCardApi";
@@ -15,7 +15,7 @@ import TypesPage from "./../pages/types-page/TypesPage";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import MainLayoutPage from "../components/layout-pages/MainLayoutPage";
 import FileReaderPage from "../pages/utilities/FileReaderPage";
-import FileUploaderPage from "../pages/utilities/FileUploaderPage";
+//import FileUploaderPage from "../pages/utilities/FileUploaderPage";
 import AvatarDemoPage from "../pages/demo/AvatarDemoPage";
 import FileInputButtonApi from "../pages/api/FileInputButtonApi";
 import AvatarApi from "../pages/api/AvatarApi";
@@ -134,37 +134,28 @@ const router = createBrowserRouter([
     path: "/server-side",
     element: <ServerSidePage />,
   },
-  {
+/*   {
     path: "/code-generator",
     element: <CodeGeneratorPage />,
-  },
+  }, */
   {
     path: "/types",
     element: <TypesPage />,
   },
-
+/*   {
+    path: "/file-reader",
+    element: <FileReaderPage />,
+  }, */
   {
-    path: "/utilities-methods",
-    element: (
-      <MainLayoutPage selectedIndex={7}>
-        <Outlet />
-      </MainLayoutPage>
-    ),
-    children: [
-      {
-        path: "/utilities-methods/file-reader",
-        element: <FileReaderPage />,
-      },
-      {
-        path: "/utilities-methods/file-uploader",
-        element: <FileUploaderPage />,
-      },
-      {
-        path: "/utilities-methods/file-downloader",
-        element: <FileDownloadPage />,
-      },
-    ],
+    path: "/file-download",
+    element: <FileDownloadPage />,
   },
+  ///
+/*   {
+    path: "/file-upload",
+    element: <FileUploaderPage />,
+  }, */
+
 ]);
 
 const MainRouter = (props) => {

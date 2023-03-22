@@ -10,7 +10,7 @@ export interface FileMosaicMainLayerProps {
     uploadStatus?: UPLOADSTATUS;
     localization?: Localization;
 
-    sizeFormatted: string;
+    sizeFormatted?: string;
 
     imageIcon: boolean;
     onSee: ((imageSource: string | undefined) => void) | undefined;

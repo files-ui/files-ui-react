@@ -8,6 +8,6 @@ export type FileMosaicInfoLayerProps = {
     onCloseInfo?:Function;
 
     localName: string;
-    sizeFormatted: string;
+    sizeFormatted?: string;
     localType?: string;
 }

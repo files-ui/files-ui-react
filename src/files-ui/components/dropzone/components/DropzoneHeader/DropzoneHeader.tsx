@@ -45,7 +45,7 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
     className = "",
     resetStyles,
     color,
-    firstClassName="",
+    firstClassName = "",
   } = props;
 
   const DropzoneHeaderLocalizer: LocalLabels = DropzoneLocalizerSelector(
@@ -77,8 +77,9 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
 
     const maxFileSizeMessenger: FunctionLabel =
       DropzoneHeaderLocalizer.maxSizeMessage as FunctionLabel;
-    if (maxFileSize) {
-      result.push(maxFileSizeMessenger(fileSizeFormater(maxFileSize)));
+    const maxFileSizeFormatted = fileSizeFormater(maxFileSize);
+    if (maxFileSizeFormatted) {
+      result.push(maxFileSizeMessenger(maxFileSizeFormatted));
       result.push(<React.Fragment>{","}&nbsp;</React.Fragment>);
     }
     const validFileSizeMessenger: FunctionLabel =

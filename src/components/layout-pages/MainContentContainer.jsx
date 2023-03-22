@@ -22,6 +22,7 @@ const MainContentContainer = ({ children }) => {
         }}
       >
         {children}
+        
       </Box>
     </Box>
   );

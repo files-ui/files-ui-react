@@ -1,11 +1,11 @@
 export { default as Dropzone } from "./components/dropzone/components/dropzone/Dropzone";
 export * from "./components/dropzone/components/dropzone/Dropzone";
 
+export { default as FileInputButton } from "./components/file-input-button/FileInputButton";
+export * from "./components/file-input-button/FileInputButton";
+
 export { default as Avatar } from "./components/avatar/Avatar";
 export * from "./components/avatar/Avatar";
-
-export { FileItem } from "./components";
-export * from "./components";
 
 export { default as FileCard } from "./components/file-card/FileCard";
 export * from "./components/file-card/FileCard";
@@ -21,6 +21,9 @@ export * from "./components/previews/ImagePreview/ImagePreview";
 
 export { default as VideoPreview } from "./components/previews/VideoPreview/VideoPreview";
 export * from "./components/previews/VideoPreview/VideoPreview";
+
+export { default as MaterialButton } from "./components/material-button/MaterialButton";
+export * from "./components/material-button/MaterialButton";
 
 export type { FileMosaicProps } from "./components/file-mosaic/components/file-mosaic/FileMosaicProps";
 export type { DropzoneProps } from "./components/dropzone/components/dropzone/DropzoneProps";

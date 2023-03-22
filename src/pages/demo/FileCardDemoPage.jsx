@@ -74,7 +74,7 @@ const FileCardDemoPage = (props) => {
             <CodeHighlight>{`<FileInputButton/>`} </CodeHighlight>
             component for allowing the user to select files. For further
             information of this component check out the{" "}
-            <a href="/components/fileinputbutton">FileInputButton</a> page.
+            <AnchorToTab href="/components/fileinputbutton">FileInputButton</AnchorToTab> page.
           </Alert>
           <br />
           <Alert severity="info">
@@ -87,7 +87,7 @@ const FileCardDemoPage = (props) => {
             <strong>Javascript</strong> example for handling the metadata that
             makes possible the information exchange between components. For
             further information about this data type check out the{" "}
-            <a href="/types#extfile">ExtFile-API. </a>
+            <AnchorToTab href="/types#extfile">ExtFile-API. </AnchorToTab>
           </Alert>
         </section>
         <section id="image-preview">
@@ -271,13 +271,13 @@ const FileCardDemoPage = (props) => {
             </AlertTitle>
             {/*  This is an info alert — <strong>check it out!</strong>
              */}
-            When only <CodeHighlight>downloadUrl</CodeHighlight> is specifyed,
+            When only <CodeHighlight>downloadUrl</CodeHighlight> is specified,
             FileCard will perform the download only for{" "}
             <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">
               same-origin URLs
             </AnchorToTab>{" "}
             since it uses the{" "}
-            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">
+            <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes">
               anchor
             </AnchorToTab>{" "}
             tag under the hood.
@@ -292,7 +292,7 @@ const FileCardDemoPage = (props) => {
             You can check an example here:
             <ul>
               <li>
-                <AnchorToTab href="/utilities-methods/file-downloader">
+                <AnchorToTab href="/file-download">
                   {"Download a File"}
                 </AnchorToTab>
               </li>

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { FileItem } from "../files-ui";
 import {
   FileMosaic,
   FileMosaicProps,
@@ -154,7 +153,7 @@ const FileItemMock = ({ darkMode = false, mosaic = false }) => {
         ) : (
           <>
             {files.map((file, index) => (
-              <FileItem
+              <FileMosaic
                 key={file.id || 1 + 10}
                 {...file}
                 preview
@@ -163,9 +162,6 @@ const FileItemMock = ({ darkMode = false, mosaic = false }) => {
                 info
                 alwaysActive
                 progress={25}
-                showProgress
-                hd
-                elevation={2}
                 darkMode={darkMode}
               />
             ))}

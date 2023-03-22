@@ -3,7 +3,7 @@ import { Clear } from "../../icons";
 import { parseSize } from "../../icons/utils/utils";
 import LoaderContainer from "../LoaderContainer/LoaderContainer";
 import { DynamicLoaderProps } from "./DynamicLoaderProps";
-
+import "./DynamicLoader.scss";
 const DynamicLoader: React.FC<DynamicLoaderProps> = (
   props: DynamicLoaderProps
 ) => {
@@ -102,7 +102,7 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
 
             {!hidePerncentage && percentage !== undefined && (
               <text
-                className="dui-text-dynamic-loader"
+                className="files-ui-text-dynamic-loader"
                 x={`${finalX}`}
                 y={`${(finalX * 7) / 6}`}
               >
