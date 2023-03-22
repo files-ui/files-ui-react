@@ -93,13 +93,13 @@ const FileDownloadPage = () => {
                 <li>
                   Make a GET request with{" "}
                   <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/API/fetch">
-                    fetch
+                    fetch API
                   </AnchorToTab>{" "}
                   (you can use{" "}
                   <AnchorToTab href="https://axios-http.com/">
                     axios
                   </AnchorToTab>{" "}
-                  or any other way to fetch
+                  or any other way to fetch resources from internet.
                 </li>
                 <li>
                   Create an{" "}

@@ -41,7 +41,9 @@ function NavBarTemplate(props) {
   };
 
   const drawer = (
-    <div>
+    <div 
+   
+    >
       <Toolbar>
         <a href="/" style={{ textDecoration: "none" }}>
           <Stack
@@ -88,6 +90,7 @@ function NavBarTemplate(props) {
     <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" } }}>
       <CssBaseline />
       <AppBar
+       className="section-container"
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },

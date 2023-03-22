@@ -42,24 +42,18 @@ const FileMosaicDemoPage = (props) => {
         idSec: x.referTo.split("#")[1],
       };
     });
-    /*  console.log(
-      "scrollHandler rightMenuItemsWithIdSec",
-      rightMenuItemsWithIdSec.map((x) => x.idSec)
-    ); */
+
     const arrElements = rightMenuItemsWithIdSec.map((x) => {
       return { ...x, element: document.getElementById(x.idSec) };
     });
 
-    //console.log("scrollHandler arrElements", arrElements);
     let pos_menu = window.pageYOffset + menu.offsetHeight;
-
-    //simply chech whicof them is clser to offset toip????
     console.log("scrollHandler pos_menu", pos_menu);
 
     const arrElementsEnhanced = arrElements.map((x) => {
       const element = x.element;
       const postElement = element.offsetTop + element.offsetHeight;
-      const distance = Math.abs(postElement - pos_menu);
+      const distance = Math.round(postElement - pos_menu,0);
       return { ...x, distance };
     });
 
@@ -68,14 +62,35 @@ const FileMosaicDemoPage = (props) => {
       pos_menu,
       arrElementsEnhanced.map(({ distance }) => distance)
     );
+    console.log(
+      "scrollHandler ids",
+      pos_menu,
+      arrElementsEnhanced.map(({ id }) => id)
+    );
+    let min = Math.min(
+      ...arrElementsEnhanced
+        .map((x) => Math.round(x.distance, 0))
+        .filter((x) => x > 0)
+    );
 
-    let min = Math.min(...arrElementsEnhanced.map((x) => x.distance));
+    console.log(
+      "prev foundelement distance min id",
+      min,
+      arrElementsEnhanced.map((y) => y.distance)
+    );
 
     arrElementsEnhanced.forEach((x) => {
       if (x.distance === min) {
-        setSelectedItem(x.id);
-        console.log("foundelement distance", x.distance);
-        console.log("foundelement id", x.id);
+     /*    console.log(
+          "foundelement distance min id",
+          arrElementsEnhanced.map((y) => y.distance),
+          x.distance,
+          min,
+          x.id
+        ); */
+        setSelectedItem((_id) => {
+          return x.id;
+        });
       }
     });
 
@@ -100,7 +115,7 @@ const FileMosaicDemoPage = (props) => {
     window.addEventListener("scroll", scrollHandler);
 
     return () => {
-      console.log("foundelement","removing event");
+      console.log("foundelement", "removing event");
       window.removeEventListener("scroll", scrollHandler);
     };
   }, []);

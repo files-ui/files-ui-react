@@ -18,7 +18,7 @@ const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
   };
   return (
     <List
-    className="section-container"
+   // className="section-container"
       sx={{ width: "100%", maxWidth: width, bgcolor: "background.paper" }}
       component="nav"
       aria-labelledby="nested-list-subheader"

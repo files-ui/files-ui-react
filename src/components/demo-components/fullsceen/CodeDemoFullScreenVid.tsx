@@ -28,7 +28,7 @@ const videoSample = {
     id: "fileId-1",
     size: 28 * 1024 * 1024,
     type: "video/mp4",
-    name: "Thos arrives wakanda.mp4",
+    name: "Thor arrives wakanda.mp4",
     videoUrl: ThorArrivesWakandaEN,
 };`;
 
@@ -39,7 +39,7 @@ const videoSample = {
     id: "fileId-1",
     size: 28 * 1024 * 1024,
     type: "video/mp4",
-    name: "Thos arrives wakanda.mp4",
+    name: "Thor arrives wakanda.mp4",
     videoUrl: ThorArrivesWakandaEN,
 };
 
@@ -75,7 +75,7 @@ const videoSample: ExtFile = {
     id: "fileId-1",
     size: 28 * 1024 * 1024,
     type: "video/mp4",
-    name: "Thos arrives wakanda.mp4",
+    name: "Thor arrives wakanda.mp4",
     videoUrl: ThorArrivesWakandaEN,
 };`;
 
@@ -86,7 +86,7 @@ const videoSample: ExtFile = {
     id: "fileId-1",
     size: 28 * 1024 * 1024,
     type: "video/mp4",
-    name: "Thos arrives wakanda.mp4",
+    name: "Thor arrives wakanda.mp4",
     videoUrl: ThorArrivesWakandaEN,
 };
 
