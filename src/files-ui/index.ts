@@ -53,3 +53,7 @@ export type {
     UploadConfig,
     ValidateFileResponse
 } from "./core";
+
+
+export { default as FilesUiProvider } from "./FilesUiProvider/FilesUiProvider";
+export * from "./FilesUiProvider/FilesUiProvider";

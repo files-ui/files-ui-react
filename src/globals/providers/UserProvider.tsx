@@ -1,10 +1,11 @@
 import { UserContext } from "../contexts/UserContext";
 import * as React from "react";
 import { UserFilesUi } from "../types/UserFilesUi";
-import {  userInitializer, userReducer } from "../reducers/userReducer";
+import { userInitializer, userReducer } from "../reducers/userReducer";
 import { ThemeProvider } from "@emotion/react";
 import { MUItheme } from "../../theme/mainTheme";
 import { FuiAction } from "../types/FuiAction";
+import { FilesUiProvider } from "../../files-ui";
 
 export const UserProvider = (props: {
   children: React.ReactNode;
@@ -23,7 +24,9 @@ export const UserProvider = (props: {
   return (
     <UserContext.Provider value={[usuario, dispatch]}>
       <ThemeProvider theme={MUItheme(usuario.darkMode ? "dark" : "light")}>
-        {children}
+        <FilesUiProvider config={{ darkMode: usuario.darkMode }}>
+          {children}
+        </FilesUiProvider>
       </ThemeProvider>
     </UserContext.Provider>
   );

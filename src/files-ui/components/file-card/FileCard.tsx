@@ -16,6 +16,7 @@ import FileMosaicStatus from "../file-mosaic/components/FileMosaicStatus/FileMos
 import FileCardUploadLayer from "./components/FileCardUploadLayer";
 import { Tooltip } from "../tooltip";
 import DownloadHidden from "../download-hidden/DownloadHidden";
+import { FilesUiContext } from "../../FilesUiProvider/FilesUiContext";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -83,7 +84,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     videoUrl,
     info,
     backgroundBlurImage = true,
-    darkMode,
+    darkMode:darkModeProp,
 
     alwaysActive = true,
 
@@ -107,6 +108,11 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     smartImgFit = "orientation",
     //} = mergeProps(props, FileCardPropsDefault);
   } = props;
+//context
+const { darkMode: darkModeContext } = React.useContext(FilesUiContext);
+const darkMode: boolean | undefined =
+  darkModeProp !== undefined ? darkModeProp : darkModeContext;
+
 
   //ref for anchor element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);

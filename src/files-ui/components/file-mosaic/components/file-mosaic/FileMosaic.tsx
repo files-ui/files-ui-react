@@ -21,6 +21,7 @@ import FileMosaicInfoLayer from "../FileMosaicInfoLayer/FileMosaicInfoLayer";
 import useProgress from "../../hooks/useProgress";
 import DownloadHidden from "../../../download-hidden/DownloadHidden";
 import FileMosaicMainLayer from "../FileMosaicMainLayer.tsx/FileMosaicMainLayer";
+import { FilesUiContext } from "../../../../FilesUiProvider/FilesUiContext";
 
 const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const {
@@ -47,7 +48,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     videoUrl,
     info,
     backgroundBlurImage = true,
-    darkMode,
+    darkMode: darkModeProp,
 
     alwaysActive = true,
 
@@ -68,6 +69,13 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onRightClick,
     smartImgFit = "orientation",
   } = props;
+
+  //context
+  const { darkMode: darkModeContext } = React.useContext(FilesUiContext);
+  const darkMode: boolean | undefined =
+    darkModeProp !== undefined ? darkModeProp : darkModeContext;
+  console.log("globalConfig", darkMode);
+
   //localizers
 
   //ref for anchor download element
