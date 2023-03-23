@@ -39,8 +39,21 @@ import CodeDemoDropzoneClickable from "../../components/demo-components/dropzone
 import CodeDemoDropzoneDropLayer from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneDropLayer";
 import CodeDemoDropzoneBehaviour from "../../components/demo-components/dropzone-demo/CodeDemoDropzoneBehaviour";
 import CodeDemoDropzoneLabel from "../../components/demo-components/dropzone-demo/CodeDropzoneDemoLabel";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 const DropzoneDemoPage = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -642,7 +655,12 @@ const DropzoneDemoPage = (props) => {
       </MainContentContainer>
 
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );
@@ -729,5 +747,10 @@ const rightMenuItems = [
     id: 7,
     label: "Localization",
     referTo: "/components/dropzone#localization",
+  },
+  {
+    id: 8,
+    label: "API",
+    referTo: "/components/dropzone#api",
   },
 ];

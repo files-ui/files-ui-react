@@ -1,5 +1,7 @@
 .type-highlight {
   color: rgb(147, 41, 129);
+  //color: #ef7ed1;
+
   font-size: 0.9125rem;
   line-height: 1.6;
  // word-break: break-all;
@@ -8,4 +10,7 @@
   &.np{
     padding: 0;
   }
+  &.darkmode{
+    color: #ffb6ec;
+  } 
 }

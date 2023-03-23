@@ -8,6 +8,7 @@ import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 import { FileMosaicAPIPropsRows } from "../../data/FileMosaicAPIPropsRows";
+import { scrollHandler } from "../../utils/scrollHandler";
 import PropsTableApi from "./PropsTableApi";
 
 const rightMenuItems = [
@@ -23,6 +24,18 @@ const rightMenuItems = [
   },
 ];
 const FileMosaicApi = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -53,7 +66,12 @@ const FileMosaicApi = (props) => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

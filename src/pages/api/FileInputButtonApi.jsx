@@ -9,6 +9,7 @@ import Alert from "@mui/material/Alert";
 import PropsTableApi from "./PropsTableApi";
 import { FileInputButtonPropsRows } from "../../data/FileInputButtonPropsRows";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 const rightMenuItems = [
   {
@@ -23,6 +24,18 @@ const rightMenuItems = [
   },
 ];
 const FileInputButtonApi = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -55,7 +68,12 @@ const FileInputButtonApi = (props) => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

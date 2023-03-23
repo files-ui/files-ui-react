@@ -1,4 +1,5 @@
 import * as React from "react";
+import { UserContext } from "../../globals/contexts/UserContext";
 import "./CodeHighlight.scss";
 
 interface CodeHighlightProps {
@@ -8,11 +9,13 @@ interface CodeHighlightProps {
 const CodeHighlight: React.FC<CodeHighlightProps> = (
   props: CodeHighlightProps
 ) => {
-  const { children, darkMode } = props;
-  return (
-    <code className={darkMode ? "code-highlight dark-mode" : "code-highlight"}>
-      {children}
-    </code>
-  );
+  const { children } = props;
+  const [usuario, ] = React.useContext(UserContext);
+  const darkMode = usuario.darkMode;
+  const finaldarkmodeclassName = !darkMode
+    ? "code-highlight"
+    : "code-highlight darkmode";
+
+  return <code className={finaldarkmodeclassName}>{children}</code>;
 };
 export default CodeHighlight;

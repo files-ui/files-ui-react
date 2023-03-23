@@ -14,8 +14,21 @@ import FileCardMosaicSwitch from "../../components/switch/FileCardMosaicSwitch";
 import TypeHighlight from "../../components/typeHighlight/TypeHighlight";
 import DemoFileMosaicLocalization from "../../components/demo-components/localization/DemoFileMosaicLocalization";
 import CodeJSFileMosaicLocalization from "../../components/demo-components/localization/CodeJSFileMosaicLocalization";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 const LocalizationPage = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   const [component, setComponent] = React.useState("FileMosaic");
   const handleChangeComponent = (newVal) => {
     setComponent(newVal);
@@ -80,7 +93,12 @@ const LocalizationPage = (props) => {
           </section>
 
           <RightMenuContainer>
-            <RightMenu width="240px" items={rightMenuItems} />
+            <RightMenu
+              width="240px"
+              items={rightMenuItems}
+              selectedItemProp={selectedItem}
+              setSelected={setSelectedItem}
+            />
           </RightMenuContainer>
         </MainContentContainer>
       </MainLayoutPage>

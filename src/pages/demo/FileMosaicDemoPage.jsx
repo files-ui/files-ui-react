@@ -29,8 +29,22 @@ import DemoFileCardActions from "../../components/demo-components/filemosaic-dem
 import CodeJSFileCardActions from "../../components/demo-components/filemosaic-demo/CodeJSFileCardActions";
 import DemoFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/DemoFileMosaicSmartImgFit";
 import CodeJSFileMosaicSmartImgFit from "../../components/demo-components/filemosaic-demo/CodeJSFileMosaicSmartImgFit";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 const FileMosaicDemoPage = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -79,7 +93,10 @@ const FileMosaicDemoPage = (props) => {
             <CodeHighlight>{`<FileInputButton/>`} </CodeHighlight>
             component for allowing the user to select files. For further
             information of this component check out the{" "}
-            <AnchorToTab href="/components/fileinputbutton">FileInputButton</AnchorToTab> page.
+            <AnchorToTab href="/components/fileinputbutton">
+              FileInputButton
+            </AnchorToTab>{" "}
+            page.
           </Alert>
           <br />
           <Alert severity="info">
@@ -392,12 +409,18 @@ const FileMosaicDemoPage = (props) => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );
 };
 export default FileMosaicDemoPage;
+
 const rightMenuItems = [
   {
     id: 0,

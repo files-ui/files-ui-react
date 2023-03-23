@@ -17,6 +17,8 @@ import { HeaderConfigAPIRows } from "../../data/HeaderConfigAPIRows";
 import { ServerResponseAPIRows } from "../../data/ServerResponseAPIRows";
 import { UploadConfigAPIRows } from "../../data/UploadConfigAPIRows";
 import { ValidateFileResponseAPIrows } from "../../data/ValidateFileResponseAPIrows";
+import { UserContext } from "../../globals/contexts/UserContext";
+import { scrollHandler } from "../../utils/scrollHandler";
 import PropsTableApi from "../api/PropsTableApi";
 
 const rightMenuItems = [
@@ -68,6 +70,23 @@ const rightMenuItems = [
 ];
 
 const TypesPage = (props) => {
+
+const [user,dispatch] = React.useContext(UserContext);
+const darkMode = user.darkMode;
+
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <MainLayoutPage selectedIndex={7}>
@@ -91,7 +110,7 @@ const TypesPage = (props) => {
                 </>
               }
               omitDefault
-              rows={ExtFileAPIRows}
+              rows={ExtFileAPIRows(darkMode)}
             />
           </section>
           <section id="validatefileresponse">
@@ -165,7 +184,12 @@ const TypesPage = (props) => {
         </MainContentContainer>
       </MainLayoutPage>{" "}
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

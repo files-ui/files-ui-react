@@ -6,6 +6,7 @@ import * as React from "react";
 import JSIcon from "../demo-components/icons/JSIcon";
 import TSIcon from "../demo-components/icons/TSIcon";
 import { Highlighter } from "rc-highlight";
+import { UserContext } from "../../globals/contexts/UserContext";
 interface ShowDemoCodeProps {
   codeSandboxJS?: string;
   codeSandboxTS?: string;
@@ -29,6 +30,9 @@ const ShowDemoCode: React.FC<ShowDemoCodeProps> = (
   } = props;
   const [showComplete, setShowComplete] = React.useState(false);
   const [showJS, setShowJS] = React.useState(true);
+
+  const [usuario, ] = React.useContext(UserContext);
+  const darkMode = usuario.darkMode;
 
   const code: string = showComplete
     ? showJS
@@ -60,7 +64,7 @@ const ShowDemoCode: React.FC<ShowDemoCodeProps> = (
                   //startIcon={}
                   onClick={() => setShowJS(true)}
                 >
-                  <JSIcon />
+                  <JSIcon color={darkMode?"rgb(178, 186, 194)":"rgb(45, 56, 67)"}/>
                 </Button>
                 <Button
                   size="small"
@@ -70,7 +74,7 @@ const ShowDemoCode: React.FC<ShowDemoCodeProps> = (
                   //  endIcon={}
                   onClick={() => setShowJS(false)}
                 >
-                  <TSIcon />
+                  <TSIcon color={darkMode?"rgb(178, 186, 194)":"rgb(45, 56, 67)"}/>
                 </Button>
               </ButtonGroup>
             )}

@@ -4,6 +4,7 @@ import * as React from "react";
 const MainContentContainer = ({ children }) => {
   return (
     <Box
+   
       sx={{
         overflow: "hidden",
         boxSizing: "border-box",
@@ -15,10 +16,12 @@ const MainContentContainer = ({ children }) => {
       }}
     >
       <Box
+      // className="section-container"
         sx={{
           boxSizing: "border-box",
           width: "100%",
           //backgroundColor:"grey"
+          
         }}
       >
         {children}

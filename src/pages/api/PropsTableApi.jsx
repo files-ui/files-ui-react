@@ -47,6 +47,8 @@ export default function PropsTableApi({
   desc=<></>,
   omitDefault = false,
 }) {
+
+
   const [sorted, setSorted] = React.useState(false);
   const [localRows, setLocalRows] = React.useState(rows);
 

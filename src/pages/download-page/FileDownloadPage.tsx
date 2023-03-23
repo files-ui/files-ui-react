@@ -16,8 +16,21 @@ import MainTitle from "../../components/main-title/MainTitle";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
+import { scrollHandler } from "../../utils/scrollHandler";
 
 const FileDownloadPage = () => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   return (
     <React.Fragment>
       <MainLayoutPage selectedIndex={9}>
@@ -25,10 +38,8 @@ const FileDownloadPage = () => {
           <MainTitle>File Download</MainTitle>
           <MainParagraph>
             In this page you will find some demos for downloading files with{" "}
-            <CodeHighlight>{"<FileMosaic/>"}</CodeHighlight>{" "}
-            and {" "}
-            <CodeHighlight>{"<FileCard/>"}</CodeHighlight>{" "}
-            components.
+            <CodeHighlight>{"<FileMosaic/>"}</CodeHighlight> and{" "}
+            <CodeHighlight>{"<FileCard/>"}</CodeHighlight> components.
           </MainParagraph>
           <section id="samehost">
             <SubTitle content="Same origin URL" />
@@ -93,13 +104,13 @@ const FileDownloadPage = () => {
                 <li>
                   Make a GET request with{" "}
                   <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/API/fetch">
-                    fetch
+                    fetch API
                   </AnchorToTab>{" "}
                   (you can use{" "}
                   <AnchorToTab href="https://axios-http.com/">
                     axios
                   </AnchorToTab>{" "}
-                  or any other way to fetch
+                  or any other way to fetch resources from internet.
                 </li>
                 <li>
                   Create an{" "}
@@ -162,7 +173,12 @@ const FileDownloadPage = () => {
       </MainLayoutPage>
 
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

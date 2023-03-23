@@ -16,7 +16,22 @@ import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
 import MainTitle from "../../components/main-title/MainTitle";
 import RightMenuContainer from "../../components/layout-pages/RightMenuContainer";
+import { scrollHandler } from "../../utils/scrollHandler";
+import CodeHighlight from "../../components/codeHighlight/CodeHighlight";
 const GettingStartedPage = ({ darkModeOn }) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
+
   return (
     <MainLayoutPage selectedIndex={0}>
       <MainContentContainer>
@@ -48,8 +63,8 @@ const GettingStartedPage = ({ darkModeOn }) => {
           <SubTitle content="Peer dependency" />
 
           <DescParagraph>
-            <code className="code">react </code> {">= 17.0.0 "}and{" "}
-            <code className="code">react-dom</code>
+            <CodeHighlight>react </CodeHighlight> {">= 17.0.0 "}and{" "}
+            <CodeHighlight>react-dom</CodeHighlight>
             {" >= 17.0.0 "} are peer dependencies.
           </DescParagraph>
         </section>
@@ -63,7 +78,12 @@ const GettingStartedPage = ({ darkModeOn }) => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </MainLayoutPage>
   );

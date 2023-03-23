@@ -12,7 +12,20 @@ import DemoFileMosaicFileIcons from "../../components/demo-components/filemosaic
 import MainLayoutPage from "../../components/layout-pages/MainLayoutPage";
 import AnchorToTab from "../../components/util-components/AnchorToTab";
 import FileCardMosaicSwitch from "../../components/switch/FileCardMosaicSwitch";
+import { scrollHandler } from "../../utils/scrollHandler";
 const FileIconsPage = (props) => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
   const [component, setComponent] = React.useState("FileMosaic");
   const handleChangeComponent = (newVal) => {
     setComponent(newVal);
@@ -24,11 +37,11 @@ const FileIconsPage = (props) => {
           <MainTitle>File Icons (extensive list)</MainTitle>
           <MainParagraph>
             Both <CodeHighlight>{"<FileMosaic/>"}</CodeHighlight> and{" "}
-            <CodeHighlight>{"<FileCard/>"}</CodeHighlight> components diplay a file icon
-            according to the file mime type. A media type (also known as a
-            Multipurpose Internet Mail Extensions or MIME type) indicates the
-            nature and format of a document, file, or assortment of bytes. You
-            can find more information{" "}
+            <CodeHighlight>{"<FileCard/>"}</CodeHighlight> components diplay a
+            file icon according to the file mime type. A media type (also known
+            as a Multipurpose Internet Mail Extensions or MIME type) indicates
+            the nature and format of a document, file, or assortment of bytes.
+            You can find more information{" "}
             <AnchorToTab href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">
               here
             </AnchorToTab>
@@ -63,11 +76,15 @@ const FileIconsPage = (props) => {
               <DemoFileMosaicFileIcons card={component === "FileCard"} />
             </Paper>
           </section>
-
-          <RightMenuContainer>
-            <RightMenu width="240px" items={rightMenuItems} />
-          </RightMenuContainer>
         </MainContentContainer>
+        <RightMenuContainer>
+          <RightMenu
+            width="240px"
+            items={rightMenuItems}
+            selectedItemProp={selectedItem}
+            setSelected={setSelectedItem}
+          />
+        </RightMenuContainer>
       </MainLayoutPage>
     </React.Fragment>
   );

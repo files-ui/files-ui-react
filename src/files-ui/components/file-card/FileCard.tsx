@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FileCardProps } from "./FileCardProps";
 import "./FileCard.scss";
+import "./../icons/IconStyles.scss";
 import "./components/FileCardPaper.scss";
 import { fileSizeFormater, getLocalFileItemData, handleClickUtil, shrinkWord } from "../../core";
 import useProgress from "../file-mosaic/hooks/useProgress";

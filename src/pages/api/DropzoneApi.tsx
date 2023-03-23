@@ -9,6 +9,7 @@ import Alert from "@mui/material/Alert";
 import PropsTableApi from "./PropsTableApi";
 import { DropzoneAPIPropsRows } from "../../data/DropzoneAPIPropsRows";
 import MainParagraph from "../../components/paragraph-main/MainParagraph";
+import { scrollHandler } from "../../utils/scrollHandler";
 const rightMenuItems = [
   {
     id: 0,
@@ -23,6 +24,19 @@ const rightMenuItems = [
 ];
 
 const DropzoneApi = () => {
+  const [selectedItem, setSelectedItem] = React.useState(0);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", () =>
+      scrollHandler(rightMenuItems, setSelectedItem)
+    );
+    return () => {
+      window.removeEventListener("scroll", () =>
+        scrollHandler(rightMenuItems, setSelectedItem)
+      );
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <MainContentContainer>
@@ -53,7 +67,12 @@ const DropzoneApi = () => {
         </section>
       </MainContentContainer>
       <RightMenuContainer>
-        <RightMenu width="240px" items={rightMenuItems} />
+        <RightMenu
+          width="240px"
+          items={rightMenuItems}
+          selectedItemProp={selectedItem}
+          setSelected={setSelectedItem}
+        />
       </RightMenuContainer>
     </React.Fragment>
   );

@@ -7,7 +7,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import logoLight from "../static/files-ui-logo-blue-wbg.png";
+import logoLight from "../static/files-ui-logo-blue-dark.png";
 import logo_blue from "../static/files-ui-logo-blue.png";
 import { IconButton, Stack, styled, Tooltip } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -15,6 +15,8 @@ import DarkModeLightModeButton from "../components/MainPage/DarkModeLightModeBut
 import MainMenuSideBar from "../components/MainMenu/MainMenuSideBar";
 import logo_text_blue from "../static/files-ui-logo-text-med.png";
 import logo_text_blue_dark from "../static/files-ui-logo-text-med-dark.png";
+import { UserContext } from "../globals/contexts/UserContext";
+import AnchorToTab from "../components/util-components/AnchorToTab";
 
 const drawerWidth = 280;
 const StyledImage = styled("img")(({ theme }) => ({
@@ -27,15 +29,28 @@ const StyledImage = styled("img")(({ theme }) => ({
   },
 }));
 function NavBarTemplate(props) {
+  const [usuario, dispatch] = React.useContext(UserContext);
+  const darkModeOn = usuario.darkMode;
   //const navigate = useNavigateToTop();
-  const { window, children, darkModeOn, handleDarkMode, selectedIndex } = props;
+  const {
+    window,
+    children,
+    /* darkModeOn, */ /* handleDarkMode, */ selectedIndex,
+  } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   //const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const handleDarkMode = () => {
+    // setDarkModeOn((darkModeOn) => !darkModeOn);
+    if (!darkModeOn) dispatch({ type: "TURNOFFLIGHT" });
+    else dispatch({ type: "TURNONLIGHT" });
+  };
 
   const handleGoGitRepo = () => {
+    alert("HAAA");
     window.open("https://github.com/files-ui", "_blank");
   };
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -56,11 +71,13 @@ function NavBarTemplate(props) {
                 marginRight: "5px",
               }}
               className="filesui-nav-logo"
+              //src={logo_blue }
               src={!darkModeOn ? logo_blue : logoLight}
               alt="files-ui-main-logo"
             />
             <img
               src={darkModeOn ? logo_text_blue_dark : logo_text_blue}
+              // src={darkModeOn ? logo_text_blue_dark : logo_text_blue}
               alt="files-ui-main-logo-text"
               height={16}
             />
@@ -85,9 +102,10 @@ function NavBarTemplate(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" } }}>
+    <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" } ,transition:"all 0.4s ease-in-out"}}>
       <CssBaseline />
       <AppBar
+        className="section-container"
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -108,7 +126,8 @@ function NavBarTemplate(props) {
           </IconButton>
 
           <StyledImage
-            src={!darkModeOn ? logo_blue : logoLight}
+            src={ logo_blue }
+            //src={!darkModeOn ? logo_blue : logoLight}
             alt="files-ui-main-logo"
           />
 
@@ -123,17 +142,19 @@ function NavBarTemplate(props) {
           </Typography>
           <Box style={{ flexGrow: 1 }} />
           <Stack direction="row" spacing={1}>
-            <Tooltip title="Go to Files-ui GitHub repo">
-              <IconButton
-                style={{ borderRadius: "8px", border: "0.5px solid #eaeef3" }}
-                onClick={handleGoGitRepo}
-                color="secondary"
-                aria-label="upload picture"
-                component="label"
-              >
-                <GitHubIcon /* htmlColor="white" */ />
-              </IconButton>
-            </Tooltip>
+            <AnchorToTab href="https://github.com/files-ui">
+              <Tooltip title="Go to Files-ui GitHub repo">
+                <IconButton
+                  style={{ borderRadius: "8px", border: "0.5px solid #eaeef3" }}
+                  //onClick={handleGoGitRepo}
+                  color="secondary"
+                  aria-label="upload picture"
+                  component="label"
+                >
+                  <GitHubIcon /* htmlColor="white" */ />
+                </IconButton>
+              </Tooltip>
+            </AnchorToTab>
             <DarkModeLightModeButton
               darkModeOn={darkModeOn}
               onChangeDarkMode={handleDarkMode}

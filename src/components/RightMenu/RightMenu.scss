@@ -4,9 +4,17 @@
   padding-left: 5px;
   width: 100%;
   //word-break: break-all;
+
+  border-left: unset;
+  color: #6f7e8c;
+
   &.selected,
   &:hover {
-    border-left: 2px #b2bac2 solid;
-    color: #6f7e8c;
+    border-left-width: 2px;
+    border-left-style: solid;
+    color: rgb(0, 114, 229);
+    &.darkmode {
+      color: rgb(102, 178, 255);
+    }
   }
 }
