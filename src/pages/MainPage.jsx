@@ -12,12 +12,19 @@ import { Divider } from "@mui/material";
 import ExtraComponentsMainPage from "../components/MainPage/SecondaryRight/ExtraComponentsMainPage";
 import ExtraComponentsMainPageInputButton from "../components/MainPage/SecondaryRight/ExtraComponentsMainPageInputButton";
 import ExtraComponentsMainPageAvatar from "../components/MainPage/SecondaryRight/ExtraComponentsMainPageAvatar";
+import { UserContext } from "../globals/contexts/UserContext";
 
 const MainPage = ({ darkMode }) => {
-  const [darkModeOn, setDarkModeOn] = React.useState(false);
+  const [usuario, dispatch] = React.useContext(UserContext);
+
+  // const [darkModeOn, setDarkModeOn] = React.useState(false);
+  const darkModeOn = usuario.darkMode;
+  console.log("userReducer darkModeOn", darkModeOn);
 
   const handleDarkMode = () => {
-    setDarkModeOn((darkModeOn) => !darkModeOn);
+    // setDarkModeOn((darkModeOn) => !darkModeOn);
+    if (!darkModeOn) dispatch({ type: "TURNOFFLIGHT" });
+    else dispatch({ type: "TURNONLIGHT" });
   };
 
   return (

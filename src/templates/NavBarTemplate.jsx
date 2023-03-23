@@ -15,6 +15,8 @@ import DarkModeLightModeButton from "../components/MainPage/DarkModeLightModeBut
 import MainMenuSideBar from "../components/MainMenu/MainMenuSideBar";
 import logo_text_blue from "../static/files-ui-logo-text-med.png";
 import logo_text_blue_dark from "../static/files-ui-logo-text-med-dark.png";
+import { UserContext } from "../globals/contexts/UserContext";
+import AnchorToTab from "../components/util-components/AnchorToTab";
 
 const drawerWidth = 280;
 const StyledImage = styled("img")(({ theme }) => ({
@@ -27,23 +29,34 @@ const StyledImage = styled("img")(({ theme }) => ({
   },
 }));
 function NavBarTemplate(props) {
+  const [usuario, dispatch] = React.useContext(UserContext);
+  const darkModeOn = usuario.darkMode;
   //const navigate = useNavigateToTop();
-  const { window, children, darkModeOn, handleDarkMode, selectedIndex } = props;
+  const {
+    window,
+    children,
+    /* darkModeOn, */ /* handleDarkMode, */ selectedIndex,
+  } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   //const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const handleDarkMode = () => {
+    // setDarkModeOn((darkModeOn) => !darkModeOn);
+    if (!darkModeOn) dispatch({ type: "TURNOFFLIGHT" });
+    else dispatch({ type: "TURNONLIGHT" });
+  };
 
   const handleGoGitRepo = () => {
+    alert("HAAA");
     window.open("https://github.com/files-ui", "_blank");
   };
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
   const drawer = (
-    <div 
-   
-    >
+    <div>
       <Toolbar>
         <a href="/" style={{ textDecoration: "none" }}>
           <Stack
@@ -90,7 +103,7 @@ function NavBarTemplate(props) {
     <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" } }}>
       <CssBaseline />
       <AppBar
-       className="section-container"
+        className="section-container"
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -126,17 +139,19 @@ function NavBarTemplate(props) {
           </Typography>
           <Box style={{ flexGrow: 1 }} />
           <Stack direction="row" spacing={1}>
-            <Tooltip title="Go to Files-ui GitHub repo">
-              <IconButton
-                style={{ borderRadius: "8px", border: "0.5px solid #eaeef3" }}
-                onClick={handleGoGitRepo}
-                color="secondary"
-                aria-label="upload picture"
-                component="label"
-              >
-                <GitHubIcon /* htmlColor="white" */ />
-              </IconButton>
-            </Tooltip>
+            <AnchorToTab href="https://github.com/files-ui">
+              <Tooltip title="Go to Files-ui GitHub repo">
+                <IconButton
+                  style={{ borderRadius: "8px", border: "0.5px solid #eaeef3" }}
+                  //onClick={handleGoGitRepo}
+                  color="secondary"
+                  aria-label="upload picture"
+                  component="label"
+                >
+                  <GitHubIcon /* htmlColor="white" */ />
+                </IconButton>
+              </Tooltip>
+            </AnchorToTab>
             <DarkModeLightModeButton
               darkModeOn={darkModeOn}
               onChangeDarkMode={handleDarkMode}
