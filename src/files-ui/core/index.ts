@@ -87,7 +87,8 @@ export type {
     UploadPromiseResponse,
     UploadResponse,
     UploadConfig,
-    UPLOADSTATUS
+    UPLOADSTATUS,
+    IconsMap
 } from "./types";
 
 export {

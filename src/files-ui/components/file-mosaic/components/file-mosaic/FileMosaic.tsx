@@ -71,10 +71,10 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   } = props;
 
   //context
-  const { darkMode: darkModeContext } = React.useContext(FilesUiContext);
+  const { darkMode: darkModeContext, icons } = React.useContext(FilesUiContext);
   const darkMode: boolean | undefined =
     darkModeProp !== undefined ? darkModeProp : darkModeContext;
-  console.log("globalConfig", darkMode);
+  console.log("globalConfig", darkMode, icons);
 
   //localizers
 
@@ -120,7 +120,8 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     valid,
     preview as boolean,
     imageUrl,
-    videoUrl
+    videoUrl,
+    icons
   );
 
   //The size formatted and rounded in 2 decimals

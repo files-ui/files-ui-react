@@ -109,7 +109,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     //} = mergeProps(props, FileCardPropsDefault);
   } = props;
 //context
-const { darkMode: darkModeContext } = React.useContext(FilesUiContext);
+const { darkMode: darkModeContext , icons} = React.useContext(FilesUiContext);
 const darkMode: boolean | undefined =
   darkModeProp !== undefined ? darkModeProp : darkModeContext;
 
@@ -150,7 +150,8 @@ const darkMode: boolean | undefined =
     valid,
     preview as boolean,
     imageUrl,
-    videoUrl
+    videoUrl,
+    icons
   );
   //The size formatted and rounded in 2 decimals
   const sizeFormatted: string | undefined = fileSizeFormater(localSize);
