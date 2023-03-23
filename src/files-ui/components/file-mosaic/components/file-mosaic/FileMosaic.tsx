@@ -3,7 +3,7 @@ import {
   addClassName,
   fileSizeFormater,
   getLocalFileItemData,
-  handleClickUtil,
+  //handleClickUtil,
 } from "../../../../core";
 import "./FileMosaic.scss";
 import "./../../../icons/IconStyles.scss";
@@ -22,6 +22,7 @@ import useProgress from "../../hooks/useProgress";
 import DownloadHidden from "../../../download-hidden/DownloadHidden";
 import FileMosaicMainLayer from "../FileMosaicMainLayer.tsx/FileMosaicMainLayer";
 import { FilesUiContext } from "../../../../FilesUiProvider/FilesUiContext";
+import { handleClickUtil } from "../../../../files-ui-react/utils";
 
 const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const {

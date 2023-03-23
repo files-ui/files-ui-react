@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { parseSize } from "../utils/utils";
 import { VisibilityProps } from "./VisibilityProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const Visibility: FC<VisibilityProps> = (props: VisibilityProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

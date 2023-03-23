@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { ClearProps } from "./ClearProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const Clear: React.FC<ClearProps> = (props: ClearProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

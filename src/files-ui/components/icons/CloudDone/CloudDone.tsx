@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { CloudDoneProps } from "./CloudDoneProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const CloudDone: React.FC<CloudDoneProps> = (props: CloudDoneProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { PersonProps } from "./PersonProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const Person: React.FC<PersonProps> = (props: PersonProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

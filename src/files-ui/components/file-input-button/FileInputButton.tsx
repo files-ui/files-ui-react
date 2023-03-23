@@ -10,7 +10,7 @@ import {
   FileValidatorProps,
   getRandomInt,
   //FunctionLabel,
-  handleClickInput,
+  //handleClickInput,
   instantPreparingToUploadOne,
   isUploadAbleExtFile,
   isValidateActive,
@@ -25,6 +25,7 @@ import {
   //UploadResponse,
   validateExtFileList,
 } from "../../core";
+import { handleClickInput } from "../../files-ui-react/utils";
 import useDropzoneFileListUpdater from "../../hooks/useDropzoneFileUpdater";
 import { DropzoneActions } from "../dropzone/components/dropzone/DropzoneProps";
 import DropzoneButtons from "../dropzone/components/DropzoneButtons/DropzoneButtons";
@@ -459,7 +460,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
   // HANDLERS for CLICK
   function handleClick(): void {
-    console.log("HAAAAAAAA");
+    //console.log("HAAAAAAAA");
     //handleClickUtil(evt);
     if (disabled) return;
 

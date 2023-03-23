@@ -1,5 +1,5 @@
 import * as React from "react";
-import { handleClickUtil } from "../../core";
+//import { handleClickUtil } from "../../core";
 export type DownloadHiddenProps = {
   downloadUrl?: string;
   anchorRef: React.RefObject<HTMLAnchorElement>;
@@ -23,6 +23,7 @@ const DownloadHidden: React.FC<DownloadHiddenProps> = (
         href={downloadUrl}
         download={fileName}
         hidden
+        rel={"noopener noreferrer"}
         onClick={handleClick}
       >
         download_file

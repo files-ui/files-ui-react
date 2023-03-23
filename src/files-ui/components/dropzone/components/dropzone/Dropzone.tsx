@@ -7,10 +7,10 @@ import {
   validateExtFileList,
   FileValidatorProps,
   isValidateActive,
-  handleClickInput,
-  handleDragUtil,
+  //handleClickInput,
+  //handleDragUtil,
   createFuiRippleFromDiv,
-  handleDropUtil,
+  //handleDropUtil,
   UploadConfig,
   ExtFileInstance,
   FunctionLabel,
@@ -54,6 +54,7 @@ import DropzoneHeader from "../DropzoneHeader/DropzoneHeader";
 import DropzoneFooter from "../DropzoneFooter/DropzoneFooter";
 import DropzoneButtons from "../DropzoneButtons/DropzoneButtons";
 import { completeAsureColor } from "../../../../core";
+import { handleClickInput, handleDragUtil, handleDropUtil } from "../../../../files-ui-react/utils";
 
 //import { print_manager } from "../../../../../utils";
 
