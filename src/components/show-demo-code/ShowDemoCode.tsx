@@ -31,7 +31,7 @@ const ShowDemoCode: React.FC<ShowDemoCodeProps> = (
   const [showComplete, setShowComplete] = React.useState(false);
   const [showJS, setShowJS] = React.useState(true);
 
-  const [usuario, dispatch] = React.useContext(UserContext);
+  const [usuario, ] = React.useContext(UserContext);
   const darkMode = usuario.darkMode;
 
   const code: string = showComplete

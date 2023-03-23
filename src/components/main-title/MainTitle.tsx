@@ -7,7 +7,7 @@ interface MainTitleProps {
 }
 const MainTitle: React.FC<MainTitleProps> = (props: MainTitleProps) => {
   const { children, className, style } = props;
-  const [usuario, dispatch] = React.useContext(UserContext);
+  const [usuario, ] = React.useContext(UserContext);
 
   // const [darkModeOn, setDarkModeOn] = React.useState(false);
   const darkMode = usuario.darkMode;

@@ -6,7 +6,7 @@ const MainParagraph: React.FC<ParagraphMainProps> = (
   props: ParagraphMainProps
 ) => {
   const { content, children } = props;
-  const [usuario, dispatch] = React.useContext(UserContext);
+  const [usuario, ] = React.useContext(UserContext);
   const darkModeOn = usuario.darkMode;
   const className = darkModeOn ? "paragraph-main darkmode" : "paragraph-main";
 

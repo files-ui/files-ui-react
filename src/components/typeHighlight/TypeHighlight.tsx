@@ -12,7 +12,7 @@ const TypeHighlight: React.FC<TypeHighlightProps> = (
   props: TypeHighlightProps
 ) => {
   const { children, np, size } = props;
-  const [usuario, dispatch] = React.useContext(UserContext);
+  const [usuario, ] = React.useContext(UserContext);
   const darkMode = usuario.darkMode;
   const finaldarkmodeclassName = !darkMode
     ? "type-highlight"

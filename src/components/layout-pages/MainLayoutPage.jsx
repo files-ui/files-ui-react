@@ -5,7 +5,7 @@ import NavBarTemplate from "../../templates/NavBarTemplate";
 import "./LayoutPage.scss";
 
 const MainLayoutPage = ({ children, selectedIndex }) => {
-  const [usuario, dispatch] = React.useContext(UserContext);
+  const [usuario, ] = React.useContext(UserContext);
   const darkMode = usuario.darkMode;
 
   const finalClassName = darkMode

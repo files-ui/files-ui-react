@@ -6,7 +6,7 @@ import "./RightMenu.scss";
 import { UserContext } from "../../globals/contexts/UserContext";
 const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
   const { items, width, selectedItemProp: selectedItem = 0 } = props;
-  const [usuario, dispatch] = React.useContext(UserContext);
+  const [usuario, ] = React.useContext(UserContext);
   const darkMode = usuario.darkMode;
 
   const handleClickAnchor = (

@@ -10,7 +10,7 @@ const CodeHighlight: React.FC<CodeHighlightProps> = (
   props: CodeHighlightProps
 ) => {
   const { children } = props;
-  const [usuario, dispatch] = React.useContext(UserContext);
+  const [usuario, ] = React.useContext(UserContext);
   const darkMode = usuario.darkMode;
   const finaldarkmodeclassName = !darkMode
     ? "code-highlight"
