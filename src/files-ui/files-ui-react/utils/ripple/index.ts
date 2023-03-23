@@ -1,1 +1,1 @@
-export { createFuiRippleFromDiv,createRippleButton } from "./ripple";
+export { createFuiRippleFromDiv, createRippleButton } from "./ripple";

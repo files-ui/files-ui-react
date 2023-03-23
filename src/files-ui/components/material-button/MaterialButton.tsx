@@ -2,7 +2,7 @@ import * as React from "react";
 import useMaterialButtonClassName from "./hooks/useMaterialButtonClassName";
 import { MaterialButtonProps } from "./MaterialButtonProps";
 import "./MaterialButton.scss";
-import { createRippleButton } from "../../core";
+import { createRippleButton } from "../../files-ui-react/utils";
 
 const MaterialButton: React.FC<MaterialButtonProps> = (
   props: MaterialButtonProps

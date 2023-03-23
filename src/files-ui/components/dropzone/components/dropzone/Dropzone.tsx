@@ -9,7 +9,7 @@ import {
   isValidateActive,
   //handleClickInput,
   //handleDragUtil,
-  createFuiRippleFromDiv,
+  //createFuiRippleFromDiv,
   //handleDropUtil,
   UploadConfig,
   ExtFileInstance,
@@ -54,7 +54,7 @@ import DropzoneHeader from "../DropzoneHeader/DropzoneHeader";
 import DropzoneFooter from "../DropzoneFooter/DropzoneFooter";
 import DropzoneButtons from "../DropzoneButtons/DropzoneButtons";
 import { completeAsureColor } from "../../../../core";
-import { handleClickInput, handleDragUtil, handleDropUtil } from "../../../../files-ui-react/utils";
+import { createFuiRippleFromDiv, handleClickInput, handleDragUtil, handleDropUtil } from "../../../../files-ui-react/utils";
 
 //import { print_manager } from "../../../../../utils";
 
