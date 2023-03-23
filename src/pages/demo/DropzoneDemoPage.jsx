@@ -748,4 +748,9 @@ const rightMenuItems = [
     label: "Localization",
     referTo: "/components/dropzone#localization",
   },
+  {
+    id: 8,
+    label: "API",
+    referTo: "/components/dropzone#api",
+  },
 ];

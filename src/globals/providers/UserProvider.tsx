@@ -1,9 +1,10 @@
 import { UserContext } from "../contexts/UserContext";
 import * as React from "react";
 import { UserFilesUi } from "../types/UserFilesUi";
-import { FilesUIAction, userInitializer, userReducer } from "../reducers/userReducer";
+import {  userInitializer, userReducer } from "../reducers/userReducer";
 import { ThemeProvider } from "@emotion/react";
 import { MUItheme } from "../../theme/mainTheme";
+import { FuiAction } from "../types/FuiAction";
 
 export const UserProvider = (props: {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ export const UserProvider = (props: {
 }) => {
   const { children, valorInicial } = props;
 
-  const [usuario, dispatch]: [UserFilesUi, React.Dispatch<FilesUIAction>] =
+  const [usuario, dispatch]: [UserFilesUi, React.Dispatch<FuiAction>] =
     React.useReducer(userReducer, valorInicial, userInitializer);
 
   React.useEffect(() => {

@@ -3,8 +3,11 @@ import ListSubheader from "@mui/material/ListSubheader/ListSubheader";
 import * as React from "react";
 import { RightMenuProps } from "./RightMenuProps";
 import "./RightMenu.scss";
+import { UserContext } from "../../globals/contexts/UserContext";
 const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
   const { items, width, selectedItemProp: selectedItem = 0 } = props;
+  const [usuario, dispatch] = React.useContext(UserContext);
+  const darkMode = usuario.darkMode;
 
   const handleClickAnchor = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
@@ -12,10 +15,14 @@ const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
     id: number
   ) => {
     onClick?.();
-
   };
 
   const finalSelectedId = selectedItem;
+
+  const darkmodeClassName = darkMode
+    ? "right-menu-anchor-item darkmode"
+    : "right-menu-anchor-item";
+  //const darkmodeClassName = darkMode?"":"";
   return (
     <List
       // className="section-container"
@@ -33,8 +40,8 @@ const RightMenu: React.FC<RightMenuProps> = (props: RightMenuProps) => {
           items.map(({ isSelected, label, onClick, referTo, id }, index) => {
             const classNameForAnchor: string =
               finalSelectedId === id
-                ? "right-menu-anchor-item selected"
-                : "right-menu-anchor-item";
+                ? `${darkmodeClassName} selected`
+                : darkmodeClassName;
             return (
               <li key={index} style={{ listStyle: "none", margin: 0 }}>
                 <a

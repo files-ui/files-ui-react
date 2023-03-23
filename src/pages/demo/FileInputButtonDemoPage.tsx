@@ -537,4 +537,9 @@ const rightMenuItems = [
     label: "Localization",
     referTo: "/components/fileinputbutton#localization",
   },
+  {
+    id: 8,
+    label: "API",
+    referTo: "/components/fileinputbutton#api",
+  },
 ];

@@ -7,7 +7,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import logoLight from "../static/files-ui-logo-blue-wbg.png";
+import logoLight from "../static/files-ui-logo-blue-dark.png";
 import logo_blue from "../static/files-ui-logo-blue.png";
 import { IconButton, Stack, styled, Tooltip } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -71,11 +71,13 @@ function NavBarTemplate(props) {
                 marginRight: "5px",
               }}
               className="filesui-nav-logo"
+              //src={logo_blue }
               src={!darkModeOn ? logo_blue : logoLight}
               alt="files-ui-main-logo"
             />
             <img
               src={darkModeOn ? logo_text_blue_dark : logo_text_blue}
+              // src={darkModeOn ? logo_text_blue_dark : logo_text_blue}
               alt="files-ui-main-logo-text"
               height={16}
             />
@@ -100,7 +102,7 @@ function NavBarTemplate(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" } }}>
+    <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" } ,transition:"all 0.4s ease-in-out"}}>
       <CssBaseline />
       <AppBar
         className="section-container"
@@ -124,7 +126,8 @@ function NavBarTemplate(props) {
           </IconButton>
 
           <StyledImage
-            src={!darkModeOn ? logo_blue : logoLight}
+            src={ logo_blue }
+            //src={!darkModeOn ? logo_blue : logoLight}
             alt="files-ui-main-logo"
           />
 

@@ -1,9 +1,9 @@
-import { UserFilesUi } from "../types/UserFilesUi";
-export interface FilesUIAction {
-  type?: string; payload?: UserFilesUi;
-}
 
-export const userReducer = (state: UserFilesUi, action: FilesUIAction): UserFilesUi => {
+import { FuiAction } from "../types/FuiAction";
+import { UserFilesUi } from "../types/UserFilesUi";
+
+
+export const userReducer = (state: UserFilesUi, action: FuiAction): UserFilesUi => {
   const { type = "", payload = {} } = action;
   console.log("userReducer", state, action);
   switch (type) {

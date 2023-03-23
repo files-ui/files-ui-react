@@ -17,6 +17,7 @@ import { HeaderConfigAPIRows } from "../../data/HeaderConfigAPIRows";
 import { ServerResponseAPIRows } from "../../data/ServerResponseAPIRows";
 import { UploadConfigAPIRows } from "../../data/UploadConfigAPIRows";
 import { ValidateFileResponseAPIrows } from "../../data/ValidateFileResponseAPIrows";
+import { UserContext } from "../../globals/contexts/UserContext";
 import { scrollHandler } from "../../utils/scrollHandler";
 import PropsTableApi from "../api/PropsTableApi";
 
@@ -69,6 +70,10 @@ const rightMenuItems = [
 ];
 
 const TypesPage = (props) => {
+
+const [user,dispatch] = React.useContext(UserContext);
+const darkMode = user.darkMode;
+
   const [selectedItem, setSelectedItem] = React.useState(0);
 
   React.useEffect(() => {
@@ -105,7 +110,7 @@ const TypesPage = (props) => {
                 </>
               }
               omitDefault
-              rows={ExtFileAPIRows}
+              rows={ExtFileAPIRows(darkMode)}
             />
           </section>
           <section id="validatefileresponse">

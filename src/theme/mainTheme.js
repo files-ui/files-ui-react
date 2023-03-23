@@ -6,7 +6,7 @@ export const MUItheme = (modeLight = "light") =>
       mode: modeLight,
       primary: {
         // light: will be calculated from palette.primary.main,
-        main: "#042354",
+        main: modeLight === "light" ? "#042354" : "#55b4f2",
         // dark: will be calculated from palette.primary.main,
         // contrastText: will be calculated to contrast with palette.primary.main
       },
