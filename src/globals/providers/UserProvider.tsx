@@ -27,11 +27,11 @@ export const UserProvider = (props: {
         <FilesUiProvider
           config={{
             darkMode: usuario.darkMode,
-            icons: {
+            /* icons: {
               png: gradle,
               mp4: "/serverside/springbootjavalogo.png",
               pdf: "https://www.iconpacks.net/icons/2/free-pdf-download-icon-2617-thumb.png",
-            },
+            }, */
           }}
         >
           {children}

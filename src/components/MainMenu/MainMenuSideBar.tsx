@@ -128,6 +128,7 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       index: 5,
       onClick: () => navigate("/localization"),
     },
+    
     /* {
       label: "Code Generator",
       index: 7,
@@ -153,6 +154,11 @@ export default function MainMenuSideBar(props: MainMenuSideBarProps) {
       label: "File download",
       index: 9,
       onClick: () => navigate("/file-download"),
+    },
+    {
+      label: "Global config",
+      index: 10,
+      onClick: () => navigate("/global-config"),
     },
   ];
 
