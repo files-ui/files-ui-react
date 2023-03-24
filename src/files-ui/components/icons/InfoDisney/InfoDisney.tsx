@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { InfoDisneyProps } from "./InfoDisneyProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const InfoDisney: React.FC<InfoDisneyProps> = (props: InfoDisneyProps) => {
   const {

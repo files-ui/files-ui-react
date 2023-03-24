@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { RemoveProps } from "./RemoveProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const RemoveOutline: React.FC<RemoveProps> = (props: RemoveProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

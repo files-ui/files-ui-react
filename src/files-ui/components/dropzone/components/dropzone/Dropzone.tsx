@@ -7,10 +7,10 @@ import {
   validateExtFileList,
   FileValidatorProps,
   isValidateActive,
-  handleClickInput,
-  handleDragUtil,
-  createFuiRippleFromDiv,
-  handleDropUtil,
+  //handleClickInput,
+  //handleDragUtil,
+  //createFuiRippleFromDiv,
+  //handleDropUtil,
   UploadConfig,
   ExtFileInstance,
   FunctionLabel,
@@ -28,6 +28,7 @@ import {
   unexpectedErrorUploadResult,
   getRandomInt,
   addClassName,
+  Localization,
 } from "../../../../core";
 import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../input-hidden/InputHidden";
@@ -54,6 +55,13 @@ import DropzoneHeader from "../DropzoneHeader/DropzoneHeader";
 import DropzoneFooter from "../DropzoneFooter/DropzoneFooter";
 import DropzoneButtons from "../DropzoneButtons/DropzoneButtons";
 import { completeAsureColor } from "../../../../core";
+import {
+  createFuiRippleFromDiv,
+  handleClickInput,
+  handleDragUtil,
+  handleDropUtil,
+} from "../../../../files-ui-react/utils";
+import { FilesUiContext } from "../../../../FilesUiProvider/FilesUiContext";
 
 //import { print_manager } from "../../../../../utils";
 
@@ -85,7 +93,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     //label
     label,
     //localization
-    localization,
+    localization: locProps,
     //ripple
     disableRipple,
     //drag operations
@@ -111,6 +119,15 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     //advancedConfig,
     ...rest
   } = mergeProps(props, defaultDrozoneProps);
+
+  //context
+  const {
+    // darkMode: darkModeContext,
+    //icons,
+    localization: locContext,
+  } = React.useContext(FilesUiContext);
+  const localization: Localization | undefined =
+    locProps !== undefined ? locProps : locContext;
 
   const {
     url,
@@ -520,14 +537,14 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     //if (isUploading) return;
     let fileList: FileList = evt.target.files as FileList;
     let extFileListOutput: ExtFile[] = fileListToExtFileArray(fileList);
-    //validate dui files
+    //validate ext files
     if (validateFilesFlag) {
       extFileListOutput = outerFuiValidation(extFileListOutput);
       if (autoClean) {
         extFileListOutput = extFileListOutput.filter((f) => f.valid);
       }
     }
-    //init xhr on each dui file
+    //init xhr on each ext file
     if (url) extFileListOutput = toUploadableExtFileList(extFileListOutput);
 
     // Clean input element to trigger onChange event on input
@@ -645,7 +662,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       }
     }
 
-    //init xhr on each dui file
+    //init xhr on each ext file
     if (url) extFileListOutput = toUploadableExtFileList(extFileListOutput);
 
     handleFilesChange(extFileListOutput);
@@ -722,12 +739,12 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         {!disableRipple && (
           <div
             ref={fuiRippleRefAbs}
-            className="dropzone-ui-base-ripple-absolute"
+            className="filesui-base-ripple-absolute"
             style={{ borderRadius: style?.borderRadius }}
           >
             <div
               ref={fuiRippleRefRel}
-              className="dropzone-ui-base-ripple-relative"
+              className="filesui-base-ripple-relative"
             ></div>
           </div>
         )}

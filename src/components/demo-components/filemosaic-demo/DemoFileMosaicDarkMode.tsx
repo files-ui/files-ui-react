@@ -48,6 +48,7 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
               onDelete={removeFile}
               info
               elevation={elevation as FileCardProps["elevation"]}
+              darkMode={false}
             />
           ))}
         </div>
@@ -88,7 +89,7 @@ const DemoFileMosaicDarkMode = (props: { card?: boolean }) => {
           flexGrow: 1,
         }}
       >
-        <FileMosaic {...sampleFileProps} info onDelete={removeFile} />
+        <FileMosaic {...sampleFileProps} info onDelete={removeFile} darkMode={false}/>
       </div>
       <div
         style={{

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 import { parseSize } from "../utils/utils";
 import { DownloadFileProps } from "./DownloadFileProps";
 

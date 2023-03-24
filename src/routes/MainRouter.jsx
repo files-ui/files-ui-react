@@ -27,6 +27,7 @@ import VideoPreviewApi from "../pages/api/VideoPreviewApi";
 import ImagePreviewApi from "../pages/api/ImagePreviewApi";
 import FullScreenApi from "../pages/api/FullScreenApi";
 import FullScreenDemoPage from "../pages/demo/FullScreenDemoPage";
+import GlobalConfigPage from "../pages/global-config-page/GlobalConfigPage";
 
 const router = createBrowserRouter([
   {
@@ -134,7 +135,7 @@ const router = createBrowserRouter([
     path: "/server-side",
     element: <ServerSidePage />,
   },
-/*   {
+  /*   {
     path: "/code-generator",
     element: <CodeGeneratorPage />,
   }, */
@@ -142,7 +143,7 @@ const router = createBrowserRouter([
     path: "/types",
     element: <TypesPage />,
   },
-/*   {
+  /*   {
     path: "/file-reader",
     element: <FileReaderPage />,
   }, */
@@ -151,11 +152,11 @@ const router = createBrowserRouter([
     element: <FileDownloadPage />,
   },
   ///
-/*   {
+  /*   {
     path: "/file-upload",
     element: <FileUploaderPage />,
   }, */
-
+  { path: "/global-config", element: <GlobalConfigPage /> },
 ]);
 
 const MainRouter = (props) => {

@@ -3,10 +3,11 @@ import {
   addClassName,
   DropzoneLocalizerSelector,
   FunctionLabel,
-  handleClickUtil,
+  //handleClickUtil,
   Localization,
   LocalLabels,
 } from "../../../../core";
+import { handleClickUtil } from "../../../../files-ui-react/utils";
 import { FooterConfig } from "../dropzone/DropzoneProps";
 
 export interface DropzoneFooterProps extends FooterConfig {
@@ -48,7 +49,7 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
   }
   const finalClassName = resetStyles
     ? className
-    : addClassName("files-ui-footer" + " " + firstClassName, className);
+    : addClassName(`files-ui-footer ${firstClassName}`, className);
 
   const finalStyle = resetStyles
     ? style

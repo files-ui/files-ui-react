@@ -1,5 +1,11 @@
 import * as React from "react";
-import { addClassName, handleClickUtil, handleDragUtil, handleDropUtil } from "../../../../core";
+import {
+  addClassName,
+  //handleClickUtil,
+  //handleDragUtil,
+  //handleDropUtil,
+} from "../../../../core";
+import { handleClickUtil, handleDragUtil, handleDropUtil } from "../../../../files-ui-react/utils";
 import "./DropzoneDisabledLayer.scss";
 export declare type DropzoneDisabledLayerProps = {
   open?: boolean;
@@ -24,12 +30,15 @@ const DropzoneDisabledLayer: React.FC<DropzoneDisabledLayerProps> = (
     handleDragUtil(evt);
   };
 
-  const handleDrop : React.DragEventHandler<HTMLDivElement> = async (
+  const handleDrop: React.DragEventHandler<HTMLDivElement> = async (
     evt: React.DragEvent<HTMLDivElement>
   ): Promise<void> => {
     handleDropUtil(evt);
-  }
-  const finalDisabledLayerClassName:string = addClassName("dropzone-ui-disabled-root",className);
+  };
+  const finalDisabledLayerClassName: string = addClassName(
+    "filesui-disabled-root",
+    className
+  );
   if (open) {
     return (
       <div

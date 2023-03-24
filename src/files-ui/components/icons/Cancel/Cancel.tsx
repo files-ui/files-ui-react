@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { CancelProps } from "./CancelProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const Cancel: React.FC<CancelProps> = (props: CancelProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

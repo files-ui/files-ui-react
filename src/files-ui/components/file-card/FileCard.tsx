@@ -3,7 +3,13 @@ import { FileCardProps } from "./FileCardProps";
 import "./FileCard.scss";
 import "./../icons/IconStyles.scss";
 import "./components/FileCardPaper.scss";
-import { fileSizeFormater, getLocalFileItemData, handleClickUtil, shrinkWord } from "../../core";
+import {
+  fileSizeFormater,
+  getLocalFileItemData,
+  Localization,
+  //handleClickUtil,
+  shrinkWord,
+} from "../../core";
 import useProgress from "../file-mosaic/hooks/useProgress";
 import useFileMosaicInitializer from "../file-mosaic/hooks/useFileMosaicInitializer";
 import { useIsUploading } from "../file-mosaic/hooks/useIsUploading";
@@ -16,6 +22,8 @@ import FileMosaicStatus from "../file-mosaic/components/FileMosaicStatus/FileMos
 import FileCardUploadLayer from "./components/FileCardUploadLayer";
 import { Tooltip } from "../tooltip";
 import DownloadHidden from "../download-hidden/DownloadHidden";
+import { FilesUiContext } from "../../FilesUiProvider/FilesUiContext";
+import { handleClickUtil } from "../../files-ui-react/utils";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -77,13 +85,13 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
 
     xhr,
 
-    localization,
+    localization:locProps,
     preview,
     imageUrl,
     videoUrl,
     info,
     backgroundBlurImage = true,
-    darkMode,
+    darkMode: darkModeProp,
 
     alwaysActive = true,
 
@@ -107,6 +115,17 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     smartImgFit = "orientation",
     //} = mergeProps(props, FileCardPropsDefault);
   } = props;
+  //context
+  const {
+    darkMode: darkModeContext,
+    icons,
+    localization: locContext,
+  } = React.useContext(FilesUiContext);
+  const localization: Localization | undefined =
+    locProps !== undefined ? locProps : locContext;
+  const darkMode: boolean | undefined =
+    darkModeProp !== undefined ? darkModeProp : darkModeContext;
+  console.log("globalConfig", darkMode, icons);
 
   //ref for anchor element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
@@ -144,7 +163,8 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     valid,
     preview as boolean,
     imageUrl,
-    videoUrl
+    videoUrl,
+    icons
   );
   //The size formatted and rounded in 2 decimals
   const sizeFormatted: string | undefined = fileSizeFormater(localSize);

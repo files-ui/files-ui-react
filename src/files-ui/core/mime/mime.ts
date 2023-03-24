@@ -19,14 +19,15 @@ import {
     zip
 } from "./icons";
 import { getExt } from "../utils/getExt";
+import { IconsMap } from "../types";
 
-const DEF_GEN_MIME: string = "octet";
+const DEF_GEN_MIME: keyof IconsMap = "octet";
 /**
  * 
  * @param tailMime 
  * @returns 
  */
-export const audioSelector = (tailMime: string): string => {
+export const audioSelector = (tailMime: string): keyof IconsMap => {
     switch (tailMime) {
         case "aac": return "aac";
         case "midi": return "midi";
@@ -43,7 +44,7 @@ export const audioSelector = (tailMime: string): string => {
         default: return DEF_GEN_MIME;
     }
 }
-export const textSelector = (tailMime: string): string => {
+export const textSelector = (tailMime: string): keyof IconsMap => {
     switch (tailMime) {
         case "css": return "css";
         case "csv": return "csv";
@@ -57,12 +58,12 @@ export const textSelector = (tailMime: string): string => {
 
     }
 }
-export const imageSelector = (tailMime: string): string => {
+export const imageSelector = (tailMime: string): keyof IconsMap => {
     switch (tailMime) {
         case "bmp": return "bmp";
         case "gif": return "gif";
         // case "vnd.microsoft.icon": return "ico";
-        case "ico": return "ico";
+        //case "ico": return "ico";
         case "jpg": return "jpeg";
         case "jpeg": return "jpeg";
         case "png": return "png";
@@ -74,7 +75,7 @@ export const imageSelector = (tailMime: string): string => {
 
     }
 }
-export const fontSelector = (tailMime: string): string => {
+export const fontSelector = (tailMime: string): keyof IconsMap => {
     switch (tailMime) {
         case "otf": return "otf";
         case "ttf": return "ttf";
@@ -85,7 +86,7 @@ export const fontSelector = (tailMime: string): string => {
     }
 }
 
-export const videoSelector = (tailMime: string): string => {
+export const videoSelector = (tailMime: string): keyof IconsMap => {
     switch (tailMime) {
         case "x-msvideo": return "avi";
         case "msvideo": return "avi";
@@ -108,7 +109,7 @@ export const videoSelector = (tailMime: string): string => {
  * @param tailMime 
  * @returns 
  */
-export const applicationSelector = (tailMime: string): string => {
+export const applicationSelector = (tailMime: string): keyof IconsMap => {
     switch (tailMime) {
         case "x-abiword": return "abw";
         case "abiword": return "abw";
@@ -164,7 +165,7 @@ export const applicationSelector = (tailMime: string): string => {
  * @returns the generic type, 
 if not found it return "octet" that means generic binary file
  */
-export const mimeSelector = (mimeType?: string): string => {
+export const mimeSelector = (mimeType?: string): keyof IconsMap => {
     // let genericMime: string | undefined = undefined;
     if (!mimeType || !mimeType.includes("/")) {
         return DEF_GEN_MIME;
@@ -194,8 +195,8 @@ export const mimeSelector = (mimeType?: string): string => {
  * @param extension 
  * @returns 
  */
-export const extensionSelector = (extension?: string): string => {
-    let genericMime: string = "octet";
+export const extensionSelector = (extension?: string): keyof IconsMap => {
+    let genericMime: keyof IconsMap = "octet";
 
     if (extension && extension !== "") {
         if (extension.includes("zip") || extension.includes("rar")) {
@@ -219,7 +220,7 @@ export const extensionSelector = (extension?: string): string => {
         } else if (extension === "java") {
             genericMime = "java";
         } else if (extension === "ts") {
-            genericMime = "ts";
+            genericMime = "typescript";
         } else if (extension === "sass" || extension === "scss") {
             genericMime = "sass";
         }
@@ -232,8 +233,8 @@ export const extensionSelector = (extension?: string): string => {
  * @param extension 
  * @returns 
  */
-export const checkIsCode = (extension?: string): string => {
-    let genericMime = "text";
+export const checkIsCode = (extension?: string): keyof IconsMap => {
+    let genericMime: keyof IconsMap = "text";
     if (extension && extension !== "") {
         if (extension === "jsx") {
             genericMime = "react";
@@ -258,17 +259,22 @@ export const checkIsCode = (extension?: string): string => {
 
 /**
  * Looks for a suitable file icon
+ * If not found, returns octet-stream url
  * @param props mime and extension from file to search
- * @returns the result file ico, if not found, turns octet-stream url
+ * @returns the result file ico
  */
 export const getURLFileIco = (
-    file: File | undefined
+    file: File | undefined,
+    customIcons: IconsMap | undefined
 ): ResultFileIco => {
 
-    let result = "";
+    let result: keyof IconsMap = "fallBack";
     //if not file, return octet
     if (!file) {
         result = DEF_GEN_MIME;
+        if (customIcons?.fallBack)
+            return { url: customIcons?.fallBack, mimeResume: result };
+
         return { url: mimeUrlList[result], mimeResume: result };
     } else {
         result = mimeSelector(file.type);
@@ -285,6 +291,11 @@ export const getURLFileIco = (
         result = extensionSelector(extention);
     }
 
+    const customUrl = customIcons?.[result];
+    if (customUrl !== undefined)
+        return { url: customUrl, mimeResume: result };
+
+
     return { url: mimeUrlList[result], mimeResume: result };
 }
 /**
@@ -295,12 +306,15 @@ export const getURLFileIco = (
 export const getURLFileIcoFromNameAndType = (
     name: string | undefined,
     type: string | undefined,
+    customIcons: IconsMap | undefined
 ): ResultFileIco => {
 
-    let result = "";
+    let result: keyof IconsMap = "octet";
     //if not nam and type, return octet
     if (!name) {
         result = DEF_GEN_MIME;
+        if (customIcons?.fallBack)
+            return { url: customIcons?.fallBack, mimeResume: result };
         return { url: mimeUrlList[result], mimeResume: result };
     } else {
         result = mimeSelector(type);
@@ -316,12 +330,15 @@ export const getURLFileIcoFromNameAndType = (
     if (result === DEF_GEN_MIME) {
         result = extensionSelector(extention);
     }
+    const customUrl = customIcons?.[result];
+    if (customUrl !== undefined)
+        return { url: customUrl, mimeResume: result };
 
     return { url: mimeUrlList[result], mimeResume: result };
 }
 interface ResultFileIco {
     url: string;
-    mimeResume: string;
+    mimeResume: keyof IconsMap;
 }
 /**
  * set of registered mimes on MDN
@@ -333,9 +350,6 @@ interface MimeSelector {
 }
 
 const mimeUrlList: MimeSelector = {
-    img: "https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_image_x16.png",
-    video: "https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_video_x16.png",
-    audio: "https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_audio_x16.png",
     aac: aac,
     accdb: accdb,
     abw: abw,
@@ -416,4 +430,6 @@ const mimeUrlList: MimeSelector = {
     react: react,
     vue: vue,
 
+
+    fallBack: octet,
 };

@@ -99,7 +99,7 @@ const FileDownloadPage = () => {
               setting the <CodeHighlight>onDownload</CodeHighlight> prop. There
               is an example of how to do it with pure javascript.
               <br />
-              The approach we use here can be summerized in 5 steps:
+              The approach we use here can be summerized in 4 steps:
               <ol>
                 <li>
                   Make a GET request with{" "}
@@ -110,7 +110,7 @@ const FileDownloadPage = () => {
                   <AnchorToTab href="https://axios-http.com/">
                     axios
                   </AnchorToTab>{" "}
-                  or any other way to fetch resources from internet.
+                  or any other way to fetch resources from internet).
                 </li>
                 <li>
                   Create an{" "}
@@ -136,7 +136,7 @@ const FileDownloadPage = () => {
                   document.
                 </li>
               </ol>
-              resources)
+              
             </DescParagraph>
             <Paper
               variant="outlined"

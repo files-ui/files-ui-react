@@ -2,7 +2,9 @@ import * as React from "react";
 import useMaterialButtonClassName from "./hooks/useMaterialButtonClassName";
 import { MaterialButtonProps } from "./MaterialButtonProps";
 import "./MaterialButton.scss";
-import { createRippleButton } from "../../core";
+import { createRippleButton } from "../../files-ui-react/utils";
+import { addClassName } from "../../core";
+import { FilesUiContext } from "../../FilesUiProvider/FilesUiContext";
 
 const MaterialButton: React.FC<MaterialButtonProps> = (
   props: MaterialButtonProps
@@ -20,7 +22,13 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
     onClick,
     resetStyles,
     disableRipple,
+    darkMode: darkModeProp,
   } = props;
+  //context
+  const { darkMode: darkModeContext } = React.useContext(FilesUiContext);
+  const darkMode: boolean | undefined =
+    darkModeProp !== undefined ? darkModeProp : darkModeContext;
+
 
   const idClassName = React.useId();
 
@@ -35,7 +43,12 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
       idClassName.replaceAll(":", ""),
       resetStyles
     );
+  const finalMBClassNameDarkMode: string | undefined = materialButtonClassName && darkMode
+    ? addClassName(materialButtonClassName, `darkmode`)
+    : materialButtonClassName;
 
+
+    console.log("finalMBClassNameDarkMode", finalMBClassNameDarkMode, darkMode);
   function handleClick<T extends HTMLAnchorElement | HTMLButtonElement>(
     e: React.MouseEvent<T, MouseEvent>
   ): void {
@@ -48,9 +61,9 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
     onClick?.(e as React.MouseEvent<HTMLButtonElement, MouseEvent>);
   }
 
-  if (materialButtonClassName !== undefined || resetStyles)
+  if (finalMBClassNameDarkMode !== undefined || resetStyles)
     return React.createElement(href ? "a" : "button", {
-      className: resetStyles && className ? className : materialButtonClassName,
+      className: resetStyles && className ? className : finalMBClassNameDarkMode,
       "data-testid": href ? "dui-anchor" : "dui-button",
       onClick: handleClick,
       href: href,

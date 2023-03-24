@@ -10,7 +10,7 @@ const FileMosaicSize: React.FC<FileItemSizeProps> = (
   return (
     <React.Fragment>
       {sizeFormatted && (
-        <div className="dui-file-item-size">{sizeFormatted}</div>
+        <div className="filesui-file-item-size">{sizeFormatted}</div>
       )}
     </React.Fragment>
   );

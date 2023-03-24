@@ -19,10 +19,10 @@ const splittedCodeJS = `<Dropzone
   onChange={updateFiles}
   minHeight="195px"
   value={extFiles}
+  accept="image/*, video/*"
   maxFiles={3}
-  // FmaxFileSize={2998000 * 20}
+  maxFileSize={2 * 1024*1024}
   label="Drag'n drop files here or click to browse"
-  // accept=".png,image/*, video/*"
   uploadConfig={{
     // autoUpload: true
     url: BASE_URL + "/file/28048465460",
@@ -37,7 +37,7 @@ const splittedCodeJS = `<Dropzone
     deleteButton: {},
     uploadButton: {},
   }}
-  >
+>
     {extFiles.map((file) => (
       <FileMosaic
         {...file}
@@ -121,27 +121,27 @@ export default function AdvancedDropzoneDemo() {
  return (
    <>
      <Dropzone
-      onChange={updateFiles}
-      minHeight="195px"
-      value={extFiles}
-      maxFiles={3}
-      // FmaxFileSize={2998000 * 20}
-      label="Drag'n drop files here or click to browse"
-      // accept=".png,image/*, video/*"
-      uploadConfig={{
-        // autoUpload: true
-        url: BASE_URL + "/file/28048465460",
-        cleanOnUpload: true,
-      }}
-      onUploadStart={handleStart}
-      onUploadFinish={handleFinish}
-      //fakeUpload
-      actionButtons={{
-        position: "after",
-        abortButton: {},
-        deleteButton: {},
-        uploadButton: {},
-      }}
+        onChange={updateFiles}
+        minHeight="195px"
+        value={extFiles}
+        accept="image/*, video/*"
+        maxFiles={3}
+        maxFileSize={2 * 1024*1024}
+        label="Drag'n drop files here or click to browse"
+        uploadConfig={{
+          // autoUpload: true
+          url: BASE_URL + "/file/28048465460",
+          cleanOnUpload: true,
+        }}
+        onUploadStart={handleStart}
+        onUploadFinish={handleFinish}
+        //fakeUpload
+        actionButtons={{
+          position: "after",
+          abortButton: {},
+          deleteButton: {},
+          uploadButton: {},
+        }}
      >
        {extFiles.map((file) => (
          <FileMosaic

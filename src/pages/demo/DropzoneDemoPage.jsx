@@ -63,7 +63,7 @@ const DropzoneDemoPage = (props) => {
           The default <CodeHighlight>{'<input type="file"/>'}</CodeHighlight> is
           just a quite boring button. That's why we present the{" "}
           <CodeHighlight>{"<Dropzone/>"}</CodeHighlight>
-          component is an special <CodeHighlight>input</CodeHighlight> enhanced
+          component as an special <CodeHighlight>input</CodeHighlight> enhanced
           by the ability to allow users to drag and drop files there or choose
           files from a file dialog and also to validate an upload them.
         </MainParagraph>
@@ -91,8 +91,13 @@ const DropzoneDemoPage = (props) => {
           </ol>
         </DescParagraph>
         <DescParagraph>
-          It's meant to be an improved version of the "react-dropzone" and
-          "dropzone" packages.
+          It's meant to be an improved version of the{" "}
+          <AnchorToTab href="https://react-dropzone.js.org/">
+            react-dropzone
+          </AnchorToTab>{" "}
+          and{" "}
+          <AnchorToTab href="https://docs.dropzone.dev/">dropzone</AnchorToTab>{" "}
+          packages.
         </DescParagraph>
 
         <section id="basic-dropzone">

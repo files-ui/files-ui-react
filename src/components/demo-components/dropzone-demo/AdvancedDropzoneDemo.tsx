@@ -63,8 +63,9 @@ export default function AdvancedDropzoneDemo() {
         onChange={updateFiles}
         minHeight="195px"
         value={extFiles}
+        accept="image/*, video/*"
         maxFiles={3}
-        // FmaxFileSize={2998000 * 20}
+        maxFileSize={2 * 1024*1024}
         label="Drag'n drop files here or click to browse"
         // accept=".png,image/*, video/*"
         uploadConfig={{
@@ -92,7 +93,6 @@ export default function AdvancedDropzoneDemo() {
             onAbort={handleAbort}
             onCancel={handleCancel}
             resultOnTooltip
-            alwaysActive
             preview
             info
           />

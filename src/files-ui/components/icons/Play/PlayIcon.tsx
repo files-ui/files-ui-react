@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { parseSize } from "../utils/utils";
 import { PlayIconProps } from "./PlayIconProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const PlayIcon: FC<PlayIconProps> = (props: PlayIconProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

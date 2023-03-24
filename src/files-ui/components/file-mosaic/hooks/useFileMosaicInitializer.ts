@@ -1,6 +1,7 @@
 import * as React from "react";
 import { getURLFileIco, readAsDataURL } from "../../../core";
 import { getURLFileIcoFromNameAndType } from "../../../core/mime/mime";
+import { IconsSet } from "../../../FilesUiProvider";
 
 /**
  * Initializer hook for FileItemNeo
@@ -20,6 +21,7 @@ const useFileMosaicInitializer = (
     preview: boolean,
     imageUrl: string | undefined,
     videoUrl: string | undefined,
+    customIcons?:IconsSet,
     xhr?: XMLHttpRequest,
 
 ): [boolean, boolean, boolean, string, string | undefined, File | string | undefined] => {
@@ -40,6 +42,7 @@ const useFileMosaicInitializer = (
         preview: boolean,
         imageUrl: string | undefined,
         videoUrl: string | undefined,
+        customIcons?:IconsSet,
         xhr?: XMLHttpRequest,
         progress?: number
     ) => {
@@ -48,8 +51,8 @@ const useFileMosaicInitializer = (
 
         if (!file && (!name && !type)) return;
 
-        const { url } = file ? getURLFileIco(file) :
-            getURLFileIcoFromNameAndType(name, type);
+        const { url } = file ? getURLFileIco(file,customIcons) :
+            getURLFileIcoFromNameAndType(name, type,customIcons);
 
         //console.log("init", url);
 
@@ -107,7 +110,7 @@ const useFileMosaicInitializer = (
 
     //////   CLEAN UP
     React.useEffect(() => {
-        init(file, name, type, valid, preview || false, imageUrl, videoUrl);
+        init(file, name, type, valid, preview || false, imageUrl, videoUrl,customIcons);
         return () => {
             setImageSource(undefined);
             setIsImage(false);
@@ -115,7 +118,7 @@ const useFileMosaicInitializer = (
             setIsReady(false);
         };
         // eslint-disable-next-line
-    }, [file, name, type, valid, preview, imageUrl, videoUrl]);
+    }, [file, name, type, valid, preview, imageUrl, videoUrl,customIcons]);
 
     return [isReady, isImage, isVideo, url, imageSource, videoSource];
 }

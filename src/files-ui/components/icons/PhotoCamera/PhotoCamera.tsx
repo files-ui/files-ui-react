@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { PhotoCameraProps } from "./PhotoCameraProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const PhotoCamera: React.FC<PhotoCameraProps> = (props: PhotoCameraProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

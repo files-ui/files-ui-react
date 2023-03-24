@@ -44,6 +44,12 @@ export interface MaterialButtonPropsInterface extends OverridableComponentProps 
    */
   disableRipple?: boolean;
 
+
+      /**
+    * If true, dark mode colors are used in the component.
+    */
+      darkMode?: boolean;
+
 }
 type DefButtonPropsMap = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 

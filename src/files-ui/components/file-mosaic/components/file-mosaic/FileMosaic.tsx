@@ -3,7 +3,8 @@ import {
   addClassName,
   fileSizeFormater,
   getLocalFileItemData,
-  handleClickUtil,
+  Localization,
+  //handleClickUtil,
 } from "../../../../core";
 import "./FileMosaic.scss";
 import "./../../../icons/IconStyles.scss";
@@ -21,6 +22,8 @@ import FileMosaicInfoLayer from "../FileMosaicInfoLayer/FileMosaicInfoLayer";
 import useProgress from "../../hooks/useProgress";
 import DownloadHidden from "../../../download-hidden/DownloadHidden";
 import FileMosaicMainLayer from "../FileMosaicMainLayer.tsx/FileMosaicMainLayer";
+import { FilesUiContext } from "../../../../FilesUiProvider/FilesUiContext";
+import { handleClickUtil } from "../../../../files-ui-react/utils";
 
 const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const {
@@ -41,13 +44,13 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
 
     xhr,
 
-    localization,
+    localization: locProps,
     preview,
     imageUrl,
     videoUrl,
     info,
     backgroundBlurImage = true,
-    darkMode,
+    darkMode: darkModeProp,
 
     alwaysActive = true,
 
@@ -68,6 +71,19 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onRightClick,
     smartImgFit = "orientation",
   } = props;
+
+  //context
+  const {
+    darkMode: darkModeContext,
+    icons,
+    localization: locContext,
+  } = React.useContext(FilesUiContext);
+  const localization: Localization | undefined =
+    locProps !== undefined ? locProps : locContext;
+  const darkMode: boolean | undefined =
+    darkModeProp !== undefined ? darkModeProp : darkModeContext;
+  console.log("globalConfig", darkMode, icons);
+
   //localizers
 
   //ref for anchor download element
@@ -112,7 +128,8 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     valid,
     preview as boolean,
     imageUrl,
-    videoUrl
+    videoUrl,
+    icons
   );
 
   //The size formatted and rounded in 2 decimals

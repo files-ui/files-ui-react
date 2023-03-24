@@ -1,7 +1,7 @@
 import * as React from "react";
 import { parseSize } from "../utils/utils";
 import { InfoBlackProps } from "./InfoBlackProps";
-import { handleClickUtil } from "../../../core";
+import { handleClickUtil } from "../../../files-ui-react/utils";
 
 const InfoBlack: React.FC<InfoBlackProps> = (props: InfoBlackProps) => {
   const { size, color, colorFill, onClick, style, className } = props;

@@ -69,7 +69,8 @@ const UsagePage = (props) => {
           </DescParagraph>
           <iframe
             title="codesandbox"
-            src="https://codesandbox.io/embed/dropzone-ui-basic-3j01v"
+            // add    ".../embed/..."
+            src="https://codesandbox.io/embed/basic-demo-js-blssi1"
             //src="https://codesandbox.io/embed/u9sy1h?hidenavigation=1&amp;fontsize=14&amp;view=preview"
             //src="https://codesandbox.io/s/material-ui-u9sy1h"
             style={{

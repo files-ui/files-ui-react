@@ -309,8 +309,8 @@ const FileCardDemoPage = (props) => {
             You can check an example here:
             <ul>
               <li>
-                <AnchorToTab href="/file-download">
-                  {"Download a File"}
+                <AnchorToTab href="/file-download#differenthost2">
+                  {"Download a File from different host"}
                 </AnchorToTab>
               </li>
             </ul>
