@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getURLFileIco, readAsDataURL } from "../../../core";
 import { getURLFileIcoFromNameAndType } from "../../../core/mime/mime";
-import { IconsConfig } from "../../../FilesUiProvider/FilesUiContextType";
+import { IconsConfig } from "../../../FilesUiProvider/FilesUIConfig";
 
 /**
  * Initializer hook for FileItemNeo

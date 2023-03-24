@@ -1,6 +1,6 @@
 import { IconsMap, Localization } from "../core";
 
-export type FilesUiConfig = {
+export type FilesUIConfig = {
     /**
      * If true, dark mode colors are used in FileMosaic and FIleCard components.
      */

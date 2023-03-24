@@ -1,5 +1,5 @@
 import React from "react";
-import { FilesUiConfig } from "./FilesUiContextType";
+import { FilesUIConfig } from "./FilesUIConfig";
 
-export const FilesUiContext: React.Context<FilesUiConfig>
+export const FilesUiContext: React.Context<FilesUIConfig>
     = React.createContext({});

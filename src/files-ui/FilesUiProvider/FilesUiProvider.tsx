@@ -1,10 +1,10 @@
 import * as React from "react";
+import { FilesUIConfig } from "./FilesUIConfig";
 import { FilesUiContext } from "./FilesUiContext";
-import { FilesUiConfig } from "./FilesUiContextType";
 
 interface FilesUiProviderProps {
   children: React.ReactNode;
-  config?: FilesUiConfig;
+  config?: FilesUIConfig;
 }
 const FilesUiProvider: React.FC<FilesUiProviderProps> = (
   props: FilesUiProviderProps
