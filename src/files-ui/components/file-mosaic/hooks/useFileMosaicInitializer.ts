@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getURLFileIco, readAsDataURL } from "../../../core";
 import { getURLFileIcoFromNameAndType } from "../../../core/mime/mime";
-import { IconsConfig } from "../../../FilesUiProvider/FilesUIConfig";
+import { IconsSet } from "../../../FilesUiProvider";
 
 /**
  * Initializer hook for FileItemNeo
@@ -21,7 +21,7 @@ const useFileMosaicInitializer = (
     preview: boolean,
     imageUrl: string | undefined,
     videoUrl: string | undefined,
-    customIcons?:IconsConfig,
+    customIcons?:IconsSet,
     xhr?: XMLHttpRequest,
 
 ): [boolean, boolean, boolean, string, string | undefined, File | string | undefined] => {
@@ -42,7 +42,7 @@ const useFileMosaicInitializer = (
         preview: boolean,
         imageUrl: string | undefined,
         videoUrl: string | undefined,
-        customIcons?:IconsConfig,
+        customIcons?:IconsSet,
         xhr?: XMLHttpRequest,
         progress?: number
     ) => {

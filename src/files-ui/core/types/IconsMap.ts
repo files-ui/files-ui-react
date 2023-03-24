@@ -21,7 +21,6 @@ export type IconsMap = {
     gzip?: string;
     gif?: string;
     html?: string;
-    //ico: ico,
     icalendar?: string;
     jar?: string;
     jpeg?: string;
@@ -29,7 +28,6 @@ export type IconsMap = {
     json?: string;
     jsonld?: string;
     midi?: string;
-    //  js: js,
     mp3?: string;
     mp4?: string;
     mpeg?: string;
@@ -52,12 +50,10 @@ export type IconsMap = {
     rtf?: string;
     sass?: string;
     sh?: string;
-    //svg: svg,
     swf?: string;
     tar?: string;
     tiff?: string;
     ttf?: string;
-    //ts: ts,
     typescript?: string;
     text?: string;
     vsd?: string;
@@ -73,12 +69,11 @@ export type IconsMap = {
     xml?: string;
     xul?: string;
     zip?: string;
-    // threegp: threegp,
     sevenzip?: string;
     python?: string;
     java?: string;
     react?: string;
     vue?: string;
-
+    //fallback when file type is not here
     fallBack?: string;
 }

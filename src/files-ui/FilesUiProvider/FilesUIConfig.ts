@@ -8,7 +8,7 @@ export type FilesUIConfig = {
     /**
      * Set of icons to override the existing ones
      */
-    icons?: IconsConfig;
+    icons?: IconsSet;
     /**
      * The language in which text labels are shown.
      * @default "EN-en"
@@ -17,4 +17,4 @@ export type FilesUIConfig = {
     //fontFamily?:string;
 }
 
-export type IconsConfig = IconsMap;
+export type IconsSet = IconsMap;

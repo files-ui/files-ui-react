@@ -58,3 +58,6 @@ export type {
 
 export { default as FilesUiProvider } from "./FilesUiProvider/FilesUiProvider";
 export * from "./FilesUiProvider/FilesUiProvider";
+
+
+export type { IconsSet, FilesUIConfig } from "./FilesUiProvider";
