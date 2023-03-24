@@ -36,7 +36,7 @@ const DropzoneDisabledLayer: React.FC<DropzoneDisabledLayerProps> = (
     handleDropUtil(evt);
   };
   const finalDisabledLayerClassName: string = addClassName(
-    "dropzone-ui-disabled-root",
+    "filesui-disabled-root",
     className
   );
   if (open) {

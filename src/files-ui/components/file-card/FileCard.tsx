@@ -6,6 +6,7 @@ import "./components/FileCardPaper.scss";
 import {
   fileSizeFormater,
   getLocalFileItemData,
+  Localization,
   //handleClickUtil,
   shrinkWord,
 } from "../../core";
@@ -84,7 +85,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
 
     xhr,
 
-    localization,
+    localization:locProps,
     preview,
     imageUrl,
     videoUrl,
@@ -115,9 +116,16 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     //} = mergeProps(props, FileCardPropsDefault);
   } = props;
   //context
-  const { darkMode: darkModeContext, icons } = React.useContext(FilesUiContext);
+  const {
+    darkMode: darkModeContext,
+    icons,
+    localization: locContext,
+  } = React.useContext(FilesUiContext);
+  const localization: Localization | undefined =
+    locProps !== undefined ? locProps : locContext;
   const darkMode: boolean | undefined =
     darkModeProp !== undefined ? darkModeProp : darkModeContext;
+  console.log("globalConfig", darkMode, icons);
 
   //ref for anchor element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);

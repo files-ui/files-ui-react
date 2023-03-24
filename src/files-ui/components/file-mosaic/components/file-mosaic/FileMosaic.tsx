@@ -3,6 +3,7 @@ import {
   addClassName,
   fileSizeFormater,
   getLocalFileItemData,
+  Localization,
   //handleClickUtil,
 } from "../../../../core";
 import "./FileMosaic.scss";
@@ -43,7 +44,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
 
     xhr,
 
-    localization,
+    localization: locProps,
     preview,
     imageUrl,
     videoUrl,
@@ -72,7 +73,13 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   } = props;
 
   //context
-  const { darkMode: darkModeContext, icons } = React.useContext(FilesUiContext);
+  const {
+    darkMode: darkModeContext,
+    icons,
+    localization: locContext,
+  } = React.useContext(FilesUiContext);
+  const localization: Localization | undefined =
+    locProps !== undefined ? locProps : locContext;
   const darkMode: boolean | undefined =
     darkModeProp !== undefined ? darkModeProp : darkModeContext;
   console.log("globalConfig", darkMode, icons);

@@ -1,4 +1,4 @@
-@keyframes dui-rotate-spin {
+@keyframes filesui-rotate-spin {
   from {
     transform: rotate(0deg);
   }
@@ -7,12 +7,12 @@
     transform: rotate(360deg);
   }
 }
-.dui-rotate {
+.filesui-rotate {
   cursor: default;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .dui-rotate {
-    animation: dui-rotate-spin infinite 2s linear;
+  .filesui-rotate {
+    animation: filesui-rotate-spin infinite 2s linear;
   }
 }

@@ -17,7 +17,7 @@ const UploadingProcess: FC<UploadingProcessProps> = (
   const finalSize = parseSize(size);
   const finalStyle = style ? style : {};
   let finalClassname = className || "";
-  finalClassname += spin ? "dui-rotate" : "";
+  finalClassname += spin ? "filesui-rotate" : "";
   return (
     <svg
       className={finalClassname}

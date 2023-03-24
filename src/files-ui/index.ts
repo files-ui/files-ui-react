@@ -51,7 +51,8 @@ export type {
     ServerResponse,
     UploadResponse,
     UploadConfig,
-    ValidateFileResponse
+    ValidateFileResponse,
+    IconsMap
 } from "./core";
 
 

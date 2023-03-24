@@ -21,7 +21,7 @@ export function createFuiRippleFromDiv
   // creating the span circle ripple
   const circle: HTMLSpanElement = document.createElement("span");
   //for searching
-  circle.id = "dui-ripple";
+  circle.id = "filesui-ripple";
   //for styles
   circle.className = "ripple";
   // calculates the diameter

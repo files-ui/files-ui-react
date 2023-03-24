@@ -14,6 +14,7 @@ import {
   instantPreparingToUploadOne,
   isUploadAbleExtFile,
   isValidateActive,
+  Localization,
   LocalLabels,
   sanitizeArrExtFile,
   sleepPreparing,
@@ -26,6 +27,7 @@ import {
   validateExtFileList,
 } from "../../core";
 import { handleClickInput } from "../../files-ui-react/utils";
+import { FilesUiContext } from "../../FilesUiProvider/FilesUiContext";
 import useDropzoneFileListUpdater from "../../hooks/useDropzoneFileUpdater";
 import { DropzoneActions } from "../dropzone/components/dropzone/DropzoneProps";
 import DropzoneButtons from "../dropzone/components/DropzoneButtons/DropzoneButtons";
@@ -68,7 +70,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     //label
     label,
     //localization
-    localization,
+    localization: locProps,
     //ripple
     disableRipple,
     //action butotns
@@ -91,8 +93,19 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
     variant,
     resetStyles,
+    darkMode: darkModeProp,
     ...rest
   } = mergeProps(props, defaultFileInputButtonProps);
+  //context
+  const {
+    darkMode: darkModeContext,
+    //icons,
+    localization: locContext,
+  } = React.useContext(FilesUiContext);
+  const localization: Localization | undefined =
+    locProps !== undefined ? locProps : locContext;
+  const darkMode: boolean | undefined =
+    darkModeProp !== undefined ? darkModeProp : darkModeContext;
 
   const {
     url,
@@ -518,6 +531,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         resetStyles={resetStyles}
         onClick={handleClick}
         disableRipple={disableRipple}
+        darkMode={darkMode}
         {...rest}
       >
         {children || label}
