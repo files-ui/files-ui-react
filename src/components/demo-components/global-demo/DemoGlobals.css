@@ -1,9 +1,18 @@
+.demo-controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    gap: 5px;
+}
+
 .demo-localization-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     min-height: 50vh;
+    padding: 10px;
 }
 
 .dropzone-filemosaic-container {

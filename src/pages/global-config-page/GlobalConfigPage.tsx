@@ -14,6 +14,7 @@ import RightMenuContainer from "../../components/layout-pages/RightMenuContainer
 import RightMenu from "../../components/RightMenu/RightMenu";
 import DemoGlobalConfig from "../../components/demo-components/global-demo/DemoGlobalConfig";
 import FileCardMosaicSwitch from "../../components/switch/FileCardMosaicSwitch";
+import CodeDemoGlobalConfig from "../../components/demo-components/global-demo/CodeDemoGlobalConfig";
 
 interface GlobalConfigPageProps {}
 const GlobalConfigPage: React.FC<GlobalConfigPageProps> = (
@@ -49,25 +50,26 @@ const GlobalConfigPage: React.FC<GlobalConfigPageProps> = (
             Also, you can add your custom icons sources.
           </MainParagraph>
           <DescParagraph>
-            This feature is possible thanks to the{" "}
+            This feature is possible thanks to the React{" "}
             <AnchorToTab href="https://react.dev/reference/react#context-hooks">
               Context hooks
             </AnchorToTab>
             .
           </DescParagraph>
           <Alert severity="info">
-            <AlertTitle> FileMosaic </AlertTitle>
+            <AlertTitle> Context and Providers </AlertTitle>
+            When it comes to Context and Providers you can think that the
+            provider is just the in charge one to pass globally a "prop". So you
+            can avoid the set it individually on every component.
+            <br></br>
             For using this feature you don't need to be an expert on{" "}
             <TypeHighlight>React.Context</TypeHighlight>.
           </Alert>
-          <section id="FilesUiProvider">
-            <SubTitle content="FilesUiProvider" />
+          <section id="config">
+            <SubTitle content="Config" />
             <DescParagraph>
-              When it comes to Context and Providers you can think that the
-              provider is just the in charge one to pass globally a "prop". So
-              you can avoid the set it individually on every component.
-              <br></br>
-              In the following themo we will set the 3 allowed params:
+              In the following demo we will wrap the complete app and will set
+              the 3 allowed params:
               <ul>
                 <li>darkMode</li>
                 <li>localization</li>
@@ -95,28 +97,25 @@ const GlobalConfigPage: React.FC<GlobalConfigPageProps> = (
             >
               <DemoGlobalConfig card={component === "FileCard"} />
             </Paper>
-            {/*    <CodeJSFileMosaicLocalization card={component === "FileCard"} /> */}
+
+            <CodeDemoGlobalConfig />
 
             <Alert severity="info">
-              <AlertTitle> FileMosaic </AlertTitle>
-              This demo is a combination of 3 samples that you can find For
-              completeness, these examples include{" "}
-              <CodeHighlight>{`<FileMosaic/>`} </CodeHighlight>
-              component for showing the files selected by the user with minimun
-              props too. For further information of this component check out the{" "}
-              <AnchorToTab href="/components/filemosaic">
-                FileMosaic
-              </AnchorToTab>{" "}
-              page.
-            </Alert>
-            <Alert severity="info">
-              <AlertTitle>
-                {" "}
-                config prop on {"<FIlesUiProvider>...</FIlesUiProvider>"}{" "}
-              </AlertTitle>
-              For further information of this data type check out the{" "}
-              <AnchorToTab href="/types#globalconfig">config type</AnchorToTab>{" "}
-              page.
+              This demo is a combination of other samples that you can find in
+              their respective pages. For further information about the data
+              types involved you can visit:
+              <ul>
+                <li>
+                  <AnchorToTab href="/types#filesuiconfig">
+                    FilesUIConfig type page
+                  </AnchorToTab>
+                </li>
+                <li>
+                  <AnchorToTab href="/types#iconsset">
+                    IconsSet type page
+                  </AnchorToTab>
+                </li>
+              </ul>
             </Alert>
           </section>
         </MainContentContainer>
@@ -137,17 +136,7 @@ export default GlobalConfigPage;
 const rightMenuItems = [
   {
     id: 0,
-    label: "Localization",
-    referTo: "/file-download#samehost",
-  },
-  {
-    id: 1,
-    label: "Dark mode",
-    referTo: "/file-download#samehost",
-  },
-  {
-    id: 2,
-    label: "Custom file icons",
-    referTo: "/file-download#samehost",
+    label: "FilesUiProvider",
+    referTo: "/global-config#config",
   },
 ];

@@ -61,7 +61,7 @@ const FileInputButtonDemoPage: React.FC<FileInputButtonDemoPageProps> = (
           The default <CodeHighlight>{'<input type="file"/>'}</CodeHighlight> is
           just a quite boring button. That's why we present the
           <CodeHighlight>{"<FileInputButton/>"}</CodeHighlight> component which
-          is an special <CodeHighlight>input</CodeHighlight> enhanced by the
+          as an special <CodeHighlight>input</CodeHighlight> enhanced by the
           ability to allow users to choose files from a file dialog and also to
           validate an upload them.
         </MainParagraph>

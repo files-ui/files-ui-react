@@ -1,5 +1,6 @@
 import { Highlighter } from "rc-highlight";
 import * as React from "react";
+import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import SubTitle from "../../components/demo-components/sub-title/SubTitle";
 //import DescParagraph from "../../components/demo-components/desc-paragraph/DescParagraph";
 import MainContentContainer from "../../components/layout-pages/MainContentContainer";
@@ -12,8 +13,10 @@ import AnchorToTab from "../../components/util-components/AnchorToTab";
 import { ActionButtonItemAPIRows } from "../../data/ActionButtonItemAPIRows";
 import { ActionButtonsAPIRows } from "../../data/ActionButtonsAPIRows";
 import { ExtFileAPIRows } from "../../data/ExtFileAPIRows";
+//import { FilesUiConfigAPIRows } from "../../data/FilesUiConfigAPIRows";
 import { FooterConfigAPIRows } from "../../data/FooterConfigAPIRows";
 import { HeaderConfigAPIRows } from "../../data/HeaderConfigAPIRows";
+//import { IconsMapAPIRows } from "../../data/IconsMapAPIRows";
 import { ServerResponseAPIRows } from "../../data/ServerResponseAPIRows";
 import { UploadConfigAPIRows } from "../../data/UploadConfigAPIRows";
 import { ValidateFileResponseAPIrows } from "../../data/ValidateFileResponseAPIrows";
@@ -67,12 +70,21 @@ const rightMenuItems = [
     label: "UPLOADSTATUS",
     referTo: "/types#uploadstatus",
   },
+  {
+    id: 9,
+    label: "FilesUiConfig",
+    referTo: "/types#filesuiconfig",
+  },
+  {
+    id: 10,
+    label: "IconsSet",
+    referTo: "/types#iconsset",
+  },
 ];
 
 const TypesPage = (props) => {
-
-const [user,dispatch] = React.useContext(UserContext);
-const darkMode = user.darkMode;
+  const [user, ] = React.useContext(UserContext);
+  const darkMode = user.darkMode;
 
   const [selectedItem, setSelectedItem] = React.useState(0);
 
@@ -181,6 +193,45 @@ const darkMode = user.darkMode;
               {UPLOADSTATUSCODE}
             </Highlighter>
           </section>
+          <section id="filesuiconfig">
+            <SubTitle content={"FilesUIConfig"} />{" "}
+            <DescParagraph>
+              Global configuration for Files UI components
+            </DescParagraph>
+            <Highlighter
+              style={{
+                margin: "20px 0",
+                fontSize: "15px",
+                lineHeight: "",
+              }}
+              onCopyToClipboard={(code_) => {
+                console.log("code copied to clipboard: ");
+                console.log(code_);
+              }}
+            >
+              {FilesUIConfigCODE}
+            </Highlighter>
+          </section>
+          <section id="iconsset">
+          
+            <SubTitle content={"IconsSet"} />{" "}
+            <DescParagraph>
+              Data type that keeps track of all keys of addmited mime types.
+            </DescParagraph>
+            <Highlighter
+              style={{
+                margin: "20px 0",
+                fontSize: "15px",
+                lineHeight: "",
+              }}
+              onCopyToClipboard={(code_) => {
+                console.log("code copied to clipboard: ");
+                console.log(code_);
+              }}
+            >
+              {IconsSetCode}
+            </Highlighter>
+          </section>
         </MainContentContainer>
       </MainLayoutPage>{" "}
       <RightMenuContainer>
@@ -195,4 +246,95 @@ const darkMode = user.darkMode;
   );
 };
 export default TypesPage;
+
 const UPLOADSTATUSCODE = `export type UPLOADSTATUS = "preparing" | "aborted" | "uploading" | "success" | "error";`;
+
+const FilesUIConfigCODE = `export type FilesUIConfig = {
+  // If true, dark mode colors are used in FileMosaic and FIleCard components.
+  darkMode?: boolean;
+
+  // Set of icons to override the existing ones
+  icons?: IconsConfig;
+  
+  // The language in which text labels are shown.
+  localization?: Localization;
+}`;
+
+const IconsSetCode= `export type IconsSet = {
+  aac?: string;
+  accdb?: string;
+  abw?: string;
+  arc?: string;
+  avi?: string;
+  azw?: string;
+  octet?: string;
+  bmp?: string;
+  bz?: string;
+  bz2?: string;
+  cda?: string;
+  csh?: string;
+  css?: string;
+  csv?: string;
+  docx?: string;
+  drawio?: string;
+  eot?: string;
+  epub?: string;
+  gzip?: string;
+  gif?: string;
+  html?: string;
+  icalendar?: string;
+  jar?: string;
+  jpeg?: string;
+  javascript?: string;
+  json?: string;
+  jsonld?: string;
+  midi?: string;
+  mp3?: string;
+  mp4?: string;
+  mpeg?: string;
+  mpkg?: string;
+  mp2t?: string;
+  odp?: string;
+  ods?: string;
+  odt?: string;
+  oga?: string;
+  ogv?: string;
+  ogx?: string;
+  opus?: string;
+  otf?: string;
+  png?: string;
+  pdf?: string;
+  php?: string;
+  pptx?: string;
+  psd?: string;
+  rar?: string;
+  rtf?: string;
+  sass?: string;
+  sh?: string;
+  swf?: string;
+  tar?: string;
+  tiff?: string;
+  ttf?: string;
+  typescript?: string;
+  text?: string;
+  vsd?: string;
+  wav?: string;
+  weba?: string;
+  webm?: string;
+  webp?: string;
+  woff?: string;
+  wma?: string;
+  wmv?: string;
+  xhtml?: string;
+  xlsx?: string;
+  xml?: string;
+  xul?: string;
+  zip?: string;
+  sevenzip?: string;
+  python?: string;
+  java?: string;
+  react?: string;
+  vue?: string;
+  //fallback when file type is not here
+  fallBack?: string;
+}`;
