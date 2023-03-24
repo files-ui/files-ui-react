@@ -14,7 +14,7 @@ import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileVal
  * @param isUploading 
  * @returns the local list of Files
  */
-const useDropzoneFileListUpdater = (
+export const useDropzoneFileListUpdater = (
     dropzoneId: number | string | undefined,
     value: ExtFile[],
     isUploading: boolean,
@@ -122,4 +122,3 @@ const useDropzoneFileListUpdater = (
 
     return [localFiles, numberOfValidFiles, setLocalFiles];
 }
-export default useDropzoneFileListUpdater;

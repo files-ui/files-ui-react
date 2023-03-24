@@ -10,7 +10,7 @@ import { ValidateFileResponse, FileValidatorProps } from "../types/validation";
  * @param localization
  * @returns
  */
-export declare const fileListvalidator: (preValidatedFiles: FileList, remainingValids: number, localValidator: FileValidatorProps, validator: (f: File) => ValidateFileResponse, maxFiles?: number, localization?: Localization) => ExtFile[];
+export declare const fileListvalidator: (preValidatedFiles: FileList, remainingValids: number, localValidator: FileValidatorProps, validator?: (f: File) => ValidateFileResponse, maxFiles?: number, localization?: Localization) => ExtFile[];
 /**
  * For each ExtFile sets the valid prop of ExtFile to "true" or "false"
  * depending on the result of the individual validation.
@@ -23,7 +23,7 @@ export declare const fileListvalidator: (preValidatedFiles: FileList, remainingV
  * @param localization
  * @returns a new ExtFile list with each item validated
  */
-export declare const validateExtFileList: (extFileList: ExtFile[], remainingValids: number, localValidatorProps: FileValidatorProps, validator: (f: File) => ValidateFileResponse, maxFiles: number | undefined, localization?: Localization) => ExtFile[];
+export declare const validateExtFileList: (extFileList: ExtFile[], remainingValids: number, localValidatorProps: FileValidatorProps, validator?: (f: File) => ValidateFileResponse, maxFiles?: number, localization?: Localization) => ExtFile[];
 /**
  *
  * @param extFile
