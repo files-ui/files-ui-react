@@ -1,7 +1,7 @@
 import * as React from "react";
+import { Dropzone, FileMosaic } from "../../../files-ui";
 
-import { Dropzone } from "../../../files-ui/components";
-import { FileMosaic } from "../../../files-ui/components/file-mosaic";
+
 import DescParagraph from "../desc-paragraph/DescParagraph";
 import SubTitle from "../sub-title/SubTitle";
 
