@@ -1,5 +1,5 @@
 import * as React from "react";
-//import { handleClickUtil } from "../../core";
+//import { handleClickUtil } from "theamazingunkowntext"
 import { InputHiddenProps } from "./InputHiddenProps";
 
 const InputHidden: React.FC<InputHiddenProps> = (props: InputHiddenProps) => {

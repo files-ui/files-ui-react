@@ -1,5 +1,5 @@
 import * as React from "react";
-import { completeAsureColor } from "../../core";
+import { completeAsureColor } from "theamazingunkowntext"
 import "./DefaultLoader.scss";
 interface DefaultLoaderNeoProps {
   color?: string;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "../../../core";
+import { FileItemLocalizerSelector, LocalLabels } from "theamazingunkowntext"
 import { Cancel } from "../../../icons";
 import FileMosaicStatus from "../FileMosaicStatus/FileMosaicStatus";
 import { FileMosaicInfoLayerProps } from "./FileMosaicInfoLayerProps";

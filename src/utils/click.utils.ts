@@ -1,3 +1,5 @@
+import * as React from "react";
+
 /**
  * Performs stopPropagation and preventDefault functions on an click event instance
  * @param evt click event handler object
@@ -18,7 +20,6 @@ export function
 export const handleClickInput = (
     input: HTMLInputElement | null
 ) => {
-    console.log("handleClickInput:", input);
     if (!input) return;
     input.click();
 }

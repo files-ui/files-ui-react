@@ -1,7 +1,7 @@
 
 
 import React, { FC } from "react";
-import { hexColorToRGB } from "../../core";
+import { hexColorToRGB } from "theamazingunkowntext"
 interface LoaderProps {
   color?: string;
 }

@@ -12,8 +12,8 @@ const useMaterialButtonClassName = (
     idClassName?: number | string,
     resetStyles?: boolean
 ): string | undefined => {
-    console.log("useMaterialButtonClassName", variant, disabled, color, textColor,
-        textDecoration, className, idClassName, resetStyles);
+    //console.log("useMaterialButtonClassName", variant, disabled, color, textColor,
+       // textDecoration, className, idClassName, resetStyles);
 
     const baseClassName: string = "material-button-root material-button";
 
@@ -51,14 +51,14 @@ const useMaterialButtonClassName = (
         let idStyle: string = "";
         if (!styleInjected) {
             idStyle = DynamiCSS.insertStyleSheet(styleSheet);
-            console.log("DynamiCSS insert", idStyle);
+            //console.log("DynamiCSS insert", idStyle);
             setIdStyles(idStyle);
             if (idStyle !== "")
                 setStyleInjected(true);
         } else {
             //already a stylesheet associated
             DynamiCSS.editStyleSheet(idStyles, styleSheet.sheetRules || []);
-            console.log("DynamiCSS edit", idStyle);
+            //console.log("DynamiCSS edit", idStyle);
 
         }
 
@@ -95,10 +95,10 @@ const useMaterialButtonClassName = (
 
 
     const removeStyle = (styleInjected: boolean, idStyles: string) => {
-        //console.log("DynamiCSS removing", styleInjected, idStyles);
+        ////console.log("DynamiCSS removing", styleInjected, idStyles);
         if (styleInjected) {
             /* const res =  */DynamiCSS.removeStyleSheet(idStyles);
-            //console.log("DynamiCSS removing res", res);
+            ////console.log("DynamiCSS removing res", res);
 
             setStyleInjected(false);
             setIdStyles("");

@@ -7,7 +7,7 @@ import {
   FunctionLabel,
   Localization,
   LocalLabels,
-} from "../../../core";
+} from "theamazingunkowntext"
 import { UploadingProcess, Clean, Cancel, Upload } from "../../../icons";
 
 export type DropzoneHeaderProps = {
@@ -125,10 +125,10 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
         borderTopLeftRadius: borderRadius,
         borderTopRightRadius: borderRadius,
       };
-  console.log("headerx resetStyles", resetStyles);
-  console.log("headerx style", style);
+  //console.log("headerx resetStyles", resetStyles);
+  //console.log("headerx style", style);
 
-  console.log("headerx finalStyle", finalStyle);
+  //console.log("headerx finalStyle", finalStyle);
   return (
     <div className={finalClassName} onClick={handleClick} style={finalStyle}>
       {makeHeader().map((HeaderItem, index) => (

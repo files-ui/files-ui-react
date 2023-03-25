@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FileMosaicUploadLayerProps } from "./FileMosaicUploadLayerProps";
 import "./FileMosaicUploadLayer.scss";
-import { UPLOADSTATUS } from "../../../core";
+import { UPLOADSTATUS } from "theamazingunkowntext"
 import {
   PreparingStatus,
   UploadingStatus,

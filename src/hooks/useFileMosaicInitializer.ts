@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getURLFileIco, readAsDataURL, getURLFileIcoFromNameAndType } from "../core";
+import { getURLFileIco, readAsDataURL, getURLFileIcoFromNameAndType } from "theamazingunkowntext"
 import { IconsSet } from "../FilesUiProvider";
 
 /**
@@ -73,17 +73,16 @@ export const useFileMosaicInitializer = (
             setVideoSource(videoUrl);
             setIsReady(true);
         } else {
-            const [headerMime, tailMime] = getHeaderAndTail(file, type);
+            //const [headerMime, tailMime] = getHeaderAndTail(file, type);
+            const response = getHeaderAndTail(file, type);
 
-            setIsImage(headerMime === "image");
-
-            setIsVideo(
-                headerMime === "video" && ["mp4", "ogg", "webm"].includes(tailMime)
-            );
+            setIsImage(response[0] === "image");
+            if (["mp4", "ogg", "webm"].includes(response[1]))
+                setIsVideo(response[0] === "video");
             if (
                 preview &&
                 (valid || typeof valid === "undefined" || valid === null) &&
-                headerMime === "image"
+                response[0] === "image"
             ) {
                 //lets check for image preview from File
                 let response: string | undefined = undefined;

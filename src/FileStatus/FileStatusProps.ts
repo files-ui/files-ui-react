@@ -1,4 +1,4 @@
-import { Localization } from "../core";
+import { Localization } from "theamazingunkowntext"
 
 export type FileStatusProps = {
     localization?: Localization;

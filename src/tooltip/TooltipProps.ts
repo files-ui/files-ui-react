@@ -1,4 +1,4 @@
-import { UPLOADSTATUS } from "../core";
+import { UPLOADSTATUS } from "theamazingunkowntext"
 import { OverridableComponentProps } from "../overridable";
 
 export interface TooltipPropsMap extends OverridableComponentProps {

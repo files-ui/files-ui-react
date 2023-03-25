@@ -1,4 +1,5 @@
-import { completeAsureColor, hexColorToRGB } from "../../core";
+import * as React from "react";
+import { completeAsureColor, hexColorToRGB } from "theamazingunkowntext"
 
 const asureRippleColor = (color: string): string => {
   return completeAsureColor(color,

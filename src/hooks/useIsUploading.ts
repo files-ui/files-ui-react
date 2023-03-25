@@ -1,4 +1,4 @@
-import { UPLOADSTATUS } from "../core";
+import { UPLOADSTATUS } from "theamazingunkowntext"
 import * as React from "react";
 export const useIsUploading = (uploadStatus: UPLOADSTATUS | undefined): boolean => {
 

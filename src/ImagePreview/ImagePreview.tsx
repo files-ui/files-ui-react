@@ -4,7 +4,7 @@ import {
   ImagePreviewProps,
 } from "./ImagePreviewProps";
 import { mergeProps } from "../overridable";
-import { getImageOrientation, readAsDataURL } from "../core";
+import { getImageOrientation, readAsDataURL } from "theamazingunkowntext"
 
 import "./ImagePreview.scss";
 
@@ -22,12 +22,12 @@ const ImagePreview: React.FC<ImagePreviewProps> = (
     style,
     className,
   } = mergeProps(props, ImagePreviewDefaultProps);
-console.log("ImagePreview smartImgFit",smartImgFit);
+//console.log("ImagePreview smartImgFit",smartImgFit);
   const [[finalHeight, finalWidth], setfinalDimensions] = React.useState<
     [number | string | undefined, number | string | undefined]
   >([undefined, undefined]);
 
-  //console.table({ src, alt, className, style, width, height });
+  ////console.table({ src, alt, className, style, width, height });
   const [source, setSource] = React.useState<string | undefined>(undefined);
   /*  const [orientation, setOrientation] = React.useState<
     "landscape" | "portrait" | undefined
@@ -39,9 +39,9 @@ console.log("ImagePreview smartImgFit",smartImgFit);
   };
 
   const handleSetStrSource = async (imageSource: string | undefined) => {
-    console.log("handleSetStrSource", imageSource);
+    //console.log("handleSetStrSource", imageSource);
     if (imageSource === "" || !imageSource) {
-      console.log("handleSetStrSource return", imageSource);
+      //console.log("handleSetStrSource return", imageSource);
 
       return;
     }
@@ -52,19 +52,19 @@ console.log("ImagePreview smartImgFit",smartImgFit);
     let finalWidth = undefined;
 
     if (!smartImgFit) {
-      console.log("handleSetStrSource no imgfit", imageSource);
+      //console.log("handleSetStrSource no imgfit", imageSource);
 
       //if not given
       finalWidth = "100%";
     } else {
-      console.log("handleSetStrSource yes imgfit", smartImgFit, imageSource);
+      //console.log("handleSetStrSource yes imgfit", smartImgFit, imageSource);
 
       try {
         const orientation: "landscape" | "portrait" = await getImageOrientation(
           imageSource
         );
 
-        console.log("handleSetStrSource orientation obtained", orientation);
+        //console.log("handleSetStrSource orientation obtained", orientation);
         if (orientation === "landscape") {
           if (smartImgFit === "orientation") {
             finalHeight = undefined;
@@ -96,7 +96,7 @@ console.log("ImagePreview smartImgFit",smartImgFit);
   React.useEffect(() => {
     //if not undefined
     if (!src) return;
-    //console.log("ImagePreview There is source :D");
+    ////console.log("ImagePreview There is source :D");
 
     if (typeof src === "string") {
       //if a url string is given, assign it directly
@@ -114,16 +114,16 @@ console.log("ImagePreview smartImgFit",smartImgFit);
     }
     // eslint-disable-next-line
   }, [src]);
-  //console.log("ImagePreview", src, source);
+  ////console.log("ImagePreview", src, source);
 
   /* const finalWidth: string | number | undefined =
     width || (orientation === "landscape" && smart ? "100%" : undefined);
   const finalHeight: string | number | undefined =
     height || (orientation === "portrait" && smart ? "100%" : undefined); */
 
-  console.log("Image result", src, source, finalHeight, finalWidth);
+  //console.log("Image result", src, source, finalHeight, finalWidth);
   const handleError = (evt: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.log("handleError", onError);
+    //console.log("handleError", onError);
     onError?.();
   };
 

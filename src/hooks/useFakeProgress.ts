@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getRandomInt } from "../core";
+import { getRandomInt } from "theamazingunkowntext"
 
 export const useFakeProgress = (time = 1500) => {
     const [progress, setProgress] = React.useState(28);
@@ -23,10 +23,10 @@ export const useFakeProgress = (time = 1500) => {
         const _myInterval = setInterval(() => {
             setProgress((_progress) => updateProgress(_progress));
         }, time);
-        console.log("useFakeProgress SET interval", _myInterval);
+        //console.log("useFakeProgress SET interval", _myInterval);
 
         return () => {
-            console.log("useFakeProgress CLEAR interval", _myInterval);
+            //console.log("useFakeProgress CLEAR interval", _myInterval);
             clearInterval(_myInterval as NodeJS.Timer);
         };
         // eslint-disable-next-line

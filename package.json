@@ -1,7 +1,7 @@
 {
   "name": "@files-ui/react",
   "version": "1.0.0",
-  "description": "UI components and uploader for files with react js / Ui File Upload library",
+  "description": "UI components for file uploas with React js",
   "main": "./build/index.js",
   "module": "./build/index.es.js",
   "types": "./build/index.d.ts",
@@ -43,12 +43,13 @@
     "url": "https://github.com/files-ui/files-ui-react/issues"
   },
   "homepage": "https://www.files-ui.com",
-  "sideEffects": false,
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^12.1.5",
+    "autoprefixer": "^10.4.14",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
@@ -60,10 +61,15 @@
     "typescript": "^5.0.2"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@types/react": "^17.0.0 || ^18.0.0",
+    "react": "^17.0.2 || ^18.0.0",
+    "react-dom": "^17.0.2 || ^18.0.0"
   },
   "dependencies": {
-    "@dynamicss/dynamicss": "^2.2.8"
+    "@dynamicss/dynamicss": "^2.2.8",
+    "theamazingunkowntext": "^1.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

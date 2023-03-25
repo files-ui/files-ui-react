@@ -2,7 +2,7 @@ import { DynamicSheet, DynamiCSS } from "@dynamicss/dynamicss";
 import * as React from "react";
 import { makeDropLayerDynamicStyle } from "../DropLayer/utils/dropLayerDynamicStyle";
 
-const BASE_DROP_LAYER_STYLE: string = "files-ui-styles-drop-layer";
+//const BASE_DROP_LAYER_STYLE: string = "files-ui-styles-drop-layer"; 
 
 
 /**
@@ -22,11 +22,11 @@ export const useDropLayerClassName = (
     const [styleInjected, setStyleInjected] = React.useState<boolean>(false);
     const [classNameCreated, setClassNameCreated] = React.useState<string>("");
 
-    const finalDropzoneId: string = (color === undefined) ? "default" : dropzoneId.replaceAll(":", "_");
+    const finalDropzoneId: string = (color === undefined) ? "default" : dropzoneId.replace(":", "_").replace(":", "_");
 
 
     React.useEffect(() => {
-        //console.log("useDropLayerClassName", color, isDragging, makeClassName);
+        ////console.log("useDropLayerClassName", color, isDragging, makeClassName);
 
         const handleInserStyle = (
             color?: string,
@@ -38,7 +38,7 @@ export const useDropLayerClassName = (
             );
             let idStyle: string = "";
 
-            console.log("useDropLayerClassName handleInserStyle", color, styleSheet);
+            //console.log("useDropLayerClassName handleInserStyle", color, styleSheet);
 
 
             if (finalDropzoneId === "default" && !styleInjected) {
@@ -72,7 +72,7 @@ export const useDropLayerClassName = (
             setClassNameCreated(finalClassName);
         };
 
-        //console.log("=>", isDragging);
+        ////console.log("=>", isDragging);
 
         if (makeClassName) {
             handleInserStyle(color,

@@ -1,4 +1,4 @@
-import { completeAsureColor } from "../../core";
+import { completeAsureColor } from "theamazingunkowntext"
 import { DEFAULT_BORDER_RADIUS } from "../../Dropzone/components/dropzone/DropzoneProps";
 
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
   addClassName,
-} from "../../../core";
+} from "theamazingunkowntext"
 import {
   handleClickUtil,
   handleDragUtil,

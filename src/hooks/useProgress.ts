@@ -10,7 +10,7 @@ export const useProgress = (
     xhr?: XMLHttpRequest,
 
 ): number | undefined => {
-    console.log("getProgress", progress, xhr);
+    //console.log("getProgress", progress, xhr);
 
     const [localProgress, setLocalProgress] = React.useState<number | undefined>(undefined);
 
@@ -23,7 +23,7 @@ export const useProgress = (
         if (xhr !== undefined && xhr !== null && xhr.upload.onprogress === null) {
             // xhr was given but it was not initialized the `onprogress` event
             xhr.upload.onprogress = (event: ProgressEvent<EventTarget>) => {
-                console.log("getProgress progress", progress, (event.loaded / event.total) * 100);
+                //console.log("getProgress progress", progress, (event.loaded / event.total) * 100);
 
 
                 setLocalProgress((event.loaded / event.total) * 100);

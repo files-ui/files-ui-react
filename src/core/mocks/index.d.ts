@@ -1,1 +1,0 @@
-export { extFileMock } from "./extFileMock";

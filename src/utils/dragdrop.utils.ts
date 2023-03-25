@@ -1,3 +1,4 @@
+import * as React from "react";
 /**
  * Performs stopPropagation and preventDefault functions on an drop event instance
  * @param evt drag event handler object

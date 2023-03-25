@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "../../core";
+import { FileItemLocalizerSelector, LocalLabels } from "theamazingunkowntext"
 import { FileMosaicInfoLayerProps } from "../../FileMosaic";
 import { Cancel } from "../../icons";
 type FileCardInfoLayerProps = FileMosaicInfoLayerProps;
@@ -7,10 +7,10 @@ const FileCardInfoLayer: React.FC<FileCardInfoLayerProps> = (
   props: FileCardInfoLayerProps
 ) => {
   const {
-    valid,
+    //valid,
     localization,
     onCloseInfo,
-    uploadStatus,
+   // uploadStatus,
     localName,
     sizeFormatted,
     localType,

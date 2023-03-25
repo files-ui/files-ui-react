@@ -1,4 +1,4 @@
-import { asureColor, colourNameToHex, completeAsureColor, darkerColor } from "../../core";
+import { asureColor, colourNameToHex, completeAsureColor, darkerColor } from "theamazingunkowntext"
 import { DynamicSheet, DynamicSheetRule } from "@dynamicss/dynamicss";
 
 export default class MaterialButtonStyleManager {
@@ -9,7 +9,7 @@ export default class MaterialButtonStyleManager {
      */
     static getNextId(): number {
         MaterialButtonStyleManager.nextButtonClassNameNumber++;
-        console.log("Id called " + MaterialButtonStyleManager.nextButtonClassNameNumber);
+        //console.log("Id called " + MaterialButtonStyleManager.nextButtonClassNameNumber);
         return MaterialButtonStyleManager.nextButtonClassNameNumber;
     }
     /**

@@ -1,3 +1,4 @@
+import * as React from "react";
 /**
  * Base props to override in all components
  * and take advantage of the

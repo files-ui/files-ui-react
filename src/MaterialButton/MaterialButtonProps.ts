@@ -1,5 +1,5 @@
 import { OverridableComponentProps } from "../overridable";
-
+import * as React from "react";
 export interface MaterialButtonPropsInterface extends OverridableComponentProps {
     /////// BUTTON props
     /**

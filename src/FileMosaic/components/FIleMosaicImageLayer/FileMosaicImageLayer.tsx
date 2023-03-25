@@ -43,7 +43,7 @@ interface FileMosaicImageLayerProps {
 const FileMosaicImageLayer: React.FC<FileMosaicImageLayerProps> = (
   props: FileMosaicImageLayerProps
 ) => {
-  //console.log("FileMosaicImageLayer", props);
+  ////console.log("FileMosaicImageLayer", props);
   const { imageSource, url, fileName, card, isBlur,smartImgFit } = props;
 
   const [localSource, setLocalSource] = React.useState<string | undefined>(
@@ -63,7 +63,7 @@ const FileMosaicImageLayer: React.FC<FileMosaicImageLayerProps> = (
   const handleError = () => {
     setError(true);
     setLocalSource(url);
-    console.log("FileMosaicImageLayer error", url);
+    //console.log("FileMosaicImageLayer error", url);
   };
 
   //If blur is true

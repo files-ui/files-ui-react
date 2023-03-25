@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ExtFile } from "../core";
+import { ExtFile } from "theamazingunkowntext"
 
 /**
  * Custom hook for managing

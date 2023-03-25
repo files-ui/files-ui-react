@@ -45,7 +45,7 @@ export {
     ExtFileInstance,
     ExtFileManager,
     createUploadConfig
-} from "./core";
+} from "theamazingunkowntext"
 
 export type {
     ExtFile,
@@ -57,7 +57,7 @@ export type {
     UploadConfig,
     ValidateFileResponse,
     IconsMap
-} from "./core";
+} from "theamazingunkowntext"
 
 
 export { default as FilesUiProvider } from "./FilesUiProvider/FilesUiProvider";

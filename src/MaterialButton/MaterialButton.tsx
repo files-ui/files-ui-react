@@ -2,10 +2,9 @@ import * as React from "react";
 import useMaterialButtonClassName from "./hooks/useMaterialButtonClassName";
 import { MaterialButtonProps } from "./MaterialButtonProps";
 import "./MaterialButton.scss";
-import { addClassName } from "../core";
+import { addClassName, FileIdGenerator } from "theamazingunkowntext";
 import { FilesUiContext } from "../FilesUiProvider/FilesUiContext";
 import { createRippleButton } from "../utils";
-
 
 const MaterialButton: React.FC<MaterialButtonProps> = (
   props: MaterialButtonProps
@@ -24,14 +23,16 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
     resetStyles,
     disableRipple,
     darkMode: darkModeProp,
+    id,
+    ...rest
   } = props;
   //context
   const { darkMode: darkModeContext } = React.useContext(FilesUiContext);
   const darkMode: boolean | undefined =
     darkModeProp !== undefined ? darkModeProp : darkModeContext;
 
-
-  const idClassName = React.useId();
+  //  const idClassName = React.useId();
+  const idClassName = React.useMemo(() => id ||FileIdGenerator.getNextId() + "", [id]);
 
   const materialButtonClassName: string | undefined =
     useMaterialButtonClassName(
@@ -41,15 +42,15 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
       textColor,
       textDecoration,
       className,
-      idClassName.replaceAll(":", ""),
+      idClassName.replace(":", "").replace(":", ""),
       resetStyles
     );
-  const finalMBClassNameDarkMode: string | undefined = materialButtonClassName && darkMode
-    ? addClassName(materialButtonClassName, `darkmode`)
-    : materialButtonClassName;
+  const finalMBClassNameDarkMode: string | undefined =
+    materialButtonClassName && darkMode
+      ? addClassName(materialButtonClassName, `darkmode`)
+      : materialButtonClassName;
 
-
-    console.log("finalMBClassNameDarkMode", finalMBClassNameDarkMode, darkMode);
+  //console.log("finalMBClassNameDarkMode", finalMBClassNameDarkMode, darkMode);
   function handleClick<T extends HTMLAnchorElement | HTMLButtonElement>(
     e: React.MouseEvent<T, MouseEvent>
   ): void {
@@ -64,13 +65,15 @@ const MaterialButton: React.FC<MaterialButtonProps> = (
 
   if (finalMBClassNameDarkMode !== undefined || resetStyles)
     return React.createElement(href ? "a" : "button", {
-      className: resetStyles && className ? className : finalMBClassNameDarkMode,
+      className:
+        resetStyles && className ? className : finalMBClassNameDarkMode,
       "data-testid": href ? "dui-anchor" : "dui-button",
       onClick: handleClick,
       href: href,
       style: style,
       children: <span className="material-button-label">{children}</span>,
       disabled: disabled,
+      ...rest
     });
   else return <React.Fragment>loading styes</React.Fragment>;
 };

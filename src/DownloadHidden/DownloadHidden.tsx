@@ -1,5 +1,5 @@
 import * as React from "react";
-//import { handleClickUtil } from "../../core";
+//import { handleClickUtil } from "theamazingunkowntext"
 export type DownloadHiddenProps = {
   downloadUrl?: string;
   anchorRef: React.RefObject<HTMLAnchorElement>;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "../core";
+import { FileItemLocalizerSelector, LocalLabels } from "theamazingunkowntext"
 import { DoDisturb } from "../icons";
 import { FileStatusProps } from "./FileStatusProps";
 interface AbortedStatusProps extends FileStatusProps {}

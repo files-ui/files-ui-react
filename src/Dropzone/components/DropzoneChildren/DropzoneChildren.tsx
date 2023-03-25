@@ -3,7 +3,7 @@ import {
   DropzoneLocalizerSelector,
   Localization,
   LocalLabels,
-} from "../../../core";
+} from "theamazingunkowntext"
 import "./DropzoneChildren.scss";
 
 declare type DropzoneChildrenProps = {

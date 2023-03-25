@@ -1,5 +1,5 @@
 import * as React from "react";
-import { addClassName, Localization } from "../../../core";
+import { addClassName, Localization } from "theamazingunkowntext"
 import { MaterialButton } from "../../../MaterialButton";
 import { ActionButtonItem, DropzoneActions } from "../dropzone/DropzoneProps";
 import "./DropzoneButtons.scss";
@@ -75,6 +75,9 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
   return (
     <div className={finalClassName} style={containerStyle}>
       {actionButtonsList.map(
+
+
+
         (actionButtonProps: ActionButtonItem, index: number) => {
           const { children, label, resetStyles, className, style, onClick } =
             actionButtonProps;
@@ -91,7 +94,12 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
             </MaterialButton>
           );
         }
-      )}
+      
+      
+      
+        )
+      
+      }
     </div>
   );
 };

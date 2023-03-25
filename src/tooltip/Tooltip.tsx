@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TooltipProps } from "./TooltipProps";
 import "./Tooltip.scss";
-import { UPLOADSTATUS } from "../core";
+import { UPLOADSTATUS } from "theamazingunkowntext"
 const Tooltip: React.FC<TooltipProps> = (props: TooltipProps) => {
   const {
     //message,
@@ -15,8 +15,7 @@ const Tooltip: React.FC<TooltipProps> = (props: TooltipProps) => {
     uploadMessage,
     open,
   } = props;
-  /*  console.log("ToolTip");
-  console.table(props); */
+
   const [statusClassName, setSatusClassName] = React.useState<
     string | undefined
   >(undefined);

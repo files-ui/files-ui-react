@@ -22,7 +22,8 @@ import {
   fileListToExtFileArray,
   toUploadableExtFileList,
   cleanInput,
-} from "../core";
+  FileIdGenerator,
+} from "theamazingunkowntext"
 import { DropzoneActions } from "../Dropzone/components/dropzone/DropzoneProps";
 import DropzoneButtons from "../Dropzone/components/DropzoneButtons/DropzoneButtons";
 import { FilesUiContext } from "../FilesUiProvider/FilesUiContext";
@@ -136,7 +137,8 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
   const [isUploading, setIsUploading] = React.useState<boolean>(false);
 
   //Id for uploding through FuiFileManager
-  const inputButtonId: string | number = React.useId();
+  //const inputButtonId: string | number = React.useId();
+  const inputButtonId: string = React.useMemo(() => FileIdGenerator.getNextId() + "",[]);
   //Flag that determines whether to validate or not
   const validateFilesFlag: boolean = isValidateActive(
     accept,
@@ -185,10 +187,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
-    console.log(
-      "incomming extfiles uploadfiles localFiles",
-      localFiles.map((x) => x.uploadStatus)
-    );
+   
     //set uploading flag to true
     setIsUploading(true);
 
@@ -207,18 +206,18 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     // initialize a new list of ExtFileInstances
     let arrOfExtFilesInstances: ExtFileInstance[] = [];
 
-    const totalNumber: number = localFiles.length;
-    console.log("upload start: totalNumber", totalNumber);
+    //const totalNumber: number = localFiles.length;
+    //console.log("upload start: totalNumber", totalNumber);
 
     const missingUpload: number = localFiles.filter((extFile: ExtFile) =>
       isUploadAbleExtFile(extFile, validateFilesFlag)
     ).length;
 
-    console.log("upload start: missingUpload", missingUpload);
+    //console.log("upload start: missingUpload", missingUpload);
 
     //no missing to upload
     if (!(missingUpload > 0)) {
-      console.log("upload start: noFilesMessage", missingUpload);
+      //console.log("upload start: noFilesMessage", missingUpload);
 
       setIsUploading(false);
 
@@ -227,7 +226,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
     //  setIsUploading(true);
     //PREPARING stage
-    console.log("validateFilesFlag", validateFilesFlag);
+    //console.log("validateFilesFlag", validateFilesFlag);
     onUploadStart?.(localFiles);
 
     arrOfExtFilesInstances =
@@ -242,21 +241,17 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
       x.toExtFile()
     );
 
-    console.log(
-      "FileManagerLog after setFileListMapPreparing",
-      arrOfExtFilesInstances
-    );
 
     //CHANGE (o alejo el isUploading o lo alejo para que tenga m,as tiempo antes de la respuyesta)
     // setIsUploading(true);
     handleFilesChange(newExtFileLocal, true);
 
-    console.log("FileManagerLog before sleep", arrOfExtFilesInstances);
+    //console.log("FileManagerLog before sleep", arrOfExtFilesInstances);
     //AWAIT when preparing time is given
     //general sleep for all files
     await sleepPreparing(preparingTime);
 
-    console.log("FileManagerLog after sleep", arrOfExtFilesInstances);
+    //console.log("FileManagerLog after sleep", arrOfExtFilesInstances);
 
     //return;
     let serverResponses: Array<ExtFile> = [];
@@ -264,10 +259,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
 
-      console.log(
-        "FileManagerLog currentExtFileInstance " + i,
-        currentExtFileInstance
-      );
+   
 
       if (
         currentExtFileInstance.uploadStatus === "preparing" &&
@@ -317,7 +309,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         }
 
         const uploadedFile = uploadResponse;
-        console.log("fake uploadResponse uploadedFile", uploadedFile);
+        //console.log("fake uploadResponse uploadedFile", uploadedFile);
 
         //update instances
         currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
@@ -346,7 +338,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
   const handleAbortUpload = () => {
     const listExtFileLocal: ExtFileInstance[] | undefined =
       ExtFileManager.getExtFileInstanceList(inputButtonId);
-    console.log("Aborting", listExtFileLocal, inputButtonId);
+    //console.log("Aborting", listExtFileLocal, inputButtonId);
 
     if (!listExtFileLocal) return;
     listExtFileLocal.forEach((extFileInstance: ExtFileInstance) => {
@@ -391,10 +383,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     extFileList: ExtFile[],
     isUploading?: boolean
   ): void => {
-    console.log(
-      "handleFilesChange",
-      extFileList.map((F) => F.uploadMessage)
-    );
+
     let finalExtFileList: ExtFile[] =
       behaviour === "add" && !isUploading
         ? [...localFiles, ...extFileList]
@@ -405,7 +394,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
       setLocalFiles(finalExtFileList);
     }
     if (autoUpload && !isUploading) {
-      console.log("autoUpload", finalExtFileList);
+      //console.log("autoUpload", finalExtFileList);
       uploadfiles(finalExtFileList);
     }
   };
@@ -449,7 +438,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
    */
   const outerFuiValidation = (fuiFileListToValidate: ExtFile[]): ExtFile[] => {
     const localValidator: FileValidatorProps = { maxFileSize, accept };
-    console.log("validatedFuiFileList pre", fuiFileListToValidate);
+    //console.log("validatedFuiFileList pre", fuiFileListToValidate);
 
     let finalNumberOfValids: number = numberOfValidFiles;
     if (behaviour === "replace") {
@@ -465,13 +454,13 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
       maxFiles,
       localization
     );
-    console.log("validatedFuiFileList aft", validatedFuiFileList);
+    //console.log("validatedFuiFileList aft", validatedFuiFileList);
     return validatedFuiFileList;
   };
 
   // HANDLERS for CLICK
   function handleClick(): void {
-    //console.log("HAAAAAAAA");
+    ////console.log("HAAAAAAAA");
     //handleClickUtil(evt);
     if (disabled) return;
 
@@ -530,6 +519,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         onClick={handleClick}
         disableRipple={disableRipple}
         darkMode={darkMode}
+        id={inputButtonId}
         {...rest}
       >
         {children || label}

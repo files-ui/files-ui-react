@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Localization, UPLOADSTATUS } from "../../core";
+import { Localization, UPLOADSTATUS } from "theamazingunkowntext"
 import {
   AbortedStatus,
   EmptyStatus,

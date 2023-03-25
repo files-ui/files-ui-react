@@ -1,4 +1,4 @@
-import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "../../../core";
+import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "theamazingunkowntext"
 
 import * as React from "react";
 import { OverridableComponentProps } from "../../../overridable";
@@ -216,7 +216,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
 
 
 export type HeaderConfig = {
-  customHeader?: JSX.Element;
+  customHeader?: React.ReactNode;
   deleteFiles?: boolean;
   cleanFiles?: boolean;
   uploadFiles?: boolean;
@@ -246,9 +246,9 @@ export type FooterConfig = {
    */
   noMissingFilesLabel?: boolean;
 
-  customMessage?: JSX.Element;
+  customMessage?: React.ReactNode;
 
-  customFooter?: JSX.Element;
+  customFooter?: React.ReactNode;
 
   style?: React.CSSProperties;
   className?: string;
@@ -257,7 +257,7 @@ export type FooterConfig = {
 
 
 export type ActionButtonItem = {
-  children?: JSX.Element;
+  children?: React.ReactNode;
   label?: string;
   style?: React.CSSProperties;
   className?: string;

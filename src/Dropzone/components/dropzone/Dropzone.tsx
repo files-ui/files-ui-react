@@ -28,8 +28,8 @@ import {
   unexpectedErrorUploadResult,
   getRandomInt,
   addClassName,
-  Localization,completeAsureColor,
-} from "../../../core";
+  Localization,completeAsureColor, FileIdGenerator,
+} from "theamazingunkowntext"
 import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../InputHidden/InputHidden";
 import {
@@ -186,7 +186,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const [localMessage, setLocalMessage] = React.useState<string>("");
   //Id for uploding through FuiFileManager
   //const dropzoneId: string | number = useDropzoneFileListID();
-  const dropzoneId: string | number = React.useId();
+ // const dropzoneId: string | number = React.useId();
+  const dropzoneId: string = React.useMemo(() => FileIdGenerator.getNextId() + "",[]);
   //React.useId();
   //Flag that determines whether to validate or not
   const validateFilesFlag: boolean = isValidateActive(
@@ -235,10 +236,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
-    console.log(
-      "incomming extfiles uploadfiles localFiles",
-      localFiles.map((x) => x.uploadStatus)
-    );
+
     //set uploading flag to true
     setIsUploading(true);
 
@@ -262,14 +260,12 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     let arrOfExtFilesInstances: ExtFileInstance[] = [];
 
     const totalNumber: number = localFiles.length;
-    console.log("upload start: totalNumber", totalNumber);
-
+   
     const missingUpload: number = localFiles.filter((extFile: ExtFile) =>
       isUploadAbleExtFile(extFile, validateFilesFlag)
     ).length;
 
-    console.log("upload start: missingUpload", missingUpload);
-
+ 
     let totalRejected: number = 0;
     let currentCountUpload: number = 0;
 
@@ -278,7 +274,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
     //no missing to upload
     if (!(missingUpload > 0)) {
-      console.log("upload start: noFilesMessage", missingUpload);
+     
       setTimeout(() => {
         if (noMissingFilesLabel)
           setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
@@ -293,7 +289,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       setLocalMessage(uploadingMessenger(`${missingUpload}/${totalNumber}`));
     //  setIsUploading(true);
     //PREPARING stage
-    console.log("validateFilesFlag", validateFilesFlag);
+    
     onUploadStart?.(localFiles);
 
     arrOfExtFilesInstances =
@@ -308,21 +304,15 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       x.toExtFile()
     );
 
-    console.log(
-      "FileManagerLog after setFileListMapPreparing",
-      arrOfExtFilesInstances
-    );
-
+  
     //CHANGE (o alejo el isUploading o lo alejo para que tenga m,as tiempo antes de la respuyesta)
     // setIsUploading(true);
     handleFilesChange(newExtFileLocal, true);
 
-    console.log("FileManagerLog before sleep", arrOfExtFilesInstances);
+   
     //AWAIT when preparing time is given
     //general sleep for all files
     await sleepPreparing(preparingTime);
-
-    console.log("FileManagerLog after sleep", arrOfExtFilesInstances);
 
     //return;
     let serverResponses: Array<ExtFile> = [];
@@ -330,11 +320,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
 
-      console.log(
-        "FileManagerLog currentExtFileInstance " + i,
-        currentExtFileInstance
-      );
-
+     
       if (
         currentExtFileInstance.uploadStatus === "preparing" &&
         !currentExtFileInstance.extraData?.deleted
@@ -389,7 +375,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         }
 
         const uploadedFile = uploadResponse;
-        console.log("fake uploadResponse uploadedFile", uploadedFile);
 
         //update instances
         currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
@@ -430,8 +415,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const handleAbortUpload = () => {
     const listExtFileLocal: ExtFileInstance[] | undefined =
       ExtFileManager.getExtFileInstanceList(dropzoneId);
-    console.log("Aborting", listExtFileLocal, dropzoneId);
-
+    
     if (!listExtFileLocal) return;
     listExtFileLocal.forEach((extFileInstance: ExtFileInstance) => {
       if (
@@ -505,10 +489,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     extFileList: ExtFile[],
     isUploading?: boolean
   ): void => {
-    console.log(
-      "handleFilesChange",
-      extFileList.map((F) => F.uploadMessage)
-    );
+    
     let finalExtFileList: ExtFile[] =
       behaviour === "add" && !isUploading
         ? [...localFiles, ...extFileList]
@@ -519,7 +500,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       setLocalFiles(finalExtFileList);
     }
     if (autoUpload && !isUploading) {
-      console.log("autoUpload", finalExtFileList);
+      
       uploadfiles(finalExtFileList);
     }
   };
@@ -563,8 +544,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
    */
   const outerFuiValidation = (fuiFileListToValidate: ExtFile[]): ExtFile[] => {
     const localValidator: FileValidatorProps = { maxFileSize, accept };
-    console.log("validatedFuiFileList pre", fuiFileListToValidate);
-
+   
+    
     let finalNumberOfValids: number = numberOfValidFiles;
     if (behaviour === "replace") {
       //re-start number of valids
@@ -579,7 +560,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       maxFiles,
       localization
     );
-    console.log("validatedFuiFileList aft", validatedFuiFileList);
+  
     return validatedFuiFileList;
   };
 
@@ -686,7 +667,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       setLocalFiles(localFiles.filter((f) => f.valid));
     }
   };
-  console.log("Dropzone styleHeader", styleHeader);
 
   const finalDropzoneClassNameBorder: string | undefined = !dropzoneClassName
     ? undefined

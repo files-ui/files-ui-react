@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "../core";
+import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "theamazingunkowntext"
 
 /**
  * Effect for keeping track of changes
@@ -25,9 +25,9 @@ export const useDropzoneFileListUpdater = (
     localization?: Localization,
     validateFilesFlag?: boolean
 ): [ExtFile[], number, React.Dispatch<React.SetStateAction<ExtFile[]>>] => {
-    console.log("incomming extfiles fileupdater value", value.map(x => x.uploadStatus));
+    //console.log("incomming extfiles fileupdater value", value.map(x => x.uploadStatus));
     
-    console.log("FileListUpdater", dropzoneId, value, isUploading, maxFileSize, accept, maxFiles, validateFilesFlag);
+    //console.log("FileListUpdater", dropzoneId, value, isUploading, maxFileSize, accept, maxFiles, validateFilesFlag);
 
     //state for managing the files locally
     const [localFiles, setLocalFiles] = React.useState<ExtFile[]>([]);
@@ -39,8 +39,8 @@ export const useDropzoneFileListUpdater = (
     React.useEffect(() => {
         let arrOfExtFiles: ExtFileInstance[] | undefined =
             ExtFileManager.getExtFileInstanceList(dropzoneId);
-        console.log("value changed", isUploading, value.map(F => F.uploadStatus), dropzoneId);
-        // console.log("value changed", value.map(F => F.uploadStatus));
+        //console.log("value changed", isUploading, value.map(F => F.uploadStatus), dropzoneId);
+        // //console.log("value changed", value.map(F => F.uploadStatus));
         if (!isUploading) {
             setLocalFiles(value);
         } else {
@@ -58,7 +58,7 @@ export const useDropzoneFileListUpdater = (
 
                     if (extFileIndex === -1) {
                         extFileInstance.extraData = { deleted: true }
-                        console.log("extFileUpdater not found", extFileInstance.id);
+                        //console.log("extFileUpdater not found", extFileInstance.id);
                     } else {
                         const currExtFileObj: ExtFile = value[extFileIndex];
 
@@ -75,7 +75,7 @@ export const useDropzoneFileListUpdater = (
                         &&
                         (arrOfExtFiles[i].uploadStatus === "preparing")
                     ) {
-                        console.log("useDropzoneFileListUpdater onCancel i", i);
+                        //console.log("useDropzoneFileListUpdater onCancel i", i);
                         arrOfExtFiles[i].uploadStatus = undefined;
                     }
                 } */

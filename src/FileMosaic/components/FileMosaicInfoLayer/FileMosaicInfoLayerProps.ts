@@ -1,4 +1,4 @@
-import { Localization, UPLOADSTATUS } from "../../../core";
+import { Localization, UPLOADSTATUS } from "theamazingunkowntext"
 
 export type FileMosaicInfoLayerProps = {
     valid: boolean | null | undefined;

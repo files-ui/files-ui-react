@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ValidateFileResponse } from "../core";
+import { ValidateFileResponse } from "theamazingunkowntext"
 
 export const useDropzoneValidation = (
     accept: string | undefined,

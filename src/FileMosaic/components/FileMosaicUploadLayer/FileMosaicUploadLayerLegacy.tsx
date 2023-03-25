@@ -6,7 +6,7 @@ import {
   FileItemLocalizerSelector,
   LocalLabels,
   UPLOADSTATUS,
-} from "../../../core";
+} from "theamazingunkowntext"
 import { CheckCircle, CloudDone, UploadError } from "../../../icons";
 import { DynamicLoader } from "../../../loader";
 

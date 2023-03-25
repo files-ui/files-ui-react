@@ -9,7 +9,7 @@ import {
   Localization,
   //handleClickUtil,
   shrinkWord,
-} from "../core";
+} from "theamazingunkowntext"
 
 import FileCardRightActions from "./components/FileCardRightActions";
 import FileCardInfoLayer from "./components/FileCardInfoLayer";
@@ -46,7 +46,7 @@ const makeFileCardClassName = (
   className: string | undefined,
   clickable?: boolean
 ): string => {
-  console.log("FileCard makeFileCardClassName", elevation, darkMode, className);
+  //console.log("FileCard makeFileCardClassName", elevation, darkMode, className);
   let finalClassName: string =
     "files-ui-file-card-main-container files-ui-tooltip card";
 
@@ -60,7 +60,7 @@ const makeFileCardClassName = (
   if (className) {
     finalClassName += ` ${className}`;
   }
-  console.log("FileCard finalClassName", finalClassName);
+  //console.log("FileCard finalClassName", finalClassName);
 
   return finalClassName;
 };
@@ -124,7 +124,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     locProps !== undefined ? locProps : locContext;
   const darkMode: boolean | undefined =
     darkModeProp !== undefined ? darkModeProp : darkModeContext;
-  console.log("globalConfig", darkMode, icons);
+  //console.log("globalConfig", darkMode, icons);
 
   //ref for anchor element
   const downloadRef = React.useRef<HTMLAnchorElement>(null);
@@ -196,7 +196,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
   const isUploading: boolean = useIsUploading(uploadStatus);
 
   React.useEffect(() => {
-    //console.log("Change isUploading", isUploading);
+    ////console.log("Change isUploading", isUploading);
     if (isUploading && showInfo) handleCloseInfo();
 
     // eslint-disable-next-line

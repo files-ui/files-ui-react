@@ -23,8 +23,8 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
     onClick,
   } = props;
 
-  console.table(props);
-  //console.log("percentage", percentage);
+  //console.table(props);
+  ////console.log("percentage", percentage);
 
   const finalRadius = radius || 28;
   const finalX = x || 30;
@@ -41,19 +41,14 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
     circumference: number
   ) {
     myCircle.style.strokeDashoffset = `${circumference * (1 - percent / 100)}`;
-    console.log(
-      "dashOffset",
-      percent,
-      circumference,
-      circumference * (1 - percent / 100)
-    );
+
     //myCircle.style.strokeDashoffset = `0`;
     /* let pct = document.getElementById("pct");
     pct.innerHTML = percent.toFixed(0) + "%"; */
   }
   React.useEffect(() => {
     const myCircle: SVGCircleElement | null = circleRef.current;
-    console.log("percentage useEffect", percentage);
+    //console.log("percentage useEffect", percentage);
 
     if (
       myCircle !== null &&

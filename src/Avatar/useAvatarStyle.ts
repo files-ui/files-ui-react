@@ -5,7 +5,7 @@ export const useAvatarStyle = (avatarId: string, borderRadius: string | undefine
     const [idAvatarStyles, setIdAvatarStyles] = React.useState<string>("");
     const [styleInjected, setStyleInjected] = React.useState<boolean>(false);
     const [classNameBorder, setClassNameBorder] = React.useState<string | undefined>(undefined);
-console.log("borderRadius",borderRadius);
+    //console.log("borderRadius",borderRadius);
     /**
      * creates a dynamic css sheet for avatar
      * @param borderRadius the border radius
@@ -29,9 +29,9 @@ console.log("borderRadius",borderRadius);
 
     React.useEffect(() => {
         return () => {
-            console.log("avatar, deleting init", styleInjected, idAvatarStyles);
+            //console.log("avatar, deleting init", styleInjected, idAvatarStyles);
             if (styleInjected) {
-                console.log("avatar, catch css delete");
+                //console.log("avatar, catch css delete");
 
                 DynamiCSS.removeStyleSheet(idAvatarStyles);
             }
@@ -60,24 +60,24 @@ console.log("borderRadius",borderRadius);
                     setStyleInjected(true);
                 }
             }
-        } else  if (!styleInjected) {
-                // check if classname was added
-                // if yes, edit css
-                // if not insert css
-                console.log("avatar, no css, inserting");
-                idStyle = DynamiCSS.insertStyleSheet(styleSheet);
-                console.log("avatar, no css, inserted OK", idStyle);
+        } else if (!styleInjected) {
+            // check if classname was added
+            // if yes, edit css
+            // if not insert css
+            //console.log("avatar, no css, inserting");
+            idStyle = DynamiCSS.insertStyleSheet(styleSheet);
+            //console.log("avatar, no css, inserted OK", idStyle);
 
-                setIdAvatarStyles(idStyle);
+            setIdAvatarStyles(idStyle);
 
-                if (idStyle !== "") {
-                    setStyleInjected(true);
-                }
-            } else {
-                console.log("avatar, catch css, modifiying", idAvatarStyles);
-                DynamiCSS.editStyleSheet(idAvatarStyles, styleSheet.sheetRules || []);
+            if (idStyle !== "") {
+                setStyleInjected(true);
             }
-        setClassNameBorder("fui-avatar-border-"+avatarId);
+        } else {
+            //console.log("avatar, catch css, modifiying", idAvatarStyles);
+            DynamiCSS.editStyleSheet(idAvatarStyles, styleSheet.sheetRules || []);
+        }
+        setClassNameBorder("fui-avatar-border-" + avatarId);
         // eslint-disable-next-line
     }, [borderRadius]);
 

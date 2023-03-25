@@ -1,4 +1,4 @@
-import { Localization, UPLOADSTATUS } from "../../../core";
+import { Localization, UPLOADSTATUS } from "theamazingunkowntext"
 import { OverridableComponentProps } from "../../../overridable";
 
 export interface FileMosaicPropsMap extends OverridableComponentProps {

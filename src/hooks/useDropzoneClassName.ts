@@ -1,6 +1,7 @@
 import { DynamicSheet, DynamicSheetRule, DynamiCSS } from "@dynamicss/dynamicss";
 import * as React from "react";
-import { completeAsureColor } from "../core";
+import { completeAsureColor } from "theamazingunkowntext";
+
 import { DEFAULT_BORDER_RADIUS } from "../Dropzone/components/dropzone/DropzoneProps";
 
 export function useDropzoneClassName(
@@ -15,7 +16,7 @@ export function useDropzoneClassName(
     minHeight: string | number | undefined
 ): [string | undefined, string | undefined, string | undefined, string | undefined] {
     //console.log("useDropzoneClassName", className, isDragging, header, footer, color, background, minHeight);
-    const finalDropzoneId: string = (color === undefined && background === undefined && minHeight === undefined) ? "default" : dropzoneId.replaceAll(":", "_");
+    const finalDropzoneId: string = (color === undefined && background === undefined && minHeight === undefined) ? "default" : dropzoneId.replace(":", "_").replace(":", "_");
 
     const baseClassName: string = "fui-dropzone-root fui-dropzone-border";
 
@@ -80,14 +81,14 @@ export function useDropzoneClassName(
     }
 
     React.useEffect(() => {
-        makeClassName(className, 
+        makeClassName(className,
             //isDragging,
             //offset, 
             color,
             // borderRadius, 
             background, minHeight);
         // eslint-disable-next-line
-    }, [className, 
+    }, [className,
         //isDragging,
         // offset, 
         color,
@@ -154,9 +155,9 @@ const makeDynamicDropzoneStyleSheet = (
     const sheetRules: DynamicSheetRule[] =
         [
             rootColorBorderStyle,
-            rootColorBorderStyleHideBorder, 
-            headerBorderStyle, 
-            footerBorderStyle, 
+            rootColorBorderStyleHideBorder,
+            headerBorderStyle,
+            footerBorderStyle,
             disabledLayerStyle
         ];
 

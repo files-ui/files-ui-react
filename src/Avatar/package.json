@@ -1,0 +1,5 @@
+{
+    "module": "./index.js",
+    "main": "../node/List/index.js",
+    "types": "./index.d.ts"
+}

@@ -1,4 +1,4 @@
-import { ValidateFileResponse, ExtFile, Localization, UploadConfig } from "../core";
+import { ValidateFileResponse, ExtFile, Localization, UploadConfig } from "theamazingunkowntext"
 import { ActionButtons } from "../Dropzone/components/dropzone/DropzoneProps";
 import { MaterialButtonProps } from "../MaterialButton/MaterialButtonProps";
 

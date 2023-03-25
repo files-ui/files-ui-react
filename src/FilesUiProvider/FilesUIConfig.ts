@@ -1,4 +1,4 @@
-import { IconsMap, Localization } from "../core";
+import { IconsMap, Localization } from "theamazingunkowntext"
 
 export type FilesUIConfig = {
     /**

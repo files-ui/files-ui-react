@@ -1,5 +1,5 @@
 import * as React from "react";
-import { addClassName } from "../../../core";
+import { addClassName } from "theamazingunkowntext"
 import { OverridableComponentProps } from "../../../overridable";
 import "./LayerContainer.scss";
 

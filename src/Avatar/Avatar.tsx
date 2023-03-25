@@ -7,6 +7,7 @@ import { useAvatarStyle } from "./useAvatarStyle";
 import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import Layer from "../FileMosaic/components/file-mosaic-layer/Layer";
 import ImagePreview from "../ImagePreview/ImagePreview";
+import { FileIdGenerator } from "theamazingunkowntext";
 const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const {
     readOnly,
@@ -30,18 +31,20 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     style,
     ...rest
   } = mergeProps(props, defaultAvatarProps);
-  console.log("Avatar smartImgFit", smartImgFit);
+  //console.log("Avatar smartImgFit", smartImgFit);
 
   const inputRef: React.RefObject<HTMLInputElement> =
     React.useRef<HTMLInputElement>(null);
 
-  const avatarId = React.useId();
+  //const avatarId = React.useId();
+  const avatarId = React.useMemo(() => FileIdGenerator.getNextId() + "", []);
+
   const finalClassNameBorder: string | undefined = useAvatarStyle(
-    avatarId.replaceAll(":", ""),
+    avatarId.replace(":", "").replace(":", ""),
     borderRadius
   );
 
-  console.log("finalClassNameBorder", finalClassNameBorder);
+  //console.log("finalClassNameBorder", finalClassNameBorder);
 
   const handleClick = () => {
     // alert("Agregar fotooooooo");
@@ -63,7 +66,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const handleError: React.ReactEventHandler<HTMLImageElement> = (
     evt: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
-    console.log("Avatar error", evt);
+    //console.log("Avatar error", evt);
     onError?.(evt);
   };
 

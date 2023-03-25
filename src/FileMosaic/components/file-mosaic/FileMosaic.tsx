@@ -4,7 +4,7 @@ import {
   fileSizeFormater,
   getLocalFileItemData,
   Localization,
-} from "../../../core";
+} from "theamazingunkowntext"
 import "./FileMosaic.scss";
 import "./../../../icons/IconStyles.scss";
 import { FileMosaicProps } from "./FileMosaicProps";
@@ -79,7 +79,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     locProps !== undefined ? locProps : locContext;
   const darkMode: boolean | undefined =
     darkModeProp !== undefined ? darkModeProp : darkModeContext;
-  console.log("globalConfig", darkMode, icons);
+  ////console.log("globalConfig", darkMode, icons);
 
   //localizers
 
@@ -108,7 +108,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   // handle progress
   const localProgress: number | undefined = useProgress(progress, xhr);
 
-  //console.log("FileMosaic progress localProgress " + localProgress);
+  ////console.log("FileMosaic progress localProgress " + localProgress);
 
   //Initialize File Item
   const [isReady, isImage, isVideo, url, imageSource, videoSource]: [
@@ -159,7 +159,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const isUploading: boolean = useIsUploading(uploadStatus);
 
   React.useEffect(() => {
-    //console.log("Change isUploading", isUploading);
+    ////console.log("Change isUploading", isUploading);
     if (isUploading && showInfo) {
       handleCloseInfo();
     }

@@ -1,4 +1,4 @@
-import { Localization, UPLOADSTATUS } from "../../../core";
+import { Localization, UPLOADSTATUS } from "theamazingunkowntext"
 
 export interface FileMosaicUploadLayerPropsMap {
     visible?: boolean;

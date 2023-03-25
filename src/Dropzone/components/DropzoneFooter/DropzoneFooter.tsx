@@ -5,7 +5,7 @@ import {
   FunctionLabel,
   Localization,
   LocalLabels,
-} from "../../../core";
+} from "theamazingunkowntext"
 import { handleClickUtil } from "../../../utils";
 import { FooterConfig } from "../dropzone/DropzoneProps";
 
@@ -57,7 +57,7 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
         borderBotomLeftRadius: borderRadius,
         borderBotomRightRadius: borderRadius,
       };
-  console.log("files-ui-footer", finalStyle);
+  //console.log("files-ui-footer", finalStyle);
 
   return (
     <div className={finalClassName} onClick={handleClick} style={finalStyle}>

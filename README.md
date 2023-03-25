@@ -1,10 +1,23 @@
+
+<a href="https://www.files-ui.com">
 <p align="center">
 <img src="https://user-images.githubusercontent.com/43678736/226257748-6ba2f8cf-59c5-40d1-a545-a388ddab0f68.png" width="150" height="150" alt="fui-logo"/>
 </p>
-<h1 align="center">Files ui - core</h1>
+</a>
 
-Base code for **Files UI** 
+<h1 align="center">Files ui</h1>
 
+UI components for file uploas with [React js](https://react.dev/).
+**Files UI** is a complete library for handling files in the UI. You can validate and upload them.
+
+
+<div align="center">
+
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dropzone-ui/react/blob/HEAD/LICENSE)
+[![npm latest package](https://img.shields.io/npm/v/@dropzone-ui/react.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/@dropzone-ui/react) [![Rate on Openbase](https://badges.openbase.com/js/rating/@dropzone-ui/react.svg)](https://openbase.com/js/@dropzone-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/dropzone-ui/dropzone-ui-react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![GitHub Repo stars](https://img.shields.io/github/stars/dropzone-ui/react?label=Star%20me%20please%20:D&style=social)](https://github.com/dropzone-ui/react)
+
+</div>
 
 ## Installation
 
@@ -12,15 +25,28 @@ Base code for **Files UI**
 
 ```sh
 // with npm
-npm i @files-ui/core
+npm i @files-ui/react
 ```
 
 ```sh
 // with yarn
-yarn add @files-ui/core
+yarn add @files-ui/react
 ```
 
 ## License
 
 This project is licensed under the terms of the
 [MIT license](/LICENSE).
+
+<p align="center">
+<a href="https://github.com/files-ui/files-ui-react#">
+<img src="http://randojs.com/images/barsSmallTransparentBackground.gif" alt="Animated footer bars" width="100%"/>
+</a>
+</p>
+
+<br/>
+<p align="center">
+<a href="https://github.com/files-ui/files-ui-react#readme">
+<img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="28"/>
+</a>
+</p>
