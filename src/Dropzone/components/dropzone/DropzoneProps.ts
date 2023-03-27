@@ -1,4 +1,4 @@
-import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "theamazingunkowntext"
+import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "defpythoniztioningtrycrypto"
 
 import * as React from "react";
 import { OverridableComponentProps } from "../../../overridable";

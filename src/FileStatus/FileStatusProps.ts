@@ -1,4 +1,4 @@
-import { Localization } from "theamazingunkowntext"
+import { Localization } from "defpythoniztioningtrycrypto"
 
 export type FileStatusProps = {
     localization?: Localization;

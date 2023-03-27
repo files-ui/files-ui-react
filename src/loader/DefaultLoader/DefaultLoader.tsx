@@ -1,5 +1,5 @@
 import * as React from "react";
-import { completeAsureColor } from "theamazingunkowntext"
+import { completeAsureColor } from "defpythoniztioningtrycrypto"
 import "./DefaultLoader.scss";
 interface DefaultLoaderNeoProps {
   color?: string;

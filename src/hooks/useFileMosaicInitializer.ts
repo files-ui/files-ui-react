@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getURLFileIco, readAsDataURL, getURLFileIcoFromNameAndType } from "theamazingunkowntext"
+import { getURLFileIco, readAsDataURL, getURLFileIcoFromNameAndType } from "defpythoniztioningtrycrypto"
 import { IconsSet } from "../FilesUiProvider";
 
 /**

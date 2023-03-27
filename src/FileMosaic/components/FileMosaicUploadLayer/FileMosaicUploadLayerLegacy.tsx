@@ -6,7 +6,7 @@ import {
   FileItemLocalizerSelector,
   LocalLabels,
   UPLOADSTATUS,
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 import { CheckCircle, CloudDone, UploadError } from "../../../icons";
 import { DynamicLoader } from "../../../loader";
 

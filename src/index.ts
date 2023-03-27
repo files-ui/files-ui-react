@@ -45,7 +45,7 @@ export {
     ExtFileInstance,
     ExtFileManager,
     createUploadConfig
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 
 export type {
     ExtFile,
@@ -57,7 +57,7 @@ export type {
     UploadConfig,
     ValidateFileResponse,
     IconsMap
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 
 
 export { default as FilesUiProvider } from "./FilesUiProvider/FilesUiProvider";

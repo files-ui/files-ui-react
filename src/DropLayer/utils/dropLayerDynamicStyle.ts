@@ -1,4 +1,4 @@
-import { completeAsureColor } from "theamazingunkowntext"
+import { completeAsureColor } from "defpythoniztioningtrycrypto"
 import { DEFAULT_BORDER_RADIUS } from "../../Dropzone/components/dropzone/DropzoneProps";
 
 

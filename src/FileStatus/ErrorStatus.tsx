@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "theamazingunkowntext"
+import { FileItemLocalizerSelector, LocalLabels } from "defpythoniztioningtrycrypto"
 import { Clear } from "../icons";
 import { FileStatusProps } from "./FileStatusProps";
 interface ErrorStatusProps extends FileStatusProps {}

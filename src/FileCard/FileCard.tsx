@@ -9,7 +9,7 @@ import {
   Localization,
   //handleClickUtil,
   shrinkWord,
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 
 import FileCardRightActions from "./components/FileCardRightActions";
 import FileCardInfoLayer from "./components/FileCardInfoLayer";

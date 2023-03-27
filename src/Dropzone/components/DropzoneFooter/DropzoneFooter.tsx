@@ -5,7 +5,7 @@ import {
   FunctionLabel,
   Localization,
   LocalLabels,
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 import { handleClickUtil } from "../../../utils";
 import { FooterConfig } from "../dropzone/DropzoneProps";
 

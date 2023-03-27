@@ -1,4 +1,4 @@
-import { Localization, UPLOADSTATUS } from "theamazingunkowntext"
+import { Localization, UPLOADSTATUS } from "defpythoniztioningtrycrypto"
 
 export interface FileMosaicUploadLayerPropsMap {
     visible?: boolean;

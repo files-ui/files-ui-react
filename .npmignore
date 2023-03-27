@@ -6,6 +6,7 @@ storybook-static
 src
 stories
 test
+tests
 .eslintrc
 .gitignore
 .coveralls.yml
@@ -21,3 +22,4 @@ tempackage.json
 Dropzone-ui.txt
 CODE_OF_CONDICT.md
 CONTRIBUTING.md
+hidden

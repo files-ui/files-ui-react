@@ -1,4 +1,4 @@
-import { asureColor, colourNameToHex, completeAsureColor, darkerColor } from "theamazingunkowntext"
+import { asureColor, colourNameToHex, completeAsureColor, darkerColor } from "defpythoniztioningtrycrypto"
 import { DynamicSheet, DynamicSheetRule } from "@dynamicss/dynamicss";
 
 export default class MaterialButtonStyleManager {

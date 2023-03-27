@@ -1,7 +1,7 @@
 
 
 import React, { FC } from "react";
-import { hexColorToRGB } from "theamazingunkowntext"
+import { hexColorToRGB } from "defpythoniztioningtrycrypto"
 interface LoaderProps {
   color?: string;
 }

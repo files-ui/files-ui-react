@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TooltipProps } from "./TooltipProps";
 import "./Tooltip.scss";
-import { UPLOADSTATUS } from "theamazingunkowntext"
+import { UPLOADSTATUS } from "defpythoniztioningtrycrypto"
 const Tooltip: React.FC<TooltipProps> = (props: TooltipProps) => {
   const {
     //message,

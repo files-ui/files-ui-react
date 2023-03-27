@@ -14,7 +14,7 @@
   gap: 0 8px;
   //justify-content: center;
   //align-items: center;
-  //padding: 23px 0px; 
+  //padding: 23px 0px;
 
   /// label
   //color: #646c7f;
@@ -75,7 +75,7 @@
 }
 
 .files-ui-footer {
-/*   border-bottom-left-radius: 8px;
+  /*   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px; */
   box-sizing: border-box;
   cursor: text;
@@ -85,10 +85,10 @@
   left: 0; */
   // width: calc(100% - 10px);
   width: 100%;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: center; */
   //border-top: 1px dotted grey;
   //background-color: rgba(128, 128, 128, 0.129);
   font-family: "Poppins", sans-serif;
@@ -96,16 +96,15 @@
   padding-left: 10px;
   font-size: 1rem;
   ////3 dots break in 1 lines
-  //overflow: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1; /* number of lines to show */
   line-clamp: 1;
   -webkit-box-orient: vertical;
+  text-align: left;
 
-  
   //background-color: rgba(0, 128, 128, 0.249);
-
 
   @media (max-width: 960px) {
     //width: calc(100% - 1px);

@@ -3,7 +3,7 @@ import * as React from "react";
 import { CheckCircle, CloudDone, DoDisturb, UploadError } from "../../../icons";
 import { FileMosaicStatusProps } from "./FileMosaicStatusProps";
 import "./FileMosaicStatus.scss";
-import { FileItemLocalizerSelector, LocalLabels } from "theamazingunkowntext"
+import { FileItemLocalizerSelector, LocalLabels } from "defpythoniztioningtrycrypto"
 
 const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
   props: FileMosaicStatusProps

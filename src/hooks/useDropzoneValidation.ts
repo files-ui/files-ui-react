@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ValidateFileResponse } from "theamazingunkowntext"
+import { ValidateFileResponse } from "defpythoniztioningtrycrypto"
 
 export const useDropzoneValidation = (
     accept: string | undefined,

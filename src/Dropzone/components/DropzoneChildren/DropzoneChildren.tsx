@@ -3,7 +3,7 @@ import {
   DropzoneLocalizerSelector,
   Localization,
   LocalLabels,
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 import "./DropzoneChildren.scss";
 
 declare type DropzoneChildrenProps = {

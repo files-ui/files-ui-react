@@ -1,4 +1,4 @@
-import { UPLOADSTATUS } from "theamazingunkowntext"
+import { UPLOADSTATUS } from "defpythoniztioningtrycrypto"
 import * as React from "react";
 export const useIsUploading = (uploadStatus: UPLOADSTATUS | undefined): boolean => {
 

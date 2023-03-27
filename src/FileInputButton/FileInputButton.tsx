@@ -23,7 +23,7 @@ import {
   toUploadableExtFileList,
   cleanInput,
   FileIdGenerator,
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 import { DropzoneActions } from "../Dropzone/components/dropzone/DropzoneProps";
 import DropzoneButtons from "../Dropzone/components/DropzoneButtons/DropzoneButtons";
 import { FilesUiContext } from "../FilesUiProvider/FilesUiContext";

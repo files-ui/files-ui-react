@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "theamazingunkowntext"
+import { FileItemLocalizerSelector, LocalLabels } from "defpythoniztioningtrycrypto"
 import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import { FileStatusProps } from "./FileStatusProps";
 

@@ -4,7 +4,7 @@ import {
   fileSizeFormater,
   getLocalFileItemData,
   Localization,
-} from "theamazingunkowntext"
+} from "defpythoniztioningtrycrypto"
 import "./FileMosaic.scss";
 import "./../../../icons/IconStyles.scss";
 import { FileMosaicProps } from "./FileMosaicProps";

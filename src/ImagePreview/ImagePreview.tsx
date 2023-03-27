@@ -4,7 +4,7 @@ import {
   ImagePreviewProps,
 } from "./ImagePreviewProps";
 import { mergeProps } from "../overridable";
-import { getImageOrientation, readAsDataURL } from "theamazingunkowntext"
+import { getImageOrientation, readAsDataURL } from "defpythoniztioningtrycrypto"
 
 import "./ImagePreview.scss";
 

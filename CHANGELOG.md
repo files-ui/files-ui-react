@@ -1,17 +1,38 @@
 # Change Log
-
+<a href="https://www.files-ui.com">
 <p align="center">
-<img align="center" height="120" src="https://user-images.githubusercontent.com/43678736/132112022-0ca409ae-cca2-43c8-be89-110376260a3f.png" alt="dropone-ui-logo">
-
-<h1 align="center">  Dropzone-UI</h1>
-
+<img src="https://user-images.githubusercontent.com/43678736/226257748-6ba2f8cf-59c5-40d1-a545-a388ddab0f68.png" width="150" height="150" alt="fui-logo"/>
 </p>
+</a>
+
+<h1 align="center">Files ui</h1>
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
+
+## [1.0.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.0.0) (2023-03-28)
+
+## 🧪 New features
+
+- \<FileMosaic/\>: Added `resultOnToolip` prop. This prop provides another hover interaction. If present or `true`, FileItem will show the file validation status and the upload status on a nice tooltip. Otherwhise, if not present, false or undefined, FileItem will display the result on the InfoLayer. Special thanks to @mateusmx, 👏 who suggested this feature🧪.
+
+- \<FileCard/\>: Added `resultOnToolip` prop. This prop provides another hover interaction. If present or `true`, FileItem will show the file validation status and the upload status on a nice tooltip. Otherwhise, if not present, false or undefined, FileItem will display the result on the InfoLayer. Special thanks to @mateusmx, 👏 who suggested this feature🧪.
+
+- \<Dropzone/\>: Added `disableScroll` prop. This prop disables the css property `overflow: auto` in FileItemContainer inside Dropzone, when it displays the FileItem list inside of it. It also disables the `maxHeight` property and forces the `view` prop to be `"grid"`. The purpose of this special prop is to allow FileItemContainer to grow at the same time FileItem list increases and prevent triggering scrollbars.
+
+## 🐛 Fixes or improvements
+
+- \<Dropzone/>: Fixed issue in FileItemContainer that made it to overflow the size of Dropzone.
+
+## 📚 Improved documentation.
+
+- Added documentation about this new features
+
+
 
 <a name="6.4.0"></a>
 
-## [6.4.0](https://github.com/dropzone-ui/react-dropzone/releases/tag/v6.4.0) (2021-12-12)
+## [6.4.0](https://github.com/dropzone-ui/dropzone-ui-react/releases/tag/v6.4.0) (2021-12-12)
 
 ## 🧪 New features
 
@@ -30,7 +51,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 <a name="6.3.6"></a>
 
-## [6.3.6](https://github.com/dropzone-ui/react-dropzone/releases/tag/v6.3.6) (2021-07-12)
+## [6.3.6](https://github.com/dropzone-ui/dropzone-ui-react/releases/tag/v6.3.6) (2021-07-12)
 
 ## 🧪 New features
 
@@ -48,7 +69,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 <a name="6.2.0"></a>
 
-## [6.2.0](https://github.com/dropzone-ui/react-dropzone/releases/tag/v6.2.0) (2021-26-11)
+## [6.2.0](https://github.com/dropzone-ui/dropzone-ui-react/releases/tag/v6.2.0) (2021-26-11)
 
 ### New features
 
@@ -71,7 +92,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 <a name="5.5.6"></a>
 
-## [5.5.6](https://github.com/dropzone-ui/react-dropzone/releases/tag/v5.3.0) (2021-26-11)
+## [5.5.6](https://github.com/dropzone-ui/dropzone-ui-react/releases/tag/v5.3.0) (2021-26-11)
 
 - 🧪 Added Localization support for ✨ **Russian** and **Chinese** ✨.
 - 🐛 Fixed small bugs.

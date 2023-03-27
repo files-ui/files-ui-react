@@ -1,4 +1,4 @@
-import { UPLOADSTATUS } from "theamazingunkowntext"
+import { UPLOADSTATUS } from "defpythoniztioningtrycrypto"
 import { OverridableComponentProps } from "../overridable";
 
 export interface TooltipPropsMap extends OverridableComponentProps {

@@ -1,4 +1,4 @@
-import { Localization, UPLOADSTATUS } from "theamazingunkowntext"
+import { Localization, UPLOADSTATUS } from "defpythoniztioningtrycrypto"
 import { OverridableComponentProps } from "../../../overridable";
 
 export interface FileMosaicPropsMap extends OverridableComponentProps {

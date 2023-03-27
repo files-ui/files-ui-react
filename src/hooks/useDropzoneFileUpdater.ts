@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "theamazingunkowntext"
+import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "defpythoniztioningtrycrypto"
 
 /**
  * Effect for keeping track of changes

@@ -1,4 +1,4 @@
-import { IconsMap, Localization } from "theamazingunkowntext"
+import { IconsMap, Localization } from "defpythoniztioningtrycrypto"
 
 export type FilesUIConfig = {
     /**
