@@ -17,12 +17,13 @@ UI components for file uploas with [React js](https://react.dev/).
 
 </div>
 
-
 <p align="center">
 <a href="https://www.files-ui.com">
 <img src="https://user-images.githubusercontent.com/43678736/228052494-99d970c0-1eb7-42c6-b22c-8c2295b8dc4a.gif"  width="80%" alt="fui-logo"/>
 </a>
 </p>
+
+- More previews [here](#more-previews).
 
 ## Installation
 
@@ -38,20 +39,70 @@ npm i @files-ui/react
 yarn add @files-ui/react
 ```
 
+## Usage and examples
+
+Here is a quick example to get you started, **it's all you need**:
+
+```jsx
+import * as React from "react";
+import ReactDOM from "react-dom";
+import { Dropzone, FileMosaic } from "@files-ui/react";
+Function App() {
+  const [files, setFiles] = React.useState([]);
+  const updateFiles = (incommingFiles) => {
+    setFiles(incommingFiles);
+  };
+  return (
+    <Dropzone onChange={updateFiles} value={files}>
+      {files.map((file) => (
+        <FileMosaic {...file} preview />
+      ))}
+    </Dropzone>
+  );
+}
+
+ReactDOM.render(<App />, document.querySelector("#app"));
+```
+
+Yes, it's really all you need to get started as you can see in these live and interactive demos:
+
+- [basic sample](http://localhost:3000/usage#quick-start) :cake:
+- [advanced sample](http://www.files-ui.com/usage#advanced-example) :hammer:
+
+## More Previews
+
+### Image full screen preview
+
+<p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066199-fb7a5bd3-9c7e-4f72-b0ef-7f11d236d38e.png" alt="Image full screen preview" width="100%"/></p>
+
+### Video full screen preview
+
+<p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066195-62063300-21e0-48fd-80d8-31b566562fde.png" alt="Video full screen preview" width="100%"/></p>
+
+### File Mosaic, FileInputButotn and Avatar preview
+
+<p align="center"><img src="https://user-images.githubusercontent.com/43678736/228063876-5b6d00fe-f0ba-453f-a7ce-c44ba7444417.png" alt="Video full screen preview" width="100%"/></p>
+
+### DarkMode
+
+<p align="center"><img src="https://user-images.githubusercontent.com/43678736/228063883-569ca6f1-6959-45bc-9882-2c447162a00f.png" alt="darkmode 1 preview" width="100%"/></p>
+
+<p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066720-e0bb96ac-3c00-4aa6-80b9-e0b4d0c5f947.png" alt="darkmode 2 preview" width="100%"/></p>
+
 ## License
 
 This project is licensed under the terms of the
 [MIT license](/LICENSE).
 
 <p align="center">
-<a href="https://github.com/files-ui/files-ui-react#">
+<a href="#">
 <img src="http://randojs.com/images/barsSmallTransparentBackground.gif" alt="Animated footer bars" width="100%"/>
 </a>
 </p>
 
 <br/>
 <p align="center">
-<a href="#readme">
+<a href="#">
 <img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="28"/>
 </a>
 </p>
