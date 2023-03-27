@@ -19,7 +19,7 @@ UI components for file uploas with [React js](https://react.dev/).
 
 <a href="https://www.files-ui.com">
 <p align="center">
-<img src="https://user-images.githubusercontent.com/43678736/228052494-99d970c0-1eb7-42c6-b22c-8c2295b8dc4a.gif"  height="min(100%,300px)" alt="fui-logo"/>
+<img src="https://user-images.githubusercontent.com/43678736/228052494-99d970c0-1eb7-42c6-b22c-8c2295b8dc4a.gif"  width="80%" alt="fui-logo"/>
 </p>
 </a>
 
