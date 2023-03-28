@@ -1,7 +1,7 @@
 {
   "name": "@files-ui/react",
   "version": "1.0.0",
-  "description": "UI components for file uploas with React js",
+  "description": "UI components for file uploads with React js",
   "main": "./build/index.js",
   "module": "./build/index.es.js",
   "types": "./build/index.d.ts",
