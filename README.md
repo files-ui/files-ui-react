@@ -6,7 +6,7 @@
 
 <h1 align="center">Files ui</h1>
 
-UI components for file uploas with [React js](https://react.dev/).
+UI components for file uploads with [React js](https://react.dev/).
 **Files UI** is a complete library for handling files in the UI. You can validate and upload them.
 
 <div align="center">
