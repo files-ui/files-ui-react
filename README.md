@@ -1,4 +1,4 @@
-<a href="https://www.files-ui.com">
+<a href="https://files-ui.vercel.app">
 <p align="center">
 <img src="https://user-images.githubusercontent.com/43678736/226257748-6ba2f8cf-59c5-40d1-a545-a388ddab0f68.png" width="150" height="150" alt="fui-logo"/>
 </p>
@@ -18,7 +18,7 @@ UI components for file uploads with [React js](https://react.dev/).
 </div>
 
 <p align="center">
-<a href="https://www.files-ui.com">
+<a href="https://files-ui.vercel.app">
 <img src="https://user-images.githubusercontent.com/43678736/228052494-99d970c0-1eb7-42c6-b22c-8c2295b8dc4a.gif"  width="80%" alt="fui-logo"/>
 </a>
 </p>
@@ -66,8 +66,8 @@ ReactDOM.render(<App />, document.querySelector("#app"));
 
 Yes, it's really all you need to get started as you can see in these live and interactive demos:
 
-- [Basic sample](http://localhost:3000/usage#quick-start) :cake:
-- [Advanced sample](http://www.files-ui.com/usage#advanced-example) :hammer:
+- [Basic sample](https://files-ui.vercel.app/usage#quick-start) :cake:
+- [Advanced sample](https://files-ui.vercel.app/usage#advanced-example) :hammer:
 
 ## More Previews
 
