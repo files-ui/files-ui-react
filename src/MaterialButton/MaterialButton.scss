@@ -1,4 +1,4 @@
-//@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
 
 .material-button-root {
   border: 0;
@@ -25,8 +25,9 @@
   min-width: 64px;
   box-sizing: border-box;
   border-radius: 4px;
+  font-family: "Poppins", sans-serif;
 
-  font-family: inherit;
+  //font-family: inherit;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.75;

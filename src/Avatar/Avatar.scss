@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
+
 .fui-avatar-main-container {
   width: 200px;
   height: 200px;
@@ -9,6 +11,7 @@
   justify-content: center;
   background-color: rgba(128, 128, 128, 0.486);
   border-radius: 10px;
+  font-family: "Poppins", sans-serif;
   &.square {
     border-radius: 0px;
   }
