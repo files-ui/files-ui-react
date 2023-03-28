@@ -66,28 +66,33 @@ ReactDOM.render(<App />, document.querySelector("#app"));
 
 Yes, it's really all you need to get started as you can see in these live and interactive demos:
 
-- [basic sample](http://localhost:3000/usage#quick-start) :cake:
-- [advanced sample](http://www.files-ui.com/usage#advanced-example) :hammer:
+- [Basic sample](http://localhost:3000/usage#quick-start) :cake:
+- [Advanced sample](http://www.files-ui.com/usage#advanced-example) :hammer:
 
 ## More Previews
 
-### Image full screen preview
+<details>
+  <summary>Image full screen preview 🖼️ </summary>
+  <p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066199-fb7a5bd3-9c7e-4f72-b0ef-7f11d236d38e.png" alt="Image full screen preview" width="100%"/></p>
 
-<p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066199-fb7a5bd3-9c7e-4f72-b0ef-7f11d236d38e.png" alt="Image full screen preview" width="100%"/></p>
-
-### Video full screen preview
-
+</details>
+<details>
+ <summary>Video full screen preview 🎞️ </summary>
 <p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066195-62063300-21e0-48fd-80d8-31b566562fde.png" alt="Video full screen preview" width="100%"/></p>
+</details>
 
-### File Mosaic, FileInputButotn and Avatar preview
-
+<details>
+ <summary>FileCard, FileInputButton and Avatar preview 🎴 </summary>
 <p align="center"><img src="https://user-images.githubusercontent.com/43678736/228063876-5b6d00fe-f0ba-453f-a7ce-c44ba7444417.png" alt="Video full screen preview" width="100%"/></p>
 
-### DarkMode
+</details>
 
+<details>
+ <summary>DarkMode 🌙 🌞 </summary> 
 <p align="center"><img src="https://user-images.githubusercontent.com/43678736/228063883-569ca6f1-6959-45bc-9882-2c447162a00f.png" alt="darkmode 1 preview" width="100%"/></p>
 
 <p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066720-e0bb96ac-3c00-4aa6-80b9-e0b4d0c5f947.png" alt="darkmode 2 preview" width="100%"/></p>
+</details>
 
 ## License
 
