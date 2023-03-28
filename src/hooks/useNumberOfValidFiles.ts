@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ExtFile } from "defpythoniztioningtrycrypto"
+import { ExtFile } from "@files-ui/core"
 
 /**
  * Custom hook for managing

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Localization, UPLOADSTATUS } from "defpythoniztioningtrycrypto"
+import { Localization, UPLOADSTATUS } from "@files-ui/core"
 import {
   AbortedStatus,
   EmptyStatus,

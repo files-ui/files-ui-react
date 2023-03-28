@@ -1,5 +1,5 @@
 import * as React from "react";
-import { completeAsureColor } from "defpythoniztioningtrycrypto"
+import { completeAsureColor } from "@files-ui/core"
 import "./DefaultLoader.scss";
 interface DefaultLoaderNeoProps {
   color?: string;

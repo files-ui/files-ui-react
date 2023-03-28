@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "defpythoniztioningtrycrypto"
+import { FileItemLocalizerSelector, LocalLabels } from "@files-ui/core"
 import { DynamicLoader } from "../loader";
 import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import { FileStatusProps } from "./FileStatusProps";

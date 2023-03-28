@@ -6,7 +6,7 @@ import {
   FileItemLocalizerSelector,
   LocalLabels,
   UPLOADSTATUS,
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 import { CheckCircle, CloudDone, UploadError } from "../../../icons";
 import { DynamicLoader } from "../../../loader";
 

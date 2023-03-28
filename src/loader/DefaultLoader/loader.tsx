@@ -1,7 +1,7 @@
 
 
 import React, { FC } from "react";
-import { hexColorToRGB } from "defpythoniztioningtrycrypto"
+import { hexColorToRGB } from "@files-ui/core"
 interface LoaderProps {
   color?: string;
 }

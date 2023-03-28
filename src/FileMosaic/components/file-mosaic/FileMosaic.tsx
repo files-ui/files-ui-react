@@ -4,7 +4,7 @@ import {
   fileSizeFormater,
   getLocalFileItemData,
   Localization,
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 import "./FileMosaic.scss";
 import "./../../../icons/IconStyles.scss";
 import { FileMosaicProps } from "./FileMosaicProps";

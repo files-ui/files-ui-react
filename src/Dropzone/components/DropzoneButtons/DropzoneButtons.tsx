@@ -1,5 +1,5 @@
 import * as React from "react";
-import { addClassName, Localization } from "defpythoniztioningtrycrypto"
+import { addClassName, Localization } from "@files-ui/core"
 import { MaterialButton } from "../../../MaterialButton";
 import { ActionButtonItem, DropzoneActions } from "../dropzone/DropzoneProps";
 import "./DropzoneButtons.scss";

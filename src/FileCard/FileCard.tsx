@@ -9,7 +9,7 @@ import {
   Localization,
   //handleClickUtil,
   shrinkWord,
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 
 import FileCardRightActions from "./components/FileCardRightActions";
 import FileCardInfoLayer from "./components/FileCardInfoLayer";

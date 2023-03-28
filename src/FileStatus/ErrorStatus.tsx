@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "defpythoniztioningtrycrypto"
+import { FileItemLocalizerSelector, LocalLabels } from "@files-ui/core"
 import { Clear } from "../icons";
 import { FileStatusProps } from "./FileStatusProps";
 interface ErrorStatusProps extends FileStatusProps {}

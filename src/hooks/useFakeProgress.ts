@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getRandomInt } from "defpythoniztioningtrycrypto"
+import { getRandomInt } from "@files-ui/core"
 
 export const useFakeProgress = (time = 1500) => {
     const [progress, setProgress] = React.useState(28);

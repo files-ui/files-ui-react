@@ -1,4 +1,4 @@
-import { UPLOADSTATUS } from "defpythoniztioningtrycrypto"
+import { UPLOADSTATUS } from "@files-ui/core"
 import * as React from "react";
 export const useIsUploading = (uploadStatus: UPLOADSTATUS | undefined): boolean => {
 

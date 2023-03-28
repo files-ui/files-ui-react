@@ -1,4 +1,4 @@
-import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "defpythoniztioningtrycrypto"
+import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "@files-ui/core"
 
 import * as React from "react";
 import { OverridableComponentProps } from "../../../overridable";

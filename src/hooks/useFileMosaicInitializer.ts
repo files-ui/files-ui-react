@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getURLFileIco, readAsDataURL, getURLFileIcoFromNameAndType } from "defpythoniztioningtrycrypto"
+import { getURLFileIco, readAsDataURL, getURLFileIcoFromNameAndType } from "@files-ui/core"
 import { IconsSet } from "../FilesUiProvider";
 
 /**

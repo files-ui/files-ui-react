@@ -1,4 +1,4 @@
-import { asureColor, colourNameToHex, completeAsureColor, darkerColor } from "defpythoniztioningtrycrypto"
+import { asureColor, colourNameToHex, completeAsureColor, darkerColor } from "@files-ui/core"
 import { DynamicSheet, DynamicSheetRule } from "@dynamicss/dynamicss";
 
 export default class MaterialButtonStyleManager {

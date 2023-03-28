@@ -1,4 +1,4 @@
-import { ValidateFileResponse, ExtFile, Localization, UploadConfig } from "defpythoniztioningtrycrypto"
+import { ValidateFileResponse, ExtFile, Localization, UploadConfig } from "@files-ui/core"
 import { ActionButtons } from "../Dropzone/components/dropzone/DropzoneProps";
 import { MaterialButtonProps } from "../MaterialButton/MaterialButtonProps";
 

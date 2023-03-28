@@ -4,7 +4,7 @@ import {
   ImagePreviewProps,
 } from "./ImagePreviewProps";
 import { mergeProps } from "../overridable";
-import { getImageOrientation, readAsDataURL } from "defpythoniztioningtrycrypto"
+import { getImageOrientation, readAsDataURL } from "@files-ui/core"
 
 import "./ImagePreview.scss";
 

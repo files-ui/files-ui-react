@@ -7,7 +7,7 @@ import {
   FunctionLabel,
   Localization,
   LocalLabels,
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 import { UploadingProcess, Clean, Cancel, Upload } from "../../../icons";
 
 export type DropzoneHeaderProps = {

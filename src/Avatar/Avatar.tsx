@@ -7,7 +7,7 @@ import { useAvatarStyle } from "./useAvatarStyle";
 import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import Layer from "../FileMosaic/components/file-mosaic-layer/Layer";
 import ImagePreview from "../ImagePreview/ImagePreview";
-import { FileIdGenerator } from "defpythoniztioningtrycrypto";
+import { FileIdGenerator } from "@files-ui/core";
 const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const {
     readOnly,

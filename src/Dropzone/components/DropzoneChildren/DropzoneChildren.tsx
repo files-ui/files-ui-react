@@ -3,7 +3,7 @@ import {
   DropzoneLocalizerSelector,
   Localization,
   LocalLabels,
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 import "./DropzoneChildren.scss";
 
 declare type DropzoneChildrenProps = {

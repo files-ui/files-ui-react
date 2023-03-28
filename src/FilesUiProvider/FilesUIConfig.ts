@@ -1,4 +1,4 @@
-import { IconsMap, Localization } from "defpythoniztioningtrycrypto"
+import { IconsMap, Localization } from "@files-ui/core"
 
 export type FilesUIConfig = {
     /**

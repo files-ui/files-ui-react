@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "defpythoniztioningtrycrypto"
+import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "@files-ui/core"
 
 /**
  * Effect for keeping track of changes

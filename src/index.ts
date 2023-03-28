@@ -45,7 +45,7 @@ export {
     ExtFileInstance,
     ExtFileManager,
     createUploadConfig
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 
 export type {
     ExtFile,
@@ -57,7 +57,7 @@ export type {
     UploadConfig,
     ValidateFileResponse,
     IconsMap
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 
 
 export { default as FilesUiProvider } from "./FilesUiProvider/FilesUiProvider";

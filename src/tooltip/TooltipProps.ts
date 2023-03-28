@@ -1,4 +1,4 @@
-import { UPLOADSTATUS } from "defpythoniztioningtrycrypto"
+import { UPLOADSTATUS } from "@files-ui/core"
 import { OverridableComponentProps } from "../overridable";
 
 export interface TooltipPropsMap extends OverridableComponentProps {

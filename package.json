@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@dynamicss/dynamicss": "^2.2.8",
-    "theamazingunkowntext": "^1.0.2"
+    "@files-ui/core": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"

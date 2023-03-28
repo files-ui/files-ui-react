@@ -1,4 +1,4 @@
-import { completeAsureColor } from "defpythoniztioningtrycrypto"
+import { completeAsureColor } from "@files-ui/core"
 import { DEFAULT_BORDER_RADIUS } from "../../Dropzone/components/dropzone/DropzoneProps";
 
 

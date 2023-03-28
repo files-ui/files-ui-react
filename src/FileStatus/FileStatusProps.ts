@@ -1,4 +1,4 @@
-import { Localization } from "defpythoniztioningtrycrypto"
+import { Localization } from "@files-ui/core"
 
 export type FileStatusProps = {
     localization?: Localization;

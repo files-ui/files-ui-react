@@ -1,5 +1,5 @@
 import * as React from "react";
-//import { handleClickUtil } from "defpythoniztioningtrycrypto"
+//import { handleClickUtil } from "@files-ui/core"
 export type DownloadHiddenProps = {
   downloadUrl?: string;
   anchorRef: React.RefObject<HTMLAnchorElement>;

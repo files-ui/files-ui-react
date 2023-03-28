@@ -23,7 +23,7 @@ import {
   toUploadableExtFileList,
   cleanInput,
   FileIdGenerator,
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 import { DropzoneActions } from "../Dropzone/components/dropzone/DropzoneProps";
 import DropzoneButtons from "../Dropzone/components/DropzoneButtons/DropzoneButtons";
 import { FilesUiContext } from "../FilesUiProvider/FilesUiContext";

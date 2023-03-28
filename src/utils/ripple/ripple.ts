@@ -1,5 +1,5 @@
 import * as React from "react";
-import { completeAsureColor, hexColorToRGB } from "defpythoniztioningtrycrypto"
+import { completeAsureColor, hexColorToRGB } from "@files-ui/core"
 
 const asureRippleColor = (color: string): string => {
   return completeAsureColor(color,

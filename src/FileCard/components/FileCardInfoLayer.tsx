@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FileItemLocalizerSelector, LocalLabels } from "defpythoniztioningtrycrypto"
+import { FileItemLocalizerSelector, LocalLabels } from "@files-ui/core"
 import { FileMosaicInfoLayerProps } from "../../FileMosaic";
 import { Cancel } from "../../icons";
 type FileCardInfoLayerProps = FileMosaicInfoLayerProps;

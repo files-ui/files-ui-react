@@ -1,4 +1,4 @@
-import { Localization, UPLOADSTATUS } from "defpythoniztioningtrycrypto"
+import { Localization, UPLOADSTATUS } from "@files-ui/core"
 
 export interface FileMosaicMainLayerProps {
     darkMode?: boolean;

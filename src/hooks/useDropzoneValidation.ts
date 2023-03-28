@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ValidateFileResponse } from "defpythoniztioningtrycrypto"
+import { ValidateFileResponse } from "@files-ui/core"
 
 export const useDropzoneValidation = (
     accept: string | undefined,

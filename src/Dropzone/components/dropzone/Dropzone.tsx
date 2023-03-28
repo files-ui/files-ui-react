@@ -29,7 +29,7 @@ import {
   getRandomInt,
   addClassName,
   Localization,completeAsureColor, FileIdGenerator,
-} from "defpythoniztioningtrycrypto"
+} from "@files-ui/core"
 import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../InputHidden/InputHidden";
 import {

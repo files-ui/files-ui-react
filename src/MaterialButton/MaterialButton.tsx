@@ -2,7 +2,7 @@ import * as React from "react";
 import useMaterialButtonClassName from "./hooks/useMaterialButtonClassName";
 import { MaterialButtonProps } from "./MaterialButtonProps";
 import "./MaterialButton.scss";
-import { addClassName, FileIdGenerator } from "defpythoniztioningtrycrypto";
+import { addClassName, FileIdGenerator } from "@files-ui/core";
 import { FilesUiContext } from "../FilesUiProvider/FilesUiContext";
 import { createRippleButton } from "../utils";
 
