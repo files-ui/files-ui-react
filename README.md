@@ -27,7 +27,11 @@ UI components for file uploads with [React js](https://react.dev/).
 </a>
 </p>
 
-- More previews [here](#more-previews).
+- :heart: it ?, support us by giving a :star: on :octocat: [Github](https://github.com/dropzone-ui/dropzone-ui) :D
+ 
+
+- :zap: Enjoying @files-ui/react? [Please leave a short review on Openbase](https://openbase.com/js/@files-ui/react#rate)
+- :eyes: More previews [here](#more-previews).
 
 ## Installation
 
