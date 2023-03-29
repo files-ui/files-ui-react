@@ -1,6 +1,6 @@
 {
   "name": "@files-ui/react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "UI components for file uploads with React js",
   "main": "./build/index.js",
   "module": "./build/index.es.js",
@@ -42,7 +42,7 @@
   "bugs": {
     "url": "https://github.com/files-ui/files-ui-react/issues"
   },
-  "homepage": "https://files-ui.vercel.app",
+  "homepage": "https://www.files-ui.com",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
