@@ -63,6 +63,16 @@ import { useDropzoneFileListUpdater, useDropLayerClassName, useDropzoneClassName
 
 //import { print_manager } from "../../../../../utils";
 
+/**
+ *
+ * Demos:
+ *
+ * - [Dropzone](https://www.files-ui.com/components/dropzone)
+ *
+ * API:
+ *
+ * - [Dropzone API](https://www.files-ui.com/api/dropzone/)
+ */
 const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const {
     //basic

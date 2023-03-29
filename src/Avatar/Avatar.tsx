@@ -8,6 +8,17 @@ import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";
 import Layer from "../FileMosaic/components/file-mosaic-layer/Layer";
 import ImagePreview from "../ImagePreview/ImagePreview";
 import { FileIdGenerator } from "@files-ui/core";
+
+/**
+ *
+ * Demos:
+ *
+ * - [Avatar](https://www.files-ui.com/components/avatar)
+ *
+ * API:
+ *
+ * - [Avatar API](https://www.files-ui.com/api/avatar/)
+ */
 const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
   const {
     readOnly,

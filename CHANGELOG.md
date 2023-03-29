@@ -15,6 +15,8 @@ Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-
 
 ## 🧪 New features and 🐛 :hammer: Improvements
 
+- [ExtFile](https://www.files-ui.com/types#extfile): Data estructure that "extends" the File Object. This object is designed to allow the information exchange between components. This data type replaces the old "FileValidate" type from dropzone-ui.
+
 - [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic): This new component replaces the old "FileItem" component.
 
   - Dark mode: Now this component can be adpted to a dark mode pages with the respective prop.
