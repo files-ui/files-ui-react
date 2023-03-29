@@ -12,8 +12,12 @@ UI components for file uploads with [React js](https://react.dev/).
 <div align="center">
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/files-ui/react/blob/HEAD/LICENSE)
-[![npm latest package](https://img.shields.io/npm/v/@files-ui/react.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/@files-ui/react) [![Rate on Openbase](https://badges.openbase.com/js/rating/@files-ui/react.svg)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/files-ui/files-ui-react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![npm latest package](https://img.shields.io/npm/v/@files-ui/react.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/@files-ui/react) [![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/files-ui/files-ui-react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub Repo stars](https://img.shields.io/github/stars/files-ui/react?label=Star%20me%20please%20:D&style=social)](https://github.com/files-ui/react)
+
+[![Verified on Openbase](https://badges.openbase.com/js/verified/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) [![Featured on Openbase](https://badges.openbase.com/js/featured/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) [![Rate this package](https://badges.openbase.com/js/rating/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) [![@files-ui/react Tutorials](https://badges.openbase.com/js/tutorials/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
+
+
 
 </div>
 
@@ -69,6 +73,18 @@ Yes, it's really all you need to get started as you can see in these live and in
 - [Basic sample](https://www.files-ui.com/usage#quick-start) :cake:
 - [Advanced sample](https://www.files-ui.com/usage#advanced-example) :hammer:
 
+## Main Components
+- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone)
+- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic)
+- [\<FileCard/\>](https://www.files-ui.com/components/filecard)
+- [\<Avatar/\>](https://www.files-ui.com/components/avatar)
+- [\<FIleInputButton/\>](https://www.files-ui.com/components/fileinputbutton)
+- [\<FullScreen/\>](https://www.files-ui.com/components/fullscreen) Image and video
+
+## Full Documentation
+
+You can find the complete documentation and demos for every component on [files-ui.com](https://www.files-ui.com)
+
 ## More Previews
 
 <details>
@@ -108,6 +124,6 @@ This project is licensed under the terms of the
 <br/>
 <p align="center">
 <a href="#">
-<img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="28"/>
+<img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="28px"/>
 </a>
 </p>
