@@ -181,7 +181,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const handleDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
     evt: React.MouseEvent
   ): void => {
-    alert("double click on file");
+    //alert("double click on file");
     evt.preventDefault();
 
     onDoubleClick?.(evt);

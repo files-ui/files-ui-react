@@ -52,7 +52,7 @@ const FileMosaicUploadLayerLegacy: React.FC<FileMosaicUploadLayerProps> = (
       <React.Fragment>
         <InfiniteLoader
           onClick={() => {
-            alert("clicked");
+            //alert("clicked");
           }}
           size={60}
         />
@@ -76,7 +76,7 @@ const FileMosaicUploadLayerLegacy: React.FC<FileMosaicUploadLayerProps> = (
         ) : (
           <InfiniteLoader
             onClick={() => {
-              alert("clicked");
+              //alert("clicked");
             }}
             size={60}
           />
