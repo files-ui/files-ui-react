@@ -7,6 +7,7 @@
 <h1 align="center">Files ui</h1>
 
 UI components for file uploads with [React js](https://react.dev/).
+
 **Files UI** is a complete library for handling files in the UI. You can validate and upload them.
 
 <div align="center">
@@ -15,9 +16,7 @@ UI components for file uploads with [React js](https://react.dev/).
 [![npm latest package](https://img.shields.io/npm/v/@files-ui/react.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/@files-ui/react) [![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/files-ui/files-ui-react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub Repo stars](https://img.shields.io/github/stars/files-ui/react?label=Star%20me%20please%20:D&style=social)](https://github.com/files-ui/react)
 
-[![Verified on Openbase](https://badges.openbase.com/js/verified/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) [![Featured on Openbase](https://badges.openbase.com/js/featured/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) [![Rate this package](https://badges.openbase.com/js/rating/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) [![@files-ui/react Tutorials](https://badges.openbase.com/js/tutorials/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
-
-
+[![Verified on Openbase](https://badges.openbase.com/js/verified/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![Featured on Openbase](https://badges.openbase.com/js/featured/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![Rate this package](https://badges.openbase.com/js/rating/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![@files-ui/react Tutorials](https://badges.openbase.com/js/tutorials/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 </div>
 
@@ -28,7 +27,6 @@ UI components for file uploads with [React js](https://react.dev/).
 </p>
 
 - :heart: it ?, support us by giving a :star: on :octocat: [Github](https://github.com/dropzone-ui/dropzone-ui) :D
- 
 
 - :zap: Enjoying @files-ui/react? [Please leave a short review on Openbase](https://openbase.com/js/@files-ui/react#rate)
 - :eyes: More previews [here](#more-previews).
@@ -55,7 +53,8 @@ Here is a quick example to get you started, **it's all you need**:
 import * as React from "react";
 import ReactDOM from "react-dom";
 import { Dropzone, FileMosaic } from "@files-ui/react";
-Function App() {
+
+function App() {
   const [files, setFiles] = React.useState([]);
   const updateFiles = (incommingFiles) => {
     setFiles(incommingFiles);
@@ -74,10 +73,13 @@ ReactDOM.render(<App />, document.querySelector("#app"));
 
 Yes, it's really all you need to get started as you can see in these live and interactive demos:
 
-- [Basic sample](https://www.files-ui.com/usage#quick-start) :cake:
-- [Advanced sample](https://www.files-ui.com/usage#advanced-example) :hammer:
+|                          |                                                                                                                                             |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Basic Sample :cake:      | [![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/basic-demo-js-blssi1?file=/src/App.js)    |
+| Advanced Sample :hammer: | [![Edit Button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/advanced-demo-js-6euo8j?file=/src/App.js) |
 
-## Main Components
+## Main Components 💠
+
 - [\<Dropzone/\>](https://www.files-ui.com/components/dropzone)
 - [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic)
 - [\<FileCard/\>](https://www.files-ui.com/components/filecard)
@@ -85,11 +87,11 @@ Yes, it's really all you need to get started as you can see in these live and in
 - [\<FIleInputButton/\>](https://www.files-ui.com/components/fileinputbutton)
 - [\<FullScreen/\>](https://www.files-ui.com/components/fullscreen) Image and video
 
-## Full Documentation
+## Full Documentation 📚
 
 You can find the complete documentation and demos for every component on [files-ui.com](https://www.files-ui.com)
 
-## More Previews
+## More Previews :eyes:
 
 <details>
   <summary>Image full screen preview 🖼️ </summary>
