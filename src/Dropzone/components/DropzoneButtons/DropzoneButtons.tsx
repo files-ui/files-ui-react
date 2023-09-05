@@ -79,8 +79,15 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
 
 
         (actionButtonProps: ActionButtonItem, index: number) => {
-          const { children, label, resetStyles, className, style, onClick } =
-            actionButtonProps;
+          const {
+            disabled,
+            children,
+            label,
+            resetStyles,
+            className,
+            style,
+            onClick,
+          } = actionButtonProps;
           return (
             <MaterialButton
               key={index}
