@@ -11,23 +11,24 @@ test("Validate label text must be 'Drop yor files here...'", () => {
 
 describe("Dropzone actionButtons", () => {
   test.each([
-    [{ uploadButton: { onClick: console.log } }, "Upload"],
-    [{ uploadButton: { label: undefined, onClick: console.log } }, "Upload"],
-    [{ uploadButton: { label: null, onClick: console.log } }, "Upload"],
-    [{ uploadButton: { label: "my label", onClick: console.log } }, "my label"],
-    [{ deleteButton: { label: null, onClick: console.log } }, "Delete"],
-    [
-      { deleteButton: { label: "my delete label", onClick: console.log } },
-      "my delete label",
-    ],
+    [{ uploadButton: { onClick: console.log } }, false],
+    [{ uploadButton: { onClick: console.log, disabled: false } }, false],
+    [{ uploadButton: { onClick: console.log, disabled: true } }, true],
+    [{ deleteButton: { onClick: console.log } }, false],
+    [{ deleteButton: { onClick: console.log, disabled: false } }, false],
+    [{ deleteButton: { onClick: console.log, disabled: true } }, true],
 
     // abortButton and cleanButton need more interaction
-  ])("label %s -> %s", (config, expected) => {
+  ])("disabled %s -> %s", (config, expected) => {
     const { container } = render(
       <Dropzone actionButtons={{ position: "after", ...config }} />,
     );
     expect(
-      container.querySelector(".files-ui-buttons-container button").textContent,
+      (
+        container.querySelector(
+          ".files-ui-buttons-container button",
+        ) as HTMLInputElement
+      ).disabled,
     ).toBe(expected);
   });
 });
