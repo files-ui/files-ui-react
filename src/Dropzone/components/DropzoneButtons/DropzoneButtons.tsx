@@ -37,28 +37,28 @@ const DropzoneButtons: React.FC<DropzoneButtonsProps> = (
     cleanButton
       ? {
           ...cleanButton,
-          label: "Clean",
+          label: cleanButton.label || "Clean",
           onClick: cleanButton.onClick || onClean,
         }
       : undefined,
     deleteButton
       ? {
           ...deleteButton,
-          label: "Delete",
+          label: deleteButton.label || "Delete",
           onClick: deleteButton.onClick || onDelete,
         }
       : undefined,
     uploadButton
       ? {
           ...uploadButton,
-          label: "Upload",
+          label: uploadButton.label || "Upload",
           onClick: uploadButton.onClick || onUpload,
         }
       : undefined,
     abortButton
       ? {
           ...abortButton,
-          label: "Abort",
+          label: abortButton.label || "Abort",
           onClick: abortButton.onClick || onAbort,
         }
       : undefined,
