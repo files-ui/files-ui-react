@@ -89,6 +89,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     //uploading
     uploadConfig,
     fakeUpload,
+    groupUpload,
     onUploadStart,
     onUploadFinish,
     //styling
@@ -326,6 +327,46 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
     //return;
     let serverResponses: Array<ExtFile> = [];
+    
+    if(groupUpload) {
+    const unifiedUpload = (method, url, arrOfFiles) : Promise<{ success : boolean, message : string, payload: object }> => {
+      arrOfExtFilesInstances.forEach((el) => el.uploadStatus = "uploading");
+      handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+      const formData = new FormData();
+      for (let i=0; i < arrOfFiles.length; i++) {
+        formData.append('files', arrOfFiles[i].file )
+      }
+      return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+        xhr.upload.onprogress =  (e) => {arrOfExtFilesInstances.forEach((el) => { el.progress = (e.loaded / e.total) * 100 });handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true)};
+        xhr.responseType = 'json'
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(xhr.response);
+            console.log(typeof xhr.response);
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
+        };
+        xhr.onerror = (err) => {
+          reject(err);
+        };
+        xhr.open(method, url);
+        xhr.send(formData)
+      });
+    };
+    try {
+      let respo:{ success : boolean, message : string, payload: object} = await unifiedUpload("POST", url, arrOfExtFilesInstances);
+      arrOfExtFilesInstances.forEach( el => el.uploadStatus = "success");
+      arrOfExtFilesInstances.forEach( el => el.uploadMessage = respo.message);
+     } catch (err) {
+      arrOfExtFilesInstances.forEach( el => el.uploadStatus = "error");
+      arrOfExtFilesInstances.forEach( el => el.uploadMessage = err.message);
+        console.log(err)
+      }
+      handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+    } else {
     //Uplad files one by one
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
@@ -405,7 +446,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
       }
     }
-
+  }
     setLocalFiles(sanitizeArrExtFile(arrOfExtFilesInstances));
 
     // upload group finished :D

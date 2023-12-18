@@ -99,6 +99,11 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    */
   fakeUpload?: boolean;
   /**
+   * If set, will upload all loaded files in a single multipart request appending array of files
+   * to the FormData files key
+   */
+  groupUpload?: boolean;
+  /**
    * Callback fired when the upload process starts.
    */
   onUploadStart?: (uploadAbleFiles: ExtFile[]) => void;
