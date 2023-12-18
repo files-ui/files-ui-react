@@ -11,6 +11,16 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
 
+## [1.1.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.1.0) (2023-12-17)
+
+## 🧪 New features and 🐛 :hammer: Improvements
+
+- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone):
+  - There is a new prop `groupUpload` that allows to perform the upload operation of a group of files in a single request.
+  - [FIX: ActionButtonItem.label not working #26 #27](https://github.com/files-ui/files-ui-react/pull/27): Pull request to solve issue on ActionButtonItem.label prop has been merged.
+  - [FIX: ActionButtonItem.disabled not working #28 #29](https://github.com/files-ui/files-ui-react/pull/29): Pull request to solve issue on ActionButtonItem.disabled prop has been merged
+  - [FEAT: Gives the option to send all files in a single request #32 #34](https://github.com/files-ui/files-ui-react/pull/34): Pull request to allow uploading a group of files in a single request.
+
 ## [Files-ui (1.0.0) = Dropzone-ui(7.0.0)](https://github.com/files-ui/files-ui-react/releases/tag/v1.0.0) (2023-03-28)
 
 ## 🧪 New features and 🐛 :hammer: Improvements
