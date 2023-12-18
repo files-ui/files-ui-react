@@ -5,8 +5,8 @@ node_modules
 storybook-static
 src
 stories
-test
-tests
+#test
+#tests
 .eslintrc
 .gitignore
 .coveralls.yml
