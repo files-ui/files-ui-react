@@ -15,8 +15,7 @@ UI components for file uploads with [React js](https://react.dev/).
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/files-ui/react/blob/HEAD/LICENSE)
 [![npm latest package](https://img.shields.io/npm/v/@files-ui/react.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/@files-ui/react) [![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/files-ui/files-ui-react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub Repo stars](https://img.shields.io/github/stars/files-ui/react?label=Star%20me%20please%20:D&style=social)](https://github.com/files-ui/react)
-
-[![Verified on Openbase](https://badges.openbase.com/js/verified/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![Featured on Openbase](https://badges.openbase.com/js/featured/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![Rate this package](https://badges.openbase.com/js/rating/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) [![@files-ui/react Tutorials](https://badges.openbase.com/js/tutorials/@files-ui/react.svg?style=openbase&token=KU5M2S80RznhcbmWDtZx1m9n8DBAO49K6UOwwvd4KVs=)](https://openbase.com/js/@files-ui/react?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![Node.js CI](https://github.com/files-ui/files-ui-react/actions/workflows/node.js.yml/badge.svg)](https://github.com/files-ui/files-ui-react)
 
 </div>
 
@@ -115,6 +114,19 @@ You can find the complete documentation and demos for every component on [files-
 
 <p align="center"><img src="https://user-images.githubusercontent.com/43678736/228066720-e0bb96ac-3c00-4aa6-80b9-e0b4d0c5f947.png" alt="darkmode 2 preview" width="100%"/></p>
 </details>
+
+## Supporters
+
+Special thanks to these amazing people :star: :
+
+### :clap: Stargazers
+
+[![Stargazers repo roster for @files-ui/files-ui-react](https://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?user=files-ui&repo=files-ui-react)](https://github.com/files-ui/files-ui-react/stargazers)
+
+### :clap: Forkers
+
+[![Forkers repo roster for @dropzone-ui/dropzone-ui-react](https://bytecrank.com/nastyox/reporoster/php/forkersSVG.php?user=files-ui&repo=files-ui-react)](https://github.com/files-ui/files-ui-react/network/members)
+
 
 ## License
 
