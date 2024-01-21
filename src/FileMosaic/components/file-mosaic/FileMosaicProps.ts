@@ -1,46 +1,7 @@
-import { Localization, UPLOADSTATUS } from "@files-ui/core"
+import { ExtFile, Localization, UPLOADSTATUS } from "@files-ui/core"
 import { OverridableComponentProps } from "../../../overridable";
 
 export interface FileMosaicPropsMap extends OverridableComponentProps {
-    /**
-     * The identifier for the file
-     */
-    id?: string | number;
-    /**
-     * The file object obtained from client drop or selection
-     */
-    file?: File;
-    /**
-     * The name of the file
-     */
-    name?: string;
-    /**
-     * The file mime type
-     */
-    type?: string;
-    /**
-     * the size of the file in bytes
-     */
-    size?: number;
-    /**
-    * whether to show a valid or rejected message ("ok", "rejected")
-    * by def. valid is false (if not present, it's false too)
-    * This value wil affect preview behaviour,
-    * If not valid, the preview will not be shown, nor the view button
-    */
-    valid?: boolean | null;
-    /**
-     * The list of errors according to the validation criteria or custom validation function given.
-     */
-    errors?: string[];
-    /**
-     * The message from server
-     */
-    uploadMessage?: string;
-    /**
-     * The current upload status of the file
-     */
-    uploadStatus?: UPLOADSTATUS;
     /**
      * if true, and if the file is an image,
      * makes visible the "view" button that will get the image url
@@ -52,19 +13,6 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      * @default false
      */
     info?: boolean;
-    /**
-     * A string representation or web url of the image
-     * that will be set to the "src" prop of an <img/> If
-     * given, the component will use this image source instead of
-     * reading the image file.
-     */
-    imageUrl?: string;
-    /**
-     * A string representation or web url of the video
-     * that will be set to the "src" prop of an <video/> tag
-     * <video src={`${videoUrl}`} />
-     */
-    videoUrl?: string;
     /**
     * If true, a background blur image will be shown
     */
@@ -127,7 +75,6 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      * Callback fired when the component is right clicked if set.
      */
     onRightClick?: (evt: React.MouseEvent) => void;
-
     /**
      * Flag that determines whether actions are visible always, or only on hover event
      */
@@ -136,12 +83,6 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      * If present a tooltip that contains the upload message will be diplayed on hover
      */
     resultOnTooltip?: boolean;
-    /**
-     * The url to be used to perform a GET request in order to download the file.
-     * This action is triggered when download button is clicked or pressed.
-     * In case onDownload prop is given
-     */
-    downloadUrl?: string;
     /**
      * If not present, image width will be set to 100%.
      * 
@@ -164,6 +105,7 @@ export type FileMosaicProps =
     /*   {
         [D in keyof React.HTMLProps<HTMLDivElement>]: React.HTMLProps<HTMLDivElement>[D]
       } & */
+      ExtFile &
     {
         [F in keyof FileMosaicPropsMap]: FileMosaicPropsMap[F]
     }

@@ -28,8 +28,10 @@ import {
   unexpectedErrorUploadResult,
   getRandomInt,
   addClassName,
-  Localization,completeAsureColor, FileIdGenerator,
-} from "@files-ui/core"
+  Localization,
+  completeAsureColor,
+  FileIdGenerator,
+} from "@files-ui/core";
 import { mergeProps } from "../../../overridable";
 import InputHidden from "../../../InputHidden/InputHidden";
 import {
@@ -59,7 +61,12 @@ import {
 } from "../../../utils";
 import { FilesUiContext } from "../../../FilesUiProvider/FilesUiContext";
 import DropLayer from "../../../DropLayer/components/DropLayer";
-import { useDropzoneFileListUpdater, useDropLayerClassName, useDropzoneClassName } from "../../../hooks";
+import {
+  useDropzoneFileListUpdater,
+  useDropLayerClassName,
+  useDropzoneClassName,
+} from "../../../hooks";
+import { isThereValidUrl } from "../../../utils/url.utils";
 
 //import { print_manager } from "../../../../../utils";
 
@@ -146,6 +153,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     cleanOnUpload = true,
     preparingTime = 1500,
     autoUpload = false,
+    urlFromExtFile,
   } = uploadConfig as UploadConfig;
 
   const {
@@ -197,8 +205,11 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const [localMessage, setLocalMessage] = React.useState<string>("");
   //Id for uploding through FuiFileManager
   //const dropzoneId: string | number = useDropzoneFileListID();
- // const dropzoneId: string | number = React.useId();
-  const dropzoneId: string = React.useMemo(() => FileIdGenerator.getNextId() + "",[]);
+  // const dropzoneId: string | number = React.useId();
+  const dropzoneId: string = React.useMemo(
+    () => FileIdGenerator.getNextId() + "",
+    []
+  );
   //React.useId();
   //Flag that determines whether to validate or not
   const validateFilesFlag: boolean = isValidateActive(
@@ -225,6 +236,10 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     validateFilesFlag
   );
   /**
+   * Flag that determines if component should perform upload given url
+   */
+  const shouldUpload: boolean = isThereValidUrl(url, urlFromExtFile, localFiles);
+  /**
    * Uploads each file in the array of ExtFiles
    * First, sets all the files in preparing status and awaits `preparingTime` miliseconds.
    * If `preparingTime` is not given or its value is false or 0, there won´t be a preparing phase.
@@ -247,7 +262,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
-
     //set uploading flag to true
     setIsUploading(true);
 
@@ -271,12 +285,11 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     let arrOfExtFilesInstances: ExtFileInstance[] = [];
 
     const totalNumber: number = localFiles.length;
-   
+
     const missingUpload: number = localFiles.filter((extFile: ExtFile) =>
       isUploadAbleExtFile(extFile, validateFilesFlag)
     ).length;
 
- 
     let totalRejected: number = 0;
     let currentCountUpload: number = 0;
 
@@ -285,7 +298,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
     //no missing to upload
     if (!(missingUpload > 0)) {
-     
       setTimeout(() => {
         if (noMissingFilesLabel)
           setLocalMessage(DropzoneLocalizer.noFilesMessage as string);
@@ -300,7 +312,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       setLocalMessage(uploadingMessenger(`${missingUpload}/${totalNumber}`));
     //  setIsUploading(true);
     //PREPARING stage
-    
+
     onUploadStart?.(localFiles);
 
     arrOfExtFilesInstances =
@@ -315,138 +327,154 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       x.toExtFile()
     );
 
-  
     //CHANGE (o alejo el isUploading o lo alejo para que tenga m,as tiempo antes de la respuyesta)
     // setIsUploading(true);
     handleFilesChange(newExtFileLocal, true);
 
-   
     //AWAIT when preparing time is given
     //general sleep for all files
     await sleepPreparing(preparingTime);
 
     //return;
     let serverResponses: Array<ExtFile> = [];
-    
-    if(groupUpload) {
-    const unifiedUpload = (method, url, arrOfFiles) : Promise<{ success : boolean, message : string, payload: object }> => {
-      arrOfExtFilesInstances.forEach((el) => el.uploadStatus = "uploading");
-      handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
-      const formData = new FormData();
-      for (let i=0; i < arrOfFiles.length; i++) {
-        formData.append('files', arrOfFiles[i].file )
-      }
-      return new Promise((resolve, reject) => {
-        let xhr = new XMLHttpRequest();
-        xhr.upload.onprogress =  (e) => {arrOfExtFilesInstances.forEach((el) => { el.progress = (e.loaded / e.total) * 100 });handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true)};
-        xhr.responseType = 'json'
-        xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            console.log(xhr.response);
-            console.log(typeof xhr.response);
-            resolve(xhr.response);
-          } else {
-            reject(xhr.response);
-          }
-        };
-        xhr.onerror = (err) => {
-          reject(err);
-        };
-        xhr.open(method, url);
-        xhr.send(formData)
-      });
-    };
-    try {
-      let respo:{ success : boolean, message : string, payload: object} = await unifiedUpload("POST", url, arrOfExtFilesInstances);
-      arrOfExtFilesInstances.forEach( el => el.uploadStatus = "success");
-      arrOfExtFilesInstances.forEach( el => el.uploadMessage = respo.message);
-     } catch (err) {
-      arrOfExtFilesInstances.forEach( el => el.uploadStatus = "error");
-      arrOfExtFilesInstances.forEach( el => el.uploadMessage = err.message);
-        console.log(err)
+
+    if (groupUpload) {
+      const unifiedUpload = (
+        method,
+        url,
+        arrOfFiles
+      ): Promise<{ success: boolean; message: string; payload: object }> => {
+        arrOfExtFilesInstances.forEach((el) => (el.uploadStatus = "uploading"));
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+        const formData = new FormData();
+        for (let i = 0; i < arrOfFiles.length; i++) {
+          formData.append("files", arrOfFiles[i].file);
+        }
+        return new Promise((resolve, reject) => {
+          let xhr = new XMLHttpRequest();
+          xhr.upload.onprogress = (e) => {
+            arrOfExtFilesInstances.forEach((el) => {
+              el.progress = (e.loaded / e.total) * 100;
+            });
+            handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+          };
+          xhr.responseType = "json";
+          xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              console.log(xhr.response);
+              console.log(typeof xhr.response);
+              resolve(xhr.response);
+            } else {
+              reject(xhr.response);
+            }
+          };
+          xhr.onerror = (err) => {
+            reject(err);
+          };
+          xhr.open(method, url);
+          xhr.send(formData);
+        });
+      };
+      try {
+        let respo: { success: boolean; message: string; payload: object } =
+          await unifiedUpload("POST", url, arrOfExtFilesInstances);
+        arrOfExtFilesInstances.forEach((el) => (el.uploadStatus = "success"));
+        arrOfExtFilesInstances.forEach(
+          (el) => (el.uploadMessage = respo.message)
+        );
+      } catch (err) {
+        arrOfExtFilesInstances.forEach((el) => (el.uploadStatus = "error"));
+        arrOfExtFilesInstances.forEach(
+          (el) => (el.uploadMessage = err.message)
+        );
+        console.log(err);
       }
       handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
     } else {
-    //Uplad files one by one
-    for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
-      const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
+      //Uplad files one by one
+      for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
+        const currentExtFileInstance: ExtFileInstance =
+          arrOfExtFilesInstances[i];
 
-     
-      if (
-        currentExtFileInstance.uploadStatus === "preparing" &&
-        !currentExtFileInstance.extraData?.deleted
-      ) {
-        //set stage to "uploading" in one file and notify change
-        // PREPARING => UPLOADING
-        await sleepTransition();
-
-        instantPreparingToUploadOne(currentExtFileInstance);
-
-        //messge in footer
-        if (uploadProgressMessage)
-          setLocalMessage(
-            uploadingMessenger(`${++currentCountUpload}/${missingUpload}`)
-          );
-
-        //CHANGE FILES
-        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
-
-        //UPLOADING => UPLOAD()
-        //upload one file and notify about change
-        let uploadResponse: ExtFile;
-
-        if (fakeUpload) {
-          uploadResponse = await fakeFuiUpload(
-            currentExtFileInstance,
-            DropzoneLocalizer
-          );
-
-          let fakeProgress = 0;
-          while (fakeProgress < 100) {
-            fakeProgress += getRandomInt(21, 35);
-            currentExtFileInstance.progress =
-              fakeProgress > 100 ? 100 : fakeProgress;
-            await sleepTransition(1000);
-            handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
-          }
-        } else {
-          try {
-            uploadResponse = await uploadExtFile(
-              currentExtFileInstance,
-              url,
-              method,
-              headers,
-              uploadLabel
-            );
-          } catch (error) {
-            uploadResponse = unexpectedErrorUploadResult(
-              currentExtFileInstance.toExtFile()
-            );
-          }
-        }
-
-        const uploadedFile = uploadResponse;
-
-        //update instances
-        currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
-        currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
-
-        //CHANGE
-        if (!(currentExtFileInstance.uploadStatus === "aborted"))
+        if (
+          currentExtFileInstance.uploadStatus === "preparing" &&
+          !currentExtFileInstance.extraData?.deleted
+        ) {
+          //set stage to "uploading" in one file and notify change
+          // PREPARING => UPLOADING
           await sleepTransition();
 
-        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+          instantPreparingToUploadOne(currentExtFileInstance);
 
-        if (uploadedFile.uploadStatus === "error") {
-          totalRejected++;
+          //messge in footer
+          if (uploadProgressMessage)
+            setLocalMessage(
+              uploadingMessenger(`${++currentCountUpload}/${missingUpload}`)
+            );
+
+          //CHANGE FILES
+          handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+
+          //UPLOADING => UPLOAD()
+          //upload one file and notify about change
+          let uploadResponse: ExtFile;
+
+          if (fakeUpload) {
+            uploadResponse = await fakeFuiUpload(
+              currentExtFileInstance,
+              DropzoneLocalizer
+            );
+
+            let fakeProgress = 0;
+            while (fakeProgress < 100) {
+              fakeProgress += getRandomInt(21, 35);
+              currentExtFileInstance.progress =
+                fakeProgress > 100 ? 100 : fakeProgress;
+              await sleepTransition(1000);
+              handleFilesChange(
+                sanitizeArrExtFile(arrOfExtFilesInstances),
+                true
+              );
+            }
+          } else {
+            try {
+              uploadResponse = await uploadExtFile(
+                currentExtFileInstance,
+                url,
+                urlFromExtFile,
+                method,
+                headers,
+                uploadLabel
+              );
+            } catch (error) {
+              uploadResponse = unexpectedErrorUploadResult(
+                currentExtFileInstance.toExtFile()
+              );
+            }
+          }
+
+          const uploadedFile = uploadResponse;
+
+          //update instances
+          currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
+          currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
+
+          //CHANGE
+          if (!(currentExtFileInstance.uploadStatus === "aborted"))
+            await sleepTransition();
+
+          handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+
+          if (uploadedFile.uploadStatus === "error") {
+            totalRejected++;
+          }
+
+          serverResponses.push(uploadResponse);
+        } else {
+          handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
         }
-
-        serverResponses.push(uploadResponse);
-      } else {
-        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
       }
     }
-  }
     setLocalFiles(sanitizeArrExtFile(arrOfExtFilesInstances));
 
     // upload group finished :D
@@ -466,7 +494,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   const handleAbortUpload = () => {
     const listExtFileLocal: ExtFileInstance[] | undefined =
       ExtFileManager.getExtFileInstanceList(dropzoneId);
-    
+
     if (!listExtFileLocal) return;
     listExtFileLocal.forEach((extFileInstance: ExtFileInstance) => {
       if (
@@ -540,7 +568,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     extFileList: ExtFile[],
     isUploading?: boolean
   ): void => {
-    
     let finalExtFileList: ExtFile[] =
       behaviour === "add" && !isUploading
         ? [...localFiles, ...extFileList]
@@ -551,7 +578,6 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       setLocalFiles(finalExtFileList);
     }
     if (autoUpload && !isUploading) {
-      
       uploadfiles(finalExtFileList);
     }
   };
@@ -575,7 +601,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       }
     }
     //init xhr on each ext file
-    if (url) extFileListOutput = toUploadableExtFileList(extFileListOutput);
+    if (shouldUpload)
+      extFileListOutput = toUploadableExtFileList(extFileListOutput);
 
     // Clean input element to trigger onChange event on input
     cleanInput(inputRef.current);
@@ -595,8 +622,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
    */
   const outerFuiValidation = (fuiFileListToValidate: ExtFile[]): ExtFile[] => {
     const localValidator: FileValidatorProps = { maxFileSize, accept };
-   
-    
+
     let finalNumberOfValids: number = numberOfValidFiles;
     if (behaviour === "replace") {
       //re-start number of valids
@@ -611,7 +637,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       maxFiles,
       localization
     );
-  
+
     return validatedFuiFileList;
   };
 
@@ -693,7 +719,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     }
 
     //init xhr on each ext file
-    if (url) extFileListOutput = toUploadableExtFileList(extFileListOutput);
+    if (shouldUpload)
+      extFileListOutput = toUploadableExtFileList(extFileListOutput);
 
     handleFilesChange(extFileListOutput);
   };
@@ -801,7 +828,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
                     maxFiles && validFilesCountHeader ? maxFiles : undefined
                   }
                   localization={localization}
-                  urlPresent={url !== undefined && uploadFilesHeader}
+                  urlPresent={shouldUpload && uploadFilesHeader}
                   onUploadStart={
                     !autoUpload && !uploadButton
                       ? () => uploadfiles(localFiles)

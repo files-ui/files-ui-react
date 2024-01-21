@@ -153,8 +153,6 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * @default false
    */
   disableRipple?: boolean;
-
-
   /**
    * Method for performing specific tasks on drag enter operations
    */
