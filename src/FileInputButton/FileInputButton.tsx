@@ -23,7 +23,7 @@ import {
   toUploadableExtFileList,
   cleanInput,
   FileIdGenerator,
-} from "@files-ui/core"
+} from "@files-ui/core";
 import { DropzoneActions } from "../Dropzone/components/dropzone/DropzoneProps";
 import DropzoneButtons from "../Dropzone/components/DropzoneButtons/DropzoneButtons";
 import { FilesUiContext } from "../FilesUiProvider/FilesUiContext";
@@ -37,6 +37,7 @@ import {
   defaultFileInputButtonProps,
   FileInputButtonProps,
 } from "./InputButtonProps";
+import { isThereValidUrl } from "../utils/url.utils";
 
 const FileInputButton: React.FC<FileInputButtonProps> = (
   props: FileInputButtonProps
@@ -114,6 +115,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     cleanOnUpload = true,
     preparingTime = 1500,
     autoUpload = false,
+    urlFromExtFile,
   } = uploadConfig as UploadConfig;
 
   const {
@@ -138,7 +140,10 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
   //Id for uploding through FuiFileManager
   //const inputButtonId: string | number = React.useId();
-  const inputButtonId: string = React.useMemo(() => FileIdGenerator.getNextId() + "",[]);
+  const inputButtonId: string = React.useMemo(
+    () => FileIdGenerator.getNextId() + "",
+    []
+  );
   //Flag that determines whether to validate or not
   const validateFilesFlag: boolean = isValidateActive(
     accept,
@@ -165,6 +170,14 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     validateFilesFlag
   );
   /**
+   * Flag that determines if component should perform upload given url
+   */
+  const shouldUpload: boolean = isThereValidUrl(
+    url,
+    urlFromExtFile,
+    localFiles
+  );
+  /**
    * Uploads each file in the array of ExtFiles
    * First, sets all the files in preparing status and awaits `preparingTime` miliseconds.
    * If `preparingTime` is not given or its value is false or 0, there won´t be a preparing phase.
@@ -187,7 +200,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
    * @returns nothing
    */
   const uploadfiles = async (localFiles: ExtFile[]): Promise<void> => {
-   
     //set uploading flag to true
     setIsUploading(true);
 
@@ -241,7 +253,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
       x.toExtFile()
     );
 
-
     //CHANGE (o alejo el isUploading o lo alejo para que tenga m,as tiempo antes de la respuyesta)
     // setIsUploading(true);
     handleFilesChange(newExtFileLocal, true);
@@ -258,8 +269,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     //Uplad files one by one
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
-
-   
 
       if (
         currentExtFileInstance.uploadStatus === "preparing" &&
@@ -297,6 +306,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
             uploadResponse = await uploadExtFile(
               currentExtFileInstance,
               url,
+              urlFromExtFile,
               method,
               headers,
               uploadLabel
@@ -383,7 +393,6 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     extFileList: ExtFile[],
     isUploading?: boolean
   ): void => {
-
     let finalExtFileList: ExtFile[] =
       behaviour === "add" && !isUploading
         ? [...localFiles, ...extFileList]
@@ -417,8 +426,9 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
         extFileListOutput = extFileListOutput.filter((f) => f.valid);
       }
     }
-    //init xhr on each dui file
-    if (url) extFileListOutput = toUploadableExtFileList(extFileListOutput);
+    //init xhr on each ext file
+    if (shouldUpload)
+      extFileListOutput = toUploadableExtFileList(extFileListOutput);
 
     // Clean input element to trigger onChange event on input
     cleanInput(inputRef.current);

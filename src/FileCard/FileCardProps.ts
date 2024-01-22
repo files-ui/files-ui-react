@@ -1,3 +1,4 @@
+import { ExtFile } from "@files-ui/core";
 import { FileMosaicPropsMap } from "../FileMosaic/components/file-mosaic/FileMosaicProps";
 
 
@@ -7,7 +8,7 @@ export interface FileCardPropsMap extends FileMosaicPropsMap {
 }
 
 
-export type FileCardProps = {
+export type FileCardProps = ExtFile & {
     [F in keyof FileCardPropsMap]: FileCardPropsMap[F]
 }
 

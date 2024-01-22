@@ -11,6 +11,48 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
 
+## [1.2.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.1.0) (2024-01-21)
+
+## 🧪 🚀 Allow uploading files with different URLs
+
+- Enhanced components to perform the upload operation with a different urls for each [ExtFile](https://www.files-ui.com/types#extfile). 
+  - [ExtFile](https://www.files-ui.com/types#extfile): Added a new property in ExtFile type: `uploadUrl`.
+  - [\<Dropzone/\>](https://www.files-ui.com/components/dropzone) & [\<FileInputButton/\>](https://www.files-ui.com/components/fileinputbutton): There is a new sub-prop `uploadConfig.customUrl()` that is a fucntion that given an extFile object, obtains a custom url.
+- The order of priority is as follows:
+    - 1) ExtFile.uploadUrl
+    - 2) DropzoneProps.UploadConfig.customUrl
+    - 3) DropzoneProps.UploadConfig.url
+
+- The setup can be as follows:
+
+```jsx
+    ...
+    return(
+      <React.Fragment>
+        <Dropzone
+            uploadConfig={
+              customUrl: (extFile)=> "https://urlfromserver/" + extFile.name
+            }
+        />
+        <FileInputButton
+            uploadConfig={
+              customUrl: (extFile)=> "https://urlfromserver/" + extFile.name
+            }
+        />
+        <Dropzone
+          onChange={updateFiles}
+          value={files}
+        >
+          {files.map((file) => (
+              <FileMosaic key={file.id} {...file} uploadUrl={"https://urlfromserver/" + extFile.id}/>
+            ))}
+        </Dropzone>
+
+      
+      </React.Fragment>
+    )
+```
+
 ## [1.1.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.1.0) (2023-12-17)
 
 ## 🧪 New features and 🐛 :hammer: Improvements
@@ -35,7 +77,7 @@ Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-
 
 - [\<FileCard/\>](https://www.files-ui.com/components/filecard): This new component is an alternative version of FileMosaic. It displays the file info in a card. Receives the same props as FileMosaic plus `elevation`.
 
-- [\<FileInputButton/\>](https://www.files-ui.com/components/dropzone): This component replaces the old "InputButton" component. The features are the same as the dropzone except the header and footer related features. That means that this component now can trigger the upload progress.
+- [\<FileInputButton/\>](https://www.files-ui.com/components/fileinputbutton): This component replaces the old "InputButton" component. The features are the same as the dropzone except the header and footer related features. That means that this component now can trigger the upload progress.
   Validation is optional, so non valid files can be uploaded.
 
 - [\<Avatar/\>](https://www.files-ui.com/components/avatar): This new component is designed tohandle the selection of images for changing the avatar. Can recieve as source an string url or even a File.
