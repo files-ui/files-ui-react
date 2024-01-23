@@ -207,7 +207,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     // flag is already true or there isnt files
     //url was not provided
 
-    if (isUploading || localFiles.length === 0 || !url) {
+    if (isUploading || localFiles.length === 0 || !shouldUpload) {
       setIsUploading(false);
       return;
     }

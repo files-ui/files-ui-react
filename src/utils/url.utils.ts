@@ -5,5 +5,5 @@ export const isThereValidUrl = (
     urlFunction?: Function,
     extFileList?: ExtFile[]
 ): boolean => {
-    return ExtFileInstance.someValidUrl(extFileList) && url && url.length && urlFunction != undefined;
+    return ExtFileInstance.someValidUrl(extFileList || []) || urlFunction != undefined || (url != undefined && url.length > 0);
 }

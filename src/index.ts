@@ -58,10 +58,9 @@ export {
     JsonParseResponse,
     NAMED_COLORS,
     NO_XHR_PROVIDED_ERROR,
-    NamedColor, SyntheticFile,
+    SyntheticFile,
     TIMEOUT_ERROR_RESPONSE,
     UNEXPECTED_ERROR_RESPONSE,
-    UploadPromiseResponse,
     ValidateErrorEnglish,
     ValidateErrorFrench,
     ValidateErrorItalian,
@@ -128,7 +127,7 @@ export {
     sleepTransition,
     unableToUploadResult,
     unexpectedErrorUploadResult,
-} from "@files-ui/core"
+} from "@files-ui/core";
 
 export type {
     ExtFile,
@@ -145,7 +144,9 @@ export type {
     FileValidatorProps,
     FunctionLabel,
     LocalLabels,
-    Method
+    Method,
+    NamedColor,
+    UploadPromiseResponse
 } from "@files-ui/core"
 
 
