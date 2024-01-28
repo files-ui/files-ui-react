@@ -154,6 +154,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     preparingTime = 1500,
     autoUpload = false,
     urlFromExtFile,
+    asBlob = false,
   } = uploadConfig as UploadConfig;
 
   const {
@@ -238,7 +239,11 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
   /**
    * Flag that determines if component should perform upload given url
    */
-  const shouldUpload: boolean = isThereValidUrl(url, urlFromExtFile, localFiles);
+  const shouldUpload: boolean = isThereValidUrl(
+    url,
+    urlFromExtFile,
+    localFiles
+  );
   /**
    * Uploads each file in the array of ExtFiles
    * First, sets all the files in preparing status and awaits `preparingTime` miliseconds.
@@ -444,7 +449,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
                 urlFromExtFile,
                 method,
                 headers,
-                uploadLabel
+                uploadLabel,
+                asBlob
               );
             } catch (error) {
               uploadResponse = unexpectedErrorUploadResult(

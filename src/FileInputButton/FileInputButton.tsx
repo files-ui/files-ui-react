@@ -116,6 +116,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     preparingTime = 1500,
     autoUpload = false,
     urlFromExtFile,
+    asBlob = false,
   } = uploadConfig as UploadConfig;
 
   const {
@@ -309,7 +310,8 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
               urlFromExtFile,
               method,
               headers,
-              uploadLabel
+              uploadLabel,
+              asBlob
             );
           } catch (error) {
             uploadResponse = unexpectedErrorUploadResult(
