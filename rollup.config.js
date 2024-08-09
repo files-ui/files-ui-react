@@ -1,4 +1,5 @@
 import commonjs from "@rollup/plugin-commonjs";
+import css from "rollup-plugin-import-css";
 import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
@@ -22,6 +23,7 @@ export default {
     },
   ],
   plugins: [
+    css(),
     sass({ insert: true }),
     
     peerDepsExternal(),
