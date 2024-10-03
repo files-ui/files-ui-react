@@ -9,7 +9,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   * Probably one of the most important methods (callbacks).
   * `onChange()` returns as first parameter an array of `ExtFile` objects,
   * with at least the following structure:
-  * 
+  *
   * ```jsx
   * export type ExtFile =
   * {
@@ -21,7 +21,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   *    uploadStatus?: undefined | "uploading", "success", "error";
   * }
   * ```
-  * This event is triggered when upload starts and when upload 
+  * This event is triggered when upload starts and when upload
   * finishes for each file in order to update the props on each ExtFile
   */
   onChange?: (files: ExtFile[]) => void;
@@ -35,10 +35,10 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   /**
   * The default implementation of accept
   * checks the file's mime type or extension
-  * against this list. This is a comma-separated 
-  * list of one or more file types, or unique file type specifiers, 
+  * against this list. This is a comma-separated
+  * list of one or more file types, or unique file type specifiers,
   * describing which file types to allow.
-  * E.g.: 
+  * E.g.:
   * ```js
   * acccept="image/*, application/pdf, .psd"
   * ```
@@ -70,12 +70,12 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    */
   onClean?: Function;
   /**
-   * If true, the component will automatically remove non valid files when user 
+   * If true, the component will automatically remove non valid files when user
    * drops files or selects them from file dialog. This flag will only work if validation is active.
    */
   autoClean?: boolean;
   /**
-   * When given, "clean" button will be visible and 
+   * When given, "clean" button will be visible and
    * every time user clicks the buttom it will trigger the default "clean operation":
    * Remove non valid files.
    * This flag will only work if validation is active.
@@ -90,6 +90,13 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   * and uploadOnDrop prop flag will not work.
   */
   uploadConfig?: UploadConfig;
+
+  /**
+   * Will be set on the XHRequest.withCredentials property
+   * Default is false
+   */
+  withCredentials?: boolean;
+
   /**
    * If set, the component will simulate the upload operation by randomly
         setting the upload status and message on each uploadable{" "}
@@ -113,7 +120,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   onUploadFinish?: (uploadedFiles: ExtFile[]) => void;
 
 
-  ///////////////          STYLING          ///////////    
+  ///////////////          STYLING          ///////////
   //borderRadius?: string | number;
   /**
    * The background color for dropzone container.
@@ -124,8 +131,8 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * The min height of the component.
    * If the value is given in number format, "px" will be assumed
    * @default "180px"
-   * 
-   * examples: 
+   *
+   * examples:
    *    "50vh"
    *    "20%"
    *    "40em"
@@ -133,7 +140,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    */
   minHeight?: string | number;
 
-  ///////////////// LABEL ///////////////   
+  ///////////////// LABEL ///////////////
   /**
   * The label to place when no files were selected
   */
@@ -203,7 +210,7 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   */
   disabled?: boolean;
   //CLICKABLE
-  /** 
+  /**
     * If false, the component will not be clickable. So, file dialog will not be opened.
     * @default true
     */
@@ -237,15 +244,15 @@ export type FooterConfig = {
    */
   allowedTypesLabel?: boolean;
   /**
-   * 
+   *
    */
   uploadProgressMessage?: boolean;
   /**
-   * 
+   *
    */
   uploadResultMessage?: boolean;
   /**
-   * 
+   *
    */
   noMissingFilesLabel?: boolean;
 
@@ -300,6 +307,7 @@ export const defaultDrozoneProps: DropzoneProps =
   disabled: false,
   dropOnLayer: true,
   uploadConfig: {},
+  withCredentials: false,
   actionButtons: {},
   header: true,
   footer: true,
@@ -310,7 +318,7 @@ export const defaultDrozoneProps: DropzoneProps =
 export const DEFAULT_BORDER_RADIUS = "8px";
 
 
-/* 
+/*
 export interface AdvancedConfigItem {
   style?: React.CSSProperties;
   className?: string;

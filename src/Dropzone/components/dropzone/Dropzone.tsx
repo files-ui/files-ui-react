@@ -95,6 +95,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     autoClean,
     //uploading
     uploadConfig,
+    withCredentials,
     fakeUpload,
     groupUpload,
     onUploadStart,
@@ -357,6 +358,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         }
         return new Promise((resolve, reject) => {
           let xhr = new XMLHttpRequest();
+          xhr.withCredentials = withCredentials;
           xhr.upload.onprogress = (e) => {
             arrOfExtFilesInstances.forEach((el) => {
               el.progress = (e.loaded / e.total) * 100;
