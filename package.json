@@ -2,9 +2,21 @@
   "name": "@files-ui/react",
   "version": "1.2.3",
   "description": "UI components for file uploads with React js",
+  "type": "module",
   "main": "./build/index.js",
   "module": "./build/index.es.js",
   "types": "./build/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.es.js",
+      "require": "./build/index.js"
+    }
+  },
+  "files": [
+    "build"
+  ],
+  "sideEffects": false,
   "scripts": {
     "build": "rollup -c",
     "test": "jest"
