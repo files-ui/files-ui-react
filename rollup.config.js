@@ -3,11 +3,10 @@ import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
 import sass from "rollup-plugin-sass";
-import { terser } from "rollup-plugin-terser";
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const packageJson = require('./package.json');
-
+import packageJson from "./package.json";
+//import jsx from 'rollup-plugin-jsx'
+//import json from "rollup-plugin-json";
+//import { terser } from "rollup-plugin-terser";
 export default {
   input: "./src/index.ts",
   output: [
@@ -15,32 +14,24 @@ export default {
       file: packageJson.main,
       format: "cjs",
       sourcemap: true,
-      exports: "named",
     },
     {
       file: packageJson.module,
       format: "esm",
       sourcemap: true,
-      exports: "named",
     },
   ],
   plugins: [
     sass({ insert: true }),
+    
     peerDepsExternal(),
-    resolve({
-      extensions: [".ts", ".tsx", ".js", ".jsx"],
-      preferBuiltins: true,
-      mainFields: ["module", "main", "browser"],
-    }),
-    commonjs({
-      include: /node_modules/,
-      extensions: [".js", ".ts"],
-    }),
-    typescript({
-      tsconfig: "./tsconfig.json",
-      clean: true,
-    }),
-    terser(),
+    resolve(
+     // { preferBuiltins: true, mainFields: ['browser'] }
+      ),
+    commonjs(),
+    typescript(),
+    //terser(),
+    //json(),
+    // jsx( {factory: 'React.createElement'} ),
   ],
-  external: ["react", "react-dom"],
 };
