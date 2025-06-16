@@ -346,19 +346,26 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
 
     if (groupUpload) {
       const unifiedUpload = (
-        method,
-        url,
-        arrOfFiles
+        method: string,
+        url: string,
+        arrOfFiles: ExtFile[]
       ): Promise<{ success: boolean; message: string; payload: object }> => {
+        if (typeof method !== 'string' || typeof url !== 'string') {
+          return Promise.reject(new Error("Method or URL is invalid"));
+        }
+
         arrOfExtFilesInstances.forEach((el) => (el.uploadStatus = "uploading"));
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
         const formData = new FormData();
         for (let i = 0; i < arrOfFiles.length; i++) {
-          formData.append("files", arrOfFiles[i].file);
+          const file = arrOfFiles[i].file;
+          if (file instanceof File) {
+            formData.append("files", file);
+          }
         }
         return new Promise((resolve, reject) => {
           let xhr = new XMLHttpRequest();
-          xhr.withCredentials = withCredentials;
+          xhr.withCredentials = withCredentials ?? false;
           xhr.upload.onprogress = (e) => {
             arrOfExtFilesInstances.forEach((el) => {
               el.progress = (e.loaded / e.total) * 100;
@@ -383,16 +390,19 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         });
       };
       try {
+        if (!url) {
+          throw new Error("Upload URL is not defined");
+        }
         let respo: { success: boolean; message: string; payload: object } =
           await unifiedUpload("POST", url, arrOfExtFilesInstances);
         arrOfExtFilesInstances.forEach((el) => (el.uploadStatus = "success"));
         arrOfExtFilesInstances.forEach(
           (el) => (el.uploadMessage = respo.message)
         );
-      } catch (err) {
+      } catch (err: unknown) {
         arrOfExtFilesInstances.forEach((el) => (el.uploadStatus = "error"));
         arrOfExtFilesInstances.forEach(
-          (el) => (el.uploadMessage = err.message)
+          (el) => (el.uploadMessage = err instanceof Error ? err.message : 'Unknown error occurred')
         );
         console.log(err);
       }
@@ -692,7 +702,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     );
   };
 
-  // KAMUI => RECIEVE FILES FROM DROP OR INPUT( CLICK ), VALIDATE AND CHANGE
+  // KAMUI => RECIEIVE FILES FROM DROP OR INPUT( CLICK ), VALIDATE AND CHANGE
 
   /**
    * Performs the action of recieving the files when user drops the files

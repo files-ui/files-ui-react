@@ -1,14 +1,18 @@
-const config = {
-  roots: ["<rootDir>/tests"],
+module.exports = {
+  testEnvironment: 'jsdom',
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.json',
+        isolatedModules: true,
+        diagnostics: {
+          ignoreCodes: [151001]
+        }
+      }
+    ]
   },
-  preset: "ts-jest",
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node", "d.ts"],
   moduleNameMapper: {
-    "^.+\\.(css|less|scss)$": "identity-obj-proxy",
-  },
-  testEnvironment: "jsdom",
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
+  }
 };
-module.exports = config;
