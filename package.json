@@ -9,6 +9,7 @@
     "build": "rollup -c",
     "test": "jest"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/files-ui/files-ui-react.git"

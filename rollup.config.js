@@ -3,10 +3,12 @@ import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
 import sass from "rollup-plugin-sass";
-import packageJson from "./package.json";
-//import jsx from 'rollup-plugin-jsx'
-//import json from "rollup-plugin-json";
-//import { terser } from "rollup-plugin-terser";
+import dts from 'rollup-plugin-dts';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf8"));
+
 export default {
   input: "./src/index.ts",
   output: [
@@ -29,7 +31,11 @@ export default {
      // { preferBuiltins: true, mainFields: ['browser'] }
       ),
     commonjs(),
-    typescript(),
+    typescript({ tsconfig: './tsconfig.build.json' }),
+    dts({
+      insertTypesEntry: true,
+      tsconfig: './tsconfig.build.json',
+    }),
     //terser(),
     //json(),
     // jsx( {factory: 'React.createElement'} ),
