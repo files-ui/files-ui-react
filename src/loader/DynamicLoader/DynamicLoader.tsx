@@ -5,7 +5,7 @@ import LoaderContainer from "../LoaderContainer/LoaderContainer";
 import { DynamicLoaderProps } from "./DynamicLoaderProps";
 import "./DynamicLoader.scss";
 const DynamicLoader: React.FC<DynamicLoaderProps> = (
-  props: DynamicLoaderProps
+  props: DynamicLoaderProps,
 ) => {
   const {
     size,
@@ -23,14 +23,11 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
     onClick,
   } = props;
 
-  //console.table(props);
-  ////console.log("percentage", percentage);
-
   const finalRadius = radius || 28;
   const finalX = x || 30;
   const finalY = y || 30;
   const finalSize = parseSize(size);
-  const finalStyle = style ? style : {};
+  const finalStyle = style || {};
 
   const circleRef: React.RefObject<SVGCircleElement> =
     React.useRef<SVGCircleElement>(null);
@@ -38,7 +35,7 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
   function setProgress(
     percent: number,
     myCircle: SVGCircleElement,
-    circumference: number
+    circumference: number,
   ) {
     myCircle.style.strokeDashoffset = `${circumference * (1 - percent / 100)}`;
 
@@ -62,7 +59,7 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
       setProgress(
         percentage >= 100 ? 100 : percentage,
         myCircle,
-        circumference
+        circumference,
       );
     }
   }, [percentage]);

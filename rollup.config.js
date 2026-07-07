@@ -1,37 +1,34 @@
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import typescript from "rollup-plugin-typescript2";
+import typescript from "@rollup/plugin-typescript";
 import sass from "rollup-plugin-sass";
-import packageJson from "./package.json";
-//import jsx from 'rollup-plugin-jsx'
-//import json from "rollup-plugin-json";
-//import { terser } from "rollup-plugin-terser";
 export default {
   input: "./src/index.ts",
   output: [
     {
-      file: packageJson.main,
+      file: "./build/index.js",
       format: "cjs",
       sourcemap: true,
     },
     {
-      file: packageJson.module,
+      file: "./build/index.es.js",
       format: "esm",
       sourcemap: true,
     },
   ],
+  // rollup.config.js
   plugins: [
-    sass({ insert: true }),
-    
+    sass({
+      insert: true,
+      options: {
+        // Silences the Dart Sass legacy API warnings cleanly
+        silenceDeprecations: ["legacy-js-api"],
+      },
+    }),
     peerDepsExternal(),
-    resolve(
-     // { preferBuiltins: true, mainFields: ['browser'] }
-      ),
+    resolve(),
     commonjs(),
     typescript(),
-    //terser(),
-    //json(),
-    // jsx( {factory: 'React.createElement'} ),
   ],
 };

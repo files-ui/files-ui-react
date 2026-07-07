@@ -9,7 +9,7 @@ import {
   Localization,
   //handleClickUtil,
   shrinkWord,
-} from "@files-ui/core"
+} from "@files-ui/core";
 
 import FileCardRightActions from "./components/FileCardRightActions";
 import FileCardInfoLayer from "./components/FileCardInfoLayer";
@@ -21,7 +21,11 @@ import { FileMosaicStatus } from "../FileMosaic";
 import Layer from "../FileMosaic/components/file-mosaic-layer/Layer";
 import LayerContainer from "../FileMosaic/components/file-mosaic-layer/LayerContainer";
 import FileMosaicImageLayer from "../FileMosaic/components/FIleMosaicImageLayer/FileMosaicImageLayer";
-import { useProgress, useFileMosaicInitializer, useIsUploading } from "../hooks";
+import {
+  useProgress,
+  useFileMosaicInitializer,
+  useIsUploading,
+} from "../hooks";
 import { handleClickUtil } from "../utils";
 
 const setFinalElevation = (elevation: string | number): number => {
@@ -44,7 +48,7 @@ const makeFileCardClassName = (
   elevation: FileCardProps["elevation"],
   darkMode: boolean | undefined,
   className: string | undefined,
-  clickable?: boolean
+  clickable?: boolean,
 ): string => {
   //console.log("FileCard makeFileCardClassName", elevation, darkMode, className);
   let finalClassName: string =
@@ -84,7 +88,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
 
     xhr,
 
-    localization:locProps,
+    localization: locProps,
     preview,
     imageUrl,
     videoUrl,
@@ -109,6 +113,9 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     onDoubleClick,
     onClick,
     onRightClick,
+    selectable = false,
+    selected = false,
+    onSelect,
 
     elevation = 4,
     smartImgFit = "orientation",
@@ -124,24 +131,23 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     locProps !== undefined ? locProps : locContext;
   const darkMode: boolean | undefined =
     darkModeProp !== undefined ? darkModeProp : darkModeContext;
-  //console.log("globalConfig", darkMode, icons);
 
   //ref for anchor element
-  const downloadRef = React.useRef<HTMLAnchorElement>(null);
+  const downloadRef = React.useRef<HTMLAnchorElement | null>(null);
 
   //className created
   const finalClassName: string = makeFileCardClassName(
     elevation,
     darkMode,
     className,
-    onClick !== undefined
+    onClick !== undefined,
   );
 
   // local properties from file
   const [localName, localType, localSize]: [
     string,
     string | undefined,
-    number | undefined
+    number | undefined,
   ] = getLocalFileItemData(file, propName, propType, propSize);
 
   // handle progress
@@ -154,7 +160,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     boolean,
     string,
     string | undefined,
-    File | string | undefined
+    File | string | undefined,
   ] = useFileMosaicInitializer(
     file,
     propName,
@@ -163,8 +169,9 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     preview as boolean,
     imageUrl,
     videoUrl,
-    icons
+    icons,
   );
+  const effectiveDownloadUrl: string | undefined = videoUrl || downloadUrl;
   //The size formatted and rounded in 2 decimals
   const sizeFormatted: string | undefined = fileSizeFormater(localSize);
 
@@ -208,14 +215,14 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
    * @param e event object
    */
   function handleClick<T extends HTMLDivElement>(
-    e: React.MouseEvent<T, MouseEvent>
+    e: React.MouseEvent<T, MouseEvent>,
   ): void {
     //avoid children to trigger onClick ripple from parent
     e.stopPropagation();
     onClick?.(e);
   }
   const handleDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
-    evt: React.MouseEvent
+    evt: React.MouseEvent,
   ): void => {
     //alert("double click on file");
     evt.preventDefault();
@@ -247,8 +254,8 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
    */
   const handleDownload = () => {
     if (onDownload) {
-      onDownload?.(id, downloadUrl);
-    } else if (typeof downloadUrl == "string") {
+      onDownload?.(id, effectiveDownloadUrl);
+    } else if (typeof effectiveDownloadUrl == "string") {
       innerDownload();
     }
   };
@@ -258,17 +265,45 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
     onAbort?.(id);
   };
 
+  const handleSelectionChange: React.ChangeEventHandler<HTMLInputElement> = (
+    evt: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    evt.stopPropagation();
+    onSelect?.(id, evt.target.checked);
+  };
+
+  const handleSelectionInputClick: React.MouseEventHandler<HTMLInputElement> = (
+    evt: React.MouseEvent<HTMLInputElement>,
+  ): void => {
+    evt.stopPropagation();
+  };
+
   if (isReady) {
     return (
       <div
         className={finalClassName}
         style={style}
+        role="listitem"
+        tabIndex={0}
+        aria-label={`File: ${localName}${sizeFormatted ? `, ${sizeFormatted}` : ""}${uploadStatus ? `, status: ${uploadStatus}` : ""}`}
         onClick={handleClick}
         onMouseEnter={handleOnHoverEnter}
         onMouseLeave={handleOnHoverLeave}
         onDoubleClick={handleDoubleClick}
         onContextMenu={handleRightClick}
       >
+        {selectable && (
+          <div className="files-ui-selection-checkbox">
+            <input
+              className="files-ui-selection-checkbox-input"
+              type="checkbox"
+              checked={Boolean(selected)}
+              onClick={handleSelectionInputClick}
+              onChange={handleSelectionChange}
+              aria-label={`Select file ${localName}`}
+            />
+          </div>
+        )}
         <LayerContainer className="files-ui-file-card-main-layer-container">
           <Layer className="file-card-main-layer" visible={true}>
             <div className="file-card-icon-plus-data">
@@ -361,7 +396,9 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
           onSee={() => onSee?.(imageSource)}
           videoIcon={isVideo && onWatch !== undefined}
           onWatch={() => onWatch?.(videoSource)}
-          downloadIcon={onDownload !== undefined || downloadUrl !== undefined}
+          downloadIcon={
+            onDownload !== undefined || effectiveDownloadUrl !== undefined
+          }
           onDownload={handleDownload}
           infoIcon={info !== undefined}
           onOpenInfo={handleOpenInfo}
@@ -379,6 +416,7 @@ const FileCard: React.FC<FileCardProps> = (props: FileCardProps) => {
           fileName={localName}
           anchorRef={downloadRef}
           downloadUrl={downloadUrl}
+          videoUrl={videoUrl}
         />
       </div>
     );

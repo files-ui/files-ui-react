@@ -10,9 +10,8 @@ import FileMosaicSize from "../FileMosaicSize/FileMosaicSize";
 import FileMosaicStatus from "../FileMosaicStatus/FileMosaicStatus";
 import { FileMosaicMainLayerProps } from "./FileMosaicMainLayerProps";
 
-const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = (
-  props: FileMosaicMainLayerProps
-) => {
+const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
+  (props: FileMosaicMainLayerProps) => {
   const {
     darkMode,
     deleteIcon,
@@ -115,5 +114,6 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = (
       </div>
     </React.Fragment>
   );
-};
+  }
+);
 export default FileMosaicMainLayer;

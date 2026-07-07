@@ -76,6 +76,18 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      */
     onRightClick?: (evt: React.MouseEvent) => void;
     /**
+     * Enables checkbox selection UI on file item.
+     */
+    selectable?: boolean;
+    /**
+     * Current selected state when selectable is enabled.
+     */
+    selected?: boolean;
+    /**
+     * Called when selection changes.
+     */
+    onSelect?: (fileId: number | string | undefined, selected: boolean) => void;
+    /**
      * Flag that determines whether actions are visible always, or only on hover event
      */
     alwaysActive?: boolean;

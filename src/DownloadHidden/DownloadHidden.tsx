@@ -1,26 +1,30 @@
 import * as React from "react";
-//import { handleClickUtil } from "@files-ui/core"
+
 export type DownloadHiddenProps = {
   downloadUrl?: string;
+  videoUrl?: string;
   anchorRef: React.RefObject<HTMLAnchorElement>;
   fileName: string;
 };
 
+function handleClick<T extends HTMLAnchorElement>(
+  evt: React.MouseEvent<T, MouseEvent>,
+): void {
+  evt.stopPropagation();
+}
+
 const DownloadHidden: React.FC<DownloadHiddenProps> = (
-  props: DownloadHiddenProps
+  props: DownloadHiddenProps,
 ) => {
-  const { downloadUrl, anchorRef, fileName } = props;
-  function handleClick<T extends HTMLAnchorElement>(
-    evt: React.MouseEvent<T, MouseEvent>
-  ): void {
-    evt.stopPropagation();
-  }
-  if (downloadUrl)
+  const { downloadUrl, videoUrl, anchorRef, fileName } = props;
+  const finalDownloadUrl: string | undefined = videoUrl || downloadUrl;
+
+  if (finalDownloadUrl)
     return (
       <a
         ref={anchorRef}
         target={"_blank"}
-        href={downloadUrl}
+        href={finalDownloadUrl}
         download={fileName}
         hidden
         rel={"noopener noreferrer"}
@@ -31,4 +35,5 @@ const DownloadHidden: React.FC<DownloadHiddenProps> = (
     );
   return <></>;
 };
+
 export default DownloadHidden;

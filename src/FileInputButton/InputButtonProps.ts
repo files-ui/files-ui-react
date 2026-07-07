@@ -90,6 +90,11 @@ interface InputButtonFullProps {
   */
     uploadConfig?: UploadConfig;
     /**
+     * Maximum number of files to upload concurrently.
+     * @default 1
+     */
+    maxConcurrentUploads?: number;
+    /**
      * Flag that indicates Dropzone to perform a fake upload process.
      * If given or true, will ignore `uploadConfig` prop, will show
      * the upload button
@@ -143,6 +148,7 @@ export const defaultFileInputButtonProps: FileInputButtonProps =
     textTransform: "uppercase",
     label: "browse...",
     behaviour: "add",
+    maxConcurrentUploads: 1,
     disabled: false,
     uploadConfig: {},
     actionButtons: {},

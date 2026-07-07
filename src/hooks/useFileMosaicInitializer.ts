@@ -1,5 +1,10 @@
 import * as React from "react";
-import { getURLFileIco, readAsDataURL, getURLFileIcoFromNameAndType } from "@files-ui/core"
+import {
+    getURLFileIco,
+    readAsDataURL,
+    getURLFileIcoFromNameAndType,
+    resizeImage,
+} from "@files-ui/core"
 import { IconsSet } from "../FilesUiProvider";
 
 /**
@@ -89,7 +94,8 @@ export const useFileMosaicInitializer = (
                 if (file) {
                     response = await readAsDataURL(file);
                     if (response) {
-                        setImageSource(response as string);
+                        const optimizedImage = await resizeImage(response);
+                        setImageSource((optimizedImage || response) as string);
                     }
                 }
                 //console.log("response image", response);

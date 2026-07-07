@@ -1,38 +1,29 @@
 import * as React from "react";
-import { getRandomInt } from "@files-ui/core"
+import { getRandomInt } from "@files-ui/core";
 
 export const useFakeProgress = (time = 1500) => {
-    const [progress, setProgress] = React.useState(28);
+  const [progress, setProgress] = React.useState(28);
 
-    React.useEffect(() => {
+  React.useEffect(() => {
+    const updateProgress = (currProgress: number): number => {
+      if (currProgress === 100) {
+        return 0;
+      }
+      const offset = getRandomInt(5, 24);
+      const newProgress = currProgress + offset;
+      
+      return newProgress > 100 ? 100 : newProgress;
+    };
 
-        const updateProgress = (currProgress: number): number => {
-            if (currProgress === 100) {
-                return 0;
-            }
-            const offset = getRandomInt(5, 24);
+    // Correctly infer the platform-agnostic return type of setInterval
+    const _myInterval: ReturnType<typeof setInterval> = setInterval(() => {
+      setProgress((_progress) => updateProgress(_progress));
+    }, time);
 
-            const newProgress = currProgress + offset;
-            if (newProgress > 100) {
-                return 100;
-            } else {
-                return newProgress;
-            }
-        };
+    return () => {
+      clearInterval(_myInterval);
+    };
+  }, [time]);
 
-        const _myInterval = setInterval(() => {
-            setProgress((_progress) => updateProgress(_progress));
-        }, time);
-        //console.log("useFakeProgress SET interval", _myInterval);
-
-        return () => {
-            //console.log("useFakeProgress CLEAR interval", _myInterval);
-            clearInterval(_myInterval as NodeJS.Timer);
-        };
-        // eslint-disable-next-line
-    }, []);
-
-    return progress;
-}
-
-
+  return progress;
+};

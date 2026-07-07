@@ -11,6 +11,157 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
 
+## [1.3.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.3.0) (2026-07-05)
+
+## ✨ Major Features, ♿ Accessibility, and 🐛 Bug Fixes
+
+### New Features
+
+#### Selection API (Phase 5.2) ✅
+
+- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard): 
+  - Added `selectable: boolean` prop — enables checkbox overlay for multi-select workflows
+  - Added `selected: boolean` prop — controlled selected state (managed by parent component)
+  - Added `onSelect: (fileId: number | string | undefined, selected: boolean) => void` callback — fires when checkbox state changes
+  - Checkbox interaction fixed: First click now immediately updates controlled parent state (no interaction lag)
+  - Full regression test coverage in `SelectionRegression.test.tsx` (both FileMosaic and FileCard)
+
+#### Lazy Loading / Virtualization (Phase 5.1) ✅
+
+- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone):
+  - Added `lazyLoad: boolean` prop — enables IntersectionObserver-based lazy rendering of children
+  - Added `lazyLoadBuffer: number` prop (default 300px) — root margin for preloading children before viewport entry
+  - New component `DropzoneChildrenNext` as safe migration path for lazy-render testing
+  - Dramatically improves performance with large file lists (100+) by reducing DOM nodes and re-render overhead
+
+#### Upload Strategy Enhancements (Phase 5.3) ✅
+
+- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone) and [\<FileInputButton/\>](https://www.files-ui.com/components/fileinputbutton):
+  - Added `maxConcurrentUploads: number` prop (default 1) — controls parallelization of simultaneous uploads
+  - Extended `UploadConfig` with `chunked: boolean` and `chunkSize: number` options
+  - Upload routing now intelligently delegates to Core's `uploadExtFileChunked()` or `uploadExtFilesConcurrent()` when enabled
+  - Backward-compatible: existing single-file, sequential upload behavior unaffected
+
+#### Core Enhancements (Phase 1 / Wave 4) ✅
+
+**@files-ui/core** — New exports for advanced upload strategies:
+
+- **Chunked Upload**: `uploadExtFileChunked()` function splits large files into configurable chunks and uploads sequentially with retry logic. Sends `X-Chunk-Index`, `X-Total-Chunks`, and `X-File-Name` headers per chunk.
+  - Exports: `splitFileIntoChunks()`, `getChunkSize()`, `ChunkedUploadConfig`, `ChunkedProgressCallback`
+  
+- **Concurrent Upload**: `uploadExtFilesConcurrent()` function orchestrates parallel uploads with configurable concurrency (default 3). Preserves result order regardless of completion.
+  - Exports: `ConcurrentUploadConfig`, `ConcurrentProgressCallback`
+  
+- **Validation Severity**: Extended `ValidateFileResponse` with optional `severity: "error" | "warning" | "info"` field for richer validation feedback (fully backward-compatible)
+
+### Accessibility Improvements (Phase 2) ✅
+
+#### Keyboard Navigation & Screen Reader Support
+
+- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone):
+  - `role="button"` (clickable) or `role="region"` (non-clickable)
+  - `tabIndex={0}` for keyboard focus on clickable instances
+  - `aria-label="File upload dropzone"` (customizable via `label` prop)
+  - `aria-disabled` attribute when disabled
+  - Keyboard interaction: `Enter` and `Space` keys open file dialog (same as click)
+
+- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard):
+  - `role="listitem"` + `tabIndex={0}` for keyboard navigation within file lists
+  - `aria-label` includes file name, size, and upload status for screen reader clarity
+
+- [\<Avatar/\>](https://www.files-ui.com/components/avatar):
+  - `role="img"` + `aria-label` (uses `alt` prop or defaults to "User avatar")
+  - Keyboard interaction: `Enter` and `Space` keys trigger file selection when not `readOnly`
+
+- [\<FullScreen/\>](https://www.files-ui.com/components/fullscreen):
+  - `role="dialog"` + `aria-modal="true"` when open
+  - `aria-label="Fullscreen preview"` for context
+
+### Performance Optimization (Phase 3) ✅
+
+#### Context & Handler Memoization
+
+- **[FilesUiProvider](https://www.files-ui.com/global-config)**: Context value now wrapped with `useMemo` — eliminates tree-wide re-renders when provider re-renders without config changes
+
+- **[\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic)**: All event handlers (`onDelete`, `onDownload`, `onAbort`, hover handlers) wrapped with `useCallback` for stable child references
+
+- **[\<Dropzone/\>](https://www.files-ui.com/components/dropzone)**: Keyboard handler wrapped with `useCallback`
+
+- **Leaf Components**: `FileMosaicName`, `FileMosaicSize`, `FileMosaicStatus`, `FileMosaicMainLayer` wrapped with `React.memo` to skip re-renders when props unchanged
+
+### Bug Fixes (Phase 4) ✅
+
+#### Video Download Priority Fix
+
+- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard):
+  - Download action now correctly prioritizes `videoUrl` over `downloadUrl` when both present
+  - Previously video items could download the wrong source (thumbnail vs video)
+
+- `DownloadHidden` component:
+  - Added `videoUrl` prop support
+  - Unified URL resolution logic across download paths
+
+#### Thumbnail Generation Performance Fix
+
+- `useFileMosaicInitializer`: Now uses `resizeImage()` after `readAsDataURL()` to reduce UI blocking
+  - Prevents thumbnail generation from freezing UI when previewing large images
+  - Maintains responsiveness during bulk file imports
+
+#### Selection Checkbox Interaction Fix
+
+- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard):
+  - Fixed checkbox interaction: Removed default-preventing click handler on selection input
+  - Controlled `selected` state now updates immediately on first click (previously required second interaction)
+  - Native checkbox toggle still works correctly with `stopPropagation()` only
+
+### Testing & Quality (Phase 6.3 / 5.2) ✅
+
+#### New Test Coverage
+
+- Added `tests/SelectionRegression.test.tsx`:
+  - Verifies FileMosaic controlled selection updates on first click (regression guard)
+  - Verifies FileCard controlled selection updates on first click (regression guard)
+  - Both tests passing ✓
+
+#### Demo Page Enhancements (Phase 6.1 & 6.2) ✅
+
+New interactive demo sections created and wired in files-ui-web:
+
+- **DropzoneDemoPage**: Added sections for
+  - Accessibility (keyboard nav, screen reader support demo)
+  - Lazy Loading (viewport virtualization demo with 100+ items)
+  - Chunked Upload (multi-chunk progress visualization)
+
+- **FileMosaicDemoPage**: Added sections for
+  - Video Download (videoUrl priority demo)
+  - Selection (multi-select checkbox workflow demo)
+
+- **FileCardDemoPage**: Added sections for
+  - Selection (multi-select with card-style items)
+
+#### API Documentation Synchronization ✅
+
+Updated `files-ui-web` API prop tables across 5 components with 13 new prop definitions:
+
+- **FileMosaic API**: `videoUrl`, `selectable`, `selected`, `onSelect`
+- **FileCard API**: `videoUrl`, `selectable`, `selected`, `onSelect`
+- **Dropzone API**: `maxConcurrentUploads`, `lazyLoad`, `lazyLoadBuffer`
+- **FileInputButton API**: `maxConcurrentUploads`
+- **UploadConfig Type**: `chunked`, `chunkSize`
+
+Descriptions normalized for consistency, clarity, and proper conditional phrasing ("If true", "If set", etc.)
+
+### Migration Path & Backward Compatibility ✓
+
+All changes are **fully backward-compatible**:
+- New props are optional with sensible defaults
+- New Core functions are additive (existing `uploadExtFile()` unchanged)
+- Existing validation logic unaffected by new `severity` field
+- Demo infrastructure extensible without breaking existing pages
+- Selection API disabled by default (`selectable=false`)
+
+---
+
 ## [1.2.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.1.0) (2024-01-21)
 
 ## 🧪 🚀 Allow uploading files with different URLs

@@ -15,7 +15,6 @@ import {
   sanitizeArrExtFile,
   fakeFuiUpload,
   getRandomInt,
-  uploadExtFile,
   unexpectedErrorUploadResult,
   FileValidatorProps,
   validateExtFileList,
@@ -38,6 +37,7 @@ import {
   FileInputButtonProps,
 } from "./InputButtonProps";
 import { isThereValidUrl } from "../utils/url.utils";
+import { uploadExtFilesWithStrategy, uploadSingleExtFileWithStrategy } from "../utils/uploadStrategy";
 
 const FileInputButton: React.FC<FileInputButtonProps> = (
   props: FileInputButtonProps
@@ -56,6 +56,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     autoClean,
     //uploading
     uploadConfig,
+    maxConcurrentUploads,
     fakeUpload,
     onUploadStart,
     onUploadFinish,
@@ -117,7 +118,12 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
     autoUpload = false,
     urlFromExtFile,
     asBlob = false,
-  } = uploadConfig as UploadConfig;
+    chunked = false,
+    chunkSize,
+  } = uploadConfig as UploadConfig & {
+    chunked?: boolean;
+    chunkSize?: number;
+  };
 
   const {
     position: actionButtonsPosition,
@@ -267,6 +273,55 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
 
     //return;
     let serverResponses: Array<ExtFile> = [];
+    const uploadCandidates: ExtFileInstance[] = arrOfExtFilesInstances.filter(
+      (instance: ExtFileInstance) =>
+        instance.uploadStatus === "preparing" && !instance.extraData?.deleted
+    );
+
+    if (!fakeUpload && (maxConcurrentUploads || 1) > 1 && uploadCandidates.length > 0) {
+      uploadCandidates.forEach((instance) => {
+        instantPreparingToUploadOne(instance);
+      });
+      handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+
+      const uploadResults = await uploadExtFilesWithStrategy(
+        uploadCandidates.map((instance) => instance.toExtFile()),
+        {
+          url,
+          urlFromExtFile,
+          method,
+          headers,
+          uploadLabel,
+          asBlob,
+          chunked,
+          chunkSize,
+          maxConcurrentUploads,
+        },
+        (_completedCount: number, _totalCount: number, latestResult: ExtFile) => {
+          const target = arrOfExtFilesInstances.find(
+            (instance) => instance.id === latestResult.id
+          );
+          if (target) {
+            target.uploadStatus = latestResult.uploadStatus;
+            target.uploadMessage = latestResult.uploadMessage;
+            target.serverResponse = latestResult.serverResponse;
+          }
+          handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+        }
+      );
+
+      for (const uploadedFile of uploadResults) {
+        const currentExtFileInstance = arrOfExtFilesInstances.find(
+          (instance) => instance.id === uploadedFile.id
+        );
+        if (currentExtFileInstance) {
+          currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
+          currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
+          currentExtFileInstance.serverResponse = uploadedFile.serverResponse;
+        }
+        serverResponses.push(uploadedFile);
+      }
+    } else {
     //Uplad files one by one
     for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
       const currentExtFileInstance: ExtFileInstance = arrOfExtFilesInstances[i];
@@ -304,14 +359,18 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
           }
         } else {
           try {
-            uploadResponse = await uploadExtFile(
+            uploadResponse = await uploadSingleExtFileWithStrategy(
               currentExtFileInstance,
-              url,
-              urlFromExtFile,
-              method,
-              headers,
-              uploadLabel,
-              asBlob
+              {
+                url,
+                urlFromExtFile,
+                method,
+                headers,
+                uploadLabel,
+                asBlob,
+                chunked,
+                chunkSize,
+              }
             );
           } catch (error) {
             uploadResponse = unexpectedErrorUploadResult(
@@ -337,6 +396,7 @@ const FileInputButton: React.FC<FileInputButtonProps> = (
       } else {
         handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
       }
+    }
     }
 
     setLocalFiles(sanitizeArrExtFile(arrOfExtFilesInstances));

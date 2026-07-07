@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react-jsx",
     "declaration": true,
-    "moduleResolution": "node",
+    "declarationDir": "./build",
+    "rootDir": "./src",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -13,6 +15,6 @@
     "outDir": "build",
     "types": ["jest", "node"]
   },
-  "include": ["src", "tests"],
-  "exclude": ["node_modules", "build"]
+  "include": ["src/**/*", "src/declarations.d.ts"],
+  "exclude": ["node_modules", "build", "tests", "**/*.test.ts", "**/*.test.tsx"]
 }

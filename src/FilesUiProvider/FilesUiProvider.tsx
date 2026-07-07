@@ -10,8 +10,12 @@ const FilesUiProvider: React.FC<FilesUiProviderProps> = (
   props: FilesUiProviderProps
 ) => {
   const { children, config } = props;
+  const contextValue = React.useMemo<FilesUIConfig>(
+    () => config || {},
+    [config]
+  );
   return (
-    <FilesUiContext.Provider value={config || {}}>
+    <FilesUiContext.Provider value={contextValue}>
       {children}
     </FilesUiContext.Provider>
   );

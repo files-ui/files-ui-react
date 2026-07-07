@@ -90,6 +90,11 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   * and uploadOnDrop prop flag will not work.
   */
   uploadConfig?: UploadConfig;
+  /**
+   * Maximum number of files to upload concurrently.
+   * @default 1
+   */
+  maxConcurrentUploads?: number;
 
   /**
    * Will be set on the XHRequest.withCredentials property
@@ -222,6 +227,17 @@ export interface DropzoneFullProps extends OverridableComponentProps {
    * @default 'add'
    */
   behaviour?: 'add' | 'replace';
+
+  /**
+   * Enables lazy mounting of dropzone children using IntersectionObserver.
+   * @default false
+   */
+  lazyLoad?: boolean;
+  /**
+   * Root margin in pixels used by lazy loading observer.
+   * @default 300
+   */
+  lazyLoadBuffer?: number;
 }
 
 
@@ -304,6 +320,9 @@ export const defaultDrozoneProps: DropzoneProps =
 {
   clickable: true,
   behaviour: "add",
+  lazyLoad: false,
+  lazyLoadBuffer: 300,
+  maxConcurrentUploads: 1,
   disabled: false,
   dropOnLayer: true,
   uploadConfig: {},
@@ -316,17 +335,3 @@ export const defaultDrozoneProps: DropzoneProps =
 }
 
 export const DEFAULT_BORDER_RADIUS = "8px";
-
-
-/*
-export interface AdvancedConfigItem {
-  style?: React.CSSProperties;
-  className?: string;
-}
-
-export type DropzoneAdvancedConfig = {
-  dropzoneLayer: any;
-  dropzoneContainer: any;
-  dropzoneLabel: any;
-}
- */

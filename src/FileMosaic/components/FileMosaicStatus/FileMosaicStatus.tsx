@@ -5,9 +5,8 @@ import { FileMosaicStatusProps } from "./FileMosaicStatusProps";
 import "./FileMosaicStatus.scss";
 import { FileItemLocalizerSelector, LocalLabels } from "@files-ui/core"
 
-const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
-  props: FileMosaicStatusProps
-) => {
+const FileMosaicStatus: React.FC<FileMosaicStatusProps> = React.memo(
+  (props: FileMosaicStatusProps) => {
   const { valid, uploadStatus, localization, style } = props;
 
   const FileItemStatusLocalizer: LocalLabels = FileItemLocalizerSelector(
@@ -52,5 +51,6 @@ const FileMosaicStatus: React.FC<FileMosaicStatusProps> = (
     }
   }
   return <></>;
-};
+  }
+);
 export default FileMosaicStatus;

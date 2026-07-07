@@ -30,6 +30,9 @@ const FullScreen: React.FC<FullScreenProps> = (props: FullScreenProps) => {
       className={
         open ? "fui-fullscreen-container show-fs" : "fui-fullscreen-container"
       }
+      role="dialog"
+      aria-modal={open || undefined}
+      aria-label="Fullscreen preview"
       onClick={handleClose}
     >
       {open && (

@@ -4,7 +4,7 @@ import {
   fileSizeFormater,
   getLocalFileItemData,
   Localization,
-} from "@files-ui/core"
+} from "@files-ui/core";
 import "./FileMosaic.scss";
 import "./../../../icons/IconStyles.scss";
 import { FileMosaicProps } from "./FileMosaicProps";
@@ -20,7 +20,11 @@ import DownloadHidden from "../../../DownloadHidden/DownloadHidden";
 import FileMosaicMainLayer from "../FileMosaicMainLayer.tsx/FileMosaicMainLayer";
 import { FilesUiContext } from "../../../FilesUiProvider/FilesUiContext";
 import { handleClickUtil } from "../../../utils";
-import { useProgress, useFileMosaicInitializer, useIsUploading } from "../../../hooks";
+import {
+  useProgress,
+  useFileMosaicInitializer,
+  useIsUploading,
+} from "../../../hooks";
 
 const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const {
@@ -66,6 +70,9 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     onDoubleClick,
     onClick,
     onRightClick,
+    selectable = false,
+    selected = false,
+    onSelect,
     smartImgFit = "orientation",
   } = props;
 
@@ -84,14 +91,14 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   //localizers
 
   //ref for anchor download element
-  const downloadRef = React.useRef<HTMLAnchorElement>(null);
+  const downloadRef = React.useRef<HTMLAnchorElement | null>(null);
 
   const finalClassName: string = addClassName(
     addClassName(
       "files-ui-file-mosaic-main-container files-ui-tooltip",
-      className
+      className,
     ),
-    onClick ? "clickable" : undefined
+    onClick ? "clickable" : undefined,
   );
 
   const fileMosaicFileNameClassName: string = darkMode
@@ -102,7 +109,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const [localName, localType, localSize]: [
     string,
     string | undefined,
-    number | undefined
+    number | undefined,
   ] = getLocalFileItemData(file, propName, propType, propSize);
 
   // handle progress
@@ -117,7 +124,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     boolean,
     string,
     string | undefined,
-    File | string | undefined
+    File | string | undefined,
   ] = useFileMosaicInitializer(
     file,
     propName,
@@ -126,8 +133,9 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
     preview as boolean,
     imageUrl,
     videoUrl,
-    icons
+    icons,
   );
+  const effectiveDownloadUrl: string | undefined = videoUrl || downloadUrl;
 
   //The size formatted and rounded in 2 decimals
   const sizeFormatted: string | undefined = fileSizeFormater(localSize);
@@ -137,24 +145,29 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   /********* ALWAYS ACTIVE LOGIC  ***************/
   //state for actionOnHover
   const [hovering, setHovering] = React.useState<boolean>(false);
-  const handleOnHoverEnter: React.MouseEventHandler<HTMLDivElement> = () => {
-    if (alwaysActive) return;
-    setHovering(true);
-  };
-  const handleOnHoverLeave: React.MouseEventHandler<HTMLDivElement> = () => {
-    if (alwaysActive) return;
-    setHovering(false);
-  };
+  const handleOnHoverEnter: React.MouseEventHandler<HTMLDivElement> =
+    React.useCallback(() => {
+      if (alwaysActive) return;
+      setHovering(true);
+    }, [alwaysActive]);
+  const handleOnHoverLeave: React.MouseEventHandler<HTMLDivElement> =
+    React.useCallback(() => {
+      if (alwaysActive) return;
+      setHovering(false);
+    }, [alwaysActive]);
 
   /***************** HANDLERS **********/
   //delete file item
-  const handleDelete = (): void => onDelete?.(id);
+  const handleDelete = React.useCallback(
+    (): void => onDelete?.(id),
+    [onDelete, id],
+  );
 
   //open info layer
-  const handleOpenInfo = (): void => setShowInfo(true);
+  const handleOpenInfo = React.useCallback((): void => setShowInfo(true), []);
 
   //close info layer
-  const handleCloseInfo = (): void => setShowInfo(false);
+  const handleCloseInfo = React.useCallback((): void => setShowInfo(false), []);
 
   const isUploading: boolean = useIsUploading(uploadStatus);
 
@@ -172,14 +185,14 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
    * @param e event object
    */
   function handleClick<T extends HTMLDivElement>(
-    e: React.MouseEvent<T, MouseEvent>
+    e: React.MouseEvent<T, MouseEvent>,
   ): void {
     //avoid children to trigger onClick ripple from parent
     e.stopPropagation();
     onClick?.(e);
   }
   const handleDoubleClick: React.MouseEventHandler<HTMLDivElement> = (
-    evt: React.MouseEvent
+    evt: React.MouseEvent,
   ): void => {
     //alert("double click on file");
     evt.preventDefault();
@@ -199,39 +212,68 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
    * onDownload, form 1
    * Trigger dowload directly performing a click on anchor element
    */
-  const innerDownload = () => {
+  const innerDownload = React.useCallback(() => {
     const anchorElement = downloadRef.current;
     if (anchorElement) {
       anchorElement.click();
     }
-  };
+  }, []);
   /**
    * onDownlad, form 2
    * Handle the download triggering an outside event
    */
-  const handleDownload = () => {
+  const handleDownload = React.useCallback(() => {
     if (onDownload) {
-      onDownload?.(id, downloadUrl);
-    } else if (typeof downloadUrl == "string") {
+      onDownload?.(id, effectiveDownloadUrl);
+    } else if (typeof effectiveDownloadUrl == "string") {
       innerDownload();
     }
-  };
-  const handleAbort = () => {
+  }, [onDownload, id, effectiveDownloadUrl, innerDownload]);
+  const handleAbort = React.useCallback(() => {
     xhr?.abort();
     onAbort?.(id);
-  };
+  }, [xhr, onAbort, id]);
+
+  const handleSelectionChange: React.ChangeEventHandler<HTMLInputElement> =
+    React.useCallback(
+      (evt: React.ChangeEvent<HTMLInputElement>) => {
+        evt.stopPropagation();
+        onSelect?.(id, evt.target.checked);
+      },
+      [onSelect, id],
+    );
+
+  const handleSelectionInputClick: React.MouseEventHandler<HTMLInputElement> =
+    React.useCallback((evt: React.MouseEvent<HTMLInputElement>) => {
+      evt.stopPropagation();
+    }, []);
 
   if (isReady)
     return (
       <div
         className={finalClassName}
         style={style}
+        role="listitem"
+        tabIndex={0}
+        aria-label={`File: ${localName}${sizeFormatted ? `, ${sizeFormatted}` : ""}${uploadStatus ? `, status: ${uploadStatus}` : ""}`}
         onClick={handleClick}
         onMouseEnter={handleOnHoverEnter}
         onMouseLeave={handleOnHoverLeave}
         onDoubleClick={handleDoubleClick}
         onContextMenu={handleRightClick}
       >
+        {selectable && (
+          <div className="files-ui-selection-checkbox">
+            <input
+              className="files-ui-selection-checkbox-input"
+              type="checkbox"
+              checked={Boolean(selected)}
+              onClick={handleSelectionInputClick}
+              onChange={handleSelectionChange}
+              aria-label={`Select file ${localName}`}
+            />
+          </div>
+        )}
         <LayerContainer
           className="files-ui-file-mosaic-icon-layer-container"
           style={style}
@@ -279,7 +321,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
               videoIcon={isVideo && onWatch !== undefined}
               onWatch={() => onWatch?.(videoSource)}
               downloadIcon={
-                onDownload !== undefined || downloadUrl !== undefined
+                onDownload !== undefined || effectiveDownloadUrl !== undefined
               }
               onDownload={handleDownload}
               infoIcon={info !== undefined}
@@ -335,6 +377,7 @@ const FileMosaic: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
           fileName={localName}
           anchorRef={downloadRef}
           downloadUrl={downloadUrl}
+          videoUrl={videoUrl}
         />
       </div>
     );

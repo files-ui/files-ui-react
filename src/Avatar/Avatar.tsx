@@ -34,7 +34,7 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     variant,
     borderRadius,
     loadingLabel: uploadingLabel,
-    isLoading: isUloading,
+    isLoading: isUploading,
     onError,
 
     smartImgFit,
@@ -42,116 +42,95 @@ const Avatar: React.FC<AvatarProps> = (props: AvatarProps) => {
     style,
     ...rest
   } = mergeProps(props, defaultAvatarProps);
-  //console.log("Avatar smartImgFit", smartImgFit);
 
-  const inputRef: React.RefObject<HTMLInputElement> =
-    React.useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  //const avatarId = React.useId();
   const avatarId = React.useMemo(() => FileIdGenerator.getNextId() + "", []);
 
   const finalClassNameBorder: string | undefined = useAvatarStyle(
     avatarId.replace(":", "").replace(":", ""),
-    borderRadius
+    borderRadius,
   );
 
-  //console.log("finalClassNameBorder", finalClassNameBorder);
-
   const handleClick = () => {
-    // alert("Agregar fotooooooo");
     inputRef.current?.click();
   };
 
   const handleChangeInput: React.ChangeEventHandler<HTMLInputElement> = (
-    evt: React.ChangeEvent<HTMLInputElement>
+    evt: React.ChangeEvent<HTMLInputElement>,
   ): void => {
-    let fileList: FileList = evt.target.files as FileList;
-
-    let fileListOutput = [];
-    for (let i = 0, f; (f = fileList[i]); i++) {
-      fileListOutput.push(f);
+    const file = evt.target.files?.[0];
+    if (file) {
+      onChange?.(file);
     }
-    onChange?.(fileListOutput[0]);
   };
 
   const handleError: React.ReactEventHandler<HTMLImageElement> = (
-    evt: React.SyntheticEvent<HTMLImageElement, Event>
+    evt: React.SyntheticEvent<HTMLImageElement, Event>,
   ) => {
-    //console.log("Avatar error", evt);
     onError?.(evt);
   };
 
   if (!finalClassNameBorder) return <></>;
   else {
     return (
-      <React.Fragment>
-        <div
-          className={`fui-avatar-main-container${
-            variant === "circle" ? " circle" : ""
-          } ${finalClassNameBorder}`}
-          style={style}
-          {...rest}
-        >
-          {/**Layer 1 */}
-          {isUloading ? (
-            <Layer visible={true}>
-              <div className={"fui-avatar-label"}>
-                <InfiniteLoader size={50} />
-                {uploadingLabel}
+      <div
+        className={`fui-avatar-main-container${
+          variant === "circle" ? " circle" : ""
+        } ${finalClassNameBorder}`}
+        style={style}
+        role="img"
+        aria-label={alt || "User avatar"}
+        tabIndex={readOnly ? undefined : 0}
+        onKeyDown={
+          readOnly
+            ? undefined
+            : (evt) => {
+                if (evt.key === "Enter" || evt.key === " ") {
+                  evt.preventDefault();
+                  handleClick();
+                }
+              }
+        }
+        {...rest}
+      >
+        {/**Layer 1 */}
+        {isUploading ? (
+          <Layer visible={true}>
+            <div className={"fui-avatar-label"}>
+              <InfiniteLoader size={50} />
+              {uploadingLabel}
+            </div>
+          </Layer>
+        ) : src ? (
+          <ImagePreview
+            className={`fui-avatar-image`}
+            src={src}
+            alt={alt}
+            onError={handleError}
+            smartImgFit={smartImgFit}
+          />
+        ) : (
+          <div className={"fui-avatar-label"}>{emptyLabel}</div>
+        )}
+        {/**Layer 2 */}
+        {!readOnly && (
+          <>
+            {!isUploading && (
+              <div className={"fui-avatar-label hide"} onClick={handleClick}>
+                {src ? changeLabel : emptyLabel}
               </div>
-            </Layer>
-          ) : src ? (
-            <ImagePreview
-              className={`fui-avatar-image`}
-              src={src}
-              alt={alt}
-              onError={handleError}
-              smartImgFit={smartImgFit}
+            )}
+            <InputHidden
+              multiple={false}
+              accept={accept || "image/*"}
+              onChange={handleChangeInput}
+              inputRef={inputRef}
             />
-          ) : (
-            <div className={"fui-avatar-label"}>{emptyLabel}</div>
-          )}
-          {/**Layer 2 */}
-          {!readOnly && (
-            <>
-              {!isUloading && (
-                <div className={"fui-avatar-label hide"} onClick={handleClick}>
-                  {src ? changeLabel : emptyLabel}
-                </div>
-              )}
-              <InputHidden
-                multiple={false}
-                accept={accept || "image/*"}
-                onChange={handleChangeInput}
-                inputRef={inputRef}
-              />
-            </>
-          )}
-        </div>
-      </React.Fragment>
+          </>
+        )}
+      </div>
     );
   }
 };
 export default Avatar;
-
-/**
- * creates a dynamic css sheet for avatar
- * @param borderRadius the border radius
- * @returns a dynamic css sheet
- */
-/* const makeDynamicAvatarCSSRules = (
-  borderRadius: string | undefined
-): DynamicSheet => {
-  const styleSheet: DynamicSheet = DynamiCSS.makeStyleSheet({
-    id: "avatar-styles",
-    sheetRules: [
-      {
-        className: "fui-avatar-border",
-        rules: {
-          borderRadius: borderRadius,
-        },
-      },
-    ],
-  });
-  return styleSheet;
-}; */

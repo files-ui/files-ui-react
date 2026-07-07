@@ -19,7 +19,6 @@ import {
   //UploadResponse,
   instantPreparingToUploadOne,
   fakeFuiUpload,
-  uploadExtFile,
   sleepTransition,
   toUploadableExtFileList,
   cleanInput,
@@ -44,7 +43,7 @@ import {
   FooterConfig,
   HeaderConfig,
 } from "./DropzoneProps";
-import DropzoneChildren from "../DropzoneChildren/DropzoneChildren";
+import DropzoneChildrenNext from "../DropzoneChildren/DropzoneChildrenNext";
 import DropzoneDisabledLayer from "../DropzoneDisabledLayer/DropzoneDisabledLayer";
 
 import "./Dropzone.scss";
@@ -67,6 +66,7 @@ import {
   useDropzoneClassName,
 } from "../../../hooks";
 import { isThereValidUrl } from "../../../utils/url.utils";
+import { uploadExtFilesWithStrategy, uploadSingleExtFileWithStrategy } from "../../../utils/uploadStrategy";
 
 //import { print_manager } from "../../../../../utils";
 
@@ -98,6 +98,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     withCredentials,
     fakeUpload,
     groupUpload,
+    maxConcurrentUploads,
     onUploadStart,
     onUploadFinish,
     //styling
@@ -131,6 +132,8 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     clickable,
     //add or replace
     behaviour,
+    lazyLoad,
+    lazyLoadBuffer,
     //content
     children,
     //advancedConfig,
@@ -156,7 +159,12 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     autoUpload = false,
     urlFromExtFile,
     asBlob = false,
-  } = uploadConfig as UploadConfig;
+    chunked = false,
+    chunkSize,
+  } = uploadConfig as UploadConfig & {
+    chunked?: boolean;
+    chunkSize?: number;
+  };
 
   const {
     position: actionButtonsPosition,
@@ -408,6 +416,66 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
       }
       handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
     } else {
+      const uploadCandidates: ExtFileInstance[] = arrOfExtFilesInstances.filter(
+        (instance: ExtFileInstance) =>
+          instance.uploadStatus === "preparing" && !instance.extraData?.deleted
+      );
+
+      if (!fakeUpload && (maxConcurrentUploads || 1) > 1 && uploadCandidates.length > 0) {
+        uploadCandidates.forEach((instance) => {
+          instantPreparingToUploadOne(instance);
+        });
+        handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+
+        const uploadResults = await uploadExtFilesWithStrategy(
+          uploadCandidates.map((instance) => instance.toExtFile()),
+          {
+            url,
+            urlFromExtFile,
+            method,
+            headers,
+            uploadLabel,
+            asBlob,
+            chunked,
+            chunkSize,
+            maxConcurrentUploads,
+          },
+          (completedCount: number, totalCount: number, latestResult: ExtFile) => {
+            if (uploadProgressMessage) {
+              setLocalMessage(
+                uploadingMessenger(`${completedCount}/${totalCount}`)
+              );
+            }
+
+            const target = arrOfExtFilesInstances.find(
+              (instance) => instance.id === latestResult.id
+            );
+            if (target) {
+              target.uploadStatus = latestResult.uploadStatus;
+              target.uploadMessage = latestResult.uploadMessage;
+              target.serverResponse = latestResult.serverResponse;
+            }
+
+            handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
+          }
+        );
+
+        for (const uploadedFile of uploadResults) {
+          const currentExtFileInstance = arrOfExtFilesInstances.find(
+            (instance) => instance.id === uploadedFile.id
+          );
+          if (currentExtFileInstance) {
+            currentExtFileInstance.uploadStatus = uploadedFile.uploadStatus;
+            currentExtFileInstance.uploadMessage = uploadedFile.uploadMessage;
+            currentExtFileInstance.serverResponse = uploadedFile.serverResponse;
+          }
+
+          if (uploadedFile.uploadStatus === "error") {
+            totalRejected++;
+          }
+          serverResponses.push(uploadedFile);
+        }
+      } else {
       //Uplad files one by one
       for (let i = 0; i < arrOfExtFilesInstances.length; i++) {
         const currentExtFileInstance: ExtFileInstance =
@@ -455,14 +523,18 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
             }
           } else {
             try {
-              uploadResponse = await uploadExtFile(
+              uploadResponse = await uploadSingleExtFileWithStrategy(
                 currentExtFileInstance,
-                url,
-                urlFromExtFile,
-                method,
-                headers,
-                uploadLabel,
-                asBlob
+                {
+                  url,
+                  urlFromExtFile,
+                  method,
+                  headers,
+                  uploadLabel,
+                  asBlob,
+                  chunked,
+                  chunkSize,
+                }
               );
             } catch (error) {
               uploadResponse = unexpectedErrorUploadResult(
@@ -491,6 +563,7 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         } else {
           handleFilesChange(sanitizeArrExtFile(arrOfExtFilesInstances), true);
         }
+      }
       }
     }
     setLocalFiles(sanitizeArrExtFile(arrOfExtFilesInstances));
@@ -666,6 +739,20 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     makeRipple();
     handleClickInput(inputRef.current);
   }
+  /**
+   * Handles keyboard interaction for accessibility.
+   * Enter or Space triggers the same action as click.
+   */
+  const handleKeyDown = React.useCallback<React.KeyboardEventHandler<HTMLDivElement>>(
+    (evt: React.KeyboardEvent<HTMLDivElement>) => {
+      if (evt.key === "Enter" || evt.key === " ") {
+        evt.preventDefault();
+        handleClick();
+      }
+    },
+    // eslint-disable-next-line
+    [clickable, disabled, isUploading]
+  );
   const handleDragEnter: React.DragEventHandler<HTMLDivElement> = (
     evt: React.DragEvent<HTMLDivElement>
   ) => {
@@ -805,7 +892,12 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
         style={style}
         className={finalDropzoneClassNameBorderClickable}
         {...rest}
+        role={clickable && !disabled ? "button" : "region"}
+        tabIndex={clickable && !disabled ? 0 : undefined}
+        aria-label={label || "File upload dropzone"}
+        aria-disabled={disabled || undefined}
         onClick={handleClick}
+        onKeyDown={clickable && !disabled ? handleKeyDown : undefined}
         onDragOver={handleDragEnter}
         onDragLeave={!dropOnLayer ? handleDragLeave : undefined}
         onDrop={!dropOnLayer ? kamui : undefined}
@@ -869,9 +961,14 @@ const Dropzone: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           )}
         </React.Fragment>
 
-        <DropzoneChildren label={label} localization={localization}>
+        <DropzoneChildrenNext
+          label={label}
+          localization={localization}
+          lazyLoad={lazyLoad}
+          lazyLoadBuffer={lazyLoadBuffer}
+        >
           {children}
-        </DropzoneChildren>
+        </DropzoneChildrenNext>
 
         <React.Fragment>
           {customFooter ? (
