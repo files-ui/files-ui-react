@@ -50,7 +50,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@testing-library/jest-dom": "^6.1.0",
-    "@testing-library/react": "^14.1.0",
+    "@testing-library/react": "^16.3.2",
     "@types/jest": "^29.5.14",
     "autoprefixer": "^10.4.14",
     "identity-obj-proxy": "^3.0.0",
