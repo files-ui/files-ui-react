@@ -47,7 +47,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.8",
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^11.1.6",
     "@testing-library/jest-dom": "^6.1.0",
     "@testing-library/react": "^14.1.0",
