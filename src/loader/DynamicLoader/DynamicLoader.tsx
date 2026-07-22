@@ -3,7 +3,7 @@ import { Clear } from "../../icons";
 import { parseSize } from "../../icons/utils/utils";
 import LoaderContainer from "../LoaderContainer/LoaderContainer";
 import { DynamicLoaderProps } from "./DynamicLoaderProps";
-import "./DynamicLoader.scss";
+import "./DynamicLoader.css";
 const DynamicLoader: React.FC<DynamicLoaderProps> = (
   props: DynamicLoaderProps,
 ) => {

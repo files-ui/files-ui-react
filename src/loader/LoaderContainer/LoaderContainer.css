@@ -6,13 +6,12 @@
   justify-content: center;
   overflow: hidden;
   position: relative;
+}
 
-  &.clickable {
-    cursor: pointer;
-  }
+.files-ui-loader-container.clickable {
+  cursor: pointer;
+}
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.61);
-  }
-
+.files-ui-loader-container:hover {
+  background-color: rgba(0, 0, 0, 0.61);
 }

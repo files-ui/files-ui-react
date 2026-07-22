@@ -1,6 +1,6 @@
 import * as React from "react";
 import { LoaderContainerProps } from "./LoaderContainerProps";
-import "./LoaderContainer.scss";
+import "./LoaderContainer.css";
 import { parseSize } from "../../icons/utils/utils";
 const LoaderContainer: React.FC<LoaderContainerProps> = (
   props: LoaderContainerProps

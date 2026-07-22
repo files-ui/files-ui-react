@@ -2,7 +2,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "@rollup/plugin-typescript";
-import sass from "rollup-plugin-sass";
+import postcss from "rollup-plugin-postcss";
 export default {
   input: "./src/index.ts",
   output: [
@@ -19,12 +19,17 @@ export default {
   ],
   // rollup.config.js
   plugins: [
-    sass({
-      insert: true,
-      options: {
-        // Silences the Dart Sass legacy API warnings cleanly
-        silenceDeprecations: ["legacy-js-api"],
-      },
+    postcss({
+      extensions: [".css", ".scss"],
+      use: [
+        [
+          "sass",
+          {
+            silenceDeprecations: ["legacy-js-api"],
+          },
+        ],
+      ],
+      inject: true,
     }),
     peerDepsExternal(),
     resolve(),

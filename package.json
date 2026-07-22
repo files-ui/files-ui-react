@@ -58,8 +58,10 @@
     "jest-environment-jsdom": "^29.7.0",
     "rollup": "^4.20.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-sass": "^1.12.19",
     "rollup-plugin-typescript2": "^0.34.1",
+    "sass": "^1.101.3",
     "ts-jest": "^29.0.5",
     "typescript": "^5.0.2"
   },

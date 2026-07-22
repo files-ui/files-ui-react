@@ -5,8 +5,8 @@ import {
   getLocalFileItemData,
   Localization,
 } from "@files-ui/core";
-import "./FileMosaic.scss";
-import "./../../../icons/IconStyles.scss";
+import "./FileMosaic.css";
+import "./../../../icons/IconStyles.css";
 import { FileMosaicProps } from "./FileMosaicProps";
 import LayerContainer from "../file-mosaic-layer/LayerContainer";
 import Layer from "../file-mosaic-layer/Layer";

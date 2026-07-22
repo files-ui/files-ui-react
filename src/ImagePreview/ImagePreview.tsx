@@ -6,7 +6,7 @@ import {
 import { mergeProps } from "../overridable";
 import { getImageOrientation, readAsDataURL } from "@files-ui/core"
 
-import "./ImagePreview.scss";
+import "./ImagePreview.css";
 
 const ImagePreview: React.FC<ImagePreviewProps> = (
   props: ImagePreviewProps

@@ -46,8 +46,8 @@ import {
 import DropzoneChildrenNext from "../DropzoneChildren/DropzoneChildrenNext";
 import DropzoneDisabledLayer from "../DropzoneDisabledLayer/DropzoneDisabledLayer";
 
-import "./Dropzone.scss";
-import "./DropzoneRipple.scss";
+import "./Dropzone.css";
+import "./DropzoneRipple.css";
 
 import DropzoneHeader from "../DropzoneHeader/DropzoneHeader";
 import DropzoneFooter from "../DropzoneFooter/DropzoneFooter";

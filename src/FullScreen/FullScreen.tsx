@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Clear } from "../icons";
 import { FullScreenProps } from "./FullScreenProps";
-import "./FullScreen.scss";
+import "./FullScreen.css";
 const FullScreen: React.FC<FullScreenProps> = (props: FullScreenProps) => {
   const { open, onClose, children } = props;
 

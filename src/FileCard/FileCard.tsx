@@ -1,8 +1,8 @@
 import * as React from "react";
 import { FileCardProps } from "./FileCardProps";
-import "./FileCard.scss";
-import "./../icons/IconStyles.scss";
-import "./components/FileCardPaper.scss";
+import "./FileCard.css";
+import "./../icons/IconStyles.css";
+import "./components/FileCardPaper.css";
 import {
   fileSizeFormater,
   getLocalFileItemData,

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { mergeProps } from "../overridable/mergeProps";
 import { AvatarProps, defaultAvatarProps } from "./AvatarProps";
-import "./Avatar.scss";
+import "./Avatar.css";
 import InputHidden from "../InputHidden/InputHidden";
 import { useAvatarStyle } from "./useAvatarStyle";
 import InfiniteLoader from "../loader/InfiniteLoader/InfiniteLoader";

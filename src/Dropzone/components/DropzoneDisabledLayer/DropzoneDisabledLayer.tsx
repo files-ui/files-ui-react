@@ -7,7 +7,7 @@ import {
   handleDragUtil,
   handleDropUtil,
 } from "../../../utils";
-import "./DropzoneDisabledLayer.scss";
+import "./DropzoneDisabledLayer.css";
 export declare type DropzoneDisabledLayerProps = {
   open?: boolean;
   className?: string;

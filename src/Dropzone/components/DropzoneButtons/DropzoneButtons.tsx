@@ -2,7 +2,7 @@ import * as React from "react";
 import { addClassName, Localization } from "@files-ui/core"
 import { MaterialButton } from "../../../MaterialButton";
 import { ActionButtonItem, DropzoneActions } from "../dropzone/DropzoneProps";
-import "./DropzoneButtons.scss";
+import "./DropzoneButtons.css";
 
 interface DropzoneButtonsProps extends DropzoneActions {
   localization?: Localization;

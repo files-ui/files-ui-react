@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import { FuiSkeletonDefaultProps, FuiSkeletonProps } from "./FuiSkeletonProps";
-import "./FuiSkeleton.scss";
+import "./FuiSkeleton.css";
 import { mergeProps } from "../overridable";
 /**
  * Fui Skeleton component inspired on Mui Skeleton component

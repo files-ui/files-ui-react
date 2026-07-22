@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FileMosaicUploadLayerProps } from "./FileMosaicUploadLayerProps";
-import "./FileMosaicUploadLayer.scss";
+import "./FileMosaicUploadLayer.css";
 import { UPLOADSTATUS } from "@files-ui/core"
 import {
   PreparingStatus,

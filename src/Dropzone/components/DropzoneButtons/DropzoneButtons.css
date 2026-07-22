@@ -6,14 +6,13 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  box-sizing: border-box;
-  //padding: 10px 0;
   gap: 10px;
+}
 
-  &.top {
-    padding-bottom: 10px;
-  }
-  &.bottom {
-    padding-top: 10px;
-  }
+.files-ui-buttons-container.top {
+  padding-bottom: 10px;
+}
+
+.files-ui-buttons-container.bottom {
+  padding-top: 10px;
 }

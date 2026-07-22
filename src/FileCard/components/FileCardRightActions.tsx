@@ -6,7 +6,7 @@ import {
   PlayIcon,
   Visibility,
 } from "../../icons";
-import "./FileCardRightActions.scss";
+import "./FileCardRightActions.css";
 
 declare type FileCardRightActionsProps = {
   darkMode?: boolean;

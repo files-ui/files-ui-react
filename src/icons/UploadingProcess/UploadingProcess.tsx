@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { parseSize } from "../utils/utils";
 import { UploadingProcessProps } from "./UploadingProcessProps";
-import "./UploadingProcess.scss";
+import "./UploadingProcess.css";
 const UploadingProcess: FC<UploadingProcessProps> = (
   props: UploadingProcessProps
 ) => {

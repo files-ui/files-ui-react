@@ -1,0 +1,70 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
+
+.fui-dropzone-root {
+  width: 100%;
+  min-width: 150px;
+  min-height: 180px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0 8px;
+  text-rendering: optimizeLegibility;
+  font-size: 1.5em;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 0.02857em;
+  box-sizing: border-box;
+  word-break: normal;
+}
+
+@media (max-width: 600px) {
+  .fui-dropzone-root {
+    font-size: 1.3em;
+  }
+}
+
+.fui-dropzone-root.clickable {
+  cursor: pointer;
+}
+
+.files-ui-header {
+  min-height: 23px;
+  cursor: text;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+@media (max-width: 960px) {
+  .files-ui-header {
+    font-size: 0.8rem;
+  }
+}
+
+.files-ui-footer {
+  box-sizing: border-box;
+  cursor: text;
+  width: 100%;
+  font-family: inherit;
+  padding-left: 10px;
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-align: left;
+}
+
+@media (max-width: 960px) {
+  .files-ui-footer {
+    padding-left: 1px;
+    font-size: 0.9rem;
+  }
+}

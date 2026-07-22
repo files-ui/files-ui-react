@@ -1,6 +1,6 @@
 import * as React from "react";
 import { completeAsureColor } from "@files-ui/core"
-import "./DefaultLoader.scss";
+import "./DefaultLoader.css";
 interface DefaultLoaderNeoProps {
   color?: string;
   label?: string;
