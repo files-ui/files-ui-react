@@ -1,20 +1,15 @@
 import * as React from "react";
 import {
   ExtFile,
-  ExtFileInstance,
   ExtFileManager,
   FileValidatorProps,
   Localization,
   Method,
+  ServerAction,
   ServerResponse,
   validateExtFileList,
   ValidateFileResponse,
 } from "@files-ui/core";
-
-/**
- * Server Action type for Next.js App Router
- */
-export type ServerAction = (formData: FormData) => Promise<ServerResponse>;
 
 /**
  * Options for useFilesUI hook
@@ -198,6 +193,16 @@ export interface UseFilesUIReturn {
    */
   isUploading: boolean;
   
+  /**
+   * Whether files are being dragged over
+   */
+  isDragging: boolean;
+  
+  /**
+   * Dropzone ID for managing multiple instances
+   */
+  dropzoneId: string | number;
+  
   // Actions
   /**
    * Add files to the list
@@ -258,13 +263,8 @@ export interface UseFilesUIReturn {
   getInputProps: () => {
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     accept?: string;
-    multiple?: boolean;
+    multiple: boolean;
   };
-  
-  /**
-   * Current drag state
-   */
-  isDragging: boolean;
 }
 
 /**
@@ -495,31 +495,248 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
   }, [validateFilesInternal, onChange]);
 
   /**
-   * Upload files
-   * TODO: Implement upload logic with action/XHR support
+   * Upload files - supports Server Actions and XHR/fetch
    */
   const uploadFiles = React.useCallback(async (): Promise<ExtFile[]> => {
-    // This will be implemented in the next step
-    // For now, return a placeholder
-    console.log("Upload not yet implemented in useFilesUI");
+    if (isUploading || localFiles.length === 0) {
+      return localFiles;
+    }
+
     setIsUploading(true);
-    onUploadStart?.(localFiles);
-    
-    // Placeholder - actual implementation will come from uploadStrategy.ts
-    const uploadedFiles = localFiles;
-    
-    setIsUploading(false);
-    onUploadFinish?.(uploadedFiles);
-    
+
+    // Filter uploadable files (valid or no validation configured, and not already uploaded)
+    const uploadableFiles = localFiles.filter(
+      (f) => (f.valid !== false) && !f.uploadStatus
+    );
+
+    if (uploadableFiles.length === 0) {
+      setIsUploading(false);
+      return localFiles;
+    }
+
+    onUploadStart?.(uploadableFiles);
+
+    let uploadedFiles: ExtFile[] = [];
+
+    try {
+      // Route 1: Server Action (Next.js App Router)
+      if (action) {
+        // Upload each file via Server Action
+        const serverActionResults: ExtFile[] = [];
+
+        for (const file of uploadableFiles) {
+          // Update to uploading status
+          setLocalFiles((prev) =>
+            prev.map((f) =>
+              f.id === file.id ? { ...f, uploadStatus: "uploading" } : f
+            )
+          );
+
+          try {
+            if (!file.file) {
+              throw new Error("File object is missing");
+            }
+
+            const formData = new FormData();
+            formData.append("file", file.file);
+            
+            // Add extra data if present
+            if (file.extraData) {
+              Object.entries(file.extraData).forEach(([key, value]) => {
+                formData.append(key, String(value));
+              });
+            }
+
+            const response = await action(formData);
+
+            const uploadedFile: ExtFile = {
+              ...file,
+              uploadStatus: response.success ? "success" : "error",
+              uploadMessage: response.message || (response.success ? "Upload successful" : "Upload failed"),
+              serverResponse: response,
+            };
+
+            serverActionResults.push(uploadedFile);
+
+            // Update file in state
+            setLocalFiles((prev) =>
+              prev.map((f) => (f.id === file.id ? uploadedFile : f))
+            );
+          } catch (error) {
+            const uploadedFile: ExtFile = {
+              ...file,
+              uploadStatus: "error",
+              uploadMessage: error instanceof Error ? error.message : "Upload failed",
+            };
+
+            serverActionResults.push(uploadedFile);
+
+            setLocalFiles((prev) =>
+              prev.map((f) => (f.id === file.id ? uploadedFile : f))
+            );
+          }
+        }
+
+        uploadedFiles = serverActionResults;
+      }
+      // Route 2: Traditional XHR/fetch upload
+      else if (url || urlFromExtFile) {
+        const { uploadSingleExtFileWithStrategy, uploadExtFilesWithStrategy } =
+          await import("../utils/uploadStrategy");
+
+        // Set all files to preparing status
+        let updatedFiles: ExtFile[] = uploadableFiles.map((f) => ({
+          ...f,
+          uploadStatus: "preparing" as const,
+        }));
+
+        setLocalFiles((prev) =>
+          prev.map((f) => {
+            const updated = updatedFiles.find((u) => u.id === f.id);
+            return updated || f;
+          })
+        );
+
+        // Concurrent upload strategy
+        if ((maxConcurrentUploads || 1) > 1) {
+          updatedFiles = updatedFiles.map((f) => ({
+            ...f,
+            uploadStatus: "uploading" as const,
+          })) as ExtFile[];
+
+          setLocalFiles((prev) =>
+            prev.map((f) => {
+              const updated = updatedFiles.find((u) => u.id === f.id);
+              return updated || f;
+            })
+          );
+
+          const results = await uploadExtFilesWithStrategy(
+            updatedFiles,
+            {
+              url,
+              urlFromExtFile,
+              method,
+              headers,
+              uploadLabel,
+              asBlob,
+              chunked,
+              chunkSize,
+              maxConcurrentUploads,
+            },
+            (completedCount, totalCount, latestResult) => {
+              setLocalFiles((prev) =>
+                prev.map((f) =>
+                  f.id === latestResult.id ? latestResult : f
+                )
+              );
+            }
+          );
+
+          uploadedFiles = results;
+
+          setLocalFiles((prev) =>
+            prev.map((f) => {
+              const uploaded = results.find((r) => r.id === f.id);
+              return uploaded || f;
+            })
+          );
+        }
+        // Sequential upload
+        else {
+          const sequentialResults: ExtFile[] = [];
+
+          for (const file of updatedFiles) {
+            // Update to uploading
+            const uploadingFile = { ...file, uploadStatus: "uploading" as const };
+            setLocalFiles((prev) =>
+              prev.map((f) => (f.id === file.id ? uploadingFile : f))
+            );
+
+            const result = await uploadSingleExtFileWithStrategy(uploadingFile, {
+              url,
+              urlFromExtFile,
+              method,
+              headers,
+              uploadLabel,
+              asBlob,
+              chunked,
+              chunkSize,
+            });
+
+            sequentialResults.push(result);
+
+            setLocalFiles((prev) =>
+              prev.map((f) => (f.id === file.id ? result : f))
+            );
+          }
+
+          uploadedFiles = sequentialResults;
+        }
+      }
+      // No upload configuration
+      else {
+        throw new Error("No upload configuration provided (action, url, or urlFromExtFile)");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      
+      // Mark all files as error
+      const errorFiles = uploadableFiles.map((f) => ({
+        ...f,
+        uploadStatus: "error" as const,
+        uploadMessage: error instanceof Error ? error.message : "Upload failed",
+      }));
+
+      uploadedFiles = errorFiles;
+
+      setLocalFiles((prev) =>
+        prev.map((f) => {
+          const errorFile = errorFiles.find((ef) => ef.id === f.id);
+          return errorFile || f;
+        })
+      );
+    } finally {
+      setIsUploading(false);
+      onUploadFinish?.(uploadedFiles);
+    }
+
     return uploadedFiles;
-  }, [localFiles, onUploadStart, onUploadFinish]);
+  }, [
+    isUploading,
+    localFiles,
+    action,
+    url,
+    urlFromExtFile,
+    method,
+    headers,
+    uploadLabel,
+    asBlob,
+    chunked,
+    chunkSize,
+    maxConcurrentUploads,
+    onUploadStart,
+    onUploadFinish,
+  ]);
 
   /**
    * Abort upload
    */
   const abortUpload = React.useCallback(() => {
     setIsUploading(false);
-    // TODO: Implement actual abort logic
+    
+    // Mark all uploading/preparing files as aborted
+    setLocalFiles((prev) =>
+      prev.map((f) =>
+        f.uploadStatus === "uploading" || f.uploadStatus === "preparing"
+          ? {
+              ...f,
+              uploadStatus: "aborted" as const,
+              uploadMessage: "Upload aborted by user",
+            }
+          : f
+      )
+    );
   }, []);
 
   /**
@@ -577,6 +794,7 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
     numberOfValidFiles,
     isUploading,
     isDragging,
+    dropzoneId,
     
     // Actions
     addFiles,

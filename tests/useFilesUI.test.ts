@@ -413,17 +413,30 @@ describe("useFilesUI Hook", () => {
     it("should call onUploadStart and onUploadFinish", async () => {
       const onUploadStart = jest.fn();
       const onUploadFinish = jest.fn();
+      const mockAction = jest.fn().mockResolvedValue({ success: true, message: "Uploaded" });
 
       const { result } = renderHook(() =>
-        useFilesUI({ onUploadStart, onUploadFinish })
+        useFilesUI({ 
+          onUploadStart, 
+          onUploadFinish,
+          action: mockAction 
+        })
       );
 
+      // Add a file first
+      await act(async () => {
+        const file = new File(["test"], "test.txt", { type: "text/plain" });
+        result.current.addFiles([file]);
+      });
+
+      // Upload the file
       await act(async () => {
         await result.current.uploadFiles();
       });
 
       expect(onUploadStart).toHaveBeenCalled();
       expect(onUploadFinish).toHaveBeenCalled();
+      expect(mockAction).toHaveBeenCalled();
     });
   });
 

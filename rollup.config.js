@@ -10,11 +10,13 @@ export default {
       file: "./build/index.js",
       format: "cjs",
       sourcemap: true,
+      inlineDynamicImports: true,
     },
     {
       file: "./build/index.es.js",
       format: "esm",
       sourcemap: true,
+      inlineDynamicImports: true,
     },
   ],
   // rollup.config.js

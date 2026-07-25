@@ -1,4 +1,4 @@
-import { ExtFile, ValidateFileResponse, Localization, UploadConfig } from "@files-ui/core"
+import { ExtFile, ValidateFileResponse, Localization, UploadConfig, ServerAction } from "@files-ui/core"
 
 import * as React from "react";
 import { OverridableComponentProps } from "../../../overridable";
@@ -90,6 +90,26 @@ export interface DropzoneFullProps extends OverridableComponentProps {
   * and uploadOnDrop prop flag will not work.
   */
   uploadConfig?: UploadConfig;
+  
+  /**
+   * Server Action for Next.js App Router.
+   * If provided, takes precedence over `uploadConfig.url`.
+   * 
+   * @example
+   * ```tsx
+   * "use server"
+   * async function uploadAction(formData: FormData) {
+   *   const file = formData.get("file") as File;
+   *   // Process file on server...
+   *   return { success: true, message: "Uploaded successfully" };
+   * }
+   * 
+   * // Client component
+   * <Dropzone action={uploadAction} />
+   * ```
+   */
+  action?: ServerAction;
+  
   /**
    * Maximum number of files to upload concurrently.
    * @default 1
