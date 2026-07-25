@@ -41,7 +41,12 @@ export type { FileCardProps } from "./FileCard/FileCardProps";
 
 export type { AvatarProps } from "./Avatar/AvatarProps";
 
+// Hooks
 export { useFakeProgress } from "./hooks";
+
+// v2.0 Headless Hook (Primary API)
+export { useFilesUI } from "./hooks";
+export type { UseFilesUIOptions, UseFilesUIReturn, ServerAction } from "./hooks";
 
 export {
     createListOfMultiTypeFile,
