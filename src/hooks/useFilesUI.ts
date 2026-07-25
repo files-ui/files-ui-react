@@ -267,6 +267,8 @@ export interface UseFilesUIReturn {
   };
 }
 
+export type { ServerAction };
+
 /**
  * Headless hook for file upload management
  * 
