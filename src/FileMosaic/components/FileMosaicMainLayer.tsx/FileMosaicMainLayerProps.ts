@@ -24,5 +24,11 @@ export interface FileMosaicMainLayerProps {
     infoIcon: boolean;
     onOpenInfo: Function | undefined;
 
+    /**
+     * Multiplier applied to action icon sizes.
+     * @default 1
+     */
+    sizeMultiplier?: number;
+
     isActive?: boolean;
 }

@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
-
 .files-ui-file-card-main-container {
   border-radius: 8px;
   /* overflow: hidden; */
@@ -14,7 +12,7 @@
   font-size: 15px;
   font-weight: 400;
   width: 320px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .files-ui-file-card-main-container .files-ui-file-card-main-layer-container {
@@ -285,3 +283,62 @@
   background-color: rgba(154, 160, 166, 0.85);
 }
 */
+
+/* ===== SIZE VARIANTS ===== */
+
+/* XS variant */
+.files-ui-file-card-main-container.fui-size-xs {
+  width: 220px;
+  min-height: 70px;
+  font-size: 11.25px;
+}
+.files-ui-file-card-main-container.fui-size-xs .files-ui-file-card-main-layer-container {
+  width: 220px;
+  height: 70px;
+}
+.files-ui-file-card-main-container.fui-size-xs .files-ui-file-card-main-layer-container .file-card-main-layer .file-card-icon-plus-data .file-card-icon-container {
+  width: 70px;
+  height: 70px;
+}
+.files-ui-file-card-main-container.fui-size-xs .files-ui-file-card-main-layer-container .file-card-main-layer .file-card-icon-plus-data .file-card-icon-container .file-card-icon-layer {
+  width: 70px;
+  height: 70px;
+}
+
+/* Small variant */
+.files-ui-file-card-main-container.fui-size-small {
+  width: 270px;
+  min-height: 85px;
+  font-size: 12.75px;
+}
+.files-ui-file-card-main-container.fui-size-small .files-ui-file-card-main-layer-container {
+  width: 270px;
+  height: 85px;
+}
+.files-ui-file-card-main-container.fui-size-small .files-ui-file-card-main-layer-container .file-card-main-layer .file-card-icon-plus-data .file-card-icon-container {
+  width: 85px;
+  height: 85px;
+}
+.files-ui-file-card-main-container.fui-size-small .files-ui-file-card-main-layer-container .file-card-main-layer .file-card-icon-plus-data .file-card-icon-container .file-card-icon-layer {
+  width: 85px;
+  height: 85px;
+}
+
+/* Large variant */
+.files-ui-file-card-main-container.fui-size-large {
+  width: 420px;
+  min-height: 130px;
+  font-size: 17.25px;
+}
+.files-ui-file-card-main-container.fui-size-large .files-ui-file-card-main-layer-container {
+  width: 420px;
+  height: 130px;
+}
+.files-ui-file-card-main-container.fui-size-large .files-ui-file-card-main-layer-container .file-card-main-layer .file-card-icon-plus-data .file-card-icon-container {
+  width: 130px;
+  height: 130px;
+}
+.files-ui-file-card-main-container.fui-size-large .files-ui-file-card-main-layer-container .file-card-main-layer .file-card-icon-plus-data .file-card-icon-container .file-card-icon-layer {
+  width: 130px;
+  height: 130px;
+}

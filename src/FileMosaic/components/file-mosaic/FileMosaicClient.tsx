@@ -74,6 +74,7 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
     selected = false,
     onSelect,
     smartImgFit = "orientation",
+    variant = "medium",
   } = props;
 
   //context
@@ -93,9 +94,21 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
   //ref for anchor download element
   const downloadRef = React.useRef<HTMLAnchorElement | null>(null);
 
+  const sizeClass: string | undefined = variant !== "medium" ? `fui-size-${variant}` : undefined;
+  const iconSizeByVariant: Record<"xs" | "small" | "medium" | "large", number> = {
+    xs: 0.65,
+    small: 0.8,
+    medium: 1,
+    large: 1.25,
+  };
+  const iconSizeMultiplier: number = iconSizeByVariant[variant];
+
   const finalClassName: string = addClassName(
     addClassName(
-      "files-ui-file-mosaic-main-container files-ui-tooltip",
+      addClassName(
+        "files-ui-file-mosaic-main-container files-ui-tooltip",
+        sizeClass,
+      ),
       className,
     ),
     onClick ? "clickable" : undefined,
@@ -326,6 +339,7 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
               onDownload={handleDownload}
               infoIcon={info !== undefined}
               onOpenInfo={handleOpenInfo}
+              sizeMultiplier={iconSizeMultiplier}
               isActive={alwaysActive || hovering}
             />
           </Layer>

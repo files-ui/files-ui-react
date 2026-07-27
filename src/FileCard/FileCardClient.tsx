@@ -119,6 +119,7 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
 
     elevation = 4,
     smartImgFit = "orientation",
+    variant = "medium",
     //} = mergeProps(props, FileCardPropsDefault);
   } = props;
   //context
@@ -135,11 +136,22 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
   //ref for anchor element
   const downloadRef = React.useRef<HTMLAnchorElement | null>(null);
 
+  const sizeClass: string | undefined = variant !== "medium" ? `fui-size-${variant}` : undefined;
+  const iconSizeByVariant: Record<"xs" | "small" | "medium" | "large", number> = {
+    xs: 0.7,
+    small: 0.85,
+    medium: 1,
+    large: 1.3,
+  };
+  const iconSizeMultiplier: number = iconSizeByVariant[variant];
+  const classNameWithSize: string | undefined =
+    sizeClass && className ? `${sizeClass} ${className}` : sizeClass || className;
+
   //className created
   const finalClassName: string = makeFileCardClassName(
     elevation,
     darkMode,
-    className,
+    classNameWithSize,
     onClick !== undefined,
   );
 
@@ -402,6 +414,7 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
           onDownload={handleDownload}
           infoIcon={info !== undefined}
           onOpenInfo={handleOpenInfo}
+          sizeMultiplier={iconSizeMultiplier}
           isActive={alwaysActive || hovering}
           visible={!isUploading && !showInfo}
         />

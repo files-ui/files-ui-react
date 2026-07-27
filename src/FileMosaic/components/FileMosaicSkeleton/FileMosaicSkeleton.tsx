@@ -3,6 +3,19 @@ import FuiSkeleton from "../../../skeleton/FuiSkeleton";
 import { FuiSkeletonProps } from "../../../skeleton/FuiSkeletonProps";
 import { mergeProps } from "../../../overridable";
 
+type SizeVariant = "xs" | "small" | "medium" | "large";
+
+interface FileMosaicSkeletonProps extends FuiSkeletonProps {
+  sizeVariant?: SizeVariant;
+}
+
+const sizeMap: Record<SizeVariant, { width: number; mainHeight: number; circleSize: number }> = {
+  xs: { width: 88, mainHeight: 88, circleSize: 24 },
+  small: { width: 110, mainHeight: 110, circleSize: 30 },
+  medium: { width: 132, mainHeight: 132, circleSize: 38 },
+  large: { width: 176, mainHeight: 176, circleSize: 48 },
+};
+
 const defaultFileMosaicSkeletonProps: FuiSkeletonProps = {
   animation: "wave",
   variant: "rectangular",
@@ -10,13 +23,17 @@ const defaultFileMosaicSkeletonProps: FuiSkeletonProps = {
   height: 160,
 };
 
-const FileMosaicSkeleton: React.FC<FuiSkeletonProps> = (
-  props: FuiSkeletonProps,
+const FileMosaicSkeleton: React.FC<FileMosaicSkeletonProps> = (
+  props: FileMosaicSkeletonProps,
 ) => {
+  const { sizeVariant = "medium", ...restProps } = props;
   const { className, style, animation, width, height } = mergeProps(
-    props,
+    restProps,
     defaultFileMosaicSkeletonProps,
   );
+
+  const dims = sizeMap[sizeVariant];
+  const finalWidth = width !== 132 ? width : dims.width;
 
   return (
     <div
@@ -25,16 +42,16 @@ const FileMosaicSkeleton: React.FC<FuiSkeletonProps> = (
         display: "inline-flex",
         flexDirection: "column",
         gap: 8,
-        width,
+        width: finalWidth,
         ...style,
       }}
     >
-      <FuiSkeleton animation={animation} width={width} height={132} />
-      <FuiSkeleton animation={animation} width={width} height={14} />
-      <FuiSkeleton animation={animation} width={width ? `calc(${width} * 0.72)` : 96} height={12} />
+      <FuiSkeleton animation={animation} width={finalWidth} height={dims.mainHeight} />
+      <FuiSkeleton animation={animation} width={finalWidth} height={14} />
+      <FuiSkeleton animation={animation} width={finalWidth ? `calc(${typeof finalWidth === "number" ? finalWidth + "px" : finalWidth} * 0.72)` : 96} height={12} />
       <div style={{ display: "flex", gap: 8 }}>
-        <FuiSkeleton animation={animation} width={38} height={38} variant="circular" />
-        <FuiSkeleton animation={animation} width={38} height={38} variant="circular" />
+        <FuiSkeleton animation={animation} width={dims.circleSize} height={dims.circleSize} variant="circular" />
+        <FuiSkeleton animation={animation} width={dims.circleSize} height={dims.circleSize} variant="circular" />
       </div>
       <div style={{ height: 0, width: 0, overflow: "hidden" }} aria-hidden="true">
         {height}

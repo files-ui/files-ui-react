@@ -23,6 +23,15 @@ v2.0.0 is a fully backward-compatible major release. All existing component APIs
 
 ### New Features
 
+#### Font loading behavior (Poppins opt-in)
+
+- Removed automatic Google Fonts `@import` from component stylesheets (`Avatar`, `Dropzone`, `FileCard`, `FileMosaic`, `MaterialButton`)
+- Updated component font declarations to use fallback stack:
+  - `"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
+- Updated tooltip styles to use the same fallback stack
+- Consumers who want `Poppins` should load it explicitly in their application
+- Added documentation: `docs/react/Fonts.md`
+
 #### Headless Hook — `useFilesUI`
 
 A framework-agnostic hook that extracts all validation, upload orchestration, and state management from `<Dropzone>` and `<FileInputButton>`. Use it to build fully custom upload UIs without any of the library's default styling.

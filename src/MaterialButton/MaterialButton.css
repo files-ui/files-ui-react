@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900);
-
 .material-button-root {
   border: 0;
   cursor: pointer;
@@ -24,7 +22,7 @@
   min-width: 64px;
   box-sizing: border-box;
   border-radius: 4px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* font-family: inherit; */
   font-size: 0.875rem;
   font-weight: 400;

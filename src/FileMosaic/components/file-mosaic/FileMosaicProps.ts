@@ -111,6 +111,15 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      * @default orientation
      */
     smartImgFit?: false | "orientation" | "center";
+    /**
+     * Controls the overall size of the component.
+     * - "xs"     — extra-small (proportionally smaller than medium)
+     * - "small"  — compact version
+     * - "medium" — current default dimensions (backward compatible)
+     * - "large"  — enlarged version
+     * @default "medium"
+     */
+    variant?: "xs" | "small" | "medium" | "large";
 }
 //React.HTMLProps<HTMLDivElement>
 export type FileMosaicProps =

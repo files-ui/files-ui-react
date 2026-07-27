@@ -1,0 +1,108 @@
+import type { NextConfigComplete } from '../config-shared';
+import type { CustomRoutes } from '../../lib/load-custom-routes';
+import type { Duplex } from 'stream';
+import type { Telemetry } from '../../telemetry/storage';
+import type { IncomingMessage, ServerResponse } from 'http';
+import type { UrlObject } from 'url';
+import type { RouteDefinition } from '../route-definitions/route-definition';
+import { type webpack } from 'next/dist/compiled/webpack/webpack';
+import getBaseWebpackConfig from '../../build/webpack-config';
+import type { __ApiPreviewProps } from '../api-utils';
+import ws from 'next/dist/compiled/ws';
+import type { UnwrapPromise } from '../../lib/coalesced-function';
+import { type NextJsHotReloaderInterface } from './hot-reloader-types';
+import type { HmrMessageSentToBrowser } from './hot-reloader-types';
+import { type ReactDebugChannelForBrowser } from './debug-channel';
+import type { ServerCacheStatus } from '../../next-devtools/dev-overlay/cache-indicator';
+import type { Lockfile } from '../../build/lockfile';
+export declare function renderScriptError(res: ServerResponse, error: Error, { verbose }?: {
+    verbose?: boolean | undefined;
+}): Promise<{
+    finished: true | undefined;
+}>;
+export default class HotReloaderWebpack implements NextJsHotReloaderInterface {
+    private hasAppRouterEntrypoints;
+    private hasPagesRouterEntrypoints;
+    private dir;
+    private buildId;
+    private encryptionKey;
+    private middlewares;
+    private pagesDir?;
+    private distDir;
+    private webpackHotMiddleware?;
+    private config;
+    private clientStats;
+    private clientError;
+    private serverError;
+    private hmrServerError;
+    private serverPrevDocumentHash;
+    private serverChunkNames?;
+    private prevChunkNames?;
+    private onDemandEntries?;
+    private previewProps;
+    private watcher;
+    private rewrites;
+    private fallbackWatcher;
+    private hotReloaderSpan;
+    private pagesMapping;
+    private appDir?;
+    private telemetry;
+    private resetFetch;
+    private lockfile;
+    private versionInfo;
+    private devtoolsFrontendUrl;
+    private reloadAfterInvalidation;
+    private isSrcDir;
+    private cacheStatusesByRequestId;
+    serverStats: webpack.Stats | null;
+    edgeServerStats: webpack.Stats | null;
+    multiCompiler?: webpack.MultiCompiler;
+    activeWebpackConfigs?: Array<UnwrapPromise<ReturnType<typeof getBaseWebpackConfig>>>;
+    constructor(dir: string, { config, isSrcDir, pagesDir, distDir, buildId, encryptionKey, previewProps, rewrites, appDir, telemetry, resetFetch, lockfile, onDevServerCleanup, }: {
+        config: NextConfigComplete;
+        isSrcDir: boolean;
+        pagesDir?: string;
+        distDir: string;
+        buildId: string;
+        encryptionKey: string;
+        previewProps: __ApiPreviewProps;
+        rewrites: CustomRoutes['rewrites'];
+        appDir?: string;
+        telemetry: Telemetry;
+        resetFetch: () => void;
+        lockfile: Lockfile | undefined;
+        onDevServerCleanup: ((listener: () => Promise<void>) => void) | undefined;
+    });
+    run(req: IncomingMessage, res: ServerResponse, parsedUrl: UrlObject): Promise<{
+        finished?: true;
+    }>;
+    setHmrServerError(error: Error | null): void;
+    clearHmrServerError(): void;
+    protected refreshServerComponents(hash: string): Promise<void>;
+    onHMR(req: IncomingMessage, _socket: Duplex, head: Buffer, callback: (client: ws.WebSocket, context: {
+        isLegacyClient: boolean;
+    }) => void): void;
+    private clean;
+    private getWebpackConfig;
+    buildFallbackError(): Promise<void>;
+    private tracedGetVersionInfo;
+    start(): Promise<void>;
+    invalidate({ reloadAfterInvalidation }?: {
+        reloadAfterInvalidation: boolean;
+    }): void;
+    getCompilationErrors(page: string): Promise<Error[]>;
+    send(message: HmrMessageSentToBrowser): void;
+    sendToClient(client: ws, message: HmrMessageSentToBrowser): void;
+    sendToLegacyClients(message: HmrMessageSentToBrowser): void;
+    setCacheStatus(status: ServerCacheStatus, htmlRequestId: string, requestId: string): void;
+    setReactDebugChannel(debugChannel: ReactDebugChannelForBrowser, htmlRequestId: string, requestId: string): void;
+    ensurePage({ page, clientOnly, appPaths, definition, isApp, url, }: {
+        page: string;
+        clientOnly: boolean;
+        appPaths?: ReadonlyArray<string> | null;
+        isApp?: boolean;
+        definition?: RouteDefinition;
+        url?: string;
+    }): Promise<void>;
+    close(): void;
+}
