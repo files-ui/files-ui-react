@@ -22,7 +22,7 @@
   min-width: 64px;
   box-sizing: border-box;
   border-radius: 4px;
-  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--files-ui-font-family, "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
   /* font-family: inherit; */
   font-size: 0.875rem;
   font-weight: 400;

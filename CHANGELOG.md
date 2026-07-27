@@ -9,7 +9,7 @@
 <h1 align="center">Files ui</h1>
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
+This file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
 
 ## [2.0.0](https://github.com/files-ui/files-ui-react/releases/tag/v2.0.0) (2026-07-25)
 
@@ -22,15 +22,6 @@ v2.0.0 is a fully backward-compatible major release. All existing component APIs
 ---
 
 ### New Features
-
-#### Font loading behavior (Poppins opt-in)
-
-- Removed automatic Google Fonts `@import` from component stylesheets (`Avatar`, `Dropzone`, `FileCard`, `FileMosaic`, `MaterialButton`)
-- Updated component font declarations to use fallback stack:
-  - `"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
-- Updated tooltip styles to use the same fallback stack
-- Consumers who want `Poppins` should load it explicitly in their application
-- Added documentation: `docs/react/Fonts.md`
 
 #### Headless Hook — `useFilesUI`
 
@@ -96,6 +87,31 @@ import { FullScreen }        from "@files-ui/react/client/full-screen";
 The root import `from "@files-ui/react"` continues to work for non-Next.js consumers.
 
 New named exports in root: `DropzoneClient`, `DropzoneContainer`, `FileInputButtonClient`, `FileInputButtonContainer`, `FileCardClient`, `FileCardContainer`, `FileMosaicClient`, `FileMosaicContainer`, `AvatarClient`, `AvatarContainer`, `FullScreenClient`, `FullScreenContainer`.
+
+
+#### Font loading behavior (Poppins opt-in)
+
+- Removed automatic Google Fonts `@import` from component stylesheets (`Avatar`, `Dropzone`, `FileCard`, `FileMosaic`, `MaterialButton`)
+- Updated component font declarations to use fallback stack:
+  - `"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
+- Updated tooltip styles to use the same fallback stack
+- Consumers who want `Poppins` should load it explicitly in their application
+- Added documentation: `docs/react/Fonts.md`
+
+#### Global `fontFamily` config via `FilesUiProvider`
+
+- Added `fontFamily` prop to `FilesUIConfig`
+- When set, `FilesUiProvider` injects a single `<style>` element that sets the CSS custom property `--files-ui-font-family` on `:root`
+- All component CSS files now reference `var(--files-ui-font-family, "Poppins", ...)` instead of a hardcoded font stack
+- Allows consumers to override fonts globally without per-component styling
+- Standard system fallbacks are appended automatically to the user-provided font
+
+```tsx
+<FilesUiProvider config={{ fontFamily: "Inter" }}>
+  <App />
+</FilesUiProvider>
+```
+
 
 #### `@files-ui/core` v2.1.0 — Pure JavaScript Source
 

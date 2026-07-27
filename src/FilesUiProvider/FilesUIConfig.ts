@@ -14,7 +14,14 @@ export type FilesUIConfig = {
      * @default "EN-en"
      */
     localization?: Localization;
-    //fontFamily?:string;
+    /**
+     * Global font family for all Files UI components.
+     * If set, overrides the default Poppins font stack via a CSS custom property.
+     * Standard system fallbacks are appended automatically.
+     * @example "Inter"
+     * @example "Roboto"
+     */
+    fontFamily?: string;
 }
 
 export type IconsSet = IconsMap;

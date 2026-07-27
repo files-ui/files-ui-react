@@ -13,7 +13,7 @@ UI components for file uploads with [React js](https://react.dev/).
 <div align="center">
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/files-ui/react/blob/HEAD/LICENSE)
-[![npm latest package](https://img.shields.io/npm/v/@files-ui/react.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/@files-ui/react) [![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/files-ui/files-ui-react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![npm latest package](https://img.shields.io/npm/v/@files-ui/react.svg?logo=npm&logoColor=fff&label=NPM+package&color=limegreen)](https://www.npmjs.com/package/@files-ui/react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub Repo stars](https://img.shields.io/github/stars/files-ui/react?label=Star%20me%20please%20:D&style=social)](https://github.com/files-ui/react)
 [![Node.js CI](https://github.com/files-ui/files-ui-react/actions/workflows/node.js.yml/badge.svg)](https://github.com/files-ui/files-ui-react)
 
@@ -25,9 +25,10 @@ UI components for file uploads with [React js](https://react.dev/).
 </a>
 </p>
 
-- :heart: it ?, support us by giving a :star: on :octocat: [Github](https://github.com/dropzone-ui/dropzone-ui) :D
 
-- :zap: Enjoying @files-ui/react? [Please leave a short review on Openbase](https://openbase.com/js/@files-ui/react#rate)
+
+- :heart: it ?, support us by giving a :star: on :octocat: [Github](https://github.com/files-ui/files-ui-react) :D
+
 - :eyes: More previews [here](#more-previews).
 
 ## Installation

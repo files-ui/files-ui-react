@@ -69,7 +69,7 @@ const DropzoneFooter: React.FC<DropzoneFooterProps> = (
             ? message
             : !accept
             ? allowedTypesLabel
-              ? DropzoneFooterLocalizer.acceptAll
+              ? (DropzoneFooterLocalizer.acceptAll as string)
               : undefined
             : accepCustomMessenger(accept)}
         </>

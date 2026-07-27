@@ -12,7 +12,7 @@
   font-size: 15px;
   font-weight: 400;
   width: 320px;
-  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--files-ui-font-family, "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
 }
 
 .files-ui-file-card-main-container .files-ui-file-card-main-layer-container {
