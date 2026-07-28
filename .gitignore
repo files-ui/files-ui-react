@@ -25,3 +25,6 @@ yarn-error.log*
 hidden
 .cursorrules
 /examples/**/node_modules
+/examples/**/.next
+/examples/**/build
+/examples/**/dist
