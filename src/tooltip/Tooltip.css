@@ -1,0 +1,126 @@
+.files-ui-tooltip {
+  cursor: default;
+  position: relative;
+  /* display: inline-block; */
+  /* border-bottom: 1px dotted black; */
+}
+
+.files-ui-tooltip:hover {
+  z-index: 2;
+}
+
+.files-ui-tooltip:hover .files-ui-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  z-index: 2;
+}
+
+.files-ui-tooltip.card:hover {
+  z-index: 2;
+}
+
+.files-ui-tooltip.card:hover .files-ui-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  z-index: 2;
+}
+
+.files-ui-tooltip.card .files-ui-tooltiptext {
+  box-sizing: border-box;
+  font-family: var(--files-ui-font-family, "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 400;
+  visibility: hidden;
+  width: 200px;
+  /* background-color: green; */
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 2px 2px;
+  position: absolute;
+  z-index: 2;
+  /* left: calc(50% - 100px); */
+  left: 0;
+  margin-top: 5px;
+  /* top: calc(100% + 5px); */
+  top: 100%;
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.files-ui-tooltip.card .files-ui-tooltiptext.not-valid-error {
+  background: linear-gradient(to top, #c62828, #d32f2f);
+}
+
+.files-ui-tooltip.card .files-ui-tooltiptext.not-valid-error::after {
+  border-color: transparent transparent #d32f2f transparent;
+}
+
+.files-ui-tooltip.card .files-ui-tooltiptext.success {
+  /* background-color: green; */
+  background: linear-gradient(to top, #1b5e20, #2e7d32);
+}
+
+.files-ui-tooltip.card .files-ui-tooltiptext.success::after {
+  border-color: transparent transparent #2e7d32 transparent;
+}
+
+.files-ui-tooltip.card .files-ui-tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  /* border-color: transparent transparent green transparent; */
+}
+
+.files-ui-tooltip .files-ui-tooltiptext {
+  box-sizing: border-box;
+  font-family: var(--files-ui-font-family, "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 400;
+  visibility: hidden;
+  width: 132px;
+  /* background-color: green; */
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 2px 2px;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.files-ui-tooltip .files-ui-tooltiptext.not-valid-error {
+  background: linear-gradient(to top, #c62828, #d32f2f);
+}
+
+.files-ui-tooltip .files-ui-tooltiptext.not-valid-error::after {
+  border-color: transparent transparent #d32f2f transparent;
+}
+
+.files-ui-tooltip .files-ui-tooltiptext.success {
+  /* background-color: green; */
+  background: linear-gradient(to top, #1b5e20, #2e7d32);
+}
+
+.files-ui-tooltip .files-ui-tooltiptext.success::after {
+  border-color: transparent transparent #2e7d32 transparent;
+}
+
+.files-ui-tooltip .files-ui-tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  /* border-color: transparent transparent green transparent; */
+}

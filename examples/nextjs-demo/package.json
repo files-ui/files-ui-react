@@ -1,0 +1,29 @@
+{
+  "name": "nextjs-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@files-ui/core": "file:../core",
+    "@files-ui/react": "file:../react",
+    "next": "16.2.11",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.5.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.11",
+    "postcss": "^8.5.23",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,59 @@
+.fui-avatar-main-container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(128, 128, 128, 0.486);
+  border-radius: 10px;
+  font-family: var(--files-ui-font-family, "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+}
+
+.fui-avatar-main-container.square {
+  border-radius: 0px;
+}
+
+.fui-avatar-main-container.circle {
+  border-radius: 50%;
+}
+
+.fui-avatar-main-container .fui-avatar-image {
+  /* width: 100%; */
+  /* height: 100%; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.fui-avatar-main-container .fui-avatar-label {
+  margin: 0;
+  overflow: hidden;
+  background-color: rgba(128, 128, 128, 0.486);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.fui-avatar-main-container .fui-avatar-label.hide {
+  display: none;
+}
+
+.fui-avatar-main-container:hover .fui-avatar-label.hide {
+  display: flex;
+}
+
+.fui-avatar-main-container .fui-avatar-label:hover {
+  background-color: rgba(71, 71, 71, 0.74);
+  display: flex;
+  cursor: pointer;
+}

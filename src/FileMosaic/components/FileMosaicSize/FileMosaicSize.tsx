@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./FileMosaicSize.scss";
+import "./FileMosaicSize.css";
 export type FileItemSizeProps = {
   sizeFormatted?: string;
 };

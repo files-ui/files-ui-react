@@ -1,0 +1,18 @@
+.files-ui-buttons-container {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.files-ui-buttons-container.top {
+  padding-bottom: 10px;
+}
+
+.files-ui-buttons-container.bottom {
+  padding-top: 10px;
+}

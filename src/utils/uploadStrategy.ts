@@ -1,12 +1,18 @@
 import {
   ExtFile,
   Method,
+  ServerAction,
   uploadExtFile,
   uploadExtFileChunked,
   uploadExtFilesConcurrent,
+  uploadExtFilesViaAction,
 } from "@files-ui/core";
 
 export type UploadStrategyOptions = {
+  // Server Actions (takes precedence over url)
+  action?: ServerAction;
+  
+  // XHR/Fetch options
   url?: string;
   urlFromExtFile?: (f: ExtFile) => string;
   method?: Method;
@@ -78,6 +84,7 @@ export const uploadExtFilesWithStrategy = async (
   if (extFiles.length === 0) return [];
 
   const {
+    action,
     maxConcurrentUploads = 1,
     chunked = false,
     url,
@@ -87,6 +94,17 @@ export const uploadExtFilesWithStrategy = async (
     uploadLabel,
     asBlob,
   } = options;
+
+  // Priority 1: Server Actions (Next.js App Router)
+  if (action) {
+    return uploadExtFilesViaAction(
+      extFiles,
+      action,
+      uploadLabel,
+      maxConcurrentUploads,
+      onFileComplete
+    );
+  }
 
   if (!chunked && maxConcurrentUploads > 1) {
     return uploadExtFilesConcurrent(

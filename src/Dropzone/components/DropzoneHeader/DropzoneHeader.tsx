@@ -68,7 +68,7 @@ const DropzoneHeader: React.FC<DropzoneHeaderProps> = (
       } else {
         result.push(
           <React.Fragment>
-            <>{DropzoneHeaderLocalizer.uploadFilesMessage}</>
+            <>{DropzoneHeaderLocalizer.uploadFilesMessage as string}</>
             <Upload color={color} onClick={handleStartUploading} />
           </React.Fragment>
         );

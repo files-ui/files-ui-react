@@ -29,7 +29,12 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
     localization,
     uploadStatus,
     isActive,
+    sizeMultiplier = 1,
   } = props;
+
+  const iconSize = Math.max(10, Math.round(15 * sizeMultiplier));
+  const infoIconSize = Math.max(6, Math.round(8 * sizeMultiplier));
+
   return (
     <React.Fragment>
       <div className="file-mosaic-main-layer-header">
@@ -40,7 +45,7 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
             }
             color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
             onClick={onDelete}
-            size="small"
+            size={iconSize}
             colorFill="transparent"
           />
         )}
@@ -68,7 +73,7 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onSee}
-                  size="small"
+                  size={iconSize}
                 />
               )}
 
@@ -81,7 +86,7 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onWatch}
-                  size="small"
+                  size={iconSize}
                 />
               )}
               {downloadIcon && (
@@ -93,7 +98,7 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onDownload}
-                  size="small"
+                  size={iconSize}
                 />
               )}
               {infoIcon && (
@@ -105,7 +110,7 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
                   }
                   onClick={onOpenInfo}
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-                  size="micro"
+                  size={infoIconSize}
                 />
               )}
             </React.Fragment>

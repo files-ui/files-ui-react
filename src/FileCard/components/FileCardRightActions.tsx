@@ -6,7 +6,7 @@ import {
   PlayIcon,
   Visibility,
 } from "../../icons";
-import "./FileCardRightActions.scss";
+import "./FileCardRightActions.css";
 
 declare type FileCardRightActionsProps = {
   darkMode?: boolean;
@@ -24,6 +24,8 @@ declare type FileCardRightActionsProps = {
 
   infoIcon: boolean;
   onOpenInfo: Function | undefined;
+
+  sizeMultiplier?: number;
 
   isActive?: boolean;
   visible?: boolean;
@@ -46,7 +48,12 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
     videoIcon,
     isActive,
     visible,
+    sizeMultiplier = 1,
   } = props;
+
+  const iconSize = Math.max(10, Math.round(15 * sizeMultiplier));
+  const infoIconSize = Math.max(6, Math.round(8 * sizeMultiplier));
+
   if (visible)
     return (
       <>
@@ -58,7 +65,7 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
               }
               color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
               onClick={onDelete}
-              size="small"
+              size={iconSize}
               colorFill="transparent"
             />
           )}
@@ -75,7 +82,7 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onSee}
-                  size="small"
+                  size={iconSize}
                 />
               )}
 
@@ -88,7 +95,7 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onWatch}
-                  size="small"
+                  size={iconSize}
                 />
               )}
               {downloadIcon && (
@@ -100,7 +107,7 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onDownload}
-                  size="small"
+                  size={iconSize}
                 />
               )}
               {infoIcon && (
@@ -112,7 +119,7 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
                   }
                   onClick={onOpenInfo}
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
-                  size="micro"
+                  size={infoIconSize}
                 />
               )}
             </React.Fragment>

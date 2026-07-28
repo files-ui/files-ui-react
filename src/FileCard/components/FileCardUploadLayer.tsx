@@ -8,7 +8,7 @@ import {
   SuccessStatus,
   UploadingStatus,
 } from "../../FileStatus";
-import "./FileCardUploadLayer.scss";
+import "./FileCardUploadLayer.css";
 export interface FileCardUploadLayerPropsMap {
   visible?: boolean;
   uploadStatus?: UPLOADSTATUS;

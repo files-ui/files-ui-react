@@ -4,7 +4,7 @@ import {
   Localization,
   LocalLabels,
 } from "@files-ui/core";
-import "./DropzoneChildren.scss";
+import "./DropzoneChildren.css";
 
 type DropzoneChildrenNextProps = {
   children?: React.ReactNode | [];

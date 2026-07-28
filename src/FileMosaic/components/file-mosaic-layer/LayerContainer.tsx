@@ -1,7 +1,7 @@
 import * as React from "react";
 import { addClassName } from "@files-ui/core"
 import { OverridableComponentProps } from "../../../overridable";
-import "./LayerContainer.scss";
+import "./LayerContainer.css";
 
 interface LayerContainerPropMap extends OverridableComponentProps {}
 

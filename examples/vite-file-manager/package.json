@@ -1,0 +1,32 @@
+{
+  "name": "vite-file-manager",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"vite\"",
+    "server": "tsx watch server/index.ts",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@files-ui/react": "file:../..",
+    "express": "^5.0.1",
+    "multer": "^2.0.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.2.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.2",
+    "vite": "^6.2.0"
+  }
+}

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TooltipProps } from "./TooltipProps";
-import "./Tooltip.scss";
+import "./Tooltip.css";
 import { UPLOADSTATUS } from "@files-ui/core"
 const Tooltip: React.FC<TooltipProps> = (props: TooltipProps) => {
   const {

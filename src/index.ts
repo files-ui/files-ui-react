@@ -1,26 +1,44 @@
 export { default as Dropzone } from "./Dropzone/components/dropzone/Dropzone";
 export * from "./Dropzone/components/dropzone/Dropzone";
+export { default as DropzoneClient } from "./Dropzone/components/dropzone/DropzoneClient";
+export { default as DropzoneContainer } from "./Dropzone/components/dropzone/DropzoneContainer";
 
 export { default as FileInputButton } from "./FileInputButton/FileInputButton";
 export * from "./FileInputButton/FileInputButton";
+export { default as FileInputButtonClient } from "./FileInputButton/FileInputButtonClient";
+export { default as FileInputButtonContainer } from "./FileInputButton/FileInputButtonContainer";
 
 export { default as Avatar } from "./Avatar/Avatar";
 export * from "./Avatar/Avatar";
+export { default as AvatarClient } from "./Avatar/AvatarClient";
+export { default as AvatarContainer } from "./Avatar/AvatarContainer";
+export { default as AvatarSkeleton } from "./Avatar/AvatarSkeleton";
 
 export { default as FileCard } from "./FileCard/FileCard";
 export * from "./FileCard/FileCard";
+export { default as FileCardClient } from "./FileCard/FileCardClient";
+export { default as FileCardContainer } from "./FileCard/FileCardContainer";
+export { default as FileCardSkeleton } from "./FileCard/components/FileCardSkeleton";
 
 export { default as FileMosaic } from "./FileMosaic/components/file-mosaic/FileMosaic";
 export * from "./FileMosaic/components/file-mosaic/FileMosaic";
+export { default as FileMosaicClient } from "./FileMosaic/components/file-mosaic/FileMosaicClient";
+export { default as FileMosaicContainer } from "./FileMosaic/components/file-mosaic/FileMosaicContainer";
+export { default as FileMosaicSkeleton } from "./FileMosaic/components/FileMosaicSkeleton";
 
 export { default as FullScreen } from "./FullScreen/FullScreen";
 export * from "./FullScreen/FullScreen";
+export { default as FullScreenClient } from "./FullScreen/FullScreenClient";
+export { default as FullScreenContainer } from "./FullScreen/FullScreenContainer";
 
 export { default as ImagePreview } from "./ImagePreview/ImagePreview";
 export * from "./ImagePreview/ImagePreview";
 
 export { default as VideoPreview } from "./VideoPreview/VideoPreview";
 export * from "./VideoPreview/VideoPreview";
+
+export { default as DropzoneSkeleton } from "./Dropzone/components/DropzoneSkeleton";
+export { default as FileInputButtonSkeleton } from "./FileInputButton/FileInputButtonSkeleton";
 
 export { default as MaterialButton } from "./MaterialButton/MaterialButton";
 export * from "./MaterialButton/MaterialButton";
@@ -35,7 +53,12 @@ export type { FileCardProps } from "./FileCard/FileCardProps";
 
 export type { AvatarProps } from "./Avatar/AvatarProps";
 
+// Hooks
 export { useFakeProgress } from "./hooks";
+
+// v2.0 Headless Hook (Primary API)
+export { useFilesUI } from "./hooks";
+export type { UseFilesUIOptions, UseFilesUIReturn, ServerAction } from "./hooks";
 
 export {
     createListOfMultiTypeFile,

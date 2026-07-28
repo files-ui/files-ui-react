@@ -1,0 +1,23 @@
+{
+  "name": "files-ui-nextjs-app-router-example",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@files-ui/react": "file:../..",
+    "next": "16.0.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.0",
+    "baseline-browser-mapping": "latest",
+    "typescript": "5.9.2"
+  }
+}

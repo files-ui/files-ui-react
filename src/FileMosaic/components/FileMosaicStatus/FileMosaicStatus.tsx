@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { CheckCircle, CloudDone, DoDisturb, UploadError } from "../../../icons";
 import { FileMosaicStatusProps } from "./FileMosaicStatusProps";
-import "./FileMosaicStatus.scss";
+import "./FileMosaicStatus.css";
 import { FileItemLocalizerSelector, LocalLabels } from "@files-ui/core"
 
 const FileMosaicStatus: React.FC<FileMosaicStatusProps> = React.memo(

@@ -9,7 +9,167 @@
 <h1 align="center">Files ui</h1>
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-Thils file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
+This file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
+
+## [2.0.0](https://github.com/files-ui/files-ui-react/releases/tag/v2.0.0) (2026-07-28)
+
+## ✨ Major Release — Headless Architecture, Server Actions & RSC Boundaries
+
+### Summary
+
+v2.0.0 is a fully backward-compatible major release. All existing component APIs continue to work unchanged. The new capabilities are opt-in.
+
+---
+
+### New Features
+
+#### Headless Hook — `useFilesUI`
+
+A framework-agnostic hook that extracts all validation, upload orchestration, and state management from `<Dropzone>` and `<FileInputButton>`. Use it to build fully custom upload UIs without any of the library's default styling.
+
+```tsx
+import { useFilesUI } from "@files-ui/react";
+
+function MyCustomUploader() {
+  const { files, isUploading, uploadFiles, getDragHandlers, getInputProps } = useFilesUI({
+    accept: "image/*",
+    maxFileSize: 5 * 1024 * 1024,
+    url: "/api/upload",
+  });
+  return (
+    <div {...getDragHandlers()}>
+      <input {...getInputProps()} />
+      <button onClick={() => uploadFiles()} disabled={isUploading}>Upload</button>
+    </div>
+  );
+}
+```
+
+#### Server Actions — `action` prop
+
+Native Next.js 16 App Router Server Actions support. Pass a Server Action directly to `<Dropzone>` or `<FileInputButton>` — no manual `fetch()` calls required.
+
+```tsx
+// app/actions/upload.ts
+"use server";
+export async function uploadFile(formData: FormData) {
+  const file = formData.get("file") as File;
+  return { success: true, message: `Received ${file.name}` };
+}
+
+// app/upload/UploadPanel.tsx
+"use client";
+import { Dropzone } from "@files-ui/react/client/dropzone";
+import { uploadFile } from "../actions/upload";
+export default function UploadPanel() {
+  return <Dropzone action={uploadFile} />;
+}
+```
+
+New core exports:
+
+- `uploadExtFileViaAction(extFile, action, uploadLabel?)` — uploads a single file via Server Action
+- `uploadExtFilesViaAction(extFiles, action, uploadLabel?, maxConcurrency?, onFileComplete?)` — uploads multiple files
+
+#### RSC Client Boundaries
+
+Each interactive component now ships a dedicated client-only import path for safe use in Next.js 16 App Router without accidentally pulling browser code into Server Components.
+
+```tsx
+import { Dropzone }          from "@files-ui/react/client/dropzone";
+import { FileInputButton }   from "@files-ui/react/client/file-input-button";
+import { FileCard }          from "@files-ui/react/client/file-card";
+import { FileMosaic }        from "@files-ui/react/client/file-mosaic";
+import { Avatar }            from "@files-ui/react/client/avatar";
+import { FullScreen }        from "@files-ui/react/client/full-screen";
+```
+
+The root import `from "@files-ui/react"` continues to work for non-Next.js consumers.
+
+New named exports in root: `DropzoneClient`, `DropzoneContainer`, `FileInputButtonClient`, `FileInputButtonContainer`, `FileCardClient`, `FileCardContainer`, `FileMosaicClient`, `FileMosaicContainer`, `AvatarClient`, `AvatarContainer`, `FullScreenClient`, `FullScreenContainer`.
+
+
+#### Font loading behavior (Poppins opt-in)
+
+- Removed automatic Google Fonts `@import` from component stylesheets (`Avatar`, `Dropzone`, `FileCard`, `FileMosaic`, `MaterialButton`)
+- Updated component font declarations to use fallback stack:
+  - `"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
+- Updated tooltip styles to use the same fallback stack
+- Consumers who want `Poppins` should load it explicitly in their application
+- Added documentation: `docs/react/Fonts.md`
+
+#### Global `fontFamily` config via `FilesUiProvider`
+
+- Added `fontFamily` prop to `FilesUIConfig`
+- When set, `FilesUiProvider` injects a single `<style>` element that sets the CSS custom property `--files-ui-font-family` on `:root`
+- All component CSS files now reference `var(--files-ui-font-family, "Poppins", ...)` instead of a hardcoded font stack
+- Allows consumers to override fonts globally without per-component styling
+- Standard system fallbacks are appended automatically to the user-provided font
+
+```tsx
+<FilesUiProvider config={{ fontFamily: "Inter" }}>
+  <App />
+</FilesUiProvider>
+```
+
+
+#### `@files-ui/core` v2.1.0 — Pure JavaScript Source
+
+The core package now ships JavaScript source files (`.js`) with TypeScript declarations (`.d.ts`) for improved readability and easier community contribution. The public TypeScript DX (types, autocomplete) is unchanged.
+
+---
+
+### Breaking Changes
+
+None. All v1.x component props, hooks, and export paths remain fully operational.
+
+### Deprecated (still functional, shown in docs as deprecated)
+
+- `useDropzoneFileListUpdater`, `useDropzoneValidation`, `useNumberOfValidFiles`, `useIsUploading` — prefer `useFilesUI`
+
+---
+
+### Migration Guide (v1.x → v2.0)
+
+#### No action required for most users
+
+Standard usage of `<Dropzone>`, `<FileMosaic>`, `<FileCard>`, `<FileInputButton>`, `<Avatar>`, and `<FullScreen>` with their existing props requires no changes.
+
+#### Opt-in: Server Actions
+
+Replace `uploadConfig={{ url: "..." }}` with the `action` prop:
+
+```tsx
+// Before (v1.x — still works)
+<Dropzone uploadConfig={{ url: "/api/upload" }} />
+
+// After (v2.0 — Server Actions)
+<Dropzone action={uploadServerAction} />
+```
+
+#### Opt-in: Headless pattern
+
+```tsx
+// Before (v1.x)
+<Dropzone accept="image/*" maxFileSize={5e6} onChange={setFiles} onUploadFinish={handleUpload} />
+
+// After (v2.0 headless)
+const { files, uploadFiles, getDragHandlers, getInputProps } = useFilesUI({
+  accept: "image/*", maxFileSize: 5e6, onChange: setFiles, onUploadFinish: handleUpload,
+});
+```
+
+#### Opt-in: Next.js 16 App Router client imports
+
+```tsx
+// Before (v1.x — root import still works in non-Next.js apps)
+import { Dropzone } from "@files-ui/react";
+
+// After (v2.0 — guaranteed client boundary in Next.js 16 App Router)
+import { Dropzone } from "@files-ui/react/client/dropzone";
+```
+
+---
 
 ## [1.3.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.3.0) (2026-07-05)
 
