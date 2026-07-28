@@ -11,7 +11,7 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 This file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
 
-## [2.0.0](https://github.com/files-ui/files-ui-react/releases/tag/v2.0.0) (2026-07-28)
+## [2.0.2](https://github.com/files-ui/files-ui-react/releases/tag/v2.0.2) (2026-07-28)
 
 ## ✨ Major Release — Headless Architecture, Server Actions & RSC Boundaries
 
