@@ -11,9 +11,9 @@ export default {
     if (id.startsWith(".") || id.startsWith("/") || id.startsWith("\0")) return false;
     // Keep absolute Windows paths (e.g., D:\...)
     if (/^[a-zA-Z]:/.test(id)) return false;
-    // Bundle tslib and style-inject (build-time helpers that must be inlined)
-    if (id === "tslib" || id.includes("style-inject")) return false;
-    // Externalize all other bare module specifiers (peer deps, etc.)
+    // Bundle style-inject (build-time helper that must be inlined)
+    if (id.includes("style-inject")) return false;
+    // Externalize all other bare module specifiers (peer deps, tslib, etc.)
     return true;
   },
   output: [
