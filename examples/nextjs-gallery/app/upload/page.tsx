@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Dropzone, FileMosaic, ExtFile } from '@files-ui/react/client/dropzone';
+import { Dropzone, FileMosaic } from '@files-ui/react';
+import type { ExtFile } from '@files-ui/react';
 import { uploadPhotos } from '../actions/upload';
 
 export default function UploadPage() {
@@ -46,7 +47,7 @@ export default function UploadPage() {
           <li><strong>Max File Size:</strong> 15 MB</li>
           <li><strong>Max Files:</strong> 20</li>
           <li><strong>Upload Method:</strong> Next.js Server Actions (no URL needed)</li>
-          <li><strong>RSC:</strong> Client subpath import <code className="text-sm bg-white px-2 py-1 rounded">@files-ui/react/client/dropzone</code></li>
+          <li><strong>Import:</strong> <code className="text-sm bg-white px-2 py-1 rounded">import {"{ Dropzone, FileMosaic }"} from &apos;@files-ui/react&apos;</code></li>
         </ul>
       </div>
     </div>

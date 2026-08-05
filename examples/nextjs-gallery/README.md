@@ -10,7 +10,7 @@ An image gallery application demonstrating `@files-ui/react` v2.0 with Next.js 1
 - **Profile** - Avatar upload with Server Actions
 - **Full-Screen Viewer** - Click photos to view in full screen with navigation
 - **Loading States** - Skeleton components in `loading.tsx` files
-- **RSC Integration** - Client subpath imports for Next.js 16 App Router
+- **RSC Integration** - Components have `"use client"` baked in; import directly from `@files-ui/react`
 
 ## Tech Stack
 
@@ -49,7 +49,7 @@ npm start
 
 ### v2.0 New Features
 - ✅ Server Actions integration (`action` prop)
-- ✅ RSC client subpath imports (`@files-ui/react/client/*`)
+- ✅ Direct imports from `@files-ui/react` in both Server & Client Components
 - ✅ `useFilesUI` headless hook with Server Actions
 - ✅ `fontFamily` config in FilesUiProvider
 - ✅ Skeleton components in Next.js streaming SSR

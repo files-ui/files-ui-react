@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { FilesUIConfig } from "./FilesUIConfig";
 import { FilesUiContext } from "./FilesUiContext";

@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { FileMosaic } from '@files-ui/react/client/file-mosaic';
-import { FullScreen } from '@files-ui/react/client/full-screen';
+import { FileMosaic, FullScreen } from '@files-ui/react';
 import { deletePhoto } from '../actions/upload';
 
 interface Photo {

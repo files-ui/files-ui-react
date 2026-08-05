@@ -31,10 +31,11 @@ describe("Selection regression", () => {
 
     render(<Harness />);
 
-    const checkbox = screen.getByLabelText("Select file selection-1.png") as HTMLInputElement;
+    const checkbox = screen.getByRole("checkbox", { name: "Select file selection-1.png" });
     fireEvent.click(checkbox);
 
-    expect(checkbox.checked).toBe(true);
+    // SVG is replaced on re-render; query the now-selected element
+    expect(screen.getByRole("checkbox", { name: "Deselect file selection-1.png" })).toHaveAttribute("aria-checked", "true");
     expect(screen.getByText("Selected: sel-1")).toBeInTheDocument();
   });
 
@@ -65,10 +66,11 @@ describe("Selection regression", () => {
 
     render(<Harness />);
 
-    const checkbox = screen.getByLabelText("Select file selection-1.png") as HTMLInputElement;
+    const checkbox = screen.getByRole("checkbox", { name: "Select file selection-1.png" });
     fireEvent.click(checkbox);
 
-    expect(checkbox.checked).toBe(true);
+    // SVG is replaced on re-render; query the now-selected element
+    expect(screen.getByRole("checkbox", { name: "Deselect file selection-1.png" })).toHaveAttribute("aria-checked", "true");
     expect(screen.getByText("Selected: sel-1")).toBeInTheDocument();
   });
 });

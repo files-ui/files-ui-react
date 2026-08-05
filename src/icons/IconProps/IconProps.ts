@@ -23,4 +23,8 @@ export interface IconProps {
      * A classname for stylesheet rules
      */
     className?: string;
+    /** Accessible label forwarded to the SVG element */
+    "aria-label"?: string;
+    /** Accessible checked state forwarded to the SVG element */
+    "aria-checked"?: boolean;
 }

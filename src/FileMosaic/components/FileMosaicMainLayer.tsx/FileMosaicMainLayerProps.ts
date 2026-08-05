@@ -21,6 +21,9 @@ export interface FileMosaicMainLayerProps {
     downloadIcon: boolean;
     onDownload: Function | undefined;
 
+    editIcon: boolean;
+    onEdit: (() => void) | undefined;
+
     infoIcon: boolean;
     onOpenInfo: Function | undefined;
 

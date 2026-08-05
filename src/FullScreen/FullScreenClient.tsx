@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { Clear } from "../icons";
 import { FullScreenProps } from "./FullScreenProps";

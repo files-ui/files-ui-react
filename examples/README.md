@@ -29,7 +29,7 @@ A document management dashboard showcasing:
 An image gallery application demonstrating:
 - Server-side rendering with React Server Components
 - Upload via Next.js Server Actions (no XHR!)
-- RSC client subpath imports
+- Direct imports from `@files-ui/react` (components have `"use client"` baked in)
 - Headless upload with `useFilesUI` + Server Actions
 - Avatar upload component
 - Full-screen image viewer
@@ -55,7 +55,7 @@ An image gallery application demonstrating:
 | **v2.0 Features** |
 | `useFilesUI` headless | ✅ | ✅ |
 | Server Actions (`action` prop) | — | ✅ |
-| RSC client subpaths | — | ✅ |
+| `"use client"` baked in | ✅ | ✅ |
 | Size `variant` prop | ✅ | — |
 | `fontFamily` config | ✅ | ✅ |
 | Skeleton components | ✅ | ✅ |

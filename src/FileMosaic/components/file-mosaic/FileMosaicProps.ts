@@ -64,6 +64,18 @@ export interface FileMosaicPropsMap extends OverridableComponentProps {
      */
     onDownload?: (fileId: number | string | undefined, downloadUrl?: string) => void;
     /**
+     * Callback fired when the edit icon is clicked. If set, the edit icon will be shown.
+     * Takes precedence over onCrop.
+     * Only visible when file is a valid image.
+     */
+    onEdit?: (file: ExtFile) => void;
+    /**
+     * Callback fired when the crop/edit icon is clicked. If set, the edit icon will be shown.
+     * Only used when onEdit is not provided.
+     * Only visible when file is a valid image.
+     */
+    onCrop?: (file: ExtFile) => void;
+    /**
      * Callback fired when the component is clicked if set.
      */
     onClick?: (evt: React.MouseEvent) => void;

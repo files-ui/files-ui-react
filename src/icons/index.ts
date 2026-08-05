@@ -1,6 +1,12 @@
 export { default as Cancel } from "./Cancel/Cancel";
 export * from "./Cancel/Cancel";
 
+export { default as CheckBox } from "./CheckBox/CheckBox";
+export * from "./CheckBox/CheckBox";
+
+export { default as CheckBoxOutline } from "./CheckBoxOutline/CheckBoxOutline";
+export * from "./CheckBoxOutline/CheckBoxOutline";
+
 export { default as CheckCircle } from "./CheckCircle/CheckCircle";
 export * from "./CheckCircle/CheckCircle";
 
@@ -21,6 +27,9 @@ export * from "./DoDisturb/DoDisturb";
 
 export { default as DownloadFile } from "./DownloadFile/DownloadFile";
 export * from "./DownloadFile/DownloadFile";
+
+export { default as Edit } from "./Edit/Edit";
+export * from "./Edit/Edit";
 
 export { default as Info } from "./Info/Info";
 export * from "./Info/Info";

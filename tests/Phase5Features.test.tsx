@@ -59,7 +59,7 @@ describe("Phase 5 feature tests", () => {
       />
     );
 
-    const checkbox = screen.getByLabelText("Select file photo.png");
+    const checkbox = screen.getByRole("checkbox", { name: "Select file photo.png" });
     fireEvent.click(checkbox);
 
     expect(onSelect).toHaveBeenCalledWith(123, true);
@@ -78,7 +78,7 @@ describe("Phase 5 feature tests", () => {
       />
     );
 
-    const checkbox = screen.getByLabelText("Select file report.pdf");
+    const checkbox = screen.getByRole("checkbox", { name: "Select file report.pdf" });
     fireEvent.click(checkbox);
 
     expect(onSelect).toHaveBeenCalledWith(456, true);

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Avatar } from '@files-ui/react/client/avatar';
-import { ExtFile } from '@files-ui/react';
+import { Avatar } from '@files-ui/react';
+import type { ExtFile } from '@files-ui/react';
 import { uploadPhotos } from '../actions/upload';
 
 export default function ProfilePage() {
@@ -37,7 +37,7 @@ export default function ProfilePage() {
           <li><strong>Shape Variants:</strong> circle, square, rounded</li>
           <li><strong>Server Action:</strong> Upload via Next.js Server Actions</li>
           <li><strong>Validation:</strong> Images only, max 5 MB</li>
-          <li><strong>RSC:</strong> Client subpath <code className="text-sm bg-white px-2 py-1 rounded">@files-ui/react/client/avatar</code></li>
+          <li><strong>Import:</strong> <code className="text-sm bg-white px-2 py-1 rounded">import {"{ Avatar }"} from &apos;@files-ui/react&apos;</code></li>
         </ul>
       </div>
     </div>

@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { mergeProps } from "../overridable/mergeProps";
 import { AvatarProps, defaultAvatarProps } from "./AvatarProps";

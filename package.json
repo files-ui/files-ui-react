@@ -1,6 +1,6 @@
 {
   "name": "@files-ui/react",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "UI components for file uploads with React js",
   "main": "./build/index.js",
   "module": "./build/index.es.js",
@@ -104,8 +104,8 @@
     "react-dom": "^17.0.2 || ^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@dynamicss/dynamicss": "^2.2.8",
-    "@files-ui/core": "^2.0.9"
+    "@dynamicss/dynamicss": ">=2.2.8",
+    "@files-ui/core": ">=2.2.0"
   },
   "publishConfig": {
     "access": "public"

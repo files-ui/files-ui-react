@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { FileCardProps } from "./FileCardProps";
 import "./FileCard.css";
@@ -27,6 +28,7 @@ import {
   useIsUploading,
 } from "../hooks";
 import { handleClickUtil } from "../utils";
+import { CheckBox, CheckBoxOutline } from "../icons";
 
 const setFinalElevation = (elevation: string | number): number => {
   //  let finalElevation: number  = "";
@@ -107,6 +109,8 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
     onAbort,
 
     onDownload,
+    onEdit,
+    onCrop,
     onSee,
     onWatch,
 
@@ -186,6 +190,10 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
   const effectiveDownloadUrl: string | undefined = videoUrl || downloadUrl;
   //The size formatted and rounded in 2 decimals
   const sizeFormatted: string | undefined = fileSizeFormater(localSize);
+
+  // Edit icon visibility logic (after localType is available)
+  const showEditIcon = (onEdit || onCrop) && valid && localType?.startsWith("image/");
+  const editHandler = onEdit || onCrop;
 
   //alwaysActive
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
@@ -277,17 +285,11 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
     onAbort?.(id);
   };
 
-  const handleSelectionChange: React.ChangeEventHandler<HTMLInputElement> = (
-    evt: React.ChangeEvent<HTMLInputElement>,
+  const handleSelectionClick: React.MouseEventHandler<SVGSVGElement> = (
+    evt: React.MouseEvent<SVGSVGElement>,
   ): void => {
     evt.stopPropagation();
-    onSelect?.(id, evt.target.checked);
-  };
-
-  const handleSelectionInputClick: React.MouseEventHandler<HTMLInputElement> = (
-    evt: React.MouseEvent<HTMLInputElement>,
-  ): void => {
-    evt.stopPropagation();
+    onSelect?.(id, !selected);
   };
 
   if (isReady) {
@@ -305,15 +307,24 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
         onContextMenu={handleRightClick}
       >
         {selectable && (
-          <div className="files-ui-selection-checkbox">
-            <input
-              className="files-ui-selection-checkbox-input"
-              type="checkbox"
-              checked={Boolean(selected)}
-              onClick={handleSelectionInputClick}
-              onChange={handleSelectionChange}
-              aria-label={`Select file ${localName}`}
-            />
+          <div className={darkMode ? "files-ui-selection-checkbox dark-mode" : "files-ui-selection-checkbox"}>
+            {selected ? (
+              <CheckBox
+                onClick={handleSelectionClick}
+                size="small"
+                color={darkMode ? "#1976d2" : "#1976d2"}
+                aria-label={`Deselect file ${localName}`}
+                aria-checked={true}
+              />
+            ) : (
+              <CheckBoxOutline
+                onClick={handleSelectionClick}
+                size="small"
+                color={darkMode ? "#616161" : "#757575"}
+                aria-label={`Select file ${localName}`}
+                aria-checked={false}
+              />
+            )}
           </div>
         )}
         <LayerContainer className="files-ui-file-card-main-layer-container">
@@ -412,6 +423,8 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
             onDownload !== undefined || effectiveDownloadUrl !== undefined
           }
           onDownload={handleDownload}
+          editIcon={showEditIcon}
+          onEdit={() => editHandler?.({ ...props, name: localName, type: localType, size: localSize })}
           infoIcon={info !== undefined}
           onOpenInfo={handleOpenInfo}
           sizeMultiplier={iconSizeMultiplier}

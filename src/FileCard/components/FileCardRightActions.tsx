@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   Clear,
   DownloadFile,
+  Edit,
   InfoDisney,
   PlayIcon,
   Visibility,
@@ -22,6 +23,9 @@ declare type FileCardRightActionsProps = {
   downloadIcon: boolean;
   onDownload: Function | undefined;
 
+  editIcon: boolean;
+  onEdit: (() => void) | undefined;
+
   infoIcon: boolean;
   onOpenInfo: Function | undefined;
 
@@ -37,10 +41,12 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
     darkMode,
     deleteIcon,
     downloadIcon,
+    editIcon,
     imageIcon,
     infoIcon,
     onDelete,
     onDownload,
+    onEdit,
     onOpenInfo,
     onSee,
     onWatch,
@@ -107,6 +113,18 @@ const FileCardRightActions: React.FC<FileCardRightActionsProps> = (
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onDownload}
+                  size={iconSize}
+                />
+              )}
+              {editIcon && (
+                <Edit
+                  className={
+                    darkMode
+                      ? "files-ui-file-icon dark-mode"
+                      : "files-ui-file-icon"
+                  }
+                  color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
+                  onClick={onEdit}
                   size={iconSize}
                 />
               )}

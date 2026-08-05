@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   Clear,
   DownloadFile,
+  Edit,
   InfoDisney,
   PlayIcon,
   Visibility,
@@ -16,10 +17,12 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
     darkMode,
     deleteIcon,
     downloadIcon,
+    editIcon,
     imageIcon,
     infoIcon,
     onDelete,
     onDownload,
+    onEdit,
     onOpenInfo,
     onSee,
     onWatch,
@@ -98,6 +101,18 @@ const FileMosaicMainLayer: React.FC<FileMosaicMainLayerProps> = React.memo(
                   }
                   color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
                   onClick={onDownload}
+                  size={iconSize}
+                />
+              )}
+              {editIcon && (
+                <Edit
+                  className={
+                    darkMode
+                      ? "files-ui-file-icon dark-mode"
+                      : "files-ui-file-icon"
+                  }
+                  color={darkMode ? "#121212" : "rgba(255,255,255,0.851)"}
+                  onClick={onEdit}
                   size={iconSize}
                 />
               )}

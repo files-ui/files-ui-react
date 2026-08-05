@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {
   addClassName,
@@ -25,6 +26,7 @@ import {
   useFileMosaicInitializer,
   useIsUploading,
 } from "../../../hooks";
+import { CheckBox, CheckBoxOutline } from "../../../icons";
 
 const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => {
   const {
@@ -64,6 +66,8 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
     onAbort,
 
     onDownload,
+    onEdit,
+    onCrop,
     onSee,
     onWatch,
 
@@ -152,6 +156,11 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
 
   //The size formatted and rounded in 2 decimals
   const sizeFormatted: string | undefined = fileSizeFormater(localSize);
+  
+  // Edit icon visibility logic (after localType is available)
+  const showEditIcon = (onEdit || onCrop) && valid && localType?.startsWith("image/");
+  const editHandler = onEdit || onCrop;
+  
   //alwaysActive
   const [showInfo, setShowInfo] = React.useState<boolean>(false);
 
@@ -247,19 +256,14 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
     onAbort?.(id);
   }, [xhr, onAbort, id]);
 
-  const handleSelectionChange: React.ChangeEventHandler<HTMLInputElement> =
+  const handleSelectionClick: React.MouseEventHandler<SVGSVGElement> =
     React.useCallback(
-      (evt: React.ChangeEvent<HTMLInputElement>) => {
+      (evt: React.MouseEvent<SVGSVGElement>) => {
         evt.stopPropagation();
-        onSelect?.(id, evt.target.checked);
+        onSelect?.(id, !selected);
       },
-      [onSelect, id],
+      [onSelect, id, selected],
     );
-
-  const handleSelectionInputClick: React.MouseEventHandler<HTMLInputElement> =
-    React.useCallback((evt: React.MouseEvent<HTMLInputElement>) => {
-      evt.stopPropagation();
-    }, []);
 
   if (isReady)
     return (
@@ -276,15 +280,24 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
         onContextMenu={handleRightClick}
       >
         {selectable && (
-          <div className="files-ui-selection-checkbox">
-            <input
-              className="files-ui-selection-checkbox-input"
-              type="checkbox"
-              checked={Boolean(selected)}
-              onClick={handleSelectionInputClick}
-              onChange={handleSelectionChange}
-              aria-label={`Select file ${localName}`}
-            />
+          <div className={darkMode ? "files-ui-selection-checkbox dark-mode" : "files-ui-selection-checkbox"}>
+            {selected ? (
+              <CheckBox
+                onClick={handleSelectionClick}
+                size="small"
+                color={darkMode ? "#1976d2" : "#1976d2"}
+                aria-label={`Deselect file ${localName}`}
+                aria-checked={true}
+              />
+            ) : (
+              <CheckBoxOutline
+                onClick={handleSelectionClick}
+                size="small"
+                color={darkMode ? "#616161" : "#757575"}
+                aria-label={`Select file ${localName}`}
+                aria-checked={false}
+              />
+            )}
           </div>
         )}
         <LayerContainer
@@ -337,6 +350,8 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
                 onDownload !== undefined || effectiveDownloadUrl !== undefined
               }
               onDownload={handleDownload}
+              editIcon={showEditIcon}
+              onEdit={() => editHandler?.({ ...props, name: localName, type: localType, size: localSize })}
               infoIcon={info !== undefined}
               onOpenInfo={handleOpenInfo}
               sizeMultiplier={iconSizeMultiplier}

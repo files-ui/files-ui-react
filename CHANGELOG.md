@@ -11,19 +11,226 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 This file also consider all dropzone-ui [releases](https://github.com/dropzone-ui/dropzone-ui-react/releases).
 
+## [2.1.0](https://github.com/files-ui/files-ui-react/releases/tag/2.1.0) (2026-08-05)
+
+### 🔌 Plugin Ecosystem, Image Editing & Material Edit and select Icons
+
+Two new optional plugin packages and a new image editing API extend Files UI without bloating the core bundle. All changes are fully backward-compatible.
+
+---
+
+### 🔌 Plugin Packages
+
+Two new optional plugin packages have been created to extend Files UI functionality without bloating the core library:
+
+#### 📸 **<a href="https://www.files-ui.com/plugins/crop" target="_blank" rel="noopener noreferrer">@files-ui/crop</a>** — Image Cropping
+
+A lightweight (~11KB gzipped) image cropping solution built on `react-easy-crop`. Provides a styled `CropDialog` component and `useCropDialog` hook for seamless integration with the edit icon.
+
+**Features:**
+- ✅ Interactive crop area with 8-point resize handles
+- ✅ Movable crop box (click and drag)
+- ✅ Rectangular and square aspect ratios
+- ✅ Real-time preview
+- ✅ Easy integration with FileMosaic/FileCard
+
+```tsx
+import { FileMosaic } from "@files-ui/react";
+import { CropDialog, useCropDialog } from "@files-ui/crop/react";
+
+function MyComponent() {
+  const { cropFile, openCrop, closeCrop, handleCropComplete } = useCropDialog({
+    onComplete: (croppedFile) => updateFile(croppedFile)
+  });
+  
+  return (
+    <>
+      <FileMosaic {...file} onEdit={openCrop} />
+      {cropFile && (
+        <CropDialog
+          file={cropFile}
+          onComplete={handleCropComplete}
+          onCancel={closeCrop}
+          aspectRatio={1}
+        />
+      )}
+    </>
+  );
+}
+```
+
+**📦 Installation:**
+```bash
+npm install @files-ui/crop
+```
+
+---
+
+#### 🗜️ **<a href="https://www.files-ui.com/plugins/compress" target="_blank" rel="noopener noreferrer">@files-ui/compress</a>** — Image Compression
+
+Client-side image compression and optimization (~8KB gzipped). Reduce file sizes before upload with customizable quality, max dimensions, and format conversion.
+
+**Features:**
+- ✅ Automatic format conversion (JPEG, PNG, WebP)
+- ✅ Configurable quality and dimensions
+- ✅ Metadata preservation option
+- ✅ Progress callbacks
+- ✅ Works with crop plugin seamlessly
+
+```tsx
+import { compressImage } from "@files-ui/compress";
+
+const compressed = await compressImage(file, {
+  maxSizeMB: 1,
+  maxWidthOrHeight: 1920,
+  quality: 0.8,
+  format: "webp"
+});
+```
+
+**📦 Installation:**
+```bash
+npm install @files-ui/compress
+```
+
+---
+
+### 📚 Integration Example
+
+Combine edit, crop, and compress for a complete image workflow:
+
+```tsx
+import { Dropzone, FileMosaic } from "@files-ui/react";
+import { CropDialog, useCropDialog } from "@files-ui/crop/react";
+import { compressImage } from "@files-ui/compress";
+
+function ImageUploader() {
+  const [files, setFiles] = useState([]);
+  const { cropFile, openCrop, closeCrop, handleCropComplete } = useCropDialog({
+    onComplete: async (croppedFile) => {
+      // Compress after crop
+      const compressed = await compressImage(croppedFile, {
+        maxWidthOrHeight: 1920,
+        quality: 0.85
+      });
+      updateFile(compressed);
+    }
+  });
+
+  return (
+    <>
+      <Dropzone onChange={setFiles} value={files}>
+        {files.map(file => (
+          <FileMosaic key={file.id} {...file} onEdit={openCrop} />
+        ))}
+      </Dropzone>
+      
+      {cropFile && (
+        <CropDialog
+          file={cropFile}
+          onComplete={handleCropComplete}
+          onCancel={closeCrop}
+        />
+      )}
+    </>
+  );
+}
+```
+
+Both packages are independently versioned and maintained. See their respective READMEs for detailed API documentation.
+
+---
+
+### ✨ Features
+
+#### 🖼️ Edit Icon for Images
+
+Added `onEdit` and `onCrop` callback props to [`FileMosaic`](https://www.files-ui.com/components/filemosaic) and [`FileCard`](https://www.files-ui.com/components/filecard) components. When provided, an edit icon (pencil) appears over valid image files, allowing users to trigger image editing workflows.
+
+**Key Features:**
+- ✅ **Precedence Rule** — `onEdit` takes precedence over `onCrop`. If both are provided, only `onEdit` will be called.
+- 🖼️ **Image-Only** — The edit icon only appears for files with `valid: true` and `type` starting with `"image/"`.
+- 🎯 **Callback Signature** — Both callbacks receive the full `ExtFile` object: `(file: ExtFile) => void`.
+- 🎨 **Consistent Styling** — Icon matches existing action buttons (Delete, Download) in size and appearance.
+
+**Example Usage:**
+
+```tsx
+import { FileMosaic } from "@files-ui/react";
+
+function MyComponent() {
+  const handleEdit = (file) => {
+    console.log("Opening editor for:", file.name);
+    // Open your image editor or crop dialog here
+  };
+
+  return (
+    <FileMosaic
+      {...file}
+      onEdit={handleEdit}
+      preview
+    />
+  );
+}
+```
+
+**📌 Note:** This release provides the edit icon integration point. The actual crop/edit dialog implementation is available as separate plugin packages (see 🔌 Plugin Packages above).
+
+---
+
+#### ☑️ Material Design Selection Icons
+
+Replaced native HTML `<input type="checkbox">` in [`FileMosaic`](https://www.files-ui.com/components/filemosaic) and [`FileCard`](https://www.files-ui.com/components/filecard) with custom Material Design SVG icon components for a more consistent and polished UI.
+
+**New Icon Components:**
+- ✅ `CheckBox` — Selected state (filled checkbox with checkmark, default `#1976d2`)
+- ✅ `CheckBoxOutline` — Unselected state (outlined empty box, default `#757575`)
+
+**Key Improvements:**
+- 🎨 **Consistent Sizing** — Uses `parseSize()` like all other icons (Edit, Delete, Download)
+- 🌙 **Dark Mode Support** — Colors adapt automatically when `darkMode` prop is set
+- ♿ **Better Accessibility** — Larger click target compared to native checkbox
+- 🖌️ **CSS Styling** — Dark mode container with `rgba(66,66,66,0.94)` background and enhanced shadows
+
+**Dark Mode Color Scheme:**
+
+| State | Light Mode | Dark Mode |
+|-------|-----------|-----------|
+| Selected | `#1976d2` (blue) | `#1976d2` (blue) |
+| Unselected | `#757575` (gray) | `#616161` (darker gray) |
+| Container BG | `rgba(255,255,255,0.94)` | `rgba(66,66,66,0.94)` |
+
+```tsx
+<FileCard {...file} selectable selected darkMode />
+<FileMosaic {...file} selectable darkMode />
+```
+
+---
+
+### 🐛 Bug Fixes
+
+#### 🔧 Edit Icon Rendering Fix
+
+- [`<FileMosaic/>`](https://www.files-ui.com/components/filemosaic) and [`<FileCard/>`](https://www.files-ui.com/components/filecard):
+  - ✅ Fixed Edit icon component — was incorrectly wrapped in a `<div>`, now returns `<svg>` directly
+  - ✅ Matches rendering pattern of all other icon components (Delete, Download, etc.)
+  - ✅ Resolves icon size mismatch that caused visual inconsistency in the action buttons row
+
+---
+
 ## [2.0.2](https://github.com/files-ui/files-ui-react/releases/tag/2.0.2) (2026-07-28)
 
-## ✨ Major Release — Headless Architecture, Server Actions & RSC Boundaries
+### ✨ Major Release — Headless Architecture, Server Actions & RSC Boundaries
 
-### Summary
+**🎉 Summary**
 
 v2.x is a fully backward-compatible major release. All existing component APIs continue to work unchanged. The new capabilities are opt-in.
 
 ---
 
-### New Features
+### 🆕 New Features
 
-#### Headless Hook — `useFilesUI`
+#### 🎯 Headless Hook — <a href="https://www.files-ui.com/headless" target="_blank" rel="noopener noreferrer">`useFilesUI`</a>
 
 A framework-agnostic hook that extracts all validation, upload orchestration, and state management from `<Dropzone>` and `<FileInputButton>`. Use it to build fully custom upload UIs without any of the library's default styling.
 
@@ -45,7 +252,9 @@ function MyCustomUploader() {
 }
 ```
 
-#### Server Actions — `action` prop
+---
+
+#### 🚀 Server Actions — `action` prop
 
 Native Next.js 16 App Router Server Actions support. Pass a Server Action directly to `<Dropzone>` or `<FileInputButton>` — no manual `fetch()` calls required.
 
@@ -66,12 +275,13 @@ export default function UploadPanel() {
 }
 ```
 
-New core exports:
+**New Core Exports:**
+- 📤 `uploadExtFileViaAction(extFile, action, uploadLabel?)` — uploads a single file via Server Action
+- 📤 `uploadExtFilesViaAction(extFiles, action, uploadLabel?, maxConcurrency?, onFileComplete?)` — uploads multiple files
 
-- `uploadExtFileViaAction(extFile, action, uploadLabel?)` — uploads a single file via Server Action
-- `uploadExtFilesViaAction(extFiles, action, uploadLabel?, maxConcurrency?, onFileComplete?)` — uploads multiple files
+---
 
-#### RSC Client Boundaries
+#### 🎯 RSC Client Boundaries
 
 Each interactive component now ships a dedicated client-only import path for safe use in Next.js 16 App Router without accidentally pulling browser code into Server Components.
 
@@ -84,27 +294,35 @@ import { Avatar }            from "@files-ui/react/client/avatar";
 import { FullScreen }        from "@files-ui/react/client/full-screen";
 ```
 
-The root import `from "@files-ui/react"` continues to work for non-Next.js consumers.
+✅ The root import `from "@files-ui/react"` continues to work for non-Next.js consumers.
 
-New named exports in root: `DropzoneClient`, `DropzoneContainer`, `FileInputButtonClient`, `FileInputButtonContainer`, `FileCardClient`, `FileCardContainer`, `FileMosaicClient`, `FileMosaicContainer`, `AvatarClient`, `AvatarContainer`, `FullScreenClient`, `FullScreenContainer`.
+**New Named Exports in Root:**
+- `DropzoneClient`, `DropzoneContainer`
+- `FileInputButtonClient`, `FileInputButtonContainer`
+- `FileCardClient`, `FileCardContainer`
+- `FileMosaicClient`, `FileMosaicContainer`
+- `AvatarClient`, `AvatarContainer`
+- `FullScreenClient`, `FullScreenContainer`
 
+---
 
-#### Font loading behavior (Poppins opt-in)
+#### 🎨 Font Loading Behavior (Poppins Opt-in)
 
-- Removed automatic Google Fonts `@import` from component stylesheets (`Avatar`, `Dropzone`, `FileCard`, `FileMosaic`, `MaterialButton`)
-- Updated component font declarations to use fallback stack:
-  - `"Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`
-- Updated tooltip styles to use the same fallback stack
-- Consumers who want `Poppins` should load it explicitly in their application
-- Added documentation: `docs/react/Fonts.md`
+**Changes:**
+- ✅ Removed automatic Google Fonts `@import` from component stylesheets
+- ✅ Updated font declarations to use fallback stack:
+  ```css
+  "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
+  ```
+- ✅ Consumers who want `Poppins` should load it explicitly in their application
+- 📚 Added documentation: [`docs/react/Fonts.md`](./docs/react/Fonts.md)
 
-#### Global `fontFamily` config via `FilesUiProvider`
+**Global `fontFamily` Config via `FilesUiProvider`**
 
-- Added `fontFamily` prop to `FilesUIConfig`
-- When set, `FilesUiProvider` injects a single `<style>` element that sets the CSS custom property `--files-ui-font-family` on `:root`
-- All component CSS files now reference `var(--files-ui-font-family, "Poppins", ...)` instead of a hardcoded font stack
-- Allows consumers to override fonts globally without per-component styling
-- Standard system fallbacks are appended automatically to the user-provided font
+- ✅ Added `fontFamily` prop to `FilesUIConfig`
+- ✅ When set, injects a single `<style>` element that sets CSS custom property `--files-ui-font-family` on `:root`
+- ✅ All component CSS files now reference `var(--files-ui-font-family, "Poppins", ...)` instead of hardcoded fonts
+- ✅ Standard system fallbacks automatically appended to user-provided font
 
 ```tsx
 <FilesUiProvider config={{ fontFamily: "Inter" }}>
@@ -112,30 +330,34 @@ New named exports in root: `DropzoneClient`, `DropzoneContainer`, `FileInputButt
 </FilesUiProvider>
 ```
 
+---
 
-#### `@files-ui/core` v2.1.0 — Pure JavaScript Source
+#### 📦 @files-ui/core v2.1.0 — Pure JavaScript Source
 
 The core package now ships JavaScript source files (`.js`) with TypeScript declarations (`.d.ts`) for improved readability and easier community contribution. The public TypeScript DX (types, autocomplete) is unchanged.
 
 ---
 
-### Breaking Changes
+### 📋 Breaking Changes
 
-None. All v1.x component props, hooks, and export paths remain fully operational.
+✅ **None.** All v1.x component props, hooks, and export paths remain fully operational.
 
-### Deprecated (still functional, shown in docs as deprecated)
+### 🚫 Deprecated (still functional, shown in docs as deprecated)
 
-- `useDropzoneFileListUpdater`, `useDropzoneValidation`, `useNumberOfValidFiles`, `useIsUploading` — prefer `useFilesUI`
+- ⚠️ `useDropzoneFileListUpdater` — prefer `useFilesUI`
+- ⚠️ `useDropzoneValidation` — prefer `useFilesUI`
+- ⚠️ `useNumberOfValidFiles` — prefer `useFilesUI`
+- ⚠️ `useIsUploading` — prefer `useFilesUI`
 
 ---
 
-### Migration Guide (v1.x → v2.0)
+### 📚 Migration Guide (v1.x → v2.0)
 
-#### No action required for most users
+#### ✅ No action required for most users
 
 Standard usage of `<Dropzone>`, `<FileMosaic>`, `<FileCard>`, `<FileInputButton>`, `<Avatar>`, and `<FullScreen>` with their existing props requires no changes.
 
-#### Opt-in: Server Actions
+#### 🔄 Opt-in: Server Actions
 
 Replace `uploadConfig={{ url: "..." }}` with the `action` prop:
 
@@ -147,7 +369,7 @@ Replace `uploadConfig={{ url: "..." }}` with the `action` prop:
 <Dropzone action={uploadServerAction} />
 ```
 
-#### Opt-in: Headless pattern
+#### 🎯 Opt-in: Headless Pattern
 
 ```tsx
 // Before (v1.x)
@@ -159,7 +381,7 @@ const { files, uploadFiles, getDragHandlers, getInputProps } = useFilesUI({
 });
 ```
 
-#### Opt-in: Next.js 16 App Router client imports
+#### 📁 Opt-in: Next.js 16 App Router Client Imports
 
 ```tsx
 // Before (v1.x — root import still works in non-Next.js apps)
@@ -173,133 +395,131 @@ import { Dropzone } from "@files-ui/react/client/dropzone";
 
 ## [1.3.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.3.0) (2026-07-05)
 
-## ✨ Major Features, ♿ Accessibility, and 🐛 Bug Fixes
+### ✨ Major Features, ♿ Accessibility, and 🐛 Bug Fixes
 
-### New Features
+#### ✅ Selection API (Phase 5.2)
 
-#### Selection API (Phase 5.2) ✅
+- [`<FileMosaic/>`](https://www.files-ui.com/components/filemosaic) and [`<FileCard/>`](https://www.files-ui.com/components/filecard):
+  - ✅ Added `selectable: boolean` prop — enables checkbox overlay for multi-select workflows
+  - ✅ Added `selected: boolean` prop — controlled selected state (managed by parent component)
+  - ✅ Added `onSelect: (fileId: number | string | undefined, selected: boolean) => void` callback — fires when checkbox state changes
+  - ✅ Checkbox interaction fixed: First click now immediately updates controlled parent state (no interaction lag)
+  - ✅ Full regression test coverage in `SelectionRegression.test.tsx` (both FileMosaic and FileCard)
 
-- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard): 
-  - Added `selectable: boolean` prop — enables checkbox overlay for multi-select workflows
-  - Added `selected: boolean` prop — controlled selected state (managed by parent component)
-  - Added `onSelect: (fileId: number | string | undefined, selected: boolean) => void` callback — fires when checkbox state changes
-  - Checkbox interaction fixed: First click now immediately updates controlled parent state (no interaction lag)
-  - Full regression test coverage in `SelectionRegression.test.tsx` (both FileMosaic and FileCard)
+#### ⚡ Lazy Loading / Virtualization (Phase 5.1)
 
-#### Lazy Loading / Virtualization (Phase 5.1) ✅
+- [`<Dropzone/>`](https://www.files-ui.com/components/dropzone):
+  - ✅ Added `lazyLoad: boolean` prop — enables IntersectionObserver-based lazy rendering of children
+  - ✅ Added `lazyLoadBuffer: number` prop (default 300px) — root margin for preloading children before viewport entry
+  - ✅ New component `DropzoneChildrenNext` as safe migration path for lazy-render testing
+  - ⚡ Dramatically improves performance with large file lists (100+) by reducing DOM nodes and re-render overhead
 
-- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone):
-  - Added `lazyLoad: boolean` prop — enables IntersectionObserver-based lazy rendering of children
-  - Added `lazyLoadBuffer: number` prop (default 300px) — root margin for preloading children before viewport entry
-  - New component `DropzoneChildrenNext` as safe migration path for lazy-render testing
-  - Dramatically improves performance with large file lists (100+) by reducing DOM nodes and re-render overhead
+#### 📤 Upload Strategy Enhancements (Phase 5.3)
 
-#### Upload Strategy Enhancements (Phase 5.3) ✅
+- [`<Dropzone/>`](https://www.files-ui.com/components/dropzone) and [`<FileInputButton/>`](https://www.files-ui.com/components/fileinputbutton):
+  - ✅ Added `maxConcurrentUploads: number` prop (default 1) — controls parallelization of simultaneous uploads
+  - ✅ Extended `UploadConfig` with `chunked: boolean` and `chunkSize: number` options
+  - ✅ Upload routing now intelligently delegates to Core's `uploadExtFileChunked()` or `uploadExtFilesConcurrent()` when enabled
+  - ✅ Backward-compatible: existing single-file, sequential upload behavior unaffected
 
-- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone) and [\<FileInputButton/\>](https://www.files-ui.com/components/fileinputbutton):
-  - Added `maxConcurrentUploads: number` prop (default 1) — controls parallelization of simultaneous uploads
-  - Extended `UploadConfig` with `chunked: boolean` and `chunkSize: number` options
-  - Upload routing now intelligently delegates to Core's `uploadExtFileChunked()` or `uploadExtFilesConcurrent()` when enabled
-  - Backward-compatible: existing single-file, sequential upload behavior unaffected
-
-#### Core Enhancements (Phase 1 / Wave 4) ✅
+#### 📚 Core Enhancements (Phase 1 / Wave 4)
 
 **@files-ui/core** — New exports for advanced upload strategies:
 
-- **Chunked Upload**: `uploadExtFileChunked()` function splits large files into configurable chunks and uploads sequentially with retry logic. Sends `X-Chunk-Index`, `X-Total-Chunks`, and `X-File-Name` headers per chunk.
+- **Chunked Upload** 📦: `uploadExtFileChunked()` function splits large files into configurable chunks and uploads sequentially with retry logic. Sends `X-Chunk-Index`, `X-Total-Chunks`, and `X-File-Name` headers per chunk.
   - Exports: `splitFileIntoChunks()`, `getChunkSize()`, `ChunkedUploadConfig`, `ChunkedProgressCallback`
   
-- **Concurrent Upload**: `uploadExtFilesConcurrent()` function orchestrates parallel uploads with configurable concurrency (default 3). Preserves result order regardless of completion.
+- **Concurrent Upload** 🔄: `uploadExtFilesConcurrent()` function orchestrates parallel uploads with configurable concurrency (default 3). Preserves result order regardless of completion.
   - Exports: `ConcurrentUploadConfig`, `ConcurrentProgressCallback`
   
-- **Validation Severity**: Extended `ValidateFileResponse` with optional `severity: "error" | "warning" | "info"` field for richer validation feedback (fully backward-compatible)
+- **Validation Severity** ⚠️: Extended `ValidateFileResponse` with optional `severity: "error" | "warning" | "info"` field for richer validation feedback (fully backward-compatible)
 
-### Accessibility Improvements (Phase 2) ✅
+### ♿ Accessibility Improvements (Phase 2)
 
-#### Keyboard Navigation & Screen Reader Support
+#### ⌨️ Keyboard Navigation & Screen Reader Support
 
-- [\<Dropzone/\>](https://www.files-ui.com/components/dropzone):
-  - `role="button"` (clickable) or `role="region"` (non-clickable)
-  - `tabIndex={0}` for keyboard focus on clickable instances
-  - `aria-label="File upload dropzone"` (customizable via `label` prop)
-  - `aria-disabled` attribute when disabled
-  - Keyboard interaction: `Enter` and `Space` keys open file dialog (same as click)
+- [`<Dropzone/>`](https://www.files-ui.com/components/dropzone):
+  - ✅ `role="button"` (clickable) or `role="region"` (non-clickable)
+  - ✅ `tabIndex={0}` for keyboard focus on clickable instances
+  - ✅ `aria-label="File upload dropzone"` (customizable via `label` prop)
+  - ✅ `aria-disabled` attribute when disabled
+  - ⌨️ Keyboard interaction: `Enter` and `Space` keys open file dialog (same as click)
 
-- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard):
-  - `role="listitem"` + `tabIndex={0}` for keyboard navigation within file lists
-  - `aria-label` includes file name, size, and upload status for screen reader clarity
+- [`<FileMosaic/>`](https://www.files-ui.com/components/filemosaic) and [`<FileCard/>`](https://www.files-ui.com/components/filecard):
+  - ✅ `role="listitem"` + `tabIndex={0}` for keyboard navigation within file lists
+  - ✅ `aria-label` includes file name, size, and upload status for screen reader clarity
 
-- [\<Avatar/\>](https://www.files-ui.com/components/avatar):
-  - `role="img"` + `aria-label` (uses `alt` prop or defaults to "User avatar")
-  - Keyboard interaction: `Enter` and `Space` keys trigger file selection when not `readOnly`
+- [`<Avatar/>`](https://www.files-ui.com/components/avatar):
+  - ✅ `role="img"` + `aria-label` (uses `alt` prop or defaults to "User avatar")
+  - ⌨️ Keyboard interaction: `Enter` and `Space` keys trigger file selection when not `readOnly`
 
-- [\<FullScreen/\>](https://www.files-ui.com/components/fullscreen):
-  - `role="dialog"` + `aria-modal="true"` when open
-  - `aria-label="Fullscreen preview"` for context
+- [`<FullScreen/>`](https://www.files-ui.com/components/fullscreen):
+  - ✅ `role="dialog"` + `aria-modal="true"` when open
+  - ✅ `aria-label="Fullscreen preview"` for context
 
-### Performance Optimization (Phase 3) ✅
+### ⚡ Performance Optimization (Phase 3)
 
-#### Context & Handler Memoization
+#### 📊 Context & Handler Memoization
 
 - **[FilesUiProvider](https://www.files-ui.com/global-config)**: Context value now wrapped with `useMemo` — eliminates tree-wide re-renders when provider re-renders without config changes
 
-- **[\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic)**: All event handlers (`onDelete`, `onDownload`, `onAbort`, hover handlers) wrapped with `useCallback` for stable child references
+- **[`<FileMosaic/>`](https://www.files-ui.com/components/filemosaic)**: All event handlers (`onDelete`, `onDownload`, `onAbort`, hover handlers) wrapped with `useCallback` for stable child references
 
-- **[\<Dropzone/\>](https://www.files-ui.com/components/dropzone)**: Keyboard handler wrapped with `useCallback`
+- **[`<Dropzone/>`](https://www.files-ui.com/components/dropzone)**: Keyboard handler wrapped with `useCallback`
 
 - **Leaf Components**: `FileMosaicName`, `FileMosaicSize`, `FileMosaicStatus`, `FileMosaicMainLayer` wrapped with `React.memo` to skip re-renders when props unchanged
 
-### Bug Fixes (Phase 4) ✅
+### 🐛 Bug Fixes (Phase 4)
 
-#### Video Download Priority Fix
+#### 🎥 Video Download Priority Fix
 
-- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard):
-  - Download action now correctly prioritizes `videoUrl` over `downloadUrl` when both present
-  - Previously video items could download the wrong source (thumbnail vs video)
+- [`<FileMosaic/>`](https://www.files-ui.com/components/filemosaic) and [`<FileCard/>`](https://www.files-ui.com/components/filecard):
+  - ✅ Download action now correctly prioritizes `videoUrl` over `downloadUrl` when both present
+  - 🔧 Previously video items could download the wrong source (thumbnail vs video)
 
 - `DownloadHidden` component:
-  - Added `videoUrl` prop support
-  - Unified URL resolution logic across download paths
+  - ✅ Added `videoUrl` prop support
+  - ✅ Unified URL resolution logic across download paths
 
-#### Thumbnail Generation Performance Fix
+#### 🖼️ Thumbnail Generation Performance Fix
 
 - `useFileMosaicInitializer`: Now uses `resizeImage()` after `readAsDataURL()` to reduce UI blocking
-  - Prevents thumbnail generation from freezing UI when previewing large images
-  - Maintains responsiveness during bulk file imports
+  - ✅ Prevents thumbnail generation from freezing UI when previewing large images
+  - ✅ Maintains responsiveness during bulk file imports
 
-#### Selection Checkbox Interaction Fix
+#### ☑️ Selection Checkbox Interaction Fix
 
-- [\<FileMosaic/\>](https://www.files-ui.com/components/filemosaic) and [\<FileCard/\>](https://www.files-ui.com/components/filecard):
-  - Fixed checkbox interaction: Removed default-preventing click handler on selection input
-  - Controlled `selected` state now updates immediately on first click (previously required second interaction)
-  - Native checkbox toggle still works correctly with `stopPropagation()` only
+- [`<FileMosaic/>`](https://www.files-ui.com/components/filemosaic) and [`<FileCard/>`](https://www.files-ui.com/components/filecard):
+  - ✅ Fixed checkbox interaction: Removed default-preventing click handler on selection input
+  - ✅ Controlled `selected` state now updates immediately on first click (previously required second interaction)
+  - ✅ Native checkbox toggle still works correctly with `stopPropagation()` only
 
-### Testing & Quality (Phase 6.3 / 5.2) ✅
+### 🧪 Testing & Quality (Phase 6.3 / 5.2)
 
-#### New Test Coverage
+#### ✅ New Test Coverage
 
 - Added `tests/SelectionRegression.test.tsx`:
-  - Verifies FileMosaic controlled selection updates on first click (regression guard)
-  - Verifies FileCard controlled selection updates on first click (regression guard)
+  - ✅ Verifies FileMosaic controlled selection updates on first click (regression guard)
+  - ✅ Verifies FileCard controlled selection updates on first click (regression guard)
   - Both tests passing ✓
 
-#### Demo Page Enhancements (Phase 6.1 & 6.2) ✅
+#### 📖 Demo Page Enhancements (Phase 6.1 & 6.2)
 
 New interactive demo sections created and wired in files-ui-web:
 
 - **DropzoneDemoPage**: Added sections for
-  - Accessibility (keyboard nav, screen reader support demo)
-  - Lazy Loading (viewport virtualization demo with 100+ items)
-  - Chunked Upload (multi-chunk progress visualization)
+  - ♿ Accessibility (keyboard nav, screen reader support demo)
+  - ⚡ Lazy Loading (viewport virtualization demo with 100+ items)
+  - 📤 Chunked Upload (multi-chunk progress visualization)
 
 - **FileMosaicDemoPage**: Added sections for
-  - Video Download (videoUrl priority demo)
-  - Selection (multi-select checkbox workflow demo)
+  - 🎥 Video Download (videoUrl priority demo)
+  - ✅ Selection (multi-select checkbox workflow demo)
 
 - **FileCardDemoPage**: Added sections for
-  - Selection (multi-select with card-style items)
+  - ✅ Selection (multi-select with card-style items)
 
-#### API Documentation Synchronization ✅
+#### 📚 API Documentation Synchronization
 
 Updated `files-ui-web` API prop tables across 5 components with 13 new prop definitions:
 
@@ -311,57 +531,54 @@ Updated `files-ui-web` API prop tables across 5 components with 13 new prop defi
 
 Descriptions normalized for consistency, clarity, and proper conditional phrasing ("If true", "If set", etc.)
 
-### Migration Path & Backward Compatibility ✓
+### ✅ Migration Path & Backward Compatibility
 
 All changes are **fully backward-compatible**:
-- New props are optional with sensible defaults
-- New Core functions are additive (existing `uploadExtFile()` unchanged)
-- Existing validation logic unaffected by new `severity` field
-- Demo infrastructure extensible without breaking existing pages
-- Selection API disabled by default (`selectable=false`)
+- ✅ New props are optional with sensible defaults
+- ✅ New Core functions are additive (existing `uploadExtFile()` unchanged)
+- ✅ Existing validation logic unaffected by new `severity` field
+- ✅ Demo infrastructure extensible without breaking existing pages
+- ✅ Selection API disabled by default (`selectable=false`)
 
 ---
 
 ## [1.2.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.1.0) (2024-01-21)
 
-## 🧪 🚀 Allow uploading files with different URLs
+### 🚀 Allow Uploading Files with Different URLs
 
-- Enhanced components to perform the upload operation with a different urls for each [ExtFile](https://www.files-ui.com/types#extfile). 
-  - [ExtFile](https://www.files-ui.com/types#extfile): Added a new property in ExtFile type: `uploadUrl`.
-  - [\<Dropzone/\>](https://www.files-ui.com/components/dropzone) & [\<FileInputButton/\>](https://www.files-ui.com/components/fileinputbutton): There is a new sub-prop `uploadConfig.customUrl()` that is a fucntion that given an extFile object, obtains a custom url.
-- The order of priority is as follows:
-    - 1) ExtFile.uploadUrl
-    - 2) DropzoneProps.UploadConfig.customUrl
-    - 3) DropzoneProps.UploadConfig.url
+- ✅ Enhanced components to perform the upload operation with a different urls for each [`ExtFile`](https://www.files-ui.com/types#extfile).
+  - [`ExtFile`](https://www.files-ui.com/types#extfile): Added a new property in ExtFile type: `uploadUrl`.
+  - [`<Dropzone/>`](https://www.files-ui.com/components/dropzone) & [`<FileInputButton/>`](https://www.files-ui.com/components/fileinputbutton): There is a new sub-prop `uploadConfig.customUrl()` that is a function that given an extFile object, obtains a custom url.
 
-- The setup can be as follows:
+**URL Priority Order:**
+1. 🥇 `ExtFile.uploadUrl`
+2. 🥈 `DropzoneProps.UploadConfig.customUrl(extFile)`
+3. 🥉 `DropzoneProps.UploadConfig.url`
+
+**Example Setup:**
 
 ```jsx
-    ...
-    return(
-      <React.Fragment>
-        <Dropzone
-            uploadConfig={
-              customUrl: (extFile)=> "https://urlfromserver/" + extFile.name
-            }
-        />
-        <FileInputButton
-            uploadConfig={
-              customUrl: (extFile)=> "https://urlfromserver/" + extFile.name
-            }
-        />
-        <Dropzone
-          onChange={updateFiles}
-          value={files}
-        >
-          {files.map((file) => (
-              <FileMosaic key={file.id} {...file} uploadUrl={"https://urlfromserver/" + extFile.id}/>
-            ))}
-        </Dropzone>
-
-      
-      </React.Fragment>
-    )
+<React.Fragment>
+  <Dropzone
+    uploadConfig={{
+      customUrl: (extFile) => "https://urlfromserver/" + extFile.name
+    }}
+  />
+  <FileInputButton
+    uploadConfig={{
+      customUrl: (extFile) => "https://urlfromserver/" + extFile.name
+    }}
+  />
+  <Dropzone onChange={updateFiles} value={files}>
+    {files.map((file) => (
+      <FileMosaic 
+        key={file.id} 
+        {...file} 
+        uploadUrl={"https://urlfromserver/" + file.id}
+      />
+    ))}
+  </Dropzone>
+</React.Fragment>
 ```
 
 ## [1.1.0](https://github.com/files-ui/files-ui-react/releases/tag/v1.1.0) (2023-12-17)
