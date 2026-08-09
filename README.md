@@ -1,8 +1,6 @@
-<a href="https://www.files-ui.com">
 <p align="center">
-<img src="https://user-images.githubusercontent.com/43678736/226257748-6ba2f8cf-59c5-40d1-a545-a388ddab0f68.png" width="150" height="150" alt="Files UI Logo"/>
+  <a href="https://www.files-ui.com" target="_blank"><img width="150" height="133" src="https://user-images.githubusercontent.com/43678736/226257748-6ba2f8cf-59c5-40d1-a545-a388ddab0f68.png" alt="Files-ui logo"></a>
 </p>
-</a>
 
 <h1 align="center">Files UI</h1>
 
