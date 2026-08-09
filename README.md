@@ -16,7 +16,7 @@
 [![npm latest package](https://img.shields.io/npm/v/@files-ui/react.svg?logo=npm&logoColor=fff&label=NPM&color=limegreen)](https://www.npmjs.com/package/@files-ui/react)
 [![Node.js CI](https://github.com/files-ui/files-ui-react/actions/workflows/node.js.yml/badge.svg)](https://github.com/files-ui/files-ui-react)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![Socket Badge](https://badge.socket.dev/npm/package/@files-ui/react/2.1.0)](https://badge.socket.dev/npm/package/@files-ui/react/2.1.0)
+[![Socket Badge](https://badge.socket.dev/npm/package/@files-ui/react/2.1.0)](https://socket.dev/npm/package/%40files-ui%2Freact)
 [![GitHub stars](https://img.shields.io/github/stars/files-ui/files-ui-react?style=social)](https://github.com/files-ui/files-ui-react)
 
 </div>
