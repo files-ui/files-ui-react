@@ -6,7 +6,6 @@ import {
   Localization,
   Method,
   ServerAction,
-  ServerResponse,
   validateExtFileList,
   ValidateFileResponse,
 } from "@files-ui/core";
@@ -239,6 +238,11 @@ export interface UseFilesUIReturn {
    * Abort ongoing upload
    */
   abortUpload: () => void;
+
+  /**
+   * Abort upload for a specific file
+   */
+  abortFileUpload: (id: string | number) => void;
   
   // Validation
   /**
@@ -332,6 +336,15 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
   
   // Drag state
   const [isDragging, setIsDragging] = React.useState<boolean>(false);
+
+  // Runtime refs for deterministic upload cancellation and stale update protection
+  const uploadGenerationRef = React.useRef<number>(0);
+  const localFilesRef = React.useRef<ExtFile[]>(localFiles);
+  const abortedFileIdsRef = React.useRef<Set<string | number>>(new Set());
+
+  React.useEffect(() => {
+    localFilesRef.current = localFiles;
+  }, [localFiles]);
 
   // Determine if validation is needed
   const needsValidation = React.useMemo(() => {
@@ -505,6 +518,8 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
     }
 
     setIsUploading(true);
+    const currentGeneration = uploadGenerationRef.current + 1;
+    uploadGenerationRef.current = currentGeneration;
 
     // Filter uploadable files (valid or no validation configured, and not already uploaded)
     const uploadableFiles = localFiles.filter(
@@ -519,6 +534,18 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
     onUploadStart?.(uploadableFiles);
 
     let uploadedFiles: ExtFile[] = [];
+    const canApplyForGeneration = () =>
+      uploadGenerationRef.current === currentGeneration;
+    const canApplyForFile = (id: string | number | undefined) =>
+      id !== undefined &&
+      canApplyForGeneration() &&
+      !abortedFileIdsRef.current.has(id);
+
+    uploadableFiles.forEach((file) => {
+      if (file.id !== undefined) {
+        abortedFileIdsRef.current.delete(file.id);
+      }
+    });
 
     try {
       // Route 1: Server Action (Next.js App Router)
@@ -527,12 +554,18 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
         const serverActionResults: ExtFile[] = [];
 
         for (const file of uploadableFiles) {
+          if (!canApplyForGeneration()) {
+            break;
+          }
+
           // Update to uploading status
-          setLocalFiles((prev) =>
-            prev.map((f) =>
-              f.id === file.id ? { ...f, uploadStatus: "uploading" } : f
-            )
-          );
+          if (canApplyForFile(file.id)) {
+            setLocalFiles((prev) =>
+              prev.map((f) =>
+                f.id === file.id ? { ...f, uploadStatus: "uploading" } : f
+              )
+            );
+          }
 
           try {
             if (!file.file) {
@@ -545,11 +578,29 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
             // Add extra data if present
             if (file.extraData) {
               Object.entries(file.extraData).forEach(([key, value]) => {
-                formData.append(key, String(value));
+                if (value === null || value === undefined) {
+                  return;
+                }
+
+                if (value instanceof Blob) {
+                  formData.append(key, value);
+                  return;
+                }
+
+                if (typeof value === "object") {
+                  formData.append(key, JSON.stringify(value));
+                  return;
+                }
+
+                formData.append(key, `${value}`);
               });
             }
 
             const response = await action(formData);
+
+            if (!canApplyForFile(file.id)) {
+              continue;
+            }
 
             const uploadedFile: ExtFile = {
               ...file,
@@ -561,10 +612,16 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
             serverActionResults.push(uploadedFile);
 
             // Update file in state
-            setLocalFiles((prev) =>
-              prev.map((f) => (f.id === file.id ? uploadedFile : f))
-            );
+            if (canApplyForFile(file.id)) {
+              setLocalFiles((prev) =>
+                prev.map((f) => (f.id === file.id ? uploadedFile : f))
+              );
+            }
           } catch (error) {
+            if (!canApplyForFile(file.id)) {
+              continue;
+            }
+
             const uploadedFile: ExtFile = {
               ...file,
               uploadStatus: "error",
@@ -573,9 +630,11 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
 
             serverActionResults.push(uploadedFile);
 
-            setLocalFiles((prev) =>
-              prev.map((f) => (f.id === file.id ? uploadedFile : f))
-            );
+            if (canApplyForFile(file.id)) {
+              setLocalFiles((prev) =>
+                prev.map((f) => (f.id === file.id ? uploadedFile : f))
+              );
+            }
           }
         }
 
@@ -589,15 +648,18 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
         // Set all files to preparing status
         let updatedFiles: ExtFile[] = uploadableFiles.map((f) => ({
           ...f,
+          xhr: f.xhr || new XMLHttpRequest(),
           uploadStatus: "preparing" as const,
         }));
 
-        setLocalFiles((prev) =>
-          prev.map((f) => {
-            const updated = updatedFiles.find((u) => u.id === f.id);
-            return updated || f;
-          })
-        );
+        if (canApplyForGeneration()) {
+          setLocalFiles((prev) =>
+            prev.map((f) => {
+              const updated = updatedFiles.find((u) => u.id === f.id);
+              return updated || f;
+            })
+          );
+        }
 
         // Concurrent upload strategy
         if ((maxConcurrentUploads || 1) > 1) {
@@ -606,12 +668,14 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
             uploadStatus: "uploading" as const,
           })) as ExtFile[];
 
-          setLocalFiles((prev) =>
-            prev.map((f) => {
-              const updated = updatedFiles.find((u) => u.id === f.id);
-              return updated || f;
-            })
-          );
+          if (canApplyForGeneration()) {
+            setLocalFiles((prev) =>
+              prev.map((f) => {
+                const updated = updatedFiles.find((u) => u.id === f.id);
+                return updated || f;
+              })
+            );
+          }
 
           const results = await uploadExtFilesWithStrategy(
             updatedFiles,
@@ -627,6 +691,10 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
               maxConcurrentUploads,
             },
             (completedCount, totalCount, latestResult) => {
+              if (!canApplyForFile(latestResult.id)) {
+                return;
+              }
+
               setLocalFiles((prev) =>
                 prev.map((f) =>
                   f.id === latestResult.id ? latestResult : f
@@ -637,23 +705,34 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
 
           uploadedFiles = results;
 
-          setLocalFiles((prev) =>
-            prev.map((f) => {
-              const uploaded = results.find((r) => r.id === f.id);
-              return uploaded || f;
-            })
-          );
+          if (canApplyForGeneration()) {
+            setLocalFiles((prev) =>
+              prev.map((f) => {
+                const uploaded = results.find((r) => r.id === f.id);
+                if (!uploaded || abortedFileIdsRef.current.has(uploaded.id as string | number)) {
+                  return f;
+                }
+                return uploaded;
+              })
+            );
+          }
         }
         // Sequential upload
         else {
           const sequentialResults: ExtFile[] = [];
 
           for (const file of updatedFiles) {
+            if (!canApplyForGeneration()) {
+              break;
+            }
+
             // Update to uploading
             const uploadingFile = { ...file, uploadStatus: "uploading" as const };
-            setLocalFiles((prev) =>
-              prev.map((f) => (f.id === file.id ? uploadingFile : f))
-            );
+            if (canApplyForFile(file.id)) {
+              setLocalFiles((prev) =>
+                prev.map((f) => (f.id === file.id ? uploadingFile : f))
+              );
+            }
 
             const result = await uploadSingleExtFileWithStrategy(uploadingFile, {
               url,
@@ -666,11 +745,13 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
               chunkSize,
             });
 
-            sequentialResults.push(result);
+            if (canApplyForFile(file.id)) {
+              sequentialResults.push(result);
 
-            setLocalFiles((prev) =>
-              prev.map((f) => (f.id === file.id ? result : f))
-            );
+              setLocalFiles((prev) =>
+                prev.map((f) => (f.id === file.id ? result : f))
+              );
+            }
           }
 
           uploadedFiles = sequentialResults;
@@ -692,15 +773,22 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
 
       uploadedFiles = errorFiles;
 
-      setLocalFiles((prev) =>
-        prev.map((f) => {
-          const errorFile = errorFiles.find((ef) => ef.id === f.id);
-          return errorFile || f;
-        })
-      );
+      if (canApplyForGeneration()) {
+        setLocalFiles((prev) =>
+          prev.map((f) => {
+            const errorFile = errorFiles.find((ef) => ef.id === f.id);
+            if (!errorFile || abortedFileIdsRef.current.has(errorFile.id as string | number)) {
+              return f;
+            }
+            return errorFile;
+          })
+        );
+      }
     } finally {
-      setIsUploading(false);
-      onUploadFinish?.(uploadedFiles);
+      if (canApplyForGeneration()) {
+        setIsUploading(false);
+        onUploadFinish?.(uploadedFiles);
+      }
     }
 
     return uploadedFiles;
@@ -725,6 +813,18 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
    * Abort upload
    */
   const abortUpload = React.useCallback(() => {
+    uploadGenerationRef.current += 1;
+
+    localFilesRef.current.forEach((file) => {
+      if (
+        file.id !== undefined &&
+        (file.uploadStatus === "uploading" || file.uploadStatus === "preparing")
+      ) {
+        abortedFileIdsRef.current.add(file.id);
+      }
+      file.xhr?.abort();
+    });
+
     setIsUploading(false);
     
     // Mark all uploading/preparing files as aborted
@@ -739,6 +839,42 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
           : f
       )
     );
+  }, []);
+
+  /**
+   * Abort upload for one file
+   */
+  const abortFileUpload = React.useCallback((id: string | number) => {
+    let hasOtherActiveUploads = false;
+
+    setLocalFiles((prev) => {
+      const next = prev.map((f) => {
+        if (f.id === id) {
+          abortedFileIdsRef.current.add(id);
+          f.xhr?.abort();
+
+          if (f.uploadStatus === "uploading" || f.uploadStatus === "preparing") {
+            return {
+              ...f,
+              uploadStatus: "aborted" as const,
+              uploadMessage: "Upload aborted by user",
+            };
+          }
+        }
+
+        if (f.id !== id && (f.uploadStatus === "uploading" || f.uploadStatus === "preparing")) {
+          hasOtherActiveUploads = true;
+        }
+
+        return f;
+      });
+
+      return next;
+    });
+
+    if (!hasOtherActiveUploads) {
+      setIsUploading(false);
+    }
   }, []);
 
   /**
@@ -808,6 +944,7 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
     // Upload
     uploadFiles,
     abortUpload,
+    abortFileUpload,
     
     // Validation
     validateFiles,

@@ -2,18 +2,40 @@ import { renderHook, act, waitFor } from "@testing-library/react";
 import { useFilesUI, UseFilesUIOptions } from "../src/hooks/useFilesUI";
 import { ExtFile, ServerResponse } from "@files-ui/core";
 
+let nextMockId = 1;
+
+const uploadSingleExtFileWithStrategyMock = jest.fn(
+  async (file: any) => ({ ...file, uploadStatus: "success", uploadMessage: "Uploaded" })
+);
+const uploadExtFilesWithStrategyMock = jest.fn(
+  async (files: any[]) =>
+    files.map((file) => ({
+      ...file,
+      uploadStatus: "success",
+      uploadMessage: "Uploaded",
+    }))
+);
+
+jest.mock("../src/utils/uploadStrategy", () => ({
+  uploadSingleExtFileWithStrategy: (...args: any[]) =>
+    uploadSingleExtFileWithStrategyMock(...args),
+  uploadExtFilesWithStrategy: (...args: any[]) =>
+    uploadExtFilesWithStrategyMock(...args),
+}));
+
 // Mock @files-ui/core
 jest.mock("@files-ui/core", () => ({
   ...jest.requireActual("@files-ui/core"),
   ExtFileManager: {
     createFileListMap: jest.fn(() => 1),
     removeFileListMap: jest.fn(),
-    getNextId: jest.fn(() => Date.now()),
+    getNextId: jest.fn(() => nextMockId++),
   },
 }));
 
 describe("useFilesUI Hook", () => {
   afterEach(() => {
+    nextMockId = 1;
     jest.clearAllMocks();
   });
 
@@ -437,6 +459,131 @@ describe("useFilesUI Hook", () => {
       expect(onUploadStart).toHaveBeenCalled();
       expect(onUploadFinish).toHaveBeenCalled();
       expect(mockAction).toHaveBeenCalled();
+    });
+
+    it("should initialize xhr for non-action uploads", async () => {
+      const { result } = renderHook(() =>
+        useFilesUI({
+          url: "/api/upload",
+        })
+      );
+
+      const file = new File(["test"], "test.txt", { type: "text/plain" });
+
+      act(() => {
+        result.current.addFiles([file]);
+      });
+
+      await act(async () => {
+        await result.current.uploadFiles();
+      });
+
+      expect(uploadSingleExtFileWithStrategyMock).toHaveBeenCalled();
+      const firstCallArg = uploadSingleExtFileWithStrategyMock.mock.calls[0][0];
+      expect(firstCallArg.xhr).toBeDefined();
+      expect(firstCallArg.xhr).toBeInstanceOf(XMLHttpRequest);
+    });
+
+    it("should keep file aborted when late completion arrives after abortUpload", async () => {
+      let resolveAction: ((value: ServerResponse) => void) | undefined;
+      const delayedAction = jest.fn(
+        () =>
+          new Promise<ServerResponse>((resolve) => {
+            resolveAction = resolve;
+          })
+      );
+
+      const { result } = renderHook(() =>
+        useFilesUI({
+          action: delayedAction,
+        })
+      );
+
+      const file = new File(["test"], "test.txt", { type: "text/plain" });
+
+      act(() => {
+        result.current.addFiles([file]);
+      });
+
+      act(() => {
+        void result.current.uploadFiles();
+      });
+
+      await waitFor(() => {
+        expect(result.current.isUploading).toBe(true);
+      });
+
+      act(() => {
+        result.current.abortUpload();
+      });
+
+      expect(result.current.isUploading).toBe(false);
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+
+      act(() => {
+        resolveAction?.({ success: true, message: "late success" });
+      });
+
+      await waitFor(() => {
+        expect(result.current.files[0].uploadStatus).toBe("aborted");
+      });
+    });
+
+    it("should abort a single file without aborting other uploads", async () => {
+      const pendingResolvers = new Map<string, (value: ServerResponse) => void>();
+      const perFileAction = jest.fn((formData: FormData) => {
+        const file = formData.get("file") as File;
+
+        return new Promise<ServerResponse>((resolve) => {
+          pendingResolvers.set(file.name, resolve);
+        });
+      });
+
+      const { result } = renderHook(() =>
+        useFilesUI({
+          action: perFileAction,
+        })
+      );
+
+      const fileA = new File(["a"], "a.txt", { type: "text/plain" });
+      const fileB = new File(["b"], "b.txt", { type: "text/plain" });
+
+      act(() => {
+        result.current.addFiles([fileA, fileB]);
+      });
+
+      act(() => {
+        void result.current.uploadFiles();
+      });
+
+      await waitFor(() => {
+        expect(result.current.isUploading).toBe(true);
+      });
+
+      const firstFileId = result.current.files[0].id as string | number;
+
+      act(() => {
+        result.current.abortFileUpload(firstFileId);
+      });
+
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+
+      act(() => {
+        pendingResolvers.get("a.txt")?.({ success: true, message: "late success a" });
+      });
+
+      await waitFor(() => {
+        expect(pendingResolvers.has("b.txt")).toBe(true);
+      });
+
+      act(() => {
+        pendingResolvers.get("b.txt")?.({ success: true, message: "success b" });
+      });
+
+      await waitFor(() => {
+        expect(result.current.files[0].uploadStatus).toBe("aborted");
+        expect(result.current.files[1].uploadStatus).toBe("success");
+      });
     });
   });
 
