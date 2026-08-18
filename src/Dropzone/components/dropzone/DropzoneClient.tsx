@@ -184,6 +184,7 @@ const DropzoneClient: React.FC<DropzoneProps> = (props: DropzoneProps) => {
     cleanFiles: cleanInvalidFiles,
     uploadFiles,
     abortUpload,
+    abortFileUpload,
     getDragHandlers,
     getInputProps,
     dropzoneId,
@@ -459,6 +460,7 @@ const DropzoneClient: React.FC<DropzoneProps> = (props: DropzoneProps) => {
           localization={localization}
           lazyLoad={lazyLoad}
           lazyLoadBuffer={lazyLoadBuffer}
+          onAbortFile={abortFileUpload}
         >
           {children}
         </DropzoneChildrenNext>

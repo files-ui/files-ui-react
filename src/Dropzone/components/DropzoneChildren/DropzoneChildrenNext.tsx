@@ -12,6 +12,7 @@ type DropzoneChildrenNextProps = {
   localization?: Localization;
   lazyLoad?: boolean;
   lazyLoadBuffer?: number;
+  onAbortFile?: (id: string | number) => void;
 };
 
 type LazyRenderItemProps = {
@@ -63,6 +64,7 @@ const DropzoneChildrenNext: React.FC<DropzoneChildrenNextProps> = (
     localization,
     lazyLoad = false,
     lazyLoadBuffer = 300,
+    onAbortFile,
   } = props;
 
   const isEmptyArray = Array.isArray(children) && children.length === 0;
@@ -77,9 +79,30 @@ const DropzoneChildrenNext: React.FC<DropzoneChildrenNextProps> = (
     );
   }
 
+  const injectAbortHandler = (child: React.ReactNode): React.ReactNode => {
+    if (!React.isValidElement(child) || !onAbortFile) {
+      return child;
+    }
+
+    const childProps = child.props as {
+      id?: string | number;
+      onAbort?: (id: string | number) => void;
+    };
+
+    if (childProps.id === undefined || childProps.onAbort) {
+      return child;
+    }
+
+    return React.cloneElement(child, {
+      onAbort: onAbortFile,
+    });
+  };
+
   if (!lazyLoad) {
     return (
-      <div className="files-ui-dropzone-children-container">{children}</div>
+      <div className="files-ui-dropzone-children-container">
+        {React.Children.map(children, injectAbortHandler)}
+      </div>
     );
   }
 
@@ -87,7 +110,7 @@ const DropzoneChildrenNext: React.FC<DropzoneChildrenNextProps> = (
     <div className="files-ui-dropzone-children-container">
       {React.Children.map(children, (child) => (
         <LazyRenderItem rootMargin={`${lazyLoadBuffer}px`}>
-          {child}
+          {injectAbortHandler(child)}
         </LazyRenderItem>
       ))}
     </div>

@@ -271,6 +271,10 @@ export interface UseFilesUIReturn {
   };
 }
 
+type UploadTargetId = string | number | undefined;
+type CanApplyForFile = (id: UploadTargetId) => boolean;
+type CanApplyForGeneration = () => boolean;
+
 export type { ServerAction };
 
 /**
@@ -509,6 +513,247 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
     });
   }, [validateFilesInternal, onChange]);
 
+  const appendExtraDataToFormData = React.useCallback(
+    (formData: FormData, extraData?: ExtFile["extraData"]) => {
+      if (!extraData) {
+        return;
+      }
+
+      Object.entries(extraData).forEach(([key, value]) => {
+        if (value === null || value === undefined) {
+          return;
+        }
+
+        if (value instanceof Blob) {
+          formData.append(key, value);
+          return;
+        }
+
+        if (typeof value === "object") {
+          formData.append(key, JSON.stringify(value));
+          return;
+        }
+
+        formData.append(key, `${value}`);
+      });
+    },
+    []
+  );
+
+  const uploadSingleFileWithServerAction = React.useCallback(
+    async (file: ExtFile): Promise<ExtFile> => {
+      if (!action) {
+        throw new Error("Server action is not configured");
+      }
+
+      try {
+        if (!file.file) {
+          throw new Error("File object is missing");
+        }
+
+        const formData = new FormData();
+        formData.append("file", file.file);
+        appendExtraDataToFormData(formData, file.extraData);
+
+        const response = await action(formData);
+
+        return {
+          ...file,
+          uploadStatus: response.success ? "success" : "error",
+          uploadMessage:
+            response.message ||
+            (response.success ? "Upload successful" : "Upload failed"),
+          serverResponse: response,
+        };
+      } catch (error) {
+        return {
+          ...file,
+          uploadStatus: "error",
+          uploadMessage: error instanceof Error ? error.message : "Upload failed",
+        };
+      }
+    },
+    [action, appendExtraDataToFormData]
+  );
+
+  const uploadWithServerAction = React.useCallback(
+    async (
+      uploadableFiles: ExtFile[],
+      canApplyForGeneration: CanApplyForGeneration,
+      canApplyForFile: CanApplyForFile
+    ): Promise<ExtFile[]> => {
+      if (!action) {
+        return [];
+      }
+
+      const results: ExtFile[] = [];
+
+      for (const file of uploadableFiles) {
+        if (!canApplyForGeneration()) {
+          break;
+        }
+
+        if (canApplyForFile(file.id)) {
+          setLocalFiles((prev) =>
+            prev.map((f) =>
+              f.id === file.id ? { ...f, uploadStatus: "uploading" } : f
+            )
+          );
+        }
+
+        const uploadedFile = await uploadSingleFileWithServerAction(file);
+        if (!canApplyForFile(file.id)) {
+          continue;
+        }
+
+        results.push(uploadedFile);
+        setLocalFiles((prev) =>
+          prev.map((f) => (f.id === file.id ? uploadedFile : f))
+        );
+      }
+
+      return results;
+    },
+    [action, uploadSingleFileWithServerAction]
+  );
+
+  const uploadWithStrategyRoute = React.useCallback(
+    async (
+      uploadableFiles: ExtFile[],
+      canApplyForGeneration: CanApplyForGeneration,
+      canApplyForFile: CanApplyForFile
+    ): Promise<ExtFile[]> => {
+      const { uploadSingleExtFileWithStrategy, uploadExtFilesWithStrategy } =
+        await import("../utils/uploadStrategy");
+
+      let preparedFiles: ExtFile[] = uploadableFiles.map((file) => ({
+        ...file,
+        xhr: file.xhr || new XMLHttpRequest(),
+        uploadStatus: "preparing" as const,
+      }));
+
+      if (canApplyForGeneration()) {
+        setLocalFiles((prev) =>
+          prev.map((f) => {
+            const prepared = preparedFiles.find((candidate) => candidate.id === f.id);
+            return prepared || f;
+          })
+        );
+      }
+
+      if ((maxConcurrentUploads || 1) > 1) {
+        preparedFiles = preparedFiles.map((file) => ({
+          ...file,
+          uploadStatus: "uploading" as const,
+        }));
+
+        if (canApplyForGeneration()) {
+          setLocalFiles((prev) =>
+            prev.map((f) => {
+              const prepared = preparedFiles.find((candidate) => candidate.id === f.id);
+              return prepared || f;
+            })
+          );
+        }
+
+        const results = await uploadExtFilesWithStrategy(
+          preparedFiles,
+          {
+            url,
+            urlFromExtFile,
+            method,
+            headers,
+            uploadLabel,
+            asBlob,
+            chunked,
+            chunkSize,
+            maxConcurrentUploads,
+          },
+          (_completedCount, _totalCount, latestResult) => {
+            if (!canApplyForFile(latestResult.id)) {
+              return;
+            }
+
+            setLocalFiles((prev) =>
+              prev.map((f) => (f.id === latestResult.id ? latestResult : f))
+            );
+          }
+        );
+
+        if (canApplyForGeneration()) {
+          setLocalFiles((prev) =>
+            prev.map((f) => {
+              const uploaded = results.find((result) => result.id === f.id);
+              if (!uploaded) {
+                return f;
+              }
+
+              if (abortedFileIdsRef.current.has(uploaded.id as string | number)) {
+                return f;
+              }
+
+              return uploaded;
+            })
+          );
+        }
+
+        return results;
+      }
+
+      const sequentialResults: ExtFile[] = [];
+
+      for (const file of preparedFiles) {
+        if (!canApplyForGeneration()) {
+          break;
+        }
+
+        const uploadingFile: ExtFile = {
+          ...file,
+          uploadStatus: "uploading" as const,
+        };
+
+        if (canApplyForFile(file.id)) {
+          setLocalFiles((prev) =>
+            prev.map((f) => (f.id === file.id ? uploadingFile : f))
+          );
+        }
+
+        const result = await uploadSingleExtFileWithStrategy(uploadingFile, {
+          url,
+          urlFromExtFile,
+          method,
+          headers,
+          uploadLabel,
+          asBlob,
+          chunked,
+          chunkSize,
+        });
+
+        if (!canApplyForFile(file.id)) {
+          continue;
+        }
+
+        sequentialResults.push(result);
+        setLocalFiles((prev) =>
+          prev.map((f) => (f.id === file.id ? result : f))
+        );
+      }
+
+      return sequentialResults;
+    },
+    [
+      url,
+      urlFromExtFile,
+      method,
+      headers,
+      uploadLabel,
+      asBlob,
+      chunked,
+      chunkSize,
+      maxConcurrentUploads,
+    ]
+  );
+
   /**
    * Upload files - supports Server Actions and XHR/fetch
    */
@@ -548,218 +793,22 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
     });
 
     try {
-      // Route 1: Server Action (Next.js App Router)
       if (action) {
-        // Upload each file via Server Action
-        const serverActionResults: ExtFile[] = [];
-
-        for (const file of uploadableFiles) {
-          if (!canApplyForGeneration()) {
-            break;
-          }
-
-          // Update to uploading status
-          if (canApplyForFile(file.id)) {
-            setLocalFiles((prev) =>
-              prev.map((f) =>
-                f.id === file.id ? { ...f, uploadStatus: "uploading" } : f
-              )
-            );
-          }
-
-          try {
-            if (!file.file) {
-              throw new Error("File object is missing");
-            }
-
-            const formData = new FormData();
-            formData.append("file", file.file);
-            
-            // Add extra data if present
-            if (file.extraData) {
-              Object.entries(file.extraData).forEach(([key, value]) => {
-                if (value === null || value === undefined) {
-                  return;
-                }
-
-                if (value instanceof Blob) {
-                  formData.append(key, value);
-                  return;
-                }
-
-                if (typeof value === "object") {
-                  formData.append(key, JSON.stringify(value));
-                  return;
-                }
-
-                formData.append(key, `${value}`);
-              });
-            }
-
-            const response = await action(formData);
-
-            if (!canApplyForFile(file.id)) {
-              continue;
-            }
-
-            const uploadedFile: ExtFile = {
-              ...file,
-              uploadStatus: response.success ? "success" : "error",
-              uploadMessage: response.message || (response.success ? "Upload successful" : "Upload failed"),
-              serverResponse: response,
-            };
-
-            serverActionResults.push(uploadedFile);
-
-            // Update file in state
-            if (canApplyForFile(file.id)) {
-              setLocalFiles((prev) =>
-                prev.map((f) => (f.id === file.id ? uploadedFile : f))
-              );
-            }
-          } catch (error) {
-            if (!canApplyForFile(file.id)) {
-              continue;
-            }
-
-            const uploadedFile: ExtFile = {
-              ...file,
-              uploadStatus: "error",
-              uploadMessage: error instanceof Error ? error.message : "Upload failed",
-            };
-
-            serverActionResults.push(uploadedFile);
-
-            if (canApplyForFile(file.id)) {
-              setLocalFiles((prev) =>
-                prev.map((f) => (f.id === file.id ? uploadedFile : f))
-              );
-            }
-          }
-        }
-
-        uploadedFiles = serverActionResults;
-      }
-      // Route 2: Traditional XHR/fetch upload
-      else if (url || urlFromExtFile) {
-        const { uploadSingleExtFileWithStrategy, uploadExtFilesWithStrategy } =
-          await import("../utils/uploadStrategy");
-
-        // Set all files to preparing status
-        let updatedFiles: ExtFile[] = uploadableFiles.map((f) => ({
-          ...f,
-          xhr: f.xhr || new XMLHttpRequest(),
-          uploadStatus: "preparing" as const,
-        }));
-
-        if (canApplyForGeneration()) {
-          setLocalFiles((prev) =>
-            prev.map((f) => {
-              const updated = updatedFiles.find((u) => u.id === f.id);
-              return updated || f;
-            })
-          );
-        }
-
-        // Concurrent upload strategy
-        if ((maxConcurrentUploads || 1) > 1) {
-          updatedFiles = updatedFiles.map((f) => ({
-            ...f,
-            uploadStatus: "uploading" as const,
-          })) as ExtFile[];
-
-          if (canApplyForGeneration()) {
-            setLocalFiles((prev) =>
-              prev.map((f) => {
-                const updated = updatedFiles.find((u) => u.id === f.id);
-                return updated || f;
-              })
-            );
-          }
-
-          const results = await uploadExtFilesWithStrategy(
-            updatedFiles,
-            {
-              url,
-              urlFromExtFile,
-              method,
-              headers,
-              uploadLabel,
-              asBlob,
-              chunked,
-              chunkSize,
-              maxConcurrentUploads,
-            },
-            (completedCount, totalCount, latestResult) => {
-              if (!canApplyForFile(latestResult.id)) {
-                return;
-              }
-
-              setLocalFiles((prev) =>
-                prev.map((f) =>
-                  f.id === latestResult.id ? latestResult : f
-                )
-              );
-            }
-          );
-
-          uploadedFiles = results;
-
-          if (canApplyForGeneration()) {
-            setLocalFiles((prev) =>
-              prev.map((f) => {
-                const uploaded = results.find((r) => r.id === f.id);
-                if (!uploaded || abortedFileIdsRef.current.has(uploaded.id as string | number)) {
-                  return f;
-                }
-                return uploaded;
-              })
-            );
-          }
-        }
-        // Sequential upload
-        else {
-          const sequentialResults: ExtFile[] = [];
-
-          for (const file of updatedFiles) {
-            if (!canApplyForGeneration()) {
-              break;
-            }
-
-            // Update to uploading
-            const uploadingFile = { ...file, uploadStatus: "uploading" as const };
-            if (canApplyForFile(file.id)) {
-              setLocalFiles((prev) =>
-                prev.map((f) => (f.id === file.id ? uploadingFile : f))
-              );
-            }
-
-            const result = await uploadSingleExtFileWithStrategy(uploadingFile, {
-              url,
-              urlFromExtFile,
-              method,
-              headers,
-              uploadLabel,
-              asBlob,
-              chunked,
-              chunkSize,
-            });
-
-            if (canApplyForFile(file.id)) {
-              sequentialResults.push(result);
-
-              setLocalFiles((prev) =>
-                prev.map((f) => (f.id === file.id ? result : f))
-              );
-            }
-          }
-
-          uploadedFiles = sequentialResults;
-        }
-      }
-      // No upload configuration
-      else {
-        throw new Error("No upload configuration provided (action, url, or urlFromExtFile)");
+        uploadedFiles = await uploadWithServerAction(
+          uploadableFiles,
+          canApplyForGeneration,
+          canApplyForFile
+        );
+      } else if (url || urlFromExtFile) {
+        uploadedFiles = await uploadWithStrategyRoute(
+          uploadableFiles,
+          canApplyForGeneration,
+          canApplyForFile
+        );
+      } else {
+        throw new Error(
+          "No upload configuration provided (action, url, or urlFromExtFile)"
+        );
       }
     } catch (error) {
       console.error("Upload error:", error);
@@ -807,6 +856,8 @@ export const useFilesUI = (options: UseFilesUIOptions = {}): UseFilesUIReturn =>
     maxConcurrentUploads,
     onUploadStart,
     onUploadFinish,
+    uploadWithServerAction,
+    uploadWithStrategyRoute,
   ]);
 
   /**
