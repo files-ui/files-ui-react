@@ -13,7 +13,7 @@ export const useIsUploading = (uploadStatus: UPLOADSTATUS | undefined): boolean 
         setLastUploadStatus(uploadStatus);
         if (
             ["uploading", "preparing"].includes(lastUploadStatus || "") &&
-            ["success", "error", "aborted"].includes(uploadStatus || "")
+            ["success", "error", "aborted", "cancelled"].includes(uploadStatus || "")
         ) {
             setTimeout(() => {
                 setIsUploading(false);

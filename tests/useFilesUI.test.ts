@@ -585,6 +585,151 @@ describe("useFilesUI Hook", () => {
         expect(result.current.files[1].uploadStatus).toBe("success");
       });
     });
+
+    it("should be idempotent when aborting the same file twice", async () => {
+      let resolveAction: ((value: ServerResponse) => void) | undefined;
+      const delayedAction = jest.fn(
+        () =>
+          new Promise<ServerResponse>((resolve) => {
+            resolveAction = resolve;
+          })
+      );
+
+      const { result } = renderHook(() =>
+        useFilesUI({ action: delayedAction })
+      );
+
+      const file = new File(["test"], "test.txt", { type: "text/plain" });
+
+      act(() => {
+        result.current.addFiles([file]);
+      });
+
+      act(() => {
+        void result.current.uploadFiles();
+      });
+
+      await waitFor(() => {
+        expect(result.current.isUploading).toBe(true);
+      });
+
+      const fileId = result.current.files[0].id as string | number;
+
+      act(() => {
+        result.current.abortFileUpload(fileId);
+      });
+
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+
+      // Second abort should not throw or change state
+      act(() => {
+        result.current.abortFileUpload(fileId);
+      });
+
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+
+      act(() => {
+        resolveAction?.({ success: true, message: "late" });
+      });
+
+      await waitFor(() => {
+        expect(result.current.files[0].uploadStatus).toBe("aborted");
+      });
+    });
+
+    it("should be idempotent when calling abortUpload twice", async () => {
+      let resolveAction: ((value: ServerResponse) => void) | undefined;
+      const delayedAction = jest.fn(
+        () =>
+          new Promise<ServerResponse>((resolve) => {
+            resolveAction = resolve;
+          })
+      );
+
+      const { result } = renderHook(() =>
+        useFilesUI({ action: delayedAction })
+      );
+
+      const file = new File(["test"], "test.txt", { type: "text/plain" });
+
+      act(() => {
+        result.current.addFiles([file]);
+      });
+
+      act(() => {
+        void result.current.uploadFiles();
+      });
+
+      await waitFor(() => {
+        expect(result.current.isUploading).toBe(true);
+      });
+
+      act(() => {
+        result.current.abortUpload();
+      });
+
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+      expect(result.current.isUploading).toBe(false);
+
+      // Second bulk abort should not throw or change state
+      act(() => {
+        result.current.abortUpload();
+      });
+
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+      expect(result.current.isUploading).toBe(false);
+
+      act(() => {
+        resolveAction?.({ success: true, message: "late" });
+      });
+
+      await waitFor(() => {
+        expect(result.current.files[0].uploadStatus).toBe("aborted");
+      });
+    });
+
+    it("should keep cancelled status when late XHR-route response arrives", async () => {
+      uploadSingleExtFileWithStrategyMock.mockImplementation(
+        (file: any) =>
+          new Promise((resolve) => {
+            // Simulate a delayed XHR response
+            setTimeout(() => {
+              resolve({ ...file, uploadStatus: "success", uploadMessage: "done" });
+            }, 50);
+          })
+      );
+
+      const { result } = renderHook(() =>
+        useFilesUI({ url: "/api/upload" })
+      );
+
+      const file = new File(["test"], "test.txt", { type: "text/plain" });
+
+      act(() => {
+        result.current.addFiles([file]);
+      });
+
+      act(() => {
+        void result.current.uploadFiles();
+      });
+
+      await waitFor(() => {
+        expect(result.current.isUploading).toBe(true);
+      });
+
+      act(() => {
+        result.current.abortUpload();
+      });
+
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+
+      // Wait for the delayed mock to settle
+      await act(async () => {
+        await new Promise((r) => setTimeout(r, 100));
+      });
+
+      expect(result.current.files[0].uploadStatus).toBe("aborted");
+    });
   });
 
   describe("Controlled Mode", () => {

@@ -2,6 +2,8 @@ import * as React from "react";
 import { ValidateFileResponse, ExtFile, ExtFileInstance, ExtFileManager, FileValidatorProps, Localization, setNextUploadStatus, validateExtFileList } from "@files-ui/core"
 
 /**
+ * @deprecated Use useFilesUI hook instead. This hook is kept for backward compatibility only.
+ *
  * Effect for keeping track of changes
  * update files when value changes
  * also updates the number of valid files

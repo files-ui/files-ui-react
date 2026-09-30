@@ -15,6 +15,7 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
     style,
     //className,
     percentage,
+    hidePercentage,
     hidePerncentage,
     radius,
     x,
@@ -22,6 +23,8 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
     width,
     onClick,
   } = props;
+
+  const shouldHidePercentage = hidePercentage ?? hidePerncentage;
 
   const finalRadius = radius || 28;
   const finalX = x || 30;
@@ -92,7 +95,7 @@ const DynamicLoader: React.FC<DynamicLoaderProps> = (
               fill="none"
             ></circle>
 
-            {!hidePerncentage && percentage !== undefined && (
+            {!shouldHidePercentage && percentage !== undefined && (
               <text
                 className="files-ui-text-dynamic-loader"
                 x={`${finalX}`}

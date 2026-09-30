@@ -1,6 +1,7 @@
 
 //Dropzone FileInputButton
 export { useDropzoneClassName } from "./useDropzoneClassName";
+/** @deprecated Legacy hook — active path uses useFilesUI instead */
 export { useDropzoneFileListUpdater } from "./useDropzoneFileUpdater";
 export { useDropzoneValidation } from "./useDropzoneValidation";
 export { useFakeProgress } from "./useFakeProgress";

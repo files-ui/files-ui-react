@@ -28,7 +28,7 @@ const UploadingStatus: React.FC<UploadingStatusProps> = (
           radius={32}
           percentage={progress}
           width={6}
-          hidePerncentage={progress === undefined || onAbort !== undefined}
+          hidePercentage={onAbort !== undefined}
           onClick={onAbort}
         />
       ) : (

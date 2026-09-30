@@ -10,4 +10,10 @@ export type FileMosaicInfoLayerProps = {
     localName: string;
     sizeFormatted?: string;
     localType?: string;
+
+    selectable?: boolean;
+    selected?: boolean;
+    onSelect?: (id: string | number | undefined, selected: boolean) => void;
+    fileId?: string | number;
+    darkMode?: boolean;
 }

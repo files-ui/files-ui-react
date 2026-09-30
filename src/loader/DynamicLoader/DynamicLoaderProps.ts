@@ -3,6 +3,8 @@ import { LoaderProps } from "../LoaderProps";
 
 export interface DynamicLoaderPropsMap extends IconProps, LoaderProps {
     percentage?: number;
+    hidePercentage?: boolean;
+    /** @deprecated Use hidePercentage instead */
     hidePerncentage?: boolean;
 }
 

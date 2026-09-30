@@ -252,9 +252,8 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
     }
   }, [onDownload, id, effectiveDownloadUrl, innerDownload]);
   const handleAbort = React.useCallback(() => {
-    xhr?.abort();
     onAbort?.(id);
-  }, [xhr, onAbort, id]);
+  }, [onAbort, id]);
 
   const handleSelectionClick: React.MouseEventHandler<SVGSVGElement> =
     React.useCallback(
@@ -279,7 +278,7 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
         onDoubleClick={handleDoubleClick}
         onContextMenu={handleRightClick}
       >
-        {selectable && (
+        {selectable && !showInfo && (
           <div className={darkMode ? "files-ui-selection-checkbox dark-mode" : "files-ui-selection-checkbox"}>
             {selected ? (
               <CheckBox
@@ -372,6 +371,11 @@ const FileMosaicClient: React.FC<FileMosaicProps> = (props: FileMosaicProps) => 
               localName={localName}
               sizeFormatted={sizeFormatted}
               localType={localType}
+              selectable={selectable}
+              selected={selected}
+              onSelect={onSelect}
+              fileId={id}
+              darkMode={darkMode}
             />
           </Layer>
 

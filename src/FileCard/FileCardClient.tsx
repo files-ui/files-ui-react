@@ -281,7 +281,6 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
   };
 
   const handleAbort = () => {
-    xhr?.abort();
     onAbort?.(id);
   };
 
@@ -306,7 +305,7 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
         onDoubleClick={handleDoubleClick}
         onContextMenu={handleRightClick}
       >
-        {selectable && (
+        {selectable && !showInfo && (
           <div className={darkMode ? "files-ui-selection-checkbox dark-mode" : "files-ui-selection-checkbox"}>
             {selected ? (
               <CheckBox
@@ -391,6 +390,11 @@ const FileCardClient: React.FC<FileCardProps> = (props: FileCardProps) => {
               localName={localName}
               sizeFormatted={sizeFormatted}
               localType={localType}
+              selectable={selectable}
+              selected={selected}
+              onSelect={onSelect}
+              fileId={id}
+              darkMode={darkMode}
             />
           </Layer>
 

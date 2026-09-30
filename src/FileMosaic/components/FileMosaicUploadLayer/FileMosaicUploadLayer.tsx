@@ -25,13 +25,16 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
 
   React.useEffect(() => {
     setStatusHistory((statusHistory: Array<UPLOADSTATUS | undefined>) => {
+      // Reset history when status clears (e.g. re-upload)
+      if (uploadStatus === undefined) {
+        return [undefined];
+      }
       if (
         statusHistory[statusHistory.length - 1] === "preparing" &&
         uploadStatus === "uploading"
       ) {
         const tempStatusHistory = [...statusHistory];
         tempStatusHistory[statusHistory.length - 1] = uploadStatus;
-        //replace
         return [...tempStatusHistory];
       }
       return [...statusHistory, uploadStatus];
@@ -91,6 +94,7 @@ const FileMosaicUploadLayer: React.FC<FileMosaicUploadLayerProps> = (
                 </div>
               );
             case "aborted":
+            case "cancelled":
               return (
                 <div className="elevation-item" key={index + 1}>
                   <AbortedStatus localization={localization} />
